@@ -7,12 +7,14 @@ package com.haijiao.room;
 import com.haijiao.file.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
  * @author fish
  */
 public class RoomFile {
+    private String uuid;
     private String fileName;
     private int pageNum;
     private String postfix;
@@ -21,6 +23,7 @@ public class RoomFile {
     private List<RoomPage> pages;
 
     public RoomFile(File file){
+        uuid = UUID.randomUUID().toString();
         fileName = file.getFileName();
         pageNum = file.getPageNum();
         postfix = file.getPostfix();
@@ -36,6 +39,10 @@ public class RoomFile {
             newPage.setTmpUrl(fileUrl + "/" + i + "." + postfix );
         }
         
+    }
+
+    public String getUuid() {
+        return uuid;
     }
     
     public boolean addIndex(String indexName, int page){
@@ -94,5 +101,12 @@ public class RoomFile {
         this.pages = pages;
     }
     
+    public RoomPage getPage(int i){
+        if(i < pageNum){
+            return pages.get(i);
+        } else {
+            return null;
+        }
+    }
     
 }

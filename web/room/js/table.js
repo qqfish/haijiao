@@ -71,9 +71,17 @@ function table(containerName, initPage, tool){
 		initPage();
 	}
         
-        this.drawFromJson = function(json){
+        this.drawFromJson = function(id, json){
             var shape = Kinetic.Node.create(json);
+            shape.setId(id);
+            shape.on("mousemove touchmove", function() {
+                if(!mousedown || toolkit.getTool() != Tooltype.Eraser) return;
+                result.idArray[result.idArray.length] = shape.getId();
+                shape.off("mousemove touchmove");
+            });
+            
             drawLayer.add(shape);
+            shapeList.
             stage.draw();
         }
         
@@ -83,21 +91,38 @@ function table(containerName, initPage, tool){
             tmpLayer.add(shape);
             stage.draw();
         }
+        
+        this.eraseFromArray = function(idArray) {
+            var shapeSet = drawLayer.getChildren();
+            for(var i = 0; i < idArray.length; i++){
+                for(var j = 0; j < shapeSet.length; j++){
+                    if(idArray[i] == shapeSet[j].getId()){
+                        drawLayer.remove(shapeSet[j]);
+                        break;
+                    }
+                }
+            }
+        }
 
 	var mousedown = false;
 	var result = null;
 	
 	stage.on("mousedown touchstart", function() {
 		if(mousedown) return;
+                mousedown = true;
 		var mousePos = stage.getMousePosition();
 		if(toolkit.getTool() == Tooltype.Hand){
 			result.x = mousePos.x;
 			result.y = mousePos.y;
 		} else if(toolkit.getTool() == Tooltype.Pen){
+                        result = new Array();
 			result[result.length] = {x:mousePos.x, y:mousePos.y};
 		} else if(toolkit.getTool() == Tooltype.Circle){
 		} else if(toolkit.getTool() == Tooltype.Line){
 		} else if(toolkit.getTool() == Tooltype.Eraser){
+                        result.erasePath = new Array();
+                        result.idArray = new Array();
+                        result.erasePath[result.erasePath.length] = {x:mousePos.x, y:mousePos.y};
 		} else {
 			console.log("tool not support\n");
 		}
@@ -118,11 +143,21 @@ function table(containerName, initPage, tool){
 			});
 			var message = {};
 			message.type = Request.TmpShape;
-			message.shap = tmpLine.toJSON();
+			message.json = tmpLine.toJSON();
 			connection.sendObject(message);
 		} else if(toolkit.getTool() == Tooltype.Circle){
 		} else if(toolkit.getTool() == Tooltype.Line){
 		} else if(toolkit.getTool() == Tooltype.Eraser){
+                    result.erasePath[result.erasePath.length] = {x:mousePos.x, y:mousePos.y};
+			var tmpLine = new Kinetic.Line({
+				points:result.erasePath,
+			    	stroke: toolkit.getColor(),
+			    	strokeWidth: toolkit.getWidth()
+			});
+			var message = {};
+			message.type = Request.TmpShape;
+			message.json = tmpLine.toJSON();
+			connection.sendObject(message);
 		} else {
 			console.log("tool not support\n");
 		}	
@@ -146,14 +181,19 @@ function table(containerName, initPage, tool){
 			});
 			var message = {};
 			message.type = Request.DrawShape;
-			message.shap = tmpLine.toJSON();
+			message.json = tmpLine.toJSON();
 			connection.sendObject(message);
 		} else if(toolkit.getTool() == Tooltype.Circle){
 		} else if(toolkit.getTool() == Tooltype.Line){
 		} else if(toolkit.getTool() == Tooltype.Eraser){
+                        message = {};
+                        message.type = Request.EraseShape;
+                        message.idArray = result.idArray;
+                        connection.sendObject(message);
 		} else {
 			console.log("tool not support\n");
 		}
+                mousedown = false;
 		result = null;
 	});
 

@@ -12,6 +12,7 @@ import java.util.List;
  * @author fish
  */
 public class File {
+    private String uuid;
     private String fileName;
     private int pageNum;
     private String fileUrl;
@@ -20,6 +21,14 @@ public class File {
 
     public File() {
         indexs = new ArrayList();
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
     
     public void addIndex(Index index){

@@ -6,7 +6,14 @@ package com.haijiao.webFc;
 
 import com.google.gson.Gson;
 import com.haijiao.room.Room;
+import com.haijiao.room.Shape;
 import com.haijiao.user.User;
+import com.haijiao.webFc.message.Request;
+import com.haijiao.webFc.message.request.RequestData;
+import com.haijiao.webFc.message.request.RequestDrawShape;
+import com.haijiao.webFc.message.request.RequestTmpShape;
+import com.haijiao.webFc.message.response.ResponseDrawShape;
+import com.haijiao.webFc.message.response.ResponseTmpShape;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -54,5 +61,26 @@ public class FcMessageInbound extends MessageInbound {
 
     @Override
     protected void onTextMessage(CharBuffer cb) throws IOException {
+        String str = cb.toString();
+        System.out.println(str);
+        if (str == null || str.isEmpty()) {
+            return;
+        }
+        RequestData textData = gson.fromJson(str, RequestData.class);
+        //System.out.println(textData.getType());
+        //System.out.println(idRoom + " " + username);
+        if (textData.getType() == Request.TmpShape) {
+            RequestTmpShape rts = gson.fromJson(str, RequestTmpShape.class);
+            ResponseTmpShape result = new ResponseTmpShape();
+            result.setJson(rts.getJson());
+            room.broadcast(gson.toJson(result));
+        } else if (textData.getType() == Request.DrawShape) {
+            RequestDrawShape shape = gson.fromJson(str, RequestDrawShape.class);
+            int id = room.addShape(shape.getJson());
+            ResponseDrawShape result = new ResponseDrawShape();
+            result.setId(id);
+            result.setJson(shape.getJson());
+            room.broadcast(gson.toJson(result));
+        }
     }
 }
