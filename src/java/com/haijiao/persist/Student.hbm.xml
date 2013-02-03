@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-1-31 15:56:05 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="test.Student" table="student" catalog="haijiao">
+        <id name="userId" type="java.lang.Integer">
+            <column name="userId" />
+            <generator class="identity" />
+        </id>
+        <property name="password" type="string">
+            <column name="password" length="45" not-null="true" />
+        </property>
+        <property name="grade" type="int">
+            <column name="grade" not-null="true" />
+        </property>
+        <property name="account" type="string">
+            <column name="account" length="45" not-null="true" />
+        </property>
+        <set name="studentfiles" inverse="true">
+            <key>
+                <column name="studentId" not-null="true" />
+            </key>
+            <one-to-many class="test.Studentfile" />
+        </set>
+    </class>
+</hibernate-mapping>
