@@ -2,7 +2,7 @@
  *
  * @author Jerry
  */
-package com.haijiao.SupportService.service;
+package com.haijiao.Domain.service;
 import com.haijiao.persist.Student;
 
 public interface IStudentService {

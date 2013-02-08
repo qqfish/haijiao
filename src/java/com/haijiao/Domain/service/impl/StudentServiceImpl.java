@@ -3,10 +3,10 @@
  * @author Jerry Zou
  */
 
-package com.haijiao.SupportService.service.impl;
+package com.haijiao.Domain.service.impl;
 import com.haijiao.SupportService.dao.impl.StudentDAOImpl;
 import com.haijiao.persist.Student;
-import com.haijiao.SupportService.service.IStudentService;
+import com.haijiao.Domain.service.IStudentService;
 
 public class StudentServiceImpl implements IStudentService{
 

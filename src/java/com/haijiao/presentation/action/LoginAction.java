@@ -4,7 +4,7 @@
  */
 
 package com.haijiao.presentation.action;
-import com.haijiao.SupportService.service.IStudentService;
+import com.haijiao.Domain.service.IStudentService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class LoginAction extends ActionSupport {
