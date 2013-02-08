@@ -10,7 +10,7 @@ var Tooltype = {
 }
 
 
-function toolkit(){
+function Toolkit(){
 	//private
 	var tool = tooltype.Hand;
 	var color = "black";

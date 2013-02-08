@@ -41,6 +41,5 @@ connection.sendObject = function(message) {
     connection.socket.send(Jmessage);
 };
 
-connection.initialize();
 
 

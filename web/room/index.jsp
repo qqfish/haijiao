@@ -12,6 +12,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div id="stable">
+            <div id="toolbar"></div>
+            <div id="videoWindows"></div>
+            <div id="textChat">
+                <div id="textConsole"></div>
+            </div>
+        </div>
+        <div id="table"></div>
     </body>
 </html>
