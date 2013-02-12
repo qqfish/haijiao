@@ -4,6 +4,7 @@
  */
 package com.haijiao.Domain.room;
 
+import com.haijiao.Domain.user.User;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
@@ -14,9 +15,9 @@ import java.util.UUID;
  */
 public class RoomManager {
     private static Map<String, Room> rooms = new TreeMap();
-    public static String createRoom(){
+    public static String createRoom(User holder){
         String id = UUID.randomUUID().toString();
-        Room newRoom = new Room(id);
+        Room newRoom = new Room(id, holder);
         rooms.put(id, newRoom);
         return id;
     }

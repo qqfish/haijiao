@@ -11,4 +11,6 @@ package com.haijiao.global;
 public class config {
     // room config
     static public String roomFileUrl = "~/roomFile";
+    static public String pageFilePostfix = "png";
+    static public String pageDataUriPrefix = "data:image/png;base64,";
 }

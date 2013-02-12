@@ -5,6 +5,7 @@
 package com.haijiao.Domain.room.webFc.message.response;
 
 import com.haijiao.Domain.room.webFc.message.Response;
+import com.haijiao.Domain.room.webFc.message.request.RequestTmpShape;
 
 /**
  *
@@ -15,6 +16,11 @@ public class ResponseTmpShape extends ResponseData{
 
     public ResponseTmpShape() {
         type = Response.TmpShape;
+    }
+    
+    public ResponseTmpShape(RequestTmpShape request) {
+        type = Response.TmpShape;
+        json = request.getJson();
     }
 
     public String getJson() {

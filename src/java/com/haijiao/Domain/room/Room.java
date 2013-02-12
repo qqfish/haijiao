@@ -12,6 +12,8 @@ import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -59,6 +61,16 @@ public class Room {
         /* copy this file and add it into the list */
     }
     
+    public boolean changePage(String uuid, int page, String tmpUri){
+        try {
+            currentPage.saveTmp(tmpUri);
+            return choosePage(uuid,page);
+        } catch (IOException ex) {
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
     public boolean choosePage(String uuid, int page) {
         RoomFile file = null;
         for(int i = 0; i < roomFile.size(); i++){
@@ -93,13 +105,28 @@ public class Room {
     
 
     public void broadcast(String message) throws IOException {
+        CharBuffer buffer = CharBuffer.wrap(message);
         for (int i = 0; i < roomSocket.size(); i++) {
-            CharBuffer buffer = CharBuffer.wrap(message);
             roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
+        }
+    }
+    
+    public void broadcastOther(String message, FcMessageInbound from) throws IOException {
+        CharBuffer buffer = CharBuffer.wrap(message);
+        for (int i = 0; i < roomSocket.size(); i++) {
+            if(!roomSocket.get(i).equals(from)) {
+                roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
+            }
         }
     }
     
     public void exitRoom(FcMessageInbound socket) {
         roomSocket.remove(socket);
     }
+
+    public String getRoomId() {
+        return roomId;
+    }
+    
+    
 }

@@ -16,8 +16,12 @@ import java.util.UUID;
  */
 public class RoomFile extends File{
     private List<RoomPage> pages;
+    private Room room;
+    private File originFile;
 
-    public RoomFile(File file){
+    public RoomFile(File file, Room room){
+        this.room = room;
+        originFile = file;
         uuid = UUID.randomUUID().toString();
         fileName = file.getFileName();
         pageNum = file.getPageNum();
@@ -29,9 +33,7 @@ public class RoomFile extends File{
         }
         pages = new ArrayList();
         for(int i = 0; i < pageNum; i++){
-            RoomPage newPage = new RoomPage();
-            newPage.setPage(i);
-            newPage.setTmpUrl(fileUrl + "/" + i + "." + postfix );
+            RoomPage newPage = new RoomPage(this,fileUrl + "/" + i + "." + postfix);
         }
         
     }
@@ -48,10 +50,6 @@ public class RoomFile extends File{
         return true;
     }
     
-
-    public void setPages(List<RoomPage> pages) {
-        this.pages = pages;
-    }
     
     public RoomPage getPage(int i){
         if(i < pageNum){
@@ -64,6 +62,14 @@ public class RoomFile extends File{
     public String getUrl(){
         //change the file into a pdf and return the URL of this pdf.
         return null;
+    }
+    
+    public void addPage(int index){
+        //add an blank page afer index
+    }
+
+    public Room getRoom() {
+        return room;
     }
     
 }

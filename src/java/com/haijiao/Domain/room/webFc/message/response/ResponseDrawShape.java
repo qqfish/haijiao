@@ -5,6 +5,7 @@
 package com.haijiao.Domain.room.webFc.message.response;
 
 import com.haijiao.Domain.room.webFc.message.Response;
+import com.haijiao.Domain.room.webFc.message.request.RequestDrawShape;
 
 /**
  *
@@ -16,6 +17,11 @@ public class ResponseDrawShape extends ResponseData{
 
     public ResponseDrawShape() {
         type = Response.DrawShape;
+    }
+    
+    public ResponseDrawShape(RequestDrawShape request) {
+        type = Response.DrawShape;
+        json = request.getJson();
     }
 
     public String getJson() {

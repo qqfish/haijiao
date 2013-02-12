@@ -96,12 +96,13 @@ function Table(containerName, tool){
         
     this.eraseFromArray = function(idArray) {
         var shapeSet = drawLayer.getChildren();
-        for(var i = 0; i < idArray.length; i++){
-            for(var j = 0; j < shapeSet.length; j++){
-                if(idArray[i] == shapeSet[j].getId()){
-                    drawLayer.remove(shapeSet[j]);
-                    break;
-                }
+        var current = 0;
+        for(var j = 0; j < shapeSet.length && current < idArray.length; j++){
+            if(idArray[current] == shapeSet[j].getId()){
+                drawLayer.remove(shapeSet[j]);
+                break;
+            } else if (idArray[current] < shapeSet[j].getId()) {
+                current++;
             }
         }
     }

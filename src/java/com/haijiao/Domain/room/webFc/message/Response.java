@@ -9,9 +9,10 @@ package com.haijiao.Domain.room.webFc.message;
  * @author fish
  */
 public class Response {
-    public static int TmpShape = 0;
-    public static int DrawShape = 1;
-    public static int EraseShape = 2;
-    public static int VideoChat = 3;
-    public static int TextChat = 4;
+    public static final int TmpShape = 0;
+    public static final int DrawShape = 1;
+    public static final int EraseShape = 2;
+    public static final int VideoChat = 3;
+    public static final int TextChat = 4;
+    public static final int ChangePage = 5;
 }

@@ -5,6 +5,7 @@
 package com.haijiao.Domain.room.webFc.message.response;
 
 import com.haijiao.Domain.room.webFc.message.Response;
+import com.haijiao.Domain.room.webFc.message.request.RequestEraseShape;
 import java.util.List;
 
 /**
@@ -16,6 +17,11 @@ public class ResponseEraseShape extends ResponseData{
 
     public ResponseEraseShape() {
         type = Response.EraseShape; 
+    }
+    
+    public ResponseEraseShape(RequestEraseShape request) {
+        type = Response.EraseShape; 
+        idArray = request.getIdArray();
     }
 
     public List<Integer> getIdArray() {

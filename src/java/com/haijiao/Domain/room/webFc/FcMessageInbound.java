@@ -9,20 +9,11 @@ import com.haijiao.Domain.room.Room;
 import com.haijiao.Domain.room.Shape;
 import com.haijiao.Domain.user.User;
 import com.haijiao.Domain.room.webFc.message.Request;
-import com.haijiao.Domain.room.webFc.message.request.RequestData;
-import com.haijiao.Domain.room.webFc.message.request.RequestDrawShape;
-import com.haijiao.Domain.room.webFc.message.request.RequestTmpShape;
-import com.haijiao.Domain.room.webFc.message.response.ResponseDrawShape;
-import com.haijiao.Domain.room.webFc.message.response.ResponseTmpShape;
+import com.haijiao.Domain.room.webFc.message.request.*;
+import com.haijiao.Domain.room.webFc.message.response.*;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
-import java.sql.SQLException;
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArraySet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.http.HttpServletResponse;
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.WsOutbound;
 
@@ -69,18 +60,53 @@ public class FcMessageInbound extends MessageInbound {
         RequestData textData = gson.fromJson(str, RequestData.class);
         //System.out.println(textData.getType());
         //System.out.println(idRoom + " " + username);
-        if (textData.getType() == Request.TmpShape) {
-            RequestTmpShape rts = gson.fromJson(str, RequestTmpShape.class);
-            ResponseTmpShape result = new ResponseTmpShape();
-            result.setJson(rts.getJson());
-            room.broadcast(gson.toJson(result));
-        } else if (textData.getType() == Request.DrawShape) {
-            RequestDrawShape shape = gson.fromJson(str, RequestDrawShape.class);
-            int id = room.addShape(shape.getJson());
-            ResponseDrawShape result = new ResponseDrawShape();
-            result.setId(id);
-            result.setJson(shape.getJson());
-            room.broadcast(gson.toJson(result));
+
+        switch (textData.getType()) {
+            case Request.TmpShape:
+                RequestTmpShape rts = gson.fromJson(str, RequestTmpShape.class);
+                ResponseTmpShape tmpResult = new ResponseTmpShape(rts);
+                room.broadcast(gson.toJson(tmpResult));
+                break;
+            case Request.DrawShape:
+                RequestDrawShape shape = gson.fromJson(str, RequestDrawShape.class);
+                int id = room.getCurrentPage().addShape(shape.getJson());
+                ResponseDrawShape drawResult = new ResponseDrawShape(shape);
+                drawResult.setId(id);
+                room.broadcast(gson.toJson(drawResult));
+                break;
+            case Request.EraseShape:
+                RequestEraseShape erase = gson.fromJson(str, RequestEraseShape.class);
+                erase.sort();
+                room.getCurrentPage().deleteShape(erase.getIdArray());
+                ResponseEraseShape eraseResult = new ResponseEraseShape(erase);
+                room.broadcast(gson.toJson(eraseResult));
+                break;
+            case Request.VideoChat:
+                RequestVideoChat rvc = gson.fromJson(str, RequestVideoChat.class);
+                ResponseVideoChat videoResult = new ResponseVideoChat(rvc);
+                room.broadcastOther(gson.toJson(videoResult), this);
+                break;
+            case Request.TextChat:
+                RequestTextChat chat = gson.fromJson(str, RequestTextChat.class);
+                ResponseTextChat chatResult = new ResponseTextChat(chat);
+                chatResult.setFrom(user.getUserId());
+                room.broadcast(gson.toJson(chatResult));
+                break;
+            case Request.ChangePage:
+                RequestChangePage page = gson.fromJson(str, RequestChangePage.class);
+                if (page.getTmpUrl() != null) {
+                    room.changePage(page.getFileUuid(), page.getPage(), page.getTmpUrl());
+                } else {
+                    room.choosePage(page.getFileUuid(), page.getPage());
+                }
+                ResponseChangePage pageResult = new ResponseChangePage(page);
+                pageResult.setUrl(room.getCurrentPage().getOriginDataUri());
+                pageResult.setShapeList(room.getCurrentPage().getShapes());
+                room.broadcast(gson.toJson(pageResult));
+                break;
+
         }
+
+
     }
 }

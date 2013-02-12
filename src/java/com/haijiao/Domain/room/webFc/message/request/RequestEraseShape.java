@@ -26,4 +26,8 @@ public class RequestEraseShape extends RequestData{
         this.idArray = idArray;
     }
     
+    public void sort(){
+        //sort the list
+    }
+    
 }

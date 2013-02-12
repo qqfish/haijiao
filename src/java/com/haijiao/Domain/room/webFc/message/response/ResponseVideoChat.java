@@ -5,18 +5,26 @@
 package com.haijiao.Domain.room.webFc.message.response;
 
 import com.haijiao.Domain.room.webFc.message.Response;
+import com.haijiao.Domain.room.webFc.message.request.RequestVideoChat;
 
 /**
  *
  * @author fish
  */
-public class ResponseVideoChat extends ResponseData{
+public class ResponseVideoChat extends ResponseData {
+
     private String from;
     private String to;
     private String data;
 
     public ResponseVideoChat() {
         type = Response.VideoChat;
+    }
+
+    public ResponseVideoChat(RequestVideoChat request) {
+        type = Response.VideoChat;
+        to = request.getTo();
+        data = request.getData();
     }
 
     public String getFrom() {
@@ -42,6 +50,4 @@ public class ResponseVideoChat extends ResponseData{
     public void setData(String data) {
         this.data = data;
     }
-    
-    
 }
