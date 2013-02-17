@@ -4,7 +4,7 @@
  */
 package com.haijiao.Domain.user;
 
-import com.haijiao.Domain.file.File;
+import com.haijiao.Domain.file.DataFile;
 import java.util.List;
 
 /**
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class User {
     protected String userId;
-    protected List<File> files;
+    protected List<DataFile> files;
 
     public String getUserId() {
         return userId;
@@ -23,11 +23,11 @@ public class User {
         this.userId = userId;
     }
 
-    public List<File> getFiles() {
+    public List<DataFile> getFiles() {
         return files;
     }
 
-    public void setFiles(List<File> files) {
+    public void setFiles(List<DataFile> files) {
         this.files = files;
     }
     
