@@ -22,7 +22,6 @@ public class LoginAction extends ActionSupport {
     }
     
     public void validate(){
-        System.out.println("123");
         if(account==null || account.trim().length()==0){
             this.addFieldError("account", this.getText("accountNull"));
         }

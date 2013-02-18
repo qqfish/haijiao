@@ -20,6 +20,4 @@ public class Request {
     public static final int removeFile = 8;
     public static final int addIndex = 9;
     public static final int removeIndex = 10;
-    public static final int addPage = 11;
-    public static final int clearPage = 12;
 }

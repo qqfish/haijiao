@@ -100,7 +100,7 @@ public class FcMessageInbound extends MessageInbound {
                     room.choosePage(page.getFileUuid(), page.getPage());
                 }
                 ResponseChangePage pageResult = new ResponseChangePage(page);
-                pageResult.setUrl(room.getCurrentPage().getOriginUrl());
+                pageResult.setUrl(room.getCurrentPage().getOriginDataUri());
                 pageResult.setShapeList(room.getCurrentPage().getShapes());
                 room.broadcast(gson.toJson(pageResult));
                 break;

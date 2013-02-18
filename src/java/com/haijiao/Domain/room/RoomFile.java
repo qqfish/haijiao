@@ -5,6 +5,7 @@
 package com.haijiao.Domain.room;
 
 import com.haijiao.Domain.file.DataFile;
+import com.haijiao.Domain.file.Index;
 import com.haijiao.global.config;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
@@ -44,6 +45,10 @@ public class RoomFile extends DataFile {
         name = file.getName();
         fileUrl = file.getFileUrl();
         doc = PDDocument.load(fileUrl);
+        indexs = new ArrayList();
+        for (int i = 0; i < file.getIndexs().size(); i++) {
+            indexs.add(new Index(file.getIndexs().get(i)));
+        }
         pages = new ArrayList();
         for (int i = 0; i < doc.getNumberOfPages(); i++) {
             pages.add(new RoomPage(this));
@@ -51,13 +56,16 @@ public class RoomFile extends DataFile {
         lastPage = 0;
     }
 
-    public boolean addBookmark(String indexName, int page) {
-        //add in doc
+    public boolean addIndex(String indexName, int page) {
+        Index index = new Index();
+        index.setIndexName(indexName);
+        index.setPage(page);
+        if (indexs.contains(index)) {
+            System.out.println("duplicate index");
+            return false;
+        }
+        indexs.add(index);
         return true;
-    }
-    
-    public void gotoBookmark(List<Integer> indexs){
-        
     }
 
     public RoomPage getPage(int i) throws IOException {
