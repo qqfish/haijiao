@@ -19,7 +19,6 @@ public class WebFcSocketServlet extends WebSocketServlet {
     @Override
     protected StreamInbound createWebSocketInbound(String string, HttpServletRequest hsr) {
         /*get the user and room throught hsr*/
-        //return new FcMessageInbound();
-        return null;
+        return new FcMessageInbound();
     }
 }

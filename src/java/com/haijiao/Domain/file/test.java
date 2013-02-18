@@ -18,6 +18,8 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageWriter;
 import javax.imageio.stream.ImageOutputStream;
 import org.apache.jasper.tagplugins.jstl.core.Url;
+import org.apache.pdfbox.cos.COSArray;
+import org.apache.pdfbox.cos.COSObject;
 import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -25,6 +27,8 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDJpeg;
 import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
+import org.apache.pdfbox.pdmodel.interactive.documentnavigation.outline.PDDocumentOutline;
+import org.apache.pdfbox.pdmodel.interactive.documentnavigation.outline.PDOutlineItem;
 
 /**
  *
@@ -33,49 +37,49 @@ import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
 public class test {
 
     public static void main(String[] args) throws IOException, COSVisitorException {
-        PDDocument doc = PDDocument.load("/Users/fish/Documents/test.pdf");
-        List pages = doc.getDocumentCatalog().getAllPages();
-        for (int i = 0; i < pages.size(); i++) {
-            System.out.println("ready");
-            PDPage page = (PDPage) pages.get(i);
-            //PDPage page1 = (PDPage) pages.get(1);
-            BufferedImage image = page.convertToImage();
-            //BufferedImage imgae = page1.convertToImage();
-            Iterator iter = ImageIO.getImageWritersBySuffix("png");
-            ImageWriter writer = (ImageWriter) iter.next();
-            File outFile = new File("/Users/fish/test/" + i + ".png");
-            FileOutputStream out = new FileOutputStream(outFile);
-            ImageOutputStream outImage = ImageIO.createImageOutputStream(out);
-            writer.setOutput(outImage);
-            writer.write(new IIOImage(image, null, null));
-        }
+//        PDDocument doc = PDDocument.load("/Users/fish/Documents/test.pdf");
+//        List pages = doc.getDocumentCatalog().getAllPages();
+//        for (int i = 0; i < pages.size(); i++) {
+//            System.out.println("ready");
+//            PDPage page = (PDPage) pages.get(i);
+//            //PDPage page1 = (PDPage) pages.get(1);
+//            BufferedImage image = page.convertToImage();
+//            //BufferedImage imgae = page1.convertToImage();
+//            Iterator iter = ImageIO.getImageWritersBySuffix("png");
+//            ImageWriter writer = (ImageWriter) iter.next();
+//            File outFile = new File("/Users/fish/test/" + i + ".png");
+//            FileOutputStream out = new FileOutputStream(outFile);
+//            ImageOutputStream outImage = ImageIO.createImageOutputStream(out);
+//            writer.setOutput(outImage);
+//            writer.write(new IIOImage(image, null, null));
+//        }
+//        
+//clear a page
+//        PDDocument doc1 = PDDocument.load("/Users/fish/Documents/os3.pdf");
+//        List pages1 = doc1.getDocumentCatalog().getAllPages();
+//        for (int i = 0; i < pages1.size(); i++) {
+//            System.out.println("ready");
+//            PDPage page = (PDPage) pages1.get(i);
+//            //PDPage page1 = (PDPage) pages.get(1);
+//            BufferedImage image = page.convertToImage();
+//            //BufferedImage imgae = page1.convertToImage();
+//            Iterator iter = ImageIO.getImageWritersBySuffix("png");
+//            ImageWriter writer = (ImageWriter) iter.next();
+//            File outFile = new File(URLDecoder.decode(("/Users/fish/test/" + i + "Àý.png"),"UTF-8"));
+//            FileOutputStream out = new FileOutputStream(outFile);
+//            ImageOutputStream outImage = ImageIO.createImageOutputStream(out);
+//            writer.setOutput(outImage);
+//            writer.write(new IIOImage(image, null, null));
+//            page.getContents().getStream().clear();
+//        }
+//        PDPage first = (PDPage) pages1.get(0);
+//        PDRectangle r = new PDRectangle( first.getMediaBox().getWidth(),first.getMediaBox().getHeight());
+//        PDPage newPage = new PDPage(r);
+//        doc1.addPage(newPage);
+//        doc1.save("/Users/fish/Documents/os3.pdf");
+//        doc1.close();
 
-        PDDocument doc1 = PDDocument.load("/Users/fish/Documents/os3.pdf");
-        List pages1 = doc1.getDocumentCatalog().getAllPages();
-        for (int i = 0; i < pages1.size(); i++) {
-            System.out.println("ready");
-            PDPage page = (PDPage) pages1.get(i);
-            //PDPage page1 = (PDPage) pages.get(1);
-            BufferedImage image = page.convertToImage();
-            //BufferedImage imgae = page1.convertToImage();
-            Iterator iter = ImageIO.getImageWritersBySuffix("png");
-            ImageWriter writer = (ImageWriter) iter.next();
-            File outFile = new File(URLDecoder.decode(("/Users/fish/test/" + i + "Àý.png"),"UTF-8"));
-            FileOutputStream out = new FileOutputStream(outFile);
-            ImageOutputStream outImage = ImageIO.createImageOutputStream(out);
-            writer.setOutput(outImage);
-            writer.write(new IIOImage(image, null, null));
-            page.getContents().getStream().clear();
-        }
-        PDPage first = (PDPage) pages1.get(0);
-        PDRectangle r = new PDRectangle( first.getMediaBox().getWidth(),first.getMediaBox().getHeight());
-        PDPage newPage = new PDPage(r);
-        doc1.addPage(newPage);
-        doc1.save("/Users/fish/Documents/os3.pdf");
-        doc1.close();
-        
-        
-        
+        //restore
 //        PDDocument doc = new PDDocument();
 //
 //        PDPage page = new PDPage();
@@ -91,5 +95,21 @@ public class test {
 //        contentStream.close();
 //        page.getContents().
 //        doc.save("/Users/fish/test/1.pdf");
+        
+        
+        //outline -- bookmark
+        PDDocument doc = PDDocument.load("/Users/fish/Downloads/test"
+                + ".pdf");
+        PDDocumentOutline root = doc.getDocumentCatalog().getDocumentOutline();
+        PDOutlineItem item = root.getFirstChild();
+        while (item != null) {
+            System.out.println("Item:" + item.getTitle() + " page: " + doc.getDocumentCatalog().getAllPages().indexOf(item.findDestinationPage(doc)));
+            PDOutlineItem child = item.getFirstChild();
+            while (child != null) {
+                System.out.println("    Child:" + child.getTitle());
+                child = child.getNextSibling();
+            }
+            item = item.getNextSibling();
+        }
     }
 }
