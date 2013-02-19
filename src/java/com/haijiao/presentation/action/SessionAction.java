@@ -20,6 +20,10 @@ public class SessionAction extends ActionSupport implements SessionAware {
     public Map getSession() {
         return session;
     }
+	
+	    public Object getValue(String key){
+        return this.session.get(key);
+    }
     
     public void putIn(String key, Object name) {
         this.session.put(key, name);
