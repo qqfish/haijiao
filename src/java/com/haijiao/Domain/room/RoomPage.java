@@ -84,4 +84,8 @@ public class RoomPage {
     public void setShapes(List<Shape> shapes) {
         this.shapes = shapes;
     }
+
+    public String getOriginDataUri() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

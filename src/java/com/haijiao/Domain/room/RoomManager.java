@@ -4,7 +4,7 @@
  */
 package com.haijiao.Domain.room;
 
-import com.haijiao.Domain.user.User;
+import com.haijiao.Domain.bean.User;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;

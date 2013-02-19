@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Login</title>
+<title>Class</title>
 <meta charset="utf-8">
 <!--css-->
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
@@ -43,22 +43,18 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <section id="content">
-<div class="ic"></div>
-  <div class="border-horiz"></div>
-  <div class="main">
-    <article class="side-bar">
-       <br/>
-      <s:form action="/login.action">
-        <s:textfield name="account" label="用户账号"></s:textfield>
-        <s:password name="password" label="用户密码"></s:password>
-        <s:submit value="登录"></s:submit>
-      </s:form>
-      备注：测试账号 TEST 密码 123456
-    </article>
-    <div class="clear"></div>
-  </div>
+	<div class="main">
+	<video width="667" height="375" controls>
+	<source src="1.mp4"  type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+	<source src="FILE_NAME.ogv"  type="video/ogg" />
+	<object width="667" height="375" type="application/x-shockwave-flash" data="FILE_NAME.swf">
+	<param name="movie" value="FILE_NAME.swf" />
+	<param name="flashvars" value="controlbar=over&amp;image=PLACEHOLDER_FILE_NAME.jpg&amp;file=1.mp4" />
+	<img src="PLACEHOLDER_FILE_NAME.jpg" width="250" height="152" alt="ALT_HERE" title="TITLE_HERE" />
+	</object>
+	</video>
+	</div>
 </section>
-
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>

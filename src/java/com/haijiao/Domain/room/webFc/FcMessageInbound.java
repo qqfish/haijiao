@@ -7,7 +7,7 @@ package com.haijiao.Domain.room.webFc;
 import com.google.gson.Gson;
 import com.haijiao.Domain.room.Room;
 import com.haijiao.Domain.room.Shape;
-import com.haijiao.Domain.user.User;
+import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.room.webFc.message.Request;
 import com.haijiao.Domain.room.webFc.message.request.*;
 import com.haijiao.Domain.room.webFc.message.response.*;

@@ -4,34 +4,27 @@
  */
 
 package com.haijiao.Domain.service.impl;
-import com.haijiao.SupportService.dao.impl.StudentDAOImpl;
-import com.haijiao.persist.Student;
+import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.service.IStudentService;
 
-public class StudentServiceImpl implements IStudentService{
+public class StudentServiceImpl implements IStudentService{ 
 
-    private StudentDAOImpl studentImpl;
-
-    public void setStudentImpl(StudentDAOImpl studentImpl) {
-        this.studentImpl = studentImpl;
-    }
-    
     @Override
     public boolean addStudent(String account, String password) {
-        Student s = new Student();
-        s.setAccount(account);
-        s.setPassword(password);
-        return studentImpl.makePersistent(s);
-    }
-
-    @Override
-    public Student getStudentById(int userId) {
-        return studentImpl.findById(userId);
+        return true;
     }
 
     @Override
     public boolean confirmLogin(String account, String password) {
-        return studentImpl.confirm(account, password);
+        if(account.equalsIgnoreCase("TEST") && password.equals("123456")){
+            return true;
+        }
+        else
+            return false;
     }
-    
+
+    @Override
+    public Student getStudentById(int userId) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

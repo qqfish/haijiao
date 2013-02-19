@@ -3,7 +3,7 @@
  * @author Jerry
  */
 package com.haijiao.Domain.service;
-import com.haijiao.persist.Student;
+import com.haijiao.Domain.bean.Student;
 
 public interface IStudentService {
     public boolean addStudent(String account, String password);

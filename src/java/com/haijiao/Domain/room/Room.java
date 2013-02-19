@@ -5,7 +5,7 @@
 package com.haijiao.Domain.room;
 
 import com.haijiao.Domain.file.DataFile;
-import com.haijiao.Domain.user.User;
+import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.room.webFc.FcMessageInbound;
 import java.io.IOException;
 import java.nio.CharBuffer;

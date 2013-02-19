@@ -1,3 +1,6 @@
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,41 +37,7 @@
 <body>
 
 <!--==============================header=================================-->
-<header>
-  <div class="main">
-		帐号 <input type="text" name="email" class="wbkuang" style="width:120px;" /> 
-		密码 <input type="password" name="password" class="wbkuang"  style="width:120px;" />
-		<a href="login.html" target="_blank" style="color:black">登陆</a>
-		<a href="register.html" target="_blank" style="color:black">免费注册</a>
-  </div>
-  <div class="line-top"></div>
-  <div class="main">
-    <div class="row-top">
-      <h1><a href="index.html"><img alt="" src="images/logo.png"></a></h1>
-      <nav>
-        <ul class="sf-menu">
-          <li><a href="index.html" style = "font-size:18px"><b>主页</b></a></li>
-          <li><a  style = "font-size:18px"><b>课程</b></a> 
-			<ul>
-              <li><a href="teachers.html">教师</a></li>
-              <li><a href="#">课程表 </a>
-            </ul>
-		  </li>
-		  <li><a href="class.html" style = "font-size:18px"><b>在线课堂</b></a> </li>
-          <li><a style = "font-size:18px"><b>个人</b></a>
-            <ul>
-              <li><a href="personal.html">资料</a></li>
-              <li><a href="#">账户</a></li>
-            </ul>
-          </li>
-          <li><a href="contact.html" style = "font-size:18px"><b>联系我们</b></a> </li>
-        </ul>
-      </nav>
-      <div class="clear"></div>
-    </div>
-  </div>
-</header>
-
+<%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <section id="content"><div class="ic"></div>
   <div class="border-horiz"></div>
@@ -102,17 +71,6 @@
 </section>
 
 <!--==============================footer=================================-->
-<footer>
-  <div class="main">
-    <ul class="soc-list">
-      <li><a href="#"><img alt="" src="images/icon-1.png"></a></li>
-      <li><a href="#"><img alt="" src="images/icon-2.png"></a></li>
-      <li><a href="#"><img alt="" src="images/icon-3.png"></a></li>
-      <li><a href="#"><img alt="" src="images/icon-4.png"></a></li>
-    </ul>
-    <div class="policy">版权所有 翻版必究</div>
-    <div class="clear"></div>
-  </div>
-</footer>
+<%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>
 </html>

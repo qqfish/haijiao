@@ -5,9 +5,8 @@
 
 package com.haijiao.presentation.action;
 import com.haijiao.Domain.service.IStudentService;
-import com.opensymphony.xwork2.ActionSupport;
 
-public class LoginAction extends ActionSupport {
+public class LoginAction extends SessionAction {
 
     private IStudentService studentService;
     private String account;
@@ -15,14 +14,15 @@ public class LoginAction extends ActionSupport {
     
     @Override
     public String execute() throws Exception {
-        if(account.equalsIgnoreCase("zou") && password.equals("123456")){
+        if(studentService.confirmLogin(account, password)){
+            this.putIn("username", account);
+            this.putIn("login", true);
             return "success";
         }
         return "login";
     }
     
     public void validate(){
-        System.out.println("123");
         if(account==null || account.trim().length()==0){
             this.addFieldError("account", this.getText("accountNull"));
         }

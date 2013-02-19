@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Login</title>
+<title>Home</title>
 <meta charset="utf-8">
 <!--css-->
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
@@ -19,6 +19,21 @@
 <script type="text/javascript" src="js/superfish.js"></script>
 <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 
+<script>	
+			jQuery(window).load(function() {								
+			jQuery('.flexslider').flexslider({
+				animation: "fade",			
+				slideshow: true,			
+				slideshowSpeed: 7000,
+				animationDuration: 600,
+				prevText: "",
+				nextText: "",
+				controlNav: false		
+			})	  
+			
+					
+      });
+	</script>
 
 
 	<!--[if lt IE 8]>
@@ -43,22 +58,8 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <section id="content">
-<div class="ic"></div>
-  <div class="border-horiz"></div>
-  <div class="main">
-    <article class="side-bar">
-       <br/>
-      <s:form action="/login.action">
-        <s:textfield name="account" label="用户账号"></s:textfield>
-        <s:password name="password" label="用户密码"></s:password>
-        <s:submit value="登录"></s:submit>
-      </s:form>
-      备注：测试账号 TEST 密码 123456
-    </article>
-    <div class="clear"></div>
-  </div>
-</section>
 
+</section>
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>
