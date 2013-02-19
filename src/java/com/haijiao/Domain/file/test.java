@@ -65,7 +65,7 @@ public class test {
 //            //BufferedImage imgae = page1.convertToImage();
 //            Iterator iter = ImageIO.getImageWritersBySuffix("png");
 //            ImageWriter writer = (ImageWriter) iter.next();
-//            File outFile = new File(URLDecoder.decode(("/Users/fish/test/" + i + "Àý.png"),"UTF-8"));
+//            File outFile = new File(URLDecoder.decode(("/Users/fish/test/" + i + "??.png"),"UTF-8"));
 //            FileOutputStream out = new FileOutputStream(outFile);
 //            ImageOutputStream outImage = ImageIO.createImageOutputStream(out);
 //            writer.setOutput(outImage);
