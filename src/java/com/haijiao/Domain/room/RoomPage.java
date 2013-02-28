@@ -52,10 +52,12 @@ public class RoomPage {
         //the idList must be sorted before
         int current = 0;
         for (int i = 0; i < shapes.size() && current < idList.size(); i++) {
+            while(shapes.get(i).getId() > idList.get(current)&& current < idList.size() - 1){
+                current++;
+            }
             if (shapes.get(i).getId() == idList.get(current)) {
                 shapes.remove(i);
-                return;
-            } else if (shapes.get(i).getId() > idList.get(current)) {
+                i--;
                 current++;
             }
         }
@@ -85,7 +87,11 @@ public class RoomPage {
         this.shapes = shapes;
     }
 
-    public String getOriginDataUri() {
-        throw new UnsupportedOperationException("Not yet implemented");
+    public RoomFile getFile() {
+        return file;
+    }
+    
+    public int getPageNumber(){
+        return file.getPageNumber(this);
     }
 }

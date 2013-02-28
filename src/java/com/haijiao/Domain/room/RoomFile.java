@@ -33,22 +33,45 @@ public class RoomFile extends DataFile {
     private List<RoomPage> pages;
     private String uuid;
     private Room room;
-    private DataFile originFile;
     private PDDocument doc;
     private int lastPage;
 
-    public RoomFile(DataFile file, Room room) throws IOException {
-        this.room = room;
-        originFile = file;
-        uuid = UUID.randomUUID().toString();
-        name = file.getName();
-        fileUrl = file.getFileUrl();
-        doc = PDDocument.load(fileUrl);
-        pages = new ArrayList();
-        for (int i = 0; i < doc.getNumberOfPages(); i++) {
-            pages.add(new RoomPage(this));
+    public RoomFile(DataFile file, Room room) {
+        try {
+            this.room = room;
+            uuid = UUID.randomUUID().toString();
+            name = file.getName();
+            fileUrl = file.getFileUrl();
+            doc = PDDocument.load(fileUrl);
+            pages = new ArrayList();
+            for (int i = 0; i < doc.getNumberOfPages(); i++) {
+                pages.add(new RoomPage(this));
+            }
+            lastPage = 0;
+        } catch (IOException ex) {
+            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
         }
-        lastPage = 0;
+    }
+    
+    public RoomFile(Room room){
+        try {
+            this.room = room;
+            uuid = UUID.randomUUID().toString();
+            name = config.newDocumentName;
+            fileUrl = null;
+            //doc = new PDDocument();
+            doc = PDDocument.load("/Users/fish/Downloads/test1.pdf");
+            pages = new ArrayList();
+            PDPage newPage = new PDPage();
+            doc.addPage(newPage);
+            for (int i = 0; i < doc.getNumberOfPages(); i++) {
+                pages.add(new RoomPage(this));
+            }
+            lastPage = 0;
+        } catch (IOException ex) {
+            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     public boolean addBookmark(String indexName, int page) {
@@ -60,18 +83,22 @@ public class RoomFile extends DataFile {
         
     }
 
-    public RoomPage getPage(int i) throws IOException {
+    public RoomPage getPage(int i) {
         if (i < doc.getNumberOfPages()) {
             lastPage = i;
             RoomPage result = pages.get(i);
             if (result.getOriginUrl() == null) {
-                PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
-                BufferedImage image = page.convertToImage();
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                ImageIO.write(image, config.pageImageType, os);
-                byte[] bytes = os.toByteArray();
-                String url = config.pageDataUriPrefix + Base64.encode(bytes);
-                result.setOriginUrl(url);
+                try {
+                    PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
+                    BufferedImage image = page.convertToImage();
+                    ByteArrayOutputStream os = new ByteArrayOutputStream();
+                    ImageIO.write(image, config.pageImageType, os);
+                    byte[] bytes = os.toByteArray();
+                    String url = config.pageDataUriPrefix + Base64.encode(bytes);
+                    result.setOriginUrl(url);
+                } catch (IOException ex) {
+                    Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
             return result;
         } else {
@@ -79,7 +106,7 @@ public class RoomFile extends DataFile {
         }
     }
 
-    public RoomPage getLastPage() throws IOException {
+    public RoomPage getLastPage(){
         return getPage(lastPage);
     }
 
@@ -115,11 +142,19 @@ public class RoomFile extends DataFile {
         }
     }
     
-    public void clearPage(int index) throws IOException{
+    public void clearPage(int index) {
         if(index < doc.getNumberOfPages()){
-            PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(index);
-            page.getContents().getStream().clear();
+            try {
+                PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(index);
+                page.getContents().getStream().clear();
+            } catch (IOException ex) {
+                Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+    }
+    
+    public int getPageNumber(RoomPage page) {
+        return pages.indexOf(page);
     }
     
 }

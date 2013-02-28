@@ -12,9 +12,9 @@ var Tooltype = {
 
 function Toolkit(){
 	//private
-	var tool = tooltype.Hand;
+	var tool = Tooltype.Hand;
 	var color = "black";
-	var width = 2;
+	var width = 5;
 	//tooltype:
 	//hand : move the paper
 	//pen

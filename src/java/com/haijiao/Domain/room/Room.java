@@ -4,12 +4,17 @@
  */
 package com.haijiao.Domain.room;
 
+import com.google.gson.Gson;
 import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.room.webFc.FcMessageInbound;
+import com.haijiao.Domain.room.webFc.message.response.ResponseChangePage;
+import com.haijiao.Domain.room.webFc.message.response.ResponseDrawShape;
+import com.haijiao.Domain.room.webFc.message.response.ResponseEraseShape;
 import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -21,6 +26,7 @@ import java.util.logging.Logger;
  */
 public class Room {
 
+    private Gson gson;
     private String roomId;
     private User holder;
     private List<User> attendance;
@@ -29,12 +35,16 @@ public class Room {
     private RoomPage currentPage;
 
     public Room(String id, User holder) {
+        gson = new Gson();
+        
         roomId = id;
         this.holder = holder;
         attendance = new ArrayList();
+        attendance.add(holder);
         roomSocket = new ArrayList();
         roomFile = new ArrayList();
-        currentPage = null;
+        roomFile.add(new RoomFile(this));
+        currentPage = roomFile.get(0).getPage(0);
     }
 
     public void addAttendance(User user) {
@@ -44,7 +54,9 @@ public class Room {
     }
 
     public void removeAttendance(User user) {
-        attendance.remove(user);
+        if (!user.equals(holder)) {
+            attendance.remove(user);
+        }
     }
 
     public boolean checkAttendance(User user) {
@@ -53,6 +65,15 @@ public class Room {
 
     public void enterRoom(FcMessageInbound socket) {
         roomSocket.add(socket);
+    }
+
+    public boolean checkInroomUser(User user) {
+        for (int i = 0; i < roomSocket.size(); i++) {
+            if (roomSocket.get(i).getUser().equals(user)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void loadFile(DataFile file) {
@@ -81,25 +102,44 @@ public class Room {
             return false;
         }
         RoomPage result = null;
-        try {
-            if (page < 0) {
-                result = file.getLastPage();
-            } else {
-                result = file.getPage(page);
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+        if (page < 0) {
+            result = file.getLastPage();
+        } else {
+            result = file.getPage(page);
         }
 
         if (result == null) {
             return false;
         }
         currentPage = result;
+
+        broadcast(gson.toJson(getCurrentPage()));
         return true;
     }
-
-    public RoomPage getCurrentPage() {
-        return currentPage;
+    
+    public ResponseChangePage getCurrentPage(){
+        ResponseChangePage message = new ResponseChangePage();
+        message.setPage(currentPage.getPageNumber());
+        message.setShapeList(currentPage.getShapes());
+        message.setUrl(currentPage.getOriginUrl());
+        message.setUuid(currentPage.getFile().getUuid());
+        return message;
+    }
+    
+    public void drawShape(String shape){
+        int id = currentPage.addShape(shape);
+        ResponseDrawShape result = new ResponseDrawShape();
+        result.setId(id);
+        result.setJson(shape);
+        broadcast(gson.toJson(result));
+    }
+    
+    public void eraseShape(List<Integer> idArray){
+        Collections.sort(idArray);
+        currentPage.deleteShape(idArray);
+        ResponseEraseShape result = new ResponseEraseShape();
+        result.setIdArray(idArray);
+        broadcast(gson.toJson(result));
     }
 
     public RoomFile getOneRoomFile(String uuid) {
@@ -111,17 +151,34 @@ public class Room {
         return null;
     }
 
-    public void broadcast(String message) throws IOException {
-        CharBuffer buffer = CharBuffer.wrap(message);
+    public void broadcast(String message) {
         for (int i = 0; i < roomSocket.size(); i++) {
-            roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
+            try {
+                CharBuffer buffer = CharBuffer.wrap(message);
+                roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
+            } catch (IOException ex) {
+                Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
-    public void broadcastOther(String message, FcMessageInbound from) throws IOException {
-        CharBuffer buffer = CharBuffer.wrap(message);
+    public void broadcastOther(String message, FcMessageInbound from) {
         for (int i = 0; i < roomSocket.size(); i++) {
             if (!roomSocket.get(i).equals(from)) {
+                try {
+                    CharBuffer buffer = CharBuffer.wrap(message);
+                    roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
+                } catch (IOException ex) {
+                    Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public void sentto(String message, String userId) throws IOException {
+        CharBuffer buffer = CharBuffer.wrap(message);
+        for (int i = 0; i < roomSocket.size(); i++) {
+            if (roomSocket.get(i).getUser().getUserId().equals(userId)) {
                 roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
             }
         }

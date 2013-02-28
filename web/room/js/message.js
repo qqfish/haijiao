@@ -15,5 +15,6 @@ var Response = {
     DrawShape: 1,
     EraseShape: 2,
     VideoChat: 3,
-    TextChat: 4
+    TextChat: 4,
+    ChangePage : 5
 }

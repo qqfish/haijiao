@@ -10,6 +10,62 @@ function UserMedia(){
     this.status = null;
 }
 function Media(parentId, text){
+    
+    //adapter
+    var RTCPeerConnection = null;
+    var getUserMedia = null;
+    var attachMediaStream = null;
+
+    if (navigator.mozGetUserMedia) {
+        console.log("This appears to be Firefox");
+
+        // The RTCPeerConnection object.
+        RTCPeerConnection = mozRTCPeerConnection;
+
+        // Get UserMedia (only difference is the prefix).
+        // Code from Adam Barth.
+        getUserMedia = navigator.mozGetUserMedia.bind(navigator);
+
+        // Attach a media stream to an element.
+        attachMediaStream = function(element, stream) {
+            console.log("Attaching media stream");
+            element.attr("mozSrcObject",stream);
+            element.play();
+        };
+    } else if (navigator.webkitGetUserMedia) {
+        console.log("This appears to be Chrome");
+
+        // The RTCPeerConnection object.
+        RTCPeerConnection = webkitRTCPeerConnection;
+  
+        // Get UserMedia (only difference is the prefix).
+        // Code from Adam Barth.
+        getUserMedia = navigator.webkitGetUserMedia.bind(navigator);
+
+        // Attach a media stream to an element.
+        attachMediaStream = function(element, stream) {
+            console.log("Attaching media stream");
+            element.attr("src",webkitURL.createObjectURL(stream));
+        };
+
+        // The representation of tracks in a stream is changed in M26.
+        // Unify them for earlier Chrome versions in the coexisting period.
+        if (!webkitMediaStream.prototype.getVideoTracks) {
+            webkitMediaStream.prototype.getVideoTracks = function() {
+                return this.videoTracks;
+            }
+        }
+        if (!webkitMediaStream.prototype.getAudioTracks) {
+            webkitMediaStream.prototype.getAudioTracks = function() {
+                return this.audioTracks;
+            }
+        }
+    } else {
+        console.log("Browser does not appear to be WebRTC-capable");
+    }
+    
+    
+    
     var mediaList = new Array();
     var localVideo;
     var localStream;
@@ -92,18 +148,19 @@ function Media(parentId, text){
             alert("Cannot create RTCPeerConnection object; WebRTC is not supported by this browser.");
             return null;
         }
-        
+        console.log(remoteUser);
         mediaList[remoteUser].status = "initializing";
         mediaList[remoteUser].video = $("<video></video>").attr("user",remoteUser).attr("class","video").hide();
-
+        
         mediaList[remoteUser].pc.onconnecting = onSessionConnecting;
         mediaList[remoteUser].pc.onopen = onSessionOpened;
         mediaList[remoteUser].pc.onaddstream = function(event) {
             console.log("Remote stream added.");
             
+            addVideo(mediaList[remoteUser].video);
             attachMediaStream(mediaList[remoteUser].video, event.stream);
             mediaList[remoteUser].remoteStream = event.stream;
-            waitForRemoteVideo(); 
+            waitForRemoteVideo(remoteUser); 
         };
         mediaList[remoteUser].pc.onremovestream = onRemoteStreamRemoved;
     }
@@ -133,7 +190,7 @@ function Media(parentId, text){
         }
     }
 
-    this.doCall = function(remoteUser) {
+    function doCall(remoteUser) {
         console.log("Sending offer to peer.");
         mediaList[remoteUser].pc.createOffer(function(sessionDescription){
             sessionDescription.sdp = preferOpus(sessionDescription.sdp);
@@ -236,8 +293,10 @@ function Media(parentId, text){
     }
     
     function removeMedia(remoteUser) {
+        console.log("remove user:" + remoteUser);
         if(mediaList[remoteUser].pc) {
             mediaList[remoteUser].pc.close();
+            mediaList[remoteUser].pc = null;
         }
         if(mediaList[remoteUser].video) {
             removeVideo(mediaList[remoteUser].video);
@@ -247,13 +306,14 @@ function Media(parentId, text){
 
     function waitForRemoteVideo(remoteUser) {
         // Call the getVideoTracks method via adapter.js.
+        console.log(remoteUser);
         videoTracks = mediaList[remoteUser].remoteStream.getVideoTracks();
         if (videoTracks.length === 0 || mediaList[remoteUser].remoteStream.currentTime > 0) {
             transitionToActive(remoteUser);
         } else {
             setTimeout(function(){
                 waitForRemoteVideo(remoteUser)
-                }, 100);
+            }, 100);
         }
     }
     function transitionToActive(remoteUser) {
@@ -264,6 +324,7 @@ function Media(parentId, text){
     
     function addVideo(video){
         parentDiv.append(video);
+        video.attr("autoplay","autoplay");
     }
     
     function removeVideo(video){
@@ -413,58 +474,5 @@ function Media(parentId, text){
 
         sdpLines[mLineIndex] = mLineElements.join(' ');
         return sdpLines;
-    }
-    
-    
-    //adapter
-    var RTCPeerConnection = null;
-    var getUserMedia = null;
-    var attachMediaStream = null;
-
-    if (navigator.mozGetUserMedia) {
-        console.log("This appears to be Firefox");
-
-        // The RTCPeerConnection object.
-        RTCPeerConnection = mozRTCPeerConnection;
-
-        // Get UserMedia (only difference is the prefix).
-        // Code from Adam Barth.
-        getUserMedia = navigator.mozGetUserMedia.bind(navigator);
-
-        // Attach a media stream to an element.
-        attachMediaStream = function(element, stream) {
-            console.log("Attaching media stream");
-            element.attr("mozSrcObject",stream);
-            element.play();
-        };
-    } else if (navigator.webkitGetUserMedia) {
-        console.log("This appears to be Chrome");
-
-        // The RTCPeerConnection object.
-        RTCPeerConnection = webkitRTCPeerConnection;
-  
-        // Get UserMedia (only difference is the prefix).
-        // Code from Adam Barth.
-        getUserMedia = navigator.webkitGetUserMedia.bind(navigator);
-
-        // Attach a media stream to an element.
-        attachMediaStream = function(element, stream) {
-            element.attr("src",createObjectURL(stream));
-        };
-
-        // The representation of tracks in a stream is changed in M26.
-        // Unify them for earlier Chrome versions in the coexisting period.
-        if (!webkitMediaStream.prototype.getVideoTracks) {
-            webkitMediaStream.prototype.getVideoTracks = function() {
-                return this.videoTracks;
-            }
-        }
-        if (!webkitMediaStream.prototype.getAudioTracks) {
-            webkitMediaStream.prototype.getAudioTracks = function() {
-                return this.audioTracks;
-            }
-        }
-    } else {
-        console.log("Browser does not appear to be WebRTC-capable");
     }
 }

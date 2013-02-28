@@ -14,6 +14,8 @@ import com.haijiao.Domain.room.webFc.message.response.*;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.WsOutbound;
 
@@ -37,10 +39,15 @@ public class FcMessageInbound extends MessageInbound {
     @Override
     protected void onOpen(WsOutbound outbound) {
         System.out.println(this.toString() + " ,new connection created");
+        sendtoUser(gson.toJson(room.getCurrentPage()));
     }
 
     @Override
     protected void onClose(int status) {
+        ResponseVideoChat bye = new ResponseVideoChat();
+        bye.setFrom(user.getUserId());
+        bye.setData("{\"type\":\"bye\"}");
+        room.broadcastOther(gson.toJson(bye), this);
         room.exitRoom(this);
         System.out.println(this.toString() + "closed");
     }
@@ -60,31 +67,29 @@ public class FcMessageInbound extends MessageInbound {
         RequestData textData = gson.fromJson(str, RequestData.class);
         //System.out.println(textData.getType());
         //System.out.println(idRoom + " " + username);
-
         switch (textData.getType()) {
             case Request.TmpShape:
                 RequestTmpShape rts = gson.fromJson(str, RequestTmpShape.class);
                 ResponseTmpShape tmpResult = new ResponseTmpShape(rts);
-                room.broadcast(gson.toJson(tmpResult));
+                room.broadcastOther(gson.toJson(tmpResult),this);
                 break;
             case Request.DrawShape:
                 RequestDrawShape shape = gson.fromJson(str, RequestDrawShape.class);
-                int id = room.getCurrentPage().addShape(shape.getJson());
-                ResponseDrawShape drawResult = new ResponseDrawShape(shape);
-                drawResult.setId(id);
-                room.broadcast(gson.toJson(drawResult));
+                room.drawShape(shape.getJson());
                 break;
             case Request.EraseShape:
                 RequestEraseShape erase = gson.fromJson(str, RequestEraseShape.class);
-                erase.sort();
-                room.getCurrentPage().deleteShape(erase.getIdArray());
-                ResponseEraseShape eraseResult = new ResponseEraseShape(erase);
-                room.broadcast(gson.toJson(eraseResult));
+                room.eraseShape(erase.getIdArray());
                 break;
             case Request.VideoChat:
                 RequestVideoChat rvc = gson.fromJson(str, RequestVideoChat.class);
                 ResponseVideoChat videoResult = new ResponseVideoChat(rvc);
-                room.broadcastOther(gson.toJson(videoResult), this);
+                videoResult.setFrom(user.getUserId());
+                if (videoResult.getTo() == null) {
+                    room.broadcastOther(gson.toJson(videoResult), this);
+                } else {
+                    room.sentto(gson.toJson(videoResult), videoResult.getTo());
+                }
                 break;
             case Request.TextChat:
                 RequestTextChat chat = gson.fromJson(str, RequestTextChat.class);
@@ -99,14 +104,23 @@ public class FcMessageInbound extends MessageInbound {
                 } else {
                     room.choosePage(page.getFileUuid(), page.getPage());
                 }
-                ResponseChangePage pageResult = new ResponseChangePage(page);
-                pageResult.setUrl(room.getCurrentPage().getOriginUrl());
-                pageResult.setShapeList(room.getCurrentPage().getShapes());
-                room.broadcast(gson.toJson(pageResult));
                 break;
 
         }
 
 
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void sendtoUser(String message) {
+        CharBuffer buffer = CharBuffer.wrap(message);
+        try {
+            getWsOutbound().writeTextMessage(buffer);
+        } catch (IOException ex) {
+            Logger.getLogger(FcMessageInbound.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

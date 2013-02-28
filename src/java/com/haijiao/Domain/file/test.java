@@ -100,6 +100,10 @@ public class test {
         //outline -- bookmark
         PDDocument doc = PDDocument.load("/Users/fish/Downloads/test"
                 + ".pdf");
+        PDDocument doc1 = PDDocument.load("/Users/fish/Downloads/test"
+                + ".pdf");
+        doc1.addPage(new PDPage());
+        System.out.println(doc.getNumberOfPages() + " " + doc1.getNumberOfPages());
         PDDocumentOutline root = doc.getDocumentCatalog().getDocumentOutline();
         PDOutlineItem item = root.getFirstChild();
         while (item != null) {

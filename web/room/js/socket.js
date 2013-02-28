@@ -14,7 +14,6 @@ connection.connect = (function(host) {
 
     connection.socket.onopen = function () {
 	    console.log('Info: WebSocket connection opened.');
-	//每隔10秒发送一条空信息，防止websocket自动断开。
 	    setInterval("connection.sendMessage('')",1000 * 10);
     };
 
@@ -24,22 +23,46 @@ connection.connect = (function(host) {
 
     connection.socket.onmessage = function (message) {
 	console.log('S->C: ' + message.data);
-        var socketData = Json.parse(message);
+        var socketData = JSON.parse(message.data);
+        switch(socketData.type){
+            case Response.TmpShape:
+                table.drawTmpFromJson(socketData.json);
+                break;
+            case Response.DrawShape:
+                table.drawFromJson(socketData.id, socketData.json);
+                break;
+            case Response.EraseShape:
+                table.eraseFromArray(socketData.idArray);
+                break;
+            case Response.TextChat:
+                textChat.printMeesage(socketData.message);
+                break;
+            case Response.VideoChat:
+                media.processSignalingMessage(socketData);
+                break;
+            case Response.ChangePage:
+                table.chagePage(socketData);
+                break;
+        }
     };
 });
 
 connection.initialize = function() {
     if (window.location.protocol == 'http:') {
-	connection.connect('ws://' + window.location.host + '/WebFc/WebFcSocketServlet');
+	connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet');
     } else {
-	connection.connect('wss://' + window.location.host + '/WebFc/WebFcSocketServlet');
+	connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServlet');
     }
 };
 
 connection.sendObject = function(message) {
-    var Jmessage = Json.stringify(message);
+    var Jmessage = JSON.stringify(message);
     connection.socket.send(Jmessage);
 };
+
+connection.sendMessage = function(message) {
+    connection.socket.send(message);
+}
 
 
 
