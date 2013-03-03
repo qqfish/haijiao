@@ -39,7 +39,11 @@ public class FcMessageInbound extends MessageInbound {
     @Override
     protected void onOpen(WsOutbound outbound) {
         System.out.println(this.toString() + " ,new connection created");
-        sendtoUser(gson.toJson(room.getCurrentPage()));
+        //room file list
+        sendtoUser(gson.toJson(new ResponseAddRoomFile(room.getRoomFile())));
+        
+        sendtoUser(gson.toJson(room.getResponseChangePage()));
+        sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
     }
 
     @Override
@@ -105,7 +109,15 @@ public class FcMessageInbound extends MessageInbound {
                     room.choosePage(page.getFileUuid(), page.getPage());
                 }
                 break;
-
+            case Request.ChangeFile:
+                RequestChangeFile file = gson.fromJson(str, RequestChangeFile.class);
+                if (file.getTmpUrl() != null) {
+                    room.changePage(file.getUuid(), -1, file.getTmpUrl());
+                } else {
+                    room.choosePage(file.getUuid(), -1);
+                }
+                sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
+                break;
         }
 
 

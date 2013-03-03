@@ -18,16 +18,28 @@
         <script src="js/socket.js"></script>
         <script src="js/media.js"></script>
         <script src="js/table.js"></script>
+        <script src="js/fileManager.js"></script>
         <script src="js/main.js"></script>
         <title>JSP Page</title>
     </head>
     <body>
         <div id="stable">
             <div id="toolbar">
+                <button id="nextPage">下一页</button>
+                <button id="prePage">上一页</button>
                 <button id="pointer">指针</button>
                 <button id="pen">画笔</button>
                 <button id="eraser">橡皮</button>
                 <button id="videoButton"">视频</button>
+                <div id="userFile">
+                    <p>用户文件</p>
+                </div>
+                <div id="roomFile">
+                    <p>房间文件</p>
+                </div>
+                <p>书签</p>
+                <div id="bookmark">
+                </div>
             </div>
             <div id="videoWindows"></div>
             <div id="textChat">

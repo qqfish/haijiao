@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.room.webFc.FcMessageInbound;
+import com.haijiao.Domain.room.webFc.message.response.ResponseChangeBookmark;
 import com.haijiao.Domain.room.webFc.message.response.ResponseChangePage;
 import com.haijiao.Domain.room.webFc.message.response.ResponseDrawShape;
 import com.haijiao.Domain.room.webFc.message.response.ResponseEraseShape;
@@ -77,7 +78,7 @@ public class Room {
     }
 
     public void loadFile(DataFile file) {
-        /* copy this file and add it into the list */
+        roomFile.add(new RoomFile(file,this));
     }
 
     public boolean changePage(String uuid, int page, String tmpUri) {
@@ -113,11 +114,11 @@ public class Room {
         }
         currentPage = result;
 
-        broadcast(gson.toJson(getCurrentPage()));
+        broadcast(gson.toJson(getResponseChangePage()));
         return true;
     }
     
-    public ResponseChangePage getCurrentPage(){
+    public ResponseChangePage getResponseChangePage(){
         ResponseChangePage message = new ResponseChangePage();
         message.setPage(currentPage.getPageNumber());
         message.setShapeList(currentPage.getShapes());
@@ -149,6 +150,13 @@ public class Room {
             }
         }
         return null;
+    }
+    
+    public ResponseChangeBookmark getResponseChangeBookmark(){
+        RootBookmark rootBookmark = currentPage.getFile().getBookmarks();
+        
+        ResponseChangeBookmark message = new ResponseChangeBookmark(rootBookmark);
+        return message;
     }
 
     public void broadcast(String message) {
@@ -191,4 +199,10 @@ public class Room {
     public String getRoomId() {
         return roomId;
     }
+
+    public List<RoomFile> getRoomFile() {
+        return roomFile;
+    }
+    
+    
 }

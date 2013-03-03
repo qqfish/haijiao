@@ -15,4 +15,6 @@ public class Response {
     public static final int VideoChat = 3;
     public static final int TextChat = 4;
     public static final int ChangePage = 5;
+    public static final int ChangeBookmark = 6;
+    public static final int AddRoomFile = 7;
 }

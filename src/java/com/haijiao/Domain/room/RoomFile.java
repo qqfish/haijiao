@@ -34,6 +34,7 @@ public class RoomFile extends DataFile {
     private String uuid;
     private Room room;
     private PDDocument doc;
+    private RootBookmark bookmarks;
     private int lastPage;
 
     public RoomFile(DataFile file, Room room) {
@@ -43,6 +44,7 @@ public class RoomFile extends DataFile {
             name = file.getName();
             fileUrl = file.getFileUrl();
             doc = PDDocument.load(fileUrl);
+            bookmarks = new RootBookmark(doc);
             pages = new ArrayList();
             for (int i = 0; i < doc.getNumberOfPages(); i++) {
                 pages.add(new RoomPage(this));
@@ -59,8 +61,8 @@ public class RoomFile extends DataFile {
             uuid = UUID.randomUUID().toString();
             name = config.newDocumentName;
             fileUrl = null;
-            //doc = new PDDocument();
-            doc = PDDocument.load("/Users/fish/Downloads/test1.pdf");
+            doc = new PDDocument();
+            bookmarks = new RootBookmark(doc);
             pages = new ArrayList();
             PDPage newPage = new PDPage();
             doc.addPage(newPage);
@@ -155,6 +157,10 @@ public class RoomFile extends DataFile {
     
     public int getPageNumber(RoomPage page) {
         return pages.indexOf(page);
+    }
+
+    public RootBookmark getBookmarks() {
+        return bookmarks;
     }
     
 }

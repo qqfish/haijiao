@@ -12,8 +12,16 @@ $(document).ready(function(){
     toolkit = new Toolkit();
     table = new Table("table",toolkit);
     media = new Media("videoWindows", textChat);
+    file = new fileManager("roomFile","bookmark");
     
     //just for test
+    $("#nextPage").click(function(){
+        file.nextPage();
+    });
+    $("#prePage").click(function(){
+        file.prePage();
+    });
+    
     $("#videoButton").click(function(){
         $(".video").toggle();
     });

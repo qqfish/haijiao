@@ -5,6 +5,7 @@
 package com.haijiao.Domain.room.webFc;
 
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.room.Room;
 
 /**
@@ -27,6 +28,14 @@ public class tmpRoom {
             user[2].setUserId("345");
             counter = 0;
             testRoom = new Room("1",user[0]);
+            DataFile file1 = new DataFile();
+            file1.setFileUrl("/Users/fish/Downloads/test1.pdf");
+            file1.setName("test1.pdf");
+            DataFile file2 = new DataFile();
+            file2.setFileUrl("/Users/fish/Downloads/test2.pdf");
+            file2.setName("test1.pdf");
+            testRoom.loadFile(file1);
+            //testRoom.loadFile(file2);
             for(int i = 1; i < 3; i++){
                 testRoom.addAttendance(user[i]);
             }

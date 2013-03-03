@@ -17,4 +17,5 @@ public class config {
     
     //File config
     static public String fileRoot = "~/file";
+    static public String defaultGroupName = "no group";
 }

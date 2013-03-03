@@ -40,10 +40,29 @@ function Table(containerName, tool){
     
     setMouse();
 
-    this.savePage = function(){
+    this.sendChangeFile = function(uuid){
         stage.toDataURL({
             callback: function(dataUrl) {
-                
+                var message = {};
+                message.type = Request.ChangeFile;
+                message.uuid = uuid;
+                message.tmpUrl = dataUrl;
+        
+                connection.sendObject(message);
+            }
+        });
+    }
+    
+    this.sendChangePage = function(uuid,page){
+        stage.toDataURL({
+            callback: function(dataUrl) {
+                var message = {};
+                message.type = Request.ChangePage;
+                message.fileUuid = uuid;
+                message.page = page;
+                message.tmpUrl = dataUrl;
+        
+                connection.sendObject(message);
             }
         });
     }
@@ -106,10 +125,10 @@ function Table(containerName, tool){
     this.eraseFromArray = function(idArray) {
         tmpLayer.removeChildren();
         var shapeSet = drawLayer.getChildren();
-        console.log(shapeSet);
+        //console.log(shapeSet);
         var current = 0;
         for(var j = 0; j < shapeSet.length && current < idArray.length; j++){
-            console.log(shapeSet[j].getId());
+            //console.log(shapeSet[j].getId());
             while(idArray[current] < shapeSet[j].getId() && current < idArray.length-1){
                 current++;
             }
@@ -282,7 +301,7 @@ function Table(containerName, tool){
                         var p2 = result.erasePath[result.erasePath.length - 1];
                         var children = drawLayer.getChildren();
                         for(var i = 0; i < children.length; i++){
-                            console.log(children[i].hasErase);
+                            //console.log(children[i].hasErase);
                             if(children[i].hasErase == true) 
                                 continue;
                             var points = children[i].getPoints();
@@ -294,7 +313,7 @@ function Table(containerName, tool){
                                     children[i].hasErase = true;
                                     break;
                                 }
-                                console.log(result.idArray.length);
+                                //console.log(result.idArray.length);
                             }
                         }
                         break;

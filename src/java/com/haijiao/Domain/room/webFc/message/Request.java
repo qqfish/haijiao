@@ -16,10 +16,5 @@ public class Request {
     public static final int VideoChat = 4;
     public static final int TextChat = 5;
     public static final int ChangePage = 6;
-    public static final int addFile = 7;
-    public static final int removeFile = 8;
-    public static final int addIndex = 9;
-    public static final int removeIndex = 10;
-    public static final int addPage = 11;
-    public static final int clearPage = 12;
+    public static final int ChangeFile = 7;
 }

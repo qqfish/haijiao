@@ -7,7 +7,9 @@ var Request = {
 	DrawShape: 2,
         EraseShape: 3,
         VideoChat: 4,
-        TextChat: 5
+        TextChat: 5,
+        ChangePage : 6,
+        ChangeFile : 7
 }
 
 var Response = {
@@ -16,5 +18,7 @@ var Response = {
     EraseShape: 2,
     VideoChat: 3,
     TextChat: 4,
-    ChangePage : 5
+    ChangePage : 5,
+    ChangeBookmark : 6,
+    AddRoomFile : 7
 }
