@@ -30,9 +30,12 @@
     </bean>
     -->
     
-    <bean id="studentService" class="com.haijiao.Domain.service.impl.StudentServiceImpl" />
+    <bean id="userService" class="com.haijiao.Domain.service.impl.UserServiceImpl" />
     <bean id="LoginAction" class="com.haijiao.presentation.action.LoginAction" scope="prototype">
-        <property name="studentService" ref="studentService" />
+        <property name="userService" ref="userService" />
+    </bean>
+    <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
+        <property name="userService" ref="userService" />
     </bean>
             
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
