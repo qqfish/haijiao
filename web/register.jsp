@@ -46,39 +46,13 @@
   <div class="border-horiz"></div>
   <div class="main">
     <article class="side-bar">
-      <p/>
-			<li>用户账号 ： 
-		  <input type="text" name="username" class="wbkuang" style="width:120px;" /> 
-		  </li>
-		  <p/>
-			<li>用户密码 ：
-		  <input type="password" name="password" class="wbkuang" style="width:120px;" /> 
-		  </li>
-		  <p/>
-		  <li>确认密码 ：
-		  <input type="password" name="password_confirm" class="wbkuang" style="width:120px;" /> 
-		  </li>
-		  <p/>
-		  <li>用户类型 ：
-		  <select name="type" class="wbkuang" style="width:140px;"> 
-		   <option value="0"></option>
-		   <option value="1">学生</option>
-		   <option value="2">学生家长</option>
-		   <option value="3">大学生家教</option>
-		   <option value="4">职业教师</option>
-		  </select>
-		  </li>
-		  <p/>
-		  <li>真实姓名 ：
-		  <input type="text" name="realname" class="wbkuang" style="width:120px;" /> 
-		  </li>
-		  <p/>
-		  <li>联系方式 ：
-		  <input type="text" name="contact" class="wbkuang" style="width:120px;" /> 
-		  </li>
-		  <p/>
-		  <p/>
-		  立即注册
+      <s:form action="register"> <br/>
+        <s:textfield name="account" label="用户账号"></s:textfield>
+        <s:password name="password1" label="用户密码"></s:password>
+        <s:password name="password2" label="确认密码"></s:password>
+        <s:select name="userType" list="{'学生','老师'}" label="用户类型" headerKey="" headerValue="请选择"></s:select>
+        <s:submit value="注册"></s:submit>
+      </s:form>
     </article>
     <div class="clear"></div>
   </div>

@@ -5,15 +5,25 @@
 
 package com.haijiao.presentation.action;
 import com.opensymphony.xwork2.ActionSupport;
+import com.haijiao.Domain.service.IUserService;
 
-public class RegisterAction extends ActionSupport{
+public class RegisterAction extends SessionAction{
     private String account;
     private String password1;
     private String password2;
+    private String userType;
+    private IUserService userService;
     
     @Override
     public String execute() throws Exception {
-        return SUCCESS;
+        if(userService.confirmRegister(account, password1, userType)){
+            this.putIn("username", account);
+            this.putIn("userType", userType);
+            this.putIn("login", true);
+            return SUCCESS;
+        } else {
+            return INPUT;
+        }
     }
     
     public void validate() {
@@ -34,6 +44,9 @@ public class RegisterAction extends ActionSupport{
         }
         else if(!password1.trim().equals(password2.trim())){
             this.addFieldError("password2", this.getText("passwordNotEqual"));
+        }
+        if(userType==null || userType.trim().length()==0){
+            this.addFieldError("userType", this.getText("userTypeNull"));
         }
     }
 
@@ -59,6 +72,22 @@ public class RegisterAction extends ActionSupport{
 
     public void setPassword2(String password2) {
         this.password2 = password2;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
     }
     
 }

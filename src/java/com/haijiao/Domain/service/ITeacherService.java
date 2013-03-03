@@ -8,12 +8,9 @@ import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.Timeslice;
 import com.haijiao.Domain.bean.User;
 
-public interface ITeacherService {
-    //验证登录
-    public boolean confirmLogin(String account, String password);
-    public Teacher getTeacherById(int userId);
-    //对某用户进行评论
-    public boolean comment(User commenter, User commentee, String content, Integer score);
+public interface ITeacherService extends IUserService {
+    public Teacher getTeacherByAccount(String account);
+
     //获取报酬
     public boolean takeMoney(Teacher tc, int number);
     //修改空闲时刻表
@@ -24,6 +21,4 @@ public interface ITeacherService {
     public boolean changeAudition(Teacher tc, boolean boo);
     //处理学生预约
     public boolean dealToReservation(Teacher tc, Timeslice ts);
-    
-    //以及文件系统相关操作....
 }

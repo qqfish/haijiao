@@ -48,7 +48,7 @@
   <div class="main">
     <article class="side-bar">
        <br/>
-      <s:form action="/login.action">
+      <s:form action="login">
         <s:textfield name="account" label="用户账号"></s:textfield>
         <s:password name="password" label="用户密码"></s:password>
         <s:submit value="登录"></s:submit>

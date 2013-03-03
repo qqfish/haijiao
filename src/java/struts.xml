@@ -8,17 +8,11 @@
     <constant name="struts.objectFactory" value="spring"/>
     
     <package name="haijiao" namespace="/" extends="struts-default">
-        <global-results>
-            <result name="login">login.jsp</result>
-        </global-results>
         <action name="login" class="LoginAction">
             <result name="input">login.jsp</result>
             <result name="success">index.jsp</result>
         </action>
-        <action name="toRegister">
-            <result name="success" type="redirect">register.jsp</result>
-        </action>
-        <action name="register" class="com.haijiao.presentation.action.RegisterAction">
+        <action name="register" class="RegisterAction">
             <result name="input">register.jsp</result>
             <result name="success">index.jsp</result>
         </action>

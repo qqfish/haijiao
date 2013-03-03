@@ -11,6 +11,7 @@ public class User {
     protected String userId;
     protected String account;
     protected String name;
+    protected String userType;
     protected List<DataFile> files;
     
     public String getUserId() {
@@ -35,6 +36,22 @@ public class User {
 
     public void setFiles(List<DataFile> files) {
         this.files = files;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
     
 }

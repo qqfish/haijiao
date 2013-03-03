@@ -4,22 +4,24 @@
  */
 
 package com.haijiao.presentation.action;
-import com.haijiao.Domain.service.IStudentService;
+import com.haijiao.Domain.service.IUserService;
 
 public class LoginAction extends SessionAction {
 
-    private IStudentService studentService;
+    private IUserService userService;
     private String account;
     private String password;
     
     @Override
     public String execute() throws Exception {
-        if(studentService.confirmLogin(account, password)){
+        String userType = userService.confirmLogin(account, password);
+        if(userType!=null || userType.trim().length()>=0){
             this.putIn("username", account);
+            this.putIn("userType", userType);
             this.putIn("login", true);
-            return "success";
+            return SUCCESS;
         }
-        return "login";
+        return INPUT;
     }
     
     public void validate(){
@@ -50,11 +52,12 @@ public class LoginAction extends SessionAction {
         this.password = password;
     }
 
-    public IStudentService getStudentService() {
-        return studentService;
+    public IUserService getUserService() {
+        return userService;
     }
 
-    public void setStudentService(IStudentService studentService) {
-        this.studentService = studentService;
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
     }
+    
 }

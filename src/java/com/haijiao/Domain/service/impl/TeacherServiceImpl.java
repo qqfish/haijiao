@@ -10,16 +10,21 @@ import com.haijiao.Domain.bean.Timeslice;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.service.ITeacherService;
 
-public class TeacherServiceImpl implements ITeacherService{
+public class TeacherServiceImpl extends UserServiceImpl implements ITeacherService{
 
     @Override
-    public boolean confirmLogin(String account, String password) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Teacher getTeacherById(int userId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Teacher getTeacherByAccount(String account) {
+        Teacher tea = new Teacher();
+        tea.setAccount(account);
+        tea.setBrief_intro("很高兴和同学们交朋友");
+        tea.setWagePerhour(35);
+        tea.setAudition(false);
+        tea.setComments(null);
+        tea.setClasses(null);
+        tea.setMoney(2000);
+        tea.setVideoURL(null);
+        tea.setSchedule(null);
+        return tea;
     }
 
     @Override
