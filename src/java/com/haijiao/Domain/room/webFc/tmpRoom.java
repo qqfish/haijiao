@@ -29,10 +29,10 @@ public class tmpRoom {
             counter = 0;
             testRoom = new Room("1",user[0]);
             DataFile file1 = new DataFile();
-            file1.setFileUrl("/Users/fish/Downloads/test1.pdf");
+            file1.setUrl("/Users/fish/Downloads/test1.pdf");
             file1.setName("test1.pdf");
             DataFile file2 = new DataFile();
-            file2.setFileUrl("/Users/fish/Downloads/test2.pdf");
+            file2.setUrl("/Users/fish/Downloads/test2.pdf");
             file2.setName("test1.pdf");
             testRoom.loadFile(file1);
             //testRoom.loadFile(file2);

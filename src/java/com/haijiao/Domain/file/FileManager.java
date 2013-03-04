@@ -18,22 +18,8 @@ import java.util.List;
  */
 public class FileManager {
 
-    private List<DirectoryFile> DirectoryFile;
-
-    public FileManager() {
-        DirectoryFile = new ArrayList();
-    }
-
-    public String getCurrentUrl() {
-        String url = config.fileRoot;
-        for (int i = 0; i < DirectoryFile.size(); i++) {
-            url += "/" + DirectoryFile.get(i).getName();
-        }
-        return url;
-    }
-
-    public boolean addFile(FileInputStream input, String FileName) throws IOException {
-        File file = new File(getCurrentUrl() + "/" + FileName);
+    public boolean addFile(FileInputStream input, String directoryUrl,String FileName) throws IOException {
+        File file = new File(directoryUrl + "/" + FileName);
         if (file.exists()) {
             return false;
         }
@@ -49,18 +35,23 @@ public class FileManager {
     }
     
     public List<AllFile> getFileList(){
+        return getFileList(config.fileRoot);
+    }
+    
+    public List<AllFile> getFileList(String directoryUrl){
         List<AllFile> result = new ArrayList();
         
-        File dir = new File(getCurrentUrl());
+        File dir = new File(directoryUrl);
         File[] file = dir.listFiles();
         for(int i = 0; i < file.length; i++){
             if(file[i].isDirectory()){
                 DirectoryFile dirFile = new DirectoryFile();
                 dirFile.setName(file[i].getName());
+                dirFile.setUrl(file[i].getAbsolutePath());
                 result.add(dirFile);
             } else {
                 DataFile dFile = new DataFile();
-                dFile.setFileUrl(file[i].getAbsolutePath());
+                dFile.setUrl(file[i].getAbsolutePath());
                 dFile.setName(file[i].getName());
                 result.add(dFile);
             }
@@ -68,13 +59,10 @@ public class FileManager {
         return result;
     }
     
-    public void enterDir(DirectoryFile dir){
-        DirectoryFile.add(dir);
+    public void removeFile(String fileUrl){
+        File file = new File(fileUrl);
+        if(file.exists() && file.isFile()){
+            file.delete();
+        }
     }
-    
-    public void enterRoot(){
-        DirectoryFile.clear();
-    }
-    
-    
 }

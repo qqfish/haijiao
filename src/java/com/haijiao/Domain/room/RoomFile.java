@@ -42,8 +42,8 @@ public class RoomFile extends DataFile {
             this.room = room;
             uuid = UUID.randomUUID().toString();
             name = file.getName();
-            fileUrl = file.getFileUrl();
-            doc = PDDocument.load(fileUrl);
+            url = file.getUrl();
+            doc = PDDocument.load(url);
             bookmarks = new RootBookmark(doc);
             pages = new ArrayList();
             for (int i = 0; i < doc.getNumberOfPages(); i++) {
@@ -60,7 +60,7 @@ public class RoomFile extends DataFile {
             this.room = room;
             uuid = UUID.randomUUID().toString();
             name = config.newDocumentName;
-            fileUrl = null;
+            url = null;
             doc = new PDDocument();
             bookmarks = new RootBookmark(doc);
             pages = new ArrayList();
@@ -138,7 +138,7 @@ public class RoomFile extends DataFile {
     
     public void save() throws IOException{
         try {
-            doc.save(fileUrl);
+            doc.save(url);
         } catch (COSVisitorException ex) {
             Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
         }

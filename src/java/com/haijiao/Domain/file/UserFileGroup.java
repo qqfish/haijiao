@@ -41,7 +41,7 @@ public class UserFileGroup{
     
     public DataFile getFile(String url){
         for(int i = 0; i < files.size(); i++){
-            if(files.get(i).getFileUrl().equals(url)){
+            if(files.get(i).getUrl().equals(url)){
                 return files.get(i);
             }
         }
