@@ -16,6 +16,12 @@
             <result name="input">register.jsp</result>
             <result name="success">index.jsp</result>
         </action>
+        <action name="getStudentInfo" class="GetStudentInfoAction">
+            <result name="success">studentInfo.jsp</result>
+        </action>
+        <action name="getTeacherInfo" class="GetTeacherInfoAction">
+            <result name="success">teacherInfo.jsp</result>
+        </action>
         <!-- Add more actions here -->
     </package>
 </struts>

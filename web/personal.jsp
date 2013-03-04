@@ -58,7 +58,7 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <section id="content">
-
+    <s:action name="getTeacherInfo" namespace="/" executeResult="true"/>
 </section>
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
