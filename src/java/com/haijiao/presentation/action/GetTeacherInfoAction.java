@@ -16,7 +16,6 @@ public class GetTeacherInfoAction extends SessionAction {
     public String execute(){
         String account = this.getValue("username").toString();
         tea = teacherService.getTeacherByAccount(account);
-        System.out.println(tea.getAccount());
         return SUCCESS;
     }
     

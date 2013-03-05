@@ -6,8 +6,8 @@
           欢迎！<s:property value="#session.username"/>
       </s:if>
       <s:else>
-          <a href="login.jsp" target="_blank" style="color:black">立即登录</a> 
-          <a href="register.jsp" target="_blank" style="color:black">免费注册</a>
+          <a href="login.jsp" style="color:black">立即登录</a> 
+          <a href="register.jsp" style="color:black">免费注册</a>
       </s:else>
   </div>
   <div class="line-top"></div>
@@ -20,7 +20,7 @@
           <li><a  style = "font-size:18px"><b>课程</b></a> 
               <ul>
                   <li><a href="teachers.jsp">教师</a></li>
-                  <li><a href="#">课程表 </a></li>>
+                  <li><a href="#">课程表 </a></li>
               </ul>
           </li>
           <li><a href="class.jsp" style = "font-size:18px"><b>在线课堂</b></a> </li>
@@ -28,7 +28,7 @@
               <li><a style = "font-size:18px"><b>个人</b></a>
                   <ul>
                       <li><a href="personal.jsp">资料</a></li>
-                      <li><a href="#">账户</a></li>
+                      <li><a href="personal.jsp">账户</a></li>
                   </ul>
               </li>
           </s:if>

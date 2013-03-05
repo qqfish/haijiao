@@ -13,6 +13,19 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <s:property value="tea.account" />
+        姓名：<s:property value="tea.name" /> <br/>
+        简单介绍：<s:property value="tea.brief_intro" /> <br/>
+        每小时收费：<s:property value="tea.wagePerhour" /> <br/>
+        是否接受试听：<s:property value="tea.audition" /> <br/>
+        现有金额：<s:property value="tea.money" /> <br/>
+        介绍视频地址：<s:property value="tea.videoUrl" /> <br/>
+        时刻表：<br/>
+        <s:iterator value="tea.schedule.slices" id="s">
+            ********<br/>
+            ** 星期<s:property value="day"/> <br/>
+            ** 开始时间<s:property value="begintime"/> <br/>
+            ** 结束时间<s:property value="endtime"/> <br/>
+            ** 状态：<s:property value="type"/> <br/>
+        </s:iterator>
     </body>
 </html>

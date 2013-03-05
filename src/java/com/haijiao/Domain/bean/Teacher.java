@@ -10,7 +10,7 @@ import java.util.List;
 public class Teacher extends User{
     private String brief_intro;
     private String intro;
-    private String videoURL;    //老师的介绍视频地址
+    private String videoUrl;    //老师的介绍视频地址
     private int money;              //该老师账户中剩下的报酬
     private List<Comment> comments;
     private List<String> classes;   //该老师教授的课程
@@ -18,6 +18,8 @@ public class Teacher extends User{
     private Schedule schedule;      //记录老师的时间表
     private int wagePerhour;         //老师每小时的辅导费
 
+    
+    
     public String getBrief_intro() {
         return brief_intro;
     }
@@ -34,12 +36,12 @@ public class Teacher extends User{
         this.intro = intro;
     }
 
-    public String getVideoURL() {
-        return videoURL;
+    public String getVideoUrl() {
+        return videoUrl;
     }
 
-    public void setVideoURL(String videoURL) {
-        this.videoURL = videoURL;
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     public int getMoney() {

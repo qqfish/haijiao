@@ -4,10 +4,11 @@
  */
 
 package com.haijiao.Domain.bean;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Schedule {
-    private List<Timeslice> slices;
+    private List<Timeslice> slices = new ArrayList<Timeslice>();
 
     public List<Timeslice> getSlices() {
         return slices;
