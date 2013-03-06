@@ -24,6 +24,12 @@
               </ul>
           </li>
           <li><a href="class.jsp" style = "font-size:18px"><b>在线课堂</b></a> </li>
+          <li><a style = "font-size:18px"><b>文件共享</b></a>
+                  <ul>
+                      <li><a href="myfile.jsp">我的文件集</a></li>
+                      <li><a href="commonfile.jsp">公共文件浏览</a></li>
+                  </ul>
+              </li>
           <s:if test="#session.login">
               <li><a style = "font-size:18px"><b>个人</b></a>
                   <ul>

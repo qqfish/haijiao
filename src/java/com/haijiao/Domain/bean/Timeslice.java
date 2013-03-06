@@ -12,6 +12,8 @@ public class Timeslice {
     private Time begintime;
     private Time endtime;
     private String type; //='class' or 'free'
+    private String process; // ='add' or 'remove' 此属性针对修改时间表时
+                                       //标注此时间片为增加的空闲时间或移除的空闲时间
     //以下属性只有当type == "class" 时才有确实的值，否则全为null
     private String studentName;
     private Boolean accept;
@@ -71,5 +73,13 @@ public class Timeslice {
 
     public void setSubject(String subject) {
         this.subject = subject;
+    }
+
+    public String getProcess() {
+        return process;
+    }
+
+    public void setProcess(String process) {
+        this.process = process;
     }
 }

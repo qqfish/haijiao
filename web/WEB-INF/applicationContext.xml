@@ -45,6 +45,15 @@
     <bean id="GetTeacherInfoAction" class="com.haijiao.presentation.action.GetTeacherInfoAction" scope="prototype">
         <property name="teacherService" ref="teacherService" />
     </bean>   
+    <bean id="ChangeAuditionAction" class="com.haijiao.presentation.action.ChangeAuditionAction" scope="prototype">
+        <property name="teacherService" ref="teacherService" />
+    </bean>   
+    <bean id="ChangeScheduleAction" class="com.haijiao.presentation.action.ChangeScheduleAction" scope="prototype">
+        <property name="teacherService" ref="teacherService" />
+    </bean>   
+    <bean id="ChangeTeacherInfoAction" class="com.haijiao.presentation.action.ChangeTeacherInfoAction" scope="prototype">
+        <property name="teacherService" ref="teacherService" />
+    </bean>   
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
     
     <!--

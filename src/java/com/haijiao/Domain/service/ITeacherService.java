@@ -6,7 +6,6 @@ package com.haijiao.Domain.service;
 import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.Timeslice;
-import com.haijiao.Domain.bean.User;
 
 public interface ITeacherService extends IUserService {
     public Teacher getTeacherByAccount(String account);
@@ -14,11 +13,11 @@ public interface ITeacherService extends IUserService {
     //获取报酬
     public boolean takeMoney(Teacher tc, int number);
     //修改空闲时刻表
-    public boolean changeSchedule(Schedule s);
+    public boolean changeSchedule(String username, Schedule s);
     //修改基本资料
-    public boolean changeInfo(Teacher tc);
+    public boolean changeInfo(String username, Teacher tc);
     //设置试听
-    public boolean changeAudition(Teacher tc, boolean boo);
+    public boolean changeAudition(String username);
     //处理学生预约
     public boolean dealToReservation(Teacher tc, Timeslice ts);
 }

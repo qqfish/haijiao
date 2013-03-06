@@ -14,10 +14,29 @@ public class User {
     protected String account;
     protected String name;
     protected String userType;
+    protected int coin;              //该账户中剩下的智慧币
+    protected List<Comment> comments;
     protected List<UserFileGroup> fileGroups;
 
     public User() {
+        comments = new ArrayList();
         fileGroups = new ArrayList();
+    }
+
+    public int getCoin() {
+        return coin;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
     
     public String getUserId() {
@@ -36,7 +55,7 @@ public class User {
         this.account = account;
     } 
     
-    public void addFileGroup(String groupName){
+    public void addFileGroupGroup(String groupName){
         UserFileGroup group = new UserFileGroup(groupName);
         fileGroups.add(group);
     }
@@ -111,18 +130,5 @@ public class User {
         this.userType = userType;
     }
     
-    public DataFile getFile(String group, String name){
-        UserFileGroup groupResult = null;
-        for(int i = 0; i < fileGroups.size(); i++){
-            if(fileGroups.get(i).getGroupName().equals(group)){
-                groupResult = fileGroups.get(i);
-                break;
-            }
-        }
-        if(groupResult == null){
-            return null;
-        }
-        
-        return groupResult.getFile(name);
-    }
+    
 }

@@ -22,6 +22,18 @@
         <action name="getTeacherInfo" class="GetTeacherInfoAction">
             <result name="success">teacherInfo.jsp</result>
         </action>
+        <action name="changeAudition" class="ChangeAuditionAction">
+            <result name="success">personal.jsp</result>
+            <result name="unconnected">error.jsp</result>
+        </action>
+        <action name="changeSchedule" class="ChangeScheduleAction">
+            <result name="success">personal.jsp</result>
+            <result name="unconnected">error.jsp</result>
+        </action>
+        <action name="changeTeacherInfo" class="ChangeTeacherInfoAction">
+            <result name="success">personal.jsp</result>
+            <result name="unconnected">error.jsp</result>
+        </action>
         <!-- Add more actions here -->
     </package>
 </struts>

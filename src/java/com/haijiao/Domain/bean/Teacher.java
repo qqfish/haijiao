@@ -5,15 +5,14 @@
 
 package com.haijiao.Domain.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher extends User{
     private String brief_intro;
     private String intro;
     private String videoUrl;    //老师的介绍视频地址
-    private int money;              //该老师账户中剩下的报酬
-    private List<Comment> comments;
-    private List<String> classes;   //该老师教授的课程
+    private List<String> classes = new ArrayList<String>();   //该老师教授的课程
     private boolean audition;        //该老师是否接受试听
     private Schedule schedule;      //记录老师的时间表
     private int wagePerhour;         //老师每小时的辅导费
@@ -42,14 +41,6 @@ public class Teacher extends User{
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
-    }
-
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     public List<Comment> getComments() {

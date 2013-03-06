@@ -23,7 +23,7 @@ public class TeacherServiceImpl extends UserServiceImpl implements ITeacherServi
         tea.setAudition(false);
         tea.setComments(null);
         tea.setClasses(null);
-        tea.setMoney(2000);
+        tea.setCoin(2000);
         tea.setVideoUrl(null);
         Schedule scd = new Schedule();
         Timeslice s = new Timeslice();
@@ -54,22 +54,22 @@ public class TeacherServiceImpl extends UserServiceImpl implements ITeacherServi
     }
     
     @Override
-    public boolean changeSchedule(Schedule s) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean changeSchedule(String username, Schedule s) {
+        return false;
     }
 
     @Override
-    public boolean changeInfo(Teacher tc) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean changeInfo(String username, Teacher tc) {
+        return false;
     }
 
     @Override
-    public boolean changeAudition(Teacher tc, boolean boo) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean changeAudition(String username) {
+        return false;
     }
 
     @Override
-    public boolean takeMoney(Teacher tc, int number) {
+    public boolean takeMoney(String username, int numberOfCoin) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
