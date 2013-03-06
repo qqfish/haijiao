@@ -17,4 +17,5 @@ public class Request {
     public static final int TextChat = 5;
     public static final int ChangePage = 6;
     public static final int ChangeFile = 7;
+    public static final int AddFileFromUser = 8;
 }

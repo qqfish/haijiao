@@ -6,6 +6,7 @@
 package com.haijiao.Domain.bean;
 import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.file.UserFileGroup;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -14,6 +15,10 @@ public class User {
     protected String name;
     protected String userType;
     protected List<UserFileGroup> fileGroups;
+
+    public User() {
+        fileGroups = new ArrayList();
+    }
     
     public String getUserId() {
         return userId;
@@ -31,7 +36,7 @@ public class User {
         this.account = account;
     } 
     
-    public void addFileGroupGroup(String groupName){
+    public void addFileGroup(String groupName){
         UserFileGroup group = new UserFileGroup(groupName);
         fileGroups.add(group);
     }
@@ -106,5 +111,18 @@ public class User {
         this.userType = userType;
     }
     
-    
+    public DataFile getFile(String group, String name){
+        UserFileGroup groupResult = null;
+        for(int i = 0; i < fileGroups.size(); i++){
+            if(fileGroups.get(i).getGroupName().equals(group)){
+                groupResult = fileGroups.get(i);
+                break;
+            }
+        }
+        if(groupResult == null){
+            return null;
+        }
+        
+        return groupResult.getFile(name);
+    }
 }

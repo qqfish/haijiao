@@ -9,7 +9,8 @@ var Request = {
         VideoChat: 4,
         TextChat: 5,
         ChangePage : 6,
-        ChangeFile : 7
+        ChangeFile : 7,
+        AddFileFromUser : 8
 }
 
 var Response = {
@@ -20,5 +21,11 @@ var Response = {
     TextChat: 4,
     ChangePage : 5,
     ChangeBookmark : 6,
-    AddRoomFile : 7
+    AddRoomFile : 7,
+    SetUserFile : 8,
+    Error: 100
+}
+
+var ErroType = {
+    AddFileFromUser: 0
 }

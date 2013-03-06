@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.room.webFc.FcMessageInbound;
+import com.haijiao.Domain.room.webFc.message.response.ResponseAddRoomFile;
 import com.haijiao.Domain.room.webFc.message.response.ResponseChangeBookmark;
 import com.haijiao.Domain.room.webFc.message.response.ResponseChangePage;
 import com.haijiao.Domain.room.webFc.message.response.ResponseDrawShape;
@@ -78,7 +79,11 @@ public class Room {
     }
 
     public void loadFile(DataFile file) {
-        roomFile.add(new RoomFile(file,this));
+        RoomFile newFile = new RoomFile(file,this);
+        roomFile.add(newFile);
+        List<RoomFile> list = new ArrayList();
+        list.add(newFile);
+        broadcast(gson.toJson(new ResponseAddRoomFile(list)));
     }
 
     public boolean changePage(String uuid, int page, String tmpUri) {

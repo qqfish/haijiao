@@ -39,9 +39,9 @@ public class UserFileGroup{
         files.remove(file);
     }
     
-    public DataFile getFile(String url){
+    public DataFile getFile(String name){
         for(int i = 0; i < files.size(); i++){
-            if(files.get(i).getUrl().equals(url)){
+            if(files.get(i).getName().equals(name)){
                 return files.get(i);
             }
         }

@@ -8,9 +8,12 @@ import com.google.gson.Gson;
 import com.haijiao.Domain.room.Room;
 import com.haijiao.Domain.room.Shape;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.room.webFc.message.Request;
 import com.haijiao.Domain.room.webFc.message.request.*;
 import com.haijiao.Domain.room.webFc.message.response.*;
+import com.haijiao.Domain.room.webFc.message.response.Error.ErrorData;
+import com.haijiao.Domain.room.webFc.message.response.Error.ErrorType;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -44,6 +47,8 @@ public class FcMessageInbound extends MessageInbound {
         
         sendtoUser(gson.toJson(room.getResponseChangePage()));
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
+        
+        sendtoUser(gson.toJson(new ResponseSetUserFile(user)));
     }
 
     @Override
@@ -117,6 +122,17 @@ public class FcMessageInbound extends MessageInbound {
                     room.choosePage(file.getUuid(), -1);
                 }
                 sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
+                break;
+            case Request.AddFileFromUser:
+                RequestAddFileFromUser addFile = gson.fromJson(str, RequestAddFileFromUser.class);
+                DataFile userFile = user.getFile(addFile.getGroup(), addFile.getName());
+                if(userFile != null){
+                    room.loadFile(userFile);
+                } else {
+                    ErrorData error = new ErrorData();
+                    error.setErrorType(ErrorType.AddFileFromUser);
+                    sendtoUser(gson.toJson(error));
+                }
                 break;
         }
 

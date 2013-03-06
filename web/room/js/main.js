@@ -12,7 +12,7 @@ $(document).ready(function(){
     toolkit = new Toolkit();
     table = new Table("table",toolkit);
     media = new Media("videoWindows", textChat);
-    file = new fileManager("roomFile","bookmark");
+    file = new fileManager("roomFile","bookmark","userFile");
     
     //just for test
     $("#nextPage").click(function(){

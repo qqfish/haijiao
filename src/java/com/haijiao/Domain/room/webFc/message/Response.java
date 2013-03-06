@@ -17,4 +17,7 @@ public class Response {
     public static final int ChangePage = 5;
     public static final int ChangeBookmark = 6;
     public static final int AddRoomFile = 7;
+    public static final int SetUserFile = 8;
+    
+    public static final int Error = 100;
 }

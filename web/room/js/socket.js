@@ -45,12 +45,13 @@ connection.connect = (function(host) {
                 file.setPage(socketData);
                 break;
             case Response.ChangeBookmark:
-                console.log("fuck");
                 file.changeBookmark(socketData);
-                console.log("fuck");
                 break;
             case Response.AddRoomFile:
                 file.addRoomFile(socketData);
+                break;
+            case Response.SetUserFile:
+                file.setUserFile(socketData);
                 break;
         }
     };
