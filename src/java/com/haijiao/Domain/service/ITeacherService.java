@@ -11,7 +11,7 @@ public interface ITeacherService extends IUserService {
     public Teacher getTeacherByAccount(String account);
 
     //获取报酬
-    public boolean takeMoney(Teacher tc, int number);
+    public boolean takeMoney(String username, int numberOfCoin);
     //修改空闲时刻表
     public boolean changeSchedule(String username, Schedule s);
     //修改基本资料

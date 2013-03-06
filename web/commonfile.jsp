@@ -57,7 +57,7 @@
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
-
+<s:action name="getCommonFile" namespace="/" executeResult="true"/>
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>

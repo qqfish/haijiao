@@ -33,6 +33,7 @@
     <bean id="userService" class="com.haijiao.Domain.service.impl.UserServiceImpl" />
     <bean id="studentService" class="com.haijiao.Domain.service.impl.StudentServiceImpl" />
     <bean id="teacherService" class="com.haijiao.Domain.service.impl.TeacherServiceImpl" />
+    <bean id="fileManager" class="com.haijiao.Domain.file.FileManager"/>
     <bean id="LoginAction" class="com.haijiao.presentation.action.LoginAction" scope="prototype">
         <property name="userService" ref="userService" />
     </bean>
@@ -53,7 +54,10 @@
     </bean>   
     <bean id="ChangeTeacherInfoAction" class="com.haijiao.presentation.action.ChangeTeacherInfoAction" scope="prototype">
         <property name="teacherService" ref="teacherService" />
-    </bean>   
+    </bean>
+    <bean id="GetCommonFileAction" class="com.haijiao.presentation.action.GetCommonFileAction" scope="prototype">
+        <property name="fileManager" ref="fileManager" />
+    </bean>
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
     
     <!--

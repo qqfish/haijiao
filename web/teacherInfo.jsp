@@ -24,7 +24,7 @@
             <s:submit value="改变试听状态"></s:submit>
         </s:form>
         现有智慧币：<s:property value="tea.coin" /> <br/>
-        介绍视频地址：<s:property value="tea.videoUrl" /> <br/>
+        介绍视频地址：<s:property value="t·ea.videoUrl" /> <br/>
         时刻表：<br/>
         <s:iterator value="tea.schedule.slices" id="s">
             ********<br/>

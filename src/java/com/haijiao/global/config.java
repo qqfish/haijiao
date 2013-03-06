@@ -16,6 +16,6 @@ public class config {
     static public String newDocumentName = "new document";
     
     //File config
-    static public String fileRoot = "~/file";
+    static public String fileRoot = "e:\\file";
     static public String defaultGroupName = "no group";
 }
