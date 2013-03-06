@@ -55,10 +55,26 @@ public class User {
         this.account = account;
     } 
     
-    public void addFileGroupGroup(String groupName){
+    public void addFileGroup(String groupName){
         UserFileGroup group = new UserFileGroup(groupName);
         fileGroups.add(group);
     }
+    
+    public DataFile getFile(String group, String name){
+        UserFileGroup groupResult = null;
+        for(int i = 0; i < fileGroups.size(); i++){
+            if(fileGroups.get(i).getGroupName().equals(group)){
+                groupResult = fileGroups.get(i);
+                break;
+            }
+        }
+        if(groupResult == null){
+            return null;
+        }
+        
+        return groupResult.getFile(name);
+    }
+
     
     public boolean addFile(String groupName, DataFile file){
         UserFileGroup group = null;
