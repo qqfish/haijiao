@@ -339,17 +339,18 @@ margin:0 12px 18px 0
 .list-dropcap1 li{padding-bottom:32px}
 .list-dropcap1 h4{color:#343434;line-height:24px}	
 .side-bar{
-width:280px;
+width:250px;
+height:622px;
 float:left;
-margin:20px 20px 0 -30px;
-padding:0 10px 7px 40px;
+margin:-3px 20px 0px -250px;
+padding:0 0px 0px 2px;
 background:#fff;
-    border-radius:18px;
+/*     border-radius:18px;
 	-moz-border-radius:18px;
-	-webkit-border-radius:18px;
-	 box-shadow:0 0 3px #c5c2a9;
-	-moz-box-shadow: 0 0 3px #c5c2a9;
-	-webkit-box-shadow:0 0 3px #c5c2a9;
+	-webkit-border-radius:18px; */
+	 -moz-box-shadow:-2px 2px 2px #999 inset;              /* For Firefox3.6+ */
+	-webkit-box-shadow:-2px 2px 2px #999 inset;           /* For Chrome5+, Safari5+ */
+	box-shadow:-2px 2px 2px #999 inset;                   /* For Latest Opera */
 }	
 .side-bar.extra{padding:18px 10px 0 40px}	
 .side-bar.extra1{padding:0px 20px 27px 30px}		
@@ -608,3 +609,39 @@ footer {
 	background:url(../images/bg-body.gif);
 }
 .soc-list li a:hover{opacity:0.7}
+
+/*===== login bar =====*/
+.login-bar{
+    width:280px;
+    height:600px;
+    float:right;
+    margin:0px 120px 0 -30px;
+    padding:0 10px 7px 40px;
+    background:#fff;
+	 box-shadow:0 0 3px #c5c2a9;
+	-moz-box-shadow: 0 0 3px #c5c2a9;
+	-webkit-box-shadow:0 0 3px #c5c2a9;
+}
+
+.main-container{
+width:0px;
+height:622px;
+float:left;
+margin:-3px 20px 0 0px;
+padding:0 0px 0px 2px;
+background:#fff;
+/*     border-radius:18px;
+	-moz-border-radius:18px;
+	-webkit-border-radius:18px; */
+	 -moz-box-shadow:-2px 2px 2px #999 inset;              /* For Firefox3.6+ */
+	-webkit-box-shadow:-2px 2px 2px #999 inset;           /* For Chrome5+, Safari5+ */
+	box-shadow:-2px 2px 2px #999 inset;                   /* For Latest Opera */dth:1024px;
+    height:600px;
+    float:right;
+    margin:0px 120px 0 -30px;
+    padding:0 10px 7px 40px;
+    background:#fff;
+	 box-shadow:0 0 3px #c5c2a9;
+	-moz-box-shadow: 0 0 3px #c5c2a9;
+	-webkit-box-shadow:0 0 3px #c5c2a9;
+}
