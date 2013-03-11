@@ -23,6 +23,7 @@
         <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen">
         <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="../css/grid.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/room.css" type="text/css" media="screen">
         <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
         <!--<link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400,400italic' rel='stylesheet' type='text/css'>-->
@@ -75,10 +76,10 @@
                     </ul>
                 </div> 
                 <hr style="width:1366px;height:2px;margin:0px 0px 0px 0px;float:right"></hr>
-                <div class="side-bar" id ="side" style="margin:0px;float: bottom;overflow: scroll;">   
+                <div class="side-bar" id ="side" style="margin:0px;float: bottom;overflow-y: auto;overflow-x: visible;white-space: nowrap;word-break: break-all">   
                     <div id="favor-content" style="display:none;">
                         <p>书签</p>
-                        <div id="bookmark"></div>
+                        <ul id="bookmark"></ul>
                     </div>
                     <div id="userFile-content" style="display:none ">
                         <p>用户文件</p>

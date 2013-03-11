@@ -340,7 +340,7 @@ function Media(parentId, text, userList){
         current.video = $("<video></video>").attr("user",user).attr("class","video").attr("autoplay","autoplay").css("opacaity",1);
         current.video.height(height).width(width);
         attachMediaStream(current.video,current.stream);
-        current.userButton = $("<button></button>").attr("user",user).attr("class","userButton").width(245);
+        current.userButton = $("<button></button>").attr("class","sideBarButton").attr("user",user).attr("class","userButton");
         if(user == localUserId){
             current.userButton.text("自己");
         } else {

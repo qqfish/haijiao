@@ -13,29 +13,38 @@ function Bookmark(uuid){
     this.title = null;
     this.page = null;
     this.element = null;
-    this.childDiv = null;
     this.children = new Array();
     
     this.scan = function(node){
         this.title = node.title;
         this.page = node.page;
-        this.element = $("<button></button>").text(node.title).attr("title",node.title).attr("page",node.page).width(245);
-        var childDiv = $("<div></div>").attr("title",node.title);
-        this.childDiv= childDiv;
-        for(var i = 0; i < node.children.length; i++){
-            var child = new Bookmark(uuid);
-            child.scan(node.children[i]);
-            this.childDiv.append(child.element);
-            this.childDiv.append(child.childDiv);
-            this.children[this.children.length] = child;
+        this.element = $("<li></li>").attr("class","sideBarButton");
+        var link = $("<span></span>").text(node.title).attr("page",node.page);
+        if(node.children.length > 0){
+            var childDiv = $("<ul></ul>").attr("title",node.title);
+            for(var i = 0; i < node.children.length; i++){
+                var child = new Bookmark(uuid);
+                child.scan(node.children[i]);
+                childDiv.append(child.element);
+                this.children[this.children.length] = child;
+            }
+            var show = $("<a></a>").text("-");
+            this.element.append(show);
+            show.click(function(){
+                if($(this).text() == "+"){
+                    $(this).text("-");
+                } else {
+                    $(this).text("+");
+                }
+                childDiv.slideToggle();
+            });
+            this.element.append(link);
+            this.element.append(childDiv);
+        } else {
+            this.element.append(link);
         }
-        
-        this.element.dblclick(function(){
+        link.click(function(){
             table.sendChangePage(uuid, $(this).attr("page"));
-        });
-        
-        this.element.click(function(){
-            childDiv.slideToggle();
         });
     }
 }
@@ -65,9 +74,8 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
         bookmarks = new Array();
         for(var i = 0; i < response.bookmarkList.length; i++){
             var child = new Bookmark(currentUuid);
-            child.scan(response.bookmarkList[i]);
+            child.scan(response.bookmarkList[i],"");
             bookmardDiv.append(child.element);
-            bookmardDiv.append(child.childDiv);
             bookmarks[bookmarks.length] = child;
         }
     }
@@ -78,7 +86,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             var r = response.fileList[i];
             file.fileName = r.fileName;
             file.uuid = r.uuid;
-            file.element = $("<button></button>").text(file.fileName).attr("uuid",file.uuid).width(245);
+            file.element = $("<li></li>").attr("class","sideBarButton").text(file.fileName).attr("uuid",file.uuid);
             roomFileDiv.append(file.element);
             file.element.click(function(){
                 table.sendChangeFile($(this).attr("uuid"));
@@ -90,15 +98,22 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
     this.setUserFile = function(response){
         for(var i = 0; i < response.groupList.length; i++){
             var group = response.groupList[i];
-            var groupDiv = $("<div></div>").attr("group",group.groupName);
-            userFileDiv.append(groupDiv);
+            var groupLi = $("<li></li>").attr("class","slideBarButton");
+            var groupUl = $("<ul></ul").attr("group",group.groupName);
+            var groupSpan = $("<span></span>").text(group.groupName);
+            groupLi.append(groupSpan);
+            groupSpan.click(function(){
+                groupUl.slideToggle();
+            });
+            groupLi.append(groupUl);
             for(var j = 0; j < group.files.length; j++){
-                var file = $("<button></button>").text(group.files[j].name).attr("name",group.files[i].name).attr("group",group.groupName).width(245);
+                var file = $("<li></li>").text(group.files[j].name).attr("class","sideBarButton").attr("name",group.files[i].name).attr("group",group.groupName);
                 file.click(function(){
                     addFileFromUser($(this).attr("group"),$(this).attr("name"));
                 });
-                userFileDiv.append(file);
+                groupUl.append(file);
             }
+            userFileDiv.append(groupLi);
         }
     }
     

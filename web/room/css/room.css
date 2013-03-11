@@ -15,3 +15,22 @@ video{
     height: 100px;
     width: 80px;
 }
+
+.sideBarButton{
+    color: #000;
+    list-style-type:none;
+    margin-left:2em;
+}
+
+.sideBarButton a{
+    color: #000;
+}
+
+li{
+    list-style-type:circle;
+}
+
+a p{
+    white-space: nowrap;
+}
+
