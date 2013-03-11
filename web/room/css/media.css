@@ -6,7 +6,12 @@
         Purpose of the stylesheet follows.
 */
 
-root { 
-    display: block;
+*{
+    padding:0;
+    margin:0;
 }
 
+video{
+    height: 100px;
+    width: 80px;
+}

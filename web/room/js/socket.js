@@ -41,7 +41,7 @@ connection.connect = (function(host) {
                 media.processSignalingMessage(socketData);
                 break;
             case Response.ChangePage:
-                table.chagePage(socketData);
+                table.changePage(socketData);
                 file.setPage(socketData);
                 break;
             case Response.ChangeBookmark:

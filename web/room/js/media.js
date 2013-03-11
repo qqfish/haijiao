@@ -6,10 +6,13 @@
 function UserMedia(){
     this.pc = null;
     this.video = null;
-    this.remoteStream = null;
+    this.container = null
+    this.userButton = null;
+    this.stream = null;
     this.status = null;
 }
-function Media(parentId, text){
+
+function Media(parentId, text, userList){
     
     //adapter
     var RTCPeerConnection = null;
@@ -65,10 +68,18 @@ function Media(parentId, text){
     }
     
     
+    var width = 320;
+    var height = 240;
+    var userListDiv = $("#" + userList);
+    var dragPlace = {};
+    dragPlace.x1 = 0;
+    dragPlace.y1 = 0;
+    dragPlace.x2 = 0;
+    dragPlace.y2 = 0;
     
     var mediaList = new Array();
-    var localVideo;
-    var localStream;
+    var localUserId = "__localUser";
+    mediaList[localUserId] = new UserMedia();
     var parentDiv;
     var textChat;
     // Set up audio and video regardless of what devices are present.
@@ -84,7 +95,6 @@ function Media(parentId, text){
 
     function initialize(parentId) {
         parentDiv = $("#" + parentId);
-        localVideo = $("<video></video>").attr("user","_local").attr("class","video");
         textChat = text;
         doGetUserMedia();
     }
@@ -150,23 +160,23 @@ function Media(parentId, text){
         }
         console.log(remoteUser);
         mediaList[remoteUser].status = "initializing";
-        mediaList[remoteUser].video = $("<video></video>").attr("user",remoteUser).attr("class","video").hide();
         
         mediaList[remoteUser].pc.onconnecting = onSessionConnecting;
         mediaList[remoteUser].pc.onopen = onSessionOpened;
         mediaList[remoteUser].pc.onaddstream = function(event) {
             console.log("Remote stream added.");
             
-            addVideo(mediaList[remoteUser].video);
-            attachMediaStream(mediaList[remoteUser].video, event.stream);
-            mediaList[remoteUser].remoteStream = event.stream;
+            //addVideo(event.stream, remoteUser);
+            //attachMediaStream(mediaList[remoteUser].video, event.stream);
+            mediaList[remoteUser].stream = event.stream;
+            addVideo(mediaList[remoteUser].stream, remoteUser);
             waitForRemoteVideo(remoteUser); 
         };
         mediaList[remoteUser].pc.onremovestream = onRemoteStreamRemoved;
     }
 
     function maybeStart(remoteUser) {
-        if (!mediaList[remoteUser] && localStream) {
+        if (!mediaList[remoteUser] && mediaList[localUserId].stream) {
             mediaList[remoteUser] = new UserMedia();
             console.log("Creating PeerConnection.");
             createPeerConnection(remoteUser);
@@ -185,7 +195,7 @@ function Media(parentId, text){
                 return;
             }
             console.log("Adding local stream.");
-            mediaList[remoteUser].pc.addStream(localStream);
+            mediaList[remoteUser].pc.addStream(mediaList[localUserId].stream);
         // Caller initiates offer to peer.
         }
     }
@@ -238,7 +248,7 @@ function Media(parentId, text){
             mediaList[remoteUser].pc.addIceCandidate(candidate);
         } else if (msg.type === 'bye' && mediaList[remoteUser]) {
             onRemoteHangup(remoteUser);
-        } else if (msg.type === 'ready' && localStream) {
+        } else if (msg.type === 'ready' && mediaList[localUserId].stream) {
             if (!mediaList[remoteUser])
                 maybeStart(remoteUser);
                     
@@ -251,10 +261,8 @@ function Media(parentId, text){
     function onUserMediaSuccess(stream) {
         console.log("User has granted access to local media.");
         // Call the polyfill wrapper to attach the media stream to this element.
-        attachMediaStream(localVideo, stream);
-        addVideo(localVideo);
-        localVideo.css("opacity",1);
-        localStream = stream;
+        mediaList[localUserId].stream = stream;
+        addVideo(stream,localUserId);
         var ready = {
             type:"ready"
         };
@@ -280,9 +288,11 @@ function Media(parentId, text){
     function onSessionConnecting(message) {
         console.log("Session connecting.");
     }
+    
     function onSessionOpened(message) {
         console.log("Session opened.");
     }
+    
     function onRemoteStreamRemoved(event) {
         console.log("Remote stream removed.");
     }
@@ -294,21 +304,23 @@ function Media(parentId, text){
     
     function removeMedia(remoteUser) {
         console.log("remove user:" + remoteUser);
+        if(mediaList[remoteUser].video) {
+            mediaList[user].video.hide();
+            mediaList[user].video.remove();
+            mediaList[user].userButton.remove();
+        }
         if(mediaList[remoteUser].pc) {
             mediaList[remoteUser].pc.close();
             mediaList[remoteUser].pc = null;
-        }
-        if(mediaList[remoteUser].video) {
-            removeVideo(mediaList[remoteUser].video);
         }
         mediaList[remoteUser] = null;
     }
 
     function waitForRemoteVideo(remoteUser) {
         // Call the getVideoTracks method via adapter.js.
-        console.log(remoteUser);
-        videoTracks = mediaList[remoteUser].remoteStream.getVideoTracks();
-        if (videoTracks.length === 0 || mediaList[remoteUser].remoteStream.currentTime > 0) {
+        console.log(mediaList[remoteUser].video.get(0).currentTime);
+        videoTracks = mediaList[remoteUser].stream.getVideoTracks();
+        if (videoTracks.length === 0 || mediaList[remoteUser].video.get(0).attr("currentTime") > 0) {
             transitionToActive(remoteUser);
         } else {
             setTimeout(function(){
@@ -317,24 +329,51 @@ function Media(parentId, text){
         }
     }
     function transitionToActive(remoteUser) {
+        console.log("begin");
         mediaList[remoteUser].video.css("opacity", 1);
         mediaList[remoteUser].status = "connected";
-        addVideo(mediaList[remoteUser].video);
     }
     
-    function addVideo(video){
-        parentDiv.append(video);
-        video.attr("autoplay","autoplay");
+    function addVideo(stream, user){
+        var current = mediaList[user];
+        current.container = $("<div></div>").attr("class","container").attr("user",user).height(height).width(width).css("top","52px").css("left","250px").css("position","absolute").hide();
+        current.video = $("<video></video>").attr("user",user).attr("class","video").attr("autoplay","autoplay").css("opacaity",1);
+        current.video.height(height).width(width);
+        attachMediaStream(current.video,current.stream);
+        current.userButton = $("<button></button>").attr("user",user).attr("class","userButton").width(245);
+        if(user == localUserId){
+            current.userButton.text("自己");
+        } else {
+            current.userButton.text(user);
+        }
+        current.userButton.click(function(){
+            var u = $(this).attr("user");
+            mediaList[u].container.toggle();
+            
+        });
+        current.container.append(current.video)
+        parentDiv.append(current.container);
+        current.container.draggable({containment: [
+                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
+        ],scroll:false});
+        userListDiv.append(current.userButton);
+        
     }
     
-    function removeVideo(video){
-        video.hide();
-        video.remove();
+    this.setDragPlace = function(x1,y1,x2,y2){
+        dragPlace.x1 = x1;
+        dragPlace.y1 = y1;
+        dragPlace.x2 = x2;
+        dragPlace.y2 = y2;
+        
+        $(".container").draggable({containment: [
+                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
+        ],scroll:false});
     }
 
     function toggleVideoMute() {
         // Call the getVideoTracks method via adapter.js.
-        videoTracks = localStream.getVideoTracks();
+        videoTracks = mediaList[localUserId].stream.getVideoTracks();
 
         if (videoTracks.length === 0) {
             console.log("No local video available.");
@@ -358,7 +397,7 @@ function Media(parentId, text){
 
     function toggleAudioMute() {
         // Call the getAudioTracks method via adapter.js.
-        audioTracks = localStream.getAudioTracks();
+        audioTracks = mediaList[localUserId].stream.getAudioTracks();
 
         if (audioTracks.length === 0) {
             console.log("No local audio available.");
@@ -474,5 +513,21 @@ function Media(parentId, text){
 
         sdpLines[mLineIndex] = mLineElements.join(' ');
         return sdpLines;
+    }
+    
+    this.getWidth = function(){
+        return width;
+    }
+    
+    this.getHeight = function(){
+        return height;
+    }
+    
+    this.setDraggable = function(){
+        $(".container").draggable('enable');
+    }
+    
+    this.setUndraggable = function(){
+        $(".container").draggable('disable');
     }
 }

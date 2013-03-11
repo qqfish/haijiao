@@ -2,18 +2,32 @@
 
 
 function Table(containerName, tool){
+    //scale 
+    
+    var scaleRange = new Array();
+    scaleRange[0] = 0.25
+    scaleRange[1] = 0.5;
+    scaleRange[2] = 1;
+    scaleRange[3] = 1.2;
+    scaleRange[4] = 1.5;
+    scaleRange[5] = 2;
+    scaleRange[6] = 2.5;
+    scaleRange[7] = 3;
+    scaleRange[8] = 4;
+    scaleRange[9] = 5;
+    
     //property of mouse
     var mousedown = false;
     var result = null;
     
     var ready = false;
     //private
-    var layerScale = 0.5;
+    var scaleChoice = 1;
     var stage = new Kinetic.Stage({
         container : containerName, 
         scale: {
-            x: layerScale,
-            y: layerScale
+            x: scaleRange[scaleChoice],
+            y: scaleRange[scaleChoice]
         },
         width : 300, 
         height : 400,
@@ -67,7 +81,7 @@ function Table(containerName, tool){
         });
     }
 
-    this.chagePage = function(response){
+    this.changePage = function(response){
         backLayer.removeChildren();
         drawLayer.removeChildren();
         tmpLayer.removeChildren();
@@ -84,7 +98,7 @@ function Table(containerName, tool){
             });
             backLayer.add(pageImage);
             
-            stage.setX(stage.getWidth() / 2 - imageSize.width * layerScale / 2);
+            stage.setX(stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2);
             stage.draw();
         }
         imageObj.src = response.url;
@@ -143,30 +157,30 @@ function Table(containerName, tool){
     function setDragBound(){
         stage.setDragBoundFunc(function(pos) {
             //console.log(stage.getPosition());
-            if(imageSize.width * layerScale < stage.getWidth() && imageSize.height * layerScale < stage.getHeight()){
+            if(imageSize.width * scaleRange[scaleChoice] < stage.getWidth() && imageSize.height * scaleRange[scaleChoice] < stage.getHeight()){
                 return {
-                    x: stage.getWidth() / 2 - imageSize.width * layerScale / 2,
+                    x: stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2,
                     y: 0 
                 }
-            } else if(imageSize.width * layerScale < stage.getWidth() && imageSize.height * layerScale >= stage.getHeight()){
+            } else if(imageSize.width * scaleRange[scaleChoice] < stage.getWidth() && imageSize.height * scaleRange[scaleChoice] >= stage.getHeight()){
                 var newY;
                 if(pos.y > 0){
                     newY = 0;
-                } else if(pos.y < stage.getHeight() - imageSize.height * layerScale){
-                    newY = stage.getHeight() - imageSize.height * layerScale;
+                } else if(pos.y < stage.getHeight() - imageSize.height * scaleRange[scaleChoice]){
+                    newY = stage.getHeight() - imageSize.height * scaleRange[scaleChoice];
                 } else {
                     newY = pos.y;
                 }
                 return {
-                    x: stage.getWidth() / 2 - imageSize.width * layerScale / 2,
+                    x: stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2,
                     y: newY
                 }
-            } else if(imageSize.width * layerScale >= stage.getWidth() && imageSize.height * layerScale < stage.getHeight()) {
+            } else if(imageSize.width * scaleRange[scaleChoice] >= stage.getWidth() && imageSize.height * scaleRange[scaleChoice] < stage.getHeight()) {
                 var newX;
                 if(pos.x > 0){
                     newX = 0;
-                } else if(pos.x < stage.getWidth() - imageSize.width * layerScale) {
-                    newX = stage.getWidth() - imageSize.width * layerScale;
+                } else if(pos.x < stage.getWidth() - imageSize.width * scaleRange[scaleChoice]) {
+                    newX = stage.getWidth() - imageSize.width * scaleRange[scaleChoice];
                 } else {
                     newX = pos.x;
                 }
@@ -178,16 +192,16 @@ function Table(containerName, tool){
                 var newY;
                 if(pos.y > 0){
                     newY = 0;
-                } else if(pos.y < stage.getHeight() - imageSize.height * layerScale){
-                    newY = stage.getHeight() - imageSize.height * layerScale;
+                } else if(pos.y < stage.getHeight() - imageSize.height * scaleRange[scaleChoice]){
+                    newY = stage.getHeight() - imageSize.height * scaleRange[scaleChoice];
                 } else {
                     newY = pos.y;
                 }
                 var newX;
                 if(pos.x > 0){
                     newX = 0;
-                } else if(pos.x < stage.getWidth() - imageSize.width * layerScale) {
-                    newX = stage.getWidth() - imageSize.width * layerScale;
+                } else if(pos.x < stage.getWidth() - imageSize.width * scaleRange[scaleChoice]) {
+                    newX = stage.getWidth() - imageSize.width * scaleRange[scaleChoice];
                 } else {
                     newX = pos.x;
                 }
@@ -228,8 +242,8 @@ function Table(containerName, tool){
                     case Tooltype.Pen:
                         result = new Array();
                         result[result.length] = {
-                            x:(mousePos.x - stage.getPosition().x) / layerScale, 
-                            y:(mousePos.y - stage.getPosition().y) / layerScale
+                            x:(mousePos.x - stage.getPosition().x) / scaleRange[scaleChoice], 
+                            y:(mousePos.y - stage.getPosition().y) / scaleRange[scaleChoice]
                         };
                         break;
                     case Tooltype.Circle:
@@ -241,8 +255,8 @@ function Table(containerName, tool){
                         result.erasePath = new Array();
                         result.idArray = new Array();
                         result.erasePath[result.erasePath.length] = {
-                            x:(mousePos.x - stage.getPosition().x) / layerScale, 
-                            y:(mousePos.y - stage.getPosition().y) / layerScale
+                            x:(mousePos.x - stage.getPosition().x) / scaleRange[scaleChoice], 
+                            y:(mousePos.y - stage.getPosition().y) / scaleRange[scaleChoice]
                         };
                         break;
                     
@@ -251,7 +265,7 @@ function Table(containerName, tool){
 
             stage.on("mousemove touchmove", function() {
                 if(toolkit.getTool() == Tooltype.Hand) return;
-                
+                console.log(mousedown);
                 if(!mousedown) return;
                 var mousePos = stage.getTouchPosition();
                 if(mousePos == null)
@@ -260,8 +274,8 @@ function Table(containerName, tool){
                 switch(toolkit.getTool()){
                     case Tooltype.Pen:
                         result[result.length] = {
-                            x:(mousePos.x - stage.getPosition().x) / layerScale, 
-                            y:(mousePos.y - stage.getPosition().y) / layerScale
+                            x:(mousePos.x - stage.getPosition().x) / scaleRange[scaleChoice], 
+                            y:(mousePos.y - stage.getPosition().y) / scaleRange[scaleChoice]
                         };
                         var tmpLine = new Kinetic.Line({
                             points: [result[result.length-2], result[result.length-1]],
@@ -281,11 +295,11 @@ function Table(containerName, tool){
                         break;
                     case Tooltype.Eraser:
                         result.erasePath[result.erasePath.length] = {
-                            x:(mousePos.x - stage.getPosition().x) / layerScale, 
-                            y:(mousePos.y - stage.getPosition().y) / layerScale
+                            x:(mousePos.x - stage.getPosition().x) / scaleRange[scaleChoice], 
+                            y:(mousePos.y - stage.getPosition().y) / scaleRange[scaleChoice]
                         };
                         var tmpLine = new Kinetic.Line({
-                            points:result.erasePath,
+                            points:[result.erasePath[result.erasePath.length-2],result.erasePath[result.erasePath.length-1]],
                             stroke: toolkit.getColor(),
                             strokeWidth: toolkit.getWidth()
                         });
@@ -313,36 +327,26 @@ function Table(containerName, tool){
                                     children[i].hasErase = true;
                                     break;
                                 }
-                                //console.log(result.idArray.length);
+                            //console.log(result.idArray.length);
                             }
                         }
                         break;
                     
                 }
             });
-
-            stage.on("mouseup touchend", function() {
+            
+            $("#desktop").mouseup(function(){
                 if(toolkit.getTool() == Tooltype.Hand) return;
                 
                 if(!mousedown) return;
-                var mousePos = stage.getTouchPosition();
-                if(mousePos == null)
-                    mousePos = stage.getMousePosition();
                 
                 switch(toolkit.getTool()){
                     case Tooltype.Pen:
-                        result[result.length] = {
-                            x:(mousePos.x - stage.getPosition().x) / layerScale, 
-                            y:(mousePos.y - stage.getPosition().y) / layerScale
-                        };
                         var tmpLine = new Kinetic.Line({
                             points: result,
                             stroke: toolkit.getColor(),
                             strokeWidth: toolkit.getWidth()
                         });
-                        tmpLine.on("mousemove touchmove", function(ev) {
-                            //somethin for erase
-                            });
                         var message = {};
                         message.type = Request.DrawShape;
                         message.json = tmpLine.toJSON();
@@ -363,7 +367,73 @@ function Table(containerName, tool){
                 mousedown = false;
                 result = null;
             });
+
+        //            stage.on("mouseup touchend", function() {
+        //                if(toolkit.getTool() == Tooltype.Hand) return;
+        //                
+        //                if(!mousedown) return;
+        //                
+        //                switch(toolkit.getTool()){
+        //                    case Tooltype.Pen:
+        //                        var tmpLine = new Kinetic.Line({
+        //                            points: result,
+        //                            stroke: toolkit.getColor(),
+        //                            strokeWidth: toolkit.getWidth()
+        //                        });
+        //                        var message = {};
+        //                        message.type = Request.DrawShape;
+        //                        message.json = tmpLine.toJSON();
+        //                        connection.sendObject(message);
+        //                        break;
+        //                    case Tooltype.Circle:
+        //                        break;
+        //                    case Tooltype.Line:
+        //                        break;
+        //                    case Tooltype.Eraser:
+        //                        message = {};
+        //                        message.type = Request.EraseShape;
+        //                        message.idArray = result.idArray;
+        //                        connection.sendObject(message);
+        //                        break;
+        //                    
+        //                }
+        //                mousedown = false;
+        //                result = null;
+        //            });
         }
+    }
+    
+    this.setStageSize = function(x,y){
+        stage.setWidth(x);
+        stage.setHeight(y);
+        stage.draw();
+    }
+    
+    this.scaleUp = function(){
+        if(scaleChoice < scaleRange.length - 1){
+            scaleChoice++;
+        }
+        stage.setScale({
+            x: scaleRange[scaleChoice],
+            y: scaleRange[scaleChoice]
+        });
+        setDefaultLocation();
+    }
+    
+    this.scaleDown = function(){
+        if(scaleChoice > 1){
+            scaleChoice --;
+        }
+        stage.setScale({
+            x: scaleRange[scaleChoice],
+            y: scaleRange[scaleChoice]
+        });
+        setDefaultLocation();
+    }
+    
+    function setDefaultLocation(){
+        stage.setX(stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2);
+        stage.draw();
     }
 }
     

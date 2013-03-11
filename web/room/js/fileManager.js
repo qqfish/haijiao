@@ -19,9 +19,9 @@ function Bookmark(uuid){
     this.scan = function(node){
         this.title = node.title;
         this.page = node.page;
-        this.element = $("<button></button>").text(node.title).attr("page",node.page);
-        this.childDiv = $("<div></div>").attr("title",node.title);
-        
+        this.element = $("<button></button>").text(node.title).attr("title",node.title).attr("page",node.page).width(245);
+        var childDiv = $("<div></div>").attr("title",node.title);
+        this.childDiv= childDiv;
         for(var i = 0; i < node.children.length; i++){
             var child = new Bookmark(uuid);
             child.scan(node.children[i]);
@@ -30,8 +30,12 @@ function Bookmark(uuid){
             this.children[this.children.length] = child;
         }
         
-        this.element.click(function(){
+        this.element.dblclick(function(){
             table.sendChangePage(uuid, $(this).attr("page"));
+        });
+        
+        this.element.click(function(){
+            childDiv.slideToggle();
         });
     }
 }
@@ -74,7 +78,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             var r = response.fileList[i];
             file.fileName = r.fileName;
             file.uuid = r.uuid;
-            file.element = $("<button></button>").text(file.fileName).attr("uuid",file.uuid);
+            file.element = $("<button></button>").text(file.fileName).attr("uuid",file.uuid).width(245);
             roomFileDiv.append(file.element);
             file.element.click(function(){
                 table.sendChangeFile($(this).attr("uuid"));
@@ -89,7 +93,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             var groupDiv = $("<div></div>").attr("group",group.groupName);
             userFileDiv.append(groupDiv);
             for(var j = 0; j < group.files.length; j++){
-                var file = $("<button></button>").text(group.files[j].name).attr("name",group.files[i].name).attr("group",group.groupName);
+                var file = $("<button></button>").text(group.files[j].name).attr("name",group.files[i].name).attr("group",group.groupName).width(245);
                 file.click(function(){
                     addFileFromUser($(this).attr("group"),$(this).attr("name"));
                 });

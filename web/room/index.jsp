@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/media.css" type="text/css" media="screen">
-        <script src="js/lib/jquery.js"></script>
+        <script src="js/lib/jquery-1.9.1.js"></script>
         <script src="js/lib/kinetic.js"></script>
         <script src="js/message.js"></script>
         <script src="js/toolkit.js"></script>
