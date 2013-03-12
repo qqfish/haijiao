@@ -5,6 +5,7 @@
     <id name="id" type="integer" column="scheduleid">
       <generator class="native"></generator>
     </id>
+    <many-to-one name="teacher" column="teach"></many-to-one>
     <list name="slices">
         <key column="consist"></key>
         <index column="scheindex"></index>

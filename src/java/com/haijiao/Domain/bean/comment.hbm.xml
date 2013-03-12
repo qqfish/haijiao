@@ -6,7 +6,6 @@
         <generator class="native"></generator>
     </id>
     <one-to-one name="commenter" class="com.haijiao.Domain.bean.User"></one-to-one>
-    <one-to-one name="commentee" class="com.haijiao.Domain.bean.User"></one-to-one>
     <property name="content" type="string"></property>
     <property name="score" type="integer"></property>
   </class>

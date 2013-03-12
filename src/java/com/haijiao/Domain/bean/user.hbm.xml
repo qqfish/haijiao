@@ -30,7 +30,7 @@
         <property name="videoUrl" type="string"></property>
         <property name="audition" type="boolean"></property>
         <property name="wagePerhour" type="integer"></property>
-        <one-to-one name="schedule" class="com.haijiao.Domain.bean.Schedule"></one-to-one>
+        <many-to-one name="schedule" column="sche" unique="true"></many-to-one>
         <list name="classes">
             <key column="openedby"></key>
             <index column="cindex"></index>
