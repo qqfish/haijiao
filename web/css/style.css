@@ -693,3 +693,21 @@ background:#fff;
     line-height: 50px;
     text-align: center;
 }
+
+.login-btn {
+	display:inline-block;
+	color:#fff;
+	padding:8px 110px;
+	background:#db3222;
+        float: right;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+    box-shadow:0 1px 2px #c5c2a9;
+	-moz-box-shadow: 0 1px 2px #c5c2a9;
+	-webkit-box-shadow:0 1px 2px #c5c2a9;
+}
+.login-btn:hover {
+	background:orangered;
+}

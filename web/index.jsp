@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Home</title>
+<title>海角教育</title>
 <meta charset="utf-8">
 <!--css-->
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
@@ -73,17 +73,19 @@
             <div style="height:400px;width:694px;float:left;overflow: hidden;"><img alt="" src="images/1.jpg" width=700 height=400></div>
             <div class="login-panel" style="border:1px solid #CCC;margin: 0px 0px 0px 0px;">
                 <div class='login-func'>
-                    <a id ='regText'class='login-reg' style="font-size: 32px;color: black;opacity: 0.5;border-right:1px solid #CCC;">用户注册</a>
-                    <div id='logText' class='login-log' style="font-size: 32px;opacity: 0.5;border-left:1px solid #CCC;border-bottom:1px solid #CCC;">用户登录</div>
+                    <div id ='regText'class='login-reg' style="font-size: 32px;color: black;opacity: 1;border-right:1px solid #CCC;">用户注册</div>
+                    <div id='logText' class='login-log' style="font-size: 32px;opacity: 0.5;border-left:1px solid #CCC;border-bottom:1px solid #CCC;background-color: #e8e7de   ">用户登录</div>
                 </div>                
                 <div id='reg-panel'>               
-                <input type="text" name="user" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;">
+                <input type="text" name="user" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 50px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;">
                 <input type="password" name="password" placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;">
                 <input type="password" name="password-again" placeholder="请重复密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;">
+                <a herf="#" class="login-btn" style="font-size: 20px; margin: 40px 70px 0px 0px">注册</a>
                 </div>
-                <div id='log-panel' style='display:none'>               
-                <input type="text" name="user" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;">
+                <div id='log-panel' style='display:none;'>               
+                <input type="text" name="user" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 50px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;">
                 <input type="password" name="password" placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"> 
+                <a herf="#" class="login-btn" style="font-size: 20px; margin: 96px 70px 0px 0px;background-color:  ">登录</a>
                 </div>
             </div>
         </div>
