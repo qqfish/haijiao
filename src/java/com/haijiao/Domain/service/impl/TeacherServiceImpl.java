@@ -4,12 +4,14 @@
  */
 
 package com.haijiao.Domain.service.impl;
+import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.Timeslice;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.service.ITeacherService;
 import java.sql.Time;
+import java.util.List;
 
 public class TeacherServiceImpl extends UserServiceImpl implements ITeacherService{
 
@@ -74,7 +76,7 @@ public class TeacherServiceImpl extends UserServiceImpl implements ITeacherServi
     }
 
     @Override
-    public boolean dealToReservation(Teacher tc, Timeslice ts) {
+    public boolean dealWithReservation(String username, Clazz c, boolean accept) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
    

@@ -16,6 +16,8 @@ public class Teacher extends User{
     private boolean audition;        //该老师是否接受试听
     private Schedule schedule;      //记录老师的时间表
     private int wagePerhour;         //老师每小时的辅导费
+    private List<Clazz> clazzlist;    //老师的课程列表
+    private List<Clazz> booklist;    //老师的课程预约列表
 
     
     
@@ -82,5 +84,20 @@ public class Teacher extends User{
     public void setWagePerhour(int wagePerhour) {
         this.wagePerhour = wagePerhour;
     }
-    
+
+    public List<Clazz> getClazzlist() {
+        return clazzlist;
+    }
+
+    public void setClazzlist(List<Clazz> clazzlist) {
+        this.clazzlist = clazzlist;
+    }
+
+    public List<Clazz> getBooklist() {
+        return booklist;
+    }
+
+    public void setBooklist(List<Clazz> booklist) {
+        this.booklist = booklist;
+    }
 }

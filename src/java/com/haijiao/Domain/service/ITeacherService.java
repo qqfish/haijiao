@@ -3,9 +3,11 @@
  * @author Jerry
  */
 package com.haijiao.Domain.service;
+import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.Timeslice;
+import java.util.List;
 
 public interface ITeacherService extends IUserService {
     public Teacher getTeacherByAccount(String account);
@@ -19,5 +21,5 @@ public interface ITeacherService extends IUserService {
     //设置试听
     public boolean changeAudition(String username);
     //处理学生预约
-    public boolean dealToReservation(Teacher tc, Timeslice ts);
+    public boolean dealWithReservation(String username, Clazz c, boolean accept);
 }
