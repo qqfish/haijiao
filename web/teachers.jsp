@@ -16,6 +16,7 @@
 <!--js-->
 <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
 <script type="text/javascript" src="js/superfish.js"></script>
+<script type="text/javascript" src="js/teachers.js"></script>
 
 <!--[if lt IE 8]>
       <div style=' clear: both; text-align:center; position: relative;'>
@@ -39,70 +40,58 @@
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
-<section id="content"><div class="ic"></div>
-  <div class="border-horiz"></div>
-  <div class="container_12">
-    <article class="side-bar">
-      <p/>
-			<li>教师姓名 ： 
-		  <input type="text" name="username" class="wbkuang" style="width:120px;" /> 
-		  </li>
-		  <p/>
-		  <li>教授科目 ：
-		  <select name="type" class="wbkuang" style="width:140px;"> 
-		   <option value="0"></option>
-		   <option value="1">语文</option>
-		   <option value="2">数学</option>
-		   <option value="3">物理</option>
-		   <option value="4">化学</option>
-		  </select>
-		  </li>
-		  <p/>
-		  <li>教授年级 ：
-		  <select name="type" class="wbkuang" style="width:140px;"> 
-		   <option value="0"></option>
-		   <option value="1">小学</option>
-		   <option value="2">初中</option>
-		   <option value="3">高中</option>
-		   <option value="4">大学</option>
-		  </select>
-		  </li>
-		  <p/>
-		  <p/>
-		  搜索
-    </article>
-    <article class="grid_8">
-      <div class="padd-1">
-        <h3>搜索结果</h3>
-      </div>
-      <ul class="list-teachers">
-        <li>
-          <figure class="box-img"><img src="images/page2-img1.jpg " alt="" /></figure>
-          <div class="overflow">
-            <h4>AAA</h4>
-            <p>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</p>
-            <a href="ta.jsp" class="btn">Read more</a> </div>
-          <div class="clear"></div>
-        </li>
-        <li>
-          <figure class="box-img"><img src="images/page2-img2.jpg " alt="" /></figure>
-          <div class="overflow">
-            <h4>BBB</h4>
-            <p>BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB</p>
-            <a href="#" class="btn">Read more</a> </div>
-          <div class="clear"></div>
-        </li>
-        <li>
-          <figure class="box-img"><img src="images/page2-img3.jpg " alt="" /></figure>
-          <div class="overflow">
-            <h4>CCC</h4>
-            <p>CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC</p>
-            <a href="#" class="btn">Read more</a> </div>
-          <div class="clear"></div>
-        </li>
-      </ul>
-    </article>
-    <div class="clear"></div>
+<section id="content">
+    <div id="seacrchBar" style="height: 100px;width: 1200px;margin:auto;background-color:gainsboro;overflow: hidden;">
+        <div style="height:99px;width:1200px;float: left;margin:0px 0px 0px 200px;">
+            <s:textfield name="search" placeholder="" autofocus="autofocus" style="margin: 30px 0px 0px 100px;height: 30px;width: 600px;font-size: 20px;"></s:textfield>
+            <a id="search-btn" href="#" class="label-btn" style="height: 25px;margin:40px 0px 0px 2px">搜索</a> 
+        </div>  
+        <div id="searchChoice" style="height:99px;width:1200px;margin:0px 0px 0px 300px;float: left">
+            <div style="height: 33px;width: 600px;">
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px;background-color: #db3222;color: #fff">年级</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">小学</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">六年级</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">初一</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">初二</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">初三</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">高一</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">高二</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">高三</a>
+                
+            </div>
+            <div style="height: 33px;width: 600px;">
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px;background-color: #db3222;color: #fff">学科</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">语文</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">数学</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">英文</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">物理</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">化学</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">生物</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">地理</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">历史</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">政治</a>                
+            </div>
+            <div style="height: 33px;width: 600px;">
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px;background-color: #db3222;color: #fff">网络</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">电信</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">网通</a>
+                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">教育网</a>
+            </div>
+        </div> 
+            <a id="close-btn" href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 300px">收起</a>   
+    </div>
+  <div  id="resultPanel" style="height: 600px;width: 1200px;margin:20px 0px 0px 30px;">
+      <a href="#" id="resultBar" class="result-bar">
+          <figure id="personImage" style="">
+              <img src="images/page2-img1.jpg"/>
+          </figure>
+      </a>
+      <a href="#" id="resultBar" class="result-bar">          
+      </a>
+      <a href="#" id="resultBar" class="result-bar">          
+      </a>
+      <a href="#" id="resultBar" class="result-bar">          
+      </a>
   </div>
 </section>
 

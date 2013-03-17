@@ -342,15 +342,15 @@ margin:0 12px 18px 0
 width:250px;
 height:622px;
 float:left;
-margin:-3px 20px 0px -250px;
+margin:0px 0px 0px 0px;
 padding:0 0px 0px 2px;
 background:#fff;
 /*     border-radius:18px;
 	-moz-border-radius:18px;
 	-webkit-border-radius:18px; */
-	 -moz-box-shadow:-2px 2px 2px #999 inset;              /* For Firefox3.6+ */
-	-webkit-box-shadow:-2px 2px 2px #999 inset;           /* For Chrome5+, Safari5+ */
-	box-shadow:-2px 2px 2px #999 inset;                   /* For Latest Opera */
+	 -moz-box-shadow:2px 2px 2px #999 inset;              /* For Firefox3.6+ */
+	-webkit-box-shadow:2px 2px 2px #999 inset;           /* For Chrome5+, Safari5+ */
+	box-shadow:2px 2px 2px #999 inset;                   /* For Latest Opera */
 }	
 .side-bar.extra{padding:18px 10px 0 40px}	
 .side-bar.extra1{padding:0px 20px 27px 30px}		
@@ -710,4 +710,40 @@ background:#fff;
 }
 .login-btn:hover {
 	background:orangered;
+}
+
+.label-btn {
+	display:inline-block;
+	color:#000;
+        border:1px solid #CCC;
+	padding:0px 10px;
+	background:gainsboro;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+    /*box-shadow:0 1px 2px #c5c2a9;
+	-moz-box-shadow: 0 1px 2px #c5c2a9;
+	-webkit-box-shadow:0 1px 2px #c5c2a9;*/
+}
+.label-btn:hover {
+	background:activeborder;
+}
+
+.result-bar {
+	height: 150px;
+        width:550px;
+        margin:30px 0px 0px 30px;
+        float: left;
+        background-color: gainsboro;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+    box-shadow:0 1px 2px #c5c2a9;
+	-moz-box-shadow: 0 1px 2px #c5c2a9;
+	-webkit-box-shadow:0 1px 2px #c5c2a9;
+}
+.result-bar:hover {
+	background:activeborder;
 }
