@@ -9,11 +9,11 @@
     
     <package name="haijiao" namespace="/" extends="struts-default">
         <action name="login" class="LoginAction">
-            <result name="input">login.jsp</result>
+            <result name="input">index.jsp</result>
             <result name="success">index.jsp</result>
         </action>
         <action name="register" class="RegisterAction">
-            <result name="input">register.jsp</result>
+            <result name="input">index.jsp</result>
             <result name="success">index.jsp</result>
         </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
