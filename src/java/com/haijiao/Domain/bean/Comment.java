@@ -5,7 +5,7 @@
 
 package com.haijiao.Domain.bean;
 
-public class Comment {
+public class Comment extends BaseBean {
     private User commenter;
     private String content;
     private Integer score;

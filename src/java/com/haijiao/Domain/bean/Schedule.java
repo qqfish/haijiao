@@ -7,9 +7,13 @@ package com.haijiao.Domain.bean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Schedule {
-    private List<Timeslice> slices = new ArrayList<Timeslice>();
+public class Schedule extends BaseBean {
+    private List<Timeslice> slices;  //两周内的时间片
     private Teacher teacher;
+
+    public Schedule() {
+        this.slices = new ArrayList<Timeslice>();
+    }
 
     public Teacher getTeacher() {
         return teacher;

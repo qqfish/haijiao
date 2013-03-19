@@ -9,18 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Teacher extends User{
-    private String brief_intro;
-    private String intro;
+    private String school;        //就读大学
+    private String brief_intro;  //老师的简单介绍，显示在搜索页面
+    private String tel;             //老师的手机
     private String videoUrl;    //老师的介绍视频地址
-    private List<String> classes = new ArrayList<String>();   //该老师教授的课程
+    private List<Lesson> lessons;   //该老师开设课程
     private boolean audition;        //该老师是否接受试听
     private Schedule schedule;      //记录老师的时间表
     private int wagePerhour;         //老师每小时的辅导费
-    private List<Clazz> clazzlist;    //老师的课程列表
-    private List<Clazz> booklist;    //老师的课程预约列表
+    private List<Student> studentlist; //教授过的学生列表
+    private List<Clazz> classlist;    //预约成功的课程列表
+    private List<Clazz> classFinishedList; //已结束的课程列表
+    private List<Clazz> booklist;    //待确认预约的课程列表
 
-    
-    
+    public Teacher() {
+        this.lessons = new ArrayList<Lesson>();
+        this.studentlist = new ArrayList<Student>();
+        this.classlist = new ArrayList<Clazz>();
+        this.classFinishedList = new ArrayList<Clazz>();
+        this.booklist = new ArrayList<Clazz>();
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
     public String getBrief_intro() {
         return brief_intro;
     }
@@ -29,12 +46,12 @@ public class Teacher extends User{
         this.brief_intro = brief_intro;
     }
 
-    public String getIntro() {
-        return intro;
+    public String getTel() {
+        return tel;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 
     public String getVideoUrl() {
@@ -45,20 +62,12 @@ public class Teacher extends User{
         this.videoUrl = videoUrl;
     }
 
-    public List<Comment> getComments() {
-        return comments;
+    public List<Lesson> getLessons() {
+        return lessons;
     }
 
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<String> getClasses() {
-        return classes;
-    }
-
-    public void setClasses(List<String> classes) {
-        this.classes = classes;
+    public void setLessons(List<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     public boolean isAudition() {
@@ -85,12 +94,28 @@ public class Teacher extends User{
         this.wagePerhour = wagePerhour;
     }
 
-    public List<Clazz> getClazzlist() {
-        return clazzlist;
+    public List<Student> getStudentlist() {
+        return studentlist;
     }
 
-    public void setClazzlist(List<Clazz> clazzlist) {
-        this.clazzlist = clazzlist;
+    public void setStudentlist(List<Student> studentlist) {
+        this.studentlist = studentlist;
+    }
+
+    public List<Clazz> getClasslist() {
+        return classlist;
+    }
+
+    public void setClasslist(List<Clazz> classlist) {
+        this.classlist = classlist;
+    }
+
+    public List<Clazz> getClassFinishedList() {
+        return classFinishedList;
+    }
+
+    public void setClassFinishedList(List<Clazz> classFinishedList) {
+        this.classFinishedList = classFinishedList;
     }
 
     public List<Clazz> getBooklist() {
