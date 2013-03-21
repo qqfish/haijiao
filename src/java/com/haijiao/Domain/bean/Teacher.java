@@ -18,16 +18,12 @@ public class Teacher extends User{
     private Schedule schedule;      //记录老师的时间表
     private int wagePerhour;         //老师每小时的辅导费
     private List<Student> studentlist; //教授过的学生列表
-    private List<Clazz> classlist;    //预约成功的课程列表
-    private List<Clazz> classFinishedList; //已结束的课程列表
-    private List<Clazz> booklist;    //待确认预约的课程列表
+    private List<Clazz> classlist;    //课程列表
 
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
         this.studentlist = new ArrayList<Student>();
         this.classlist = new ArrayList<Clazz>();
-        this.classFinishedList = new ArrayList<Clazz>();
-        this.booklist = new ArrayList<Clazz>();
     }
 
     public String getSchool() {
@@ -108,21 +104,5 @@ public class Teacher extends User{
 
     public void setClasslist(List<Clazz> classlist) {
         this.classlist = classlist;
-    }
-
-    public List<Clazz> getClassFinishedList() {
-        return classFinishedList;
-    }
-
-    public void setClassFinishedList(List<Clazz> classFinishedList) {
-        this.classFinishedList = classFinishedList;
-    }
-
-    public List<Clazz> getBooklist() {
-        return booklist;
-    }
-
-    public void setBooklist(List<Clazz> booklist) {
-        this.booklist = booklist;
     }
 }

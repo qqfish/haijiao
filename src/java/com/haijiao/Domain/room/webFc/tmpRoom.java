@@ -30,12 +30,12 @@ public class tmpRoom {
             counter = 0;
             testRoom = new Room("1",user[0]);
             DataFile file1 = new DataFile();
-            file1.setUrl("/Users/fish/Downloads/test1.pdf");
+            file1.setUrl("E:\\2013_02_27.pdf");
             file1.setName("test1.pdf");
             user[0].addFileGroup("new");
             user[0].addFile("new", file1);
             DataFile file2 = new DataFile();
-            file2.setUrl("/Users/fish/Downloads/test2.pdf");
+            file2.setUrl("E:\\2013_02_27.pdf");
             file2.setName("test1.pdf");
             //testRoom.loadFile(file1);
             //testRoom.loadFile(file2);
