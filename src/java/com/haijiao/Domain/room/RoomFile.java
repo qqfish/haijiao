@@ -5,6 +5,7 @@
 package com.haijiao.Domain.room;
 
 import com.haijiao.Domain.file.DataFile;
+import com.haijiao.Domain.file.UserFile;
 import com.haijiao.global.config;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
@@ -38,6 +39,23 @@ public class RoomFile extends DataFile {
     private int lastPage;
 
     public RoomFile(DataFile file, Room room) {
+        try {
+            this.room = room;
+            uuid = UUID.randomUUID().toString();
+            name = file.getName();
+            url = file.getUrl();
+            doc = PDDocument.load(url);
+            bookmarks = new RootBookmark(doc);
+            pages = new ArrayList();
+            for (int i = 0; i < doc.getNumberOfPages(); i++) {
+                pages.add(new RoomPage(this));
+            }
+            lastPage = 0;
+        } catch (IOException ex) {
+            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+        public RoomFile(UserFile file, Room room) {
         try {
             this.room = room;
             uuid = UUID.randomUUID().toString();

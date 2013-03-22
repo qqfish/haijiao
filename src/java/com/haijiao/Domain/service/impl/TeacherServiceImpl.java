@@ -7,44 +7,52 @@ package com.haijiao.Domain.service.impl;
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.bean.Timeslice;
-import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.service.GenericService;
 import com.haijiao.Domain.service.ITeacherService;
-import java.sql.Time;
 import java.util.List;
 
-public class TeacherServiceImpl extends UserServiceImpl implements ITeacherService{
+public class TeacherServiceImpl extends GenericService<Teacher,Integer> implements ITeacherService {
 
     @Override
     public Teacher getTeacherByAccount(String account) {
-        Teacher tea = new Teacher();
-        tea.setName("呵呵老师");
-        return tea;
-    }
-
-    @Override
-    public boolean comment(User commenter, User commentee, String content, Integer score) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String hql = "from Teacher where email='"+ account + "'";
+        List<Teacher> lt = findByqQuery(hql);
+        if(lt.size() == 1)
+            return findByqQuery(hql).get(0);
+        else
+            return null;
     }
     
     @Override
     public boolean changeSchedule(String username, Schedule s) {
-        return false;
+        Teacher t = getTeacherByAccount(username);
+        t.setSchedule(s);
+        update(t);
+        return true;
     }
 
     @Override
     public boolean changeInfo(String username, Teacher tc) {
-        return false;
+        update(tc);
+        return true;
     }
 
     @Override
     public boolean changeAudition(String username) {
-        return false;
+        Teacher t = getTeacherByAccount(username);
+        boolean audition = t.isAudition();
+        t.setAudition(!audition);
+        update(t);
+        return true;
     }
 
     @Override
     public boolean takeMoney(String username, int numberOfCoin) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Teacher t = getTeacherByAccount(username);
+        int coin = t.getCoin();
+        t.setCoin(coin + numberOfCoin);
+        update(t);
+        return true;
     }
 
     @Override

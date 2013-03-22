@@ -7,6 +7,7 @@ package com.haijiao.Domain.room;
 import com.google.gson.Gson;
 import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.room.webFc.FcMessageInbound;
 import com.haijiao.Domain.room.webFc.message.response.ResponseAddRoomFile;
 import com.haijiao.Domain.room.webFc.message.response.ResponseChangeBookmark;
@@ -78,7 +79,7 @@ public class Room {
         return false;
     }
 
-    public void loadFile(DataFile file) {
+    public void loadFile(UserFile file) {
         RoomFile newFile = new RoomFile(file,this);
         roomFile.add(newFile);
         List<RoomFile> list = new ArrayList();
@@ -191,7 +192,7 @@ public class Room {
     public void sentto(String message, String userId) throws IOException {
         CharBuffer buffer = CharBuffer.wrap(message);
         for (int i = 0; i < roomSocket.size(); i++) {
-            if (roomSocket.get(i).getUser().getUserId().equals(userId)) {
+            if (roomSocket.get(i).getUser().getName().equals(userId)) {
                 roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
             }
         }

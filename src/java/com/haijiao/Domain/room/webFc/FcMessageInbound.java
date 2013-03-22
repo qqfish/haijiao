@@ -9,6 +9,7 @@ import com.haijiao.Domain.room.Room;
 import com.haijiao.Domain.room.Shape;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.file.DataFile;
+import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.room.webFc.message.Request;
 import com.haijiao.Domain.room.webFc.message.request.*;
 import com.haijiao.Domain.room.webFc.message.response.*;
@@ -54,7 +55,7 @@ public class FcMessageInbound extends MessageInbound {
     @Override
     protected void onClose(int status) {
         ResponseVideoChat bye = new ResponseVideoChat();
-        bye.setFrom(user.getUserId());
+        bye.setFrom(user.getName());
         bye.setData("{\"type\":\"bye\"}");
         room.broadcastOther(gson.toJson(bye), this);
         room.exitRoom(this);
@@ -93,7 +94,7 @@ public class FcMessageInbound extends MessageInbound {
             case Request.VideoChat:
                 RequestVideoChat rvc = gson.fromJson(str, RequestVideoChat.class);
                 ResponseVideoChat videoResult = new ResponseVideoChat(rvc);
-                videoResult.setFrom(user.getUserId());
+                videoResult.setFrom(user.getName());
                 if (videoResult.getTo() == null) {
                     room.broadcastOther(gson.toJson(videoResult), this);
                 } else {
@@ -103,7 +104,7 @@ public class FcMessageInbound extends MessageInbound {
             case Request.TextChat:
                 RequestTextChat chat = gson.fromJson(str, RequestTextChat.class);
                 ResponseTextChat chatResult = new ResponseTextChat(chat);
-                chatResult.setFrom(user.getUserId());
+                chatResult.setFrom(user.getName());
                 room.broadcast(gson.toJson(chatResult));
                 break;
             case Request.ChangePage:
@@ -125,7 +126,7 @@ public class FcMessageInbound extends MessageInbound {
                 break;
             case Request.AddFileFromUser:
                 RequestAddFileFromUser addFile = gson.fromJson(str, RequestAddFileFromUser.class);
-                DataFile userFile = user.getFile(addFile.getGroup(), addFile.getName());
+                UserFile userFile = user.getFile(addFile.getGroup(), addFile.getName());
                 if(userFile != null){
                     room.loadFile(userFile);
                 } else {

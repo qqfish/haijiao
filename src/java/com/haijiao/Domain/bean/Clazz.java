@@ -7,21 +7,44 @@ package com.haijiao.Domain.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
-public class Clazz extends BaseBean { //clazz -> class
+@Entity    
+@Table(name="clazz")     
+@PrimaryKeyJoinColumn(name="ClazzId")
+public class Clazz extends BaseBean{ //clazz -> class
+    @ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "tid")
     private Teacher teacher;
+    
+    @ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "sid")
     private Student student;
+    
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "lid", unique = true)
     private Lesson lesson;
+    
+    @OneToMany(mappedBy="clazz")
     private List<Timeslice> timeslices;  //保存本次预约课程的时间范围
+    
     private boolean accept;  //本次预约老师是否已接受
     private boolean message;   //本次预约在接受或拒绝后附加的信息
     private Integer pay;    //本次课程的花费
     private boolean finish;  //本次课程是否已结束（结算）
 
-    public Clazz() {
+    public Clazz(){
         this.timeslices = new ArrayList<Timeslice>();
     }
-    
+
     public Teacher getTeacher() {
         return teacher;
     }
@@ -85,5 +108,5 @@ public class Clazz extends BaseBean { //clazz -> class
     public void setFinish(boolean finish) {
         this.finish = finish;
     }
-    
+
 }

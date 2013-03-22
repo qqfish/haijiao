@@ -5,6 +5,13 @@
 
 package com.haijiao.Domain.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+@Entity    
+@Table(name="lesson")     
+@PrimaryKeyJoinColumn(name="LessonId")
 public class Lesson extends BaseBean{
     private String name;
     private String grade;

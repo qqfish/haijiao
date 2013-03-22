@@ -6,26 +6,19 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/haijiao</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">315121</property>
+    <property name="hibernate.connection.password">zy102428</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.show_sql">true</property>
-    <mapping resource="com/haijiao/Domain/bean/comment.hbm.xml"/>
-    <mapping resource="com/haijiao/Domain/bean/schedule.hbm.xml"/>
-    <mapping resource="com/haijiao/Domain/bean/timeSlice.hbm.xml"/>
-    <mapping resource="com/haijiao/Domain/bean/user.hbm.xml"/>
-    <mapping resource="com/haijiao/Domain/file/userfilegroup.hbm.xml"/>
-    <mapping resource="com/haijiao/Domain/file/datafile.hbm.xml"/>
-   <!--
-    <property name="hibernate.show_sql">true</property>
-    <property name="hibernate.connection.autocommit">true</property>
-    -->
+    <mapping class="com.haijiao.Domain.bean.BaseBean"/>
+    <mapping class="com.haijiao.Domain.bean.Clazz"/>
+    <mapping class="com.haijiao.Domain.bean.Comment"/>
+    <mapping class="com.haijiao.Domain.bean.Lesson"/>
+    <mapping class="com.haijiao.Domain.bean.Schedule"/>
+    <mapping class="com.haijiao.Domain.bean.Student"/>
+    <mapping class="com.haijiao.Domain.bean.Teacher"/>
+    <mapping class="com.haijiao.Domain.bean.Timeslice"/>
+    <mapping class="com.haijiao.Domain.bean.User"/>
+    <mapping class="com.haijiao.Domain.file.UserFileGroup"/>
+    <mapping class="com.haijiao.Domain.file.UserFile"/>
   </session-factory>
-  <!--
-    <mapping resource="persist/Teacherfileindex.hbm.xml"/>
-    <mapping resource="persist/Teacher.hbm.xml"/>
-    <mapping resource="persist/Teacherfile.hbm.xml"/>
-    <mapping resource="persist/Studentfileindex.hbm.xml"/>
-    <mapping resource="persist/Studentfile.hbm.xml"/>
-    <mapping resource="persist/Student.hbm.xml"/>
-    -->
 </hibernate-configuration>

@@ -7,17 +7,47 @@ package com.haijiao.Domain.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
+@Entity    
+@Table(name="teacher")     
+@PrimaryKeyJoinColumn(name="TeacherId")
 public class Teacher extends User{
     private String school;        //就读大学
     private String brief_intro;  //老师的简单介绍，显示在搜索页面
     private String tel;             //老师的手机
     private String videoUrl;    //老师的介绍视频地址
+    
+    @OneToMany
+    @JoinColumn(name="tid", referencedColumnName="TeacherId")
     private List<Lesson> lessons;   //该老师开设课程
+    
     private boolean audition;        //该老师是否接受试听
+    
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "scheid", unique = true)
     private Schedule schedule;      //记录老师的时间表
+    
     private int wagePerhour;         //老师每小时的辅导费
+    
+    @ManyToMany(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "teach",
+            joinColumns = @JoinColumn(name="sid"),
+            inverseJoinColumns = @JoinColumn(name="tid")
+            )
     private List<Student> studentlist; //教授过的学生列表
+    
+    @OneToMany(mappedBy = "teacher")
     private List<Clazz> classlist;    //课程列表
 
     public Teacher() {
@@ -105,4 +135,5 @@ public class Teacher extends User{
     public void setClasslist(List<Clazz> classlist) {
         this.classlist = classlist;
     }
+
 }

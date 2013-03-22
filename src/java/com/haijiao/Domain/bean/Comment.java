@@ -5,8 +5,22 @@
 
 package com.haijiao.Domain.bean;
 
-public class Comment extends BaseBean {
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+
+@Entity    
+@Table(name="comment")     
+@PrimaryKeyJoinColumn(name="commentId")
+public class Comment extends BaseBean{
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="uid")
     private User commenter;
+    
     private String content;
     private Integer score;
 

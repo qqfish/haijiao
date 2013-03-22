@@ -6,11 +6,30 @@
 package com.haijiao.Domain.bean;
 
 import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+@Entity    
+@Table(name="timeslice")     
+@PrimaryKeyJoinColumn(name="TimeSliceId")
 public class Timeslice extends BaseBean {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cid")
     private Clazz clazz;   //本时间属于哪个clazz，如果为null，则为空闲时间
+    
+    @Column(name="datetime")
     private Date date;   //日期
+    
     private Integer week; //第一/二个星期，此处只能取值1或2
+    
+    @Column(name="weekday")
     private String day;   //星期X
     private int index;     //时间片index，比如 1对应 8:00-8:30，2对应 8:30-9:00
 

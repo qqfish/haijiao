@@ -5,34 +5,42 @@
 
 package com.haijiao.Domain.bean;
 import com.haijiao.Domain.file.DataFile;
+import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
+@Entity    
+@Table(name="user")     
+@PrimaryKeyJoinColumn(name="UserId")
+@Inheritance(strategy = InheritanceType.JOINED ) 
 public class User extends BaseBean{
-    protected String userId;     //在房间中用到？
     protected String email;      //用户的账号,即Email
     protected String name;      //用户的真实姓名
     protected String userType; //用户的类型："teacher" or "student"
     protected Integer score;     //用户的评分
-    protected String password;//用户密码
+    protected String password;  //用户密码
     protected int coin;              //该账户中剩下的智慧币
     protected String intro;        //用户的个人简介，显示在个人主页上
     protected String picUrl;      //用户头像的URL
+    
+    @OneToMany(mappedBy="commenter")
     protected List<Comment> commentsToThis; //所有对本用户的评论
+    
+    @OneToMany
+    @JoinColumn(name="uid", referencedColumnName="UserId")
     protected List<UserFileGroup> fileGroups;
 
     public User() {
         commentsToThis = new ArrayList();
         fileGroups = new ArrayList();
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
     }
 
     public String getEmail() {
@@ -83,6 +91,14 @@ public class User extends BaseBean{
         this.score = score;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public int getCoin() {
         return coin;
     }
@@ -104,7 +120,7 @@ public class User extends BaseBean{
         fileGroups.add(group);
     }
     
-    public DataFile getFile(String group, String name){
+    public UserFile getFile(String group, String name){
         UserFileGroup groupResult = null;
         for(int i = 0; i < fileGroups.size(); i++){
             if(fileGroups.get(i).getGroupName().equals(group)){
@@ -120,7 +136,7 @@ public class User extends BaseBean{
     }
 
     
-    public boolean addFile(String groupName, DataFile file){
+    public boolean addFile(String groupName, UserFile file){
         UserFileGroup group = null;
         for(int i = 0; i < fileGroups.size(); i++){
             if(fileGroups.get(i).getGroupName().equals(groupName)){
@@ -136,7 +152,7 @@ public class User extends BaseBean{
         return true;
     }
     
-    public void removeFile(String groupName, DataFile file){
+    public void removeFile(String groupName, UserFile file){
         UserFileGroup group = null;
         for(int i = 0; i < fileGroups.size(); i++){
             if(fileGroups.get(i).getGroupName().equals(groupName)){
@@ -151,7 +167,7 @@ public class User extends BaseBean{
         group.removeFile(file);
     }
     
-    public void moveFile(String fromGroup, String toGroup, DataFile file){
+    public void moveFile(String fromGroup, String toGroup, UserFile file){
         UserFileGroup from = null;
         UserFileGroup to = null;
         for(int i = 0; i < fileGroups.size(); i++){

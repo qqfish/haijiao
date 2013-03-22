@@ -6,10 +6,8 @@ package com.haijiao.Domain.service;
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.bean.Timeslice;
-import java.util.List;
 
-public interface ITeacherService extends IUserService {
+public interface ITeacherService extends Generic<Teacher,Integer> {
     public Teacher getTeacherByAccount(String account);
 
     //获取报酬

@@ -6,6 +6,7 @@ package com.haijiao.Domain.room.webFc;
 
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.file.DataFile;
+import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
 import com.haijiao.Domain.room.Room;
 
@@ -24,18 +25,18 @@ public class tmpRoom {
             user[0] = new User();
             user[1] = new User();
             user[2] = new User();
-            user[0].setUserId("123");
-            user[1].setUserId("234");
-            user[2].setUserId("345");
+            user[0].setName("123");
+            user[1].setName("234");
+            user[2].setName("345");
             counter = 0;
             testRoom = new Room("1",user[0]);
-            DataFile file1 = new DataFile();
-            file1.setUrl("E:\\2013_02_27.pdf");
+            UserFile file1 = new UserFile();
+            file1.setUrl("/Users/fish/Downloads/test1.pdf");
             file1.setName("test1.pdf");
             user[0].addFileGroup("new");
             user[0].addFile("new", file1);
-            DataFile file2 = new DataFile();
-            file2.setUrl("E:\\2013_02_27.pdf");
+            UserFile file2 = new UserFile();
+            file2.setUrl("/Users/fish/Downloads/test2.pdf");
             file2.setName("test1.pdf");
             //testRoom.loadFile(file1);
             //testRoom.loadFile(file2);
