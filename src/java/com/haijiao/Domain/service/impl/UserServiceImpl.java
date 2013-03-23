@@ -14,9 +14,9 @@ import java.util.List;
 public class UserServiceImpl extends GenericService<User, Integer> implements IUserService {
 
     @Override
-    public boolean confirmRegister(String account, String password, String userType) {
+    public boolean confirmExist(String account) {
         String hql = "from User where email='"+ account + "'";
-        return findByqQuery(hql)!=null;
+        return findByqQuery(hql)==null;
     }
     
     @Override
@@ -30,6 +30,16 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
             return usertype;
         }
     }
+    
+    @Override
+    public boolean addStudent(String account, String password, String grade, String school, String tel, String telType) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean addTeacher(String account, String password, String school, String tel) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 
     @Override
     public boolean comment(User commenter, User commentee, String content, Integer score) {
@@ -37,7 +47,7 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
     }
 
     @Override
-    public List<Teacher> searchTeacher(String name, Integer grade, String subject, String net) {
+    public List<Teacher> searchTeacher(String name, String grade, String subject, String net) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -51,4 +61,8 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public List<Comment> getComment(String acount) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

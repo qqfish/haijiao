@@ -16,7 +16,7 @@ public class RegisterAction extends SessionAction{
     
     @Override
     public String execute() throws Exception {
-        if(userService.confirmRegister(account, password1, userType)){
+        if(userService.confirmExist(account)){
             this.putIn("username", account);
             this.putIn("userType", userType);
             this.putIn("login", true);

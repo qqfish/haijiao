@@ -13,7 +13,7 @@ import java.util.List;
 public class SearchTeacherAction extends SessionAction {
     IUserService userService;
     String name;
-    Integer grade;
+    String grade;
     String subject;
     String net;
     List<Teacher> teacherlist;
@@ -49,11 +49,11 @@ public class SearchTeacherAction extends SessionAction {
         this.name = name;
     }
 
-    public Integer getGrade() {
+    public String getGrade() {
         return grade;
     }
 
-    public void setGrade(Integer grade) {
+    public void setGrade(String grade) {
         this.grade = grade;
     }
 

@@ -59,5 +59,15 @@ public class TeacherServiceImpl extends GenericService<Teacher,Integer> implemen
     public boolean dealWithReservation(String username, Clazz c, boolean accept) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public Schedule getTeacherSchedule(String username) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Clazz> getTeacherFinishedClasses(String username) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
    
 }

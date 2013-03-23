@@ -6,10 +6,16 @@ package com.haijiao.Domain.service;
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
+import java.util.List;
 
 public interface ITeacherService extends Generic<Teacher,Integer> {
     public Teacher getTeacherByAccount(String account);
-
+    
+    //获取老师时间表
+    public Schedule getTeacherSchedule(String username);
+    //获取老师已完结课程
+    public List<Clazz> getTeacherFinishedClasses(String username);
+    
     //获取报酬
     public boolean takeMoney(String username, int numberOfCoin);
     //修改空闲时刻表

@@ -5,6 +5,7 @@
 
 package com.haijiao.Domain.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -33,15 +34,11 @@ public class Student extends User{
     private List<Teacher> teacherList;   //预约过的老师列表
     
     @OneToMany(mappedBy = "student")
-    private List<Clazz> classList; //预约好的课程列表
-    
-    @OneToMany(mappedBy = "student")
-    private List<Clazz> classFinishedList; //已结束的课程列表
+    private List<Clazz> classList; //课程列表
 
     public Student() {
         this.teacherList = new ArrayList<Teacher>();
         this.classList = new ArrayList<Clazz>();
-        this.classFinishedList = new ArrayList<Clazz>();
     }
 
     public String getGrade() {
@@ -98,13 +95,5 @@ public class Student extends User{
 
     public void setClassList(List<Clazz> classList) {
         this.classList = classList;
-    }
-
-    public List<Clazz> getClassFinishedList() {
-        return classFinishedList;
-    }
-
-    public void setClassFinishedList(List<Clazz> classFinishedList) {
-        this.classFinishedList = classFinishedList;
     }
 }
