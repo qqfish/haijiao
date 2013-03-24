@@ -45,8 +45,7 @@
 <section id="content">
 <div class="ic"></div>
   <div class="border-horiz"></div>
-  <div class="main">
-    <article class="side-bar">
+  <div id="loginpanel" style="height:600px; width: 1000px;margin:auto;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
        <br/>
       <s:form action="login">
         <s:textfield name="account" label="用户账号"></s:textfield>
@@ -54,8 +53,6 @@
         <s:submit value="登录"></s:submit>
       </s:form>
       备注：测试账号 TEST 密码 123456
-    </article>
-    <div class="clear"></div>
   </div>
 </section>
 

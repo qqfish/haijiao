@@ -1,15 +1,6 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags"  %>
 <header>
-  <div class="main">
-      <s:if test="#session.login">
-          欢迎！<s:property value="#session.username"/>
-      </s:if>
-      <s:else>
-          <a href="login.jsp" style="color:black">立即登录</a> 
-          <a href="register.jsp" style="color:black">免费注册</a>
-      </s:else>
-  </div>
   <div class="line-top"></div>
   <div class="main">
     <div class="row-top">
@@ -17,13 +8,7 @@
       <nav>
         <ul class="sf-menu">
           <li><a href="index.jsp" style = "font-size:18px"><b>主页</b></a></li>
-          <li><a  style = "font-size:18px"><b>课程</b></a> 
-              <ul>
-                  <li><a href="teachers.jsp">教师</a></li>
-                  <li><a href="#">课程表 </a></li>
-              </ul>
-          </li>
-          <li><a href="class.jsp" style = "font-size:18px"><b>在线课堂</b></a> </li>
+          <li><a href="teachers.jsp" style = "font-size:18px"><b>1v1名师</b></a></li>
           <li><a style = "font-size:18px"><b>文件共享</b></a>
                   <ul>
                       <s:if test="#session.login">
@@ -41,6 +26,7 @@
               </li>
           </s:if>
           <li><a href="contact.jsp" style = "font-size:18px"><b>联系我们</b></a> </li>
+          <li><a href="contact.jsp" style = "font-size:18px"><b>意见反馈</b></a> </li>
         </ul>
       </nav>
       <div class="clear"></div>

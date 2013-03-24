@@ -41,7 +41,7 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <section id="content">
-    <div id="seacrchBar" style="height: 100px;width: 1200px;margin:auto;background-color:gainsboro;overflow: hidden;">
+    <div id="seacrchBar" style="height: 100px;width: auto;margin:auto;background-color: transparent;overflow: hidden;border-bottom: 2px solid #CCC;border-top: 2px solid #CCC">
         <div style="height:99px;width:1200px;float: left;margin:0px 0px 0px 200px;">
             <s:textfield name="search" placeholder="" autofocus="autofocus" style="margin: 30px 0px 0px 100px;height: 30px;width: 600px;font-size: 20px;"></s:textfield>
             <a id="search-btn" href="#" class="label-btn" style="height: 25px;margin:40px 0px 0px 2px">搜索</a> 
@@ -80,11 +80,23 @@
         </div> 
             <a id="close-btn" href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 300px">收起</a>   
     </div>
-  <div  id="resultPanel" style="height: 600px;width: 1200px;margin:20px 0px 0px 30px;">
-      <a href="#" id="resultBar" class="result-bar">
-          <figure id="personImage" style="">
-              <img src="images/page2-img1.jpg"/>
+  <div  id="resultPanel" style="height: 800px;width: auto;margin:20px 0px 0px auto;">
+      <a href="teacherInfo.jsp" id="resultBar" class="result-bar">
+          <figure id="personImage" class="figureBar">
+              <img src="images/page2-img1.jpg" style="height: 150px;width: 150px;"/>
           </figure>
+          <div id="teacherName" style="height:50px;width: 350px;float:left;font-size: 36px;color: #000000;margin: 10px 0px 0px 15px;line-height: 50px">邹润阳</div>
+          <div id="teacherScore" class="label" style="font-size: 10px; margin: 0px 0px 0px 13px;background-color: transparent;border: 1px solid #db3222;color: #db3222">评分：100</div>
+          <div id="teacherCourses" style="height: 30px;width:390px;float:left;margin: 0px 0px 0px 10px;">
+              <div class="label" style="height: 25px;margin:2px 0px 0px 2px">小学</div>
+              <div class="label" style="height: 25px;margin:2px 0px 0px 2px">数学</div>
+              <div class="label" style="height: 25px;margin:2px 0px 0px 2px;">英语</div>
+          </div>
+          <div id="teacherIcons" style="height: 30px;width:390px;float:left;margin: 0px 0px 0px 10px;">
+              <div  style="height: 20px;width: 20px;margin:2px 0px 0px 5px;float:left;border:1px solid #000;border-radius: 5px"></div>
+              <div  style="height: 20px;width: 20px;margin:2px 0px 0px 5px;float:left;border:1px solid #000;border-radius: 5px"></div>
+              <div  style="height: 20px;width: 20px;margin:2px 0px 0px 5px;float:left;border:1px solid #000;border-radius: 5px"></div>
+          </div>
       </a>
       <a href="#" id="resultBar" class="result-bar">          
       </a>

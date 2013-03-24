@@ -68,7 +68,7 @@
                         <li><a id="nextPage">下一页</a></li>
                         <li><a id="scaleUp">放大</a></li>
                         <li><a id="scaleDown">缩小</a></li>
-                        <li><a class="favor-close-sidebar">书签</a></li>
+                        <li><a class="favor-close-sidebar"><img src="../images/icon.png"/></a></li>
                         <li><a class="userFile-close-sidebar">用户文件</a></li>
                         <li><a class="user-close-sidebar">用户列表</a></li>
                         <li><a class="file-close-sidebar">文件</a></li>

@@ -18,6 +18,7 @@
 <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
 <script type="text/javascript" src="js/superfish.js"></script>
 <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
+<script type="text/javascript" src="js/reg.js"></script>
 
 
 
@@ -42,22 +43,23 @@
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
-<section id="content"><div class="ic"></div>
-  <div class="border-horiz"></div>
-  <div class="main">
-    <article class="side-bar">
-      <s:form action="register"> <br/>
-        <s:textfield name="account" label="用户账号"></s:textfield>
-        <s:password name="password1" label="用户密码"></s:password>
-        <s:password name="password2" label="确认密码"></s:password>
-        <s:select name="userType" list="{'学生','老师'}" label="用户类型" headerKey="" headerValue="请选择"></s:select>
-        <s:submit value="注册"></s:submit>
-      </s:form>
-    </article>
-    <div class="clear"></div>
+<section id="content">
+<div class="ic"></div>
+  <div id="regpanel" style="height:600px; width: 800px;margin:auto;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
+      <div style="font-size: 36px;margin:20px 0px 0px 40px">用户注册</div>
+        <hr style="height: 1px;width: auto;margin:10px auto"/> 
+         <div style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;">基本信息</div>
+      <input type="text" name="user" placeholder="请输入邮箱" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"><br/>
+       <input type="password" name="password" placeholder="请输入密码" autofocus="autofocus" style="margin:30px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"><br/>
+       <input type="password" name="password-again" placeholder="请重复密码" autofocus="autofocus" style="margin:30px 0px 0px 60px;height: 30px;;width: 300px;font-size: 20px;"><br/>
+        <input type="text" name="name" placeholder="请输入真实姓名" autofocus="autofocus" style="margin:30px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"><br/>
+               <hr style="height: 1px;width: auto;margin:10px auto"/>
+        <div style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;">注册身份</div>      
+       <input type="radio" name="identify" value="1" style="margin:5px 0px 0px 60px;float: left;font-size: 20px;"/><div style="margin:0px 0px 0px 10px;float: left;font-size: 20px;">学生</div>
+       <input type="radio" name="identify" value="2" style="margin:5px 0px 0px 60px;float: left;font-size: 20px;"/><div style="margin:0px 0px 0px 10px;float: left;font-size: 20px;">教师</div>
+  <a herf="register.jsp" class="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;">注册</a>
   </div>
 </section>
-
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>
