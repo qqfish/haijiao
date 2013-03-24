@@ -6,15 +6,20 @@
     <constant name="struts.locale" value="zh_CN" />
     <constant name="struts.i18n.encoding" value="UTF-8" />
     <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.ui.theme" value="simple" />
     
     <package name="haijiao" namespace="/" extends="struts-default">
         <action name="login" class="LoginAction">
             <result name="input">index.jsp</result>
-            <result name="success">index.jsp</result>
+            <result name="success">teachers.jsp</result>
         </action>
         <action name="register" class="RegisterAction">
             <result name="input">index.jsp</result>
             <result name="success">index.jsp</result>
+        </action>
+        <action name="searchTeacher" class="SearchTeacherAction">
+            <result name="success">teachers.jsp</result>
+            <result name="input">teachers.jsp</result>
         </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>

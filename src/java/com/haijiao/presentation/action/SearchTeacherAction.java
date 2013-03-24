@@ -12,10 +12,7 @@ import java.util.List;
 
 public class SearchTeacherAction extends SessionAction {
     IUserService userService;
-    String name;
-    String grade;
-    String subject;
-    String net;
+    String searchContent;
     List<Teacher> teacherlist;
     
     public SearchTeacherAction(){
@@ -23,10 +20,12 @@ public class SearchTeacherAction extends SessionAction {
     }
     
     public String execute(){
-        /*****
-         * 此处加入如果某项为空的处理
-         */
-        teacherlist = userService.searchTeacher(name, grade, subject, net);
+        List<String> strList = new ArrayList<String>();
+        String[] strArray = searchContent.split(" ");
+        for(int i=0; i<strArray.length; i++){
+            strList.add(strArray[i]);
+        }
+        teacherlist = userService.searchTeacher(strList);
         return SUCCESS;
         /***
          *  此处加入出错处理
@@ -41,36 +40,12 @@ public class SearchTeacherAction extends SessionAction {
         this.userService = userService;
     }
 
-    public String getName() {
-        return name;
+    public String getSearchContent() {
+        return searchContent;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGrade() {
-        return grade;
-    }
-
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getNet() {
-        return net;
-    }
-
-    public void setNet(String net) {
-        this.net = net;
+    public void setSearchContent(String searchContent) {
+        this.searchContent = searchContent;
     }
 
     public List<Teacher> getTeacherlist() {

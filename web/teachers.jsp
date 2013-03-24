@@ -43,8 +43,10 @@
 <section id="content">
     <div id="seacrchBar" style="height: 100px;width: auto;margin:auto;background-color: transparent;overflow: hidden;border-bottom: 2px solid #CCC;border-top: 2px solid #CCC">
         <div style="height:99px;width:1200px;float: left;margin:0px 0px 0px 200px;">
-            <s:textfield name="search" placeholder="" autofocus="autofocus" style="margin: 30px 0px 0px 100px;height: 30px;width: 600px;font-size: 20px;"></s:textfield>
-            <a id="search-btn" href="#" class="label-btn" style="height: 25px;margin:40px 0px 0px 2px">搜索</a> 
+            <s:form action="searchTeacher">
+                <s:textfield name="searchContent" placeholder="" autofocus="autofocus" style="margin: 30px 0px 0px 100px;height: 30px;width: 600px;font-size: 20px;"></s:textfield>
+                <s:submit id="search-btn" cssClass="label-btn" style="height: 25px;margin:40px 0px 0px 2px" value="搜索"></s:submit>
+            </s:form>
         </div>  
         <div id="searchChoice" style="height:99px;width:1200px;margin:0px 0px 0px 300px;float: left">
             <div style="height: 33px;width: 600px;">

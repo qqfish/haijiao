@@ -18,26 +18,15 @@
           p:url="${jdbc.url}"
           p:username="${jdbc.username}"
           p:password="${jdbc.password}" /-->
-    <!--
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"> 
-        <property name="configLocation"
-            value = "classpath:hibernate.cfg.xml">
-        </property>
-    </bean>
     
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
-        <property name="sessionFactory" ref="sessionFactory"/>  
-    </bean>
-    -->
-    
-    <bean id="userService" class="com.haijiao.Domain.service.impl.UserServiceImpl" />
-    <bean id="studentService" class="com.haijiao.Domain.service.impl.StudentServiceImpl" />
-    <bean id="teacherService" class="com.haijiao.Domain.service.impl.TeacherServiceImpl" />
     <bean id="fileManager" class="com.haijiao.Domain.file.FileManager"/>
     <bean id="LoginAction" class="com.haijiao.presentation.action.LoginAction" scope="prototype">
         <property name="userService" ref="userService" />
     </bean>
     <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
+        <property name="userService" ref="userService" />
+    </bean>
+    <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
         <property name="userService" ref="userService" />
     </bean>
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
@@ -59,7 +48,54 @@
         <property name="fileManager" ref="fileManager" />
     </bean>
     <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> 
+        <property name="configLocation"
+            value = "classpath:hibernate.cfg.xml">
+        </property>
+    </bean>
     
+    <bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">  
+        <property name="sessionFactory" ref="sessionFactory"/>  
+    </bean>
+    
+    <bean id="hibernateTransactionAttributeSource" class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
+        <property name="properties">
+            <props>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="userService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="hibernateTransactionManager"/>
+        <property name="target">
+            <bean class="com.haijiao.Domain.service.impl.UserServiceImpl">
+                <property name="sessionFactory" ref="sessionFactory"/>
+            </bean>
+        </property>
+        <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
+    </bean>
+    
+    <bean id="teacherService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="hibernateTransactionManager"/>
+        <property name="target">
+            <bean class="com.haijiao.Domain.service.impl.TeacherServiceImpl">
+                <property name="sessionFactory" ref="sessionFactory"/>
+            </bean>
+        </property>
+        <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
+    </bean>
+    
+    <bean id="studentService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="hibernateTransactionManager"/>
+        <property name="target">
+            <bean class="com.haijiao.Domain.service.impl.StudentServiceImpl">
+                <property name="sessionFactory" ref="sessionFactory"/>
+            </bean>
+        </property>
+        <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
+    </bean>
     <!--
     <bean id="studentDAOImpl" class="com.haijiao.dao.impl.StudentDAOImpl">
         <property name="sessionFactory">
