@@ -5,7 +5,6 @@
 
 package com.haijiao.Domain.bean;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -18,8 +17,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity    
-@Table(name="student")     
-@PrimaryKeyJoinColumn(name="StudentId")
+@Table(name="student")
+@PrimaryKeyJoinColumn
 public class Student extends User{
     private String grade;   //学生当前的年级
     private String school;  //学生就读学校
@@ -96,4 +95,5 @@ public class Student extends User{
     public void setClassList(List<Clazz> classList) {
         this.classList = classList;
     }
+
 }

@@ -18,7 +18,7 @@ public interface IUserService extends Generic<User,Integer>{
     //注册成为老师
     public boolean addTeacher(String account, String password, String school, String tel);
     //获取所有对本用户的评论
-    public List<Comment> getComment(String acount);
+    public List<Comment> getComment(String acount);   
     //对某用户进行评论
     public boolean comment(User commenter, User commentee, String content, Integer score);
     

@@ -8,6 +8,7 @@ package com.haijiao.Domain.bean;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -17,19 +18,32 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import org.hibernate.annotations.CollectionOfElements;
 
 @Entity    
-@Table(name="teacher")     
-@PrimaryKeyJoinColumn(name="TeacherId")
+@Table(name="teacher")
+@PrimaryKeyJoinColumn
 public class Teacher extends User{
     private String school;        //就读大学
     private String brief_intro;  //老师的简单介绍，显示在搜索页面
     private String tel;             //老师的手机
     private String videoUrl;    //老师的介绍视频地址
     
-    @OneToMany
-    @JoinColumn(name="tid", referencedColumnName="TeacherId")
-    private List<Lesson> lessons;   //该老师开设课程
+    @CollectionOfElements(targetElement=String.class)
+    @JoinTable(
+        name = "label",
+        joinColumns = @JoinColumn(name = "labelid")
+    )
+    @Column(name = "labels")
+    private List<String> labels; //老师的标签 
+    
+    @CollectionOfElements(targetElement=String.class)
+    @JoinTable(
+        name = "lesson",
+        joinColumns = @JoinColumn(name = "lessonid")
+    )
+    @Column(name = "lessons")
+    private List<String> lessons;   //该老师开设课程
     
     private boolean audition;        //该老师是否接受试听
     
@@ -51,7 +65,8 @@ public class Teacher extends User{
     private List<Clazz> classlist;    //课程列表
 
     public Teacher() {
-        this.lessons = new ArrayList<Lesson>();
+        this.lessons = new ArrayList<String>();
+        this.labels = new ArrayList<String>();
         this.studentlist = new ArrayList<Student>();
         this.classlist = new ArrayList<Clazz>();
     }
@@ -88,11 +103,19 @@ public class Teacher extends User{
         this.videoUrl = videoUrl;
     }
 
-    public List<Lesson> getLessons() {
+    public List<String> getLabels() {
+        return labels;
+    }
+
+    public void setLabels(List<String> labels) {
+        this.labels = labels;
+    }
+
+    public List<String> getLessons() {
         return lessons;
     }
 
-    public void setLessons(List<Lesson> lessons) {
+    public void setLessons(List<String> lessons) {
         this.lessons = lessons;
     }
 

@@ -13,12 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity    
-@Table(name="timeslice")     
-@PrimaryKeyJoinColumn(name="TimeSliceId")
+@Table(name="timeslice")
 public class Timeslice extends BaseBean {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cid")

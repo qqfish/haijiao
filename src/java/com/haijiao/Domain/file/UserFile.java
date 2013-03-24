@@ -6,7 +6,6 @@ package com.haijiao.Domain.file;
 
 import com.haijiao.Domain.bean.BaseBean;
 import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -15,8 +14,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="userfile")     
-@PrimaryKeyJoinColumn(name="UserFileId")
+@Table(name="userfile")
 public class UserFile extends BaseBean{
     String name;
     String url;

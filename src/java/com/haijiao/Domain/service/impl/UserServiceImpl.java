@@ -51,8 +51,8 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
         for(int i=0; i<strList.size(); i++){
             System.out.println("Search for:" + strList.get(i) + "\n");
         }
-        return null;
-    }
+    return null;
+}
 
     @Override
     public boolean uploadFile(String account, Object file) {

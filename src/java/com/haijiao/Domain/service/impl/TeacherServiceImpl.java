@@ -62,12 +62,12 @@ public class TeacherServiceImpl extends GenericService<Teacher,Integer> implemen
 
     @Override
     public Schedule getTeacherSchedule(String username) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public List<Clazz> getTeacherFinishedClasses(String username) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 }

@@ -13,13 +13,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity    
 @Table(name="clazz")     
-@PrimaryKeyJoinColumn(name="ClazzId")
 public class Clazz extends BaseBean{ //clazz -> class
     @ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "tid")
@@ -29,9 +26,7 @@ public class Clazz extends BaseBean{ //clazz -> class
     @JoinColumn(name = "sid")
     private Student student;
     
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "lid", unique = true)
-    private Lesson lesson;
+    private String lesson;
     
     @OneToMany(mappedBy="clazz")
     private List<Timeslice> timeslices;  //保存本次预约课程的时间范围
@@ -61,11 +56,11 @@ public class Clazz extends BaseBean{ //clazz -> class
         this.student = student;
     }
 
-    public Lesson getLesson() {
+    public String getLesson() {
         return lesson;
     }
 
-    public void setLesson(Lesson lesson) {
+    public void setLesson(String lesson) {
         this.lesson = lesson;
     }
 

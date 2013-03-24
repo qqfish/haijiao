@@ -4,7 +4,6 @@
  */
 
 package com.haijiao.Domain.bean;
-import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
 import java.util.ArrayList;
@@ -13,14 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.MappedSuperclass;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-@Entity    
-@Table(name="user")     
-@PrimaryKeyJoinColumn(name="UserId")
-@Inheritance(strategy = InheritanceType.JOINED ) 
+@Entity
+@Table    
+@Inheritance(strategy = InheritanceType.JOINED )
 public class User extends BaseBean{
     protected String email;      //用户的账号,即Email
     protected String name;      //用户的真实姓名
@@ -35,7 +33,7 @@ public class User extends BaseBean{
     protected List<Comment> commentsToThis; //所有对本用户的评论
     
     @OneToMany
-    @JoinColumn(name="uid", referencedColumnName="UserId")
+    @JoinColumn(name="uid")
     protected List<UserFileGroup> fileGroups;
 
     public User() {

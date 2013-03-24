@@ -9,15 +9,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity    
-@Table(name="bird")     
-@PrimaryKeyJoinColumn(name="BirdId")
+@Table(name="bird")
 public class Schedule extends BaseBean {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="scheid")

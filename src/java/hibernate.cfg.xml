@@ -6,13 +6,12 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/haijiao</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">315121</property>
+    <property name="hibernate.connection.password">zy102428</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.show_sql">true</property>
     <mapping class="com.haijiao.Domain.bean.BaseBean"/>
     <mapping class="com.haijiao.Domain.bean.Clazz"/>
     <mapping class="com.haijiao.Domain.bean.Comment"/>
-    <mapping class="com.haijiao.Domain.bean.Lesson"/>
     <mapping class="com.haijiao.Domain.bean.Schedule"/>
     <mapping class="com.haijiao.Domain.bean.Student"/>
     <mapping class="com.haijiao.Domain.bean.Teacher"/>
