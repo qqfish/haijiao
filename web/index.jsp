@@ -80,16 +80,17 @@
                     <s:textfield name="account"  placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;" ></s:textfield>
                     <s:password name="password1"  placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
                     <s:password name="password2" placeholder="请重复密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
-                    <s:submit cssClass="login-btn" style="font-size: 20px; margin: 20px 20px 0px 0px" value="注册"></s:submit>
+                    <s:submit id="reg-btn" cssClass="login-btn" style="font-size: 20px; margin: 20px 70px 0px 0px;border:0px" value="注册"></s:submit>
                 </s:form>
                 </div>
                 <div id='log-panel' style='display:none;'>
                     <s:form action="login.action">
                         <s:textfield name="account" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 50px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:textfield>
                         <s:password name="password" placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
-                        <s:submit cssClass="login-btn" style="font-size: 20px; margin: 20px 70px 0px 60px;background-color:  " value="登录"></s:submit>
+                        <s:submit cssClass="login-btn" style="font-size: 20px; margin: 70px 70px 0px 60px;border:0px" value="登录"></s:submit>
                     </s:form>
                 </div>
+                
             </div>
         </div>
 	  <div class="box-slogan">

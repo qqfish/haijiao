@@ -10,22 +10,8 @@
         <ul class="sf-menu">
           <li><a href="index.jsp" style = "font-size:18px"><b>主页</b></a></li>
           <li><a href="teachers.jsp" style = "font-size:18px"><b>1v1名师</b></a></li>
-          <li><a style = "font-size:18px"><b>文件共享</b></a>
-                  <ul>
-                      <s:if test="#session.login">
-                          <li><a href="myfile.jsp">我的文件集</a></li>
-                      </s:if>
-                      <li><a href="commonfile.jsp">公共文件浏览</a></li>
-                  </ul>
-              </li>
-          <s:if test="#session.login">
-              <li><a style = "font-size:18px"><b>个人</b></a>
-                  <ul>
-                      <li><a href="personal.jsp">资料</a></li>
-                      <li><a href="personal.jsp">账户</a></li>
-                  </ul>
-              </li>
-          </s:if>
+          <li><a href ="studentInfo.jsp"style = "font-size:18px"><b>个人</b></a></li>
+                  
           <li><a href="contact.jsp" style = "font-size:18px"><b>联系我们</b></a> </li>
           <li><a href="contact.jsp" style = "font-size:18px"><b>意见反馈</b></a> </li>
         </ul>
