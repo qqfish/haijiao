@@ -8,6 +8,7 @@ package com.haijiao.presentation.action;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.service.ITeacherService;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SearchTeacherAction extends SessionAction {
@@ -15,16 +16,13 @@ public class SearchTeacherAction extends SessionAction {
     String searchContent;
     List<Teacher> teacherlist;
     
-    public SearchTeacherAction(){
-        teacherlist = new ArrayList<Teacher>();
-    }
-    
-    public String execute(){
+    @Override
+    public String execute() throws Exception{
+        System.out.println("1");
         List<String> strList = new ArrayList<String>();
         String[] strArray = searchContent.split(" ");
-        for(int i=0; i<strArray.length; i++){
-            strList.add(strArray[i]);
-        }
+        strList.addAll(Arrays.asList(strArray));
+        teacherlist = new ArrayList<Teacher>();
         teacherlist = teacherService.searchTeacher(strList);
         return SUCCESS;
         /***

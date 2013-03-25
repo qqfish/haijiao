@@ -37,7 +37,7 @@ public class Teacher extends User{
     @Column(name = "labels")
     private List<String> labels; //老师的标签 
     
-    @OneToMany
+    @OneToMany(fetch=FetchType.EAGER)
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     

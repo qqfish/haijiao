@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="css/grid.css" type="text/css" media="screen">
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400,400italic' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
 <!--js-->
 <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
@@ -77,7 +76,7 @@
                     <div id='logText' class='login-log' style="font-size: 32px;opacity: 0.5;border-left:1px solid #CCC;border-bottom:1px solid #CCC;background-color: #e8e7de   ">用户登录</div>
                 </div>                
                 <div id='reg-panel'>
-                <s:form action="register"> <br/>
+                <s:form action="register.action"> <br/>
                     <s:textfield name="account"  placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;" ></s:textfield>
                     <s:password name="password1"  placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
                     <s:password name="password2" placeholder="请重复密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
@@ -85,7 +84,7 @@
                 </s:form>
                 </div>
                 <div id='log-panel' style='display:none;'>
-                    <s:form action="login">
+                    <s:form action="login.action">
                         <s:textfield name="account" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 50px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:textfield>
                         <s:password name="password" placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
                         <s:submit cssClass="login-btn" style="font-size: 20px; margin: 20px 70px 0px 60px;background-color:  " value="登录"></s:submit>

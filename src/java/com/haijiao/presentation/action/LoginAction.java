@@ -24,6 +24,7 @@ public class LoginAction extends SessionAction {
         return INPUT;
     }
     
+    @Override
     public void validate(){
         if(account==null || account.trim().length()==0){
             this.addFieldError("account", this.getText("accountNull"));
