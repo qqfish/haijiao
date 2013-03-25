@@ -6,12 +6,12 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.service.IUserService;
+import com.haijiao.Domain.service.ITeacherService;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SearchTeacherAction extends SessionAction {
-    IUserService userService;
+    ITeacherService teacherService;
     String searchContent;
     List<Teacher> teacherlist;
     
@@ -25,20 +25,21 @@ public class SearchTeacherAction extends SessionAction {
         for(int i=0; i<strArray.length; i++){
             strList.add(strArray[i]);
         }
-        teacherlist = userService.searchTeacher(strList);
+        teacherlist = teacherService.searchTeacher(strList);
         return SUCCESS;
         /***
          *  此处加入出错处理
          */
     }
 
-    public IUserService getUserService() {
-        return userService;
+    public ITeacherService getTeacherService() {
+        return teacherService;
     }
 
-    public void setUserService(IUserService userService) {
-        this.userService = userService;
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
     }
+
 
     public String getSearchContent() {
         return searchContent;

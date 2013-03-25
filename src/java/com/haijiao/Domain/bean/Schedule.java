@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity    
-@Table(name="bird")
+@Table
 public class Schedule extends BaseBean {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="scheid")

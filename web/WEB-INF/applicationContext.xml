@@ -27,7 +27,7 @@
         <property name="userService" ref="userService" />
     </bean>
     <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
-        <property name="userService" ref="userService" />
+        <property name="teacherService" ref="teacherService" />
     </bean>
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
         <property name="studentService" ref="studentService" />

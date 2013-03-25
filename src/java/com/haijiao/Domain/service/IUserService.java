@@ -23,8 +23,7 @@ public interface IUserService extends Generic<User,Integer>{
     public boolean comment(User commenter, User commentee, String content, Integer score);
     
     //搜索相关操作
-    //搜索老师（名字，年级，科目、网络状况）
-    public List<Teacher> searchTeacher(List<String> strList); 
+   
  
     //文件系统相关操作
     //上传文件

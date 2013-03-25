@@ -46,13 +46,7 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public List<Teacher> searchTeacher(List<String> strList ) {
-        for(int i=0; i<strList.size(); i++){
-            System.out.println("Search for:" + strList.get(i) + "\n");
-        }
-    return null;
-}
+    
 
     @Override
     public boolean uploadFile(String account, Object file) {

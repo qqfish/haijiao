@@ -10,6 +10,9 @@ import java.util.List;
 
 public interface ITeacherService extends Generic<Teacher,Integer> {
     public Teacher getTeacherByAccount(String account);
+    
+     //搜索老师（名字，年级，科目、网络状况）
+    public List<Teacher> searchTeacher(List<String> strList); 
 
     //获取老师时间表
     public Schedule getTeacherSchedule(String username);

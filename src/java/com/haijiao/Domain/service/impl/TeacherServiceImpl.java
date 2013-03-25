@@ -69,5 +69,26 @@ public class TeacherServiceImpl extends GenericService<Teacher,Integer> implemen
     public List<Clazz> getTeacherFinishedClasses(String username) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public List<Teacher> searchTeacher(List<String> strList ) {
+        String hql = "select distinct t from Teacher t left join t.lessons l";
+        String where = " where "; 
+        String or = " or ";
+        for(int i=0; i<strList.size(); i++){
+            String keyword = strList.get(i);
+            where += "l.name like '%" + keyword + "%'";
+            where += or;
+            where += "t.name like '%" + keyword + "%'";
+            if(i +1< strList.size())
+                where += or;
+            System.out.println("Search for:" + strList.get(i) + "\n");
+        }
+        hql += where;
+        List<Teacher> t = findByqQuery(hql);
+        System.out.println(hql);
+        System.out.println(t.size());
+        return t;
+}
    
 }
