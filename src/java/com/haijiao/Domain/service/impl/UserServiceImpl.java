@@ -23,8 +23,9 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
     public String confirmLogin(String account, String password) {
         String hql = "from User where email='"+ account +"' and password='"+ password +"'";
         List<User> ul= findByqQuery(hql);
-        if(ul == null)
+        if(ul.isEmpty()){
             return null;
+        }
         else{
             String usertype = ul.get(0).getUserType();
             return usertype;

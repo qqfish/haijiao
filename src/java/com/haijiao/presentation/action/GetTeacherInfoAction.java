@@ -5,17 +5,17 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.service.ITeacherService;
 import com.haijiao.Domain.bean.Teacher;
+import com.haijiao.Domain.service.ITeacherService;
 
-public class GetTeacherInfoAction extends SessionAction {
+public class GetTeacherInfoAction extends RequestAction {
     ITeacherService teacherService;
     Teacher tea;
 
     @Override
     public String execute(){
-        String account = this.getValue("username").toString();
-        tea = teacherService.getTeacherByAccount(account);
+        String email = (String)this.getValue("teacherEmail");
+        tea = teacherService.getTeacherByAccount(email);
         return SUCCESS;
     }
     

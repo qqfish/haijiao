@@ -18,7 +18,6 @@ public class SearchTeacherAction extends SessionAction {
     
     @Override
     public String execute() throws Exception{
-        System.out.println("1");
         List<String> strList = new ArrayList<String>();
         String[] strArray = searchContent.split(" ");
         strList.addAll(Arrays.asList(strArray));

@@ -29,12 +29,12 @@
     <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
         <property name="teacherService" ref="teacherService" />
     </bean>
-    <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
-        <property name="studentService" ref="studentService" />
-    </bean>
     <bean id="GetTeacherInfoAction" class="com.haijiao.presentation.action.GetTeacherInfoAction" scope="prototype">
         <property name="teacherService" ref="teacherService" />
     </bean>   
+    <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
+        <property name="studentService" ref="studentService" />
+    </bean>
     <bean id="ChangeAuditionAction" class="com.haijiao.presentation.action.ChangeAuditionAction" scope="prototype">
         <property name="teacherService" ref="teacherService" />
     </bean>   

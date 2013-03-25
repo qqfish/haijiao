@@ -13,6 +13,7 @@ public class SessionAction extends ActionSupport implements SessionAware {
     
     private Map session;
     
+    @Override
     public void setSession(Map session) {
         this.session = session;
     }

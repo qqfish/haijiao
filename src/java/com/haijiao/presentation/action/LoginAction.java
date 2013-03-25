@@ -15,13 +15,15 @@ public class LoginAction extends SessionAction {
     @Override
     public String execute() throws Exception {
         String userType = userService.confirmLogin(account, password);
-        if(userType!=null || userType.trim().length()>=0){
+        if(account==null || account.trim().length()==0){
+            return INPUT;
+        } else {
             this.putIn("username", account);
             this.putIn("userType", userType);
             this.putIn("login", true);
             return SUCCESS;
         }
-        return INPUT;
+        
     }
     
     @Override
