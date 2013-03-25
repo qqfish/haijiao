@@ -368,38 +368,38 @@ function Table(containerName, tool){
                 result = null;
             });
 
-        //            stage.on("mouseup touchend", function() {
-        //                if(toolkit.getTool() == Tooltype.Hand) return;
-        //                
-        //                if(!mousedown) return;
-        //                
-        //                switch(toolkit.getTool()){
-        //                    case Tooltype.Pen:
-        //                        var tmpLine = new Kinetic.Line({
-        //                            points: result,
-        //                            stroke: toolkit.getColor(),
-        //                            strokeWidth: toolkit.getWidth()
-        //                        });
-        //                        var message = {};
-        //                        message.type = Request.DrawShape;
-        //                        message.json = tmpLine.toJSON();
-        //                        connection.sendObject(message);
-        //                        break;
-        //                    case Tooltype.Circle:
-        //                        break;
-        //                    case Tooltype.Line:
-        //                        break;
-        //                    case Tooltype.Eraser:
-        //                        message = {};
-        //                        message.type = Request.EraseShape;
-        //                        message.idArray = result.idArray;
-        //                        connection.sendObject(message);
-        //                        break;
-        //                    
-        //                }
-        //                mousedown = false;
-        //                result = null;
-        //            });
+                    stage.on(" touchend", function() {
+                        if(toolkit.getTool() == Tooltype.Hand) return;
+                        
+                        if(!mousedown) return;
+                        
+                        switch(toolkit.getTool()){
+                            case Tooltype.Pen:
+                                var tmpLine = new Kinetic.Line({
+                                    points: result,
+                                    stroke: toolkit.getColor(),
+                                    strokeWidth: toolkit.getWidth()
+                                });
+                                var message = {};
+                                message.type = Request.DrawShape;
+                                message.json = tmpLine.toJSON();
+                                connection.sendObject(message);
+                                break;
+                            case Tooltype.Circle:
+                                break;
+                            case Tooltype.Line:
+                                break;
+                            case Tooltype.Eraser:
+                                message = {};
+                                message.type = Request.EraseShape;
+                                message.idArray = result.idArray;
+                                connection.sendObject(message);
+                                break;
+                            
+                        }
+                        mousedown = false;
+                        result = null;
+                    });
         }
     }
     

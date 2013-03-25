@@ -28,18 +28,22 @@ function Bookmark(uuid){
                 childDiv.append(child.element);
                 this.children[this.children.length] = child;
             }
-            var show = $("<a></a>").text("-");
+            var show = $("<IMG></IMG>").attr("src","image/jiantou.png").attr("status","-");
+            show.rotate(90);
             this.element.append(show);
             show.click(function(){
-                if($(this).text() == "+"){
-                    $(this).text("-");
+                if($(this).attr("status") == "+"){
+                    $(this).rotate({animateTo:90});
+                    $(this).attr("status","-");
                 } else {
-                    $(this).text("+");
+                    $(this).rotate({animateTo:0});
+                    $(this).attr("status","+");
                 }
                 childDiv.slideToggle();
             });
             this.element.append(link);
             this.element.append(childDiv);
+            childDiv.slideToggle();
         } else {
             this.element.append(link);
         }
