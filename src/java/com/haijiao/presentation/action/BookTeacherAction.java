@@ -5,35 +5,31 @@
 
 package com.haijiao.presentation.action;
 
+import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Timeslice;
-import com.haijiao.Domain.service.IStudentService;
-import java.util.ArrayList;
+import com.haijiao.Domain.service.IClazzService;
 import java.util.List;
 
 public class BookTeacherAction extends SessionAction {
-    IStudentService studentService;
+    IClazzService clazzService;
     String teacherName;
-    List<Timeslice> timeslices;
-    
-    public BookTeacherAction (){
-        timeslices = new ArrayList<Timeslice>();
-    }
+    Clazz clazz;
     
     @Override
     public String execute(){
-        if (studentService.bookTeacher((String)this.getValue("username"), teacherName, timeslices)) {
+        if (clazzService.bookTeacher((String)this.getValue("username"), teacherName, clazz)) {
             return SUCCESS;
         } else {
             return "fail";
         }
     }
 
-    public IStudentService getStudentService() {
-        return studentService;
+    public IClazzService getClazzService() {
+        return clazzService;
     }
 
-    public void setStudentService(IStudentService studentService) {
-        this.studentService = studentService;
+    public void setClazzService(IClazzService clazzService) {
+        this.clazzService = clazzService;
     }
 
     public String getTeacherName() {
@@ -44,12 +40,11 @@ public class BookTeacherAction extends SessionAction {
         this.teacherName = teacherName;
     }
 
-    public List<Timeslice> getTimeslices() {
-        return timeslices;
+    public Clazz getClazz() {
+        return clazz;
     }
 
-    public void setTimeslices(List<Timeslice> timeslices) {
-        this.timeslices = timeslices;
+    public void setClazz(Clazz clazz) {
+        this.clazz = clazz;
     }
-
 }

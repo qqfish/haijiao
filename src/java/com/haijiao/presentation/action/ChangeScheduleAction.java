@@ -6,27 +6,28 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Schedule;
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.Domain.service.IScheduleService;
 
 public class ChangeScheduleAction extends SessionAction {
-    ITeacherService teacherService;
+    IScheduleService scheduleService;
     Schedule s;
     
     @Override
     public String execute(){
-        if(teacherService.changeSchedule(this.getValue("username").toString(), s)){
+        if(scheduleService.changeSchedule(this.getValue("username").toString(), s)){
             return SUCCESS;
         } else {
             this.putIn("errormessage", "修改失败，服务器未响应");
             return "unconnected";
         }
     }
-    public ITeacherService getTeacherService() {
-        return teacherService;
+
+    public IScheduleService getScheduleService() {
+        return scheduleService;
     }
 
-    public void setTeacherService(ITeacherService teacherService) {
-        this.teacherService = teacherService;
+    public void setScheduleService(IScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
     }
 
     public Schedule getS() {

@@ -4,8 +4,6 @@
  */
 
 package com.haijiao.Domain.service.impl;
-import com.haijiao.Domain.bean.Comment;
-import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.service.GenericService;
 import com.haijiao.Domain.service.IUserService;
@@ -31,23 +29,6 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
             return usertype;
         }
     }
-    
-    @Override
-    public boolean addStudent(String account, String password, String grade, String school, String tel, String telType) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean addTeacher(String account, String password, String school, String tel) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean comment(User commenter, User commentee, String content, Integer score) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    
 
     @Override
     public boolean uploadFile(String account, Object file) {
@@ -57,10 +38,5 @@ public class UserServiceImpl extends GenericService<User, Integer> implements IU
     @Override
     public Object download(String fileuri) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Comment> getComment(String acount) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

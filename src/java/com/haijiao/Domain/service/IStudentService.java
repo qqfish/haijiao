@@ -3,20 +3,17 @@
  * @author Jerry
  */
 package com.haijiao.Domain.service;
-import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Student;
-import com.haijiao.Domain.bean.Timeslice;
-import java.util.List;
+import com.haijiao.Domain.bean.Teacher;
+
 
 public interface IStudentService extends Generic<Student,Integer> {
     public Student getStudentByAccount(String account);
     
-    //获取老师时间表
-    public Schedule getStudentSchedule(String username);
-    //获取老师已完结课程
-    public List<Clazz> getStudentFinishedClasses(String username);
-    
-    //预定老师
-    public boolean bookTeacher(String studentAccount, String teacherAccount, List<Timeslice> timeslices);
+    //注册成为学生
+    public boolean addStudent(String account, String password, String grade, String school, String tel, String telType);
+    //充值
+    public boolean topUpMoney(String username, int numberOfCoin);
+    //修改基本资料
+    public boolean changeInfo(String username, Teacher tc);
 }

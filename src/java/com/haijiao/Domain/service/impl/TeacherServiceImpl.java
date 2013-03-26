@@ -4,8 +4,6 @@
  */
 
 package com.haijiao.Domain.service.impl;
-import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.service.GenericService;
 import com.haijiao.Domain.service.ITeacherService;
@@ -17,18 +15,11 @@ public class TeacherServiceImpl extends GenericService<Teacher,Integer> implemen
     public Teacher getTeacherByAccount(String account) {
         String hql = "from Teacher where email='"+ account + "'";
         List<Teacher> lt = findByqQuery(hql);
-        if(lt.size() == 1)
+        if(lt.size() == 1){
             return findByqQuery(hql).get(0);
-        else
+        } else {
             return null;
-    }
-    
-    @Override
-    public boolean changeSchedule(String username, Schedule s) {
-        Teacher t = getTeacherByAccount(username);
-        t.setSchedule(s);
-        update(t);
-        return true;
+        }
     }
 
     @Override
@@ -54,21 +45,6 @@ public class TeacherServiceImpl extends GenericService<Teacher,Integer> implemen
         update(t);
         return true;
     }
-
-    @Override
-    public boolean dealWithReservation(String username, Clazz c, boolean accept) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Schedule getTeacherSchedule(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Clazz> getTeacherFinishedClasses(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
     @Override
     public List<Teacher> searchTeacher(List<String> strList ) {
@@ -90,5 +66,10 @@ public class TeacherServiceImpl extends GenericService<Teacher,Integer> implemen
         System.out.println(t.size());
         return t;
 }
+
+    @Override
+    public boolean addTeacher(String account, String password, String school, String tel) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
    
 }

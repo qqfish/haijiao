@@ -6,27 +6,27 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.Domain.service.IClazzService;
 
 public class DealWithReservation extends SessionAction {
-    private ITeacherService teacherService;
+    private IClazzService clazzService;
     private Clazz c;
     private boolean accept;
     
     public String execute(){
-        if (teacherService.dealWithReservation((String)this.getValue("username"), c, accept)) {
+        if (clazzService.dealWithReservation((String)this.getValue("username"), c, accept)) {
             return SUCCESS;
         } else {
             return "error";
         }
     }
 
-    public ITeacherService getTeacherService() {
-        return teacherService;
+    public IClazzService getClazzService() {
+        return clazzService;
     }
 
-    public void setTeacherService(ITeacherService teacherService) {
-        this.teacherService = teacherService;
+    public void setClazzService(IClazzService clazzService) {
+        this.clazzService = clazzService;
     }
 
     public Clazz getC() {
