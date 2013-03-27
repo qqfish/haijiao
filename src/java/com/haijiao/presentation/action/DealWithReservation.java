@@ -10,13 +10,19 @@ import com.haijiao.Domain.service.IClazzService;
 
 public class DealWithReservation extends SessionAction {
     private IClazzService clazzService;
-    private Clazz c;
+    private Integer clazzId;
     private boolean accept;
     
     public String execute(){
-        if (clazzService.dealWithReservation((String)this.getValue("username"), c, accept)) {
+        if (clazzService.dealWithReservation(clazzId, accept)) {
+            if(accept == true){
+                this.putIn("message", this.getText("successMessage"));
+            } else {
+                this.putIn("message", this.getText("refuseMessage"));
+            }
             return SUCCESS;
         } else {
+            this.putIn("message", this.getText("errorMessage"));
             return "error";
         }
     }
@@ -29,13 +35,14 @@ public class DealWithReservation extends SessionAction {
         this.clazzService = clazzService;
     }
 
-    public Clazz getC() {
-        return c;
+    public Integer getClazzId() {
+        return clazzId;
     }
 
-    public void setC(Clazz c) {
-        this.c = c;
+    public void setClazzId(Integer clazzId) {
+        this.clazzId = clazzId;
     }
+    
 
     public boolean isAccept() {
         return accept;

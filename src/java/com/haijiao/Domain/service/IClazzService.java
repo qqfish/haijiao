@@ -5,7 +5,7 @@
 package com.haijiao.Domain.service;
 
 import com.haijiao.Domain.bean.Clazz;
-import java.util.List;
+import java.sql.Date;
 
 /**
  *
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IClazzService extends Generic<Clazz,Integer>{
     //预定老师
-    public boolean bookTeacher(Clazz clazz);
+    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Date date, Integer week, String day, Integer beginIndex, Integer endIndex);
     //处理学生预约
     public boolean dealWithReservation(int id, boolean accept);
 }

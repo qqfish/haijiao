@@ -18,13 +18,13 @@ import javax.persistence.Table;
 public class Schedule extends BaseBean {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name="scheid")
-    private List<Timeslice> slices;  //两周内的时间片
+    private List<Clazz> clazzes;  //两周内的课程（空余时间）
     
     @OneToOne(mappedBy = "schedule")
     private Teacher teacher;
 
     public Schedule() {
-        this.slices = new ArrayList<Timeslice>();
+        this.clazzes = new ArrayList<Clazz>();
     }
 
     public Teacher getTeacher() {
@@ -35,11 +35,11 @@ public class Schedule extends BaseBean {
         this.teacher = teacher;
     }
 
-    public List<Timeslice> getSlices() {
-        return slices;
+    public List<Clazz> getClazzes() {
+        return clazzes;
     }
 
-    public void setSlices(List<Timeslice> slices) {
-        this.slices = slices;
+    public void setClazzes(List<Clazz> clazzes) {
+        this.clazzes = clazzes;
     }
 }
