@@ -3,6 +3,8 @@
  * @author Jerry
  */
 package com.haijiao.Domain.service;
+import com.haijiao.Domain.bean.Clazz;
+import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import java.util.List;
 
@@ -20,4 +22,11 @@ public interface ITeacherService extends Generic<Teacher,Integer> {
     public boolean changeInfo(String username, Teacher tc);
     //设置试听
     public boolean changeAudition(String username);
+    
+    //获取老师已完结课程
+    public List<Clazz> getFinishedClasses(String username);
+    //获取老师时间表
+    public Schedule getSchedule(String username);
+    //修改时间表
+    public boolean changeSchedule(String username, Schedule s);
 }

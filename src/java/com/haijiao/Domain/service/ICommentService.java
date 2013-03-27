@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Jerry
  */
-public interface ICommentService {
+public interface ICommentService extends Generic<Comment,Integer>{
     //获取所有对本用户的评论
     public List<Comment> getComment(String acount);   
     //对某用户进行评论

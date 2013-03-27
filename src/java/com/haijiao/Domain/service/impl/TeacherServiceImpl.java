@@ -4,6 +4,8 @@
  */
 
 package com.haijiao.Domain.service.impl;
+import com.haijiao.Domain.bean.Clazz;
+import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.service.GenericService;
 import com.haijiao.Domain.service.ITeacherService;
@@ -70,6 +72,26 @@ public class TeacherServiceImpl extends GenericService<Teacher,Integer> implemen
     @Override
     public boolean addTeacher(String account, String password, String school, String tel) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Clazz> getFinishedClasses(String username) {
+        Teacher t = getTeacherByAccount(username);
+        return t.getClasslist();
+    }
+
+    @Override
+    public Schedule getSchedule(String username) {
+        Teacher t = getTeacherByAccount(username);
+        return t.getSchedule();
+    }
+
+    @Override
+    public boolean changeSchedule(String username, Schedule s) {
+        Teacher t = getTeacherByAccount(username);
+        t.setSchedule(s);
+        update(t);
+        return true;
     }
    
 }
