@@ -5,14 +5,14 @@
 
 package com.haijiao.presentation.action;
 import com.opensymphony.xwork2.ActionSupport;
-import com.haijiao.Domain.service.IUserService;
+import com.haijiao.SupportService.dao.IUserDAO;
 
 public class RegisterAction extends SessionAction{
     private String account;
     private String password1;
     private String password2;
     private String userType;
-    private IUserService userService;
+    private IUserDAO userService;
     
     @Override
     public String execute() throws Exception {
@@ -82,11 +82,11 @@ public class RegisterAction extends SessionAction{
         this.userType = userType;
     }
 
-    public IUserService getUserService() {
+    public IUserDAO getUserService() {
         return userService;
     }
 
-    public void setUserService(IUserService userService) {
+    public void setUserService(IUserDAO userService) {
         this.userService = userService;
     }
     

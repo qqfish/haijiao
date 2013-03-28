@@ -6,10 +6,10 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.service.IClazzService;
+import com.haijiao.SupportService.dao.IClazzDAO;
 
 public class DealWithReservation extends SessionAction {
-    private IClazzService clazzService;
+    private IClazzDAO clazzService;
     private Integer clazzId;
     private boolean accept;
     
@@ -27,11 +27,11 @@ public class DealWithReservation extends SessionAction {
         }
     }
 
-    public IClazzService getClazzService() {
+    public IClazzDAO getClazzService() {
         return clazzService;
     }
 
-    public void setClazzService(IClazzService clazzService) {
+    public void setClazzService(IClazzDAO clazzService) {
         this.clazzService = clazzService;
     }
 

@@ -16,7 +16,6 @@
     <mapping class="com.haijiao.Domain.bean.Schedule"/>
     <mapping class="com.haijiao.Domain.bean.Student"/>
     <mapping class="com.haijiao.Domain.bean.Teacher"/>
-    <mapping class="com.haijiao.Domain.bean.Timeslice"/>
     <mapping class="com.haijiao.Domain.bean.User"/>
     <mapping class="com.haijiao.Domain.file.UserFileGroup"/>
     <mapping class="com.haijiao.Domain.file.UserFile"/>

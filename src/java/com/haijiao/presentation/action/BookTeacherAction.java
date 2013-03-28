@@ -5,11 +5,11 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.service.IClazzService;
+import com.haijiao.SupportService.dao.IClazzDAO;
 import java.sql.Date;
 
 public class BookTeacherAction extends SessionAction {
-    IClazzService clazzService;
+    IClazzDAO clazzService;
     String teacherEmail;
     String lessonName;
     Date date;
@@ -30,11 +30,11 @@ public class BookTeacherAction extends SessionAction {
         }
     }
 
-    public IClazzService getClazzService() {
+    public IClazzDAO getClazzService() {
         return clazzService;
     }
 
-    public void setClazzService(IClazzService clazzService) {
+    public void setClazzService(IClazzDAO clazzService) {
         this.clazzService = clazzService;
     }
 

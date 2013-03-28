@@ -6,10 +6,10 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.SupportService.dao.ITeacherDAO;
 
 public class GetTeacherInfoAction extends RequestAction {
-    ITeacherService teacherService;
+    ITeacherDAO teacherService;
     Teacher tea;
 
     @Override
@@ -19,11 +19,11 @@ public class GetTeacherInfoAction extends RequestAction {
         return SUCCESS;
     }
     
-    public ITeacherService getTeacherService() {
+    public ITeacherDAO getTeacherService() {
         return teacherService;
     }
 
-    public void setTeacherService(ITeacherService teacherService) {
+    public void setTeacherService(ITeacherDAO teacherService) {
         this.teacherService = teacherService;
     }
 

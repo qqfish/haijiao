@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.haijiao.Domain.service;
+package com.haijiao.SupportService.dao;
 
 import com.haijiao.Domain.bean.Clazz;
 import java.sql.Date;
@@ -11,7 +11,7 @@ import java.sql.Date;
  *
  * @author Jerry
  */
-public interface IClazzService extends Generic<Clazz,Integer>{
+public interface IClazzDAO extends GenericDAO<Clazz,Integer>{
     //预定老师
     public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Date date, Integer week, String day, Integer beginIndex, Integer endIndex);
     //处理学生预约

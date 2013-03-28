@@ -6,13 +6,13 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.SupportService.dao.ITeacherDAO;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SearchTeacherAction extends SessionAction {
-    ITeacherService teacherService;
+    ITeacherDAO teacherService;
     String searchContent;
     List<Teacher> teacherlist;
     
@@ -29,11 +29,11 @@ public class SearchTeacherAction extends SessionAction {
          */
     }
 
-    public ITeacherService getTeacherService() {
+    public ITeacherDAO getTeacherService() {
         return teacherService;
     }
 
-    public void setTeacherService(ITeacherService teacherService) {
+    public void setTeacherService(ITeacherDAO teacherService) {
         this.teacherService = teacherService;
     }
 

@@ -5,10 +5,10 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.SupportService.dao.ITeacherDAO;
 
 public class ChangeAuditionAction extends SessionAction{
-    ITeacherService teacherService;
+    ITeacherDAO teacherService;
 
     @Override
     public String execute(){
@@ -21,11 +21,11 @@ public class ChangeAuditionAction extends SessionAction{
         }
     }
     
-    public ITeacherService getTeacherService() {
+    public ITeacherDAO getTeacherService() {
         return teacherService;
     }
 
-    public void setTeacherService(ITeacherService teacherService) {
+    public void setTeacherService(ITeacherDAO teacherService) {
         this.teacherService = teacherService;
     }
     

@@ -15,7 +15,7 @@ import org.hibernate.criterion.Criterion;
  *
  * @author hp
  */
-public abstract class GenericHibernateDAO<T,ID extends Serializable> implements GenericDAO<T,ID>{
+public abstract class GenericHibernateDAO <T,ID extends Serializable> implements GenericDAO<T,ID>{
     private Class<T> persistentClass;
     private SessionFactory  sessionFactory;
 
@@ -37,7 +37,7 @@ public abstract class GenericHibernateDAO<T,ID extends Serializable> implements 
     public Class<T> getPersistentClass() {
         return persistentClass;
     }
-
+    
     @Override
     public T findById(ID id) {
         T entity = (T) sessionFactory.getCurrentSession().get(getPersistentClass(), id);
@@ -60,26 +60,23 @@ public abstract class GenericHibernateDAO<T,ID extends Serializable> implements 
         sessionFactory.getCurrentSession().delete(entity);
         return true;
     }
-    
+
     @Override
-    public void update(T entity){
-        sessionFactory.getCurrentSession().saveOrUpdate(entity);
+    public void update(T instance) {
+        sessionFactory.getCurrentSession().saveOrUpdate(instance);
     }
-    
+
     @Override
-    public List<T> findByqQuery(String hql){
+    public List<T> findByqQuery(String hql) {
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
-    
-    /**
-     * Use this inside subclasses as a convenience method.
-     */
-    @SuppressWarnings("unchecked")
-    protected List<T> findByCriteria(Criterion... criterion) {
+
+    private List<T> findByCriteria(Criterion... criterion) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
         for (Criterion c : criterion) {
             crit.add(c);
         }
         return crit.list();
-   }
+    }
+    
 }

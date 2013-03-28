@@ -2,10 +2,10 @@
  *
  * @author Jerry
  */
-package com.haijiao.Domain.service;
+package com.haijiao.SupportService.dao;
 import com.haijiao.Domain.bean.User;
 
-public interface IUserService extends Generic<User,Integer>{
+public interface IUserDAO extends GenericDAO<User,Integer>{
     //验证是否存在用户名
     public boolean confirmExist(String account);
     //验证登陆

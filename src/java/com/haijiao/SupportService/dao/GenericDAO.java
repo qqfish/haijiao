@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author hp
  */
-public interface GenericDAO<T,ID extends Serializable> {
+public interface GenericDAO <T,ID extends Serializable>{
     T findById(ID id); 
     List<T> findAll();
     //save

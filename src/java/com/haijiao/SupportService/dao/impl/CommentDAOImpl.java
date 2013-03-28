@@ -3,15 +3,15 @@
  * @author Jerry Zou
  */
 
-package com.haijiao.Domain.service.impl;
+package com.haijiao.SupportService.dao.impl;
 
 import com.haijiao.Domain.bean.Comment;
 import com.haijiao.Domain.bean.User;
-import com.haijiao.Domain.service.GenericService;
-import com.haijiao.Domain.service.ICommentService;
+import com.haijiao.SupportService.dao.GenericHibernateDAO;
+import com.haijiao.SupportService.dao.ICommentDAO;
 import java.util.List;
 
-public class CommentServiceImpl extends GenericService<Comment,Integer> implements ICommentService {
+public class CommentDAOImpl extends GenericHibernateDAO<Comment,Integer> implements ICommentDAO {
 
     @Override
     public List<Comment> getComment(String acount) {

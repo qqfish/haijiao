@@ -3,13 +3,13 @@
  * @author Jerry Zou
  */
 
-package com.haijiao.Domain.service.impl;
+package com.haijiao.SupportService.dao.impl;
 import com.haijiao.Domain.bean.User;
-import com.haijiao.Domain.service.GenericService;
-import com.haijiao.Domain.service.IUserService;
+import com.haijiao.SupportService.dao.GenericHibernateDAO;
+import com.haijiao.SupportService.dao.IUserDAO;
 import java.util.List;
 
-public class UserServiceImpl extends GenericService<User, Integer> implements IUserService {
+public class UserDAOImpl extends GenericHibernateDAO<User, Integer> implements IUserDAO {
 
     @Override
     public boolean confirmExist(String account) {

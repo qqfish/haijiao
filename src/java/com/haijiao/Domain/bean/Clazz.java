@@ -29,11 +29,7 @@ public class Clazz extends BaseBean{ //clazz -> class
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="lid", unique=true)
     private Lesson lesson;
-    
-    /***************************************************************************
-     *  此处为更改后添加的属性。
-     * 
-     * */
+
     @Column(name="datetime")
     private Date date;   //日期
     
@@ -43,10 +39,6 @@ public class Clazz extends BaseBean{ //clazz -> class
     private String day;   //星期X
     private int beginIndex;    //时间片index，比如 1对应 8:00-8:30，2对应 8:30-9:00
     private int endIndex;
-    
-    /******************************************************
-     * 
-     * */ 
     
     private boolean accept;  //本次预约老师是否已接受
     private boolean message;   //本次预约在接受或拒绝后附加的信息
