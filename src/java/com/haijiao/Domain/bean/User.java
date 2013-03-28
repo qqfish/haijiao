@@ -6,6 +6,7 @@
 package com.haijiao.Domain.bean;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
@@ -27,6 +28,8 @@ public class User extends BaseBean{
     protected int coin;              //该账户中剩下的智慧币
     protected String intro;        //用户的个人简介，显示在个人主页上
     protected String picUrl;      //用户头像的URL
+    protected String sex;          //性别
+    protected Date birthday;
     
     @OneToMany(mappedBy="commenter")
     protected List<Comment> commentsToThis; //所有对本用户的评论
@@ -103,6 +106,24 @@ public class User extends BaseBean{
     public void setCoin(int coin) {
         this.coin = coin;
     }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+    
+    
 
     public List<Comment> getCommentsToThis() {
         return commentsToThis;
