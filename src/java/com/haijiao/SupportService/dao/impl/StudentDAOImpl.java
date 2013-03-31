@@ -15,8 +15,8 @@ import java.util.List;
 public class StudentDAOImpl extends GenericHibernateDAO<Student,Integer> implements IStudentDAO{ 
 
     @Override
-    public Student getStudentByAccount(String account) {
-        String hql = "from Student where email='"+ account + "'";
+    public Student getStudentByEmail(String email) {
+        String hql = "from Student where email='"+ email + "'";
         List<Student> lt = findByqQuery(hql);
         if(lt.size() == 1){
             return findByqQuery(hql).get(0);
@@ -31,24 +31,24 @@ public class StudentDAOImpl extends GenericHibernateDAO<Student,Integer> impleme
     }
 
     @Override
-    public boolean topUpMoney(String username, int numberOfCoin) {
+    public boolean topUpMoney(String email, int numberOfCoin) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public boolean changeInfo(String username, Teacher tc) {
+    public boolean changeInfo(String email, Teacher tc) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<Clazz> getFinishedClasses(String username) {
-        Student s = getStudentByAccount(username);
+    public List<Clazz> getFinishedClasses(String email) {
+        Student s = getStudentByEmail(email);
         return s.getClassList();
     }
 
     @Override
-    public Schedule getSchedule(String username) {
-        Student s = getStudentByAccount(username);
+    public Schedule getSchedule(String email) {
+        Student s = getStudentByEmail(email);
         return s.getSchedule();
     }
 }

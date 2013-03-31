@@ -14,8 +14,8 @@ import java.util.List;
 public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> implements ITeacherDAO {
 
     @Override
-    public Teacher getTeacherByAccount(String account) {
-        String hql = "from Teacher where email='"+ account + "'";
+    public Teacher getTeacherByEmail(String email) {
+        String hql = "from Teacher where email='"+ email + "'";
         List<Teacher> lt = findByqQuery(hql);
         if(lt.size() == 1){
             return findByqQuery(hql).get(0);
@@ -25,14 +25,14 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
     }
 
     @Override
-    public boolean changeInfo(String username, Teacher tc) {
+    public boolean changeInfo(String email, Teacher tc) {
         update(tc);
         return true;
     }
 
     @Override
-    public boolean changeAudition(String username) {
-        Teacher t = getTeacherByAccount(username);
+    public boolean changeAudition(String email) {
+        Teacher t = getTeacherByEmail(email);
         boolean audition = t.isAudition();
         t.setAudition(!audition);
         update(t);
@@ -40,8 +40,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
     }
 
     @Override
-    public boolean takeMoney(String username, int numberOfCoin) {
-        Teacher t = getTeacherByAccount(username);
+    public boolean takeMoney(String email, int numberOfCoin) {
+        Teacher t = getTeacherByEmail(email);
         int coin = t.getCoin();
         t.setCoin(coin - numberOfCoin);
         update(t);
@@ -58,8 +58,9 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
             where += "l.name like '%" + keyword + "%'";
             where += or;
             where += "t.name like '%" + keyword + "%'";
-            if(i +1< strList.size())
+            if(i +1< strList.size()){
                 where += or;
+            }
         }
         hql += where;
         List<Teacher> t = findByqQuery(hql);
@@ -67,25 +68,25 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
 }
 
     @Override
-    public boolean addTeacher(String account, String password, String school, String tel) {
+    public boolean addTeacher(String email, String password, String school, String tel) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<Clazz> getFinishedClasses(String username) {
-        Teacher t = getTeacherByAccount(username);
+    public List<Clazz> getFinishedClasses(String email) {
+        Teacher t = getTeacherByEmail(email);
         return t.getClasslist();
     }
 
     @Override
-    public Schedule getSchedule(String username) {
-        Teacher t = getTeacherByAccount(username);
+    public Schedule getSchedule(String email) {
+        Teacher t = getTeacherByEmail(email);
         return t.getSchedule();
     }
 
     @Override
-    public boolean changeSchedule(String username, Schedule s) {
-        Teacher t = getTeacherByAccount(username);
+    public boolean changeSchedule(String email, Schedule s) {
+        Teacher t = getTeacherByEmail(email);
         t.setSchedule(s);
         update(t);
         return true;

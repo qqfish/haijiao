@@ -4,11 +4,11 @@
  */
 
 package com.haijiao.presentation.action;
-import com.haijiao.SupportService.dao.IUserDAO;
+import com.haijiao.Domain.service.IUserService;
 
 public class LoginAction extends SessionAction {
 
-    private IUserDAO userService;
+    private IUserService userService;
     private String account;
     private String password;
     
@@ -55,12 +55,11 @@ public class LoginAction extends SessionAction {
         this.password = password;
     }
 
-    public IUserDAO getUserService() {
+    public IUserService getUserService() {
         return userService;
     }
 
-    public void setUserService(IUserDAO userService) {
+    public void setUserService(IUserService userService) {
         this.userService = userService;
     }
-    
 }

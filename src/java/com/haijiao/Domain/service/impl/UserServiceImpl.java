@@ -8,18 +8,22 @@ package com.haijiao.Domain.service.impl;
 import com.haijiao.Domain.bean.Comment;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.service.IUserService;
+import com.haijiao.SupportService.dao.ITeacherDAO;
+import com.haijiao.SupportService.dao.IUserDAO;
 import java.util.List;
 
 public class UserServiceImpl implements IUserService{
+    IUserDAO userDAO;
+    ITeacherDAO teacherDAO;
 
     @Override
     public boolean confirmExist(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return userDAO.confirmExist(email);
     }
 
     @Override
     public String confirmLogin(String email, String password) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return userDAO.confirmLogin(email, password);
     }
 
     @Override
@@ -29,7 +33,7 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public List<Teacher> searchTeacher(List<String> strList) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return teacherDAO.searchTeacher(strList);
     }
 
     @Override
@@ -52,4 +56,19 @@ public class UserServiceImpl implements IUserService{
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    public IUserDAO getUserDAO() {
+        return userDAO;
+    }
+
+    public void setUserDAO(IUserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    public ITeacherDAO getTeacherDAO() {
+        return teacherDAO;
+    }
+
+    public void setTeacherDAO(ITeacherDAO teacherDAO) {
+        this.teacherDAO = teacherDAO;
+    }
 }

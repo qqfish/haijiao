@@ -6,24 +6,24 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.SupportService.dao.ITeacherDAO;
+import com.haijiao.Domain.service.ITeacherService;
 
 public class GetTeacherInfoAction extends RequestAction {
-    ITeacherDAO teacherService;
+    ITeacherService teacherService;
     Teacher tea;
 
     @Override
     public String execute(){
         String email = (String)this.getValue("teacherEmail");
-        tea = teacherService.getTeacherByAccount(email);
+        tea = teacherService.getTeacherByEmail(email);
         return SUCCESS;
     }
-    
-    public ITeacherDAO getTeacherService() {
+
+    public ITeacherService getTeacherService() {
         return teacherService;
     }
 
-    public void setTeacherService(ITeacherDAO teacherService) {
+    public void setTeacherService(ITeacherService teacherService) {
         this.teacherService = teacherService;
     }
 

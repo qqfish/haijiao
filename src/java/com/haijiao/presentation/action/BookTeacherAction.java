@@ -5,11 +5,11 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.SupportService.dao.IClazzDAO;
+import com.haijiao.Domain.service.IStudentService;
 import java.sql.Date;
 
 public class BookTeacherAction extends SessionAction {
-    IClazzDAO clazzService;
+    IStudentService studentService;
     String teacherEmail;
     String lessonName;
     Date date;
@@ -17,11 +17,10 @@ public class BookTeacherAction extends SessionAction {
     Integer endIndex;
     Integer week;
     String day;
-    //timeslice
     
     @Override
     public String execute(){
-        if (clazzService.bookTeacher(teacherEmail,(String)this.getValue("username"), lessonName, date, week, day, beginIndex, endIndex)) {
+        if (studentService.bookTeacher(teacherEmail,(String)this.getValue("username"), lessonName, date, week, day, beginIndex, endIndex)) {
             this.putIn("message", this.getText("successMessage"));
             return SUCCESS;
         } else {
@@ -30,12 +29,12 @@ public class BookTeacherAction extends SessionAction {
         }
     }
 
-    public IClazzDAO getClazzService() {
-        return clazzService;
+    public IStudentService getStudentService() {
+        return studentService;
     }
 
-    public void setClazzService(IClazzDAO clazzService) {
-        this.clazzService = clazzService;
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
     }
 
     public String getTeacherEmail() {

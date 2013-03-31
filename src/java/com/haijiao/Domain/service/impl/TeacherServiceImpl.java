@@ -9,14 +9,18 @@ import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.SupportService.dao.IClazzDAO;
+import com.haijiao.SupportService.dao.ITeacherDAO;
 import java.sql.Date;
 import java.util.List;
 
 public class TeacherServiceImpl implements ITeacherService {
+    ITeacherDAO teacherDAO;
+    IClazzDAO clazzDAO;
 
     @Override
     public Teacher getTeacherByEmail(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return teacherDAO.getTeacherByEmail(email);
     }
 
     @Override
@@ -26,32 +30,48 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public boolean takeMoney(String email, int numberOfCoin) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return teacherDAO.takeMoney(email, numberOfCoin);
     }
 
     @Override
     public boolean changeAudition(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return teacherDAO.changeAudition(email);
     }
 
     @Override
     public List<Clazz> getFinishedClasses(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return teacherDAO.getFinishedClasses(email);
     }
 
     @Override
     public Schedule getSchedule(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return teacherDAO.getSchedule(email);
     }
 
     @Override
     public boolean changeSchedule(String email, Schedule s) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return teacherDAO.changeSchedule(email, s);
     }
 
     @Override
     public boolean dealWithReservation(int clazzId, boolean accept) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return clazzDAO.dealWithReservation(clazzId, accept);
+    }
+
+    public ITeacherDAO getTeacherDAO() {
+        return teacherDAO;
+    }
+
+    public void setTeacherDAO(ITeacherDAO teacherDAO) {
+        this.teacherDAO = teacherDAO;
+    }
+
+    public IClazzDAO getClazzDAO() {
+        return clazzDAO;
+    }
+
+    public void setClazzDAO(IClazzDAO clazzDAO) {
+        this.clazzDAO = clazzDAO;
     }
 
 }

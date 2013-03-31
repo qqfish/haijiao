@@ -5,16 +5,15 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.SupportService.dao.IClazzDAO;
+import com.haijiao.Domain.service.ITeacherService;
 
 public class DealWithReservation extends SessionAction {
-    private IClazzDAO clazzService;
+    private ITeacherService teacherService;
     private Integer clazzId;
     private boolean accept;
     
     public String execute(){
-        if (clazzService.dealWithReservation(clazzId, accept)) {
+        if (teacherService.dealWithReservation(clazzId, accept)) {
             if(accept == true){
                 this.putIn("message", this.getText("successMessage"));
             } else {
@@ -27,12 +26,12 @@ public class DealWithReservation extends SessionAction {
         }
     }
 
-    public IClazzDAO getClazzService() {
-        return clazzService;
+    public ITeacherService getTeacherService() {
+        return teacherService;
     }
 
-    public void setClazzService(IClazzDAO clazzService) {
-        this.clazzService = clazzService;
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 
     public Integer getClazzId() {
