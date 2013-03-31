@@ -5,7 +5,6 @@
 
 package com.haijiao.presentation.action;
 import com.haijiao.SupportService.service.IUserService;
-import com.haijiao.SupportService.dao.IUserDAO;
 
 public class RegisterAction extends SessionAction{
     private String account;

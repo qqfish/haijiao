@@ -12,32 +12,30 @@
     
     <bean id="fileManager" class="com.haijiao.Domain.file.FileManager"/>
     <bean id="LoginAction" class="com.haijiao.presentation.action.LoginAction" scope="prototype">
-        <property name="userService" ref="userService" />
+        <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
-        <property name="userService" ref="userService" />
+        <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
-        <property name="teacherService" ref="teacherService" />
+        <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="GetTeacherInfoAction" class="com.haijiao.presentation.action.GetTeacherInfoAction" scope="prototype">
-        <property name="teacherService" ref="teacherService" />
+        <property name="teacherService" ref="teacherServiceImpl" />
     </bean>   
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
-        <property name="studentService" ref="studentService" />
+        <property name="studentService" ref="studentServiceImpl" />
     </bean>
     <bean id="ChangeAuditionAction" class="com.haijiao.presentation.action.ChangeAuditionAction" scope="prototype">
-        <property name="teacherService" ref="teacherService" />
+        <property name="teacherService" ref="teacherServiceImpl" />
     </bean>   
     <bean id="ChangeScheduleAction" class="com.haijiao.presentation.action.ChangeScheduleAction" scope="prototype">
-        <property name="teacherService" ref="teacherService" />
+        <property name="teacherService" ref="teacherServiceImpl" />
     </bean>   
     <bean id="ChangeTeacherInfoAction" class="com.haijiao.presentation.action.ChangeTeacherInfoAction" scope="prototype">
-        <property name="teacherService" ref="teacherService" />
+        <property name="teacherService" ref="teacherServiceImpl" />
     </bean>
-    <bean id="GetCommonFileAction" class="com.haijiao.presentation.action.GetCommonFileAction" scope="prototype">
-        <property name="fileManager" ref="fileManager" />
-    </bean>
+    <bean id="GetCommonFileAction" class="com.haijiao.presentation.action.GetCommonFileAction" scope="prototype"/>
     
     <!-- persist -->
 
@@ -49,11 +47,21 @@
     
     <!-- DAO -->
     
-    <bean id="clazzDAOImpl" class="com.haijiao.SupportService.dao.impl.ClazzDAOImpl"/>
-    <bean id="commentDAOImpl" class="com.haijiao.SupportService.dao.impl.CommentDAOImpl"/>
-    <bean id="studentDAOImpl" class="com.haijiao.SupportService.dao.impl.StudentDAOImpl"/>
-    <bean id="teacherDAOImpl" class="com.haijiao.SupportService.dao.impl.TeacherDAOImpl"/>
-    <bean id="userDAOImpl" class="com.haijiao.SupportService.dao.impl.UserDAOImpl"/>
+    <bean id="clazzDAOImpl" class="com.haijiao.SupportService.dao.impl.ClazzDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="commentDAOImpl" class="com.haijiao.SupportService.dao.impl.CommentDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="studentDAOImpl" class="com.haijiao.SupportService.dao.impl.StudentDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="teacherDAOImpl" class="com.haijiao.SupportService.dao.impl.TeacherDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="userDAOImpl" class="com.haijiao.SupportService.dao.impl.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
     
     <!-- Service -->
     
@@ -89,25 +97,36 @@
     
     <bean id="userService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target" ref="userServiceImpl"/>
+        <property name="target">
+            <bean class="com.haijiao.SupportService.service.impl.UserServiceImpl">
+                <property name="userDAO" ref="userDAOImpl"/>
+                <property name="teacherDAO" ref="teacherDAOImpl"/>
+            </bean>
+        </property>
         <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
     </bean>
     
     <bean id="teacherService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target" ref="teacherServiceImpl"/>
+        <property name="target">
+            <ref bean="teacherServiceImpl"/>
+        </property> 
         <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
     </bean>
     
     <bean id="studentService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target" ref="studentServiceImpl"/>
+        <property name="target">
+            <ref bean="studentServiceImpl"/>
+        </property>
         <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
     </bean>
     
     <bean id="classService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
         <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target" ref="classServiceImpl"/>
+        <property name="target">
+            <ref bean="classServiceImpl"/>
+        </property>
         <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
     </bean>
     
