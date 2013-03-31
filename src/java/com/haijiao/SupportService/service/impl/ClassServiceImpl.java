@@ -13,11 +13,14 @@ import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import java.sql.Date;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author hp
  */
+
+@Transactional
 public class ClassServiceImpl implements IClassService{
     IClazzDAO clazzDAO;
     ITeacherDAO teacherDAO;

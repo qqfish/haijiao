@@ -12,7 +12,9 @@ import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class UserServiceImpl implements IUserService{
     IUserDAO userDAO;
     ITeacherDAO teacherDAO;

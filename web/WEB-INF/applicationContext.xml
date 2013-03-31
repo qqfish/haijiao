@@ -87,47 +87,6 @@
         <property name="sessionFactory" ref="sessionFactory"/>  
     </bean>
     
-    <bean id="hibernateTransactionAttributeSource" class="org.springframework.transaction.interceptor.NameMatchTransactionAttributeSource">
-        <property name="properties">
-            <props>
-                <prop key="*">PROPAGATION_REQUIRED</prop>
-            </props>
-        </property>
-    </bean>
-    
-    <bean id="userService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target">
-            <bean class="com.haijiao.SupportService.service.impl.UserServiceImpl">
-                <property name="userDAO" ref="userDAOImpl"/>
-                <property name="teacherDAO" ref="teacherDAOImpl"/>
-            </bean>
-        </property>
-        <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
-    </bean>
-    
-    <bean id="teacherService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target">
-            <ref bean="teacherServiceImpl"/>
-        </property> 
-        <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
-    </bean>
-    
-    <bean id="studentService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target">
-            <ref bean="studentServiceImpl"/>
-        </property>
-        <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
-    </bean>
-    
-    <bean id="classService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
-        <property name="transactionManager" ref="hibernateTransactionManager"/>
-        <property name="target">
-            <ref bean="classServiceImpl"/>
-        </property>
-        <property name="transactionAttributeSource" ref="hibernateTransactionAttributeSource"/>
-    </bean>
+    <tx:annotation-driven transaction-manager="hibernateTransactionManager"/>
     
 </beans>

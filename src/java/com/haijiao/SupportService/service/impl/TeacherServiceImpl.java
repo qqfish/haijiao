@@ -12,7 +12,9 @@ import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import java.sql.Date;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 public class TeacherServiceImpl implements ITeacherService {
     ITeacherDAO teacherDAO;
 
