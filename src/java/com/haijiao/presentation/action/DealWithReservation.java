@@ -5,15 +5,15 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.SupportService.service.IClassService;
 
 public class DealWithReservation extends SessionAction {
-    private ITeacherService teacherService;
+    private IClassService classService;
     private Integer clazzId;
     private boolean accept;
     
     public String execute(){
-        if (teacherService.dealWithReservation(clazzId, accept)) {
+        if (classService.dealWithReservation(clazzId, accept)) {
             if(accept == true){
                 this.putIn("message", this.getText("successMessage"));
             } else {
@@ -26,12 +26,12 @@ public class DealWithReservation extends SessionAction {
         }
     }
 
-    public ITeacherService getTeacherService() {
-        return teacherService;
+    public IClassService getTeacherService() {
+        return classService;
     }
 
-    public void setTeacherService(ITeacherService teacherService) {
-        this.teacherService = teacherService;
+    public void setTeacherService(IClassService classService) {
+        this.classService = classService;
     }
 
     public Integer getClazzId() {

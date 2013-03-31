@@ -5,7 +5,7 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.SupportService.service.ITeacherService;
 import java.sql.Date;
 
 public class ChangeTeacherInfoAction extends SessionAction {

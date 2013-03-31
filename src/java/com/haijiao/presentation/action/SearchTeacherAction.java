@@ -6,9 +6,7 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.service.ITeacherService;
-import com.haijiao.Domain.service.IUserService;
-import com.haijiao.SupportService.dao.ITeacherDAO;
+import com.haijiao.SupportService.service.IUserService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

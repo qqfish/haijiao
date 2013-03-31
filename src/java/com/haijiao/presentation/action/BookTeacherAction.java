@@ -5,11 +5,11 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.service.IStudentService;
+import com.haijiao.SupportService.service.IClassService;
 import java.sql.Date;
 
 public class BookTeacherAction extends SessionAction {
-    IStudentService studentService;
+    IClassService classService;
     String teacherEmail;
     String lessonName;
     Date date;
@@ -20,7 +20,7 @@ public class BookTeacherAction extends SessionAction {
     
     @Override
     public String execute(){
-        if (studentService.bookTeacher(teacherEmail,(String)this.getValue("username"), lessonName, date, week, day, beginIndex, endIndex)) {
+        if (classService.bookTeacher(teacherEmail,(String)this.getValue("username"), lessonName, date, week, day, beginIndex, endIndex)) {
             this.putIn("message", this.getText("successMessage"));
             return SUCCESS;
         } else {
@@ -29,12 +29,12 @@ public class BookTeacherAction extends SessionAction {
         }
     }
 
-    public IStudentService getStudentService() {
-        return studentService;
+    public IClassService getStudentService() {
+        return classService;
     }
 
-    public void setStudentService(IStudentService studentService) {
-        this.studentService = studentService;
+    public void setStudentService(IClassService classService) {
+        this.classService = classService;
     }
 
     public String getTeacherEmail() {

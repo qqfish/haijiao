@@ -3,11 +3,12 @@
  * @author Jerry Zou
  */
 
-package com.haijiao.Domain.service.impl;
+package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Comment;
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.service.IUserService;
+import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import java.util.List;
@@ -15,6 +16,14 @@ import java.util.List;
 public class UserServiceImpl implements IUserService{
     IUserDAO userDAO;
     ITeacherDAO teacherDAO;
+
+    public void setUserDAO(IUserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    public void setTeacherDAO(ITeacherDAO teacherDAO) {
+        this.teacherDAO = teacherDAO;
+    }
 
     @Override
     public boolean confirmExist(String email) {
@@ -28,7 +37,11 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public boolean register(String account, String password, String userType) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        User u = new User();
+        u.setEmail(account);
+        u.setPassword(password);
+        u.setUserType(userType);
+        return userDAO.makePersistent(u);
     }
 
     @Override
@@ -55,20 +68,5 @@ public class UserServiceImpl implements IUserService{
     public Object download(String fileuri) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
-    public IUserDAO getUserDAO() {
-        return userDAO;
-    }
-
-    public void setUserDAO(IUserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
-
-    public ITeacherDAO getTeacherDAO() {
-        return teacherDAO;
-    }
-
-    public void setTeacherDAO(ITeacherDAO teacherDAO) {
-        this.teacherDAO = teacherDAO;
-    }
+    
 }

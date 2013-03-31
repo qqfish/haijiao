@@ -4,8 +4,6 @@
  */
 
 package com.haijiao.SupportService.dao.impl;
-import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.Schedule;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
@@ -22,30 +20,6 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
         } else {
             return null;
         }
-    }
-
-    @Override
-    public boolean changeInfo(String email, Teacher tc) {
-        update(tc);
-        return true;
-    }
-
-    @Override
-    public boolean changeAudition(String email) {
-        Teacher t = getTeacherByEmail(email);
-        boolean audition = t.isAudition();
-        t.setAudition(!audition);
-        update(t);
-        return true;
-    }
-
-    @Override
-    public boolean takeMoney(String email, int numberOfCoin) {
-        Teacher t = getTeacherByEmail(email);
-        int coin = t.getCoin();
-        t.setCoin(coin - numberOfCoin);
-        update(t);
-        return true;
     }
     
     @Override
@@ -70,26 +44,6 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
     @Override
     public boolean addTeacher(String email, String password, String school, String tel) {
         throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<Clazz> getFinishedClasses(String email) {
-        Teacher t = getTeacherByEmail(email);
-        return t.getClasslist();
-    }
-
-    @Override
-    public Schedule getSchedule(String email) {
-        Teacher t = getTeacherByEmail(email);
-        return t.getSchedule();
-    }
-
-    @Override
-    public boolean changeSchedule(String email, Schedule s) {
-        Teacher t = getTeacherByEmail(email);
-        t.setSchedule(s);
-        update(t);
-        return true;
     }
    
 }

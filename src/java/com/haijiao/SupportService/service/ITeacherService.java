@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.haijiao.Domain.service;
+package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Schedule;
@@ -30,6 +30,4 @@ public interface ITeacherService {
     public Schedule getSchedule(String email);
     //修改时间表
     public boolean changeSchedule(String email, Schedule s);
-    //处理学生预约
-    public boolean dealWithReservation(int clazzId, boolean accept);
 }

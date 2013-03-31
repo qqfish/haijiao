@@ -4,7 +4,7 @@
  */
 
 package com.haijiao.presentation.action;
-import com.haijiao.Domain.service.IUserService;
+import com.haijiao.SupportService.service.IUserService;
 
 public class LoginAction extends SessionAction {
 

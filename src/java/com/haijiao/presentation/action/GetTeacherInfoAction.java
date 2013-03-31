@@ -6,7 +6,7 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.service.ITeacherService;
+import com.haijiao.SupportService.service.ITeacherService;
 
 public class GetTeacherInfoAction extends RequestAction {
     ITeacherService teacherService;
