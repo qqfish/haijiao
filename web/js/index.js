@@ -24,4 +24,9 @@ jQuery(document).ready(function($){
 		$('#reg-panel').hide();
 		$('#log-panel').show();            
 	});
+       
+        $('#choosemodal').modal({
+            show: false,
+            backdrop: "static"
+        });
 });

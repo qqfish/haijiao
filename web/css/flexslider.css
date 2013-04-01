@@ -10,25 +10,25 @@ html[xmlns] .slides {display: block;}
 * html .slides {height: 1%;}
 
 .flexslider .slides {
-	padding:10px;
+	padding:0px;
 	background:#fff;
-    border-radius:16px;
-	-moz-border-radius:16px;
-	-webkit-border-radius:16px;
-	    box-shadow:0 0 3px #c5c2a9;
-	-moz-box-shadow: 0 0 3px #c5c2a9;
-	-webkit-box-shadow:0 0 3px #c5c2a9;
+    border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	    box-shadow:0 0 0px #c5c2a9;
+	-moz-box-shadow: 0 0 0px #c5c2a9;
+	-webkit-box-shadow:0 0 0px #c5c2a9;
 	
 	}
 
 .flexslider .slides img{
-	border-radius:7px;
-	-moz-border-radius:7px;
-	-webkit-border-radius:7px;}
+	border-radius:0px;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;}
 .flexslider {
 	margin: 0 auto ;
 	position: relative;
-	width:960px;}
+	width:800px;}
 
 /* Control Nav */
 

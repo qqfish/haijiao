@@ -5,4 +5,8 @@ jQuery(document).ready(function($){
         $('#close-btn').click(function(){
 			$('#seacrchBar').animate({height:100}, 1000);	
 	});
+        $('#choosemodal').modal({
+            show: false,
+            backdrop: "static"
+        });
 });

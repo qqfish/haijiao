@@ -36,7 +36,7 @@ blockquote, q {
 table, table td { 
 	padding:0;
 	border:none;
-	border-collapse:collapse;
+	border-collapse:separate;
 }
 img {
 	vertical-align:top; 
