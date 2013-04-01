@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
@@ -11,7 +10,10 @@
 
         <!--<script type="text/javascript" src="../js/jquery.flexslider-min.js"></script>-->
         <script src="js/lib/jquery-ui-1.10.1.custom.min.js"></script>
+        <script src="js/lib/jQueryRotate.2.2.js"></script>
         <script src="js/lib/kinetic.js"></script>
+        <script src="js/adapter.js"></script>
+        <script src="js/screen.js"></script>
         <script src="js/message.js"></script>
         <script src="js/toolkit.js"></script>
         <script src="js/textChat.js"></script>
@@ -69,7 +71,7 @@
                         <li><a id="nextPage">下一页</a></li>
                         <li><a id="scaleUp">放大</a></li>
                         <li><a id="scaleDown">缩小</a></li>
-                        <li><a class="favor-close-sidebar"><img src="../images/icon.png"/></a></li>
+                        <li><a class="favor-close-sidebar">书签</a></li>
                         <li><a class="userFile-close-sidebar">用户文件</a></li>
                         <li><a class="user-close-sidebar">用户列表</a></li>
                         <li><a class="file-close-sidebar">文件</a></li>
@@ -79,20 +81,16 @@
                 <hr style="width:1366px;height:2px;margin:0px 0px 0px 0px;float:right"></hr>
                 <div class="side-bar" id ="side" style="margin:0px;float: bottom;overflow-y: auto;overflow-x: visible;white-space: nowrap;word-break: break-all">   
                     <div id="favor-content" style="display:none;">
-                        <p>书签</p>
                         <ul id="bookmark"></ul>
                     </div>
                     <div id="userFile-content" style="display:none ">
-                        <p>用户文件</p>
-                        <div id="userFile"></div>
+                        <ul id="userFile"></ul>
                     </div>
                     <div id="user-content" style="display:none">
-                        <p>用户列表</p>
-                        <div id="users"></div>
+                        <ul id="users"></ul>
                     </div>
                     <div id="file-content" style="display: none">
-                        <p>房间文件</p>
-                        <div id="roomFile"></div>
+                        <ul id="roomFile"></ul>
                     </div>        
                 </div>
             </div>

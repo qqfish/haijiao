@@ -33,10 +33,14 @@ function Bookmark(uuid){
             this.element.append(show);
             show.click(function(){
                 if($(this).attr("status") == "+"){
-                    $(this).rotate({animateTo:90});
+                    $(this).rotate({
+                        animateTo:90
+                    });
                     $(this).attr("status","-");
                 } else {
-                    $(this).rotate({animateTo:0});
+                    $(this).rotate({
+                        animateTo:0
+                    });
                     $(this).attr("status","+");
                 }
                 childDiv.slideToggle();
@@ -136,5 +140,39 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
     
     this.prePage = function(){
         table.sendChangePage(currentUuid, pageNum - 1);
+    }
+    
+    this.uploadFile = function(file){
+        var blob = null;
+        blob = sliceFile(file);
+        var reader = new FileReader();
+        var pos = file.name.lastIndexOf(".");
+        var type = file.name.substring(pos+1, file.name.length);
+        if(file.type.indexOf('image') != -1){
+            type = "image";
+            reader.readAsDataURL(blob);
+            reader.onstart = function(e){
+                lock();
+            }
+            reader.onload = function loaded(evt) {
+                var imgObj = new Image();
+                imgObj.onload = function(){
+                    table.uploadImage(this);
+                };
+                imgObj.src = evt.target.result;
+            }
+        } else if(type == "pdf"){
+            reader.readAsBinaryString(blob);
+            reader.onstart = function(e){
+                lock();
+            }
+            reader.onload = function loaded(evt) {
+                var message = {};
+                message.type = Request.UploadFile;
+                message.postfix = type;
+                message.data = evt.target.result;
+                connection.sendObject(message);
+            }
+        }
     }
 }

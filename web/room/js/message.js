@@ -10,7 +10,8 @@ var Request = {
         TextChat: 5,
         ChangePage : 6,
         ChangeFile : 7,
-        AddFileFromUser : 8
+        AddFileFromUser : 8,
+        UploadFile: 9
 }
 
 var Response = {
@@ -23,6 +24,7 @@ var Response = {
     ChangeBookmark : 6,
     AddRoomFile : 7,
     SetUserFile : 8,
+    UploadBackground : 9,
     Error: 100
 }
 

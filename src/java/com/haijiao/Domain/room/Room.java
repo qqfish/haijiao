@@ -14,6 +14,7 @@ import com.haijiao.Domain.room.webFc.message.response.ResponseChangeBookmark;
 import com.haijiao.Domain.room.webFc.message.response.ResponseChangePage;
 import com.haijiao.Domain.room.webFc.message.response.ResponseDrawShape;
 import com.haijiao.Domain.room.webFc.message.response.ResponseEraseShape;
+import com.haijiao.Domain.room.webFc.message.response.ResponseUploadBackground;
 import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
@@ -163,6 +164,17 @@ public class Room {
         
         ResponseChangeBookmark message = new ResponseChangeBookmark(rootBookmark);
         return message;
+    }
+    
+    public void uploadFIle(String type, String data){
+        if(type.equals("image")){
+            currentPage.setOriginUrl(data);
+            ResponseUploadBackground message = new ResponseUploadBackground();
+            message.setDataUrl(currentPage.getOriginUrl());
+            broadcast(gson.toJson(message));
+        } else if (type.equals("pdf")){
+            //coming soon
+        }
     }
 
     public void broadcast(String message) {

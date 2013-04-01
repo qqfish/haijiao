@@ -135,6 +135,12 @@ public class FcMessageInbound extends MessageInbound {
                     sendtoUser(gson.toJson(error));
                 }
                 break;
+            case Request.UploadFile:
+                System.out.printf("hello");
+                RequestUploadFile upload = gson.fromJson(str, RequestUploadFile.class);
+                room.uploadFIle(upload.getPostfix(), upload.getData());
+                break;
+                
         }
 
 

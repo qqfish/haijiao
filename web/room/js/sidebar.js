@@ -41,11 +41,11 @@ jQuery(document).ready(function($){
             }, 'fast', function(){
                 $('#favor-content').show();
             
-            $('#user-content').hide();
+                $('#user-content').hide();
  
-            $('#file-content').hide();
+                $('#file-content').hide();
         
-            $('#userFile-content').hide();
+                $('#userFile-content').hide();
             });
         
             $('#desktop').animate({

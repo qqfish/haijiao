@@ -53,6 +53,9 @@ connection.connect = (function(host) {
             case Response.SetUserFile:
                 file.setUserFile(socketData);
                 break;
+            case Response.UploadBackground:
+                table.uploadBackground(socketData.dataUrl);
+                break;
         }
     };
 });

@@ -17,8 +17,8 @@ $(document).ready(function(){
     file = new fileManager("roomFile","bookmark","userFile");
     
     $(window).resize(function(){
-        $("#desktop").height($(window).height()-52).width($(window).width() - 250 + $("#side").css("left"));
-        table.setStageSize($("#desktop").width(), $("#desktop").height());
+        $("#desktop").height($(window).height()-52).width($(window).width() - 250 + $(".slide-bar").css("left"));
+        table.setStageSize($(window).width(), $("#desktop").height());
         media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
 
         $("#side").height($(window).height()-52);
@@ -26,7 +26,6 @@ $(document).ready(function(){
     
     var w=$(window).width();//可见区域宽度
     var h=$(window).height();//可见区域高度
-    console.log(w);
     $("#desktop").height(h-52).width(w);
 
     $("#side").height(h-52).css("marginLeft","-250px");
@@ -63,4 +62,27 @@ $(document).ready(function(){
     });
     
     $("#pointer").click();
+    
+    $(document).on({
+        dragleave:function(e){    //拖离 
+            e.preventDefault(); 
+        }, 
+        drop:function(e){  //拖后放 
+            e.preventDefault(); 
+        }, 
+        dragenter:function(e){    //拖进 
+            e.preventDefault(); 
+        }, 
+        dragover:function(e){    //拖来拖去 
+            e.preventDefault(); 
+        } 
+    });
+    
+    document.getElementById('desktop').addEventListener("drop",function(e){
+        e.preventDefault();
+        var fileList = e.dataTransfer.files;
+        for(var i = 0; i < fileList.length; i++){
+            file.uploadFile(fileList[i]);
+        }
+    });
 });

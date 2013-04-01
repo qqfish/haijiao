@@ -14,7 +14,7 @@ public class RequestData {
     public RequestData() {
     }
 
-    public int getType() {
+    public int getType(){
         return type;
     }
 

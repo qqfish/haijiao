@@ -18,4 +18,5 @@ public class Request {
     public static final int ChangePage = 6;
     public static final int ChangeFile = 7;
     public static final int AddFileFromUser = 8;
+    public static final int UploadFile = 9;
 }

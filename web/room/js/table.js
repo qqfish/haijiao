@@ -55,6 +55,7 @@ function Table(containerName, tool){
     setMouse();
 
     this.sendChangeFile = function(uuid){
+        setStageToSave();
         stage.toDataURL({
             callback: function(dataUrl) {
                 var message = {};
@@ -68,6 +69,7 @@ function Table(containerName, tool){
     }
     
     this.sendChangePage = function(uuid,page){
+        setStageToSave();
         stage.toDataURL({
             callback: function(dataUrl) {
                 var message = {};
@@ -97,7 +99,7 @@ function Table(containerName, tool){
                 image: imageObj
             });
             backLayer.add(pageImage);
-            
+            resetStage();
             stage.setX(stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2);
             stage.draw();
         }
@@ -110,11 +112,11 @@ function Table(containerName, tool){
         stage.draw();
         
         setDragBound();
+        unlock();
     }
         
     this.drawFromJson = function(id, json){
         tmpLayer.removeChildren();
-        console.log(tmpLayer.getChildren());
         var shape = Kinetic.Node.create(json);
         shape.setId(id);
         //        shape.on("mouseout touchout", function() {
@@ -139,7 +141,6 @@ function Table(containerName, tool){
     this.eraseFromArray = function(idArray) {
         tmpLayer.removeChildren();
         var shapeSet = drawLayer.getChildren();
-        //console.log(shapeSet);
         var current = 0;
         for(var j = 0; j < shapeSet.length && current < idArray.length; j++){
             //console.log(shapeSet[j].getId());
@@ -265,7 +266,6 @@ function Table(containerName, tool){
 
             stage.on("mousemove touchmove", function() {
                 if(toolkit.getTool() == Tooltype.Hand) return;
-                console.log(mousedown);
                 if(!mousedown) return;
                 var mousePos = stage.getTouchPosition();
                 if(mousePos == null)
@@ -368,38 +368,38 @@ function Table(containerName, tool){
                 result = null;
             });
 
-                    stage.on(" touchend", function() {
-                        if(toolkit.getTool() == Tooltype.Hand) return;
+            stage.on(" touchend", function() {
+                if(toolkit.getTool() == Tooltype.Hand) return;
                         
-                        if(!mousedown) return;
+                if(!mousedown) return;
                         
-                        switch(toolkit.getTool()){
-                            case Tooltype.Pen:
-                                var tmpLine = new Kinetic.Line({
-                                    points: result,
-                                    stroke: toolkit.getColor(),
-                                    strokeWidth: toolkit.getWidth()
-                                });
-                                var message = {};
-                                message.type = Request.DrawShape;
-                                message.json = tmpLine.toJSON();
-                                connection.sendObject(message);
-                                break;
-                            case Tooltype.Circle:
-                                break;
-                            case Tooltype.Line:
-                                break;
-                            case Tooltype.Eraser:
-                                message = {};
-                                message.type = Request.EraseShape;
-                                message.idArray = result.idArray;
-                                connection.sendObject(message);
-                                break;
+                switch(toolkit.getTool()){
+                    case Tooltype.Pen:
+                        var tmpLine = new Kinetic.Line({
+                            points: result,
+                            stroke: toolkit.getColor(),
+                            strokeWidth: toolkit.getWidth()
+                        });
+                        var message = {};
+                        message.type = Request.DrawShape;
+                        message.json = tmpLine.toJSON();
+                        connection.sendObject(message);
+                        break;
+                    case Tooltype.Circle:
+                        break;
+                    case Tooltype.Line:
+                        break;
+                    case Tooltype.Eraser:
+                        message = {};
+                        message.type = Request.EraseShape;
+                        message.idArray = result.idArray;
+                        connection.sendObject(message);
+                        break;
                             
-                        }
-                        mousedown = false;
-                        result = null;
-                    });
+                }
+                mousedown = false;
+                result = null;
+            });
         }
     }
     
@@ -434,6 +434,86 @@ function Table(containerName, tool){
     function setDefaultLocation(){
         stage.setX(stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2);
         stage.draw();
+    }
+    
+    this.uploadImage = function(imageObj){
+        var img = new Kinetic.Image({
+            image: imageObj,
+            x: 0,
+            y: 0,
+            width: imageObj.width,
+            height: imageObj.height,
+            draggable: true
+        });
+        if(img.getWidth() > imageSize.width){
+            img.setHeight(img.getHeight() / img.getWidth() * imageSize.width);
+            img.setWidth(imageSize.width);
+        }
+        if(img.getHeight() > imageSize.height){
+            img.setWidth(img.getWidth() / img.getHeight() * imageSize.height);
+            img.setHeight(imageSize.height);
+        }
+        tmpLayer.add(img);
+        stage.draw();
+        img.on("dblclick dbltouch", function(){
+            setStageToSave();
+            drawLayer.remove();
+            stage.draw();
+            stage.toDataURL({
+                callback: function(dataUrl) {
+                    img.remove();
+                    resetStage();
+                    stage.add(drawLayer);
+                    var message = {};
+                    message.type = Request.UploadFile;
+                    message.postfix = "image";
+                    message.data = dataUrl;
+                    connection.sendObject(message);
+                }
+            });
+        });
+    }
+    
+    this.uploadBackground = function(dataUrl){
+        backLayer.removeChildren();
+        var imageObj = new Image();
+
+        imageObj.onload = function(){
+            imageSize.width = imageObj.width;
+            imageSize.height = imageObj.height;
+            var pageImage = new Kinetic.Image({
+                x: 0,
+                y: 0,
+                image: imageObj
+            });
+            backLayer.add(pageImage);
+            stage.setX(stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2);
+            resetStage();
+            stage.draw();
+            unlock();
+        }
+        imageObj.src = dataUrl;
+    }
+    
+    function setStageToSave(){
+        stage.setScale({
+            x: 1,
+            y: 1
+        });
+        stage.setHeight(imageSize.height);
+        stage.setWidth(imageSize.width);
+        stage.setX(0);
+        stage.setY(0);
+        stage.draw();
+    }
+    
+    function resetStage(){
+        $(window).resize();
+        stage.setScale({
+            x: scaleRange[scaleChoice],
+            y: scaleRange[scaleChoice]
+        });
+        setDefaultLocation();
     }
 }
     
