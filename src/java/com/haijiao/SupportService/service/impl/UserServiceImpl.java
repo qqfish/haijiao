@@ -6,18 +6,28 @@
 package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Comment;
+import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
-import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @Transactional
 public class UserServiceImpl implements IUserService{
+    @Resource
     IUserDAO userDAO;
+    
+    @Resource
     ITeacherDAO teacherDAO;
+    
+    @Resource
+    IStudentDAO studentDAO;
 
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -25,6 +35,10 @@ public class UserServiceImpl implements IUserService{
 
     public void setTeacherDAO(ITeacherDAO teacherDAO) {
         this.teacherDAO = teacherDAO;
+    }
+
+    public void setStudentDAO(IStudentDAO studentDAO) {
+        this.studentDAO = studentDAO;
     }
 
     @Override
@@ -39,11 +53,23 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public boolean register(String account, String password, String userType) {
-        User u = new User();
-        u.setEmail(account);
-        u.setPassword(password);
-        u.setUserType(userType);
-        return userDAO.makePersistent(u);
+        if(userType.equals("student")){
+            Student s = new Student();
+            s.setEmail(account);
+            s.setPassword(password);
+            s.setUserType(userType);
+            return studentDAO.makePersistent(s);
+        }
+        else if(userType.equals("teacher")){
+            Teacher t = new Teacher();
+            t.setEmail(account);
+            t.setPassword(password);
+            t.setUserType(userType);
+            return teacherDAO.makePersistent(t);
+        }
+        else{
+            return false;
+        }
     }
 
     @Override

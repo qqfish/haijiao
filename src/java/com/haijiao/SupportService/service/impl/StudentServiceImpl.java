@@ -12,10 +12,14 @@ import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import java.sql.Date;
 import java.util.List;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @Transactional
 public class StudentServiceImpl implements IStudentService{
+    @Resource
     IStudentDAO studentDAO;
 
     public void setStudentDAO(IStudentDAO studentDAO) {

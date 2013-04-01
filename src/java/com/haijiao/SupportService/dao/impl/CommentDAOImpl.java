@@ -10,7 +10,9 @@ import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.ICommentDAO;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class CommentDAOImpl extends GenericHibernateDAO<Comment,Integer> implements ICommentDAO {
 
     @Override

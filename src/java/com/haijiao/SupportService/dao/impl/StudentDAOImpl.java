@@ -8,7 +8,9 @@ import com.haijiao.Domain.bean.Student;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class StudentDAOImpl extends GenericHibernateDAO<Student,Integer> implements IStudentDAO{ 
 
     @Override

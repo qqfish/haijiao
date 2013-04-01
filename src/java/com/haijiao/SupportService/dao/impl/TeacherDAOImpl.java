@@ -8,7 +8,9 @@ import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> implements ITeacherDAO {
 
     @Override

@@ -7,6 +7,7 @@ package com.haijiao.SupportService.dao;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import javax.annotation.Resource;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
@@ -17,6 +18,8 @@ import org.hibernate.criterion.Criterion;
  */
 public abstract class GenericHibernateDAO <T,ID extends Serializable> implements GenericDAO<T,ID>{
     private Class<T> persistentClass;
+    
+    @Resource(name="sessionFactory")
     private SessionFactory  sessionFactory;
 
     public GenericHibernateDAO() {

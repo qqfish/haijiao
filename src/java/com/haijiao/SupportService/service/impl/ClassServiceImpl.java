@@ -13,6 +13,8 @@ import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import java.sql.Date;
+import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -20,10 +22,16 @@ import org.springframework.transaction.annotation.Transactional;
  * @author hp
  */
 
+@Service
 @Transactional
 public class ClassServiceImpl implements IClassService{
+    @Resource
     IClazzDAO clazzDAO;
+    
+    @Resource
     ITeacherDAO teacherDAO;
+    
+    @Resource
     IStudentDAO studentDAO;
 
     public void setClazzDAO(IClazzDAO clazzDAO) {

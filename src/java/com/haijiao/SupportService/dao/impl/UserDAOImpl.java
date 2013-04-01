@@ -8,7 +8,9 @@ import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserDAOImpl extends GenericHibernateDAO<User, Integer> implements IUserDAO {
 
     @Override
