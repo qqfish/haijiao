@@ -7,27 +7,40 @@ package com.haijiao.presentation.action;
 import com.haijiao.SupportService.service.IUserService;
 
 public class RegisterAction extends SessionAction{
-    private String account;
+    private String email;
     private String password1;
     private String password2;
     private String userType;
     private IUserService userService;
     
     @Override
-    public String execute() throws Exception {
-        if(userService.confirmExist(account)){
-            this.putIn("username", account);
+    public String execute(){
+        if(!userService.confirmExist(email)){
+            userService.register(email, password1, userType);
+            this.putIn("username", email);
             this.putIn("userType", userType);
             this.putIn("login", true);
+            this.putIn("message", this.getText("registerSuccess"));
             return SUCCESS;
         } else {
+            this.putIn("message", this.getText("userExist"));
             return INPUT;
         }
     }
     
+    public String student(){
+        userType = "student";
+        return execute();
+    }
+    
+    public String teacher(){
+        userType = "teacher";
+        return execute();
+    }
+    
     public void validate() {
-        if(account==null || account.trim().length()==0){
-            this.addFieldError("account", this.getText("accountNull"));
+        if(email==null || email.trim().length()==0){
+            this.addFieldError("email", this.getText("emailNull"));
         }
         if(password1==null || password1.trim().length()==0){
             this.addFieldError("password1", this.getText("passwordNull"));
@@ -44,17 +57,14 @@ public class RegisterAction extends SessionAction{
         else if(!password1.trim().equals(password2.trim())){
             this.addFieldError("password2", this.getText("passwordNotEqual"));
         }
-        if(userType==null || userType.trim().length()==0){
-            this.addFieldError("userType", this.getText("userTypeNull"));
-        }
     }
 
-    public String getAccount() {
-        return account;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword1() {
@@ -73,20 +83,20 @@ public class RegisterAction extends SessionAction{
         this.password2 = password2;
     }
 
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
-    }
-
     public IUserService getUserService() {
         return userService;
     }
 
     public void setUserService(IUserService userService) {
         this.userService = userService;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
 }

@@ -7,12 +7,10 @@
       <h1><a href="index.jsp"><img alt="" src="images/logo.png"></a></h1>
       <nav>
         <ul class="sf-menu">
+          <li><a href="index.jsp" style = "font-size:18px"><b>首页</b></a></li>
           <s:if test="#session.login">
               <li><s:a action="toMyPage.action" style = "font-size:18px"><b>个人主页</b></s:a></li>
           </s:if>
-          <s:else>
-              <li><a href="index.jsp" style = "font-size:18px"><b>首页</b></a></li>
-          </s:else>
           <li><a href="teachers.jsp" style = "font-size:18px"><b>1v1名师</b></a></li>            
           <li><a href="contact.jsp" style = "font-size:18px"><b>联系我们</b></a> </li>
           <li><a href="contact.jsp" style = "font-size:18px"><b>意见反馈</b></a> </li>
@@ -21,4 +19,5 @@
       <div class="clear"></div>
     </div>
   </div>
+  <div style="text-align: center"><s:property value="#session.message"/></div>
 </header>

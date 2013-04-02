@@ -9,18 +9,19 @@ import com.haijiao.SupportService.service.IUserService;
 public class LoginAction extends SessionAction {
 
     private IUserService userService;
-    private String account;
+    private String email;
     private String password;
     
     @Override
     public String execute() throws Exception {
-        String userType = userService.confirmLogin(account, password);
-        if(account==null || account.trim().length()==0){
+        String userType = userService.confirmLogin(email, password);
+        if(email==null || email.trim().length()==0){
             return INPUT;
         } else {
-            this.putIn("username", account);
+            this.putIn("email", email);
             this.putIn("userType", userType);
             this.putIn("login", true);
+            this.putIn("message",this.getText("loginsuccess"));
             return SUCCESS;
         }
         
@@ -28,8 +29,8 @@ public class LoginAction extends SessionAction {
     
     @Override
     public void validate(){
-        if(account==null || account.trim().length()==0){
-            this.addFieldError("account", this.getText("accountNull"));
+        if(email==null || email.trim().length()==0){
+            this.addFieldError("email", this.getText("emailNull"));
         }
         if(password==null || password.trim().length()==0){
             this.addFieldError("password", this.getText("passwordNull"));
@@ -39,12 +40,12 @@ public class LoginAction extends SessionAction {
         }
     }
 
-    public String getAccount() {
-        return account;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

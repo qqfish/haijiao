@@ -13,9 +13,13 @@
             <result name="input">index.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
-        <action name="register" class="RegisterAction">
+        <action name="register" class="RegisterAction" method="teacher">
             <result name="input">index.jsp</result>
-            <result name="success">teachers.jsp</result>
+            <result name="success">register.jsp</result>
+        </action>
+        <action name="register" class="RegisterAction" method="student">
+            <result name="input">index.jsp</result>
+            <result name="success">register.jsp</result>
         </action>
         <action name="searchTeacher" class="SearchTeacherAction">
             <result name="success">teachers.jsp</result>

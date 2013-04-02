@@ -23,6 +23,11 @@ public class SearchTeacherAction extends SessionAction {
         strList.addAll(Arrays.asList(strArray));
         teacherlist = new ArrayList<Teacher>();
         teacherlist = userService.searchTeacher(strList);
+        if(!teacherlist.isEmpty()){
+            this.putIn("message", this.getText("searchSuccess"));
+        } else {
+            this.putIn("message", this.getText("searchNull"));
+        }
         return SUCCESS;
         /***
          *  此处加入出错处理

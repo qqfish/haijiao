@@ -18,7 +18,7 @@ public interface IUserService {
     //验证登陆
     public String confirmLogin(String email, String password);
     //注册为User
-    public boolean register(String account, String password, String userType);
+    public boolean register(String email, String password, String userType);
     //搜索老师（名字，年级，科目、网络状况）
     public List<Teacher> searchTeacher(List<String> strList);
     //获取所有对本用户的评论
