@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 public interface IClassService {
     //预定老师
-    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Date date, Integer week, String day, Integer beginIndex, Integer endIndex);
+    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Date date, Integer week, Integer day, Integer beginIndex, Integer endIndex);
     //处理学生预约
     public boolean dealWithReservation(int clazzId, boolean accept);
 }

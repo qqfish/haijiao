@@ -26,6 +26,10 @@
     <bean id="GetTeacherInfoAction" class="com.haijiao.presentation.action.GetTeacherInfoAction" scope="prototype">
         <property name="teacherService" ref="teacherServiceImpl" />
     </bean>   
+    <bean id="BookTeacherAction" class="com.haijiao.presentation.action.BookTeacherAction" scope="prototype">
+        <property name="teacherService" ref="teacherServiceImpl" />
+        <property name="classService" ref="classServiceImpl" />
+    </bean>
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
         <property name="studentService" ref="studentServiceImpl" />
     </bean>

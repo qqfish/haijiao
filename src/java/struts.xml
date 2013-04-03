@@ -28,6 +28,9 @@
         <action name="getTeacherInfo" class="GetTeacherInfoAction">
             <result name="success">teacherInfo.jsp</result>
         </action>
+        <action name="bookTeacher" class="BookTeacherAction">
+            <result name="success">teacherInfo.jsp</result>
+        </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>
         </action>
