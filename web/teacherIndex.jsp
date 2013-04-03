@@ -64,7 +64,7 @@
         <div style="margin:0px 0px 0px 20px "><s:property value="intro"/></div>
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div style="margin:40px 0px 0px 40px ">已有 30 人选择了TA</div>
-        <a class="login-btn" data-toggle="modal" data-target="#choosemodal" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">我要预约</a>
+        <a href="#" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">我要预约</a>
     </div>
     <div id="topbar" style="height:100px;width: 900px;margin: 0px 0px 0px 20px;float:left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
     </div>
@@ -101,69 +101,7 @@
          <div style="font-size: 36px;margin:20px 0px 0px 40px">评论</div>
         <hr style="height: 1px;width: 860px;margin:10px auto"/>
     </div>
-            <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
-                    <div class="modal-header" style="height: 50px">
-                      <a class="close" data-dismiss="modal">×</a>
-                      <h3 style="margin-top:-20px">请选择课程时间</h3>
-                    </div>
-                    <div class="modal-body">
-                        <div class="schedule_panel">
-                            <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
-                            <tbody>
-                            <tr>
-                                    <th ></th>
-                                    <th>Mon.</th>
-                                    <th>Tue.</th>
-                                    <th>Wed.</th>
-                                    <th>Thu.</th>
-                                    <th>Fri.</th>
-                                    <th style="width:24px">Sat.</th>
-                                    <th style="width:24px">Sun.</th>
-                            </tr>
-                            <tr class="class_1">
-                                    <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_2">
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_3">
-                                    <th rowspan="2">10:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_4">
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_5">
-                                    <th rowspan="2">中 午</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_6">
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_7">
-                                    <th rowspan="2">14：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_8">
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_9">
-                                    <th rowspan="2">16：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_10">
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_11">
-                                    <th rowspan="3">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_12">
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            <tr class="class_13">
-                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                            </tr>
-                            </tbody>
-                    </table>
-                    </div>
-                    </div>
-          </div>
+            
 </section>
 
 <!--==============================footer=================================-->
