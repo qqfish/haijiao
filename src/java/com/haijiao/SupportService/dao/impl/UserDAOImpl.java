@@ -16,7 +16,7 @@ public class UserDAOImpl extends GenericHibernateDAO<User, Integer> implements I
     @Override
     public boolean confirmExist(String account) {
         String hql = "from User where email='"+ account + "'";
-        return findByqQuery(hql)!=null;
+        return (!findByqQuery(hql).isEmpty());
     }
     
     @Override
