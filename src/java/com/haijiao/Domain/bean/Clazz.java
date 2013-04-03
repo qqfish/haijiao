@@ -36,7 +36,7 @@ public class Clazz extends BaseBean{ //clazz -> class
     private Integer week; //第一/二个星期，此处只能取值1或2
     
     @Column(name="weekday")
-    private String day;   //星期X
+    private Integer day;   //星期X
     private int beginIndex;    //时间片index，比如 1对应 8:00-8:30，2对应 8:30-9:00
     private int endIndex;
     
@@ -86,11 +86,11 @@ public class Clazz extends BaseBean{ //clazz -> class
         this.week = week;
     }
 
-    public String getDay() {
+    public Integer getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(Integer day) {
         this.day = day;
     }
 

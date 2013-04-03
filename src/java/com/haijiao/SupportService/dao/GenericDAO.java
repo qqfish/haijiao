@@ -19,5 +19,5 @@ public interface GenericDAO <T,ID extends Serializable>{
     //remove
     boolean makeTransient(T entity);
     void update(T instance);
-    public List<T> findByqQuery(String hql);
+    public List<T> findByQuery(String hql);
 }

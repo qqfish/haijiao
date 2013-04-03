@@ -16,9 +16,9 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
     @Override
     public Teacher getTeacherByEmail(String email) {
         String hql = "from Teacher where email='"+ email + "'";
-        List<Teacher> lt = findByqQuery(hql);
+        List<Teacher> lt = findByQuery(hql);
         if(lt.size() == 1){
-            return findByqQuery(hql).get(0);
+            return findByQuery(hql).get(0);
         } else {
             return null;
         }
@@ -39,13 +39,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
             }
         }
         hql += where;
-        List<Teacher> t = findByqQuery(hql);
+        List<Teacher> t = findByQuery(hql);
         return t;
-}
-
-    @Override
-    public boolean addTeacher(String email, String password, String school, String tel) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
    
 }

@@ -25,7 +25,9 @@ public interface IUserService {
     //搜索老师（名字，年级，科目、网络状况）
     public List<Teacher> searchTeacher(List<String> strList);
     //获取所有对本用户的评论
-    public List<Comment> getComment(String email);   
+    public List<Comment> getComment(String email);
+    //获取用户做出的所有评论
+    public List<Comment> getCommentMade(String email);
     //对某用户进行评论
     public boolean comment(String commenterEmail, String commenteeEmail, String content, Integer score);
 

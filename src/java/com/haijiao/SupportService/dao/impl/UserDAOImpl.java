@@ -16,13 +16,13 @@ public class UserDAOImpl extends GenericHibernateDAO<User, Integer> implements I
     @Override
     public boolean confirmExist(String account) {
         String hql = "from User where email='"+ account + "'";
-        return (!findByqQuery(hql).isEmpty());
+        return (!findByQuery(hql).isEmpty());
     }
     
     @Override
     public User getUserByEmail(String email) {
         String hql = "from User where email='" + email + "'";
-        List<User> lu = findByqQuery(hql);
+        List<User> lu = findByQuery(hql);
         if(lu.isEmpty())
             return null;
         else
@@ -32,7 +32,7 @@ public class UserDAOImpl extends GenericHibernateDAO<User, Integer> implements I
     @Override
     public String confirmLogin(String account, String password) {
         String hql = "from User where email='"+ account +"' and password='"+ password +"'";
-        List<User> ul= findByqQuery(hql);
+        List<User> ul= findByQuery(hql);
         if(ul.isEmpty()){
             return null;
         }

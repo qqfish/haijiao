@@ -9,6 +9,7 @@ import com.haijiao.Domain.bean.Comment;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.dao.ICommentDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
@@ -29,6 +30,9 @@ public class UserServiceImpl implements IUserService{
     
     @Resource
     IStudentDAO studentDAO;
+    
+    @Resource
+    ICommentDAO commentDAO;
 
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -96,12 +100,24 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public List<Comment> getComment(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return commentDAO.getComment(email);
+    }
+    
+    @Override
+    public List<Comment> getCommentMade(String email) {
+        return commentDAO.getCommentMade(email);
     }
 
     @Override
     public boolean comment(String commenterEmail, String commenteeEmail, String content, Integer score) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        User Commenter = userDAO.getUserByEmail(commenterEmail);
+        User Commentee = userDAO.getUserByEmail(commenteeEmail);
+        Comment c = new Comment();
+        c.setCommentee(Commentee);
+        c.setCommenter(Commenter);
+        c.setContent(content);
+        c.setScore(score);
+        return commentDAO.makePersistent(c);
     }
 
     @Override

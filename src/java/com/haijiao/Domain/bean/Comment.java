@@ -16,8 +16,12 @@ import javax.persistence.Table;
 public class Comment extends BaseBean{
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="uid")
+    @JoinColumn(name="commenterid")
     private User commenter;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="commenteeid")
+    private User commentee;
     
     private String content;
     private Integer score;
@@ -28,6 +32,14 @@ public class Comment extends BaseBean{
 
     public void setCommenter(User commenter) {
         this.commenter = commenter;
+    }
+
+    public User getCommentee() {
+        return commentee;
+    }
+
+    public void setCommentee(User commentee) {
+        this.commentee = commentee;
     }
 
     public String getContent() {

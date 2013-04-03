@@ -47,7 +47,7 @@ public class ClassServiceImpl implements IClassService{
     }
     
     @Override
-    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Date date, Integer week, String day, Integer beginIndex, Integer endIndex) {
+    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Date date, Integer week, Integer day, Integer beginIndex, Integer endIndex) {
         Clazz c = new Clazz();
         Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
         Student s = studentDAO.getStudentByEmail(studentEmail);

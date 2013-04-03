@@ -70,7 +70,7 @@ public abstract class GenericHibernateDAO <T,ID extends Serializable> implements
     }
 
     @Override
-    public List<T> findByqQuery(String hql) {
+    public List<T> findByQuery(String hql) {
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
