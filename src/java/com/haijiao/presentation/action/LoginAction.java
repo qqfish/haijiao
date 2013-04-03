@@ -4,7 +4,10 @@
  */
 
 package com.haijiao.presentation.action;
+import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IUserService;
+import com.opensymphony.xwork2.ActionContext;
+import java.util.Map;
 
 public class LoginAction extends SessionAction {
 
@@ -15,11 +18,11 @@ public class LoginAction extends SessionAction {
     @Override
     public String execute() throws Exception {
         String userType = userService.confirmLogin(email, password);
-        if(email==null || email.trim().length()==0){
+        if(userType == null || email==null || email.trim().length()==0){
             return INPUT;
         } else {
-            this.putIn("email", email);
-            this.putIn("userType", userType);
+            User theUser = userService.getUserByEmail(email);
+            this.putIn("user", theUser);
             this.putIn("login", true);
             this.putIn("message",this.getText("loginsuccess"));
             return SUCCESS;

@@ -6,6 +6,7 @@ package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Comment;
 import com.haijiao.Domain.bean.Teacher;
+import com.haijiao.Domain.bean.User;
 import java.util.List;
 
 /**
@@ -15,6 +16,8 @@ import java.util.List;
 public interface IUserService {
     //验证是否存在用户名
     public boolean confirmExist(String email);
+    
+    public User getUserByEmail(String email);
     //验证登陆
     public String confirmLogin(String email, String password);
     //注册为User

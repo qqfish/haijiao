@@ -16,6 +16,7 @@
     <bean id="LoginAction" class="com.haijiao.presentation.action.LoginAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />
     </bean>
+    <bean id="IndexAction" class="com.haijiao.presentation.action.IndexAction" scope="prototype" />
     <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />
     </bean>
@@ -44,7 +45,7 @@
         </property>
     </bean>
     
-    <context:component-scan base-package="com.haijiao.SupportService"/>
+    <context:component-scan base-package="com.haijiao.SupportService,com.haijiao.presentation.action"/>
     
     <!-- Transaction -->
     

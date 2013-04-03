@@ -62,7 +62,7 @@
               <img src="images/page2-img2.jpg" style="height: 230px;width: 230px;"/>
         </figure>
         <a class="label" href="register.jsp" style="height: 25px;margin:10px 0px 0px 10px;">修改资料</a>
-        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px">BBB</div>          
+        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px"><s:property value="user.name"/></div>          
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div id="teacherCourses" style="height: 30px;width:250px;float:left;margin: 0px 0px 10px 10px;">
               <div class="label" style="height: 25px;margin:2px 0px 0px 2px;">年级</div>

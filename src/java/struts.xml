@@ -47,5 +47,10 @@
             <result name="success">fileList.jsp</result>
             <result name="unconnected">error.jsp</result>
         </action>
+        <action name="index" class="IndexAction">
+            <result name="success">index.jsp</result>
+            <result name="teacher">teacherInfo.jsp</result>
+            <result name="student">studentInfo.jsp</result>
+        </action>
     </package>
 </struts>

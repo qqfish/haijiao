@@ -8,10 +8,11 @@ package com.haijiao.SupportService.service.impl;
 import com.haijiao.Domain.bean.Comment;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
+import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.dao.IStudentDAO;
-import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
+import com.haijiao.SupportService.service.IUserService;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,22 @@ public class UserServiceImpl implements IUserService{
         return userDAO.confirmExist(email);
     }
 
+
+    @Override
+    public User getUserByEmail(String email) {
+        User u = userDAO.getUserByEmail(email);
+        String type = u.getUserType();
+        if(type.equals("teacher")) {
+            return teacherDAO.getTeacherByEmail(email);
+        }
+        else if(type.equals("student")) {
+            return studentDAO.getStudentByEmail(email);
+        }
+        else {
+            return null;
+        }
+    }
+    
     @Override
     public String confirmLogin(String email, String password) {
         return userDAO.confirmLogin(email, password);

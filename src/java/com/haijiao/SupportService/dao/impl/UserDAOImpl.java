@@ -20,6 +20,16 @@ public class UserDAOImpl extends GenericHibernateDAO<User, Integer> implements I
     }
     
     @Override
+    public User getUserByEmail(String email) {
+        String hql = "from User where email='" + email + "'";
+        List<User> lu = findByqQuery(hql);
+        if(lu.isEmpty())
+            return null;
+        else
+            return lu.get(0);
+    }
+    
+    @Override
     public String confirmLogin(String account, String password) {
         String hql = "from User where email='"+ account +"' and password='"+ password +"'";
         List<User> ul= findByqQuery(hql);

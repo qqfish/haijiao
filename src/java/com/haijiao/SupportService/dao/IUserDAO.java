@@ -8,6 +8,8 @@ import com.haijiao.Domain.bean.User;
 public interface IUserDAO extends GenericDAO<User,Integer>{
     //验证是否存在用户名
     public boolean confirmExist(String email);
+    
+    public User getUserByEmail(String email);
     //验证登陆
     public String confirmLogin(String email, String password);
 
