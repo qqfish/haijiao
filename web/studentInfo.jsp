@@ -59,16 +59,16 @@
 <section id="content" style="height:1400px">
     <div id="sideInfo" style="height: 600px; width: 250px;margin: 0px 0px 0px 50px ;float: left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
         <figure id="personImage" class="figureBar" style="height: 230px; width:230px;">
-              <img src="images/page2-img2.jpg" style="height: 230px;width: 230px;"/>
+              <img src="<s:property value="#session.student.picUrl"/>" style="height: 230px;width: 230px;"/>
         </figure>
         <a class="label" href="register.jsp" style="height: 25px;margin:10px 0px 0px 10px;">修改资料</a>
-        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px"><s:property value="user.name"/></div>          
+        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px"><s:property value="#session.student.name"/></div>          
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div id="teacherCourses" style="height: 30px;width:250px;float:left;margin: 0px 0px 10px 10px;">
               <div class="label" style="height: 25px;margin:2px 0px 0px 2px;">年级</div>
         </div>
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
-        <div style="margin:0px 0px 0px 20px ">这个人很懒 什么都没留下。</div>
+        <div style="margin:0px 0px 0px 20px "><s:property value="#session.student.intro"/></div>
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div style="margin:40px 0px 0px 40px ">您近期还有7堂课</div>
         <a href="teachers.jsp" class="login-btn" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">我要上课</a>
