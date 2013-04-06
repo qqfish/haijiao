@@ -15,6 +15,8 @@
     <bean id="fileManager" class="com.haijiao.Domain.file.FileManager"/>
     <bean id="LoginAction" class="com.haijiao.presentation.action.LoginAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />
+        <property name="teacherService" ref="teacherServiceImpl" />
+        <property name="studentService" ref="studentServiceImpl"/>
     </bean>
     <bean id="IndexAction" class="com.haijiao.presentation.action.IndexAction" scope="prototype" />
     <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
@@ -38,9 +40,6 @@
         <property name="studentService" ref="studentServiceImpl" />
     </bean>
     <bean id="ChangeAuditionAction" class="com.haijiao.presentation.action.ChangeAuditionAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-    </bean>
-    <bean id="ChangeTeacherInfoAction" class="com.haijiao.presentation.action.ChangeTeacherInfoAction" scope="prototype">
         <property name="teacherService" ref="teacherServiceImpl" />
     </bean>
     <bean id="GetCommonFileAction" class="com.haijiao.presentation.action.GetCommonFileAction" scope="prototype"/>

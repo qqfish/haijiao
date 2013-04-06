@@ -51,17 +51,17 @@
 <section id="content" style="height:1200px">
     <div id="sideInfo" style="height: 600px; width: 250px;margin: 0px 0px 0px 50px ;float: left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
         <figure id="personImage" class="figureBar" style="height: 230px; width:230px;">
-              <img src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
+              <img src="<s:property value="#session.teacher.picUrl"/>" style="height: 230px;width: 230px;"/>
         </figure>
-        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px"><s:property value="tea.name"/></div>          
+        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px"><s:property value="#session.teacher.name"/></div>          
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div id="teacherCourses" style="height: 30px;width:250px;float:left;margin: 0px 0px 10px 10px;">
-              <s:iterator value="tea.lessons" status="st">
+              <s:iterator value="#session.teacher.lessons" status="st">
                   <div class="label-1" style="height: 25px;margin:2px 0px 0px 2px"><s:property value="name"/></div>
               </s:iterator>
         </div>
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
-        <div style="margin:0px 0px 0px 20px "><s:property value="intro"/></div>
+        <div style="margin:0px 0px 0px 20px "><s:property value="#session.teacher.intro"/></div>
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div style="margin:40px 0px 0px 40px ">已有 30 人选择了TA</div>
         <a class="login-btn" data-toggle="modal" data-target="#choosemodal" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">我要预约</a>
@@ -84,7 +84,7 @@
         <div style="font-size: 36px;margin:20px 0px 0px 40px">详细资料</div>
         <hr style="height: 1px;width: 860px;margin:10px auto"/>
         <div id="leftbar" style="height:200px;width:400px;float:left;margin:0px 0px 0px 20px">
-            <div style="height:50px;width:300px;margin: 0px 0px 0px 20px;line-height: 50px">大学<div class="label-1" style="height: 25px;float: right;margin:10px 0px 0px 0px;padding:0px 10px;line-height: 25px"><s:property value="tea.school"/></div></div>
+            <div style="height:50px;width:300px;margin: 0px 0px 0px 20px;line-height: 50px">大学<div class="label-1" style="height: 25px;float: right;margin:10px 0px 0px 0px;padding:0px 10px;line-height: 25px"><s:property value="#session.teacher.school"/></div></div>
             <div style="height:50px;width:300px;margin: 0px 0px 0px 20px;line-height: 50px">毕业年份<div class="label-1" style="height: 25px;float: right;margin:10px 0px 0px 0px;padding:0px 10px;line-height: 25px">毕不了业</div></div>
             <div style="height:50px;width:300px;margin: 0px 0px 0px 20px;line-height: 50px">专业<div class="label-1" style="height: 25px;float: right;margin:10px 0px 0px 0px;padding:0px 10px;line-height: 25px">软件工程</div></div>
             <div style="height:50px;width:300px;margin: 0px 0px 0px 20px;line-height: 50px">GPA<div class="label-1" style="height: 25px;float: right;margin:10px 0px 0px 0px;padding:0px 10px;line-height: 25px">0/4.0</div></div>

@@ -29,6 +29,11 @@
             <result name="input">index.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
+        <action name="index" class="IndexAction">
+            <result name="success">index.jsp</result>
+            <result name="teacher">teacherInfo.jsp</result>
+            <result name="student">studentInfo.jsp</result>
+        </action>
         <action name="searchTeacher" class="SearchTeacherAction">
             <result name="success">teachers.jsp</result>
             <result name="input">teachers.jsp</result>
@@ -50,18 +55,9 @@
             <result name="success">personal.jsp</result>
             <result name="unconnected">error.jsp</result>
         </action>
-        <action name="changeTeacherInfo" class="ChangeTeacherInfoAction">
-            <result name="success">personal.jsp</result>
-            <result name="unconnected">error.jsp</result>
-        </action>
         <action name="getCommonFile" class="GetCommonFileAction">
             <result name="success">fileList.jsp</result>
             <result name="unconnected">error.jsp</result>
-        </action>
-        <action name="index" class="IndexAction">
-            <result name="success">index.jsp</result>
-            <result name="teacher">teacherInfo.jsp</result>
-            <result name="student">studentInfo.jsp</result>
         </action>
     </package>
 </struts>

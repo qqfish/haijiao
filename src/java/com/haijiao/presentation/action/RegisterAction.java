@@ -4,6 +4,7 @@
  */
 
 package com.haijiao.presentation.action;
+import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IUserService;
 
 public class RegisterAction extends SessionAction{
@@ -15,10 +16,10 @@ public class RegisterAction extends SessionAction{
     
     @Override
     public String execute(){
-        System.out.println(email);
         if(!userService.confirmExist(email)){
             userService.register(email, password1, userType);
-            this.putIn("email", email);
+            User theUser = userService.getUserByEmail(email);
+            this.putIn("user", theUser);
             this.putIn("userType", userType);
             this.putIn("login", true);
             this.putIn("message", this.getText("registerSuccess"));

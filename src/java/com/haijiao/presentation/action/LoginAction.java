@@ -4,24 +4,39 @@
  */
 
 package com.haijiao.presentation.action;
+import com.haijiao.Domain.bean.Student;
+import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.service.IStudentService;
+import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 
 public class LoginAction extends SessionAction {
 
     private IUserService userService;
+    private ITeacherService teacherService;
+    private IStudentService studentService;
     private String email;
     private String password;
     
     @Override
     public String execute() throws Exception {
         String userType = userService.confirmLogin(email, password);
-        if(userType == null || email==null || email.trim().length()==0){
+        if(userType == null){
             return INPUT;
         } else {
+            if(userType.equals("teacher")){
+                System.out.println(userType);
+                System.out.println(email);
+                System.out.println(password);
+                Teacher theTeacher = teacherService.getTeacherByEmail(email);
+                this.putIn("teacher", theTeacher);
+            } else if (userType.equals("student")){
+                Student theStudent = studentService.getStudentByEmail(email);
+                this.putIn("student", theStudent);
+            }
             User theUser = userService.getUserByEmail(email);
             this.putIn("user", theUser);
-            this.putIn("email", email);
             this.putIn("login", true);
             this.putIn("userType", userType);
             this.putIn("message",this.getText("loginsuccess"));
@@ -65,5 +80,21 @@ public class LoginAction extends SessionAction {
 
     public void setUserService(IUserService userService) {
         this.userService = userService;
+    }
+
+    public ITeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
+    public IStudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
     }
 }
