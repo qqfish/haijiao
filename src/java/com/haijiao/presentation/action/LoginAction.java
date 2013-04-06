@@ -6,8 +6,6 @@
 package com.haijiao.presentation.action;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IUserService;
-import com.opensymphony.xwork2.ActionContext;
-import java.util.Map;
 
 public class LoginAction extends SessionAction {
 
@@ -23,7 +21,9 @@ public class LoginAction extends SessionAction {
         } else {
             User theUser = userService.getUserByEmail(email);
             this.putIn("user", theUser);
+            this.putIn("email", email);
             this.putIn("login", true);
+            this.putIn("userType", userType);
             this.putIn("message",this.getText("loginsuccess"));
             return SUCCESS;
         }

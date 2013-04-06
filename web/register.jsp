@@ -1,5 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -45,7 +46,7 @@
 <section id="content">
 <div class="ic"></div>
   <div id="regpanel" style="height:600px; width: 800px;margin:auto;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
-      <s:form action="register.action">
+      <s:form action="changeInfo.action">
             <s:if test="#session.userType == 'teacher'">
                 <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，请充实你的详细信息吧^ ^</div>
             </s:if>
@@ -55,17 +56,15 @@
             <hr style="height: 1px;width: auto;margin:10px auto"/>
             <s:textfield type="text" name="name" placeholder="请输入您的大名" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
             <s:textfield type="text" name="sex" placeholder="请输入您的性别" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-            <s:textfield type="text" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
             <s:if test="#session.userType == 'teacher'">
                 <s:textfield type="text" name="school" placeholder="请输入您就读的大学" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:textfield type="text" name="tel" placeholder="请输入您的手机号" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
+                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="teacherRegister"/>
             </s:if>
             <s:if test="#session.userType == 'student'">
-                <s:textfield type="text" name="school" placeholder="请输入您在读的学校" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:textfield type="text" name="grade" placeholder="请输入您在读的年级" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:textfield type="text" name="tel" placeholder="请输入您或您父母的手机号" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
+                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="studentRegister"/>
             </s:if>
         </s:form>
   </div>

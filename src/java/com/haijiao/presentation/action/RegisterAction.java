@@ -17,7 +17,6 @@ public class RegisterAction extends SessionAction{
     public String execute(){
         System.out.println(email);
         if(!userService.confirmExist(email)){
-            System.out.println("1");
             userService.register(email, password1, userType);
             this.putIn("email", email);
             this.putIn("userType", userType);
@@ -25,7 +24,6 @@ public class RegisterAction extends SessionAction{
             this.putIn("message", this.getText("registerSuccess"));
             return SUCCESS;
         } else {
-            System.out.println("2");
             this.putIn("message", this.getText("userExist"));
             return INPUT;
         }

@@ -5,17 +5,21 @@
 
 package com.haijiao.presentation.action;
 
+import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import java.sql.Date;
 
-public class ChangeTeacherInfoAction extends SessionAction {
+public class ChangeInfoAction extends SessionAction {
     ITeacherService teacherService;
+    IStudentService studentService;
     String password;
     String name;
     String sex;
     Date birthday;
     String school;
+    String grade;
     String tel;
+    String telType;
 
     @Override
     public String execute(){
@@ -25,6 +29,26 @@ public class ChangeTeacherInfoAction extends SessionAction {
         } else {
             this.putIn("message", this.getText("errormessage"));
             return "unconnected";
+        }
+    }
+    
+    public String teacherRegister(){
+        if(teacherService.changeInfo((String)this.getValue("email"), null, name, sex, null, school, tel)){
+            this.putIn("message", this.getText("teaRegisterSuccess"));
+            return SUCCESS;
+        } else {
+            this.putIn("message", this.getText("teaRegisterFailure"));
+            return "input";
+        }
+    }
+    
+    public String studentRegister(){
+        if(studentService.changeInfo((String)this.getValue("email"), null, name, sex, null, grade, null, tel, null)){
+            this.putIn("message", this.getText("stuRegisterSuccess"));
+            return SUCCESS;
+        } else {
+            this.putIn("message", this.getText("stuRegisterFailure"));
+            return "input";
         }
     }
 
@@ -82,5 +106,29 @@ public class ChangeTeacherInfoAction extends SessionAction {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public IStudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+
+    public String getTelType() {
+        return telType;
+    }
+
+    public void setTelType(String telType) {
+        this.telType = telType;
     }
 }
