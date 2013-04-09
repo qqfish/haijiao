@@ -23,7 +23,7 @@ public class ChangeInfoAction extends SessionAction {
 
     @Override
     public String execute(){
-        if(teacherService.changeInfo((String)this.getValue("email"), password, name, sex, birthday, school, tel)){
+        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, birthday, school, tel)){
             this.putIn("message", this.getText("successmessage"));
             return SUCCESS;
         } else {
@@ -33,7 +33,7 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String teacherRegister(){
-        if(teacherService.changeInfo((String)this.getValue("email"), null, name, sex, null, school, tel)){
+        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, null, school, tel)){
             this.putIn("message", this.getText("teaRegisterSuccess"));
             return SUCCESS;
         } else {
@@ -43,7 +43,7 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String studentRegister(){
-        if(studentService.changeInfo((String)this.getValue("email"), null, name, sex, null, grade, null, tel, null)){
+        if(studentService.changeInfo((String)this.getValue("email"), name, sex, null, grade, null, tel, null)){
             this.putIn("message", this.getText("stuRegisterSuccess"));
             return SUCCESS;
         } else {

@@ -31,16 +31,31 @@ public class StudentServiceImpl implements IStudentService{
         return studentDAO.getStudentByEmail(email);
     }
 
+     @Override
+    public boolean changePassword(String email, String password){
+        Student t = studentDAO.getStudentByEmail(email);
+        t.setPassword(password);
+        studentDAO.update(t);
+        return true;
+    }
+    
     @Override
-    public boolean changeInfo(String email, String password, String name, String sex, Date birthday, String grade, String school, String tel, String telType) {
+    public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType) {
         Student s = studentDAO.getStudentByEmail(email);
-        s.setBirthday(birthday);
-        s.setGrade(grade);
-        s.setName(name);
-        s.setSchool(school);
-        s.setSex(sex);
-        s.setTel(tel);
-        s.setTelType(telType);
+        if(birthday != null)
+            s.setBirthday(birthday);
+        if(!grade.isEmpty())
+            s.setGrade(grade);
+        if(!name.isEmpty())
+            s.setName(name);
+        if(!school.isEmpty())
+            s.setSchool(school);
+        if(!sex.isEmpty())
+            s.setSex(sex);
+        if(!tel.isEmpty())
+            s.setTel(tel);
+        if(!telType.isEmpty())
+            s.setTelType(telType);
         studentDAO.update(s);
         return true;
     }

@@ -10,7 +10,6 @@ import com.haijiao.Domain.bean.ScheduleArray;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.ITeacherService;
-import java.sql.Date;
 import java.util.List;
 
 public class BookTeacherAction extends SessionAction {
