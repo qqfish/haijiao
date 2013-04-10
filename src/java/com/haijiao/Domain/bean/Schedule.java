@@ -46,9 +46,4 @@ public class Schedule extends BaseBean {
     public void setClazzes(List<Clazz> clazzes) {
         this.clazzes = clazzes;
     }
-    
-    public String toJson(){
-        Gson gson = new Gson();
-        return gson.toJson(this);
-    }
 }

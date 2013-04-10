@@ -157,14 +157,4 @@ public class Teacher extends User{
     public void setClasslist(List<Clazz> classlist) {
         this.classlist = classlist;
     }
-    
-    public String toJson(){
-        Gson gson = new Gson();
-        System.out.println("begin:");
-        System.out.println(this.schedule.getId());
-        System.out.println(gson.toJson(this.schedule));
-        System.out.println("end");
-        return gson.toJson(this);
-    }
-
 }

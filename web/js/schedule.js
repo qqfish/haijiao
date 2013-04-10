@@ -10,12 +10,13 @@ $(document).ready(function() {
             create : 0,
             remove : 1
         }
-        var result = new Array(index);
-        for(var i = 0; i < index; i++){
-            result[i] = new Array(day);
+        var result = new Array(day);
+        for(var i = 0; i < day; i++){
+            result[i] = new Array(index);
         }
         $('.schedule_table').find('tr').each(function(i){
             $(this).find('td').each(function(j){
+                $(this).css("background-color","#CCF");
                 $(this).attr("index",i - 1).attr("day",j);
                 $(this).attr("available", 0);
                 $(this).attr("free", 0);
@@ -43,13 +44,13 @@ $(document).ready(function() {
                         $(this).attr("own", 1);
                         result[$(this).attr("index")][$(this).attr("day")] = TYPE.create;
                     } else if ($(this).attr("own") == 1){
-                        if(result[$(this).attr("index")][$(this).attr("day")] == TYPE.create){
-                            result[$(this).attr("index")][$(this).attr("day")] = null;
+                        if(result[$(this).attr("day")][$(this).attr("index")] == TYPE.create){
+                            result[$(this).attr("day")][$(this).attr("index")] = null;
                         } else {
-                            result[$(this).attr("index")][$(this).attr("day")] = TYPE.remove;
+                            result[$(this).attr("day")][$(this).attr("index")] = TYPE.remove;
                         }
                         $(this).removeAttr("style");
-                        $(this).attr("own",0);
+                        $(this).attr("own",0).attr("free",1);
                     }
                 });  
             });        
@@ -59,15 +60,17 @@ $(document).ready(function() {
                 return;
             }
             for(var i = 0; i < schedule.clazzes.length; i++){
-                var clazz = schedult.clazzes[i];
+                var clazz = schedule.clazzes[i];
                 for(var j = clazz.beginIndex; j <= clazz.endIndex; j++){
-                    if(clazz.student.email == email){
-                        $("td[index='" + j + "',day='" + i +"']").attr("own",1).attr("available",1).attr("free",0).css("background-color", "#FC9");
-                    } else if(clazz.student != null){
-                        $("td[index='" + j + "',day='" + i +"']").attr("own",0).attr("available",1).attr("free",0).css("background-color", "#FFF");
+                    console.log(clazz.studentEmail == null);
+                    if(clazz.studentEmail == null){
+                        console.log("hello");
+                        $("td[index='" + j + "'][day='" + i +"']").attr("available",1).attr("free",1).removeAttr("style");;
+                    } else if(clazz.studentEmail == email){
+                        $("td[index='" + j + "'][day='" + i +"']").attr("own",1).attr("available",1).attr("free",0).css("background-color", "#FC9");
                     } else {
-                        $("td[index='" + j + "',day='" + i +"']").attr("available",0).css("background-color", "#f4f");
-                    }
+                        $("td[index='" + j + "'][day='" + i +"']").attr("own",0).attr("available",1).attr("free",0).css("background-color", "#FFF");
+                    } 
                 }
             }
         }

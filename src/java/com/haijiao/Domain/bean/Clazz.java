@@ -43,7 +43,7 @@ public class Clazz extends BaseBean{ //clazz -> class
     private int endIndex;
     
     private boolean accept;  //本次预约老师是否已接受
-    private boolean message;   //本次预约在接受或拒绝后附加的信息
+    private String message;   //本次预约在接受或拒绝后附加的信息
     private Integer pay;    //本次课程的花费
     private boolean finish;  //本次课程是否已结束（结算）
 
@@ -128,11 +128,11 @@ public class Clazz extends BaseBean{ //clazz -> class
         this.accept = accept;
     }
 
-    public boolean isMessage() {
+    public String getMessage() {
         return message;
     }
 
-    public void setMessage(boolean message) {
+    public void setMessage(String message) {
         this.message = message;
     }
 

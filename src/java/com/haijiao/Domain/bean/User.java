@@ -49,7 +49,7 @@ public class User extends BaseBean{
         fileGroups = new ArrayList();
     }
 
-    public String getAmail() {
+    public String getEmail() {
         return email;
     }
 
