@@ -49,7 +49,7 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <section id="content" style="height:1200px">
-    <div id="sideInfo" style="height: 600px; width: 250px;margin: 0px 0px 0px 50px ;float: left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
+    <div id="sideInfo" style="height: 660px; width: 250px;margin: 0px 0px 0px 50px ;float: left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
         <figure id="personImage" class="figureBar" style="height: 230px; width:230px;">
               <img src="<s:property value="#session.teacher.picUrl"/>" style="height: 230px;width: 230px;"/>
         </figure>
@@ -63,8 +63,10 @@
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div style="margin:0px 0px 0px 20px "><s:property value="intro"/></div>
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
-        <div style="margin:40px 0px 0px 40px ">已有 30 人选择了TA</div>
-        <a href="#" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">我要预约</a>
+        <div style="margin:40px 0px 0px 40px ">已有 30 人选择了你</div>
+        <a href="changeInfo.jsp" class="login-btn">修改资料</a>
+        <a href="changePassword.jsp" class="login-btn" >修改密码</a>
+        <a data-target="#choosemodal" style="font-size: 20px; margin: 20px 0px 0px 40px;padding: 10px 40px;float: left">修改时间表</a>
     </div>
     <div id="topbar" style="height:100px;width: 900px;margin: 0px 0px 0px 20px;float:left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
     </div>

@@ -22,11 +22,23 @@
             <result name="success">register.jsp</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="teacherRegister">
-            <result name="input">index.jsp</result>
+            <result name="input">register.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="studentRegister">
-            <result name="input">index.jsp</result>
+            <result name="input">register.jsp</result>
+            <result name="success">teachers.jsp</result>
+        </action>
+         <action name="changeInfo" class="ChangeInfoAction" method="teacherChange">
+            <result name="input">changeInfo.jsp</result>
+            <result name="success">teachers.jsp</result>
+        </action>
+        <action name="changeInfo" class="ChangeInfoAction" method="studentChange">
+            <result name="input">changeInfo.jsp</result>
+            <result name="success">teachers.jsp</result>
+        </action>
+        <action name="changeInfo" class="ChangeInfoAction" method="changePassword">
+            <result name="input">changePassword.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
         <action name="index" class="IndexAction">

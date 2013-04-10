@@ -20,6 +20,9 @@ public class ChangeInfoAction extends SessionAction {
     String grade;
     String tel;
     String telType;
+    String oldpwd;
+    String newpwd;
+    String newpwd2;
 
     @Override
     public String execute(){
@@ -50,6 +53,30 @@ public class ChangeInfoAction extends SessionAction {
             this.putIn("message", this.getText("stuRegisterFailure"));
             return "input";
         }
+    }
+    
+    public String teacherChange(){
+        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, null, school, tel)){
+            this.putIn("message", this.getText("teaChangeSuccess"));
+            return SUCCESS;
+        } else {
+            this.putIn("message", this.getText("teaChangeFailure"));
+            return "input";
+        }
+    }
+    
+    public String studentChange(){
+        if(studentService.changeInfo((String)this.getValue("email"), name, sex, null, grade, null, tel, null)){
+            this.putIn("message", this.getText("stuChangeSuccess"));
+            return SUCCESS;
+        } else {
+            this.putIn("message", this.getText("stuChangeFailure"));
+            return "input";
+        }
+    }
+    
+    public String changePassword(){
+        return SUCCESS;
     }
 
     public ITeacherService getTeacherService() {
