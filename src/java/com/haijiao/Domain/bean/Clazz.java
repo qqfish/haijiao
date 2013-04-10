@@ -88,19 +88,11 @@ public class Clazz extends BaseBean{ //clazz -> class
         this.week = week;
     }
 
-<<<<<<< HEAD
-    public Integer getDay() {
-        return day;
-    }
-
-    public void setDay(Integer day) {
-=======
     public int getDay() {
         return day;
     }
 
     public void setDay(int day) {
->>>>>>> schedule not test yet
         this.day = day;
     }
 

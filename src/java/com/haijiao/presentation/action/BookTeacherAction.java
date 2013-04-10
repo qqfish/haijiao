@@ -88,20 +88,19 @@ public class BookTeacherAction extends SessionAction {
         this.gson = gson;
     }
 
-<<<<<<< HEAD
+    public ITeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
     public Teacher getTea() {
         return tea;
     }
 
     public void setTea(Teacher tea) {
         this.tea = tea;
-=======
-    public Integer getDay() {
-        return day;
-    }
-
-    public void setDay(Integer day) {
-        this.day = day;
->>>>>>> schedule not test yet
     }
 }
