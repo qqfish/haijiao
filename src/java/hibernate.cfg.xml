@@ -20,5 +20,6 @@
     <mapping class="com.haijiao.Domain.file.UserFileGroup"/>
     <mapping class="com.haijiao.Domain.file.UserFile"/>
     <mapping class="com.haijiao.Domain.bean.Lesson"/>
+    <mapping class="com.haijiao.Domain.bean.Label"/>
   </session-factory>
 </hibernate-configuration>

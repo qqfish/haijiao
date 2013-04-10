@@ -5,6 +5,7 @@
 
 package com.haijiao.Domain.bean;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -19,6 +20,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.annotations.CollectionOfElements;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity    
 @Table(name="teacher")
@@ -29,15 +32,13 @@ public class Teacher extends User{
     private String tel;             //老师的手机
     private String videoUrl;    //老师的介绍视频地址
     
-    @CollectionOfElements(targetElement=String.class)
-    @JoinTable(
-        name = "label",
-        joinColumns = @JoinColumn(name = "labelid")
-    )
-    @Column(name = "labels")
-    private List<String> labels; //老师的标签 
+    @OneToMany(fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @Column(name = "lid")
+    private List<Label> labels; //老师的标签 
     
     @OneToMany(fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     
@@ -49,7 +50,8 @@ public class Teacher extends User{
     
     private int wagePerhour;         //老师每小时的辅导费
     
-    @ManyToMany(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST})
+    @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
             name = "teach",
             joinColumns = @JoinColumn(name="sid"),
@@ -57,12 +59,13 @@ public class Teacher extends User{
             )
     private List<Student> studentlist; //教授过的学生列表
     
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Clazz> classlist;    //课程列表
 
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
-        this.labels = new ArrayList<String>();
+        this.labels = new ArrayList<Label>();
         this.studentlist = new ArrayList<Student>();
         this.classlist = new ArrayList<Clazz>();
     }
@@ -99,11 +102,11 @@ public class Teacher extends User{
         this.videoUrl = videoUrl;
     }
 
-    public List<String> getLabels() {
+    public List<Label> getLabels() {
         return labels;
     }
 
-    public void setLabels(List<String> labels) {
+    public void setLabels(List<Label> labels) {
         this.labels = labels;
     }
 
@@ -153,6 +156,15 @@ public class Teacher extends User{
 
     public void setClasslist(List<Clazz> classlist) {
         this.classlist = classlist;
+    }
+    
+    public String toJson(){
+        Gson gson = new Gson();
+        System.out.println("begin:");
+        System.out.println(this.schedule.getId());
+        System.out.println(gson.toJson(this.schedule));
+        System.out.println("end");
+        return gson.toJson(this);
     }
 
 }

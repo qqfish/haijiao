@@ -14,15 +14,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity    
 @Table(name="clazz")     
 public class Clazz extends BaseBean{ //clazz -> class
-    @ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "tid")
     private Teacher teacher;
     
-    @ManyToOne(fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "sid")
     private Student student;
     
@@ -36,8 +38,8 @@ public class Clazz extends BaseBean{ //clazz -> class
     private Integer week; //第一/二个星期，此处只能取值1或2
     
     @Column(name="weekday")
-    private Integer day;   //星期X
-    private int beginIndex;    //时间片index，比如 1对应 8:00-8:30，2对应 8:30-9:00
+    private int day;   //星期X
+    private int beginIndex;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
     private int endIndex;
     
     private boolean accept;  //本次预约老师是否已接受
@@ -86,11 +88,19 @@ public class Clazz extends BaseBean{ //clazz -> class
         this.week = week;
     }
 
+<<<<<<< HEAD
     public Integer getDay() {
         return day;
     }
 
     public void setDay(Integer day) {
+=======
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+>>>>>>> schedule not test yet
         this.day = day;
     }
 
