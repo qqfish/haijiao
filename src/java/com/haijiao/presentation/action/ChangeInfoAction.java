@@ -5,13 +5,16 @@
 
 package com.haijiao.presentation.action;
 
+import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
+import com.haijiao.SupportService.service.IUserService;
 import java.sql.Date;
 
 public class ChangeInfoAction extends SessionAction {
     ITeacherService teacherService;
     IStudentService studentService;
+    IUserService userService;
     String password;
     String name;
     String sex;
@@ -76,6 +79,18 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String changePassword(){
+        User u = (User)this.getValue("user");
+        System.out.println(u.getPassword());
+        if ( !oldpwd.equals(u.getPassword())) {
+            this.putIn("message", this.getText("passwordWrong"));
+            return "input";
+        } 
+        if ( !newpwd.equals(newpwd2) ) {
+            this.putIn("message", this.getText("passwordNotEqual"));
+            return "input";
+        }
+        userService.changePassword( u.getEmail(), newpwd );
+        this.putIn("message", this.getText("changePasswordSuccess"));
         return SUCCESS;
     }
 
@@ -157,5 +172,37 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setTelType(String telType) {
         this.telType = telType;
+    }
+
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
+    }
+
+    public String getOldpwd() {
+        return oldpwd;
+    }
+
+    public void setOldpwd(String oldpwd) {
+        this.oldpwd = oldpwd;
+    }
+
+    public String getNewpwd() {
+        return newpwd;
+    }
+
+    public void setNewpwd(String newpwd) {
+        this.newpwd = newpwd;
+    }
+
+    public String getNewpwd2() {
+        return newpwd2;
+    }
+
+    public void setNewpwd2(String newpwd2) {
+        this.newpwd2 = newpwd2;
     }
 }

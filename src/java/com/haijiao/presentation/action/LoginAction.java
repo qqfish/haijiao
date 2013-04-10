@@ -39,6 +39,7 @@ public class LoginAction extends SessionAction {
             this.putIn("user", theUser);
             this.putIn("login", true);
             this.putIn("userType", userType);
+            this.putIn("email",email);
             this.putIn("message",this.getText("loginsuccess"));
             return SUCCESS;
         }

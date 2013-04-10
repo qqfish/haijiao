@@ -25,6 +25,7 @@
     <bean id="ChangeInfoAction" class="com.haijiao.presentation.action.ChangeInfoAction" scope="prototype">
         <property name="teacherService" ref="teacherServiceImpl" />
         <property name="studentService" ref="studentServiceImpl"/>
+        <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />

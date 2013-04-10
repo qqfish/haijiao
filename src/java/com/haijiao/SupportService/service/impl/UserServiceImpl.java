@@ -68,6 +68,14 @@ public class UserServiceImpl implements IUserService{
     }
     
     @Override
+    public boolean changePassword(String email, String password){
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        t.setPassword(password);
+        teacherDAO.update(t);
+        return true;
+    }
+    
+    @Override
     public String confirmLogin(String email, String password) {
         return userDAO.confirmLogin(email, password);
     }

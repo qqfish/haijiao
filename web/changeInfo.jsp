@@ -55,19 +55,19 @@
       <s:form action="changeInfo.action">
             <s:if test="#session.userType == 'teacher'">
                 <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，修改你的详细信息吧^ ^</div>
-                <s:textfield type="text" name="name" placeholder="请输入您的大名" value="" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="sex" placeholder="请输入您的性别" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="school" placeholder="请输入您就读的大学" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="tel" placeholder="请输入您的手机号" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="sex" placeholder="请输入您的性别" value="%{#session.teacher.sex}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.teacher.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="teacherRegister"/>
             </s:if>
             <s:if test="#session.userType == 'student'">
                 <div style="font-size: 36px;margin:20px 0px 0px 40px">同学您好，修改你的详细信息吧^ ^</div>
-                <s:textfield type="text" name="name" placeholder="请输入您的大名" value="#session." autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="sex" placeholder="请输入您的性别" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="school" placeholder="请输入您就读的大学" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="grade" placeholder="请输入您在读的年级" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="tel" placeholder="请输入您或您父母的手机号" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}"  autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="sex" placeholder="请输入您的性别" value="%{#session.teacher.sex}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="grade" placeholder="请输入您在读的年级" value="%{#session.teacher.grade}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:textfield type="text" name="tel" placeholder="请输入您或您父母的手机号" value="%{#session.teacher.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="studentRegister"/>
             </s:if>
         </s:form>

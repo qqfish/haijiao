@@ -30,31 +30,23 @@ public class StudentServiceImpl implements IStudentService{
     public Student getStudentByEmail(String email) {
         return studentDAO.getStudentByEmail(email);
     }
-
-     @Override
-    public boolean changePassword(String email, String password){
-        Student t = studentDAO.getStudentByEmail(email);
-        t.setPassword(password);
-        studentDAO.update(t);
-        return true;
-    }
     
     @Override
     public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType) {
         Student s = studentDAO.getStudentByEmail(email);
         if(birthday != null)
             s.setBirthday(birthday);
-        if(!grade.isEmpty())
+        if(grade != null)
             s.setGrade(grade);
-        if(!name.isEmpty())
+        if(name != null)
             s.setName(name);
-        if(!school.isEmpty())
+        if(school != null)
             s.setSchool(school);
-        if(!sex.isEmpty())
+        if(sex != null)
             s.setSex(sex);
-        if(!tel.isEmpty())
+        if(tel != null)
             s.setTel(tel);
-        if(!telType.isEmpty())
+        if(telType != null)
             s.setTelType(telType);
         studentDAO.update(s);
         return true;

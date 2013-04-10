@@ -17,8 +17,6 @@ import java.util.List;
 public interface IStudentService {
     public Student getStudentByEmail(String email);
     
-    //修改密码
-    public boolean changePassword(String email, String password);
     //修改基本资料
     public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType);
     //充值

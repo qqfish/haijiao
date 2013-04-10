@@ -22,6 +22,7 @@ public class RegisterAction extends SessionAction{
             this.putIn("user", theUser);
             this.putIn("userType", userType);
             this.putIn("login", true);
+            this.putIn("email", email);
             this.putIn("message", this.getText("registerSuccess"));
             return SUCCESS;
         } else {

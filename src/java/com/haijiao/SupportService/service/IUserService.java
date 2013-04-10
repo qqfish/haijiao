@@ -18,6 +18,9 @@ public interface IUserService {
     public boolean confirmExist(String email);
     
     public User getUserByEmail(String email);
+    
+    //修改密码
+    public boolean changePassword(String email, String password);
     //验证登陆
     public String confirmLogin(String email, String password);
     //注册为User

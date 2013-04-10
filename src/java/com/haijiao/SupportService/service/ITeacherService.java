@@ -17,8 +17,6 @@ import java.util.List;
 public interface ITeacherService {
     public Teacher getTeacherByEmail(String email);
     
-    //修改密码
-    public boolean changePassword(String email, String password);
     //修改基本资料
     public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String tel);
     //获取报酬
