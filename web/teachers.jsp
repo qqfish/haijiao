@@ -89,10 +89,10 @@
                   <img src="<s:property value="picUrl"/>" style="height: 150px;width: 150px;"/>
               </figure>
               <div id="teacherName" style="height:50px;width: 350px;float:left;font-size: 36px;color: #000000;margin: 10px 0px 0px 15px;line-height: 50px"><s:property value="name"/></div>
-              <div id="teacherScore" class="label" style="font-size: 10px; margin: 0px 0px 0px 13px;background-color: transparent;border: 1px solid #db3222;color: #db3222">评分：<s:property value="score"/></div>
+              <div id="teacherScore" class="label-1" style="font-size: 10px; margin: 0px 0px 0px 13px;background-color: transparent;border: 1px solid #db3222;color: #db3222">评分：<s:property value="score"/></div>
               <div id="teacherCourses" style="height: 30px;width:390px;float:left;margin: 0px 0px 0px 10px;">
                   <s:iterator value="lessons" status="st">
-                      <div class="label" style="height: 25px;margin:2px 0px 0px 2px"><s:property value="name"/></div>
+                      <div class="label-1" style="height: 25px;margin:2px 0px 0px 2px"><s:property value="name"/></div>
                   </s:iterator>
               </div>
               <div id="teacherIcons" style="height: 30px;width:390px;float:left;margin: 0px 0px 0px 10px;">

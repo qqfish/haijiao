@@ -5,6 +5,8 @@
 
 package com.haijiao.presentation.action;
 
+import com.haijiao.Domain.bean.Student;
+import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
@@ -26,20 +28,11 @@ public class ChangeInfoAction extends SessionAction {
     String oldpwd;
     String newpwd;
     String newpwd2;
-
-    @Override
-    public String execute(){
-        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, birthday, school, tel)){
-            this.putIn("message", this.getText("successmessage"));
-            return SUCCESS;
-        } else {
-            this.putIn("message", this.getText("errormessage"));
-            return "unconnected";
-        }
-    }
     
     public String teacherRegister(){
         if(teacherService.changeInfo((String)this.getValue("email"), name, sex, null, school, tel)){
+            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
+            this.putIn("teacher", theTeacher);
             this.putIn("message", this.getText("teaRegisterSuccess"));
             return SUCCESS;
         } else {
@@ -50,6 +43,8 @@ public class ChangeInfoAction extends SessionAction {
     
     public String studentRegister(){
         if(studentService.changeInfo((String)this.getValue("email"), name, sex, null, grade, null, tel, null)){
+            Student s = studentService.getStudentByEmail((String)this.getValue("email"));
+            this.putIn("student", s);
             this.putIn("message", this.getText("stuRegisterSuccess"));
             return SUCCESS;
         } else {
@@ -60,6 +55,8 @@ public class ChangeInfoAction extends SessionAction {
     
     public String teacherChange(){
         if(teacherService.changeInfo((String)this.getValue("email"), name, sex, null, school, tel)){
+            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
+            this.putIn("teacher", theTeacher);
             this.putIn("message", this.getText("teaChangeSuccess"));
             return SUCCESS;
         } else {
@@ -70,6 +67,8 @@ public class ChangeInfoAction extends SessionAction {
     
     public String studentChange(){
         if(studentService.changeInfo((String)this.getValue("email"), name, sex, null, grade, null, tel, null)){
+            Student s = studentService.getStudentByEmail((String)this.getValue("email"));
+            this.putIn("student", s);
             this.putIn("message", this.getText("stuChangeSuccess"));
             return SUCCESS;
         } else {
