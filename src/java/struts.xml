@@ -31,8 +31,8 @@
         </action>
         <action name="index" class="IndexAction">
             <result name="success">index.jsp</result>
-            <result name="teacher">teacherInfo.jsp</result>
-            <result name="student">studentInfo.jsp</result>
+            <result name="teacher">teacherIndex.jsp</result>
+            <result name="student">studentIndex.jsp</result>
         </action>
         <action name="searchTeacher" class="SearchTeacherAction">
             <result name="success">teachers.jsp</result>

@@ -1,9 +1,3 @@
-<%-- 
-    Document   : studentIndex
-    Created on : 2013-3-26, 22:11:27
-    Author     : Bx Yang
---%>
-
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
@@ -22,10 +16,8 @@
 <!--js-->
 <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
 <script type="text/javascript" src="js/superfish.js"></script>
-<script type="text/javascript" src="js/schedule.js"></script>
 <script type="text/javascript" src="js/teachers.js"></script>
 <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
 
 <script>	
 			jQuery(window).load(function() {								
@@ -67,81 +59,27 @@
 <section id="content" style="height:1400px">
     <div id="sideInfo" style="height: 600px; width: 250px;margin: 0px 0px 0px 50px ;float: left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
         <figure id="personImage" class="figureBar" style="height: 230px; width:230px;">
-              <img src="images/page2-img2.jpg" style="height: 230px;width: 230px;"/>
+              <img src="<s:property value="#session.student.picUrl"/>" style="height: 230px;width: 230px;"/>
         </figure>
         <a class="label" href="register.jsp" style="height: 25px;margin:10px 0px 0px 10px;">修改资料</a>
-        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px">BBB</div>          
+        <div id="teacherName" style="height:50px;width: auto;float:right;font-size: 36px;color: #000000;margin: 0px 10px 0px 0px;line-height: 50px"><s:property value="#session.student.name"/></div>          
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div id="teacherCourses" style="height: 30px;width:250px;float:left;margin: 0px 0px 10px 10px;">
               <div class="label" style="height: 25px;margin:2px 0px 0px 2px;">年级</div>
         </div>
-        <hr style="height: 1px;width: 230px;margin:10px auto"/>5
-        <div style="margin:0px 0px 0px 20px ">这个人很懒 什么都没留下。</div>
+        <hr style="height: 1px;width: 230px;margin:10px auto"/>
+        <div style="margin:0px 0px 0px 20px "><s:property value="#session.student.intro"/></div>
         <hr style="height: 1px;width: 230px;margin:10px auto"/>
         <div style="margin:40px 0px 0px 40px ">您近期还有7堂课</div>
         <a href="teachers.jsp" class="login-btn" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">我要上课</a>
     </div>
     <div id="topbar" style="height:100px;width: 900px;margin: 0px 0px 0px 20px;float:left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
     </div>
-    <div id="middlebar" style="height:305px;width: 900px;margin: 20px 0px 0px 20px;float:left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
-        <div id="leftbar" style="height:305px;width:600px;float:left;margin:0px 0px 0px 0px">
-            <div class="schedule_panel">
-		<table class="schedule_table" width="100%" border="0" style="z-index: 1">
-		<tbody>
-		<tr>
-			<th ></th>
-                        <th>Mon.</th>
-                        <th>Tue.</th>
-                        <th>Wed.</th>
-                        <th>Thu.</th>
-                        <th>Fri.</th>
-                        <th style="width:24px">Sat.</th>
-                        <th style="width:24px">Sun.</th>
-		</tr>
-		<tr class="class_1">
-			<th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_2">
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_3">
-			<th rowspan="2">10:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_4">
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_5">
-			<th rowspan="2">中 午</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_6">
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_7">
-			<th rowspan="2">14：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_8">
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_9">
-			<th rowspan="2">16：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_10">
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_11">
-			<th rowspan="3">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_12">
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		<tr class="class_13">
-			<td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-		</tr>
-		</tbody>
-	</table>
-	</div>
+    <div id="middlebar" style="height:300px;width: 900px;margin: 20px 0px 0px 20px;float:left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
+        <div id="leftbar" style="height:300px;width:600px;float:left;margin:0px 0px 0px 0px">
+            课程表
         </div>
-        <hr style="height: 305px;width: 1px;float:left;margin:0px 0px 0px 0px"/>
+        <hr style="height: 300px;width: 1px;float:left;margin:0px 0px 0px 20px"/>
         <div id="rightbar" style="height:260px;width:200px;float:left;margin:20px 0px 0px 20px">
             
         </div>
@@ -189,4 +127,3 @@
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>
 </html>
-
