@@ -5,10 +5,11 @@
 
 package com.haijiao.Domain.bean;
 
-public class Bill {
+public class Bill extends BaseBean{
     private User from;
     private int money;
-    private boolean earn;
+    private boolean earn;   //收入或支出
+    private String message; //账单说明
     private Comment comment;
 
     public Bill() {

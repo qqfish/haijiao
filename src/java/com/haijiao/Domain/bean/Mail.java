@@ -5,7 +5,7 @@
 
 package com.haijiao.Domain.bean;
 
-public class Mail {
+public class Mail extends BaseBean{
     private User from;
     private User to;
     private String message;

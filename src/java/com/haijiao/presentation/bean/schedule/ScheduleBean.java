@@ -21,9 +21,9 @@ public class ScheduleBean {
         if(s == null){
             return;
         }
-        for(int i = 0; i < s.getClazzes().size(); i++){
-            clazzes.add(new ClazzBean(s.getClazzes().get(i)));
-        }
+//        for(int i = 0; i < s.getClazzes().size(); i++){
+//            clazzes.add(new ClazzBean(s.getClazzes().get(i)));
+//        }
     }
     
     public ScheduleBean() {

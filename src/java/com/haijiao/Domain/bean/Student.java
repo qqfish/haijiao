@@ -27,7 +27,7 @@ public class Student extends User{
     
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "scheid", unique = true)
-    private Schedule schedule;      //学生的时间表
+    private List<Clazz> schedule;      //学生的时间表
     
     @ManyToMany(mappedBy = "studentlist")
     private List<Teacher> teacherList;   //收藏老师的列表
@@ -68,11 +68,11 @@ public class Student extends User{
         this.telType = telType;
     }
 
-    public Schedule getSchedule() {
+    public List<Clazz> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(List<Clazz> schedule) {
         this.schedule = schedule;
     }
 

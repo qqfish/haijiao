@@ -17,17 +17,20 @@ import javax.persistence.Table;
 @Entity    
 @Table(name="clazz")     
 public class Clazz extends BaseBean{ //clazz -> class
+    public class Status{
+        static final int notAvailable = 0;
+        static final int available = 1;
+        static final int notAccept = 2;
+        static final int accept = 3;
+    }
+    
     @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "tid")
     private Teacher teacher;
     
     @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "stableSid")
-    private Student stableStudent;  //固定时间的学生
-    
-    @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "tmpSid")
-    private Student tmpStudent;     //临时学生
+    @JoinColumn(name = "sid")
+    private Student student;  //固定时间的学生
     
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="lid", unique=true)
@@ -38,12 +41,9 @@ public class Clazz extends BaseBean{ //clazz -> class
     @Column(name="sliceindex")
     private int index;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
     
-    private boolean accept;  //本次预约老师是否已接受
-    private boolean studentPause;  //学生暂停 其他学生可以选当临时学生
-    private boolean teacherPause;   //老师暂停 其他学生不能选
-    private String message;   //本次预约在接受或拒绝后附加的信息
-    private Integer pay;    //本次课程的花费
-    private boolean finish;  //本次课程是否已结束（结算）
+    private int status;  //本次预约的状态，可选值未Status类中
+    private int remain;    //课程次数，-1为无限,每上一次减1，到0该课程被清除
+    private int timeToBegin;    //距离开始的次数,方便学生查询
 
     
     public Teacher getTeacher() {
@@ -52,14 +52,6 @@ public class Clazz extends BaseBean{ //clazz -> class
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
-    }
-
-    public Student getStableStudent() {
-        return stableStudent;
-    }
-
-    public void setStableStudent(Student stableStudent) {
-        this.stableStudent = stableStudent;
     }
 
     public Lesson getLesson() {
@@ -77,46 +69,6 @@ public class Clazz extends BaseBean{ //clazz -> class
     public void setDay(int day) {
         this.day = day;
     }
-    
-    public boolean isAccept() {
-        return accept;
-    }
-
-    public void setAccept(boolean accept) {
-        this.accept = accept;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Integer getPay() {
-        return pay;
-    }
-
-    public void setPay(Integer pay) {
-        this.pay = pay;
-    }
-
-    public boolean isFinish() {
-        return finish;
-    }
-
-    public void setFinish(boolean finish) {
-        this.finish = finish;
-    }
-
-    public Student getTmpStudent() {
-        return tmpStudent;
-    }
-
-    public void setTmpStudent(Student tmpStudent) {
-        this.tmpStudent = tmpStudent;
-    }
 
     public int getIndex() {
         return index;
@@ -126,20 +78,35 @@ public class Clazz extends BaseBean{ //clazz -> class
         this.index = index;
     }
 
-    public boolean isStudentPause() {
-        return studentPause;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudentPause(boolean studentPause) {
-        this.studentPause = studentPause;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public boolean isTeacherPause() {
-        return teacherPause;
+    public int getStatus() {
+        return status;
     }
 
-    public void setTeacherPause(boolean teacherPause) {
-        this.teacherPause = teacherPause;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
+    public int getRemain() {
+        return remain;
+    }
+
+    public void setRemain(int remain) {
+        this.remain = remain;
+    }
+
+    public int getTimeToBegin() {
+        return timeToBegin;
+    }
+
+    public void setTimeToBegin(int timeToBegin) {
+        this.timeToBegin = timeToBegin;
+    }
 }

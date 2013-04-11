@@ -28,7 +28,6 @@ public class Teacher extends User{
     private String school;        //就读大学
     private String province;     //省份
     private String classNum;   //成功完成课程的次数
-    private String rate;            //完成率
 	@Column(columnDefinition="int default 0")
     private String reserveNum;  //预约次数
     private String tel;             //老师的手机
@@ -102,14 +101,6 @@ public class Teacher extends User{
 
     public void setReserveNum(String reserveNum) {
         this.reserveNum = reserveNum;
-    }
-
-    public String getRate() {
-        return rate;
-    }
-
-    public void setRate(String rate) {
-        this.rate = rate;
     }
 
     public String getTel() {

@@ -2,7 +2,7 @@
  *
  * @author Jerry Zou
  */
-package com.haijiao.Domain.bean;
+package com.haijiao.presentation.bean;
 
 import com.haijiao.SupportService.service.IClassService;
 import java.util.List;

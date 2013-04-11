@@ -32,22 +32,22 @@ public class ClazzBean {
     private boolean finish;  //本次课程是否已结束（结算）
     
     public ClazzBean(Clazz c){
-        if(c.getTeacher() != null)
-            teacherEmail = c.getTeacher().getEmail();
-        if(c.getStableStudent() != null)
-            stableStudentEmail = c.getStableStudent().getEmail();
-        if(c.getTmpStudent() != null)
-            tmpStudentEmail = c.getTmpStudent().getEmail();
-        if(c.getLesson() != null)
-            lesson = c.getLesson().getName();
-        day = c.getDay();
-        index = c.getIndex();
-        studentPause = c.isStudentPause();
-        teacherPause = c.isTeacherPause();
-        accept = c.isAccept();
-        message = c.getMessage();
-        pay = c.getPay();
-        finish = c.isFinish();
+//        if(c.getTeacher() != null)
+//            teacherEmail = c.getTeacher().getEmail();
+//        if(c.getStableStudent() != null)
+//            stableStudentEmail = c.getStableStudent().getEmail();
+//        if(c.getTmpStudent() != null)
+//            tmpStudentEmail = c.getTmpStudent().getEmail();
+//        if(c.getLesson() != null)
+//            lesson = c.getLesson().getName();
+//        day = c.getDay();
+//        index = c.getIndex();
+//        studentPause = c.isStudentPause();
+//        teacherPause = c.isTeacherPause();
+//        accept = c.isAccept();
+//        message = c.getMessage();
+//        pay = c.getPay();
+//        finish = c.isFinish();
     }
     
     public ClazzBean() {

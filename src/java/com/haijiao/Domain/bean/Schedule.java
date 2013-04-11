@@ -22,13 +22,13 @@ public class Schedule extends BaseBean {
     @OneToMany(fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name="scheid")
-    private List<Clazz> clazzes;  //两周内的课程（空余时间）
+    private List<FreeTime> freeTimes;  //教师的空闲时间
     
     @OneToOne(mappedBy = "schedule")
     private Teacher teacher;
 
     public Schedule() {
-        this.clazzes = new ArrayList<Clazz>();
+        this.freeTimes = new ArrayList<FreeTime>();
     }
 
     public Teacher getTeacher() {
@@ -39,11 +39,11 @@ public class Schedule extends BaseBean {
         this.teacher = teacher;
     }
 
-    public List<Clazz> getClazzes() {
-        return clazzes;
+    public List<FreeTime> getFreeTimes() {
+        return freeTimes;
     }
 
-    public void setClazzes(List<Clazz> clazzes) {
-        this.clazzes = clazzes;
+    public void setFreeTimes(List<FreeTime> freeTimes) {
+        this.freeTimes = freeTimes;
     }
 }

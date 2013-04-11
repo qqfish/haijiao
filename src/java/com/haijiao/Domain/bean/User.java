@@ -24,6 +24,11 @@ import org.hibernate.annotations.FetchMode;
 @Table    
 @Inheritance(strategy = InheritanceType.JOINED )
 public class User extends BaseBean{
+    public class Status{
+        static final int offline = 0;
+        static final int onlineAndAvailable = 1;
+        static final int onlineAndBusy = 2;
+    }
     protected String email;      //用户的账号,即Email
     protected String name;      //用户的真实姓名
     protected String userType; //用户的类型："teacher" or "student"
@@ -34,7 +39,7 @@ public class User extends BaseBean{
     protected String picUrl;      //用户头像的URL
     protected String sex;          //性别
     protected Date birthday;
-    protected int status;
+    protected int status;   //可选项为Status
     
     protected List<Bill> billList; //账单列表
     protected List<Mail> mailBox;
