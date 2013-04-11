@@ -15,18 +15,17 @@ public class ClazzBean {
 
     private String teacherEmail;
 
-    private String studentEmail;
+    private String stableStudentEmail;
+    
+    private String tmpStudentEmail;
 
     private String lesson;
 
-    private Date date;   //日期
-    
-    private Integer week; //第一/二个星期，此处只能取值1或2
-
     private int day;   //星期X
-    private int beginIndex;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
-    private int endIndex;
-    
+    private int index;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
+
+    private boolean studentPause;
+    private boolean teacherPause;
     private boolean accept;  //本次预约老师是否已接受
     private String message;   //本次预约在接受或拒绝后附加的信息
     private Integer pay;    //本次课程的花费
@@ -35,15 +34,16 @@ public class ClazzBean {
     public ClazzBean(Clazz c){
         if(c.getTeacher() != null)
             teacherEmail = c.getTeacher().getEmail();
-        if(c.getStudent() != null)
-            studentEmail = c.getStudent().getEmail();
+        if(c.getStableStudent() != null)
+            stableStudentEmail = c.getStableStudent().getEmail();
+        if(c.getTmpStudent() != null)
+            tmpStudentEmail = c.getTmpStudent().getEmail();
         if(c.getLesson() != null)
             lesson = c.getLesson().getName();
-        date = c.getDate();
-        week = c.getWeek();
         day = c.getDay();
-        beginIndex = c.getBeginIndex();
-        endIndex = c.getEndIndex();
+        index = c.getIndex();
+        studentPause = c.isStudentPause();
+        teacherPause = c.isTeacherPause();
         accept = c.isAccept();
         message = c.getMessage();
         pay = c.getPay();
@@ -61,14 +61,6 @@ public class ClazzBean {
         this.teacherEmail = teacherEmail;
     }
 
-    public String getStudentEmail() {
-        return studentEmail;
-    }
-
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
-    }
-
     public String getLesson() {
         return lesson;
     }
@@ -77,44 +69,12 @@ public class ClazzBean {
         this.lesson = lesson;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Integer getWeek() {
-        return week;
-    }
-
-    public void setWeek(Integer week) {
-        this.week = week;
-    }
-
     public int getDay() {
         return day;
     }
 
     public void setDay(int day) {
         this.day = day;
-    }
-
-    public int getBeginIndex() {
-        return beginIndex;
-    }
-
-    public void setBeginIndex(int beginIndex) {
-        this.beginIndex = beginIndex;
-    }
-
-    public int getEndIndex() {
-        return endIndex;
-    }
-
-    public void setEndIndex(int endIndex) {
-        this.endIndex = endIndex;
     }
 
     public boolean isAccept() {
@@ -147,6 +107,46 @@ public class ClazzBean {
 
     public void setFinish(boolean finish) {
         this.finish = finish;
+    }
+
+    public String getStableStudentEmail() {
+        return stableStudentEmail;
+    }
+
+    public void setStableStudentEmail(String stableStudentEmail) {
+        this.stableStudentEmail = stableStudentEmail;
+    }
+
+    public String getTmpStudentEmail() {
+        return tmpStudentEmail;
+    }
+
+    public void setTmpStudentEmail(String tmpStudentEmail) {
+        this.tmpStudentEmail = tmpStudentEmail;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public boolean isStudentPause() {
+        return studentPause;
+    }
+
+    public void setStudentPause(boolean studentPause) {
+        this.studentPause = studentPause;
+    }
+
+    public boolean isTeacherPause() {
+        return teacherPause;
+    }
+
+    public void setTeacherPause(boolean teacherPause) {
+        this.teacherPause = teacherPause;
     }
     
     

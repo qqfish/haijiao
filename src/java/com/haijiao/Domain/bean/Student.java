@@ -31,13 +31,9 @@ public class Student extends User{
     
     @ManyToMany(mappedBy = "studentlist")
     private List<Teacher> teacherList;   //预约过的老师列表
-    
-    @OneToMany(mappedBy = "student")
-    private List<Clazz> classList; //课程列表
 
     public Student() {
         this.teacherList = new ArrayList<Teacher>();
-        this.classList = new ArrayList<Clazz>();
     }
 
     public String getGrade() {
@@ -86,14 +82,6 @@ public class Student extends User{
 
     public void setTeacherList(List<Teacher> teacherList) {
         this.teacherList = teacherList;
-    }
-
-    public List<Clazz> getClassList() {
-        return classList;
-    }
-
-    public void setClassList(List<Clazz> classList) {
-        this.classList = classList;
     }
 
 }

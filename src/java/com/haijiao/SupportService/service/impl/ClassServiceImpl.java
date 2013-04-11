@@ -13,6 +13,7 @@ import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import java.sql.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,25 +46,6 @@ public class ClassServiceImpl implements IClassService{
     public void setStudentDAO(IStudentDAO studentDAO) {
         this.studentDAO = studentDAO;
     }
-    
-    @Override
-    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Date date, Integer week, Integer day, Integer beginIndex, Integer endIndex) {
-        Clazz c = new Clazz();
-        Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
-        Student s = studentDAO.getStudentByEmail(studentEmail);
-        Lesson l = new Lesson();
-        l.setName(lesson);
-        c.setBeginIndex(beginIndex);
-        c.setDate(date);
-        c.setDay(day);
-        c.setEndIndex(endIndex);
-        c.setFinish(false);
-        c.setLesson(l);
-        c.setWeek(week);
-        c.setStudent(s);
-        c.setTeacher(t);
-        return clazzDAO.makePersistent(c);
-    }
 
     @Override
     public boolean dealWithReservation(int clazzId, boolean accept) {
@@ -71,5 +53,45 @@ public class ClassServiceImpl implements IClassService{
         c.setAccept(accept);
         clazzDAO.update(c);
         return true;
+    }
+
+    @Override
+    public boolean bookStableTeacher(String teacherEmail, String studentEmail, String lesson, Integer day, Integer index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean bookTmpTeacher(String teacherEmail, String studentEmail, String lesson, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean studentPauseBook(String teacherEmail, String studentEmail, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean teacherPauseBook(String teacherEmail, String studentEmail, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean teacherAddClazz(String teacherEmail, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean teacherRemoveClazz(String teacherEmail, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean cancelBook(String teacherEmail, String studentEmail, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Clazz> getStudentClazz(String studentEmail) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

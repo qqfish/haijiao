@@ -34,6 +34,7 @@ public class User extends BaseBean{
     protected String picUrl;      //用户头像的URL
     protected String sex;          //性别
     protected Date birthday;
+    protected boolean online;
     
     @OneToMany(mappedBy="commenter",fetch=FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)

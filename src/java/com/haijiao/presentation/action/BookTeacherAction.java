@@ -28,21 +28,6 @@ public class BookTeacherAction extends SessionAction {
     public String execute(){
         ScheduleArray sa = gson.fromJson(gsonStr, ScheduleArray.class);
         List<List<Integer>> array = sa.getArray();
-        for(int i=0; i<array.size(); i++){
-            for(int j=0; j<array.get(i).size(); j++){
-                if(array.get(i).get(j)!=null){
-                    for(int k=j; k<array.get(i).size(); k++){
-                        if(k==array.get(i).size()-1){
-                            classService.bookTeacher(teacherEmail,(String)this.getValue("username"), "temp", null, 1, i, j, k);
-                            break;
-                        } else if(array.get(i).get(k+1)==null){
-                            classService.bookTeacher(teacherEmail,(String)this.getValue("username"), "temp", null, 1, i, j, k);
-                            break;
-                        }
-                    }
-                }
-            }
-        }
         tea = teacherService.getTeacherByEmail(teacherEmail);
         this.putIn("message", this.getText("successMessage"));
         return SUCCESS;
@@ -86,14 +71,6 @@ public class BookTeacherAction extends SessionAction {
 
     public void setGson(Gson gson) {
         this.gson = gson;
-    }
-
-    public ITeacherService getTeacherService() {
-        return teacherService;
-    }
-
-    public void setTeacherService(ITeacherService teacherService) {
-        this.teacherService = teacherService;
     }
 
     public Teacher getTea() {
