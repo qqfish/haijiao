@@ -6,41 +6,27 @@
 package com.haijiao.Domain.bean;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity    
 @Table(name="comment")
 public class Comment extends BaseBean{
     
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="commenterid")
-    private User commenter;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="commenteeid")
-    private User commentee;
-    
     private String content;
+    private String reply;
     private Integer score;
 
-    public User getCommenter() {
-        return commenter;
+    public Comment() {
     }
 
-    public void setCommenter(User commenter) {
-        this.commenter = commenter;
+    public String getReply() {
+        return reply;
     }
 
-    public User getCommentee() {
-        return commentee;
+    public void setReply(String reply) {
+        this.reply = reply;
     }
 
-    public void setCommentee(User commentee) {
-        this.commentee = commentee;
-    }
 
     public String getContent() {
         return content;

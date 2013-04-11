@@ -26,7 +26,11 @@ import org.hibernate.annotations.FetchMode;
 @PrimaryKeyJoinColumn
 public class Teacher extends User{
     private String school;        //就读大学
-    private String brief_intro;  //老师的简单介绍，显示在搜索页面
+    private String province;     //省份
+    private String classNum;   //成功完成课程的次数
+    private String rate;            //完成率
+	@Column(columnDefinition="int default 0")
+    private String reserveNum;  //预约次数
     private String tel;             //老师的手机
     private String videoUrl;    //老师的介绍视频地址
     
@@ -40,15 +44,13 @@ public class Teacher extends User{
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     
-    private boolean audition;       //该老师是否接受试听
+    private boolean audition;        //该老师是否接受试听
     
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "scheid", unique = true)
     private Schedule schedule;      //记录老师的时间表
     
-    private int wagePerhour;        //老师每小时的辅导费
-    @Column(columnDefinition="int default 0")
-    private int reserveNum;         //老师预约数
+    private int wagePerhour;         //老师每小时的辅导费
     
     @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @Fetch(value = FetchMode.SUBSELECT)
@@ -78,12 +80,36 @@ public class Teacher extends User{
         this.school = school;
     }
 
-    public String getBrief_intro() {
-        return brief_intro;
+    public String getProvince() {
+        return province;
     }
 
-    public void setBrief_intro(String brief_intro) {
-        this.brief_intro = brief_intro;
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getClassNum() {
+        return classNum;
+    }
+
+    public void setClassNum(String classNum) {
+        this.classNum = classNum;
+    }
+
+    public String getReserveNum() {
+        return reserveNum;
+    }
+
+    public void setReserveNum(String reserveNum) {
+        this.reserveNum = reserveNum;
+    }
+
+    public String getRate() {
+        return rate;
+    }
+
+    public void setRate(String rate) {
+        this.rate = rate;
     }
 
     public String getTel() {
@@ -140,14 +166,6 @@ public class Teacher extends User{
 
     public void setWagePerhour(int wagePerhour) {
         this.wagePerhour = wagePerhour;
-    }
-
-    public int getReserveNum() {
-        return reserveNum;
-    }
-
-    public void setReserveNum(int reserveNum) {
-        this.reserveNum = reserveNum;
     }
 
     public List<Student> getStudentlist() {

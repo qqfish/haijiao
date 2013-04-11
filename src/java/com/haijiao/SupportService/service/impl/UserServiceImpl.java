@@ -121,8 +121,6 @@ public class UserServiceImpl implements IUserService{
         User Commenter = userDAO.getUserByEmail(commenterEmail);
         User Commentee = userDAO.getUserByEmail(commenteeEmail);
         Comment c = new Comment();
-        c.setCommentee(Commentee);
-        c.setCommenter(Commenter);
         c.setContent(content);
         c.setScore(score);
         return commentDAO.makePersistent(c);

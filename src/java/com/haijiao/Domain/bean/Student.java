@@ -11,6 +11,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -29,7 +30,7 @@ public class Student extends User{
     private Schedule schedule;      //学生的时间表
     
     @ManyToMany(mappedBy = "studentlist")
-    private List<Teacher> teacherList;   //预约过的老师列表
+    private List<Teacher> teacherList;   //收藏老师的列表
 
     public Student() {
         this.teacherList = new ArrayList<Teacher>();

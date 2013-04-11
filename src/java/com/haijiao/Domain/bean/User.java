@@ -34,11 +34,10 @@ public class User extends BaseBean{
     protected String picUrl;      //用户头像的URL
     protected String sex;          //性别
     protected Date birthday;
-    protected boolean online;
+    protected int status;
     
-    @OneToMany(mappedBy="commenter",fetch=FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    protected List<Comment> commentsToThis; //所有对本用户的评论
+    protected List<Bill> billList; //账单列表
+    protected List<Mail> mailBox;
     
     @OneToMany(fetch=FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
@@ -46,8 +45,9 @@ public class User extends BaseBean{
     protected List<UserFileGroup> fileGroups;
 
     public User() {
-        commentsToThis = new ArrayList();
         fileGroups = new ArrayList();
+        billList = new ArrayList<Bill>();
+        mailBox = new ArrayList<Mail>();
     }
 
     public String getEmail() {
@@ -129,15 +129,29 @@ public class User extends BaseBean{
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-    
-    
 
-    public List<Comment> getCommentsToThis() {
-        return commentsToThis;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCommentsToThis(List<Comment> commentsToThis) {
-        this.commentsToThis = commentsToThis;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public List<Bill> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(List<Bill> billList) {
+        this.billList = billList;
+    }
+
+    public List<Mail> getMailBox() {
+        return mailBox;
+    }
+
+    public void setMailBox(List<Mail> mailBox) {
+        this.mailBox = mailBox;
     }
     
     public void addFileGroup(String groupName){
