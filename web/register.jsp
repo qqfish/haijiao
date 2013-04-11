@@ -1,6 +1,5 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +13,15 @@
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="css/datepicker.css">
 <!--js-->
-<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="js/superfish.js"></script>
 <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 <script type="text/javascript" src="js/reg.js"></script>
-
-
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 
 	<!--[if lt IE 8]>
       <div style=' clear: both; text-align:center; position: relative;'>
@@ -45,26 +46,28 @@
 <!--==============================content=================================-->
 <section id="content">
 <div class="ic"></div>
-  <div id="regpanel" style="height:600px; width: 800px;margin:auto;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
-      <s:form action="changeInfo.action">
+  <div id="regpanel" class="container" style="width:800px;border: 1px solid #CCC;box-shadow:3px 3px 3px #c5c2a9;-moz-box-shadow: 3px 3px 3px #c5c2a9;-webkit-box-shadow:3px 3px 3px #c5c2a9;background-color: white;">
+      <s:form action="register.action">
             <s:if test="#session.userType == 'teacher'">
-                <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，请充实你的详细信息吧^ ^</div>
+                <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，请填写您的详细信息吧^ ^</div>
             </s:if>
             <s:if test="#session.userType == 'student'">
-                <div style="font-size: 36px;margin:20px 0px 0px 40px">同学您好，我去年买了个表^ ^</div>
+                <div style="font-size: 36px;margin:20px 0px 0px 40px">同学您好，请填写您的详细信息吧^ ^</div>
             </s:if>
             <hr style="height: 1px;width: auto;margin:10px auto"/>
             <s:textfield type="text" name="name" placeholder="请输入您的大名" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
             <s:textfield type="text" name="sex" placeholder="请输入您的性别" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+            <s:textfield type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
             <s:if test="#session.userType == 'teacher'">
                 <s:textfield type="text" name="school" placeholder="请输入您就读的大学" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:textfield type="text" name="tel" placeholder="请输入您的手机号" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="teacherRegister"/>
+                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
             </s:if>
             <s:if test="#session.userType == 'student'">
+                <s:textfield type="text" name="school" placeholder="请输入您在读的学校" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:textfield type="text" name="grade" placeholder="请输入您在读的年级" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                 <s:textfield type="text" name="tel" placeholder="请输入您或您父母的手机号" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="studentRegister"/>
+                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
             </s:if>
         </s:form>
   </div>

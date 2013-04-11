@@ -13,8 +13,8 @@
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
-<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css"></script>
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css"></script>
+<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <!--js-->
 <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
 <script type="text/javascript" src="js/superfish.js"></script>
@@ -70,47 +70,48 @@
 		  </ul>
 		</div>
 	  </div>-->
-        <div class="login-bar" style="border:2px solid #CCC;" >
+        <div class="login-bar" style="" >
             <!--<div id ="dispalypanel" style="width:600px;height: 400px;"><img src="images/1.jpg" width=600 height=400></div>-->
             <div style="height:400px;width:694px;float:left;overflow: hidden;"><img alt="" src="images/1.jpg" width=700 height=400></div>
-            <div class="login-panel" style="border:1px solid #CCC;margin: 0px 0px 0px 0px;">
-                <div class='login-func'>
-                    <div id ='regText'class='login-reg' style="font-size: 32px;color: black;opacity: 1;border-right:1px solid #CCC;">用户注册</div>
-                    <div id='logText' class='login-log' style="font-size: 32px;opacity: 0.5;border-left:1px solid #CCC;border-bottom:1px solid #CCC;background-color: #e8e7de   ">用户登录</div>
-                </div>                
-                <div id='reg-panel'>
-                <s:form action="register.action"> <br/>
-                    <s:textfield name="email"  placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;" ></s:textfield>
-                    <s:password name="password1"  placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
-                    <s:password name="password2" placeholder="请重复密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
-                    <a id="reg-btn" data-toggle="modal" data-target="#choosemodal" class="login-btn" style="font-size: 20px; margin: 20px 70px 0px 0px;border:0px">注册</a>
-                    <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
-                        <div class="modal-header" style="height: 50px">
-                            <a class="close" data-dismiss="modal">×</a>
-                            <h3 style="margin-top:-20px">选择您的身份</h3>
-                        </div>
-                        <div class="modal-body">
-                            <div id="leftbar" style="height:250px;width:250px;float:left;margin:0px 0px 0px 30px;border:1px solid #CCC">
-                                <s:submit value="老师" method="teacher"></s:submit>
-                            </div>
-                            <div id="rightbar" style="height:250px;width:250px;float:left;margin:0px 0px 0px 40px;border:1px solid #CCC">
-                                <s:submit value="学生" method="student"></s:submit>
-                            </div>
-                        </div>
-                    </div>
-                </s:form>
-                </div>
-                <div id='log-panel' style='display:none;'>
-                    <s:form action="login.action">
-                        <s:textfield name="email" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 50px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:textfield>
-                        <s:password name="password" placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
-                        <s:submit cssClass="login-btn" style="font-size: 20px; margin: 70px 70px 0px 60px;border:0px" value="登录"></s:submit>
+            <div class="login-panel" style="border:1px solid #CCC;">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#reg-panel" data-toggle="tab" style="height: 50px;width:172px;line-height: 50px;font-size: 32px;border-radius: 0px;border-left: 0px">注册</a></li>
+                    <li><a href="#log-panel" data-toggle="tab" style="height: 50px;width:173px;line-height: 50px;font-size: 32px;border-radius: 0px;border-right: 0px">登录</a></li>
+                  </ul>  
+                <div class="tab-content">
+                <div class="tab-pane fade active in" id='reg-panel'>
+                    <s:form action="register.action">
+                        <s:textfield name="email"  placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;" ></s:textfield>
+                        <s:password name="password1"  placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
+                        <s:password name="password2" placeholder="请重复密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
+                       <a id="reg-btn" data-toggle="modal" data-target="#choosemodal" class="login-btn" style="font-size: 20px; margin: 20px 70px 0px 60px;border:0px">注册</a>
+                       <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
+            <div class="modal-header" style="height: 50px">
+                <a class="close" data-dismiss="modal">×</a>
+                <h3 style="margin-top:-20px">选择您的身份</h3>
+            </div>       
+            <div class="modal-body">
+                <div id="leftbar" style="height:250px;width:250px;float:left;margin:0px 0px 0px 30px;border:1px solid #CCC">        
+                    <s:submit value="老师" method="teacher"></s:submit>     
+                </div>     
+                <div id="rightbar" style="height:250px;width:250px;float:left;margin:0px 0px 0px 40px;border:1px solid #CCC">      
+                    <s:submit value="学生" method="student"></s:submit>
+                </div> 
+            </div>        
+        </div>
                     </s:form>
                 </div>
-            </div>
+                <div class="tab-pane fade"  id='log-panel'>
+                    <s:form action="login.action">
+                        <s:textfield name="email" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:textfield>
+                        <s:password name="password" placeholder="请输入密码" autofocus="autofocus" style="margin: 20px 0px 0px 40px;height: 30px;width: 300px;font-size: 20px;"></s:password>
+                        <s:submit cssClass="login-btn" style="font-size: 20px; margin: 80px 70px 0px 60px;border:0px" value="登录"></s:submit>
+                    </s:form>
+                </div>
+                </div>
+           </div>
         </div>
-        <a class="btn" data-toggle="modal" data-target="#choosemodal">点击"无ESC关闭，无遮蔽背景"演示</a>
-        
+
         
 	  <div class="box-slogan">
 		<h3>欢迎来到海角家教！</h3>
