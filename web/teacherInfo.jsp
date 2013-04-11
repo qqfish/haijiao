@@ -74,10 +74,10 @@
         </div>
         <hr style="height: 300px;width: 1px;float:left;margin:0px 0px 0px 20px"/>
         <div id="rightbar" style="height:260px;width:300px;float:left;margin:20px 0px 0px 20px">
-            <div style="height:60px;width:300px;margin: 20px 0px 0px 20px;line-height: 60px;border-bottom: 1px solid #CCC">预约数<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px;">10</div></div>
-            <div style="height:60px;width:300px;margin: 0px 0px 0px 20px;line-height: 60px;border-bottom: 1px solid #CCC">完成预约数<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px">100</div></div>
-            <div style="height:60px;width:300px;margin: 0px 0px 0px 20px;line-height: 60px;border-bottom: 1px solid #CCC">出勤率<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px">100%</div></div>
-            <div style="height:60px;width:300px;margin: 0px 0px 0px 20px;line-height: 60px">评分<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px">9.0/10.0</div></div>
+            <div style="height:60px;width:300px;margin: 20px 0px 0px 20px;line-height: 60px;border-bottom: 1px solid #CCC">预约数<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px;"><s:property value="tea.reserveNum"/></div></div>
+            <div style="height:60px;width:300px;margin: 0px 0px 0px 20px;line-height: 60px;border-bottom: 1px solid #CCC">学校<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px"><s:property value="tea.school"/></div></div>
+            <div style="height:60px;width:300px;margin: 0px 0px 0px 20px;line-height: 60px;border-bottom: 1px solid #CCC">收费<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px"><s:property value="tea.wagePerhour"/></div></div>
+            <div style="height:60px;width:300px;margin: 0px 0px 0px 20px;line-height: 60px">评分<div class="label-1" style="height: 25px;float: right;margin:15px 0px 0px 0px;padding:0px 10px;line-height: 25px"><s:property value="tea.score"/>/10.0</div></div>
         </div>
     </div>
     <div id="infobar" style="height:300px;width: 900px;margin: 20px 0px 0px 20px;float:left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
@@ -98,8 +98,12 @@
         </div>
     </div>
     <div id="bottombar" style="height:300px;width: 900px;margin: 20px 0px 0px 320px;float:left;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
-         <div style="font-size: 36px;margin:20px 0px 0px 40px">评论</div>
+        <div style="font-size: 36px;margin:20px 0px 0px 40px">评论</div>
         <hr style="height: 1px;width: 860px;margin:10px auto"/>
+        <s:iterator value="tea.commentsToThis" status="st">
+            <div style="font-size: 36px;margin:20px 0px 0px 40px"><s:property value="tea.commentsToThis.content"/></div>
+            <hr style="height: 1px;width: 860px;margin:10px auto"/>
+        </s:iterator>
     </div>
             <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
                     <div class="modal-header" style="height: 50px">

@@ -5,7 +5,6 @@
 
 package com.haijiao.Domain.bean;
 
-import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -19,7 +18,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -42,13 +40,15 @@ public class Teacher extends User{
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     
-    private boolean audition;        //该老师是否接受试听
+    private boolean audition;       //该老师是否接受试听
     
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "scheid", unique = true)
     private Schedule schedule;      //记录老师的时间表
     
-    private int wagePerhour;         //老师每小时的辅导费
+    private int wagePerhour;        //老师每小时的辅导费
+    @Column(columnDefinition="int default 0")
+    private int reserveNum;         //老师预约数
     
     @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @Fetch(value = FetchMode.SUBSELECT)
@@ -140,6 +140,14 @@ public class Teacher extends User{
 
     public void setWagePerhour(int wagePerhour) {
         this.wagePerhour = wagePerhour;
+    }
+
+    public int getReserveNum() {
+        return reserveNum;
+    }
+
+    public void setReserveNum(int reserveNum) {
+        this.reserveNum = reserveNum;
     }
 
     public List<Student> getStudentlist() {

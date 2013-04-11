@@ -35,6 +35,7 @@ public class Clazz extends BaseBean{ //clazz -> class
     
     @Column(name="weekday")
     private int day;   //星期X 从0到13
+    @Column(name="sliceindex")
     private int index;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
     
     private boolean accept;  //本次预约老师是否已接受
