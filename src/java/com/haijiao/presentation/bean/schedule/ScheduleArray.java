@@ -9,29 +9,19 @@ import java.util.List;
 
 public class ScheduleArray {
 
-    public class Status {
-
-        public static final int add = 0;
-        public static final int remove = 1;
-        public static final int addStable = 2;
-        public static final int addTmp = 3;
-        public static final int studentCancel = 4;
-        public static final int teacherPause = 5;
-        public static final int studentPause = 6;
-    }
     
-    public class 
+
     IClassService classService;
-    List<List<Integer>> array;
+    List<List<ClazzUpdate>> array;
 
     public ScheduleArray() {
     }
 
-    public List<List<Integer>> getArray() {
+    public List<List<ClazzUpdate>> getArray() {
         return array;
     }
 
-    public void setArray(List<List<Integer>> array) {
+    public void setArray(List<List<ClazzUpdate>> array) {
         this.array = array;
     }
 
@@ -45,29 +35,17 @@ public class ScheduleArray {
 
     public void updateData(String teacherEmail, String studentEmail) {
         for (int i = 0; i < array.size(); i++) {
-            List<Integer> oneDay = array.get(i);
+            List<ClazzUpdate> oneDay = array.get(i);
             for (int j = 0; j < oneDay.size(); j++) {
-                switch (oneDay.get(j)) {
-                    case add:
+                switch (oneDay.get(j).getStatus()) {
+                    case ClazzUpdate.Status.add:
                         classService.teacherAddClazz(teacherEmail, i, j);
                         break;
-                    case remove:
+                    case ClazzUpdate.Status.remove:
                         classService.teacherRemoveClazz(teacherEmail, i, j);
                         break;
-                    case addStable:
-                        classService.bookStableTeacher(teacherEmail, studentEmail, "tmp", i, j);
-                        break;
-                    case addTmp:
-                        classService.bookTmpTeacher(teacherEmail, studentEmail, "tmp", i, j);
-                        break;
-                    case studentCancel:
-                        classService.cancelBook(teacherEmail, studentEmail, i, j);
-                        break;
-                    case teacherPause:
-                        classService.teacherPauseBook(teacherEmail, studentEmail, i, j);
-                        break;
-                    case studentPause:
-                        classService.studentPauseBook(teacherEmail, studentEmail, i, j);
+                    case ClazzUpdate.Status.studentBook:
+                        classService.bookTeacher(teacherEmail, studentEmail, "tmp", i, j, oneDay.get(j).getNum());
                         break;
                 }
             }
