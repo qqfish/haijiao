@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity    
 @Table(name="clazz")     
@@ -32,6 +34,8 @@ public class Clazz extends BaseBean{ //clazz -> class
     @JoinColumn(name="lid", unique=true)
     private Lesson lesson;
 
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="freetimeid")
     private FreeTime freeTime;
     
     private int status;  //本次预约的状态，可选值未Status类中

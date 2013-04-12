@@ -14,5 +14,4 @@ import java.util.List;
 public interface IClazzDAO extends GenericDAO<Clazz,Integer>{
     public Clazz getClazz(String temail,String lesson,int day,int index);
     public List<Clazz> getStudentClazz(String studentEmail);
-    public Clazz getClazz(int id);
 }

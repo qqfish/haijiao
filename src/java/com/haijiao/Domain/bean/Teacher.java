@@ -46,9 +46,7 @@ public class Teacher extends User{
     
     private boolean audition;       //该老师是否接受试听
     
-    @OneToMany(fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name="scheid")
+    @OneToMany(mappedBy = "teacher")
     private List<FreeTime> schedule;//记录老师的时间表
     
     private int wagePerhour;        //老师每小时的辅导费

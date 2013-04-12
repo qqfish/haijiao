@@ -27,15 +27,15 @@ public class FreeTimeBean {
     
     public FreeTimeBean(FreeTime f){
         Clazz first = f.getClazzList().get(0);
-        if(first.getTeacher() != null)
-            teacherEmail = first.getTeacher().getEmail();
+        //if(first.getTeacher() != null)
+        //    teacherEmail = first.getTeacher().getEmail();
         if(first.getStudent() != null)
             studentEmail = first.getStudent().getEmail();
         if(first.getLesson() != null)
             lesson = first.getLesson().getName();
         
-        day = first.getDay();
-        index = first.getIndex();
+        //day = first.getDay();
+        //index = first.getIndex();
         status = first.getStatus();
         remain = first.getRemain();
     }

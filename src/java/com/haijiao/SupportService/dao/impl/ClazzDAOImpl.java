@@ -31,4 +31,5 @@ public class ClazzDAOImpl extends GenericHibernateDAO<Clazz,Integer> implements 
         String hql = "select c from clazz where c.student.eamil = '" + studentEmail + "'";
         return findByQuery(hql);
     }
+    
 }

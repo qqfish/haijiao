@@ -8,6 +8,7 @@ import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Lesson;
 import com.haijiao.Domain.bean.Student;
+import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.IFreeTimeDAO;
@@ -81,7 +82,7 @@ public class ClassServiceImpl implements IClassService {
 
     @Override
     public boolean studentPauseBook(int clazzId, int num) {
-        Clazz clazz = clazzDAO.getClazz(clazzId);
+        Clazz clazz = clazzDAO.findById(clazzId);
         FreeTime freeTime = clazz.getFreeTime();
         int pos = freeTime.getClazzList().indexOf(clazz);
         if (pos < 0 || pos >= freeTime.getClazzList().size()) {
@@ -102,7 +103,7 @@ public class ClassServiceImpl implements IClassService {
 
     @Override
     public boolean teacherPauseBook(int clazzId, int num) {
-        Clazz clazz = clazzDAO.getClazz(clazzId);
+        Clazz clazz = clazzDAO.findById(clazzId);
         FreeTime freeTime = clazz.getFreeTime();
         int pos = freeTime.getClazzList().indexOf(clazz);
         if (pos < 0 || pos >= freeTime.getClazzList().size()) {
@@ -161,7 +162,7 @@ public class ClassServiceImpl implements IClassService {
     public boolean dealWithReservation(int clazzId, boolean accept) {
         if(!accept)
             return cancelBook(clazzId);
-        Clazz clazz = clazzDAO.getClazz(clazzId);
+        Clazz clazz = clazzDAO.findById(clazzId);
         if(clazz == null)
             return false;
         clazz.setStatus(Clazz.Status.accept);
@@ -170,7 +171,7 @@ public class ClassServiceImpl implements IClassService {
 
     @Override
     public boolean cancelBook(int clazzId) {
-        Clazz clazz = clazzDAO.getClazz(clazzId);
+        Clazz clazz = clazzDAO.findById(clazzId);
         int pos = clazz.getFreeTime().getClazzList().indexOf(clazz);
         if(pos < 0 || pos >= clazz.getFreeTime().getClazzList().size())
             return false;
