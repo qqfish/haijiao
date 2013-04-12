@@ -2,20 +2,25 @@
  *
  * @author Jerry Zou
  */
-package com.haijiao.presentation.bean;
+package com.haijiao.presentation.bean.schedule;
 
 import com.haijiao.SupportService.service.IClassService;
 import java.util.List;
 
 public class ScheduleArray {
-    static final int add = 0;
-    static final int remove = 1;
-    static final int addStable = 2;
-    static final int addTmp = 3;
-    static final int studentCancel = 4;
-    static final int teacherPause = 5;
-    static final int studentPause = 6;
+
+    public class Status {
+
+        public static final int add = 0;
+        public static final int remove = 1;
+        public static final int addStable = 2;
+        public static final int addTmp = 3;
+        public static final int studentCancel = 4;
+        public static final int teacherPause = 5;
+        public static final int studentPause = 6;
+    }
     
+    public class 
     IClassService classService;
     List<List<Integer>> array;
 
@@ -39,10 +44,10 @@ public class ScheduleArray {
     }
 
     public void updateData(String teacherEmail, String studentEmail) {
-        for(int i = 0; i < array.size(); i++){
+        for (int i = 0; i < array.size(); i++) {
             List<Integer> oneDay = array.get(i);
-            for(int j = 0; j < oneDay.size(); j++){
-                switch(oneDay.get(j)){
+            for (int j = 0; j < oneDay.size(); j++) {
+                switch (oneDay.get(j)) {
                     case add:
                         classService.teacherAddClazz(teacherEmail, i, j);
                         break;

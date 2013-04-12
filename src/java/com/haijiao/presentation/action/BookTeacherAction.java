@@ -6,7 +6,7 @@
 package com.haijiao.presentation.action;
 
 import com.google.gson.Gson;
-import com.haijiao.presentation.bean.ScheduleArray;
+import com.haijiao.presentation.bean.schedule.ScheduleArray;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.ITeacherService;

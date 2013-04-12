@@ -25,9 +25,9 @@ import org.hibernate.annotations.FetchMode;
 @Inheritance(strategy = InheritanceType.JOINED )
 public class User extends BaseBean{
     public class Status{
-        static final int offline = 0;
-        static final int onlineAndAvailable = 1;
-        static final int onlineAndBusy = 2;
+        public static final int offline = 0;
+        public static final int onlineAndAvailable = 1;
+        public static final int onlineAndBusy = 2;
     }
     protected String email;     //用户的账号,即Email
     protected String name;      //用户的真实姓名

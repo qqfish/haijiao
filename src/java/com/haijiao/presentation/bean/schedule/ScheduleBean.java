@@ -13,16 +13,16 @@ import java.util.List;
  * @author fish
  */
 public class ScheduleBean {
-    private List<ClazzBean> clazzes;
+    private List<FreeTimeBean> clazzes;
     
     public ScheduleBean() {
     }
 
-    public List<ClazzBean> getClazzes() {
+    public List<FreeTimeBean> getClazzes() {
         return clazzes;
     }
 
-    public void setClazzes(List<ClazzBean> clazzes) {
+    public void setClazzes(List<FreeTimeBean> clazzes) {
         this.clazzes = clazzes;
     }
     
