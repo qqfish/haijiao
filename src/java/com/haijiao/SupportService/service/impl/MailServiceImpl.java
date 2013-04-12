@@ -26,6 +26,14 @@ public class MailServiceImpl implements IMailService{
     IMailDAO mailDAO;
     @Resource
     IUserDAO userDAO;
+
+    public void setMailDAO(IMailDAO mailDAO) {
+        this.mailDAO = mailDAO;
+    }
+
+    public void setUserDAO(IUserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
     
     @Override
     public Mail getMailById(int id) {

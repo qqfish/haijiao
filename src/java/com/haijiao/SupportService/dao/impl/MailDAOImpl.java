@@ -8,11 +8,14 @@ import com.haijiao.Domain.bean.Mail;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IMailDAO;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author hp
  */
+
+@Repository
 public class MailDAOImpl extends GenericHibernateDAO<Mail,Integer> implements IMailDAO{
 
     @Override

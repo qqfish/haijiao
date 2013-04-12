@@ -8,11 +8,14 @@ import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IFreeTimeDAO;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author hp
  */
+
+@Repository
 public class FreeTimeDAOImpl extends GenericHibernateDAO<FreeTime,Integer> implements IFreeTimeDAO{
 
     @Override
