@@ -45,6 +45,19 @@ public class Clazz extends BaseBean{ //clazz -> class
     private int remain;    //课程次数，-1为无限,每上一次减1，到0该课程被清除
     private int timeToBegin;    //距离开始的次数,方便学生查询
 
+    public Clazz(Clazz c){
+        teacher = c.getTeacher();
+        student = c.getStudent();
+        lesson = c.getLesson();
+        day = c.getDay();
+        index = c.getIndex();
+        status = c.getStatus();
+        remain = c.getRemain();
+        timeToBegin = c.getTimeToBegin();
+    }
+
+    public Clazz() {
+    }
     
     public Teacher getTeacher() {
         return teacher;

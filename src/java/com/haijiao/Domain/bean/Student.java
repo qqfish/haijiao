@@ -7,9 +7,11 @@ package com.haijiao.Domain.bean;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -31,7 +33,13 @@ public class Student extends User{
     @JoinColumn(name = "scheid", unique = true)
     private List<Clazz> schedule;      //学生的时间表
     
-    @ManyToMany(mappedBy = "studentlist")
+    @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinTable(
+            name = "favorite",
+            joinColumns = @JoinColumn(name="sid"),
+            inverseJoinColumns = @JoinColumn(name="tid")
+    )
     private List<Teacher> teacherList;   //收藏老师的列表
 
     public Student() {

@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
@@ -54,24 +53,9 @@ public class Teacher extends User{
     
     private int wagePerhour;        //老师每小时的辅导费
     
-    @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinTable(
-            name = "teach",
-            joinColumns = @JoinColumn(name="sid"),
-            inverseJoinColumns = @JoinColumn(name="tid")
-    )
-    private List<Student> studentlist; //教授过的学生列表
-    
-    @OneToMany(mappedBy = "teacher",fetch = FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Clazz> classlist;  //课程列表
-
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
         this.labels = new ArrayList<Label>();
-        this.studentlist = new ArrayList<Student>();
-        this.classlist = new ArrayList<Clazz>();
     }
 
     public String getSchool() {
@@ -162,19 +146,4 @@ public class Teacher extends User{
         this.wagePerhour = wagePerhour;
     }
 
-    public List<Student> getStudentlist() {
-        return studentlist;
-    }
-
-    public void setStudentlist(List<Student> studentlist) {
-        this.studentlist = studentlist;
-    }
-
-    public List<Clazz> getClasslist() {
-        return classlist;
-    }
-
-    public void setClasslist(List<Clazz> classlist) {
-        this.classlist = classlist;
-    }
 }

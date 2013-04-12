@@ -23,19 +23,16 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author hp
  */
-
 @Service
 @Transactional
-public class ClassServiceImpl implements IClassService{
+public class ClassServiceImpl implements IClassService {
+
     @Resource
     IClazzDAO clazzDAO;
-    
     @Resource
     ITeacherDAO teacherDAO;
-    
     @Resource
     IStudentDAO studentDAO;
-    
     @Resource
     IFreeTimeDAO freeTimeDAO;
 
@@ -52,90 +49,64 @@ public class ClassServiceImpl implements IClassService{
     }
 
     @Override
-    public boolean dealWithReservation(int clazzId, boolean accept) {
-        Clazz c = clazzDAO.findById(clazzId);
-        if(accept){
-            c.setStatus(Clazz.Status.accept);
-            clazzDAO.update(c);
-            return true;
-        }
-        else{
-            clazzDAO.makeTransient(c);
-            return true;
-        }
-    }
-
-    @Override
-    public boolean bookStableTeacher(String teacherEmail, String studentEmail, String lesson, Integer day, Integer index) {
-        Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
+    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Integer day, Integer index, int num) {
         Student s = studentDAO.getStudentByEmail(studentEmail);
-        Clazz c = new Clazz();
         Lesson l = new Lesson();
         l.setName(lesson);
-        c.setDay(day);
-        c.setIndex(index);
-        c.setLesson(l);
-        c.setRemain(-1);
-        c.setStatus(Clazz.Status.available);
-        c.setStudent(s);
-        c.setTeacher(t);
-        return clazzDAO.makePersistent(c);
-    }
-
-    @Override
-    public boolean bookTmpTeacher(String teacherEmail, String studentEmail, String lesson, int day, int index) {
-        Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
-        Student s = studentDAO.getStudentByEmail(studentEmail);
-        Clazz c = new Clazz();
-        Lesson l = new Lesson();
-        l.setName(lesson);
-        c.setDay(day);
-        c.setIndex(index);
-        c.setLesson(l);
-        c.setRemain(1);
-        c.setStatus(1);
-        c.setStudent(s);
-        c.setTeacher(t);
-        return clazzDAO.makePersistent(c);
-    }
-
-    @Override
-    public boolean studentPauseBook(String teacherEmail, String studentEmail, int day, int index) {
-        Clazz c = clazzDAO.getClazz(studentEmail, studentEmail, day, index);
-        int timeToBegin = c.getTimeToBegin();
-        c.setTimeToBegin(timeToBegin + 1);
-        c.setStatus(1);
-        clazzDAO.update(c);
-        return true;
-    }
-
-    @Override
-    public boolean teacherPauseBook(String teacherEmail, String studentEmail, int day, int index) {
-        Clazz c = clazzDAO.getClazz(studentEmail, studentEmail, day, index);
-        int timeToBegin = c.getTimeToBegin();
-        c.setTimeToBegin(timeToBegin + 1);
-        c.setStatus(0);
-        clazzDAO.update(c);
-        return true;
-    }
-
-    @Override
-    public boolean teacherAddClazz(String teacherEmail, int day, int index) {
         FreeTime ft = freeTimeDAO.getTeacherFreeTime(teacherEmail, day, index);
-        return true;
-    }
-
-    @Override
-    public boolean teacherRemoveClazz(String teacherEmail, int day, int index) {
-        FreeTime ft = freeTimeDAO.getTeacherFreeTime(teacherEmail, day, index);
+        List<Clazz> clazzList = ft.getClazzList();
+        Clazz nextClazz = new Clazz(clazzList.get(0));
+        if (nextClazz.getStatus() != Clazz.Status.available) {
+            return false;
+        }
+        if (nextClazz.getRemain() > 0) {
+            if (nextClazz.getRemain() < num) {
+                return false;
+            }
+            nextClazz.setRemain(nextClazz.getRemain() - num);
+        }
+        clazzList.get(0).setLesson(l);
+        clazzList.get(0).setRemain(num);
+        clazzList.get(0).setStatus(Clazz.Status.notAccept);
+        clazzList.get(0).setStudent(s);
+        clazzList.get(0).setTimeToBegin(0);
+        nextClazz.setTimeToBegin(num);
+        if(nextClazz.getRemain() > 0){
+            clazzList.add(1, nextClazz);
+            clazzDAO.makePersistent(nextClazz);
+        }
         freeTimeDAO.update(ft);
         return true;
     }
 
     @Override
-    public boolean cancelBook(String teacherEmail, String studentEmail, int day, int index) {
-        Clazz c = clazzDAO.getClazz(studentEmail, studentEmail, day, index);
-        return clazzDAO.makeTransient(c);
+    public boolean studentPauseBook(int clazzId, int num) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean teacherPauseBook(int clazzId, int num) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean teacherAddClazz(String teacherEmail, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean teacherRemoveClazz(String teacherEmail, int day, int index) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean dealWithReservation(int clazzId, boolean accept) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean cancelBook(int clazzId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
