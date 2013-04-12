@@ -63,8 +63,7 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public List<Clazz> getFinishedClasses(String email) {
-        Teacher t = teacherDAO.getTeacherByEmail(email);
-        return t.getClasslist();
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

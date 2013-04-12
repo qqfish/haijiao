@@ -27,7 +27,7 @@ public class BookTeacherAction extends SessionAction {
     @Override
     public String execute(){
         ScheduleArray sa = gson.fromJson(gsonStr, ScheduleArray.class);
-        List<List<Integer>> array = sa.getArray();
+        //List<List<Integer>> array = sa.getArray();
         tea = teacherService.getTeacherByEmail(teacherEmail);
         this.putIn("message", this.getText("successMessage"));
         return SUCCESS;

@@ -5,11 +5,12 @@
 package com.haijiao.SupportService.dao;
 
 import com.haijiao.Domain.bean.Bill;
+import java.util.List;
 
 /**
  *
  * @author hp
  */
 public interface IBillDAO extends GenericDAO<Bill,Integer>{
-    
+    public List<Bill> getBillByEmail(String email);
 }

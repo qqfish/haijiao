@@ -69,6 +69,14 @@ public class UserServiceImpl implements IUserService{
     }
     
     @Override
+    public boolean setStatus(String email, int status) {
+        User u = userDAO.getUserByEmail(email);
+        u.setStatus(status);
+        userDAO.update(u);
+        return true;
+    }
+        
+    @Override
     public boolean changePassword(String email, String password){
         Teacher t = teacherDAO.getTeacherByEmail(email);
         t.setPassword(password);
@@ -105,18 +113,6 @@ public class UserServiceImpl implements IUserService{
     @Override
     public List<Teacher> searchTeacher(List<String> strList) {
         return teacherDAO.searchTeacher(strList);
-    }
-
-    @Override
-    public List<Bill> getBill(String email) {
-        User u = userDAO.getUserByEmail(email);
-        return u.getBillList();
-    }
-    
-    @Override
-    public List<Mail> getMail(String email) {
-        User u = userDAO.getUserByEmail(email);
-        return u.getMailBox();
     }
 
     @Override

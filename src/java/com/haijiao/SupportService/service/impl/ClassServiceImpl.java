@@ -8,7 +8,6 @@ import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Lesson;
 import com.haijiao.Domain.bean.Student;
-import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.IFreeTimeDAO;
