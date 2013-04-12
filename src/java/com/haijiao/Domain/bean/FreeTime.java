@@ -22,6 +22,9 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table
 public class FreeTime extends BaseBean{
+    
+    private Teacher teacher;
+    
     @Column(name="weekday")
     private int day;   //星期X 从0到13
     
@@ -35,6 +38,14 @@ public class FreeTime extends BaseBean{
 
     public FreeTime() {
         clazzList = new ArrayList();
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 
     public int getDay() {

@@ -146,4 +146,12 @@ public class Teacher extends User{
         this.wagePerhour = wagePerhour;
     }
 
+    public FreeTime getFreeTime(int day, int index) {
+        for(int i = 0; i < schedule.size(); i++){
+            if(schedule.get(i).getDay() == day && schedule.get(i).getIndex() == index){
+                return schedule.get(i);
+            }
+        }
+        return null;
+    }
 }

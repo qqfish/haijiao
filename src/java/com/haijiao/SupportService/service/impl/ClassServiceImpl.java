@@ -13,6 +13,7 @@ import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.IFreeTimeDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -70,7 +71,7 @@ public class ClassServiceImpl implements IClassService {
         clazzList.get(0).setStudent(s);
         clazzList.get(0).setTimeToBegin(0);
         nextClazz.setTimeToBegin(num);
-        if(nextClazz.getRemain() > 0){
+        if (nextClazz.getRemain() > 0) {
             clazzList.add(1, nextClazz);
             clazzDAO.makePersistent(nextClazz);
         }
@@ -80,36 +81,108 @@ public class ClassServiceImpl implements IClassService {
 
     @Override
     public boolean studentPauseBook(int clazzId, int num) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Clazz clazz = clazzDAO.getClazz(clazzId);
+        FreeTime freeTime = clazz.getFreeTime();
+        int pos = freeTime.getClazzList().indexOf(clazz);
+        if (pos < 0 || pos >= freeTime.getClazzList().size()) {
+            return false;
+        }
+        Clazz freeClazz = new Clazz(clazz);
+        freeClazz.setRemain(num);
+        freeClazz.setStatus(Clazz.Status.available);
+        clazzDAO.makePersistent(freeClazz);
+        freeTime.getClazzList().add(pos, freeClazz);
+        for (int i = pos + 1; i < freeTime.getClazzList().size(); i++) {
+            freeTime.getClazzList().get(i).addTimeToBegin(num);
+            clazzDAO.update(freeTime.getClazzList().get(i));
+        }
+        freeTimeDAO.update(freeTime);
+        return true;
     }
 
     @Override
     public boolean teacherPauseBook(int clazzId, int num) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Clazz clazz = clazzDAO.getClazz(clazzId);
+        FreeTime freeTime = clazz.getFreeTime();
+        int pos = freeTime.getClazzList().indexOf(clazz);
+        if (pos < 0 || pos >= freeTime.getClazzList().size()) {
+            return false;
+        }
+        Clazz freeClazz = new Clazz(clazz);
+        freeClazz.setRemain(num);
+        freeClazz.setStatus(Clazz.Status.notAvailable);
+        clazzDAO.makePersistent(freeClazz);
+        freeTime.getClazzList().add(pos, freeClazz);
+        for (int i = pos + 1; i < freeTime.getClazzList().size(); i++) {
+            freeTime.getClazzList().get(i).addTimeToBegin(num);
+            clazzDAO.update(freeTime.getClazzList().get(i));
+        }
+        freeTimeDAO.update(freeTime);
+        return true;
     }
 
     @Override
     public boolean teacherAddClazz(String teacherEmail, int day, int index) {
+        Teacher tea = teacherDAO.getTeacherByEmail(teacherEmail);
+        Clazz freeClazz = new Clazz();
+        freeClazz.setRemain(-1);
+        freeClazz.setStatus(Clazz.Status.available);
+        freeClazz.setTimeToBegin(0);
+        clazzDAO.makePersistent(freeClazz);
+        List<Clazz> clazzList = new ArrayList();
+        clazzList.add(freeClazz);
+        FreeTime freeTime = new FreeTime();
+        freeTime.setClazzList(clazzList);
+        freeTime.setDay(day);
+        freeTime.setIndex(index);
+        freeTime.setTeacher(tea);
+        freeTimeDAO.makePersistent(freeTime);
+        freeClazz.setFreeTime(freeTime);
+        clazzDAO.update(freeClazz);
+        tea.getSchedule().add(freeTime);
+        teacherDAO.update(tea);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public boolean teacherRemoveClazz(String teacherEmail, int day, int index) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Teacher tea = teacherDAO.getTeacherByEmail(teacherEmail);
+        FreeTime freeTime = tea.getFreeTime(day, index);
+        if(freeTime == null){
+            return false;
+        }
+        tea.getSchedule().remove(freeTime);
+        freeTimeDAO.makeTransient(freeTime);
+        teacherDAO.update(tea);
+        return true;
     }
 
     @Override
     public boolean dealWithReservation(int clazzId, boolean accept) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(!accept)
+            return cancelBook(clazzId);
+        Clazz clazz = clazzDAO.getClazz(clazzId);
+        if(clazz == null)
+            return false;
+        clazz.setStatus(Clazz.Status.accept);
+        return true;
     }
 
     @Override
     public boolean cancelBook(int clazzId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Clazz> getStudentClazz(String studentEmail) {
-        return clazzDAO.getStudentClazz(studentEmail);
+        Clazz clazz = clazzDAO.getClazz(clazzId);
+        int pos = clazz.getFreeTime().getClazzList().indexOf(clazz);
+        if(pos < 0 || pos >= clazz.getFreeTime().getClazzList().size())
+            return false;
+        for(int i = pos + 1; i < clazz.getFreeTime().getClazzList().size(); i++){
+            if(clazz.getRemain() != -1){
+                clazz.getFreeTime().getClazzList().get(i).addTimeToBegin(-clazz.getRemain());
+                clazzDAO.update(clazz.getFreeTime().getClazzList().get(i));
+            }
+        }
+        clazz.getFreeTime().getClazzList().remove(pos);
+        clazzDAO.makeTransient(clazz);
+        freeTimeDAO.update(clazz.getFreeTime());
+        return true;
     }
 }

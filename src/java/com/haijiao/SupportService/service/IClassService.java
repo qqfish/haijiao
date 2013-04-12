@@ -27,7 +27,4 @@ public interface IClassService {
     //取消预约
     public boolean cancelBook(int clazzId);
     
-    public List<Clazz> getStudentClazz(String studentEmail);
-    
-    
 }

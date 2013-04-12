@@ -23,11 +23,7 @@ public class Clazz extends BaseBean{ //clazz -> class
         static public final int notAccept = 2;
         static public final int accept = 3;
     }
-    
-    @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "tid")
-    private Teacher teacher;
-    
+   
     @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "sid")
     private Student student;  //固定时间的学生
@@ -35,36 +31,23 @@ public class Clazz extends BaseBean{ //clazz -> class
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name="lid", unique=true)
     private Lesson lesson;
-    
-    @Column(name="weekday")
-    private int day;   //星期X 从0到13
-    @Column(name="sliceindex")
-    private int index;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
+
+    private FreeTime freeTime;
     
     private int status;  //本次预约的状态，可选值未Status类中
     private int remain;    //课程次数，-1为无限,每上一次减1，到0该课程被清除
     private int timeToBegin;    //距离开始的次数,方便学生查询
 
     public Clazz(Clazz c){
-        teacher = c.getTeacher();
         student = c.getStudent();
         lesson = c.getLesson();
-        day = c.getDay();
-        index = c.getIndex();
+        freeTime = c.getFreeTime();
         status = c.getStatus();
         remain = c.getRemain();
         timeToBegin = c.getTimeToBegin();
     }
 
     public Clazz() {
-    }
-    
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
     }
 
     public Lesson getLesson() {
@@ -74,21 +57,13 @@ public class Clazz extends BaseBean{ //clazz -> class
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
     }
-    
-    public int getDay() {
-        return day;
+
+    public FreeTime getFreeTime() {
+        return freeTime;
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
+    public void setFreeTime(FreeTime freeTime) {
+        this.freeTime = freeTime;
     }
 
     public Student getStudent() {
@@ -121,5 +96,8 @@ public class Clazz extends BaseBean{ //clazz -> class
 
     public void setTimeToBegin(int timeToBegin) {
         this.timeToBegin = timeToBegin;
+    }
+    public void addTimeToBegin(int num) {
+        timeToBegin += num;
     }
 }
