@@ -36,6 +36,7 @@ public class LoginAction extends SessionAction {
                 this.putIn("student", theStudent);
             }
             User theUser = userService.getUserByEmail(email);
+            userService.setStatus(email, User.Status.onlineAndAvailable);
             this.putIn("user", theUser);
             this.putIn("login", true);
             this.putIn("userType", userType);
