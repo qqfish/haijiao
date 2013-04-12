@@ -5,7 +5,8 @@
 
 package com.haijiao.SupportService.service.impl;
 
-import com.haijiao.Domain.bean.Comment;
+import com.haijiao.Domain.bean.Bill;
+import com.haijiao.Domain.bean.Mail;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
@@ -107,23 +108,15 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public List<Comment> getComment(String email) {
-        return commentDAO.getComment(email);
+    public List<Bill> getBill(String email) {
+        User u = userDAO.getUserByEmail(email);
+        return u.getBillList();
     }
     
     @Override
-    public List<Comment> getCommentMade(String email) {
-        return commentDAO.getCommentMade(email);
-    }
-
-    @Override
-    public boolean comment(String commenterEmail, String commenteeEmail, String content, Integer score) {
-        User Commenter = userDAO.getUserByEmail(commenterEmail);
-        User Commentee = userDAO.getUserByEmail(commenteeEmail);
-        Comment c = new Comment();
-        c.setContent(content);
-        c.setScore(score);
-        return commentDAO.makePersistent(c);
+    public List<Mail> getMail(String email) {
+        User u = userDAO.getUserByEmail(email);
+        return u.getMailBox();
     }
 
     @Override

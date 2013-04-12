@@ -5,7 +5,7 @@
 package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.Schedule;
+import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Teacher;
 import java.sql.Date;
 import java.util.List;
@@ -27,7 +27,7 @@ public interface ITeacherService {
     //获取老师已完结课程---->用于显示账单
     public List<Clazz> getFinishedClasses(String email);
     //获取老师时间表
-    public Schedule getSchedule(String email);
+    public List<FreeTime> getSchedule(String email);
     //修改时间表
-    public boolean changeSchedule(String email, Schedule s);
+    //public boolean changeSchedule(String email, Schedule s);
 }

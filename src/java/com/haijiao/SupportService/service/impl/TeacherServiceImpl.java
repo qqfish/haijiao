@@ -6,7 +6,7 @@
 package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.Schedule;
+import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.service.ITeacherService;
@@ -68,17 +68,9 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public Schedule getSchedule(String email) {
+    public List<FreeTime> getSchedule(String email) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         return t.getSchedule();
-    }
-
-    @Override
-    public boolean changeSchedule(String email, Schedule s) {
-        Teacher t = teacherDAO.getTeacherByEmail(email);
-        t.setSchedule(s);
-        teacherDAO.update(t);
-        return true;
     }
 
 }

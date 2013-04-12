@@ -29,20 +29,23 @@ public class User extends BaseBean{
         static final int onlineAndAvailable = 1;
         static final int onlineAndBusy = 2;
     }
-    protected String email;      //用户的账号,即Email
+    protected String email;     //用户的账号,即Email
     protected String name;      //用户的真实姓名
-    protected String userType; //用户的类型："teacher" or "student"
-    protected Integer score;     //用户的评分
+    protected String userType;  //用户的类型："teacher" or "student"
+    protected Integer score;    //用户的评分
     protected String password;  //用户密码
-    protected int coin;              //该账户中剩下的智慧币
-    protected String intro;        //用户的个人简介，显示在个人主页上
-    protected String picUrl;      //用户头像的URL
-    protected String sex;          //性别
-    protected Date birthday;
-    protected int status;   //可选项为Status
+    protected int coin;         //该账户中剩下的智慧币
+    protected String intro;     //用户的个人简介，显示在个人主页上
+    protected String picUrl;    //用户头像的URL
+    protected String sex;       //性别
+    protected Date birthday;    //生日
+    protected int status;       //可选项为Status
     
-    protected List<Bill> billList; //账单列表
-    protected List<Mail> mailBox;
+    @OneToMany(mappedBy = "from")
+    protected List<Bill> billList;  //账单列表
+    
+    @OneToMany(mappedBy = "to")
+    protected List<Mail> mailBox;   //收到的私信
     
     @OneToMany(fetch=FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)

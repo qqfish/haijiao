@@ -5,7 +5,7 @@
 package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.Schedule;
+import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Student;
 import java.sql.Date;
 import java.util.List;
@@ -25,5 +25,5 @@ public interface IStudentService {
     //获取学生已完结课程----->用于账单
     public List<Clazz> getFinishedClasses(String email);
     //获取学生时间表
-    public Schedule getSchedule(String email);
+    public List<FreeTime> getSchedule(String email);
 }

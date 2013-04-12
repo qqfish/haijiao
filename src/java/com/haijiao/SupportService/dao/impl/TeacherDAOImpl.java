@@ -18,7 +18,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
         String hql = "from Teacher where email='"+ email + "'";
         List<Teacher> lt = findByQuery(hql);
         if(lt.size() == 1){
-            return findByQuery(hql).get(0);
+            return lt.get(0);
         } else {
             return null;
         }

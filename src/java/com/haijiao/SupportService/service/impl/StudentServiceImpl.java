@@ -6,7 +6,7 @@
 package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.Schedule;
+import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.dao.IStudentDAO;
@@ -67,9 +67,8 @@ public class StudentServiceImpl implements IStudentService{
     }
 
     @Override
-    public Schedule getSchedule(String email) {
-        Student s = studentDAO.getStudentByEmail(email);
-        return s.getSchedule();
+    public List<FreeTime> getSchedule(String email) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

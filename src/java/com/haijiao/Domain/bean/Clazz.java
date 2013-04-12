@@ -17,11 +17,11 @@ import javax.persistence.Table;
 @Entity    
 @Table(name="clazz")     
 public class Clazz extends BaseBean{ //clazz -> class
-    public class Status{
-        static final int notAvailable = 0;
-        static final int available = 1;
-        static final int notAccept = 2;
-        static final int accept = 3;
+        public class Status{
+        static public final int notAvailable = 0;
+        static public final int available = 1;
+        static public final int notAccept = 2;
+        static public final int accept = 3;
     }
     
     @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})

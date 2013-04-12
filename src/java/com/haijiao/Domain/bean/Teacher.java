@@ -25,17 +25,19 @@ import org.hibernate.annotations.FetchMode;
 @Table(name="teacher")
 @PrimaryKeyJoinColumn
 public class Teacher extends User{
-    private String school;        //就读大学
-    private String province;     //省份
-    private String classNum;   //成功完成课程的次数
-	@Column(columnDefinition="int default 0")
+    private String school;      //就读大学
+    private String province;    //省份
+    private String classNum;    //成功完成课程的次数
+    
+    @Column(columnDefinition="int default 0")
     private String reserveNum;  //预约次数
-    private String tel;             //老师的手机
+    
+    private String tel;         //老师的手机
     private String videoUrl;    //老师的介绍视频地址
     
     @OneToMany(fetch=FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    @Column(name = "lid")
+    @JoinColumn(name = "lid")
     private List<Label> labels; //老师的标签 
     
     @OneToMany(fetch=FetchType.EAGER)
@@ -43,13 +45,14 @@ public class Teacher extends User{
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     
-    private boolean audition;        //该老师是否接受试听
+    private boolean audition;       //该老师是否接受试听
     
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "scheid", unique = true)
-    private Schedule schedule;      //记录老师的时间表
+    @OneToMany(fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    @JoinColumn(name="scheid")
+    private List<FreeTime> schedule;//记录老师的时间表
     
-    private int wagePerhour;         //老师每小时的辅导费
+    private int wagePerhour;        //老师每小时的辅导费
     
     @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @Fetch(value = FetchMode.SUBSELECT)
@@ -57,12 +60,12 @@ public class Teacher extends User{
             name = "teach",
             joinColumns = @JoinColumn(name="sid"),
             inverseJoinColumns = @JoinColumn(name="tid")
-            )
+    )
     private List<Student> studentlist; //教授过的学生列表
     
     @OneToMany(mappedBy = "teacher",fetch = FetchType.EAGER)
     @Fetch(value = FetchMode.SUBSELECT)
-    private List<Clazz> classlist;    //课程列表
+    private List<Clazz> classlist;  //课程列表
 
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
@@ -143,11 +146,11 @@ public class Teacher extends User{
         this.audition = audition;
     }
 
-    public Schedule getSchedule() {
+    public List<FreeTime> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Schedule schedule) {
+    public void setSchedule(List<FreeTime> schedule) {
         this.schedule = schedule;
     }
 

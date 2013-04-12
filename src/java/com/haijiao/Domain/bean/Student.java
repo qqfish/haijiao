@@ -7,14 +7,15 @@ package com.haijiao.Domain.bean;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity    
 @Table(name="student")
@@ -25,7 +26,8 @@ public class Student extends User{
     private String tel;        //学生或家长的联系方式
     private String telType; //="student" or "parent"
     
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     @JoinColumn(name = "scheid", unique = true)
     private List<Clazz> schedule;      //学生的时间表
     

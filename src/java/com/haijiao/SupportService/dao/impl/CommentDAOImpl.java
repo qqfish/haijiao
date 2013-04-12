@@ -6,7 +6,6 @@
 package com.haijiao.SupportService.dao.impl;
 
 import com.haijiao.Domain.bean.Comment;
-import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.ICommentDAO;
 import java.util.List;
