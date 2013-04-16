@@ -13,6 +13,9 @@
             <result name="input">index.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
+        <action name="logout" class="LogoutAction">
+            <result name="success">index.jsp</result>
+        </action>
         <action name="register" class="RegisterAction" method="teacher">
             <result name="input">index.jsp</result>
             <result name="success">register.jsp</result>

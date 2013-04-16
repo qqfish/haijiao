@@ -23,6 +23,7 @@ public class LoginAction extends SessionAction {
     public String execute() throws Exception {
         String userType = userService.confirmLogin(email, password);
         if(userType == null){
+            this.putIn("message",this.getText("loginFail"));
             return INPUT;
         } else {
             if(userType.equals("teacher")){
@@ -50,13 +51,13 @@ public class LoginAction extends SessionAction {
     @Override
     public void validate(){
         if(email==null || email.trim().length()==0){
-            this.addFieldError("email", this.getText("emailNull"));
+            this.putIn("message",this.getText("emailNull"));
         }
         if(password==null || password.trim().length()==0){
-            this.addFieldError("password", this.getText("passwordNull"));
+            this.putIn("message",this.getText("passwordNull"));
         }
         else if(password.trim().length()<6){
-            this.addFieldError("password", this.getText("passwordShort"));
+            this.putIn("message",this.getText("passwordShort"));
         }
     }
 

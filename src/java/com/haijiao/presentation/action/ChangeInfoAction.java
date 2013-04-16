@@ -12,6 +12,8 @@ import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class ChangeInfoAction extends SessionAction {
     ITeacherService teacherService;
@@ -20,7 +22,7 @@ public class ChangeInfoAction extends SessionAction {
     String password;
     String name;
     String sex;
-    Date birthday;
+    String birthday;
     String school;
     String grade;
     String tel;
@@ -28,9 +30,14 @@ public class ChangeInfoAction extends SessionAction {
     String oldpwd;
     String newpwd;
     String newpwd2;
+    SimpleDateFormat sdf;
     
-    public String teacherRegister(){
-        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, null, school, tel)){
+    public ChangeInfoAction() throws ParseException{
+        sdf= new SimpleDateFormat("MM/dd/yyyy");
+    }
+    
+    public String teacherRegister() throws ParseException{
+        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), school, tel)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
             this.putIn("teacher", theTeacher);
             this.putIn("message", this.getText("teaRegisterSuccess"));
@@ -41,8 +48,8 @@ public class ChangeInfoAction extends SessionAction {
         }
     }
     
-    public String studentRegister(){
-        if(studentService.changeInfo((String)this.getValue("email"), name, sex, null, grade, null, tel, null)){
+    public String studentRegister() throws ParseException{
+        if(studentService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), grade, null, tel, null)){
             Student s = studentService.getStudentByEmail((String)this.getValue("email"));
             this.putIn("student", s);
             this.putIn("message", this.getText("stuRegisterSuccess"));
@@ -53,8 +60,8 @@ public class ChangeInfoAction extends SessionAction {
         }
     }
     
-    public String teacherChange(){
-        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, null, school, tel)){
+    public String teacherChange() throws ParseException{
+        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), school, tel)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
             this.putIn("teacher", theTeacher);
             this.putIn("message", this.getText("teaChangeSuccess"));
@@ -65,8 +72,8 @@ public class ChangeInfoAction extends SessionAction {
         }
     }
     
-    public String studentChange(){
-        if(studentService.changeInfo((String)this.getValue("email"), name, sex, null, grade, null, tel, null)){
+    public String studentChange() throws ParseException{
+        if(studentService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), grade, null, tel, null)){
             Student s = studentService.getStudentByEmail((String)this.getValue("email"));
             this.putIn("student", s);
             this.putIn("message", this.getText("stuChangeSuccess"));
@@ -125,12 +132,20 @@ public class ChangeInfoAction extends SessionAction {
         this.sex = sex;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public SimpleDateFormat getSdf() {
+        return sdf;
+    }
+
+    public void setSdf(SimpleDateFormat sdf) {
+        this.sdf = sdf;
     }
 
     public String getSchool() {

@@ -29,4 +29,8 @@ public class SessionAction extends ActionSupport implements SessionAware {
     public void putIn(String key, Object name) {
         this.session.put(key, name);
     }
+    
+    public void sessionClear() {
+        this.session.clear();
+    }
 }

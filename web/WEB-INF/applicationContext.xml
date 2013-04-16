@@ -18,6 +18,7 @@
         <property name="teacherService" ref="teacherServiceImpl" />
         <property name="studentService" ref="studentServiceImpl"/>
     </bean>
+    <bean id="LogoutAction" class="com.haijiao.presentation.action.LogoutAction" scope="prototype" />
     <bean id="IndexAction" class="com.haijiao.presentation.action.IndexAction" scope="prototype" />
     <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />

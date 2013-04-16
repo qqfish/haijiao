@@ -11,6 +11,7 @@
           <li><a href="teachers.jsp" style = "font-size:18px"><b>1v1名师</b></a></li>            
           <li><a href="contact.jsp" style = "font-size:18px"><b>联系我们</b></a> </li>
           <li><a href="contact.jsp" style = "font-size:18px"><b>意见反馈</b></a> </li>
+          <li><s:a action="logout.action" style = "font-size:18px"><b>退出(暂时放这儿)</b></s:a></li>
         </ul>
       </nav>
       <div class="clear"></div>

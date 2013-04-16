@@ -44,22 +44,22 @@ public class RegisterAction extends SessionAction{
     
     public void validate() {
         if(email==null || email.trim().length()==0){
-            this.addFieldError("email", this.getText("emailNull"));
+            this.putIn("message", this.getText("emailNull"));
         }
         if(password1==null || password1.trim().length()==0){
-            this.addFieldError("password1", this.getText("passwordNull"));
+            this.putIn("message", this.getText("passwordNull"));
         }
         else if(password1.trim().length()<6){
-            this.addFieldError("password1", this.getText("passwordShort"));
+            this.putIn("message", this.getText("passwordShort"));
         }
         if(password2==null || password2.trim().length()==0){
-            this.addFieldError("password2", this.getText("passwordNull"));
+            this.putIn("message", this.getText("passwordNull"));
         }
         else if(password2==null || password2.trim().length()<6){
-            this.addFieldError("password2", this.getText("passwordShort"));
+            this.putIn("message", this.getText("passwordShort"));
         }
         else if(!password1.trim().equals(password2.trim())){
-            this.addFieldError("password2", this.getText("passwordNotEqual"));
+            this.putIn("message", this.getText("passwordNotEqual"));
         }
     }
 
