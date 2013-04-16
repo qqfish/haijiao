@@ -1,17 +1,16 @@
 <%-- 
-    Document   : changePassword
-    Created on : 2013-4-10, 17:06:55
+    Document   : changeIntro
+    Created on : 2013-4-16, 21:56:03
     Author     : Jerry
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="sx" uri="/struts-dojo-tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Register</title>
+<title>海角教育</title>
 <meta charset="utf-8">
 <!--css-->
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
@@ -20,12 +19,30 @@
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
+<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <!--js-->
 <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
 <script type="text/javascript" src="js/superfish.js"></script>
 <script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="js/reg.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 
+<script>	
+			jQuery(window).load(function() {								
+			jQuery('.flexslider').flexslider({
+				animation: "fade",			
+				slideshow: true,			
+				slideshowSpeed: 7000,
+				animationDuration: 600,
+				prevText: "",
+				nextText: "",
+				controlNav: false		
+			})	  
+			
+					
+      });
+	</script>
 
 
 	<!--[if lt IE 8]>
@@ -50,18 +67,17 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <jsp:include page="changeInfoList.jsp"/>
-<section id="content">
-<div class="ic"></div>
-  <div id="regpanel" style="height:600px; width: 800px;margin:auto;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
-      <s:form action="changeInfo.action">
-            <s:textfield type="text" name="oldpwd" placeholder="请输入旧密码" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-            <s:textfield type="text" name="newpwd" placeholder="请输入新密码" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-            <s:textfield type="text" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-            <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="changePassword"/>
-        </s:form>
-  </div>
-</section>
+<s:form action="changeIntro.action">
+    <s:if test="#session.userType == 'teacher'">
+        <s:textarea name="intro" value="%{#session.teacher.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+    </s:if>
+    <s:if test="#session.userType == 'student'">
+        <s:textarea name="intro" value="%{#session.student.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+    </s:if>
+    <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
+</s:form>
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>
 </html>
+

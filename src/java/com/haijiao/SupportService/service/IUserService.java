@@ -22,6 +22,8 @@ public interface IUserService {
     public boolean setStatus(String email, int status);
     //修改密码
     public boolean changePassword(String email, String password);
+    //修改详细资料
+    public boolean changeIntro(String email, String intro);
     //验证登陆
     public String confirmLogin(String email, String password);
     //注册为User

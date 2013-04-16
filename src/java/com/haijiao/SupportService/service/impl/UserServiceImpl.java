@@ -124,5 +124,10 @@ public class UserServiceImpl implements IUserService{
     public Object download(String fileuri) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    @Override
+    public boolean changeIntro(String email, String intro) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
     
 }

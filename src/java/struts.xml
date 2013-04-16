@@ -44,6 +44,10 @@
             <result name="input">changePassword.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
+        <action name="changeIntro" class="ChangeIntroAction">
+            <result name="input">changeIntro.jsp</result>
+            <result name="success">changeIntro.jsp</result>
+        </action>
         <action name="index" class="IndexAction">
             <result name="success">index.jsp</result>
             <result name="teacher">teacherIndex.jsp</result>
