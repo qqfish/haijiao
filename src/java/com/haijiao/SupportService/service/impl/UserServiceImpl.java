@@ -85,6 +85,14 @@ public class UserServiceImpl implements IUserService{
     }
     
     @Override
+    public boolean changeIntro(String email, String intro) {
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        t.setIntro(intro);
+        teacherDAO.update(t);
+        return true;
+    }
+    
+    @Override
     public String confirmLogin(String email, String password) {
         return userDAO.confirmLogin(email, password);
     }
@@ -122,11 +130,6 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public Object download(String fileuri) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean changeIntro(String email, String intro) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
