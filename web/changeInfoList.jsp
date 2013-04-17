@@ -15,6 +15,7 @@
         <ul>
             <li><a href="changeInfo.jsp">修改基本资料</a></li>
             <li><a href="changePassword.jsp">修改密码</a></li>
+            <li><a href="changePic.jsp">修改头像</a></li>
             <li><a href="changeIntro.jsp">修改详细资料</a></li>
         </ul>
     </body>

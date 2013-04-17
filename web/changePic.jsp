@@ -1,6 +1,6 @@
 <%-- 
-    Document   : changeIntro
-    Created on : 2013-4-16, 21:56:03
+    Document   : changePic
+    Created on : 2013-4-17, 14:08:15
     Author     : Jerry
 --%>
 
@@ -67,15 +67,13 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
 <jsp:include page="changeInfoList.jsp"/>
-<s:form action="changeIntro.action">
-    <s:if test="#session.userType == 'teacher'">
-        <s:textarea name="intro" value="%{#session.teacher.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-    </s:if>
-    <s:if test="#session.userType == 'student'">
-        <s:textarea name="intro" value="%{#session.student.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-    </s:if>
-    <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
-</s:form>
+<s:if test="#session.userType=='student'">
+    <img src="<s:property value="#session.student.picUrl"/>" style="height: 230px;width: 230px;"/>
+</s:if>
+<s:if test="#session.userType=='teacher'">
+    <img src="<s:property value="#session.teacher.picUrl"/>" style="height: 230px;width: 230px;"/>
+</s:if>
+上传图片？
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>

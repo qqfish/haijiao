@@ -42,24 +42,31 @@ public class RegisterAction extends SessionAction{
         return execute();
     }
     
+    @Override
     public void validate() {
         if(email==null || email.trim().length()==0){
             this.putIn("message", this.getText("emailNull"));
+            this.addActionError(null);
         }
         if(password1==null || password1.trim().length()==0){
             this.putIn("message", this.getText("passwordNull"));
+            this.addActionError(null);
         }
         else if(password1.trim().length()<6){
             this.putIn("message", this.getText("passwordShort"));
+            this.addActionError(null);
         }
         if(password2==null || password2.trim().length()==0){
             this.putIn("message", this.getText("passwordNull"));
+            this.addActionError(null);
         }
         else if(password2==null || password2.trim().length()<6){
             this.putIn("message", this.getText("passwordShort"));
+            this.addActionError(null);
         }
         else if(!password1.trim().equals(password2.trim())){
             this.putIn("message", this.getText("passwordNotEqual"));
+            this.addActionError(null);
         }
     }
 

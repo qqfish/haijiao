@@ -31,13 +31,26 @@ public class ChangeInfoAction extends SessionAction {
     String newpwd;
     String newpwd2;
     SimpleDateFormat sdf;
+    SimpleDateFormat sdf2;
+    Date date;
     
     public ChangeInfoAction() throws ParseException{
         sdf= new SimpleDateFormat("MM/dd/yyyy");
+        sdf2= new SimpleDateFormat("yy-MM-dd");
+        
+    }
+    
+    public void parseDate() throws ParseException{
+        try{
+            date = new Date(sdf.parse(birthday).getTime());
+        } catch(ParseException e){
+            date = new Date(sdf2.parse(birthday).getTime());
+        }
     }
     
     public String teacherRegister() throws ParseException{
-        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), school, tel)){
+        parseDate();
+        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, date, school, tel)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
             this.putIn("teacher", theTeacher);
             this.putIn("message", this.getText("teaRegisterSuccess"));
@@ -49,7 +62,8 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String studentRegister() throws ParseException{
-        if(studentService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), grade, null, tel, null)){
+        parseDate();
+        if(studentService.changeInfo((String)this.getValue("email"), name, sex, date, grade, null, tel, null)){
             Student s = studentService.getStudentByEmail((String)this.getValue("email"));
             this.putIn("student", s);
             this.putIn("message", this.getText("stuRegisterSuccess"));
@@ -61,7 +75,8 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String teacherChange() throws ParseException{
-        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), school, tel)){
+        parseDate();
+        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, date , school, tel)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
             this.putIn("teacher", theTeacher);
             this.putIn("message", this.getText("teaChangeSuccess"));
@@ -73,7 +88,8 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String studentChange() throws ParseException{
-        if(studentService.changeInfo((String)this.getValue("email"), name, sex, new Date(sdf.parse(birthday).getTime()), grade, null, tel, null)){
+        parseDate();
+        if(studentService.changeInfo((String)this.getValue("email"), name, sex, date, grade, null, tel, null)){
             Student s = studentService.getStudentByEmail((String)this.getValue("email"));
             this.putIn("student", s);
             this.putIn("message", this.getText("stuChangeSuccess"));

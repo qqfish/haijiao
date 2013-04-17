@@ -50,14 +50,17 @@ public class LoginAction extends SessionAction {
     
     @Override
     public void validate(){
-        if(email==null || email.trim().length()==0){
+        if(email.isEmpty() || email.trim().length()==0){
             this.putIn("message",this.getText("emailNull"));
+            this.addActionError(null);
         }
-        if(password==null || password.trim().length()==0){
+        else if(password.isEmpty() || password.trim().length()==0){
             this.putIn("message",this.getText("passwordNull"));
+            this.addActionError(null);
         }
         else if(password.trim().length()<6){
             this.putIn("message",this.getText("passwordShort"));
+            this.addActionError(null);
         }
     }
 
