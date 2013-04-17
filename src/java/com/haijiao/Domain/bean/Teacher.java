@@ -43,7 +43,8 @@ public class Teacher extends User{
     
     private boolean audition;       //该老师是否接受试听
     
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(mappedBy = "teacher",fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<FreeTime> schedule;//记录老师的时间表
     
     private int wagePerhour;        //老师每小时的辅导费
@@ -140,10 +141,19 @@ public class Teacher extends User{
     public void setWagePerhour(int wagePerhour) {
         this.wagePerhour = wagePerhour;
     }
+    
+    public Lesson getLessonByName(String lesson){
+        for(int i = 0; i < lessons.size(); i++){
+            if(lessons.get(i).getName().equals(lesson)){
+                return lessons.get(i);
+            }
+        }
+        return null;
+    }
 
     public FreeTime getFreeTime(int day, int index) {
         for(int i = 0; i < schedule.size(); i++){
-            if(schedule.get(i).getDay() == day && schedule.get(i).getIndex() == index){
+            if(schedule.get(i).getWeekday() == day && schedule.get(i).getSliceIndex() == index){
                 return schedule.get(i);
             }
         }

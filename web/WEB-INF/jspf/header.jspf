@@ -1,21 +1,31 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags"  %>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+
 <header>
-  <div class="line-top"></div>
-  <div class="main">
-    <div class="row-top">
-      <h1><a href="index.jsp"><img alt="" src="images/logo.png"></a></h1>
-      <nav>
-        <ul class="sf-menu">
-          <li><s:a action="index.action" style = "font-size:18px"><b>主页</b></s:a></li>
-          <li><a href="teachers.jsp" style = "font-size:18px"><b>1v1名师</b></a></li>            
-          <li><a href="contact.jsp" style = "font-size:18px"><b>联系我们</b></a> </li>
-          <li><a href="contact.jsp" style = "font-size:18px"><b>意见反馈</b></a> </li>
-          <li><s:a action="logout.action" style = "font-size:18px"><b>退出(暂时放这儿)</b></s:a></li>
-        </ul>
-      </nav>
-      <div class="clear"></div>
+      <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="span12 offset2">
+                <a class="brand" href="index.jsp">Haijiao</a>
+                <ul class="nav">
+                  <li><a href="">去逛逛</a></li>
+                  <li><a href="contact.jsp">联系我们</a></li>
+                  <li><a href="">意见反馈</a></li>
+                  <form class="navbar-search pull-left" action="">
+                      <input type="text" class=" span3" placeholder="搜索">
+                      <i class="icon-search icon-white"></i>
+                  </form>
+                </ul>
+                <ul class="nav" style="float: right">
+                  <li><a href="">user</a></li>
+                  <li><a href="">余额</a></li>
+                  <li><a href="">收件箱</a></li>
+                  <li><a href="">去上课</a></li>
+                  <li><a href="">登出</a></li>
+                </ul>
+          </div>
     </div>
   </div>
-  <div style="text-align: center"><s:property value="#session.message"/></div>
 </header>

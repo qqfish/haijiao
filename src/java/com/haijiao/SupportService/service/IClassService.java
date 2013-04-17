@@ -5,6 +5,7 @@
 package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Clazz;
+import com.haijiao.global.scheduleLocation;
 import java.util.List;
 
 /**
@@ -13,15 +14,15 @@ import java.util.List;
  */
 public interface IClassService {
     //预定老师
-    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, Integer day, Integer index, int num);
+    public boolean bookTeacher(String teacherEmail, String studentEmail, String lesson, List<scheduleLocation> cList, int num);
     
     public boolean studentPauseBook(int clazzId, int num);
     
     public boolean teacherPauseBook(int clazzId, int num);
     
-    public boolean teacherAddClazz(String teacherEmail, int day, int index);
+    public boolean teacherAddClazz(String teacherEmail, List<scheduleLocation> cList);
     
-    public boolean teacherRemoveClazz(String teacherEmail, int day, int index);
+    public boolean teacherRemoveClazz(String teacherEmail, List<scheduleLocation> cList);
     //处理学生预约
     public boolean dealWithReservation(int clazzId, boolean accept);
     //取消预约

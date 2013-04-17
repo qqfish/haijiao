@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -27,12 +29,13 @@ public class FreeTime extends BaseBean{
     private Teacher teacher;
     
     @Column(name="weekday")
-    private int day;   //星期X 从0到13
+    private int weekday;   //星期X 从0到13
     
     @Column(name="sliceindex")
-    private int index;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
+    private int sliceIndex;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
     
-    @OneToMany(mappedBy = "freeTime")
+    @OneToMany(mappedBy = "freeTime",fetch = FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Clazz> clazzList;  //该空闲时间选的课程，第一个为本次的课程，完成后第一个clazz的remain减1，为0则删除, timeToClass 也减一
 
     public FreeTime() {
@@ -47,20 +50,20 @@ public class FreeTime extends BaseBean{
         this.teacher = teacher;
     }
 
-    public int getDay() {
-        return day;
+    public int getWeekday() {
+        return weekday;
     }
 
-    public void setDay(int day) {
-        this.day = day;
+    public void setWeekday(int weekday) {
+        this.weekday = weekday;
     }
 
-    public int getIndex() {
-        return index;
+    public int getSliceIndex() {
+        return sliceIndex;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    public void setSliceIndex(int sliceIndex) {
+        this.sliceIndex = sliceIndex;
     }
 
     public List<Clazz> getClazzList() {

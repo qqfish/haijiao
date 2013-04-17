@@ -20,8 +20,8 @@ public class FreeTimeDAOImpl extends GenericHibernateDAO<FreeTime,Integer> imple
 
     @Override
     public FreeTime getTeacherFreeTime(String email, int day, int index) {
-        String hql = "select ft form techer t join t.schedule.freeTimes ft where t.email = '"
-                + email + "' and ft.day = '" + day + "' and ft.index = '" + index + "'";
+        String hql = "select ft from Teacher t join t.schedule ft where t.email = '"
+                + email + "' and ft.weekday = '" + day + "' and ft.sliceIndex = '" + index + "'";
         List<FreeTime> lf = findByQuery(hql);
         if(lf.size() != 1)
             return null;

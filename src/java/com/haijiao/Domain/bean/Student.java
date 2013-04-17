@@ -28,9 +28,7 @@ public class Student extends User{
     private String tel;        //学生或家长的联系方式
     private String telType; //="student" or "parent"
     
-    @OneToMany(fetch=FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "scheid", unique = true)
+    @OneToMany(mappedBy="student")
     private List<Clazz> schedule;      //学生的时间表
     
     @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})

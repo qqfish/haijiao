@@ -2,7 +2,6 @@
  *
  * @author Jerry Zou
  */
-
 package com.haijiao.Domain.bean;
 
 import javax.persistence.CascadeType;
@@ -13,33 +12,31 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity    
-@Table(name="clazz")     
-public class Clazz extends BaseBean{ //clazz -> class
-        public class Status{
+@Entity
+@Table(name = "clazz")
+public class Clazz extends BaseBean { //clazz -> class
+
+    public class Status {
+
         static public final int notAvailable = 0;
         static public final int available = 1;
         static public final int notAccept = 2;
         static public final int accept = 3;
     }
-   
-    @ManyToOne(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "sid")
     private Student student;  //固定时间的学生
-    
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name="lid", unique=true)
+    @JoinColumn(name = "lid")
     private Lesson lesson;
-
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="freetimeid")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "freetimeid")
     private FreeTime freeTime;
-    
     private int status;  //本次预约的状态，可选值未Status类中
     private int remain;    //课程次数，-1为无限,每上一次减1，到0该课程被清除
     private int timeToBegin;    //距离开始的次数,方便学生查询
 
-    public Clazz(Clazz c){
+    public Clazz(Clazz c) {
         student = c.getStudent();
         lesson = c.getLesson();
         freeTime = c.getFreeTime();
@@ -98,6 +95,7 @@ public class Clazz extends BaseBean{ //clazz -> class
     public void setTimeToBegin(int timeToBegin) {
         this.timeToBegin = timeToBegin;
     }
+
     public void addTimeToBegin(int num) {
         timeToBegin += num;
     }

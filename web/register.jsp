@@ -6,21 +6,10 @@
 <head>
 <title>Register</title>
 <meta charset="utf-8">
-<!--css-->
-<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-<link rel="stylesheet" href="css/grid.css" type="text/css" media="screen">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/datepicker.css">
 <!--js-->
 <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-<script type="text/javascript" src="js/superfish.js"></script>
-<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
 <script type="text/javascript" src="js/reg.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 
 	<!--[if lt IE 8]>
@@ -44,10 +33,9 @@
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
-<section id="content">
-<div class="ic"></div>
-  <div id="regpanel" class="container" style="width:800px;border: 1px solid #CCC;box-shadow:3px 3px 3px #c5c2a9;-moz-box-shadow: 3px 3px 3px #c5c2a9;-webkit-box-shadow:3px 3px 3px #c5c2a9;background-color: white;">
-      <s:form action="changeInfo.action">
+<div id="content">
+  <div class="container">
+      <s:form action="register.action">
             <s:if test="#session.userType == 'teacher'">
                 <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，修改你的详细信息吧^ ^</div>
                 名字<s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
@@ -66,7 +54,7 @@
             </s:if>
         </s:form>
   </div>
-</section>
+</div>
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>

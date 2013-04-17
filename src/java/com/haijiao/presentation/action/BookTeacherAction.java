@@ -10,35 +10,32 @@ import com.haijiao.presentation.bean.schedule.ScheduleArray;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.ITeacherService;
+import com.haijiao.global.scheduleLocation;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookTeacherAction extends SessionAction {
     IClassService classService;
     ITeacherService teacherService;
     String teacherEmail;
-    String gsonStr;
-    Gson gson;
-    Teacher tea;
+    String json;
+    int times;
 
     public BookTeacherAction() {
-        this.gson = new Gson();
     }
     
     @Override
     public String execute(){
-        ScheduleArray sa = gson.fromJson(gsonStr, ScheduleArray.class);
         //List<List<Integer>> array = sa.getArray();
-        tea = teacherService.getTeacherByEmail(teacherEmail);
+        System.out.println(json);
+        System.out.println(teacherEmail);
+        Gson gson = new Gson();
+        ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
+        List<scheduleLocation> sList = array.toList();
+        classService.bookTeacher(teacherEmail, (String)this.getValue("email"), "tmp", sList, times);
+        
         this.putIn("message", this.getText("successMessage"));
         return SUCCESS;
-    }
-
-    public IClassService getStudentService() {
-        return classService;
-    }
-
-    public void setStudentService(IClassService classService) {
-        this.classService = classService;
     }
 
     public String getTeacherEmail() {
@@ -49,6 +46,30 @@ public class BookTeacherAction extends SessionAction {
         this.teacherEmail = teacherEmail;
     }
 
+    public IClassService getStudentService() {
+        return classService;
+    }
+
+    public void setStudentService(IClassService classService) {
+        this.classService = classService;
+    }
+
+    public String getJson() {
+        return json;
+    }
+
+    public void setJson(String json) {
+        this.json = json;
+    }
+
+    public int getTimes() {
+        return times;
+    }
+
+    public void setTimes(int times) {
+        this.times = times;
+    }
+
     public IClassService getClassService() {
         return classService;
     }
@@ -57,27 +78,11 @@ public class BookTeacherAction extends SessionAction {
         this.classService = classService;
     }
 
-    public String getGsonStr() {
-        return gsonStr;
+    public ITeacherService getTeacherService() {
+        return teacherService;
     }
 
-    public void setGsonStr(String gsonStr) {
-        this.gsonStr = gsonStr;
-    }
-
-    public Gson getGson() {
-        return gson;
-    }
-
-    public void setGson(Gson gson) {
-        this.gson = gson;
-    }
-
-    public Teacher getTea() {
-        return tea;
-    }
-
-    public void setTea(Teacher tea) {
-        this.tea = tea;
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 }

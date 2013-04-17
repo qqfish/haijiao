@@ -5,6 +5,7 @@
 package com.haijiao.presentation.bean.schedule;
 
 import com.google.gson.Gson;
+import com.haijiao.Domain.bean.FreeTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,12 @@ import java.util.List;
 public class ScheduleBean {
     private List<FreeTimeBean> clazzes;
     
-    public ScheduleBean() {
+    public ScheduleBean(List<FreeTime> f) {
+        clazzes = new ArrayList();
+        for(int i = 0; i < f.size(); i++){
+            FreeTimeBean newClazz = new FreeTimeBean(f.get(i));
+            clazzes.add(newClazz);
+        }
     }
 
     public List<FreeTimeBean> getClazzes() {
