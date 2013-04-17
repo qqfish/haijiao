@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Register</title>
+<title>海角教育</title>
 <meta charset="utf-8">
 <!--css-->
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
@@ -60,22 +60,24 @@
       <s:form action="changeInfo.action">
             <s:if test="#session.userType == 'teacher'">
                 <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，修改你的详细信息吧^ ^</div>
-                <s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="sex" placeholder="请输入您的性别" value="%{#session.teacher.sex}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" value="%{#session.teacher.birthday}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.teacher.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="teacherRegister"/>
+                名字<s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                性别<s:radio list="{'男', '女'}" name="sex" value="%{#session.teacher.sex}"/><br/>
+                生日<s:textfield type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" value="%{#session.teacher.birthday}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                省份<s:select headerKey="" headerValue="请选择你出生的省份" name="province" value="%{#session.teacher.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                大学<s:textfield type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                手机<s:textfield type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.teacher.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="teacherChange"/>
             </s:if>
             <s:if test="#session.userType == 'student'">
                 <div style="font-size: 36px;margin:20px 0px 0px 40px">同学您好，修改你的详细信息吧^ ^</div>
-                <s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.student.name}"  autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="sex" placeholder="请输入您的性别" value="%{#session.student.sex}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" value="%{#session.student.birthday}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.student.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="grade" placeholder="请输入您在读的年级" value="%{#session.student.grade}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:textfield type="text" name="tel" placeholder="请输入您或您父母的手机号" value="%{#session.student.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="studentRegister"/>
+                名字<s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.student.name}"  autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                性别<s:radio list="{'男', '女'}" name="sex" value="%{#session.student.sex}"/><br/>
+                生日<s:textfield type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" value="%{#session.student.birthday}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                学校<s:textfield type="text" name="school" placeholder="请输入您就读的学校" value="%{#session.student.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                年级<s:select headerKey="" headerValue="请选择你的年级" name="grade" value="%{#session.student.grade}" list="{'一年级', '二年级', '三年级', '四年级', '五年级', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                手机<s:textfield type="text" name="tel" placeholder="请输入您或您父母的手机号" value="%{#session.student.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                <s:radio list="{'父母的手机', '我的手机'}" name="telType" value="%{#session.student.telType}"/><br/>
+                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="studentChange"/>
             </s:if>
         </s:form>
   </div>

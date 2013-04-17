@@ -34,20 +34,27 @@ public class StudentServiceImpl implements IStudentService{
     @Override
     public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType) {
         Student s = studentDAO.getStudentByEmail(email);
-        if(birthday != null)
+        if(birthday != null){
             s.setBirthday(birthday);
-        if(grade != null)
+        }
+        if(grade != null){
             s.setGrade(grade);
-        if(name != null)
+        }
+        if(name != null){
             s.setName(name);
-        if(school != null)
+        }
+        if(school != null){
             s.setSchool(school);
-        if(sex != null)
+        }
+        if(sex != null){
             s.setSex(sex);
-        if(tel != null)
+        }
+        if(tel != null){
             s.setTel(tel);
-        if(telType != null)
+        }
+        if(telType != null){
             s.setTelType(telType);
+        }
         studentDAO.update(s);
         return true;
     }

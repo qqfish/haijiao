@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Register</title>
+<title>海角教育</title>
 <meta charset="utf-8">
 <!--css-->
 <link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">

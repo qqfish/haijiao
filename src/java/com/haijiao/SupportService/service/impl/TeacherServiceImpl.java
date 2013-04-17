@@ -32,13 +32,21 @@ public class TeacherServiceImpl implements ITeacherService {
     }
     
     @Override
-    public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String tel) {
+    public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String tel, String province) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
-        t.setBirthday(birthday);
-        t.setSchool(school);
-        t.setName(name);
-        t.setSex(sex);
-        t.setTel(tel);
+        if (birthday!=null) {
+            t.setBirthday(birthday);
+        } if (school!=null) {
+            t.setSchool(school);
+        } if (name!=null) {
+            t.setName(name);
+        } if (sex!=null) {
+            t.setSex(sex);
+        } if (tel!=null) {
+            t.setTel(tel);
+        } if (province!=null) {
+            t.setProvince(province);
+        }
         teacherDAO.update(t);
         return true;
     }
