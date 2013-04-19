@@ -33,16 +33,30 @@
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
-<div id="content">
   <div class="container">
       <s:form action="register.action">
             <s:if test="#session.userType == 'teacher'">
-                <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，修改你的详细信息吧^ ^</div>
-                名字<s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                性别<s:radio list="{'男', '女'}" name="sex" value="%{#session.teacher.sex}"/><br/>
-                省份<s:select headerKey="" headerValue="请选择你出生的省份" name="province" value="%{#session.teacher.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                大学<s:textfield type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="teacherRegister"/>
+                <h2 class="offset2">老师您好，请填写您的详细信息^ ^</h2>
+                <hr class="span8 offset2"/>
+                <dl class="dl-horizontal offset2">
+                  <dt>姓名</dt>
+                  <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的全名" value="%{#session.teacher.name}" autofocus="autofocus"/></dd>
+                  <dt>性别</dt>
+                  <dd><s:radio list="{'男', '女'}" name="sex" value="%{#session.teacher.sex}" /></dd>
+                  <dd>
+                      <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                        <button type="button" value="0" class="btn" data-toggle="button">男</button>
+                        <button type="button" value="1" class="btn" data-toggle="button">女</button>
+                      </div>
+                  </dd>
+                  <dt>出生地</dt>
+                  <dd><s:select cssClass="span4" headerValue="请选择你出生的省份" name="province" value="%{#session.teacher.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
+                  <dt>毕业学校</dt>
+                  <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}"/></dd>
+                  <br/>
+                  <br/>
+                  <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherRegister"/></dd>
+                </dl>                
             </s:if>
             <s:if test="#session.userType == 'student'">
                 <div style="font-size: 36px;margin:20px 0px 0px 40px">同学您好，修改你的详细信息吧^ ^</div>
@@ -54,7 +68,6 @@
             </s:if>
         </s:form>
   </div>
-</div>
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>

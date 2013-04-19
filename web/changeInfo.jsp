@@ -1,7 +1,7 @@
 <%-- 
     Document   : changeInfo
     Created on : 2013-4-10, 16:19:38
-    Author     : Jerry
+    Author     : bx
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,21 +13,9 @@
 <head>
 <title>海角教育</title>
 <meta charset="utf-8">
-<!--css-->
-<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-<link rel="stylesheet" href="css/grid.css" type="text/css" media="screen">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen">
-<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/datepicker.css">
 <!--js-->
-<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
-<script type="text/javascript" src="js/superfish.js"></script>
-<script type="text/javascript" src="js/jquery.flexslider-min.js"></script>
-<script type="text/javascript" src="js/reg.js"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 
 
@@ -53,35 +41,104 @@
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
-<jsp:include page="changeInfoList.jsp"/>
-<section id="content">
-<div class="ic"></div>
-  <div id="regpanel" style="height:600px; width: 800px;margin:auto;border: 1px solid #CCC;box-shadow:4px 4px 4px #c5c2a9;-moz-box-shadow: 4px 4px 4px #c5c2a9;-webkit-box-shadow:4px 4px 4px #c5c2a9;background-color: white;">
-      <s:form action="changeInfo.action">
-            <s:if test="#session.userType == 'teacher'">
-                <div style="font-size: 36px;margin:20px 0px 0px 40px">老师您好，修改你的详细信息吧^ ^</div>
-                名字<s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                性别<s:radio list="{'男', '女'}" name="sex" value="%{#session.teacher.sex}"/><br/>
-                生日<s:textfield type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" value="%{#session.teacher.birthday}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                省份<s:select headerKey="" headerValue="请选择你出生的省份" name="province" value="%{#session.teacher.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                大学<s:textfield type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                手机<s:textfield type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.teacher.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="teacherChange"/>
-            </s:if>
-            <s:if test="#session.userType == 'student'">
-                <div style="font-size: 36px;margin:20px 0px 0px 40px">同学您好，修改你的详细信息吧^ ^</div>
-                名字<s:textfield type="text" name="name" placeholder="请输入您的大名" value="%{#session.student.name}"  autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                性别<s:radio list="{'男', '女'}" name="sex" value="%{#session.student.sex}"/><br/>
-                生日<s:textfield type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" autofocus="autofocus" value="%{#session.student.birthday}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                学校<s:textfield type="text" name="school" placeholder="请输入您就读的学校" value="%{#session.student.school}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                年级<s:select headerKey="" headerValue="请选择你的年级" name="grade" value="%{#session.student.grade}" list="{'一年级', '二年级', '三年级', '四年级', '五年级', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                手机<s:textfield type="text" name="tel" placeholder="请输入您或您父母的手机号" value="%{#session.student.tel}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
-                <s:radio list="{'父母的手机', '我的手机'}" name="telType" value="%{#session.student.telType}"/><br/>
-                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="studentChange"/>
-            </s:if>
-        </s:form>
+<link rel="stylesheet" href="css/tooltik.css">
+<div class="container">
+    <div class="row">
+        <div class="span3">
+            <ul class="nav nav-list bs-docs-sidenav">
+                <li class="active"><a href="#1" data-toggle="tab">修改资料<i class="icon-chevron-right pull-right"></i></a></li>
+                <li><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
+                <li><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
+                <li><a href="#4" data-toggle="tab">高级设置<i class="icon-chevron-right pull-right"></i></a></li>
+           </ul>
+        </div>
+        <div class="span9">
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id='1'>
+                    <s:form action="changeInfo.action">
+                        <s:if test="#session.userType == 'teacher'">
+                            <h3>老师您好，修改你的详细信息吧^ ^</h3>
+                            <hr/>
+                            <dl>
+                                <dt>姓名</dt>
+                                <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" /></dd>
+                                <dt>性别</dt>
+                                <dd><s:radio list="{'男', '女'}" name="sex" value="%{#session.teacher.sex}"/></dd>
+                                <dt>生日</dt>
+                                <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{#session.teacher.birthday}"/></dd>
+                                <dt>省份</dt>
+                                <dd><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{#session.teacher.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
+                                <dt>大学</dt>
+                                <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}"/></dd>
+                                <dt>手机</dt>
+                                <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.teacher.tel}"/></dd>                                
+                                <br/>
+                                <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherChange"/></dd>
+                            </dl>
+                        </s:if>
+                        <s:if test="#session.userType == 'student'">
+                            <h3>同学您好，修改你的详细信息吧^ ^</h3>
+                            <hr/>
+                            <dl>
+                                <dt>姓名</dt>
+                                <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的大名" value="%{#session.student.name}"  autofocus="autofocus"/></dd>
+                                <dt>性别</dt>
+                                <dd><s:radio list="{'男', '女'}" name="sex" value="%{#session.student.sex}"/></dd>
+                                <dt>生日</dt>
+                                <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{#session.student.birthday}"/></dd>
+                                <dt>省份</dt>
+                                <dd><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{#session.student.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
+                                <dt>大学</dt>
+                                <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.student.school}"/></dd>
+                                <dt>手机</dt>
+                                <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.student.tel}"/></dd>   
+                                <dd><s:radio list="{'父母的手机', '我的手机'}" name="telType" value="%{#session.student.telType}"/></dd>
+                                <br/>
+                                <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="studentChange"/></dd>
+                            </dl>
+                        </s:if>
+                    </s:form>
+                </div>
+                <div class="tab-pane fade"  id='2'>
+                    <s:form action="changeInfo.action">
+                        <h3>修改密码</h3>
+                        <hr/>
+                        <dl>
+                            <dt>旧密码</dt>
+                            <dd><s:textfield cssClass="span4" type="text" name="oldpwd" placeholder="请输入旧密码" autofocus="autofocus"/></dd>
+                            <dt>新密码</dt>
+                            <dd><s:textfield cssClass="span4" type="text" name="newpwd" placeholder="请输入新密码" autofocus="autofocus"/></dd>
+                            <dt>确认密码</dt>
+                            <dd><s:textfield cssClass="span4" type="text" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus"/></dd>
+                            <br/>
+                            <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="changePassword"/></dd>
+                        </dl>
+                    </s:form>
+                </div>
+                <div class="tab-pane fade"  id='3'>
+                    <s:if test="#session.userType=='student'">
+                        <img src="<s:property value="#session.student.picUrl"/>" style="height: 230px;width: 230px;"/>
+                    </s:if>
+                    <s:if test="#session.userType=='teacher'">
+                        <img src="<s:property value="#session.teacher.picUrl"/>" style="height: 230px;width: 230px;"/>
+                    </s:if>
+                </div>
+                <div class="tab-pane fade"  id='4'>
+                    <s:form action="changeIntro.action">
+                        <s:if test="#session.userType == 'teacher'">
+                            <s:textarea name="intro" value="%{#session.teacher.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                        </s:if>
+                        <s:if test="#session.userType == 'student'">
+                            <s:textarea name="intro" value="%{#session.student.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                        </s:if>
+                        <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
+                    </s:form>
+                </div>
+            </div>
+        </div>
+    </div>      
   </div>
-</section>
+</div>
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>

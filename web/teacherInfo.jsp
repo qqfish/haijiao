@@ -1,5 +1,5 @@
 <%-- 
-    Document   : studentIndex
+    Document   : 
     Created on : 2013-3-26, 22:11:27
     Author     : Bx Yang
 --%>
@@ -20,10 +20,10 @@
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="css/bootstrap-part.css" type="text/css" media="screen">
         <!--js-->
-        <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+        <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/superfish.js"></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
+		<script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
         <!--[if lt IE 8]>
@@ -43,7 +43,7 @@
                 <![endif]-->
 
     </head>
-    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
+    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>

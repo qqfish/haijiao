@@ -6,16 +6,9 @@
 <head>
 <title>Teachers</title>
 <meta charset="utf-8">
-<!--css-->
-<link rel="stylesheet" href="css/reset.css" type="text/css" media="screen">
-<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-<link rel="stylesheet" href="css/grid.css" type="text/css" media="screen">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-<!--js-->
-<script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
-<script type="text/javascript" src="js/superfish.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="js/teachers.js"></script>
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
 <!--[if lt IE 8]>
       <div style=' clear: both; text-align:center; position: relative;'>
@@ -39,49 +32,55 @@
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
-<section id="content">
-    <div id="seacrchBar" style="height: 100px;width: auto;margin:auto;background-color: transparent;overflow: hidden;border-bottom: 2px solid #CCC;border-top: 2px solid #CCC">
-        <div style="height:99px;width:1200px;float: left;margin:0px 0px 0px 200px;">
-            <s:form action="searchTeacher.action">
-                <s:textfield name="searchContent" placeholder="" autofocus="autofocus" style="margin: 30px 0px 0px 100px;height: 30px;width: 600px;font-size: 20px;"></s:textfield>
-                <s:submit id="search-btn" cssClass="label-btn" style="height: 25px;margin:40px 0px 0px 2px" value="搜索"></s:submit>
-            </s:form>
-        </div>  
-        <div id="searchChoice" style="height:99px;width:1200px;margin:0px 0px 0px 300px;float: left">
-            <div style="height: 33px;width: 600px;">
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px;background-color: #db3222;color: #fff">年级</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">小学</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">六年级</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">初一</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">初二</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">初三</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">高一</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">高二</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">高三</a>
-                
+<div class="container" style="background-color: white;">
+    <div class="span9 offset1">
+        <h3>搜索结果</h3>
+        <div class="accordion" id="choice">
+            <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse"  href="#collapseOne">
+              搜索筛选
+            </a>
+          </div>
+          <div id="collapseOne" class="accordion-body collapse">
+            <div class="accordion-inner">
+                <button type="button" class="btn btn-danger">年级</button>
+                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                    <button type="button" value="0" class="btn" data-toggle="button">小学</button>
+                    <button type="button" value="1" class="btn" data-toggle="button">六年级</button>
+                    <button type="button" value="2" class="btn" data-toggle="button">初一</button>
+                    <button type="button" value="3" class="btn" data-toggle="button">初二</button>
+                    <button type="button" value="4" class="btn" data-toggle="button">初三</button>
+                    <button type="button" value="5" class="btn" data-toggle="button">高一</button>
+                    <button type="button" value="6" class="btn" data-toggle="button">高二</button>
+                    <button type="button" value="7" class="btn" data-toggle="button">高三</button>
+                </div>
+                <p></p>
+                <button type="button" class="btn btn-danger">学科</button>
+                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                    <button type="button" value="0" class="btn" data-toggle="button">语文</button>
+                    <button type="button" value="1" class="btn" data-toggle="button">数学</button>
+                    <button type="button" value="2" class="btn" data-toggle="button">英语</button>
+                    <button type="button" value="3" class="btn" data-toggle="button">物理</button>
+                    <button type="button" value="4" class="btn" data-toggle="button">化学</button>
+                    <button type="button" value="5" class="btn" data-toggle="button">生物</button>
+                    <button type="button" value="6" class="btn" data-toggle="button">政治</button>
+                    <button type="button" value="7" class="btn" data-toggle="button">历史</button>
+                    <button type="button" value="8" class="btn" data-toggle="button">地理</button>
+                </div>
+                <p></p>
+                <button type="button" class="btn btn-danger">网络</button>
+                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                    <button type="button" value="0" class="btn" data-toggle="button">电信</button>
+                    <button type="button" value="1" class="btn" data-toggle="button">网通</button>
+                    <button type="button" value="2" class="btn" data-toggle="button">教育网</button>
+                </div>                
             </div>
-            <div style="height: 33px;width: 600px;">
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px;background-color: #db3222;color: #fff">学科</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">语文</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">数学</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">英文</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">物理</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">化学</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">生物</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">地理</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">历史</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">政治</a>                
-            </div>
-            <div style="height: 33px;width: 600px;">
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px;background-color: #db3222;color: #fff">网络</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">电信</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">网通</a>
-                <a href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 2px">教育网</a>
-            </div>
-        </div> 
-            <a id="close-btn" href="#" class="label-btn" style="height: 25px;margin:2px 0px 0px 300px">收起</a>   
+          </div>
+        </div>
+        </div>
     </div>
-  <div  id="resultPanel" style="height: 800px;width: auto;margin:20px 0px 0px auto;">
+  <div  id="resultPanel" class="span9">
       <s:iterator value="teacherlist" id="list">
           <s:a action="getTeacherInfo.action" id="resultBar" cssClass="result-bar">
               <s:param name="teacherEmail"><s:property value="email"/></s:param>
@@ -103,7 +102,7 @@
           </s:a>
       </s:iterator>
   </div>
-</section>
+</div>
 
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>
