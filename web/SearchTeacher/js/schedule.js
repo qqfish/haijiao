@@ -51,7 +51,7 @@ $(document).ready(function() {
                     if ($(this).attr("times") != 0 && $(this).attr("select") == 0) {
                         $(this).css("background-color", "#FC9");
                         $(this).attr("select",1);
-                        result.array[$(this).attr("index")][$(this).attr("day")] = TYPE.create;
+                        result.array[$(this).attr("day")][$(this).attr("index")] = TYPE.create;
                         if(min < 0 && $(this).attr("times") > 0){
                             min = $(this).attr("times");
                         } else if(min > $(this).attr("times")){
@@ -63,9 +63,11 @@ $(document).ready(function() {
                         $(this).attr("select",0);
                         if(min > 0 && min == $(this).attr("times")){
                             min = -1;
+                            var has = 0;
                             for(var i = 0; i < day; i++){
                                 for(var j = 0; j < index; j++){
                                     if(result.array[i][j] == TYPE.create){
+                                        has = 1;
                                         if(min < 0 && $("[index='"+ j +"'][day='" + i + "']").attr("times") > 0){
                                             min = $("td[index='"+ j +"'][day='" + i + "']").attr("times");
                                         } else if(min > $("[index='"+ j +"'][day='" + i + "']").attr("times")){
@@ -75,18 +77,16 @@ $(document).ready(function() {
                                 }
                             }
                         }
+                        if(has == 0)
+                            min = 0;
                     }
                 });  
             });        
         }); 
-        
-        $("td[rel=popover]")
-        .popover()
-        .click(function(e) {
-            e.preventDefault();
-        });
+
    
         $('#next').click(function(){
+            console.log(JSON.stringify(result));
             $("#schedule_json").val(JSON.stringify(result));
             $('#schedule_panel').hide();
             $('#confirm_panel').show();

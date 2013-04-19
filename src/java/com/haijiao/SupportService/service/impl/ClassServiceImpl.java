@@ -55,11 +55,10 @@ public class ClassServiceImpl implements IClassService {
         Student s = studentDAO.getStudentByEmail(studentEmail);
         Teacher tea = teacherDAO.getTeacherByEmail(teacherEmail);
         Lesson l = tea.getLessonByName(lesson);
-        System.out.println("lll");
         if(l == null)
             return false;
         for (int i = 0; i < cList.size(); i++) {
-            System.out.println("fucnk");
+            System.out.println(cList.get(i).getDay() + ":  " + cList.get(i).getIndex() + "  " + teacherEmail);
             FreeTime ft = freeTimeDAO.getTeacherFreeTime(teacherEmail, cList.get(i).getDay(), cList.get(i).getIndex());
             List<Clazz> clazzList = ft.getClazzList();
             Clazz nextClazz = new Clazz(clazzList.get(0));

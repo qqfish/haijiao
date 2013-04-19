@@ -23,7 +23,7 @@
         <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
         <script type="text/javascript" src="js/superfish.js"></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="js/schedule.js"></script>
+        <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
         <!--[if lt IE 8]>
@@ -43,7 +43,7 @@
                 <![endif]-->
 
     </head>
-    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);">
+    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>

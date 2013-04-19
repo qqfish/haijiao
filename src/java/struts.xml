@@ -62,6 +62,12 @@
         </action>
         <action name="bookTeacher" class="BookTeacherAction">
             <result name="success">teacherInfo.jsp</result>
+            <result name="input">index.jsp</result>
+            <result name="teacher">teacherIndex.jsp</result>
+        </action>
+        <action name="addFreeTime" class="AddFreeTimeAction">
+            <result name="success">teacherInfo.jsp</result>
+            <result name="input">teacherInfo.asp</result>
         </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>

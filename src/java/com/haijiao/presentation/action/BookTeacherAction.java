@@ -8,8 +8,10 @@ package com.haijiao.presentation.action;
 import com.google.gson.Gson;
 import com.haijiao.presentation.bean.schedule.ScheduleArray;
 import com.haijiao.Domain.bean.Teacher;
+import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.ITeacherService;
+import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.global.scheduleLocation;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 public class BookTeacherAction extends SessionAction {
     IClassService classService;
     ITeacherService teacherService;
+    IUserService userService;
     String teacherEmail;
     String json;
     int times;
@@ -27,11 +30,18 @@ public class BookTeacherAction extends SessionAction {
     @Override
     public String execute(){
         //List<List<Integer>> array = sa.getArray();
-        System.out.println(json);
-        System.out.println(teacherEmail);
+        User stu = userService.getUserByEmail((String)this.getSessionValue("email"));
+        if(stu == null){
+            return INPUT;
+        }
+        if(stu.getUserType().equals("teacher")){
+            return "teacher";
+        }
         Gson gson = new Gson();
+        System.out.println(json);
         ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
         List<scheduleLocation> sList = array.toList();
+        System.out.println(sList.size());
         classService.bookTeacher(teacherEmail, (String)this.getSessionValue("email"), "tmp", sList, times);
         
         this.sessionPutIn("message", this.getText("successMessage"));
@@ -84,5 +94,13 @@ public class BookTeacherAction extends SessionAction {
 
     public void setTeacherService(ITeacherService teacherService) {
         this.teacherService = teacherService;
+    }
+
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
     }
 }
