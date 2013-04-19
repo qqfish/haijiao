@@ -23,7 +23,7 @@ public class LoginAction extends SessionAction {
     public String execute() throws Exception {
         String userType = userService.confirmLogin(email, password);
         if(userType == null){
-            this.putIn("message",this.getText("loginFail"));
+            this.sessionPutIn("message",this.getText("loginFail"));
             return INPUT;
         } else {
             if(userType.equals("teacher")){
@@ -31,18 +31,18 @@ public class LoginAction extends SessionAction {
                 System.out.println(email);
                 System.out.println(password);
                 Teacher theTeacher = teacherService.getTeacherByEmail(email);
-                this.putIn("teacher", theTeacher);
+                this.sessionPutIn("teacher", theTeacher);
             } else if (userType.equals("student")){
                 Student theStudent = studentService.getStudentByEmail(email);
-                this.putIn("student", theStudent);
+                this.sessionPutIn("student", theStudent);
             }
             User theUser = userService.getUserByEmail(email);
             userService.setStatus(email, User.Status.onlineAndAvailable);
-            this.putIn("user", theUser);
-            this.putIn("login", true);
-            this.putIn("userType", userType);
-            this.putIn("email",email);
-            this.putIn("message",this.getText("loginsuccess"));
+            this.sessionPutIn("user", theUser);
+            this.sessionPutIn("login", true);
+            this.sessionPutIn("userType", userType);
+            this.sessionPutIn("email",email);
+            this.sessionPutIn("message",this.getText("loginsuccess"));
             return SUCCESS;
         }
         
@@ -51,15 +51,15 @@ public class LoginAction extends SessionAction {
     @Override
     public void validate(){
         if(email.isEmpty() || email.trim().length()==0){
-            this.putIn("message",this.getText("emailNull"));
+            this.sessionPutIn("message",this.getText("emailNull"));
             this.addActionError(null);
         }
         else if(password.isEmpty() || password.trim().length()==0){
-            this.putIn("message",this.getText("passwordNull"));
+            this.sessionPutIn("message",this.getText("passwordNull"));
             this.addActionError(null);
         }
         else if(password.trim().length()<6){
-            this.putIn("message",this.getText("passwordShort"));
+            this.sessionPutIn("message",this.getText("passwordShort"));
             this.addActionError(null);
         }
     }

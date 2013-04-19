@@ -26,7 +26,7 @@ public class RequestAction extends ActionSupport implements ServletRequestAware{
         this.request = request;
     }
     
-    public Object getValue(String key){
+    public Object getRequestValue(String key){
         return this.request.getParameter(key);
     }
 

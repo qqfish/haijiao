@@ -19,15 +19,15 @@ public class RegisterAction extends SessionAction{
         if(!userService.confirmExist(email)){
             userService.register(email, password1, userType);
             User theUser = userService.getUserByEmail(email);
-            this.putIn("user", theUser);
-            this.putIn("userType", userType);
-            this.putIn("login", true);
-            this.putIn("email", email);
+            this.sessionPutIn("user", theUser);
+            this.sessionPutIn("userType", userType);
+            this.sessionPutIn("login", true);
+            this.sessionPutIn("email", email);
             userService.setStatus(email, User.Status.onlineAndAvailable);
-            this.putIn("message", this.getText("registerSuccess"));
+            this.sessionPutIn("message", this.getText("registerSuccess"));
             return SUCCESS;
         } else {
-            this.putIn("message", this.getText("userExist"));
+            this.sessionPutIn("message", this.getText("userExist"));
             return INPUT;
         }
     }
@@ -45,27 +45,27 @@ public class RegisterAction extends SessionAction{
     @Override
     public void validate() {
         if(email==null || email.trim().length()==0){
-            this.putIn("message", this.getText("emailNull"));
+            this.sessionPutIn("message", this.getText("emailNull"));
             this.addActionError(null);
         }
         if(password1==null || password1.trim().length()==0){
-            this.putIn("message", this.getText("passwordNull"));
+            this.sessionPutIn("message", this.getText("passwordNull"));
             this.addActionError(null);
         }
         else if(password1.trim().length()<6){
-            this.putIn("message", this.getText("passwordShort"));
+            this.sessionPutIn("message", this.getText("passwordShort"));
             this.addActionError(null);
         }
         if(password2==null || password2.trim().length()==0){
-            this.putIn("message", this.getText("passwordNull"));
+            this.sessionPutIn("message", this.getText("passwordNull"));
             this.addActionError(null);
         }
         else if(password2==null || password2.trim().length()<6){
-            this.putIn("message", this.getText("passwordShort"));
+            this.sessionPutIn("message", this.getText("passwordShort"));
             this.addActionError(null);
         }
         else if(!password1.trim().equals(password2.trim())){
-            this.putIn("message", this.getText("passwordNotEqual"));
+            this.sessionPutIn("message", this.getText("passwordNotEqual"));
             this.addActionError(null);
         }
     }

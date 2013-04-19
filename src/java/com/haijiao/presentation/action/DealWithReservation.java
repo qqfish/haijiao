@@ -15,13 +15,13 @@ public class DealWithReservation extends SessionAction {
     public String execute(){
         if (classService.dealWithReservation(clazzId, accept)) {
             if(accept == true){
-                this.putIn("message", this.getText("successMessage"));
+                this.sessionPutIn("message", this.getText("successMessage"));
             } else {
-                this.putIn("message", this.getText("refuseMessage"));
+                this.sessionPutIn("message", this.getText("refuseMessage"));
             }
             return SUCCESS;
         } else {
-            this.putIn("message", this.getText("errorMessage"));
+            this.sessionPutIn("message", this.getText("errorMessage"));
             return "error";
         }
     }

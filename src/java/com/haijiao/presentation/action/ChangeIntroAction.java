@@ -19,18 +19,18 @@ public class ChangeIntroAction extends SessionAction {
     
     @Override
     public String execute(){
-        if(userService.changeIntro((String)this.getValue("email"), intro)){
-            if(((String)this.getValue("userType")).equals("teacher")){
-                Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
-                this.putIn("teacher", theTeacher);
+        if(userService.changeIntro((String)this.getSessionValue("email"), intro)){
+            if(((String)this.getSessionValue("userType")).equals("teacher")){
+                Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
+                this.sessionPutIn("teacher", theTeacher);
             } else {
-                Student theStudent = studentService.getStudentByEmail((String)this.getValue("email"));
-                this.putIn("student", theStudent);
+                Student theStudent = studentService.getStudentByEmail((String)this.getSessionValue("email"));
+                this.sessionPutIn("student", theStudent);
             }
-            this.putIn("message", this.getText("changeIntroSuccess"));
+            this.sessionPutIn("message", this.getText("changeIntroSuccess"));
             return SUCCESS;
         } else {
-            this.putIn("message", this.getText("changeIntroFailure"));
+            this.sessionPutIn("message", this.getText("changeIntroFailure"));
             return "input";
         }
     }

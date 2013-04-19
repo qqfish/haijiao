@@ -16,7 +16,7 @@ public class GetTeacherInfoAction extends RequestAction{
 
     @Override
     public String execute(){
-        String email = (String)this.getValue("teacherEmail");
+        String email = (String)this.getRequestValue("teacherEmail");
         tea = teacherService.getTeacherByEmail(email);
         scheduleBean = new ScheduleBean(tea.getSchedule());
         System.out.println(scheduleBean.toJson());

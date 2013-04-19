@@ -73,68 +73,68 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String teacherRegister() throws ParseException{
-        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, null, school, null, province)){
-            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
-            this.putIn("teacher", theTeacher);
-            this.putIn("message", this.getText("teaRegisterSuccess"));
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, null, province)){
+            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
+            this.sessionPutIn("teacher", theTeacher);
+            this.sessionPutIn("message", this.getText("teaRegisterSuccess"));
             return SUCCESS;
         } else {
-            this.putIn("message", this.getText("teaRegisterFailure"));
+            this.sessionPutIn("message", this.getText("teaRegisterFailure"));
             return "input";
         }
     }
     
     public String studentRegister() throws ParseException{
-        if(studentService.changeInfo((String)this.getValue("email"), name, sex, null, grade, school, null, null)){
-            Student s = studentService.getStudentByEmail((String)this.getValue("email"));
-            this.putIn("student", s);
-            this.putIn("message", this.getText("stuRegisterSuccess"));
+        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, null, grade, school, null, null)){
+            Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
+            this.sessionPutIn("student", s);
+            this.sessionPutIn("message", this.getText("stuRegisterSuccess"));
             return SUCCESS;
         } else {
-            this.putIn("message", this.getText("stuRegisterFailure"));
+            this.sessionPutIn("message", this.getText("stuRegisterFailure"));
             return "input";
         }
     }
     
     public String teacherChange() throws ParseException{
         parseDate();
-        if(teacherService.changeInfo((String)this.getValue("email"), name, sex, date , school, tel, province)){
-            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getValue("email"));
-            this.putIn("teacher", theTeacher);
-            this.putIn("message", this.getText("teaChangeSuccess"));
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, tel, province)){
+            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
+            this.sessionPutIn("teacher", theTeacher);
+            this.sessionPutIn("message", this.getText("teaChangeSuccess"));
             return SUCCESS;
         } else {
-            this.putIn("message", this.getText("teaChangeFailure"));
+            this.sessionPutIn("message", this.getText("teaChangeFailure"));
             return "input";
         }
     }
     
     public String studentChange() throws ParseException{
         parseDate();
-        if(studentService.changeInfo((String)this.getValue("email"), name, sex, date, grade, school, tel, telType)){
-            Student s = studentService.getStudentByEmail((String)this.getValue("email"));
-            this.putIn("student", s);
-            this.putIn("message", this.getText("stuChangeSuccess"));
+        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, date, grade, school, tel, telType)){
+            Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
+            this.sessionPutIn("student", s);
+            this.sessionPutIn("message", this.getText("stuChangeSuccess"));
             return SUCCESS;
         } else {
-            this.putIn("message", this.getText("stuChangeFailure"));
+            this.sessionPutIn("message", this.getText("stuChangeFailure"));
             return "input";
         }
     }
     
     public String changePassword(){
-        User u = (User)this.getValue("user");
+        User u = (User)this.getSessionValue("user");
         System.out.println(u.getPassword());
         if ( !oldpwd.equals(u.getPassword())) {
-            this.putIn("message", this.getText("passwordWrong"));
+            this.sessionPutIn("message", this.getText("passwordWrong"));
             return "input";
         } 
         if ( !newpwd.equals(newpwd2) ) {
-            this.putIn("message", this.getText("passwordNotEqual"));
+            this.sessionPutIn("message", this.getText("passwordNotEqual"));
             return "input";
         }
         userService.changePassword( u.getEmail(), newpwd );
-        this.putIn("message", this.getText("changePasswordSuccess"));
+        this.sessionPutIn("message", this.getText("changePasswordSuccess"));
         return SUCCESS;
     }
 

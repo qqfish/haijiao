@@ -8,14 +8,14 @@ public class IndexAction extends SessionAction {
     
     @Override
     public String execute() throws Exception {
-        Boolean login = (Boolean)this.getValue("login");
+        Boolean login = (Boolean)this.getSessionValue("login");
         if(login!=null && login==true){
-            String userType = (String)this.getValue("userType");
+            String userType = (String)this.getSessionValue("userType");
             if(userType.equals("teacher")){
-                this.putIn("message", this.getText("teacherInfo"));
+                this.sessionPutIn("message", this.getText("teacherInfo"));
                 return "teacher";
             } else {
-                this.putIn("message", this.getText("studentInfo"));
+                this.sessionPutIn("message", this.getText("studentInfo"));
                 return "student";
             }
         } else {

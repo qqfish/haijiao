@@ -12,11 +12,11 @@ public class ChangeAuditionAction extends SessionAction{
 
     @Override
     public String execute(){
-        if(teacherService.changeAudition(this.getValue("username").toString())){
+        if(teacherService.changeAudition(this.getSessionValue("username").toString())){
             return SUCCESS;
         }
         else {
-            this.putIn("errormessage", "数据库未响应！");
+            this.sessionPutIn("errormessage", "数据库未响应！");
             return "unconnected";
         }
     }

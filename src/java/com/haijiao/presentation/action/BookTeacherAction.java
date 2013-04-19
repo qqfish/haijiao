@@ -32,9 +32,9 @@ public class BookTeacherAction extends SessionAction {
         Gson gson = new Gson();
         ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
         List<scheduleLocation> sList = array.toList();
-        classService.bookTeacher(teacherEmail, (String)this.getValue("email"), "tmp", sList, times);
+        classService.bookTeacher(teacherEmail, (String)this.getSessionValue("email"), "tmp", sList, times);
         
-        this.putIn("message", this.getText("successMessage"));
+        this.sessionPutIn("message", this.getText("successMessage"));
         return SUCCESS;
     }
 
