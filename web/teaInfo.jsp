@@ -57,6 +57,7 @@
             <li>总评分<br/><p class="text-center">1</p></li>
         </ul>
         <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
+        <a class="btn btn-primary" href="sendmail.jsp?id=<s:property value="tea.id" />">发送私信</a>
     </div>
         <div class="span9">
             <ul class="nav nav-pills">

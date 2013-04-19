@@ -23,7 +23,7 @@ import org.hibernate.annotations.FetchMode;
 public class Teacher extends User{
     private String school;      //就读大学
     private String province;    //省份
-    private String classNum;    //成功完成课程的次数
+    private int classNum;    //成功完成课程的次数
     
     @Column(columnDefinition="int default 0")
     private int reserveNum;  //预约次数
@@ -70,11 +70,11 @@ public class Teacher extends User{
         this.province = province;
     }
 
-    public String getClassNum() {
+    public int getClassNum() {
         return classNum;
     }
 
-    public void setClassNum(String classNum) {
+    public void setClassNum(int classNum) {
         this.classNum = classNum;
     }
 

@@ -22,7 +22,7 @@
                     <s:if test="#session.email!=null">
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>
                         <li><a href="">余额</a></li>
-                        <li><a href="">收件箱</a></li>
+                        <li><a href="mail.jsp">收件箱</a></li>
                         <li><a href="">去上课</a></li>
                         <li><a href="logout.action">登出</a></li>
                     </s:if>
