@@ -22,19 +22,20 @@
         <script src="js/table.js"></script>
         <script src="js/fileManager.js"></script>
         <script src="js/main.js"></script>
+        <script src="js/tooltip.js"></script>
         <!--css-->
-        <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen">
         <link rel="stylesheet" href="../css/style.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="../css/grid.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/room.css" type="text/css" media="screen">
         <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
         <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon" />
         <!--<link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400,400italic' rel='stylesheet' type='text/css'>-->
-        <link rel="stylesheet" href="../css/flexslider.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="../css/bootstrap.min.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="../css/bootstrap-responsive.min.css" type="text/css" media="screen">
         <!--js-->
         <!--<script type="text/javascript" src="../js/superfish.js"></script>-->
         <script type="text/javascript" src="js/sidebar.js"></script>
-        
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
         <script type="text/javascript">
         </script>
         <!--[if lt IE 8]>
@@ -59,27 +60,33 @@
         <!--<!--%@ include file="WEB-INF/jspf/header.jspf"%>-->
         <div class="line-top"></div>
         <!--==============================content=================================-->
-        <section id="content"> 
+        <div id="content"> 
 
-            <div id="tools">
-                <div>
-                    <ul class="sf-menu" style="float: right;">
-                        <li><a id="pointer">指针</a></li>
-                        <li><a id="pen">画笔</a></li>
-                        <li><a id="eraser">橡皮</a></li>
-                        <li><a id="prePage">上一页</a></li>
-                        <li><a id="nextPage">下一页</a></li>
-                        <li><a id="scaleUp">放大</a></li>
-                        <li><a id="scaleDown">缩小</a></li>
-                        <li><a class="favor-close-sidebar">书签</a></li>
-                        <li><a class="userFile-close-sidebar">用户文件</a></li>
-                        <li><a class="user-close-sidebar">用户列表</a></li>
-                        <li><a class="file-close-sidebar">文件</a></li>
-                        <li><a class="close-sidebar" >关闭侧边栏</a></li>
-                    </ul>
-                </div> 
-                <hr style="width:1366px;height:2px;margin:0px 0px 0px 0px;float:right"></hr>
-                <div class="side-bar" id ="side" style="margin:0px;float: bottom;overflow-y: auto;overflow-x: visible;white-space: nowrap;word-break: break-all">   
+            <div id="tools" class="navbar navbar-inverse">
+                <div  class="navbar-inner">
+                    <div class="span12 offset2">
+                        <a class="brand" href="index.jsp">Haijiao</a>
+                        <ul class="nav">
+                            <li>
+                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                    <button id="pointer" type="button" value="0" class="btn active" data-toggle="tooltip" data-placement="bottom" data-original-title="指针">指针</button>
+                                    <button id="pen" type="button" value="1" class="btn" data-toggle="tooltip" data-placement="bottom" data-original-title="画笔"><i class="icon-pencil"></i></button>
+                                    <button id="eraser" type="button" value="2" class="btn" data-toggle="tooltip" data-placement="bottom" data-original-title="橡皮"><i class="icon-hdd"></i></button>
+                                </div>
+                            </li>
+                            <li><a id="prePage" data-toggle="tooltip" data-placement="bottom" data-original-title="上一页"><i class="icon-arrow-left icon-white"></i></a></li>
+                            <li><a id="nextPage" data-toggle="tooltip" data-placement="bottom" data-original-title="下一页"><i class="icon-arrow-right icon-white" ></i></a></li>
+                            <li><a id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
+                            <li><a id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
+                            <li><a class="favor-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="收藏栏"><i class="icon-tags icon-white"></i></a></li>
+                            <li><a class="userFile-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="用户文件"><i class="icon-th-list icon-white"></i></a></li>
+                            <li><a class="user-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="用户列表"><i class="icon-user icon-white"></i></a></li>
+                            <li><a class="file-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="文件列表"><i class="icon-folder-open icon-white"></i></a></li>
+                            <li><a class="close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="关闭侧边栏"><i class="icon-remove icon-white"></i></a></li>
+                        </ul>
+                    </div> 
+                </div>
+                <div class="well span2" id ="side" style="margin:0px;float: bottom;overflow-y: auto;overflow-x: visible;white-space: nowrap;word-break: break-all">   
                     <div id="favor-content" style="display:none;">
                         <ul id="bookmark"></ul>
                     </div>
@@ -99,7 +106,7 @@
                 </div>
             </div>
 
-        </section>
+        </div>
         <!--==============================footer=================================-->
         <!--%@ include file="WEB-INF/jspf/footer.jspf"%>
         </body>
