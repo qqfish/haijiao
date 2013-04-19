@@ -2,7 +2,6 @@
  *
  * @author Jerry Zou
  */
-
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
@@ -12,25 +11,31 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SearchTeacherAction extends SessionAction {
+
     IUserService userService;
     String searchContent;
     List<Teacher> teacherlist;
-    
+
     @Override
-    public String execute() throws Exception{
+    public String execute() throws Exception {
         List<String> strList = new ArrayList<String>();
-        String[] strArray = searchContent.split(" ");
-        strList.addAll(Arrays.asList(strArray));
+        if (searchContent != null) {
+            String[] strArray = searchContent.split(" ");
+            strList.addAll(Arrays.asList(strArray));
+        } else {
+            strList.add("");
+        }
         teacherlist = new ArrayList<Teacher>();
         teacherlist = userService.searchTeacher(strList);
-        if(!teacherlist.isEmpty()){
+        if (!teacherlist.isEmpty()) {
             this.sessionPutIn("message", this.getText("searchSuccess"));
         } else {
             this.sessionPutIn("message", this.getText("searchNull"));
         }
         return SUCCESS;
-        /***
-         *  此处加入出错处理
+        /**
+         * *
+         * 此处加入出错处理
          */
     }
 
@@ -57,7 +62,4 @@ public class SearchTeacherAction extends SessionAction {
     public void setTeacherlist(List<Teacher> teacherlist) {
         this.teacherlist = teacherlist;
     }
-            
-    
-
 }

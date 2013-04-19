@@ -14,7 +14,6 @@
 <meta charset="utf-8">
 <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="js/teachers.js"></script>
-<script type="text/javascript" src="js/schedule.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
@@ -36,7 +35,7 @@
 	<![endif]-->
 
 </head>
-<body>
+<body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);">
 
 <!--==============================header=================================-->
 <%@ include file="WEB-INF/jspf/header.jspf"%>
@@ -46,15 +45,15 @@
         <div id="sideInfo" class="span3">
 <!--              <img src="<s:property value="#session.teacher.picUrl"/>"/>-->
         <img width="210px" height="210px" src="images/1.jpg" class="img-polaroid"/>
-        <h1>邹润阳<s:property value="#session.teacher.name"/></h1>          
+        <h1><s:property value="tea.name"/></h1>          
         <hr/>
-        <p>中国 上海</p>
-        <p>woshishabi@22.com</p>
-        <p>2012-1-1 加入</p>
+        <p><s:property value="tea.province"/></p>
+        <p><s:property value="tea.email" /></p>
+        <p><s:property value="tea.createTime" /> 加入</p>
         <hr/>
         <ul class="inline">
-            <li>预约数<br/><p class="text-center">1</p></li>
-            <li>完成数<br/><p class="text-center">1</p></li>
+            <li>预约数<br/><p class="text-center"><s:property value="tea.reserveNum" default="0"/></p></li>
+            <li>完成数<br/><p class="text-center"><s:property value="tea.classNum" default="0"/></p></li>
             <li>总评分<br/><p class="text-center">1</p></li>
         </ul>
         <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>

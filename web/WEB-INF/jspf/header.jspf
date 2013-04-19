@@ -5,27 +5,33 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 
 <header>
-      <div class="navbar navbar-inverse">
+    <div class="navbar navbar-inverse">
         <div class="navbar-inner">
             <div class="span12 offset2">
-                <a class="brand" href="index.jsp">Haijiao</a>
+                <a class="brand" href="index.action">Haijiao</a>
                 <ul class="nav">
-                  <li><a href="">去逛逛</a></li>
-                  <li><a href="contact.jsp">联系我们</a></li>
-                  <li><a href="">意见反馈</a></li>
-                  <form class="navbar-search pull-left" action="">
-                      <input type="text" class=" span3" placeholder="搜索">
-                      <i class="icon-search icon-white"></i>
-                  </form>
+                    <li><a href="searchTeacher.action">去逛逛</a></li>
+                    <li><a href="contact.jsp">联系我们</a></li>
+                    <li><a href="">意见反馈</a></li>
+                    <s:form cssClass="navbar-search pull-left" action="searchTeacher.action">
+                        <s:textfield  name="searchContent" cssClass=" span3" placeholder="搜索"></s:textfield>
+                        <i class="icon-search icon-white"></i>
+                    </s:form>
                 </ul>
                 <ul class="nav" style="float: right">
-                  <li><a href="">user</a></li>
-                  <li><a href="">余额</a></li>
-                  <li><a href="mail.jsp">收件箱</a></li>
-                  <li><a href="">去上课</a></li>
-                  <li><a href="">登出</a></li>
+                    <s:if test="#session.email!=null">
+                        <li><a href="index.action"><s:property value="#session.name" /></a></li>
+                        <li><a href="">余额</a></li>
+                        <li><a href="">收件箱</a></li>
+                        <li><a href="">去上课</a></li>
+                        <li><a href="logout.action">登出</a></li>
+                    </s:if>
+                    <s:else>            
+                        <li><a href="index.action">注册</a></li>
+                        <li><a href="index.action">登陆</a></li>
+                    </s:else>
                 </ul>
-          </div>
+            </div>
+        </div>
     </div>
-  </div>
 </header>

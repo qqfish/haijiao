@@ -80,29 +80,29 @@
         </div>
         </div>
     </div>
-  <div  id="resultPanel" class="span9">
+  <div  id="resultPanel" class="span12">
       <s:iterator value="teacherlist" id="list">
-          <s:a action="getTeacherInfo.action" id="resultBar" cssClass="result-bar">
+          <s:a action="getTeacherInfo.action" id="resultBar" cssClass="well span5">
               <s:param name="teacherEmail"><s:property value="email"/></s:param>
-              <figure id="personImage" class="figureBar">
-                  <img src="<s:property value="picUrl"/>" style="height: 150px;width: 150px;"/>
+              <figure id="personImage" class="pull-left" style="width:150px;height:150px">
+                  <img src="<s:property value="picUrl"/>"/>
               </figure>
-              <div id="teacherName" style="height:50px;width: 350px;float:left;font-size: 36px;color: #000000;margin: 10px 0px 0px 15px;line-height: 50px"><s:property value="name"/></div>
-              <div id="teacherScore" class="label-1" style="font-size: 10px; margin: 0px 0px 0px 13px;background-color: transparent;border: 1px solid #db3222;color: #db3222">评分：<s:property value="score"/></div>
-              <div id="teacherCourses" style="height: 30px;width:390px;float:left;margin: 0px 0px 0px 10px;">
+              <h3 id="teacherName" ><s:property value="name"/></h3>
+              <div id="teacherScore" class="label" >评分：<s:property value="score"/></div>
+              <div id="teacherCourses">
                   <s:iterator value="lessons" status="st">
-                      <div class="label-1" style="height: 25px;margin:2px 0px 0px 2px"><s:property value="name"/></div>
+                      <div class="label" ><s:property value="name"/></div>
                   </s:iterator>
               </div>
-              <div id="teacherIcons" style="height: 30px;width:390px;float:left;margin: 0px 0px 0px 10px;">
-                  <div  style="height: 20px;width: 20px;margin:2px 0px 0px 5px;float:left;border:1px solid #000;border-radius: 5px"></div>
-                  <div  style="height: 20px;width: 20px;margin:2px 0px 0px 5px;float:left;border:1px solid #000;border-radius: 5px"></div>
-                  <div  style="height: 20px;width: 20px;margin:2px 0px 0px 5px;float:left;border:1px solid #000;border-radius: 5px"></div>
+              <div id="teacherIcons" class="">
+                  <div  class="label">1</div>
+                  <div  class="label">1</div>
+                  <div  class="label">1</div>
               </div>
           </s:a>
       </s:iterator>
   </div>
-</div>
+</div>  
 
 <!--==============================footer=================================-->
 <%@ include file="WEB-INF/jspf/footer.jspf"%>

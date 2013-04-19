@@ -26,20 +26,9 @@ public class LoginAction extends SessionAction {
             this.sessionPutIn("message",this.getText("loginFail"));
             return INPUT;
         } else {
-            if(userType.equals("teacher")){
-                System.out.println(userType);
-                System.out.println(email);
-                System.out.println(password);
-                Teacher theTeacher = teacherService.getTeacherByEmail(email);
-                this.sessionPutIn("teacher", theTeacher);
-            } else if (userType.equals("student")){
-                Student theStudent = studentService.getStudentByEmail(email);
-                this.sessionPutIn("student", theStudent);
-            }
             User theUser = userService.getUserByEmail(email);
             userService.setStatus(email, User.Status.onlineAndAvailable);
-            this.sessionPutIn("user", theUser);
-            this.sessionPutIn("login", true);
+            this.sessionPutIn("name", theUser.getName());
             this.sessionPutIn("userType", userType);
             this.sessionPutIn("email",email);
             this.sessionPutIn("message",this.getText("loginsuccess"));

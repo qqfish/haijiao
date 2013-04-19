@@ -58,7 +58,7 @@
             <result name="input">teachers.jsp</result>
         </action>
         <action name="getTeacherInfo" class="GetTeacherInfoAction">
-            <result name="success">teacherInfo.jsp</result>
+            <result name="success">teaInfo.jsp</result>
         </action>
         <action name="bookTeacher" class="BookTeacherAction">
             <result name="success">teacherInfo.jsp</result>
