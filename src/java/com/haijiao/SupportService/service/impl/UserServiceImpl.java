@@ -5,8 +5,6 @@
 
 package com.haijiao.SupportService.service.impl;
 
-import com.haijiao.Domain.bean.Bill;
-import com.haijiao.Domain.bean.Mail;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
@@ -51,7 +49,6 @@ public class UserServiceImpl implements IUserService{
     public boolean confirmExist(String email) {
         return userDAO.confirmExist(email);
     }
-
 
     @Override
     public User getUserByEmail(String email) {

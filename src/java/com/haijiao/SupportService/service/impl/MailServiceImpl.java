@@ -46,6 +46,18 @@ public class MailServiceImpl implements IMailService{
     }
 
     @Override
+    public boolean sendMail(String emailFrom, int id, String message) {
+        Mail m = new Mail();
+        User from = userDAO.getUserByEmail(emailFrom);
+        User to = userDAO.findById(id);
+        m.setFrom(from);
+        m.setMessage(message);
+        m.setRead(false);
+        m.setTo(to);
+        return mailDAO.makePersistent(m);
+    }
+    
+    @Override
     public boolean sendMail(String emailFrom, String emailTo, String message) {
         Mail m = new Mail();
         User from = userDAO.getUserByEmail(emailFrom);

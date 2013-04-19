@@ -17,6 +17,7 @@ public interface IMailService {
      //获取本用户收到的私信
     public List<Mail> getMail(String email);
     //发送一封私信
+    public boolean sendMail(String emailFrom, int id, String message);
     public boolean sendMail(String emailFrom, String emailTo, String message);
     //设置私信状态（已读/未读）
     public boolean setMailStatus(int mailId, boolean read);

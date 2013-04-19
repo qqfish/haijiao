@@ -21,7 +21,7 @@
                 <ul class="nav" style="float: right">
                   <li><a href="">user</a></li>
                   <li><a href="">余额</a></li>
-                  <li><a href="">收件箱</a></li>
+                  <li><a href="mail.jsp">收件箱</a></li>
                   <li><a href="">去上课</a></li>
                   <li><a href="">登出</a></li>
                 </ul>

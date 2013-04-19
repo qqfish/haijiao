@@ -26,7 +26,7 @@ public class Teacher extends User{
     private String classNum;    //成功完成课程的次数
     
     @Column(columnDefinition="int default 0")
-    private String reserveNum;  //预约次数
+    private int reserveNum;  //预约次数
     
     private String tel;         //老师的手机
     private String videoUrl;    //老师的介绍视频地址
@@ -78,11 +78,11 @@ public class Teacher extends User{
         this.classNum = classNum;
     }
 
-    public String getReserveNum() {
+    public int getReserveNum() {
         return reserveNum;
     }
 
-    public void setReserveNum(String reserveNum) {
+    public void setReserveNum(int reserveNum) {
         this.reserveNum = reserveNum;
     }
 
