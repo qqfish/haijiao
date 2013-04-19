@@ -82,6 +82,7 @@ public class ClassServiceImpl implements IClassService {
                 clazzList.add(1, nextClazz);
                 clazzDAO.makePersistent(nextClazz);
             }
+            clazzDAO.update(clazzList.get(0));
             freeTimeDAO.update(ft);
         }
         System.out.println("fuck");
