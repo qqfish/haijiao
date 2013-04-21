@@ -34,7 +34,7 @@
 <%@ include file="WEB-INF/jspf/header.jspf"%>
 <!--==============================content=================================-->
   <div class="container">
-      <s:form action="register.action">
+      <s:form action="changeInfo.action">
             <s:if test="#session.userType == 'teacher'">
                 <h2 class="offset2">老师您好，请填写您的详细信息^ ^</h2>
                 <hr class="span8 offset2"/>
