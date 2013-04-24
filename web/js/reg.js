@@ -1,3 +1,9 @@
 jQuery(document).ready(function($){
-	$('#datepicker').datepicker();
+    $('#datepicker').datepicker();
+    $('#maleButton').click(function(){
+        $('#changeInfo_sex男').click();
+    });
+    $('#femaleButton').click(function(){
+        $('#changeInfo_sex女').click();
+    });
 });

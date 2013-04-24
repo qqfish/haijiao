@@ -35,18 +35,22 @@
 <!--==============================content=================================-->
   <div class="container">
       <s:form action="changeInfo.action">
-            <s:if test="#session.userType == 'teacher'">
+            <s:if test="true">
                 <h2 class="offset2">老师您好，请填写您的详细信息^ ^</h2>
                 <hr class="span8 offset2"/>
                 <dl class="dl-horizontal offset2">
                   <dt>姓名</dt>
                   <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的全名" value="%{#session.teacher.name}" autofocus="autofocus"/></dd>
                   <dt>性别</dt>
-                  <dd><s:radio list="{'男', '女'}" name="sex" value="%{#session.teacher.sex}" /></dd>
+                  <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex"/></dd>
+                  <!--
+                  <input type="radio" name="sex" id="changeInfo_sex男" value="男"/> 男
+                  <input type="radio" name="sex" id="changeInfo_sex女" value="女"/> 女
+                  -->
                   <dd>
                       <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                        <button type="button" value="0" class="btn" data-toggle="button">男</button>
-                        <button type="button" value="1" class="btn" data-toggle="button">女</button>
+                        <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">男</button>
+                        <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">女</button>
                       </div>
                   </dd>
                   <dt>出生地</dt>

@@ -18,4 +18,12 @@ public class LogoutAction extends SessionAction {
         this.sessionPutIn("message", "退出成功");
         return SUCCESS;
     }
+
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
+    }
 }

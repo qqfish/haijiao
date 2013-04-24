@@ -18,8 +18,10 @@
         <property name="teacherService" ref="teacherServiceImpl" />
         <property name="studentService" ref="studentServiceImpl"/>
     </bean>
-    <bean id="LogoutAction" class="com.haijiao.presentation.action.LogoutAction" scope="prototype" />
-    <bean id="IndexAction" class="com.haijiao.presentation.action.IndexAction" scope="prototype" >
+    <bean id="LogoutAction" class="com.haijiao.presentation.action.LogoutAction" scope="prototype">
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
+    <bean id="IndexAction" class="com.haijiao.presentation.action.IndexAction" scope="prototype">
         <property name="teacherService" ref="teacherServiceImpl" />
         <property name="studentService" ref="studentServiceImpl"/>
         <property name="userService" ref="userServiceImpl" />
