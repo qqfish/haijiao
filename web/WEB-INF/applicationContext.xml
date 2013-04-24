@@ -66,12 +66,13 @@
     <bean id="GetMailAction" class="com.haijiao.presentation.action.GetMailAction" scope="prototype">
         <property name="mailService" ref="mailServiceImpl" />
     </bean>
+    <bean id="EnterRoomAction" class="com.haijiao.presentation.action.EnterRoomAction" scope="prototype" />    
     
     <!-- persist -->
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> 
         <property name="configLocation"
-            value = "classpath:hibernate.cfg.xml">
+                  value = "classpath:hibernate.cfg.xml">
         </property>
     </bean>
     

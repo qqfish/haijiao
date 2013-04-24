@@ -29,7 +29,7 @@ public class tmpRoom {
             user[1].setName("234");
             user[2].setName("345");
             counter = 0;
-            testRoom = new Room("1",user[0]);
+            testRoom = new Room(user[0]);
             UserFile file1 = new UserFile();
             file1.setUrl("/Users/fish/Downloads/test1.pdf");
             file1.setName("test1.pdf");

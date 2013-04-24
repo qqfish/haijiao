@@ -60,11 +60,12 @@ connection.connect = (function(host) {
     };
 });
 
-connection.initialize = function() {
+connection.initialize = function(clazzId, email) {
+    console.log(email);
     if (window.location.protocol == 'http:') {
-	connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet');
+	connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&email='+email);
     } else {
-	connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServlet');
+	connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&email='+email);
     }
 };
 

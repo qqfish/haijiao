@@ -6,8 +6,8 @@ var textChat;
 var toolkit;
 var table;
 var media;
-$(document).ready(function(){
-    connection.initialize();
+function init(clazzId, email){
+    connection.initialize(clazzId, email);
     textChat = new TextChat("textConsole");
     toolkit = new Toolkit();
     table = new Table("table",toolkit);
@@ -85,4 +85,4 @@ $(document).ready(function(){
             file.uploadFile(fileList[i]);
         }
     });
-});
+}

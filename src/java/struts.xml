@@ -32,7 +32,7 @@
             <result name="input">register.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
-         <action name="changeInfo" class="ChangeInfoAction" method="teacherChange">
+        <action name="changeInfo" class="ChangeInfoAction" method="teacherChange">
             <result name="input">changeInfo.jsp</result>
             <result name="success">teachers.jsp</result>
         </action>
@@ -90,7 +90,11 @@
         </action>
         <action name="getMail" class="GetMailAction">
             <result name="success" type="">mail.jsp</result>
-            <result name="input">error.jsp</result>
+	    <result name="input">error.jsp</result>
+        </action>
+        <action name="enterRoom" class="EnterRoomAction">
+            <result name="success">/room/index.jsp</result>
+            <result name="false">index.jsp</result>
         </action>
     </package>
 </struts>

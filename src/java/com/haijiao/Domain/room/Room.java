@@ -31,17 +31,14 @@ import java.util.logging.Logger;
 public class Room {
 
     private Gson gson;
-    private String roomId;
     private User holder;
     private List<User> attendance;
     private List<FcMessageInbound> roomSocket;
     private List<RoomFile> roomFile;
     private RoomPage currentPage;
 
-    public Room(String id, User holder) {
+    public Room(User holder) {
         gson = new Gson();
-        
-        roomId = id;
         this.holder = holder;
         attendance = new ArrayList();
         attendance.add(holder);
@@ -212,10 +209,6 @@ public class Room {
 
     public void exitRoom(FcMessageInbound socket) {
         roomSocket.remove(socket);
-    }
-
-    public String getRoomId() {
-        return roomId;
     }
 
     public List<RoomFile> getRoomFile() {

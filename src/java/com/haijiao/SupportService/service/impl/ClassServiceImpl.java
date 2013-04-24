@@ -200,4 +200,9 @@ public class ClassServiceImpl implements IClassService {
         freeTimeDAO.update(clazz.getFreeTime());
         return true;
     }
+    
+    @Override
+    public Clazz getClazzById(int clazzId) {
+        return clazzDAO.findById(clazzId);
+    }
 }

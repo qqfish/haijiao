@@ -28,4 +28,6 @@ public interface IClassService {
     //取消预约
     public boolean cancelBook(int clazzId);
     
+    public Clazz getClazzById(int clazzId);
+    
 }
