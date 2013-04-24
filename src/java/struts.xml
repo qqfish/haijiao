@@ -88,5 +88,9 @@
             <result name="success" type="">index.jsp</result>
             <result name="input">error.jsp</result>
         </action>
+        <action name="getMail" class="GetMailAction">
+            <result name="success" type="">mail.jsp</result>
+            <result name="input">error.jsp</result>
+        </action>
     </package>
 </struts>

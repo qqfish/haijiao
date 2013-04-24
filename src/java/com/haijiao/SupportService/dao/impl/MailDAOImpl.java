@@ -23,4 +23,10 @@ public class MailDAOImpl extends GenericHibernateDAO<Mail,Integer> implements IM
         String hql = "from Mail m where m.to.email = '" + email + "'";
         return findByQuery(hql);
     }
+
+    @Override
+    public List<Mail> getUnreadMailByEmail(String email) {
+        String hql = "from Mail m where m.to.email = '" + email + "' and m.read is false";
+        return findByQuery(hql);
+    }
 }

@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface IMailDAO extends GenericDAO<Mail,Integer>{
     public List<Mail> getMailByEmail(String email);
+    public List<Mail> getUnreadMailByEmail(String email);
 }

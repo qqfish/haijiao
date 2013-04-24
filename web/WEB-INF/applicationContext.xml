@@ -58,7 +58,11 @@
     <bean id="GetCommonFileAction" class="com.haijiao.presentation.action.GetCommonFileAction" scope="prototype"/>
     <bean id="SendMailAction" class="com.haijiao.presentation.action.SendMailAction" scope="prototype">
         <property name="mailService" ref="mailServiceImpl" />
-    </bean>   
+    </bean>
+    <bean id="GetMailAction" class="com.haijiao.presentation.action.GetMailAction" scope="prototype">
+        <property name="mailService" ref="mailServiceImpl" />
+    </bean>
+    
     <!-- persist -->
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> 

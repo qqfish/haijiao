@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -28,28 +30,22 @@
                 <div class="span9">
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id='newMsg'>
+                            <s:iterator value="unreadMailList">
                             <div class="well">
-                                <h5>大菊花侠</h5>
-                                <p>邹润阳是大白痴</p>                            
-                                <button class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</button>
+                                <h5><s:property value="from.name"/></h5>
+                                <p><s:property value="message"/></p>                            
+                                <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
                             </div>
-                            <div class="well">
-                                <h5>菊花侠</h5>
-                                <p>邹润阳是大白痴</p>                            
-                                <button class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</button>
-                            </div>
+                            </s:iterator>
                         </div>
                         <div class="tab-pane fade" id='allMsg'>
+                            <s:iterator value="unreadMailList">
                             <div class="well">
-                                <h5>菊花侠</h5>
-                                <p>邹润阳是大白痴</p>                            
-                                <button class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</button>
+                                <h5><s:property value="from.name"/></h5>
+                                <p><s:property value="message"/></p>                         
+                                <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
                             </div>
-                            <div class="well">
-                                <h5>菊花侠</h5>
-                                <p>邹润阳是大白痴</p>                            
-                                <button class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</button>
-                            </div>
+                            </s:iterator>
                         </div>
                     </div>
                 </div>
