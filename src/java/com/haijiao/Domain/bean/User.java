@@ -41,7 +41,7 @@ public class User extends BaseBean{
     protected Date birthday;    //生日
     protected int status;       //可选项为Status
     
-    @OneToMany(mappedBy = "from")
+    @OneToMany(mappedBy = "from",fetch=FetchType.EAGER)
     protected List<Bill> billList;  //账单列表
     
     @OneToMany(mappedBy = "to")

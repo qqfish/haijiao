@@ -9,82 +9,93 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Teachers</title>
-<meta charset="utf-8">
-<script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-<script type="text/javascript" src="js/teachers.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-<link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-<script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
+    <head>
+        <title>Teachers</title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+        <script type="text/javascript" src="js/teachers.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+        <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
 
-<!--[if lt IE 8]>
-      <div style=' clear: both; text-align:center; position: relative;'>
-        <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-          <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
-       </a>
-     </div>
-     
-    <![endif]-->
+        <!--[if lt IE 8]>
+              <div style=' clear: both; text-align:center; position: relative;'>
+                <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+                  <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+               </a>
+             </div>
+             
+            <![endif]-->
 
-<!--[if lt IE 9]>
-   		<script src="js/html5.js"></script>
-  		<link rel="stylesheet" href="css/ie.css"> 
-         <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400italic' rel='stylesheet' type='text/css'>
-       <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
-	<![endif]-->
+        <!--[if lt IE 9]>
+                        <script src="js/html5.js"></script>
+                        <link rel="stylesheet" href="css/ie.css"> 
+                 <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400italic' rel='stylesheet' type='text/css'>
+               <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
+                <![endif]-->
 
-</head>
-<body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);">
+    </head>
+    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);">
 
-<!--==============================header=================================-->
-<%@ include file="WEB-INF/jspf/header.jspf"%>
-<!--==============================content=================================-->
-<div class="container">
-    <div class="row">
-        <div id="sideInfo" class="span3">
-<!--              <img src="<s:property value="#session.teacher.picUrl"/>"/>-->
-        <img width="210px" height="210px" src="images/1.jpg" class="img-polaroid"/>
-        <h1><s:property value="tea.name"/></h1>          
-        <hr/>
-        <p><s:property value="tea.province"/></p>
-        <p><s:property value="tea.email" /></p>
-        <p><s:property value="tea.createTime" /> 加入</p>
-        <hr/>
-        <ul class="inline">
-            <li>预约数<br/><p class="text-center"><s:property value="tea.reserveNum" default="0"/></p></li>
-            <li>完成数<br/><p class="text-center"><s:property value="tea.classNum" default="0"/></p></li>
-            <li>总评分<br/><p class="text-center">1</p></li>
-        </ul>
-        <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-        <a class="btn btn-primary" href="sendmail.jsp?id=<s:property value="tea.id" />">发送私信</a>
-    </div>
-        <div class="span9">
-            <ul class="nav nav-pills">
-                    <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
-                    <li><a href="#course_area" data-toggle="tab">课程介绍</a></li>
-                    <li><a href="#comment_area" data-toggle="tab">留言板</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade active in" id='info_area'>
-                    <div class="well"></div>
+        <!--==============================header=================================-->
+        <%@ include file="WEB-INF/jspf/header.jspf"%>
+        <!--==============================content=================================-->
+        <div class="container">
+            <div class="row">
+                <div id="sideInfo" class="span3">
+                    <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
+                    <h1><s:property value="tea.name"/></h1>          
+                    <hr/>
+                    <p><s:property value="tea.province"/></p>
+                    <p><s:property value="tea.email" /></p>
+                    <p><s:property value="tea.createTime" /> 加入</p>
+                    <hr/>
+                    <ul class="inline">
+                        <li>预约数<br/><p class="text-center"><s:property value="tea.reserveNum" default="0"/></p></li>
+                        <li>完成数<br/><p class="text-center"><s:property value="tea.classNum" default="0"/></p></li>
+                        <li>总评分<br/><p class="text-center"><s:property value="tea.score" default="0"/></p></li>
+                    </ul>
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
+                    <a class="btn btn-primary" href="sendmail.jsp?id=<s:property value="tea.id" />">发送私信</a>
                 </div>
-                <div class="tab-pane fade" id='course_area'>
-                    <div class="well"></div>
-                    <div class="well"></div>
-                    <div class="well"></div>
+                <div class="span9">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
+                        <li><a href="#course_area" data-toggle="tab">课程介绍</a></li>
+                        <li><a href="#comment_area" data-toggle="tab">评论</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id='info_area'>
+                            <dl>
+                                <dt>性别</dt>
+                                <dd><s:property value="tea.sex"/></dd>
+                                <dt>生日</dt>
+                                <dd><s:property value="tea.birthday"/></dd>
+                                <dt>大学</dt>
+                                <dd><s:property value="tea.school"/></dd>
+                                <dt>手机</dt>
+                                <dd><s:property value="tea.tel"/></dd>
+                                <dt>介绍</dt>
+                                <dd><s:property value="tea.intro"/></dd>
+                            </dl>
+                        </div>
+                        <div class="tab-pane fade" id='course_area'>
+                            <div class="well"></div>
+                            <div class="well"></div>
+                            <div class="well"></div>
+                        </div>
+                        <div class="tab-pane fade" id='comment_area'>
+                            <s:iterator value="tea.billList">
+                                <div class="well">
+                                    <h5><s:property value="from.name"/></h5>
+                                    <p><s:property value="comment.content"/></p>                            
+                                </div>
+                            </s:iterator> 
+                        </div>
+                    </div>
                 </div>
-                <div class="tab-pane fade" id='comment_area'>
-                    <div class="well"></div>
-                    <div class="well"></div>
-                    <div class="well"></div>
-                    <div class="well"></div>
-                    <div class="well"></div>    
-                </div>
-            </div>
-        </div>
-    </div>  
-        <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
+            </div>  
+            <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
                 <div class="modal-header" style="height: 50px">
                     <a class="close" data-dismiss="modal">×</a>
                     <h3>请选择课程时间</h3>
@@ -169,10 +180,9 @@
 
 
             </div>
-</div>
+        </div>
 
-<!--==============================footer=================================-->
-<%@ include file="WEB-INF/jspf/footer.jspf"%>
-</body>
+        <!--==============================footer=================================-->
+        <%@ include file="WEB-INF/jspf/footer.jspf"%>
+    </body>
 </html>
-
