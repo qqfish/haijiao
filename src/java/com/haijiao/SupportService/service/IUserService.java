@@ -31,8 +31,6 @@ public interface IUserService {
     public boolean register(String email, String password, String userType);
     //搜索老师（名字，年级，科目、网络状况）
     public List<Teacher> searchTeacher(List<String> strList);
-    
-    public List<Bill> getBillList(String email);
 
     //文件系统相关操作
     //上传文件

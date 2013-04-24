@@ -8,6 +8,7 @@ package com.haijiao.SupportService.service.impl;
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Teacher;
+import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.service.ITeacherService;
 import java.sql.Date;
@@ -21,9 +22,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class TeacherServiceImpl implements ITeacherService {
     @Resource
     ITeacherDAO teacherDAO;
+    
+    @Resource
+    IClazzDAO classDAO;
 
     public void setTeacherDAO(ITeacherDAO teacherDAO) {
         this.teacherDAO = teacherDAO;
+    }
+
+    public void setClassDAO(IClazzDAO classDAO) {
+        this.classDAO = classDAO;
     }
 
     @Override
@@ -77,7 +85,7 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public List<Clazz> getClasses(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return classDAO.getTeacherClazz(email);
     }
 
 }
