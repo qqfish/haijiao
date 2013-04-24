@@ -3,9 +3,9 @@
  * and open the template in the editor.
  */
 
-var schedule;
+var viewSchedule;
 $(document).ready(function() {
-    function Schedule(index, day){
+    function ViewSchedule(index, day){
         var status = { 
             notAvailable : 0,
             available : 1,
@@ -25,12 +25,11 @@ $(document).ready(function() {
             for(var j = 0; j < index; j++)
                 result.array[i][j] = TYPE.nothing;
         }
-        $('.schedule_table').find('tr').each(function(i){
+        $('.static_schedule_table').find('tr').each(function(i){
             $(this).find('td').each(function(j){
                 //$(this).css("background-color","#CCF");
                 $(this).attr("index",i - 1).attr("day",j);
                 $(this).attr("status", 0);
-                $(this).attr("select", 0);
            
                 $(this).mouseover(function() {
                     if($(this).attr("status") == 0 && $(this).attr("select") == 0){
@@ -63,26 +62,25 @@ $(document).ready(function() {
             });        
         }); 
         
-        $('#upload').click(function(){
-            if(select == 0) {
-                $("#chooseError").text("没有选择添加课程");
-            } else {
-                $("#schedule_json").val(JSON.stringify(result));
-                $("#schedule_form").submit();
-                console.log($("#schedule_json").val());
-            }
-        });
-        
         this.drawSchedule = function(schedule){
             if(schedule == null){
                 return;
             }
             for(var i = 0; i < schedule.clazzes.length; i++){
                 var clazz = schedule.clazzes[i];
-                $("td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("status",clazz.status).css("background-color","#CCF");
+                if(clazz.status == status.notAvailable){
+                    $(".static_schedule_table td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("status",clazz.status).html("<p>暂停</p>");
+                } else if(clazz.status == status.available){
+                    $(".static_schedule_table td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("status",clazz.status).html("<p>空闲</p>");
+                } else if(clazz.status == status.notAccept){
+                    $(".static_schedule_table td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("status",clazz.status).html("<p>" + clazz.lesson + "(未确定)</p>")
+                } else if(clazz.status == status.accept){
+                    $(".static_schedule_table td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("status",clazz.status).html("<p>" + clazz.lesson + "</p>")
+
+                }
             }
         }
     }
-    schedule = new Schedule(13,7);
+    viewSchedule = new ViewSchedule(13,7);
 });
 
