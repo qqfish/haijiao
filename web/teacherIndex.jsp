@@ -36,7 +36,8 @@
                 <![endif]-->
 
     </head>
-    <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>); viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
+    <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
+            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
@@ -51,14 +52,20 @@
                     <p>中国 上海</p>
                     <p>woshishabi@22.com</p>
                     <p>2012-1-1 加入</p>
-                    <hr/>
-                    <table>
+                    <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
-                                <th>预约数<br/><p class="text-center">1</p></th>
-                        <th>完成数<br/><p class="text-center">1</p></th>
-                        <th>总评分<br/><p class="text-center">1</p></th>
-                        </tr>
+                                <td>预约数</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>完成数</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>评分</td>
+                                <td>1</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -72,7 +79,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id='student_area'>
-                            <table class="table table-hover">
+                            <table class="table table-hover table-striped">
                                 <tbody>
                                     <tr>
                                         <td>
@@ -182,7 +189,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a class="login-btn" data-toggle="modal" data-target="#choosemodal" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">增加空闲时间</a>
+                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">增加空闲时间</a>
                             <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
                                 <div class="modal-header" style="height: 50px">
                                     <a class="close" data-dismiss="modal">×</a>
@@ -190,7 +197,7 @@
                                     <p id="chooseError"></p>
                                 </div>
                                 <div class="modal-body" >
-                                    <div class="schedule_panel" id="schedule_panel" style="height:350px;">
+                                    <div class="schedule_panel" id="schedule_panel">
                                         <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
                                             <tbody>
                                                 <tr>
@@ -246,7 +253,7 @@
                                         </table>
                                         <s:form id="schedule_form" action="addFreeTime.action">
                                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
-                                            <a class="login-btn" id="upload" style="padding:0px 10px;margin-top: 20px;margin-right: 10px;" >添加</a>
+                                                <a class="btn btn-primary pull-right" id="upload" >添加</a>
                                         </s:form>
                                         <p></p>
                                     </div>
@@ -254,7 +261,7 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
-                            <table class="table table-hover">
+                            <table class="table table-hover table-striped">
                                 <thead>
                                     <tr>
                                         <th>姓名</th>
@@ -290,15 +297,23 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>
-                            <blockquote>
-                                <h4>邹润阳<label class="label label-important pull-right">评分:0.0</label></h4>
-                                <small>
-                                    <span>这老师是傻逼，大家千万不要选他</span>
-                                    <span class="pull-right">
-                                        <button type="button" class="btn btn-info btn-mini">回复</button>
-                                    </span>
-                                </small>
-                            </blockquote>
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <blockquote>
+                                                <h4>邹润阳<label class="label label-important pull-right">评分:0.0</label></h4>
+                                                <small>
+                                                    <span>这老师是傻逼，大家千万不要选他</span>
+                                                    <span class="pull-right">
+                                                        <button type="button" class="btn btn-info btn-mini">回复</button>
+                                                    </span>
+                                                </small>
+                                            </blockquote>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
