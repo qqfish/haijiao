@@ -70,14 +70,14 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public List<Clazz> getFinishedClasses(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public List<FreeTime> getSchedule(String email) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         return t.getSchedule();
+    }
+
+    @Override
+    public List<Clazz> getClasses(String email) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

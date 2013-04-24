@@ -24,8 +24,8 @@ public interface ITeacherService {
     //设置试听
     public boolean changeAudition(String email);
     
-    //获取老师已完结课程---->用于显示账单
-    public List<Clazz> getFinishedClasses(String email);
+    //获取老师的课程
+    public List<Clazz> getClasses(String email);
     //获取老师时间表
     public List<FreeTime> getSchedule(String email);
     //修改时间表

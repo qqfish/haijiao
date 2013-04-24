@@ -5,6 +5,7 @@
 
 package com.haijiao.SupportService.service.impl;
 
+import com.haijiao.Domain.bean.Bill;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
@@ -134,6 +135,11 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public Object download(String fileuri) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public List<Bill> getBillList(String email) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     

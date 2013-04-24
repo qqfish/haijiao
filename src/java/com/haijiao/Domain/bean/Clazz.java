@@ -24,7 +24,7 @@ public class Clazz extends BaseBean { //clazz -> class
     }
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "sid")
-    private Student student;  //固定时间的学生
+    private Student student;  //学生
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "lid")
     private Lesson lesson;
