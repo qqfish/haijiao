@@ -14,7 +14,8 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="TeacherIndex/js/schedule.js"></script>
+        <script type="text/javascript" src="TeacherIndex/js/addSchedule.js"></script>
+        <script type="text/javascript" src="TeacherIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
@@ -35,7 +36,7 @@
                 <![endif]-->
 
     </head>
-    <body>
+    <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>); viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
@@ -128,7 +129,7 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id='schedule_area'>
-                            <table class="schedule_table" width="100%" border="0" style="z-index: 1">
+                            <table class="static_schedule_table" width="100%" border="0" style="z-index: 1">
                                 <tbody>
                                     <tr>
                                         <th ></th>
@@ -180,8 +181,8 @@
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                 </tbody>
-				</table>
-				<a class="login-btn" data-toggle="modal" data-target="#choosemodal" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">增加空闲时间</a>
+                            </table>
+                            <a class="login-btn" data-toggle="modal" data-target="#choosemodal" style="font-size: 20px; margin: 40px 0px 0px 40px;padding: 10px 40px;float: left">增加空闲时间</a>
                             <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
                                 <div class="modal-header" style="height: 50px">
                                     <a class="close" data-dismiss="modal">×</a>
@@ -251,8 +252,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover">
