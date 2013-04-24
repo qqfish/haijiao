@@ -17,7 +17,7 @@
 <div class="container">
         <div class="row">
             <!--<div id ="dispalypanel" style="width:600px;height: 400px;"><img src="images/1.jpg" width=600 height=400></div>-->
-            <div class="span8"style="overflow: hidden;"><img alt="" src="images/1.jpg" width=700 height=400></div>
+            <div class="span8" style="overflow: hidden;"><img alt="" src="images/1.jpg" width=700 height=400></div>
             <div class="span4">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#reg-panel" data-toggle="tab">注册</a></li>

@@ -8,9 +8,10 @@ mark, rp, rt, ruby, summary, time {
 /* Global properties ======================================================== */
 body {	
 	line-height:24px;
-	color:#343434;
+/*	color:#343434;*/
+        color:white;
 	min-width:1020px;
-	background:url(../images/bg-body.gif) #e6e4d7;
+/*	background:url(../images/bg-body.gif) #e6e4d7;*/
 }
 html, body {
 	height:100%;
@@ -177,21 +178,21 @@ dl dd span {
 .schedule_table{
 	font-size:9pt;
 }
-th{
+.schedule_table th{
 	width:65px;
 	background-color:white;
 	border:1px solid #aaa;
 }
-tr{
+.schedule_table tr{
 	text-align:center;
 	height:19px;
 	background-color:#E5E5E5;
 }
-td{
+.schedule_table td{
 	
 }
 
-td, th { padding: 1px; }
+.schedule_table td, th { padding: 1px; }
 
 .class_1,.class_2,.class_3,.class_4,.class_7,.class_8,.class_9,.class_10{
 	background-color:#efefef;
