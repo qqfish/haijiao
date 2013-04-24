@@ -22,29 +22,44 @@
         <div class="container">
             <div class="row">
                 <div class="span3">
+                    <h3>私信</h3>
+                    <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
-                        <li class="active"><a href="#newMsg" data-toggle="tab">新消息<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li class="active"><a href="#sendMsg" data-toggle="tab">写信息<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li><a href="#newMsg" data-toggle="tab">新消息<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#allMsg" data-toggle="tab">所有消息<i class="icon-chevron-right pull-right"></i></a></li>
                     </ul>
                 </div>
                 <div class="span9">
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id='newMsg'>
-                            <s:iterator value="unreadMailList">
-                            <div class="well">
-                                <h5><s:property value="from.name"/></h5>
-                                <p><s:property value="message"/></p>                            
-                                <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                        <div class="tab-pane fade active in" id='sendMsg'>
+                            <div class="span8">
+                                <s:form class="form-horizontal" action="sendMail.action" method="post">
+                                    <h5>收件人:</h5>
+                                    <s:textfield cssClass="span8" name="name" id="inputEmail" value="%{#parameters.id}"/>
+                                    <h5>内容:</h5>
+                                    <s:textarea cssClass="span8" name="content" rows="10"></s:textarea>
+                                            <button type="submit" class="btn btn-primary pull-right span1">取消</button>
+                                            <button type="submit" class="btn btn-primary pull-right span1">发送</button>
+                                </s:form>
                             </div>
+                        </div>
+                        <div class="tab-pane fade" id='newMsg'>
+                            <s:iterator value="unreadMailList">
+                                <div class="well">
+                                    <h5><s:property value="from.name"/></h5>
+                                    <p><s:property value="message"/></p>                            
+                                    <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                </div>
                             </s:iterator>
                         </div>
                         <div class="tab-pane fade" id='allMsg'>
                             <s:iterator value="unreadMailList">
-                            <div class="well">
-                                <h5><s:property value="from.name"/></h5>
-                                <p><s:property value="message"/></p>                         
-                                <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
-                            </div>
+                                <div class="well">
+                                    <h5><s:property value="from.name"/></h5>
+                                    <p><s:property value="message"/></p>                         
+                                    <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                </div>
                             </s:iterator>
                         </div>
                     </div>
