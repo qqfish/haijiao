@@ -4,14 +4,22 @@
  */
 package com.haijiao.presentation.action;
 
+import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.service.IStudentService;
+import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.presentation.bean.schedule.ScheduleBean;
 
 public class IndexAction extends SessionAction {
     ScheduleBean scheduleBean;
     IUserService userService;
+    ITeacherService teacherService;
+    IStudentService studentService;
+    Teacher teacher;
+    Student student;
+    
     @Override
     public String execute() throws Exception {
         String email = (String)this.getSessionValue("email");
@@ -21,9 +29,11 @@ public class IndexAction extends SessionAction {
                 Teacher tea = (Teacher) user;
                 this.sessionPutIn("message", this.getText("teacherInfo"));
                 scheduleBean = new ScheduleBean(tea.getSchedule());
+                teacher = teacherService.getTeacherByEmail(email);
                 return "teacher";
             } else {
                 this.sessionPutIn("message", this.getText("studentInfo"));
+                student = studentService.getStudentByEmail(email);
                 return "student";
             }
         } else {
@@ -46,5 +56,36 @@ public class IndexAction extends SessionAction {
     public void setUserService(IUserService userService) {
         this.userService = userService;
     }
-    
+
+    public ITeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
+    public IStudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 }

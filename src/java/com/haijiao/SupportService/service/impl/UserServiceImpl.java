@@ -13,6 +13,7 @@ import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import com.haijiao.SupportService.service.IUserService;
+import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -101,6 +102,9 @@ public class UserServiceImpl implements IUserService{
             s.setEmail(account);
             s.setPassword(password);
             s.setUserType(userType);
+            java.util.Date datetime=new java.util.Date();
+            Date time=new Date(datetime.getTime());
+            s.setCreateTime(time);
             return studentDAO.makePersistent(s);
         }
         else if(userType.equals("teacher")){
@@ -108,6 +112,9 @@ public class UserServiceImpl implements IUserService{
             t.setEmail(account);
             t.setPassword(password);
             t.setUserType(userType);
+            java.util.Date datetime=new java.util.Date();
+            Date time=new Date(datetime.getTime());
+            t.setCreateTime(time);
             return teacherDAO.makePersistent(t);
         }
         else{

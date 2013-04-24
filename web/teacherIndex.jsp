@@ -45,26 +45,25 @@
         <div class="container">
             <div class="row">
                 <div id="sideInfo" class="span3">
-            <!--              <img src="<s:property value="#session.teacher.picUrl"/>"/>-->
-                    <img width="210px" height="210px" src="images/1.jpg" class="img-polaroid"/>
-                    <h1>邹润阳<s:property value="#session.teacher.name"/></h1>          
+                    <img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/>
+                    <h1><s:property value="teacher.name"/></h1>          
                     <hr/>
-                    <p>中国 上海</p>
-                    <p>woshishabi@22.com</p>
-                    <p>2012-1-1 加入</p>
+                    <p><s:property value="teacher.province"/></p>
+                    <p><s:property value="teacher.email"/></p>
+                    <p><s:property value="teacher.createdateToString()"/> 加入</p>
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
                                 <td>预约数</td>
-                                <td>1</td>
+                                <td><s:property value="teacher.reserveNum"/></td>
                             </tr>
                             <tr>
                                 <td>完成数</td>
-                                <td>1</td>
+                                <td><s:property value="teacher.classNum"/></td>
                             </tr>
                             <tr>
                                 <td>评分</td>
-                                <td>1</td>
+                                <td><s:property value="teacher.score"/></td>
                             </tr>
                         </tbody>
                     </table>

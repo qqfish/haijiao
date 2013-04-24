@@ -17,7 +17,6 @@ import javax.persistence.Table;
 public class Clazz extends BaseBean { //clazz -> class
 
     public class Status {
-
         static public final int notAvailable = 0;
         static public final int available = 1;
         static public final int notAccept = 2;

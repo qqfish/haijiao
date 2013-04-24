@@ -6,6 +6,7 @@
 package com.haijiao.Domain.bean;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -46,5 +47,11 @@ public class BaseBean {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+    
+    public String createdateToString(){
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+        String strDate=df.format(createTime);
+        return strDate;
     }
 }
