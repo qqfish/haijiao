@@ -4,21 +4,29 @@
  */
 package com.haijiao.presentation.action;
 
+import com.haijiao.Domain.bean.Bill;
+import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.presentation.bean.schedule.ScheduleBean;
+import java.util.List;
 
 public class IndexAction extends SessionAction {
     ScheduleBean scheduleBean;
     IUserService userService;
     ITeacherService teacherService;
     IStudentService studentService;
+    IBillService billService;
     Teacher teacher;
     Student student;
+    List<Bill> billList;
+    List<Clazz> classList;
+    
     
     @Override
     public String execute() throws Exception {
@@ -30,10 +38,14 @@ public class IndexAction extends SessionAction {
                 this.sessionPutIn("message", this.getText("teacherInfo"));
                 scheduleBean = new ScheduleBean(tea.getSchedule());
                 teacher = teacherService.getTeacherByEmail(email);
+                billList = billService.getBill(email);
+                classList = teacherService.getClasses(email);
+                System.out.println(classList.size());
                 return "teacher";
             } else {
                 this.sessionPutIn("message", this.getText("studentInfo"));
                 student = studentService.getStudentByEmail(email);
+                billList = billService.getBill(email);
                 return "student";
             }
         } else {
@@ -87,5 +99,29 @@ public class IndexAction extends SessionAction {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public IBillService getBillService() {
+        return billService;
+    }
+
+    public void setBillService(IBillService billService) {
+        this.billService = billService;
+    }
+
+    public List<Bill> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(List<Bill> billList) {
+        this.billList = billList;
+    }
+
+    public List<Clazz> getClassList() {
+        return classList;
+    }
+
+    public void setClassList(List<Clazz> classList) {
+        this.classList = classList;
     }
 }

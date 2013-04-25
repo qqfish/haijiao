@@ -25,6 +25,7 @@
         <property name="teacherService" ref="teacherServiceImpl" />
         <property name="studentService" ref="studentServiceImpl"/>
         <property name="userService" ref="userServiceImpl" />
+        <property name="billService" ref="billServiceImpl" />
     </bean>
     <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />

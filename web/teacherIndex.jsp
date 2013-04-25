@@ -80,57 +80,44 @@
                         <div class="tab-pane fade active in" id='student_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <blockquote>
-                                                <h4>邹润阳<label class="label label-info pull-right">等待审批</label></h4>
-                                                <small>
-                                                    <span>周二19:00-20:00</span>
-                                                    <span style="margin-left: 10px">剩余 12 次课程</span>
-                                                    <span style="margin-left: 10px">下次上课在 3 天后</span>
-                                                    <span style="margin-left: 10px"class="pull-right">
-                                                        <button type="button" class="btn btn-info btn-mini">暂停</button>
-                                                        <button type="button" class="btn btn-info btn-mini">确认</button>
-                                                        <button type="button" class="btn btn-info btn-mini">取消</button>
-                                                    </span>
-                                                </small>
-                                            </blockquote>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <blockquote>
-                                                <h4>邹润阳<label class="label label-info pull-right">等待审批</label></h4>
-                                                <small>
-                                                    <span>周二19:00-20:00</span>
-                                                    <span style="margin-left: 10px">剩余 12 次课程</span>
-                                                    <span style="margin-left: 10px">下次上课在 3 天后</span>
-                                                    <span class="pull-right">
-                                                        <button type="button" class="btn btn-info btn-mini">暂停</button>
-                                                        <button type="button" class="btn btn-info btn-mini">确认</button>
-                                                        <button type="button" class="btn btn-info btn-mini">取消</button>
-                                                    </span>
-                                                </small>
-                                            </blockquote>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <blockquote>
-                                                <h4>邹润阳<label class="label label-info pull-right">等待审批</label></h4>
-                                                <small>
-                                                    <span>周二19:00-20:00</span>
-                                                    <span style="margin-left: 10px">剩余 12 次课程</span>
-                                                    <span style="margin-left: 10px">下次上课在 3 天后</span>
-                                                    <span class="pull-right">
-                                                        <button type="button" class="btn btn-info btn-mini">暂停</button>
-                                                        <button type="button" class="btn btn-info btn-mini">确认</button>
-                                                        <button type="button" class="btn btn-info btn-mini">取消</button>
-                                                    </span>
-                                                </small>
-                                            </blockquote>
-                                        </td>
-                                    </tr>
+                                    <s:if test="classList.size()<=0">
+                                        还没有学生选你哦~！
+                                    </s:if>
+                                    <s:else>
+                                    <s:iterator value="classList" id="list">
+                                        <s:if test="status>=2">
+                                            <tr>
+                                                <td>
+                                                    <blockquote>
+                                                        <h4><s:property value="student.name"/>
+                                                            <label class="label label-info pull-right">
+                                                                <s:if test="status==2">
+                                                                    等待审批
+                                                                </s:if>
+                                                                <s:if test="status==2">
+                                                                    已确认
+                                                                </s:if>
+                                                            </label>
+                                                        </h4>
+                                                        <small>
+                                                                <span>
+                                                                    <s:property value="freeTime.strWeekday()"/>
+                                                                <s:property value="freeTime.strSliceIndex()"/>
+                                                            </span>
+                                                            <span style="margin-left: 10px">剩余<s:property value="remain"/>次课程</span>
+                                                            <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
+                                                            <span style="margin-left: 10px"class="pull-right">
+                                                                <button type="button" class="btn btn-info btn-mini">暂停</button>
+                                                                <button type="button" class="btn btn-info btn-mini">确认</button>
+                                                                <button type="button" class="btn btn-info btn-mini">取消</button>
+                                                            </span>
+                                                        </small>
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                        </s:if>
+                                    </s:iterator>
+                                    </s:else>
                                 </tbody>
                             </table>
                         </div>
@@ -261,6 +248,10 @@
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover table-striped">
+                                <s:if test="billList.size()<=0">
+                                    暂无交易记录哦~！
+                                </s:if>
+                                <s:else>
                                 <thead>
                                     <tr>
                                         <th>姓名</th>
@@ -270,29 +261,18 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>邹润阳</td>
-                                        <td>打架</td>
-                                        <td>￥2</td>
-                                        <td>昨天</td>
-                                        <td><button type="button" class="btn btn-info btn-mini">评论</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>邹润阳</td>
-                                        <td>打架</td>
-                                        <td>￥2</td>
-                                        <td>昨天</td>
-                                        <td><button type="button" class="btn btn-info btn-mini">评论</button></td>
-                                    </tr>
-                                    <tr>
-                                        <td>邹润阳</td>
-                                        <td>打架</td>
-                                        <td>￥2</td>
-                                        <td>昨天</td>
-                                        <td><button type="button" class="btn btn-info btn-mini">评论</button></td>
-                                    </tr>   
+                                <tbody>        
+                                    <s:iterator value="billList" id="billList">
+                                        <tr>
+                                            <td><s:property value="from.name" /></td>
+                                            <td><s:property value="from.lesson" /></td>
+                                            <td><s:property value="getRealMoney()" /></td>
+                                            <td><s:property value="createdateToString()" /></td>
+                                            <td><button type="button" class="btn btn-info btn-mini">评论</button></td>
+                                        </tr>
+                                    </s:iterator>
                                 </tbody>
+                                </s:else>
                             </table>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>

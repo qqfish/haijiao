@@ -34,7 +34,7 @@ public class ClazzDAOImpl extends GenericHibernateDAO<Clazz,Integer> implements 
 
     @Override
     public List<Clazz> getTeacherClazz(String teacherEmail) {
-        String hql = "select distinct c from clazz c left join c.freeTime ft where ft.teacher.eamil = '" + teacherEmail + "'";
+        String hql = "select distinct c from Clazz c left join c.freeTime ft where ft.teacher.email = '" + teacherEmail + "'";
         return findByQuery(hql);
     }
     

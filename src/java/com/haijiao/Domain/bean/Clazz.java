@@ -4,6 +4,7 @@
  */
 package com.haijiao.Domain.bean;
 
+import com.haijiao.global.timer;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,9 +32,23 @@ public class Clazz extends BaseBean { //clazz -> class
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "freetimeid")
     private FreeTime freeTime;
-    private int status;  //本次预约的状态，可选值未Status类中
+    private int status;  //本次预约的状态，可选值在Status类中
     private int remain;    //课程次数，-1为无限,每上一次减1，到0该课程被清除
     private int timeToBegin;    //距离开始的次数,方便学生查询
+    
+    public String remainWeek(){
+        int next = timeToBegin * 2;
+        if ((freeTime.getWeekday()>=0&&freeTime.getWeekday()<=6)||(timer.nowDay>=7&&timer.nowDay<=13)) {
+            next++;
+        } else if ((freeTime.getWeekday()>=7&&freeTime.getWeekday()<=13)||(timer.nowDay>=0&&timer.nowDay<=6)) {
+            next++;
+        }
+        if (next==0) {
+            return "本周";
+        } else {
+            return next+"周后";
+        }
+    }
 
     public Clazz(Clazz c) {
         student = c.getStudent();

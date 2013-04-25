@@ -20,7 +20,7 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill,Integer> implements IB
 
     @Override
     public List<Bill> getBillByEmail(String email) {
-        String hql = "from Bill b where b.user.email = '" + email + "'";
+        String hql = "from Bill b where b.from.email = '" + email + "'";
         return findByQuery(hql);
     }
     

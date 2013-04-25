@@ -21,12 +21,23 @@ public class Bill extends BaseBean{
     private User from;
     
     private int money;
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "lid")
+    private Lesson lesson;
     private boolean earn;   //收入或支出
     private String message; //账单说明
     
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "commentid", unique = true)
     private Comment comment;
+    
+    public int getRealMoney(){
+        if (earn==true) {
+            return money;
+        } else {
+            return -money;
+        }
+    }
 
     public Bill() {
     }
@@ -70,6 +81,12 @@ public class Bill extends BaseBean{
     public void setComment(Comment comment) {
         this.comment = comment;
     }
-    
-    
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
+    }
 }
