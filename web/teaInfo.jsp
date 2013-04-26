@@ -48,51 +48,108 @@
                     <p><s:property value="tea.province"/></p>
                     <p><s:property value="tea.email" /></p>
                     <p><s:property value="tea.createTime" /> 加入</p>
-                    <hr/>
-                    <ul class="inline">
-                        <li>预约数<br/><p class="text-center"><s:property value="tea.reserveNum" default="0"/></p></li>
-                        <li>完成数<br/><p class="text-center"><s:property value="tea.classNum" default="0"/></p></li>
-                        <li>总评分<br/><p class="text-center"><s:property value="tea.score" default="0"/></p></li>
-                    </ul>
+                    <table class="table table-hover table-striped">
+                        <tbody>
+                            <tr>
+                                <td>预约数</td>
+                                <td><s:property value="teacher.reserveNum"/></td>
+                            </tr>
+                            <tr>
+                                <td>完成数</td>
+                                <td><s:property value="teacher.classNum"/></td>
+                            </tr>
+                            <tr>
+                                <td>评分</td>
+                                <td><s:property value="teacher.score"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                    <a class="btn btn-primary" href="sendmail.jsp?id=<s:property value="tea.id" />">发送私信</a>
+                    <a class="btn btn-primary" href="mail.jsp?id=<s:property value="tea.id" />">发送私信</a>
                 </div>
                 <div class="span9">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
-                        <li><a href="#course_area" data-toggle="tab">课程介绍</a></li>
+                        <li><a href="#detail_area" data-toggle="tab">详细信息</a></li>
                         <li><a href="#comment_area" data-toggle="tab">评论</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id='info_area'>
-                            <dl>
-                                <dt>性别</dt>
-                                <dd><s:property value="tea.sex"/></dd>
-                                <dt>生日</dt>
-                                <dd><s:property value="tea.birthday"/></dd>
-                                <dt>大学</dt>
-                                <dd><s:property value="tea.school"/></dd>
-                                <dt>手机</dt>
-                                <dd><s:property value="tea.tel"/></dd>
-                            </dl>
+                        <div class="tab-pane row fade active in" id='info_area'>
+                            <div class="span5 well">
+
+                            </div>
+                            <div class="span3">
+                                <table class="table table-hover table-striped ">
+                                    <tbody>
+                                        <tr>
+                                            <td class="span1">
+                                                <strong>性别</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.sex"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>生日</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.birthday"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>大学</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.school"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>手机</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.tel"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id='course_area'>
+                        <div class="tab-pane fade" id='detail_area'>
                             <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
-                            <div id="teaintro" class="well"></div>
-                            <script>
-                                $("#teaintro").html($("#tmp").text());
-                            </script>
-                            <div class="well"></div>
-                            <div class="well"></div>
-                            <div class="well"></div>
+                            <div id="teaintro">
+                                <script>
+                                     $("#teaintro").html($("#tmp").text());
+                                </script>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>
-                            <s:iterator value="tea.billList">
-                                <div class="well">
-                                    <h5><s:property value="from.name"/></h5>
-                                    <p><s:property value="comment.content"/></p>                            
-                                </div>
-                            </s:iterator> 
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <blockquote>
+                                                <s:if test="billList.size()<=0">
+                                                    还没有评论哦~！
+                                                </s:if>
+                                                <s:else>
+                                                    <s:iterator value="billList" id="billList">
+                                                        <h4><s:property value="from.name" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
+                                                        <small>
+                                                            <span><s:property value="from.content" /></span>
+                                                            <span class="pull-right">
+                                                                <button type="button" class="btn btn-info btn-mini">回复</button>
+                                                            </span>
+                                                        </small>
+                                                    </s:iterator>
+                                                </s:else>
+                                            </blockquote>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -164,13 +221,10 @@
                         <s:form id="schedule_form" action="bookTeacher.action">
                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
-                            <s:textfield id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus" style="margin:0px 0px 0px 30px;height: 30px;width: 300px;font-size: 20px;"></s:textfield>
+                            <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
                                 <session id="schedule_error"></session>
                                 <div id="lesson_select">
-                                    <a href="#" class="label">语文</a>
-                                    <a href="#" class="label">数学</a>
-                                    <a href="#" class="label">英文</a>
-                                    <a href="#" class="label">物理</a> 
+                                    <a href="#" class="label label-info">语文</a>
                                 </div>
                                 <a class="btn btn-info btn-small pull-right" id="pre">上一步</a>
                                 <a class="btn btn-primary btn-small pull-right" id="upload">提交</a>
