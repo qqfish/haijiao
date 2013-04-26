@@ -44,6 +44,8 @@
         <property name="studentService" ref="studentServiceImpl"/>
         <property name="userService" ref="userServiceImpl" />
     </bean>
+    <bean id="DealApplyAction" class="com.haijiao.presentation.action.DealApplyAction" scope="prototype">
+    </bean>
     <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />
     </bean>

@@ -51,6 +51,9 @@
             <result name="input">changeIntro.jsp</result>
             <result name="success">teainfo.jsp</result>
         </action>
+        <action name="dealApply" class="DealApplyAction">
+            <result name="success">teachers.jsp</result>
+        </action>
         <action name="index" class="IndexAction">
             <result name="success">index.jsp</result>
             <result name="teacher">teacherIndex.jsp</result>

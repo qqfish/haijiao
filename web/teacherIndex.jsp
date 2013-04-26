@@ -110,11 +110,20 @@
                                                             <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
                                                             <span style="margin-left: 10px"class="pull-right">
                                                                 <s:if test="status==3">
-                                                                    <button type="button" class="btn btn-info btn-mini">暂停</button>
+                                                                    <s:a action="dealApply.action">
+                                                                        <s:param name="button">stop</s:param>
+                                                                        <button type="button" class="btn btn-info btn-mini">暂停</button>
+                                                                    </s:a>
                                                                 </s:if>
                                                                 <s:if test="status==2">
-                                                                    <button type="button" class="btn btn-info btn-mini">确认</button>
-                                                                    <button type="button" class="btn btn-info btn-mini">拒绝</button>
+                                                                    <s:a action="dealApply.action">
+                                                                        <s:param name="button">accept</s:param>
+                                                                        <button type="button" class="btn btn-info btn-mini">确认</button>
+                                                                    </s:a>
+                                                                    <s:a action="dealApply.action">
+                                                                        <s:param name="button">decline</s:param>
+                                                                        <button type="button" class="btn btn-info btn-mini">拒绝</button>
+                                                                    </s:a>
                                                                 </s:if>
                                                             </span>
                                                         </small>
