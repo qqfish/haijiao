@@ -14,4 +14,5 @@ public interface IRoomService {
     public Room checkAndApplyRoom(int clazzId);
     public void removeRoom(int clazzId);
     public void clearUnuseRoom();
+    public Room enterPublicRoom(String teacherEmail);
 }

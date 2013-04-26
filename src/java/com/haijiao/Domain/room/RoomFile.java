@@ -11,7 +11,10 @@ import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -55,7 +58,8 @@ public class RoomFile extends DataFile {
             Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-        public RoomFile(UserFile file, Room room) {
+
+    public RoomFile(UserFile file, Room room) {
         try {
             this.room = room;
             uuid = UUID.randomUUID().toString();
@@ -72,8 +76,8 @@ public class RoomFile extends DataFile {
             Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public RoomFile(Room room){
+
+    public RoomFile(Room room) {
         try {
             this.room = room;
             uuid = UUID.randomUUID().toString();
@@ -91,16 +95,46 @@ public class RoomFile extends DataFile {
         } catch (IOException ex) {
             Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+    
+    public RoomFile(String name, String data, Room room) {
+        try {
+            this.room = room;
+            uuid = UUID.randomUUID().toString();
+            this.name = name;
+            url = config.tmpRoomFile + "/" + this.room.getId();
+            File dir = new File(url);
+            if(!dir.exists())
+                dir.mkdirs();
+            url = url + "/" + uuid + ".pdf";
+            File newFile = new File(url);
+            if(!newFile.exists())
+                newFile.createNewFile();
+            FileOutputStream fos = new FileOutputStream(newFile);
+            fos.write(Base64.decode(data));
+            fos.close();
+            doc = PDDocument.load(url);
+            bookmarks = new RootBookmark(doc);
+            pages = new ArrayList();
+            PDPage newPage = new PDPage();
+            doc.addPage(newPage);
+            for (int i = 0; i < doc.getNumberOfPages(); i++) {
+                pages.add(new RoomPage(this));
+            }
+            lastPage = 0;
+        } catch (IOException ex) {
+            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public boolean addBookmark(String indexName, int page) {
         //add in doc
         return true;
     }
-    
-    public void gotoBookmark(List<Integer> indexs){
-        
+
+    public void gotoBookmark(List<Integer> indexs) {
     }
 
     public RoomPage getPage(int i) {
@@ -126,7 +160,7 @@ public class RoomFile extends DataFile {
         }
     }
 
-    public RoomPage getLastPage(){
+    public RoomPage getLastPage() {
         return getPage(lastPage);
     }
 
@@ -137,7 +171,7 @@ public class RoomFile extends DataFile {
 
     public void addPage() {
         PDPage lastPage = (PDPage) doc.getDocumentCatalog().getAllPages().get(doc.getNumberOfPages() - 1);
-        PDRectangle r = new PDRectangle(lastPage.getMediaBox().getWidth(),lastPage.getMediaBox().getHeight());
+        PDRectangle r = new PDRectangle(lastPage.getMediaBox().getWidth(), lastPage.getMediaBox().getHeight());
         PDPage newPage = new PDPage(r);
         doc.addPage(newPage);
     }
@@ -153,17 +187,17 @@ public class RoomFile extends DataFile {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-    
-    public void save() throws IOException{
+
+    public void save() throws IOException {
         try {
             doc.save(url);
         } catch (COSVisitorException ex) {
             Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void clearPage(int index) {
-        if(index < doc.getNumberOfPages()){
+        if (index < doc.getNumberOfPages()) {
             try {
                 PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(index);
                 page.getContents().getStream().clear();
@@ -172,7 +206,7 @@ public class RoomFile extends DataFile {
             }
         }
     }
-    
+
     public int getPageNumber(RoomPage page) {
         return pages.indexOf(page);
     }
@@ -180,6 +214,4 @@ public class RoomFile extends DataFile {
     public RootBookmark getBookmarks() {
         return bookmarks;
     }
-    
-    
 }

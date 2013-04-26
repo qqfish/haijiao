@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.TreeMap;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,15 +32,19 @@ import java.util.logging.Logger;
 public class Room {
 
     private Gson gson;
+    private String id;
     private User holder;
     private List<User> attendance;
     private List<FcMessageInbound> roomSocket;
     private List<RoomFile> roomFile;
     private RoomPage currentPage;
+    private RoomTimer timer;
 
-    public Room(User holder) {
+    public Room(User holder, int price) {
         gson = new Gson();
+        id = UUID.randomUUID().toString();
         this.holder = holder;
+        timer = new RoomTimer(this, price);
         attendance = new ArrayList();
         attendance.add(holder);
         roomSocket = new ArrayList();
@@ -69,6 +74,8 @@ public class Room {
     }
 
     public boolean checkInroomUser(User user) {
+        if(roomSocket.size() == 0)
+            return true;
         for (int i = 0; i < roomSocket.size(); i++) {
             if (roomSocket.get(i).getUser().equals(user)) {
                 return true;
@@ -78,7 +85,7 @@ public class Room {
     }
 
     public void loadFile(UserFile file) {
-        RoomFile newFile = new RoomFile(file,this);
+        RoomFile newFile = new RoomFile(file, this);
         roomFile.add(newFile);
         List<RoomFile> list = new ArrayList();
         list.add(newFile);
@@ -121,8 +128,8 @@ public class Room {
         broadcast(gson.toJson(getResponseChangePage()));
         return true;
     }
-    
-    public ResponseChangePage getResponseChangePage(){
+
+    public ResponseChangePage getResponseChangePage() {
         ResponseChangePage message = new ResponseChangePage();
         message.setPage(currentPage.getPageNumber());
         message.setShapeList(currentPage.getShapes());
@@ -130,16 +137,16 @@ public class Room {
         message.setUuid(currentPage.getFile().getUuid());
         return message;
     }
-    
-    public void drawShape(String shape){
+
+    public void drawShape(String shape) {
         int id = currentPage.addShape(shape);
         ResponseDrawShape result = new ResponseDrawShape();
         result.setId(id);
         result.setJson(shape);
         broadcast(gson.toJson(result));
     }
-    
-    public void eraseShape(List<Integer> idArray){
+
+    public void eraseShape(List<Integer> idArray) {
         Collections.sort(idArray);
         currentPage.deleteShape(idArray);
         ResponseEraseShape result = new ResponseEraseShape();
@@ -155,22 +162,28 @@ public class Room {
         }
         return null;
     }
-    
-    public ResponseChangeBookmark getResponseChangeBookmark(){
+
+    public ResponseChangeBookmark getResponseChangeBookmark() {
         RootBookmark rootBookmark = currentPage.getFile().getBookmarks();
-        
+
         ResponseChangeBookmark message = new ResponseChangeBookmark(rootBookmark);
         return message;
     }
-    
-    public void uploadFIle(String type, String data){
-        if(type.equals("image")){
+
+    public void uploadFile(String type, String data, String name) {
+        if (type.equals("image")) {
             currentPage.setOriginUrl(data);
             ResponseUploadBackground message = new ResponseUploadBackground();
             message.setDataUrl(currentPage.getOriginUrl());
             broadcast(gson.toJson(message));
-        } else if (type.equals("pdf")){
-            //coming soon
+        } else if (type.equals("pdf")) {
+            int i = data.indexOf(",");
+            String rawData = data.substring(i+1);
+            RoomFile newFile = new RoomFile(name, rawData, this);
+            roomFile.add(newFile);
+            List<RoomFile> list = new ArrayList();
+            list.add(newFile);
+            broadcast(gson.toJson(new ResponseAddRoomFile(list)));
         }
     }
 
@@ -213,6 +226,26 @@ public class Room {
 
     public List<RoomFile> getRoomFile() {
         return roomFile;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<User> getAttendance() {
+        return attendance;
+    }
+
+    public User getHolder() {
+        return holder;
+    }
+
+    public RoomTimer getTimer() {
+        return timer;
     }
     
 }
