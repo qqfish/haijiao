@@ -76,7 +76,4 @@ connection.sendObject = function(message) {
 
 connection.sendMessage = function(message) {
     connection.socket.send(message);
-}
-
-
-
+};

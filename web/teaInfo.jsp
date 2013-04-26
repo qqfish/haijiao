@@ -74,11 +74,14 @@
                                 <dd><s:property value="tea.school"/></dd>
                                 <dt>手机</dt>
                                 <dd><s:property value="tea.tel"/></dd>
-                                <dt>介绍</dt>
-                                <dd><s:property value="tea.intro"/></dd>
                             </dl>
                         </div>
                         <div class="tab-pane fade" id='course_area'>
+                            <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
+                            <div id="teaintro" class="well"></div>
+                            <script>
+                                $("#teaintro").html($("#tmp").text());
+                            </script>
                             <div class="well"></div>
                             <div class="well"></div>
                             <div class="well"></div>

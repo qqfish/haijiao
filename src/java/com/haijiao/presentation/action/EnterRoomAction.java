@@ -12,6 +12,7 @@ public class EnterRoomAction extends RequestSessionAction{
     int clazzId;
     String email;
     
+    @Override
     public String execute(){
         clazzId = -1;
         clazzId = Integer.parseInt((String)this.getOutRequest("clazzId"));

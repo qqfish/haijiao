@@ -46,7 +46,7 @@
         </action>
         <action name="changeIntro" class="ChangeIntroAction">
             <result name="input">changeIntro.jsp</result>
-            <result name="success">changeIntro.jsp</result>
+            <result name="success">teainfo.jsp</result>
         </action>
         <action name="index" class="IndexAction">
             <result name="success">index.jsp</result>
@@ -67,7 +67,7 @@
         </action>
         <action name="addFreeTime" class="AddFreeTimeAction">
             <result name="success">teacherInfo.jsp</result>
-            <result name="input">teacherInfo.asp</result>
+            <result name="input">teacherInfo.jsp</result>
         </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>
@@ -90,7 +90,7 @@
         </action>
         <action name="getMail" class="GetMailAction">
             <result name="success" type="">mail.jsp</result>
-	    <result name="input">error.jsp</result>
+            <result name="input">error.jsp</result>
         </action>
         <action name="enterRoom" class="EnterRoomAction">
             <result name="success">/room/index.jsp</result>

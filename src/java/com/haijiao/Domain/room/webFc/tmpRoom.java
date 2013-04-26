@@ -5,9 +5,7 @@
 package com.haijiao.Domain.room.webFc;
 
 import com.haijiao.Domain.bean.User;
-import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.file.UserFile;
-import com.haijiao.Domain.file.UserFileGroup;
 import com.haijiao.Domain.room.Room;
 
 /**

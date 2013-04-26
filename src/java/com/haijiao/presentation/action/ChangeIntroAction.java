@@ -43,6 +43,14 @@ public class ChangeIntroAction extends SessionAction {
         this.userService = userService;
     }
 
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
+    }
+
     public String getIntro() {
         return intro;
     }

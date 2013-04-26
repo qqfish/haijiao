@@ -4,7 +4,6 @@
  */
 package com.haijiao.SupportService.service;
 
-import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.room.Room;
 
 /**
