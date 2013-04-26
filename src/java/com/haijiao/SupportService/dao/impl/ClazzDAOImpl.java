@@ -33,9 +33,21 @@ public class ClazzDAOImpl extends GenericHibernateDAO<Clazz,Integer> implements 
     }
 
     @Override
+    public int getStudentClazzNum(String studentEmail) {
+        String hql = "select count(c) from clazz where c.student.eamil = '" + studentEmail + "'";
+        return getNumber(hql).intValue();
+    }
+    
+    @Override
     public List<Clazz> getTeacherClazz(String teacherEmail) {
         String hql = "select distinct c from Clazz c left join c.freeTime ft where ft.teacher.email = '" + teacherEmail + "'";
         return findByQuery(hql);
+    }
+
+    @Override
+    public int getTeacherClazzNum(String teacherEmail) {
+        String hql = "select count(distinct c) from Clazz c left join c.freeTime ft where ft.teacher.email = '" + teacherEmail + "'";
+        return getNumber(hql).intValue();
     }
     
 }

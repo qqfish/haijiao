@@ -9,6 +9,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import javax.annotation.Resource;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 
@@ -74,6 +75,16 @@ public abstract class GenericHibernateDAO <T,ID extends Serializable> implements
         return sessionFactory.getCurrentSession().createQuery(hql).list();
     }
 
+    @Override
+    public List<T> findPageByQuery(String hql, int first, int pagesize){
+        return sessionFactory.getCurrentSession().createQuery(hql).setFirstResult(first).setMaxResults(pagesize).list();
+    }
+    
+    @Override
+    public Number getNumber(String hql){
+        return (Number) sessionFactory.getCurrentSession().createQuery(hql).uniqueResult();
+    }
+    
     private List<T> findByCriteria(Criterion... criterion) {
         Criteria crit = sessionFactory.getCurrentSession().createCriteria(getPersistentClass());
         for (Criterion c : criterion) {

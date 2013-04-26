@@ -19,11 +19,23 @@ public class CommentDAOImpl extends GenericHibernateDAO<Comment,Integer> impleme
         String hql = "select distinct c from Comment c left join c.commentee u where u.email='" + email + "'";
         return findByQuery(hql);
     }
+    
+    @Override
+    public int getCommentNum(String email) {
+        String hql = "select count(distinct c) from Comment c left join c.commentee u where u.email='" + email + "'";
+        return getNumber(hql).intValue();
+    }
 
     @Override
     public List<Comment> getCommentMade(String email) {
         String hql = "select distinct c from Comment c left join c.commenter u where u.email='" + email + "'";
         return findByQuery(hql);
+    }
+
+    @Override
+    public int getCommentMadeNum(String email) {
+        String hql = "select count(distinct c) from Comment c left join c.commenter u where u.email='" + email + "'";
+        return getNumber(hql).intValue();
     }
 
 }
