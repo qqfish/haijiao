@@ -14,6 +14,7 @@ public class config {
     static public String pageImageType = "png";
     static public String pageDataUriPrefix = "data:image/png;base64,";
     static public String newDocumentName = "new document";
+    static public String tmpRoomFile = "~/tmp";
     
     //File config
     static public String fileRoot = "e:\\file";

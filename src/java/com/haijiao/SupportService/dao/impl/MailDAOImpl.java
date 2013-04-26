@@ -25,8 +25,20 @@ public class MailDAOImpl extends GenericHibernateDAO<Mail,Integer> implements IM
     }
 
     @Override
+    public int getMailNum(String email) {
+        String hql = "select count(m) from Mail m where m.to.email = '" + email + "'";
+        return getNumber(hql).intValue();
+    }
+        
+    @Override
     public List<Mail> getUnreadMailByEmail(String email) {
         String hql = "from Mail m where m.to.email = '" + email + "' and m.read is false";
         return findByQuery(hql);
+    }
+
+    @Override
+    public int getUnreadMailNum(String email) {
+        String hql = "select count(m) from Mail m where m.to.email = '" + email + "' and m.read is false";
+        return getNumber(hql).intValue();
     }
 }

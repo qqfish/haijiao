@@ -62,7 +62,7 @@ public class BillServiceImpl implements IBillService{
     }
 
     @Override
-    public boolean produceBill(String studentEmail, String teacherEmail, int money, boolean earn, String message) {
+    public boolean produceBill(String studentEmail, String teacherEmail, int money, String message) {
         Student s = studentDAO.getStudentByEmail(studentEmail);
         Bill studentBill = new Bill();
         studentBill.setEarn(false);

@@ -162,7 +162,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 imgObj.src = evt.target.result;
             }
         } else if(type == "pdf"){
-            reader.readAsBinaryString(blob);
+            reader.readAsDataURL(blob);
             reader.onstart = function(e){
                 lock();
             }
@@ -170,6 +170,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 var message = {};
                 message.type = Request.UploadFile;
                 message.postfix = type;
+                message.name = file.name;
                 message.data = evt.target.result;
                 connection.sendObject(message);
             }

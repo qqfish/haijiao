@@ -49,7 +49,7 @@
                                 <div class="well">
                                     <h5><s:property value="from.name"/></h5>
                                     <p><s:property value="message"/></p>                            
-                                    <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                    <a href="mail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
                                 </div>
                             </s:iterator>
                         </div>
@@ -58,7 +58,7 @@
                                 <div class="well">
                                     <h5><s:property value="from.name"/></h5>
                                     <p><s:property value="message"/></p>                         
-                                    <a href="sendmail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                    <a href="mail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
                                 </div>
                             </s:iterator>
                         </div>

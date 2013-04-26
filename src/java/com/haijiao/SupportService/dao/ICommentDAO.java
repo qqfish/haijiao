@@ -13,7 +13,9 @@ import java.util.List;
  */
 public interface ICommentDAO extends GenericDAO<Comment,Integer>{
     //获取所有对本用户的评论
-    public List<Comment> getComment(String email);   
+    public List<Comment> getComment(String email);
+    public int getCommentNum(String email);
     //获取所有本用户做出的评论
     public List<Comment> getCommentMade(String email);
+    public int getCommentMadeNum(String email);
 }

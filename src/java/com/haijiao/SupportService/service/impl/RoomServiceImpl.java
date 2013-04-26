@@ -5,9 +5,11 @@
 package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Clazz;
+import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.room.Room;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.IRoomService;
+import com.haijiao.SupportService.service.ITeacherService;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.TreeMap;
@@ -71,6 +73,8 @@ public class RoomServiceImpl implements IRoomService {
     private static Map<TeaAndStu, Room> roomTable;
     @Resource
     IClassService classService;
+    @Resource
+    ITeacherService teacherService;
 
     @Override
     public Room checkAndApplyRoom(int clazzId) {
@@ -84,14 +88,36 @@ public class RoomServiceImpl implements IRoomService {
         if (clazz.getStudent() == null) {
             return null;
         }
-        
+
         TeaAndStu aas = new TeaAndStu();
         aas.setStuEmail(clazz.getStudent().getEmail());
         aas.setTeaEmail(clazz.getFreeTime().getTeacher().getEmail());
         Room result = roomTable.get(aas);
         if (result == null) {
-            result = new Room(clazz.getFreeTime().getTeacher());
+            result = new Room(clazz.getFreeTime().getTeacher(), clazz.getFreeTime().getTeacher().getWagePerhour());
             result.addAttendance(clazz.getStudent());
+            roomTable.put(aas, result);
+        }
+        return result;
+    }
+
+    @Override
+    public Room enterPublicRoom(String teacherEmail) {
+        if (roomTable == null) {
+            roomTable = new Hashtable();
+        }
+        
+        Teacher tea = teacherService.getTeacherByEmail(teacherEmail);
+        
+        if(tea == null)
+            return null;
+
+        TeaAndStu aas = new TeaAndStu();
+        aas.setTeaEmail(teacherEmail);
+        
+        Room result = roomTable.get(aas);
+        if (result == null) {
+            result = new Room(tea, 0);
             roomTable.put(aas, result);
         }
         return result;
@@ -109,7 +135,7 @@ public class RoomServiceImpl implements IRoomService {
         if (clazz.getStudent() == null) {
             return;
         }
-        
+
         TeaAndStu aas = new TeaAndStu();
         aas.setStuEmail(clazz.getStudent().getEmail());
         aas.setTeaEmail(clazz.getFreeTime().getTeacher().getEmail());

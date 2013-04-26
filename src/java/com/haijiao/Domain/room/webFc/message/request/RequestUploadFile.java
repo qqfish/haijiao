@@ -12,6 +12,7 @@ import com.haijiao.Domain.room.webFc.message.Request;
  */
 public class RequestUploadFile extends RequestData{
     private String postfix;
+    private String name;
     private String data;
 
     public RequestUploadFile() {
@@ -32,6 +33,14 @@ public class RequestUploadFile extends RequestData{
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     
 }

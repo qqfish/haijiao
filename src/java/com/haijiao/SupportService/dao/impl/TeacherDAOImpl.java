@@ -25,7 +25,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
     }
     
     @Override
-    public List<Teacher> searchTeacher(List<String> strList ) {
+    public List<Teacher> searchTeacher(List<String> strList) {
         String hql = "select distinct t from Teacher t left join t.lessons l";
         String where = " where "; 
         String or = " or ";
@@ -41,6 +41,24 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher,Integer> impleme
         hql += where;
         List<Teacher> t = findByQuery(hql);
         return t;
+    }
+
+    @Override
+    public int getTeacherNum(List<String> strList) {
+        String hql = "select count(distinct t) from Teacher t left join t.lessons l";
+        String where = " where "; 
+        String or = " or ";
+        for(int i=0; i<strList.size(); i++){
+            String keyword = strList.get(i);
+            where += "l.name like '%" + keyword + "%'";
+            where += or;
+            where += "t.name like '%" + keyword + "%'";
+            if(i +1< strList.size()){
+                where += or;
+            }
+        }
+        hql += where;
+        return getNumber(hql).intValue();
     }
    
 }
