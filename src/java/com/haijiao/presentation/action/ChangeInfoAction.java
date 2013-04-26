@@ -34,30 +34,6 @@ public class ChangeInfoAction extends SessionAction {
     SimpleDateFormat sdf;
     SimpleDateFormat sdf2;
     Date date;
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public SimpleDateFormat getSdf2() {
-        return sdf2;
-    }
-
-    public void setSdf2(SimpleDateFormat sdf2) {
-        this.sdf2 = sdf2;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
     
     public ChangeInfoAction() throws ParseException{
         sdf= new SimpleDateFormat("MM/dd/yyyy");
@@ -121,10 +97,9 @@ public class ChangeInfoAction extends SessionAction {
             return "input";
         }
     }
-    
+
     public String changePassword(){
-        User u = (User)this.getSessionValue("user");
-        System.out.println(u.getPassword());
+        User u = userService.getUserByEmail((String)this.getSessionValue("email"));
         if ( !oldpwd.equals(u.getPassword())) {
             this.sessionPutIn("message", this.getText("passwordWrong"));
             return "input";
@@ -256,5 +231,29 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setNewpwd2(String newpwd2) {
         this.newpwd2 = newpwd2;
+    }
+    
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public SimpleDateFormat getSdf2() {
+        return sdf2;
+    }
+
+    public void setSdf2(SimpleDateFormat sdf2) {
+        this.sdf2 = sdf2;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

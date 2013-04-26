@@ -81,64 +81,27 @@
             <div  id="resultPanel" class="span9 offset1">
                 <div class="row-fluid">
                     <ul class="thumbnails">
-                        <li class="span3">
-                            <div class="thumbnail">
-                                <img src="images/1.jpg" alt="">
-                                <div class="caption">
-                                    <h4>邹润阳<label class="label label-important pull-right">评分：0.0</label></h4>
-                                    <p><label class="label label-info">价格</label><label class="label label-info">语文</label></p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="thumbnail">
-                                <img src="images/1.jpg" alt="">
-                                <div class="caption">
-                                    <h4>邹润阳<label class="label label-important pull-right">评分：0.0</label></h4>
-                                    <p><label class="label label-info">语文</label></p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="thumbnail">
-                                <img src="images/1.jpg" alt="">
-                                <div class="caption">
-                                    <h4>邹润阳<label class="label label-important pull-right">评分：0.0</label></h4>
-                                    <p><label class="label label-info">语文</label></p>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="span3">
-                            <div class="thumbnail">
-                                <img src="images/1.jpg" alt="">
-                                <div class="caption">
-                                    <h4>邹润阳<label class="label label-important pull-right">评分：0.0</label></h4>
-                                    <p><label class="label label-info">语文</label></p>
-                                </div>
-                            </div>
-                        </li>
+                        <s:iterator value="teacherlist" id="list">
+                            <s:a action="getTeacherInfo.action" id="resultBar">
+                                <s:param name="teacherEmail"><s:property value="email"/></s:param>
+                                <li class="span3">
+                                    <div class="thumbnail">
+                                        <img src="<s:property value="picUrl"/>" alt="">
+                                        <div class="caption">
+                                            <h4><s:property value="name"/><label class="label label-important pull-right">评分：<s:property value="score"/></label></h4>
+                                                <p>
+                                                    <label class="label label-info">每小时报酬<s:property value="wagePerhour"/>元</label>
+                                                    <s:iterator value="lessons" status="st">
+                                                        <label class="label label-info" ><s:property value="name"/></label>
+                                                    </s:iterator>
+                                                </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            </s:a>
+                        </s:iterator>
                     </ul>
                 </div>
-                <s:iterator value="teacherlist" id="list">
-                    <s:a action="getTeacherInfo.action" id="resultBar" cssClass="well span5">
-                        <s:param name="teacherEmail"><s:property value="email"/></s:param>
-                            <figure id="personImage" class="pull-left" style="width:150px;height:150px">
-                                <img src="<s:property value="picUrl"/>"/>
-                        </figure>
-                        <h3 id="teacherName" ><s:property value="name"/></h3>
-                        <div id="teacherScore" class="label" >评分：<s:property value="score"/></div>
-                        <div id="teacherCourses">
-                            <s:iterator value="lessons" status="st">
-                                <div class="label" ><s:property value="name"/></div>
-                            </s:iterator>
-                        </div>
-                        <div id="teacherIcons" class="">
-                            <div  class="label">1</div>
-                            <div  class="label">1</div>
-                            <div  class="label">1</div>
-                        </div>
-                    </s:a>
-                </s:iterator>
             </div>
         </div>  
 

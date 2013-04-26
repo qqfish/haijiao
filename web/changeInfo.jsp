@@ -17,6 +17,7 @@
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="js/changeInfo.js"></script>
 
 
 
@@ -51,7 +52,7 @@
                         <li class="active"><a href="#1" data-toggle="tab">修改资料<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li><a href="#4" data-toggle="tab">高级设置<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
                     </ul>
                 </div>
                 <div class="span9">
@@ -63,17 +64,23 @@
                                     <hr/>
                                     <dl>
                                         <dt>姓名</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的大名" value="%{#session.teacher.name}" autofocus="autofocus" /></dd>
+                                        <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的大名" value="%{tea.name}" autofocus="autofocus" /></dd>
                                         <dt>性别</dt>
-                                        <dd><s:radio list="{'男', '女'}" name="sex" value="%{#session.teacher.sex}"/></dd>
+                                        <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></dd>
+                                        <dd>
+                                            <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">男</button>
+                                                <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">女</button>
+                                            </div>
+                                        </dd>
                                         <dt>生日</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{#session.teacher.birthday}"/></dd>
+                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{tea.birthday}"/></dd>
                                         <dt>省份</dt>
-                                        <dd><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{#session.teacher.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
+                                        <dd><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{tea.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
                                         <dt>大学</dt>
-                                        <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.teacher.school}"/></dd>
+                                        <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{tea.school}"/></dd>
                                         <dt>手机</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.teacher.tel}"/></dd>                                
+                                        <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{tea.tel}"/></dd>                                
                                         <br/>
                                         <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherChange"/></dd>
                                     </dl>
@@ -107,11 +114,11 @@
                                 <hr/>
                                 <dl>
                                     <dt>旧密码</dt>
-                                    <dd><s:textfield cssClass="span4" type="text" name="oldpwd" placeholder="请输入旧密码" autofocus="autofocus"/></dd>
+                                    <dd><s:password cssClass="span4" type="text" name="oldpwd" placeholder="请输入旧密码" autofocus="autofocus"/></dd>
                                     <dt>新密码</dt>
-                                    <dd><s:textfield cssClass="span4" type="text" name="newpwd" placeholder="请输入新密码" autofocus="autofocus"/></dd>
+                                    <dd><s:password cssClass="span4" type="text" name="newpwd" placeholder="请输入新密码" autofocus="autofocus"/></dd>
                                     <dt>确认密码</dt>
-                                    <dd><s:textfield cssClass="span4" type="text" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus"/></dd>
+                                    <dd><s:password cssClass="span4" type="text" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus"/></dd>
                                     <br/>
                                     <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="changePassword"/></dd>
                                 </dl>

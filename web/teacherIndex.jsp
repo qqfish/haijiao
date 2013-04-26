@@ -69,7 +69,9 @@
                     </table>
                 </div>
                 <div class="span9">
-                    <button type="button" class="btn btn-primary pull-right"><i class="icon-pencil icon-white"></i>修改资料</button>
+                    <s:a action="toChangeInfo.action">
+                        <button type="button" class="btn btn-primary pull-right"><i class="icon-pencil icon-white"></i>修改资料</button>
+                    </s:a>
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
                         <li><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
@@ -94,7 +96,7 @@
                                                                 <s:if test="status==2">
                                                                     等待审批
                                                                 </s:if>
-                                                                <s:if test="status==2">
+                                                                <s:if test="status==3">
                                                                     已确认
                                                                 </s:if>
                                                             </label>
@@ -107,9 +109,13 @@
                                                             <span style="margin-left: 10px">剩余<s:property value="remain"/>次课程</span>
                                                             <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
                                                             <span style="margin-left: 10px"class="pull-right">
-                                                                <button type="button" class="btn btn-info btn-mini">暂停</button>
-                                                                <button type="button" class="btn btn-info btn-mini">确认</button>
-                                                                <button type="button" class="btn btn-info btn-mini">取消</button>
+                                                                <s:if test="status==3">
+                                                                    <button type="button" class="btn btn-info btn-mini">暂停</button>
+                                                                </s:if>
+                                                                <s:if test="status==2">
+                                                                    <button type="button" class="btn btn-info btn-mini">确认</button>
+                                                                    <button type="button" class="btn btn-info btn-mini">拒绝</button>
+                                                                </s:if>
                                                             </span>
                                                         </small>
                                                     </blockquote>
@@ -249,7 +255,9 @@
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover table-striped">
                                 <s:if test="billList.size()<=0">
-                                    暂无交易记录哦~！
+                                    <tbody>
+                                        暂无交易记录哦~！
+                                    </tbody>
                                 </s:if>
                                 <s:else>
                                 <thead>
@@ -281,13 +289,20 @@
                                     <tr>
                                         <td>
                                             <blockquote>
-                                                <h4>邹润阳<label class="label label-important pull-right">评分:0.0</label></h4>
-                                                <small>
-                                                    <span>这老师是傻逼，大家千万不要选他</span>
-                                                    <span class="pull-right">
-                                                        <button type="button" class="btn btn-info btn-mini">回复</button>
-                                                    </span>
-                                                </small>
+                                                <s:if test="billList.size()<=0">
+                                                    还没有评论哦~！
+                                                </s:if>
+                                                <s:else>
+                                                <s:iterator value="billList" id="billList">
+                                                    <h4><s:property value="from.name" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
+                                                    <small>
+                                                        <span><s:property value="from.content" /></span>
+                                                        <span class="pull-right">
+                                                            <button type="button" class="btn btn-info btn-mini">回复</button>
+                                                        </span>
+                                                    </small>
+                                                </s:iterator>
+                                                </s:else>
                                             </blockquote>
                                         </td>
                                     </tr>

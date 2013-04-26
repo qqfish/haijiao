@@ -13,14 +13,12 @@
         <title>Redirecting...</title>
     </head>
     <body>
-        <s:if test="#session.login">
-            <s:if test="#session.userType == 'teacher'">
-                <jsp:forward page="teacherInfo.jsp" />
-            </s:if>
-            <s:if test="#session.userType == 'student'">
-                <jsp:forward page="studentInfo.jsp" />
-            </s:if>
+        <s:if test="#session.userType == 'teacher'">
+            <jsp:forward page="teacherInfo.jsp" />
         </s:if>
+        <s:elseif test="#session.userType == 'student'">
+            <jsp:forward page="studentInfo.jsp" />
+        </s:elseif>
         <s:else>
             <jsp:forward page="index.jsp" />
         </s:else>

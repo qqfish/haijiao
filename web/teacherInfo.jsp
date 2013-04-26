@@ -23,7 +23,7 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/superfish.js"></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-	<script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
+		<script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
         <!--[if lt IE 8]>
