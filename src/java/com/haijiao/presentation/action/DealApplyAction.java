@@ -5,7 +5,10 @@
 
 package com.haijiao.presentation.action;
 
+import com.haijiao.SupportService.service.IClassService;
+
 public class DealApplyAction extends RequestSessionAction {
+    IClassService classService;
     
     @Override
     public String execute(){
@@ -22,15 +25,26 @@ public class DealApplyAction extends RequestSessionAction {
     }
     
     public void stop(){
-        
+        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+        classService.teacherPauseBook(classId, 1);
     }
     
     public void accept(){
-        
+        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+        classService.dealWithReservation(classId, true);
     }
     
     public void decline(){
-        
+        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+        classService.dealWithReservation(classId, false);
+    }
+
+    public IClassService getClassService() {
+        return classService;
+    }
+
+    public void setClassService(IClassService classService) {
+        this.classService = classService;
     }
     
 }

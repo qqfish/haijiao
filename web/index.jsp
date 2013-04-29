@@ -6,8 +6,12 @@
 <head>
 <title>海角教育</title>
 <meta charset="utf-8">
+<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/validate.css" />
 <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/validate.js"></script>
 </head>
 <body>
 
@@ -26,21 +30,26 @@
              <div class="tab-content">
                 <div class="tab-pane fade active in" id='reg-panel'>
                     <s:form action="register.action">
-                        <s:textfield name="email"  placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 4px;height: 30px;width: 280px;font-size: 20px;" ></s:textfield>
-                        <s:password name="password1"  placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;height: 30px;width: 280px;font-size: 20px;"></s:password>
-                        <s:password name="password2" placeholder="请重复密码"  style="margin: 20px 0px 0px 4px;height: 30px;width: 280px;font-size: 20px;"></s:password>
-                       <a id="reg-btn" data-toggle="modal" data-target="#choosemodal" class="btn btn-danger btn-large" style="width:252px;margin-top:40px;margin-left: 4px">注册</a>
+                        <s:textfield name="email"  onchange="validate_email(this,email_tip);" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 4px;height: 30px;width: 280px;font-size: 20px;" ></s:textfield>
+                        <div id="email_tip" class="validateTip"></div>
+                        <s:password name="password1"  onchange="validate_passwordlength(this,password_tip1);" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;height: 30px;width: 280px;font-size: 20px;"></s:password>
+                        <div id="password_tip1" class="validateTip"></div>
+                        <s:password name="password2" onchange="validate_passwordequal(password1,this,password_tip2);" placeholder="请重复密码"  style="margin: 20px 0px 0px 4px;height: 30px;width: 280px;font-size: 20px;"></s:password>
+                        <div id="password_tip2" class="validateTip"></div>
+                        <a id="reg-btn" data-toggle="modal" data-target="#choosemodal" class="btn btn-danger btn-large" style="width:252px;margin-top:40px;margin-left: 4px">注册</a>
                        <div class="modal fade hide" id="choosemodal">
                             <div class="modal-header" >
                                 <a class="close" data-dismiss="modal">×</a>
                                 <h3>选择您的身份</h3>
                             </div>       
                             <div class="modal-body">
-                                <div style="width:49%;float:left;border:1px solid #CCC">        
-                                    <s:submit value="老师" method="teacher"></s:submit>     
+                                <div style="width:49%;float:left;border:0px solid #CCC">
+                                    <a href="#" id="teacherbutton"><img src="images/imteacher.png"/></a>
+                                    <s:submit value="老师" id="teachersubmit" cssStyle="display:none;" method="teacher"></s:submit>     
                                 </div>     
-                                <div style="width:49%;float:left;border:1px solid #CCC">      
-                                    <s:submit value="学生" method="student"></s:submit>
+                                <div style="width:49%;float:left;border:0px solid #CCC">
+                                    <a href="#" id="studentbutton"><img src="images/imstudent.png"/></a>
+                                    <s:submit value="学生" id="studentsubmit" cssStyle="display:none;" method="student"></s:submit>
                                 </div> 
                             </div>        
                         </div>

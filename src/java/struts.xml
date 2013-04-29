@@ -11,7 +11,7 @@
     <package name="haijiao" namespace="/" extends="struts-default">
         <action name="login" class="LoginAction">
             <result name="input">index.jsp</result>
-            <result name="success">teachers.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="logout" class="LogoutAction">
             <result name="success">index.jsp</result>
@@ -29,30 +29,30 @@
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="teacherRegister">
             <result name="input">register.jsp</result>
-            <result name="success">teachers.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="studentRegister">
             <result name="input">register.jsp</result>
-            <result name="success">teachers.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="teacherChange">
             <result name="input">changeInfo.jsp</result>
-            <result name="success">teachers.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="studentChange">
             <result name="input">changeInfo.jsp</result>
-            <result name="success">teachers.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="changePassword">
             <result name="input">changePassword.jsp</result>
-            <result name="success">teachers.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="changeIntro" class="ChangeIntroAction">
             <result name="input">changeIntro.jsp</result>
             <result name="success">teaInfo.jsp</result>
         </action>
         <action name="dealApply" class="DealApplyAction">
-            <result name="success">teachers.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="index" class="IndexAction">
             <result name="success">index.jsp</result>

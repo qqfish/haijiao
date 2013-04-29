@@ -7,10 +7,12 @@
 <title>Register</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/datepicker.css">
+<link rel="stylesheet" href="css/validate.css">
 <!--js-->
 <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
 <script type="text/javascript" src="js/reg.js"></script>
 <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="js/validate.js"></script>
 
 	<!--[if lt IE 8]>
       <div style=' clear: both; text-align:center; position: relative;'>
@@ -40,7 +42,8 @@
                 <hr class="span8 offset2"/>
                 <dl class="dl-horizontal offset2">
                   <dt>姓名</dt>
-                  <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的全名" autofocus="autofocus"/></dd>
+                  <dd><s:textfield cssClass="span4" onchange="validate_required(this,name_tip);" type="text" name="name" placeholder="请输入您的全名" autofocus="autofocus"/></dd>
+                  <div id="name_tip" class="validateTip"></div>
                   <dt>性别</dt>
                   <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex"/></dd>
                   <dd>
@@ -63,7 +66,8 @@
                 <hr class="span8 offset2"/>
                 <dl class="dl-horizontal offset2">
                   <dt>姓名</dt>
-                  <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的全名" autofocus="autofocus"/></dd>
+                  <dd><s:textfield cssClass="span4" onchange="validate_required(this,name_tip);" type="text" name="name" placeholder="请输入您的全名" autofocus="autofocus"/></dd>
+                  <div id="name_tip" class="validateTip"></div>
                   <dt>性别</dt>
                   <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex"/></dd>
                   <dd>

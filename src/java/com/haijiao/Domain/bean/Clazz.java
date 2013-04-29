@@ -37,16 +37,17 @@ public class Clazz extends BaseBean { //clazz -> class
     private int timeToBegin;    //距离开始的次数,方便学生查询
     
     public String remainWeek(){
+        /*
         int next = timeToBegin * 2;
         if ((freeTime.getWeekday()>=0&&freeTime.getWeekday()<=6)||(timer.nowDay>=7&&timer.nowDay<=13)) {
             next++;
         } else if ((freeTime.getWeekday()>=7&&freeTime.getWeekday()<=13)||(timer.nowDay>=0&&timer.nowDay<=6)) {
             next++;
-        }
-        if (next==0) {
+        }*/
+        if (timeToBegin==0) {
             return "本周";
         } else {
-            return next+"周后";
+            return timeToBegin+"周后";
         }
     }
 

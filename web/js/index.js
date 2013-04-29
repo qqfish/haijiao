@@ -5,4 +5,12 @@ jQuery(document).ready(function($){
             show: false,
             backdrop: "static"
         });
+        
+        $('#teacherbutton').click(function(){
+            $('#teachersubmit').click();
+        });
+        
+        $('#studentbutton').click(function(){
+            $('#studentsubmit').click();
+        });
 });

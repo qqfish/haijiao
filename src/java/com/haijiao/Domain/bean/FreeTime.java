@@ -29,7 +29,7 @@ public class FreeTime extends BaseBean{
     private Teacher teacher;
     
     @Column(name="weekday")
-    private int weekday;   //星期X 从0到13
+    private int weekday;   //星期X 从0到6
     
     @Column(name="sliceindex")
     private int sliceIndex;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
@@ -39,13 +39,7 @@ public class FreeTime extends BaseBean{
     private List<Clazz> clazzList;  //该空闲时间选的课程，第一个为本次的课程，完成后第一个clazz的remain减1，为0则删除, timeToClass 也减一
 
     public String strWeekday(){
-        int day;
-        if(weekday>=7){
-            day = weekday -7;
-        } else {
-            day = weekday;
-        }
-        switch(day) {
+        switch(weekday) {
             case 0:
                 return "周一";
             case 1:
@@ -131,6 +125,4 @@ public class FreeTime extends BaseBean{
     public void setClazzList(List<Clazz> clazzList) {
         this.clazzList = clazzList;
     }
-    
-    
 }

@@ -14,10 +14,41 @@
         <title>海角教育</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/datepicker.css">
+        <link rel="stylesheet" href="kindeditor/theme/default/default.css" />
+        <link rel="stylesheet" href="css/validate.css">
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="js/changeInfo.js"></script>
+        <script type="text/javascript" src="js/validate.js"></script>
+        <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
+        <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+        <script>
+            var editor;
+            KindEditor.ready(function(K) {
+                editor = K.create('textarea[name="intro"]', {
+                    resizeType : 1,
+                    allowPreviewEmoticons : false,
+                    allowImageUpload : false,
+                    items : [
+                        'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+                    });
+            });
+
+            jQuery(window).load(function() {
+                jQuery('.flexslider').flexslider({
+                    animation: "fade",
+                    slideshow: true,
+                    slideshowSpeed: 7000,
+                    animationDuration: 600,
+                    prevText: "",
+                    nextText: "",
+                    controlNav: false
+                });
+            });
+        </script>
 
 
 
@@ -64,7 +95,8 @@
                                     <hr/>
                                     <dl>
                                         <dt>姓名</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的大名" value="%{tea.name}" autofocus="autofocus" /></dd>
+                                        <dd><s:textfield cssClass="span4" onchange="validate_required(this,name_tip);" type="text" name="name" placeholder="请输入您的大名" value="%{tea.name}" autofocus="autofocus" /></dd>
+                                        <dd id="name_tip" class="validateTip" style="text-align: left;"></dd>
                                         <dt>性别</dt>
                                         <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></dd>
                                         <dd>
@@ -116,9 +148,11 @@
                                     <dt>旧密码</dt>
                                     <dd><s:password cssClass="span4" type="text" name="oldpwd" placeholder="请输入旧密码" autofocus="autofocus"/></dd>
                                     <dt>新密码</dt>
-                                    <dd><s:password cssClass="span4" type="text" name="newpwd" placeholder="请输入新密码" autofocus="autofocus"/></dd>
+                                    <dd><s:password cssClass="span4" onchange="validate_passwordlength(this,password_tip1);" type="text" name="newpwd" placeholder="请输入新密码" autofocus="autofocus"/></dd>
+                                    <dd id="password_tip1" class="validateTip" style="text-align: left;"></dd>
                                     <dt>确认密码</dt>
-                                    <dd><s:password cssClass="span4" type="text" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus"/></dd>
+                                    <dd><s:password cssClass="span4" onchange="validate_passwordequal(newpwd,this,password_tip2);" type="text" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus"/></dd>
+                                    <dd id="password_tip2" class="validateTip" style="text-align: left;"></dd>
                                     <br/>
                                     <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="changePassword"/></dd>
                                 </dl>
