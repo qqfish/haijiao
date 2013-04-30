@@ -173,19 +173,19 @@
                         </div>
                         <div class="tab-pane fade"  id='3'>
                             <s:if test="#session.userType=='student'">
-                                <img src="<s:property value="#session.student.picUrl"/>" style="height: 230px;width: 230px;"/>
+                                <img src="<s:property value="stu.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
                             <s:if test="#session.userType=='teacher'">
-                                <img src="<s:property value="#session.teacher.picUrl"/>" style="height: 230px;width: 230px;"/>
+                                <img src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
                         </div>
                         <div class="tab-pane fade"  id='4'>
                             <s:form action="changeIntro.action">
                                 <s:if test="#session.userType == 'teacher'">
-                                    <s:textarea name="intro" value="%{#session.teacher.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                                    <s:textarea name="intro" value="%{tea.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                                 </s:if>
                                 <s:if test="#session.userType == 'student'">
-                                    <s:textarea name="intro" value="%{#session.student.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                                    <s:textarea name="intro" value="%{stu.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
                                 </s:if>
                                 <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
                             </s:form>

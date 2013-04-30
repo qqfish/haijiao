@@ -22,7 +22,7 @@
                     <s:if test="#session.email!=null">
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>
                         <li><a href="">余额</a></li>
-                        <li><a href="mail.jsp">收件箱</a></li>
+                        <li><a href="getMail.action">收件箱</a></li>
                         <li>
                             <div class="btn-group">
                                 <button class="btn btn-inverse">去上课</button>

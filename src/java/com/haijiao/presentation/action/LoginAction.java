@@ -4,8 +4,6 @@
  */
 
 package com.haijiao.presentation.action;
-import com.haijiao.Domain.bean.Student;
-import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;

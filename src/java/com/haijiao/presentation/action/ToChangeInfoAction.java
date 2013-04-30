@@ -21,7 +21,7 @@ public class ToChangeInfoAction extends SessionAction {
         if ("teacher".equals((String)this.getSessionValue("userType"))){
             tea = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
         } else if ("student".equals((String)this.getSessionValue("userType"))) {
-        stu = studentService.getStudentByEmail((String)this.getSessionValue("email"));
+            stu = studentService.getStudentByEmail((String)this.getSessionValue("email"));
         } else {
             //return "failure";
         }
