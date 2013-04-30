@@ -242,4 +242,35 @@ public class User extends BaseBean{
         System.out.println(gson.toJson(this));
         return gson.toJson(this);
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 41 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 41 * hash + (this.userType != null ? this.userType.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+            return false;
+        }
+        if ((this.name == null) ? (other.name != null) : !this.name.equals(other.name)) {
+            return false;
+        }
+        if ((this.userType == null) ? (other.userType != null) : !this.userType.equals(other.userType)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

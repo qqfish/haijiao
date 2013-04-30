@@ -52,20 +52,23 @@
                         <tbody>
                             <tr>
                                 <td>预约数</td>
-                                <td><s:property value="teacher.reserveNum"/></td>
+                                <td><s:property value="tea.reserveNum"/></td>
                             </tr>
                             <tr>
                                 <td>完成数</td>
-                                <td><s:property value="teacher.classNum"/></td>
+                                <td><s:property value="tea.classNum"/></td>
                             </tr>
                             <tr>
                                 <td>评分</td>
-                                <td><s:property value="teacher.score"/></td>
+                                <td><s:property value="tea.score"/></td>
                             </tr>
                         </tbody>
                     </table>
                     <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
                     <a class="btn btn-primary" href="mail.jsp?id=<s:property value="tea.id" />">发送私信</a>
+                    <s:if test="tea.status=1">
+                        <a class="btn btn-primary" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">公共课程</a>
+                    </s:if>
                 </div>
                 <div class="span9">
                     <ul class="nav nav-pills">
@@ -121,7 +124,7 @@
                             <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
                             <div id="teaintro">
                                 <script>
-                                     $("#teaintro").html($("#tmp").text());
+                                    $("#teaintro").html($("#tmp").text());
                                 </script>
                             </div>
                         </div>
@@ -222,12 +225,12 @@
                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
                             <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
-                                <session id="schedule_error"></session>
-                                <div id="lesson_select">
-                                    <a href="#" class="label label-info">语文</a>
-                                </div>
-                                <a class="btn btn-info btn-small pull-right" id="pre">上一步</a>
-                                <a class="btn btn-primary btn-small pull-right" id="upload">提交</a>
+                            <session id="schedule_error"></session>
+                            <div id="lesson_select">
+                                <a href="#" class="label label-info">语文</a>
+                            </div>
+                            <a class="btn btn-info btn-small pull-right" id="pre">上一步</a>
+                            <a class="btn btn-primary btn-small pull-right" id="upload">提交</a>
                         </s:form>
                         <br/>
                         <p></p>

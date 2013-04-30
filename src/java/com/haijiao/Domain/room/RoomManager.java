@@ -17,7 +17,7 @@ public class RoomManager {
     private static Map<String, Room> rooms = new TreeMap();
     public static String createRoom(User holder){
         String id = UUID.randomUUID().toString();
-        Room newRoom = new Room(holder,0);
+        Room newRoom = new Room(holder,0, 2);
         rooms.put(id, newRoom);
         return id;
     }

@@ -59,6 +59,7 @@ public class FcMessageInbound extends MessageInbound {
         bye.setData("{\"type\":\"bye\"}");
         room.broadcastOther(gson.toJson(bye), this);
         room.exitRoom(this);
+        room.getTimer().pause();
         System.out.println(this.toString() + "closed");
     }
 
@@ -138,6 +139,12 @@ public class FcMessageInbound extends MessageInbound {
             case Request.UploadFile:
                 RequestUploadFile upload = gson.fromJson(str, RequestUploadFile.class);
                 room.uploadFile(upload.getPostfix(), upload.getData(), upload.getName());
+                break;
+            case Request.ToggleTimer:
+                room.getTimer().toggle();
+                break;
+            case Request.StopTimer:
+                room.getTimer().stop();
                 break;
                 
         }

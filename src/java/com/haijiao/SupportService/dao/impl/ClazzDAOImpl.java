@@ -8,6 +8,7 @@ package com.haijiao.SupportService.dao.impl;
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IClazzDAO;
+import com.haijiao.global.timer;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -48,6 +49,18 @@ public class ClazzDAOImpl extends GenericHibernateDAO<Clazz,Integer> implements 
     public int getTeacherClazzNum(String teacherEmail) {
         String hql = "select count(distinct c) from Clazz c left join c.freeTime ft where ft.teacher.email = '" + teacherEmail + "'";
         return getNumber(hql).intValue();
+    }
+
+    @Override
+    public List<Clazz> getStudentTodayClazz(String studentEmail) {
+        String hql = "select distinct c from Clazz c left join c.freeTime ft where c.student.email = '" + studentEmail + "' and ft.weekday = " + timer.nowDay + " and c.timeToBegin = 0";
+        return findByQuery(hql);
+    }
+
+    @Override
+    public List<Clazz> getTeacherTodayClazz(String teacherEmail) {
+        String hql = "select distinct c from Clazz c left join c.freeTime ft where ft.teacher.email = '" + teacherEmail + "' and ft.weekday = " + timer.nowDay + " and c.timeToBegin = 0";
+        return findByQuery(hql);
     }
     
 }

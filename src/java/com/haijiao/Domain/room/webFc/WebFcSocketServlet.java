@@ -31,19 +31,24 @@ public class WebFcSocketServlet extends WebSocketServlet {
     @Override
     protected StreamInbound createWebSocketInbound(String string, HttpServletRequest hsr) {
         /*get the user and room throught hsr*/
-        int clazzId = Integer.parseInt(hsr.getParameter("clazzId"));
+        String clazzIdStr = hsr.getParameter("clazzId");
         String email = hsr.getParameter("email");
+        String teaEmail = hsr.getParameter("teaEmail");
         ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(hsr.getSession().getServletContext());
 
         roomService = (IRoomService) context.getBean("roomServiceImpl");
         userService = (IUserService) context.getBean("userServiceImpl");
-
-        Room room = roomService.checkAndApplyRoom(clazzId);
+        Room room = null;
+        if(!clazzIdStr.equals("null"))
+            room = roomService.checkAndApplyRoom(Integer.parseInt(clazzIdStr));
+        else if(!teaEmail.equals("null"))
+            room = roomService.enterPublicRoom(teaEmail);
         System.out.println(room);
         User user = userService.getUserByEmail(email);
-        System.out.println(user);
+        System.out.println(email);
         
-        if (room == null || user == null || room.checkInroomUser(user)) {
+        if (room == null || user == null || !room.checkInroomUser(user)) {
+            System.out.println("error");
             return null;
         }
         return new FcMessageInbound(user, room);

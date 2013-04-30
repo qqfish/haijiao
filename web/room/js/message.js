@@ -11,7 +11,9 @@ var Request = {
         ChangePage : 6,
         ChangeFile : 7,
         AddFileFromUser : 8,
-        UploadFile: 9
+        UploadFile: 9,
+        ToggleTimer: 10,
+        StopTimer: 11
 }
 
 var Response = {
@@ -25,6 +27,7 @@ var Response = {
     AddRoomFile : 7,
     SetUserFile : 8,
     UploadBackground : 9,
+    ShowTimer : 10,
     Error: 100
 }
 

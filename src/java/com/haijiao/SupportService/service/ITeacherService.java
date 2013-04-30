@@ -26,6 +26,8 @@ public interface ITeacherService {
     
     //获取老师的课程
     public List<Clazz> getClasses(String email);
+    //获取老师当天课程
+    public List<Clazz> getTodayClasses(String email);
     //获取老师时间表
     public List<FreeTime> getSchedule(String email);
     //修改时间表

@@ -19,5 +19,6 @@ public class Response {
     public static final int AddRoomFile = 7;
     public static final int SetUserFile = 8;
     public static final int UploadBackground = 9;
+    public static final int ShowTimer = 10;
     public static final int Error = 100;
 }

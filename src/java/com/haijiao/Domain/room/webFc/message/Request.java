@@ -19,4 +19,6 @@ public class Request {
     public static final int ChangeFile = 7;
     public static final int AddFileFromUser = 8;
     public static final int UploadFile = 9;
+    public static final int ToggleTimer = 10;
+    public static final int StopTimer = 11;
 }

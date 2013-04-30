@@ -39,8 +39,9 @@ public class Room {
     private List<RoomFile> roomFile;
     private RoomPage currentPage;
     private RoomTimer timer;
+    private int max;
 
-    public Room(User holder, int price) {
+    public Room(User holder, int price, int max) {
         gson = new Gson();
         id = UUID.randomUUID().toString();
         this.holder = holder;
@@ -51,6 +52,7 @@ public class Room {
         roomFile = new ArrayList();
         roomFile.add(new RoomFile(this));
         currentPage = roomFile.get(0).getPage(0);
+        this.max = max;
     }
 
     public void addAttendance(User user) {
@@ -74,10 +76,15 @@ public class Room {
     }
 
     public boolean checkInroomUser(User user) {
-        if(roomSocket.size() == 0)
+        if(roomSocket.size() >= max){
+            return false;
+        }
+        if(attendance.size() == 1)
             return true;
-        for (int i = 0; i < roomSocket.size(); i++) {
-            if (roomSocket.get(i).getUser().equals(user)) {
+        for (int i = 0; i < attendance.size(); i++) {
+            System.out.println("att: " + attendance.get(i).getEmail());
+            if (attendance.get(i).equals(user)) {
+                System.out.println("ok");
                 return true;
             }
         }
@@ -246,6 +253,10 @@ public class Room {
 
     public RoomTimer getTimer() {
         return timer;
+    }
+    
+    public boolean isReady(){
+        return roomSocket.size() > 1;
     }
     
 }

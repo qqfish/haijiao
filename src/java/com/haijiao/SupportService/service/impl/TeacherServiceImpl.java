@@ -88,4 +88,9 @@ public class TeacherServiceImpl implements ITeacherService {
         return classDAO.getTeacherClazz(email);
     }
 
+    @Override
+    public List<Clazz> getTodayClasses(String email) {
+        return classDAO.getTeacherTodayClazz(email);
+    }
+
 }

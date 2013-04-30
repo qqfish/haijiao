@@ -6,8 +6,10 @@ var textChat;
 var toolkit;
 var table;
 var media;
-function init(clazzId, email){
-    connection.initialize(clazzId, email);
+var timer;
+function init(clazzId, teaEmail, email){
+    connection.initialize(clazzId, teaEmail, email);
+    timer = new Timer("timerPanel");
     textChat = new TextChat("textConsole");
     toolkit = new Toolkit();
     table = new Table("table",toolkit);

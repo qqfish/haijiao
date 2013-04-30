@@ -102,5 +102,9 @@
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>
         </action>
+        <action name="enterPublicRoom" class="EnterPublicRoomAction">
+            <result name="success">/room/index.jsp</result>
+            <result name="false">index.jsp</result>
+        </action>
     </package>
 </struts>

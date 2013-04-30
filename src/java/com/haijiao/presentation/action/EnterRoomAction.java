@@ -10,7 +10,6 @@ package com.haijiao.presentation.action;
  */
 public class EnterRoomAction extends RequestSessionAction{
     int clazzId;
-    String email;
     
     @Override
     public String execute(){
@@ -19,8 +18,7 @@ public class EnterRoomAction extends RequestSessionAction{
         if(clazzId < 0){
             return "false";
         }
-        email = (String)this.getOutSession("email");
-        if(email == null){
+        if(this.getOutSession("email") == null){
             return "false";
         }
         return SUCCESS;
@@ -32,14 +30,6 @@ public class EnterRoomAction extends RequestSessionAction{
 
     public void setClazzId(int clazzId) {
         this.clazzId = clazzId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
     
 }

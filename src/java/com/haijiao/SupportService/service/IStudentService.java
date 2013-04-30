@@ -25,5 +25,7 @@ public interface IStudentService {
     //获取学生已完结课程----->用于账单
     public List<Clazz> getFinishedClasses(String email);
     //获取学生时间表
-    public List<FreeTime> getSchedule(String email);
+    public List<Clazz> getSchedule(String email);
+    
+    public List<Clazz> getTodayClasses(String email);
 }

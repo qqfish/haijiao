@@ -94,7 +94,7 @@ public class RoomServiceImpl implements IRoomService {
         aas.setTeaEmail(clazz.getFreeTime().getTeacher().getEmail());
         Room result = roomTable.get(aas);
         if (result == null) {
-            result = new Room(clazz.getFreeTime().getTeacher(), clazz.getFreeTime().getTeacher().getWagePerhour());
+            result = new Room(clazz.getFreeTime().getTeacher(), clazz.getFreeTime().getTeacher().getWagePerhour(),2);
             result.addAttendance(clazz.getStudent());
             roomTable.put(aas, result);
         }
@@ -117,7 +117,7 @@ public class RoomServiceImpl implements IRoomService {
         
         Room result = roomTable.get(aas);
         if (result == null) {
-            result = new Room(tea, 0);
+            result = new Room(tea, 0,2);
             roomTable.put(aas, result);
         }
         return result;

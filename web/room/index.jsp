@@ -15,6 +15,7 @@
         <script src="/haijiao/room/js/adapter.js"></script>
         <script src="/haijiao/room/js/screen.js"></script>
         <script src="/haijiao/room/js/message.js"></script>
+        <script src="/haijiao/room/js/timer.js"></script>
         <script src="/haijiao/room/js/toolkit.js"></script>
         <script src="/haijiao/room/js/textChat.js"></script>
         <script src="/haijiao/room/js/socket.js"></script>
@@ -54,7 +55,7 @@
         <![endif]-->
 
     </head>
-    <body onload="init(<s:property value='clazzId' default='null' />, <s:property value='email' default='null' />);">
+    <body onload="init(<s:property value='clazzId' default='null' />,<s:property value='teaEmail' default='null' />, <s:property value='#session.email' default='null' />);">
 
         <!--==============================header=================================-->
         <!--<!--%@ include file="WEB-INF/jspf/header.jspf"%>-->
@@ -67,6 +68,9 @@
                     <div class="span12 offset2">
                         <a class="brand" href="index.jsp">Haijiao</a>
                         <ul class="nav">
+                            <li><a id="toggleTimer">暂停/开始</a></li>
+                            <li><a id="stopTimer">停止</a></li>
+                            <li><session id="timerPanel"></session></li>
                             <li>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <button id="pointer" type="button" value="0" class="btn active" data-toggle="tooltip" data-placement="bottom" data-original-title="指针">指针</button>

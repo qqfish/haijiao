@@ -8,6 +8,7 @@ package com.haijiao.SupportService.service.impl;
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Student;
+import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import java.sql.Date;
@@ -21,6 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentServiceImpl implements IStudentService{
     @Resource
     IStudentDAO studentDAO;
+    @Resource
+    IClazzDAO clazzDAO;
 
     public void setStudentDAO(IStudentDAO studentDAO) {
         this.studentDAO = studentDAO;
@@ -29,6 +32,14 @@ public class StudentServiceImpl implements IStudentService{
     @Override
     public Student getStudentByEmail(String email) {
         return studentDAO.getStudentByEmail(email);
+    }
+
+    public IClazzDAO getClazzDAO() {
+        return clazzDAO;
+    }
+
+    public void setClazzDAO(IClazzDAO clazzDAO) {
+        this.clazzDAO = clazzDAO;
     }
     
     @Override
@@ -74,8 +85,13 @@ public class StudentServiceImpl implements IStudentService{
     }
 
     @Override
-    public List<FreeTime> getSchedule(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<Clazz> getSchedule(String email) {
+        return clazzDAO.getStudentClazz(email);
+    }
+
+    @Override
+    public List<Clazz> getTodayClasses(String email) {
+        return clazzDAO.getStudentTodayClazz(email);
     }
 
 }

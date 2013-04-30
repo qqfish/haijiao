@@ -56,16 +56,19 @@ connection.connect = (function(host) {
             case Response.UploadBackground:
                 table.uploadBackground(socketData.dataUrl);
                 break;
+            case Response.ShowTimer:
+                timer.showTimer(socketData);
+                break;
         }
     };
 });
 
-connection.initialize = function(clazzId, email) {
+connection.initialize = function(clazzId, teaEmail, email) {
     console.log(email);
     if (window.location.protocol == 'http:') {
-	connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&email='+email);
+	connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     } else {
-	connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&email='+email);
+	connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     }
 };
 
