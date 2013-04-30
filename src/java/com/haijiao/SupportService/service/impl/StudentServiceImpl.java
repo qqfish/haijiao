@@ -80,12 +80,7 @@ public class StudentServiceImpl implements IStudentService{
     }
 
     @Override
-    public List<Clazz> getFinishedClasses(String email) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<Clazz> getSchedule(String email) {
+    public List<Clazz> getClasses(String email) {
         return clazzDAO.getStudentClazz(email);
     }
 

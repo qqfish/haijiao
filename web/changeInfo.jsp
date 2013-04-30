@@ -122,18 +122,31 @@
                                     <hr/>
                                     <dl>
                                         <dt>姓名</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="name" placeholder="请输入您的大名" value="%{#session.student.name}"  autofocus="autofocus"/></dd>
+                                        <dd><s:textfield cssClass="span4" onchange="validate_required(this,name_tip);" type="text" name="name" placeholder="请输入您的大名" value="%{stu.name}" autofocus="autofocus" /></dd>
+                                        <dd id="name_tip" class="validateTip" style="text-align: left;"></dd>
                                         <dt>性别</dt>
-                                        <dd><s:radio list="{'男', '女'}" name="sex" value="%{#session.student.sex}"/></dd>
+                                        <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{stu.sex}"/></dd>
+                                        <dd>
+                                            <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">男</button>
+                                                <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">女</button>
+                                            </div>
+                                        </dd>
                                         <dt>生日</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{#session.student.birthday}"/></dd>
-                                        <dt>省份</dt>
-                                        <dd><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{#session.student.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
-                                        <dt>大学</dt>
-                                        <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{#session.student.school}"/></dd>
+                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{stu.birthday}"/></dd>
+                                        <dt>学校</dt>
+                                        <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" value="%{stu.school}"/></dd>
+                                        <dt>年级</dt>
+                                        <dd><s:textfield cssClass="span4" type="text" name="grade" placeholder="请输入您就读的年级" value="%{stu.grade}"/></dd>
                                         <dt>手机</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{#session.student.tel}"/></dd>   
-                                        <dd><s:radio list="{'父母的手机', '我的手机'}" name="telType" value="%{#session.student.telType}"/></dd>
+                                        <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{stu.tel}"/></dd>                                
+                                        <dd style="display: none;"><s:radio list="{'student', 'parent'}" name="telType" value="%{stu.telType}"/></dd>
+                                        <dd>
+                                            <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                <button id="meButton" type="button" value="0" class="btn" data-toggle="button">我的手机</button>
+                                                <button id="parentButton" type="button" value="1" class="btn" data-toggle="button">爸妈的手机</button>
+                                            </div>
+                                        </dd>
                                         <br/>
                                         <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="studentChange"/></dd>
                                     </dl>

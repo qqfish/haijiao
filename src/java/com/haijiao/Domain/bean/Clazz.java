@@ -4,7 +4,6 @@
  */
 package com.haijiao.Domain.bean;
 
-import com.haijiao.global.timer;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

@@ -14,4 +14,18 @@ jQuery(document).ready(function($){
     $('#femaleButton').click(function(){
         $('#changeInfo_sex女').click();
     });
+    
+    var telType = $('input:radio[name="telType"]:checked').val();
+    if (telType=="student") {
+        $('#meButton').click();
+    } else if (telType=="parent") {
+        $('#parentButton').click();
+    }
+    
+    $('#meButton').click(function(){
+        $('#changeInfo_telTypestudent').click();
+    });
+    $('#parentButton').click(function(){
+        $('#changeInfo_telTypeparent').click();
+    });
 });

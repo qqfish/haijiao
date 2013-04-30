@@ -46,6 +46,7 @@ public class IndexAction extends SessionAction {
                 this.sessionPutIn("message", this.getText("studentInfo"));
                 student = studentService.getStudentByEmail(email);
                 billList = billService.getBill(email);
+                classList = studentService.getClasses(email);
                 return "student";
             }
         } else {

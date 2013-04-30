@@ -29,13 +29,13 @@ public class ClazzDAOImpl extends GenericHibernateDAO<Clazz,Integer> implements 
 
     @Override
     public List<Clazz> getStudentClazz(String studentEmail) {
-        String hql = "select c from clazz where c.student.eamil = '" + studentEmail + "'";
+        String hql = "select c from Clazz c where c.student.email = '" + studentEmail + "'";
         return findByQuery(hql);
     }
 
     @Override
     public int getStudentClazzNum(String studentEmail) {
-        String hql = "select count(c) from clazz where c.student.eamil = '" + studentEmail + "'";
+        String hql = "select count(c) from Clazz c where c.student.email = '" + studentEmail + "'";
         return getNumber(hql).intValue();
     }
     

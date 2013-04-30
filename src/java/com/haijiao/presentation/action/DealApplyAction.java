@@ -18,6 +18,8 @@ public class DealApplyAction extends RequestSessionAction {
             accept();
         } else if("decline".equals((String)this.getOutRequest("button"))){
             decline();
+        } else if("studentStop".equals((String)this.getOutRequest("button"))){
+            studentStop();
         } else {
             //do nothing;
         }
@@ -37,6 +39,11 @@ public class DealApplyAction extends RequestSessionAction {
     public void decline(){
         Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
         classService.dealWithReservation(classId, false);
+    }
+    
+    public void studentStop(){
+        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+        classService.studentPauseBook(classId, 1);
     }
 
     public IClassService getClassService() {
