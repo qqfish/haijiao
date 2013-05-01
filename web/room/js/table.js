@@ -55,6 +55,7 @@ function Table(containerName, tool){
     setMouse();
 
     this.sendChangeFile = function(uuid){
+        lock();
         setStageToSave();
         stage.toDataURL({
             callback: function(dataUrl) {
@@ -69,6 +70,7 @@ function Table(containerName, tool){
     }
     
     this.sendChangePage = function(uuid,page){
+        lock();
         setStageToSave();
         stage.toDataURL({
             callback: function(dataUrl) {

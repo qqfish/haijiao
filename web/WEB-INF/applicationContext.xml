@@ -76,9 +76,6 @@
     </bean>
     <bean id="EnterRoomAction" class="com.haijiao.presentation.action.EnterRoomAction" scope="prototype" />   
     <bean id="EnterPublicRoomAction" class="com.haijiao.presentation.action.EnterPublicRoomAction" scope="prototype" />     
-    <bean id="RoomTimer" class="com.haijiao.Domain.room.RoomTimer">
-        <property name="billService" ref="billServiceImpl" />
-    </bean>
     <!-- persist -->
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"> 
@@ -87,8 +84,7 @@
         </property>
     </bean>
     
-    <context:component-scan base-package="com.haijiao.SupportService,com.haijiao.presentation.action"/>
-    
+    <context:component-scan base-package="com.haijiao.SupportService,com.haijiao.presentation.action,com.haijiao.Domain.room"/>
     <!-- Transaction -->
     
     <bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">  

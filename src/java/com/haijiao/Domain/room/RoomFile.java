@@ -117,8 +117,6 @@ public class RoomFile extends DataFile {
             doc = PDDocument.load(url);
             bookmarks = new RootBookmark(doc);
             pages = new ArrayList();
-            PDPage newPage = new PDPage();
-            doc.addPage(newPage);
             for (int i = 0; i < doc.getNumberOfPages(); i++) {
                 pages.add(new RoomPage(this));
             }
@@ -139,6 +137,8 @@ public class RoomFile extends DataFile {
 
     public RoomPage getPage(int i) {
         if (i < doc.getNumberOfPages()) {
+            if(i >= pages.size())
+                i = pages.size() - 1;
             lastPage = i;
             RoomPage result = pages.get(i);
             if (result.getOriginUrl() == null) {

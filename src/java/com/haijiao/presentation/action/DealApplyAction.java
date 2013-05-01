@@ -2,21 +2,21 @@
  *
  * @author Jerry Zou
  */
-
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IClassService;
 
 public class DealApplyAction extends RequestSessionAction {
+
     IClassService classService;
-    
+
     @Override
-    public String execute(){
-        if("stop".equals((String)this.getOutRequest("button"))){
+    public String execute() {
+        if ("stop".equals((String) this.getOutRequest("button"))) {
             stop();
-        } else if("accept".equals((String)this.getOutRequest("button"))){
+        } else if ("accept".equals((String) this.getOutRequest("button"))) {
             accept();
-        } else if("decline".equals((String)this.getOutRequest("button"))){
+        } else if ("decline".equals((String) this.getOutRequest("button"))) {
             decline();
         } else if("studentStop".equals((String)this.getOutRequest("button"))){
             studentStop();
@@ -25,19 +25,19 @@ public class DealApplyAction extends RequestSessionAction {
         }
         return SUCCESS;
     }
-    
-    public void stop(){
-        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+
+    public void stop() {
+        Integer classId = Integer.parseInt((String) this.getOutRequest("classId"));
         classService.teacherPauseBook(classId, 1);
     }
-    
-    public void accept(){
-        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+
+    public void accept() {
+        Integer classId = Integer.parseInt((String) this.getOutRequest("classId"));
         classService.dealWithReservation(classId, true);
     }
-    
-    public void decline(){
-        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+
+    public void decline() {
+        Integer classId = Integer.parseInt((String) this.getOutRequest("classId"));
         classService.dealWithReservation(classId, false);
     }
     
@@ -53,5 +53,4 @@ public class DealApplyAction extends RequestSessionAction {
     public void setClassService(IClassService classService) {
         this.classService = classService;
     }
-    
 }

@@ -4,13 +4,20 @@
  */
 
 function lock(){
-    
+    $('#showAlarm').click();
 }
 
 function unlock(){
-    
+    $('#closeAlarm').click();
 }
 
 function pError(str){
     alert(str);
 }
+
+$(document).ready(function(){
+    $('#alarmMessage').modal({
+        show: false,
+        backdrop: "static"
+    });
+});

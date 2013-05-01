@@ -62,7 +62,7 @@
         <div class="line-top"></div>
         <!--==============================content=================================-->
         <div id="content"> 
-
+            <a id="showAlarm" data-toggle="modal" data-target="#alarmMessage" class="btn btn-danger btn-large" style="display: none;"/>
             <div id="tools" class="navbar navbar-inverse">
                 <div  class="navbar-inner">
                     <div class="span12 offset2">
@@ -104,6 +104,11 @@
                         <ul id="roomFile"></ul>
                     </div>        
                 </div>
+            </div>
+
+            <div class="modal hide" id="alarmMessage">
+                <a class="close" id="closeAlarm" data-dismiss="modal" style="display: none;"></a>
+                <session>Loading...</session>       
             </div>
             <div id="desktop" style="position: absolute;top: 50px;overflow: hidden;">
                 <div id="table">

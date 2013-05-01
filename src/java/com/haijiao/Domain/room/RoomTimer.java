@@ -10,11 +10,13 @@ import com.haijiao.SupportService.service.impl.BillServiceImpl;
 import java.util.List;
 import java.util.Timer;
 import javax.annotation.Resource;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author fish
  */
+@Controller
 public class RoomTimer {
     //just for one to one
 
@@ -22,6 +24,7 @@ public class RoomTimer {
     private TimeCounter counter;
     private int price;
     private Room room;
+    @Resource
     private IBillService billService;
 
     public RoomTimer(){
@@ -33,7 +36,7 @@ public class RoomTimer {
         timer.schedule(counter, 1000, 1000);
         this.room = room;
         this.price = price;
-        billService = new BillServiceImpl();
+        //billService = new BillServiceImpl();
     }
 
     public void start() {

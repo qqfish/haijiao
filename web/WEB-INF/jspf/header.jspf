@@ -30,7 +30,6 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a>邹润阳12:00</a></li>
                                     <s:if test="#session.userType=='teacher'">
                                         <s:iterator value="#session.todayClazz">
                                             <s:if test="status==3">
