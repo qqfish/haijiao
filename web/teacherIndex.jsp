@@ -278,6 +278,7 @@
                                         <th>课程</th>
                                         <th>金额</th>
                                         <th>时间</th>
+                                        <th>信息</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -288,8 +289,28 @@
                                             <td><s:property value="from.lesson" /></td>
                                             <td><s:property value="getRealMoney()" /></td>
                                             <td><s:property value="createdateToString()" /></td>
-                                            <td><button type="button" class="btn btn-info btn-mini">评论</button></td>
+                                            <td><s:property value="message" /></td>
+                                            <td><a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a></td>
                                         </tr>
+                                        <div id="comment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h3 id="myModalLabel">评论</h3>
+                                            </div>
+                                            <s:form action="makeComment.action">
+                                            <div class="modal-body">
+                                                <s:textfield name="id" value="%{id}"></s:textfield>
+                                                <br/>
+                                                <s:textarea name="content" autofocus="autofocus"></s:textarea>
+                                                <br/>
+                                                评分<s:textfield name="score"></s:textfield>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                <s:submit cssClass="btn btn-primary" value="提交"></s:submit>
+                                            </div>
+                                            </s:form>
+                                        </div>
                                     </s:iterator>
                                 </tbody>
                                 </s:else>
@@ -306,13 +327,15 @@
                                                 </s:if>
                                                 <s:else>
                                                 <s:iterator value="billList" id="billList">
-                                                    <h4><s:property value="from.name" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
-                                                    <small>
-                                                        <span><s:property value="from.content" /></span>
-                                                        <span class="pull-right">
-                                                            <button type="button" class="btn btn-info btn-mini">回复</button>
-                                                        </span>
-                                                    </small>
+                                                    <s:if test="comment != null">
+                                                        <h4><s:property value="from.name" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
+                                                        <small>
+                                                            <span><s:property value="comment.content" /></span>
+                                                            <span class="pull-right">
+                                                                <button type="button" class="btn btn-info btn-mini">回复</button>
+                                                            </span>
+                                                        </small>
+                                                    </s:if>
                                                 </s:iterator>
                                                 </s:else>
                                             </blockquote>

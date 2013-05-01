@@ -106,5 +106,8 @@
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>
         </action>
+        <action name="makeComment" class="MakeCommentAction">
+            <result name="success">teacherIndex.jsp</result>
+        </action>
     </package>
 </struts>
