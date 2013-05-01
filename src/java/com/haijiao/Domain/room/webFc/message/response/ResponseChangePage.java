@@ -16,6 +16,7 @@ import java.util.List;
 public class ResponseChangePage extends ResponseData{
     private String uuid;
     private int page;
+    private int totalPage;
     private String url;
     private List<Shape> shapeList;
     
@@ -59,6 +60,14 @@ public class ResponseChangePage extends ResponseData{
 
     public void setShapeList(List<Shape> shapeList) {
         this.shapeList = shapeList;
+    }
+
+    public int getTotalPage() {
+        return totalPage;
+    }
+
+    public void setTotalPage(int totalPage) {
+        this.totalPage = totalPage;
     }
     
     

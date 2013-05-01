@@ -138,6 +138,7 @@ public class Room {
 
     public ResponseChangePage getResponseChangePage() {
         ResponseChangePage message = new ResponseChangePage();
+        message.setTotalPage(currentPage.getFile().getTotalPageNumber());
         message.setPage(currentPage.getPageNumber());
         message.setShapeList(currentPage.getShapes());
         message.setUrl(currentPage.getOriginUrl());

@@ -89,6 +89,8 @@ function Table(containerName, tool){
         backLayer.removeChildren();
         drawLayer.removeChildren();
         tmpLayer.removeChildren();
+        
+        setPagePanel(response.page, response.totalPage);
 
         var imageObj = new Image();
 
@@ -516,6 +518,21 @@ function Table(containerName, tool){
             y: scaleRange[scaleChoice]
         });
         setDefaultLocation();
+    }
+    
+    function setPagePanel(current, total){
+        $("#currentPage").text(current + 1);
+        $("#totalPage").text(total);
+        $("#nextPage").unbind("click");
+        if(current < total - 1)
+            $("#nextPage").click(function(){
+                file.nextPage();
+            });
+        $("#prePage").unbind("click");
+        if(current > 0)
+            $("#prePage").click(function(){
+                file.prePage();
+            });
     }
 }
     

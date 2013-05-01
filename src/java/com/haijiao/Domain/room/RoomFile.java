@@ -210,6 +210,10 @@ public class RoomFile extends DataFile {
     public int getPageNumber(RoomPage page) {
         return pages.indexOf(page);
     }
+    
+    public int getTotalPageNumber(){
+        return pages.size();
+    }
 
     public RootBookmark getBookmarks() {
         return bookmarks;

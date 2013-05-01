@@ -55,7 +55,7 @@
         <![endif]-->
 
     </head>
-    <body onload="init(<s:property value='clazzId' default='null' />,<s:property value='teaEmail' default='null' />, <s:property value='#session.email' default='null' />);">
+    <body onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='#session.email' default='null' />');">
 
         <!--==============================header=================================-->
         <!--<!--%@ include file="WEB-INF/jspf/header.jspf"%>-->
@@ -71,6 +71,7 @@
                             <li><a id="toggleTimer">暂停/开始</a></li>
                             <li><a id="stopTimer">停止</a></li>
                             <li><session id="timerPanel"></session></li>
+                        <li><session id="currentPage"></session> / <session id="totalPage"></session></li>
                             <li>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <button id="pointer" type="button" value="0" class="btn active" data-toggle="tooltip" data-placement="bottom" data-original-title="指针">指针</button>
