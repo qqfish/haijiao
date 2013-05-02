@@ -31,17 +31,19 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <s:if test="#session.userType=='teacher'">
+                                        <s:if test="#session.todayClazz.size()==0">
+                                            <li>今天没有课程哦</li>
+                                        </s:if>
                                         <s:iterator value="#session.todayClazz">
-                                            <s:if test="status==3">
                                                 <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">学生:<s:property value="student.name"/>   第<s:property value="freeTime.sliceIndex"/>节课</a></li>
-                                            </s:if>
                                         </s:iterator>
                                     </s:if>
                                     <s:else>
+                                        <s:if test="#session.todayClazz.size()==0">
+                                            <p>今天没有课程哦</p>
+                                        </s:if>
                                         <s:iterator value="#session.todayClazz">
-                                            <s:if test="status==3">
-                                                <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">老师:<s:property value="freeTime.teacher.name"/>   第<s:property value="freeTime.sliceIndex"/>节课</a></li>
-                                            </s:if>
+                                            <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">老师:<s:property value="freeTime.teacher.name"/>   第<s:property value="freeTime.sliceIndex"/>节课</a></li>
                                         </s:iterator>
                                     </s:else>
                                 </ul>

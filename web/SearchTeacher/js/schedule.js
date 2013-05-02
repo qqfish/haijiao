@@ -6,7 +6,7 @@
 var schedule;
 $(document).ready(function() {
     function Schedule(index, day){
-        var min = -1;
+        var min = 0;
         var status = { 
             notAvailable : 0,
             available : 1,
@@ -54,7 +54,7 @@ $(document).ready(function() {
                         result.array[$(this).attr("day")][$(this).attr("index")] = TYPE.create;
                         if(min < 0 && $(this).attr("times") > 0){
                             min = $(this).attr("times");
-                        } else if(min > $(this).attr("times")){
+                        } else if(min == 0 || min > $(this).attr("times")){
                             min = $(this).attr("times");
                         }
                     } else if ($(this).attr("select") == 1){
@@ -97,12 +97,16 @@ $(document).ready(function() {
         });
         
         $('#upload').click(function(){
-            if(min > 0 && $("schedule_times").text() > min) {
+            if(min == 0){
+                $("#schedule_error").text("请返回上一步选择预约时间");
+            } else if($("#schedule_times").val() == "") {
+                $("#schedule_error").text("请输入课程次数");
+            } else if(min > 0 && $("#schedule_times").val() > min) {
                 $("#schedule_error").text("课程次数最大为"+ min);
-            } else {
-                console.log($("#schedule_times").val());
+            } else if($('#schedule_lesson').val() == ""){
+                $("#schedule_error").text("请选择课程种类");
+            }else {
                 $("#schedule_form").submit();
-                console.log($("#schedule_json").val());
             }
         });
         

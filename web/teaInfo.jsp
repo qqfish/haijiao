@@ -234,9 +234,11 @@
                             <session id="schedule_error"></session>
                             <div id="lesson_select">
                                 <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                                <s:iterator value="tea.lessons" status="st">
-                                    <a href="#" class="label label-info" onclick="$('#schedule_lesson').val('<s:property value="name"/>')"><s:property value="name"/></a>
-                                </s:iterator>
+                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                    <s:iterator value="tea.lessons" status="st">
+                                        <button type="button" class="btn"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
+                                    </s:iterator>
+                                </div>
                             </div>
                             <a class="btn btn-info btn-small pull-right" id="pre">上一步</a>
                             <a class="btn btn-primary btn-small pull-right" id="upload">提交</a>
