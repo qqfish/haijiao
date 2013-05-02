@@ -7,8 +7,10 @@ package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.FreeTime;
+import com.haijiao.Domain.bean.Lesson;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.dao.IClazzDAO;
+import com.haijiao.SupportService.dao.ILessonDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.service.ITeacherService;
 import java.sql.Date;
@@ -25,6 +27,9 @@ public class TeacherServiceImpl implements ITeacherService {
     
     @Resource
     IClazzDAO classDAO;
+    
+    @Resource
+    ILessonDAO lessonDAO;
 
     public void setTeacherDAO(ITeacherDAO teacherDAO) {
         this.teacherDAO = teacherDAO;
@@ -32,6 +37,10 @@ public class TeacherServiceImpl implements ITeacherService {
 
     public void setClassDAO(IClazzDAO classDAO) {
         this.classDAO = classDAO;
+    }
+
+    public void setLessonDAO(ILessonDAO lessonDAO) {
+        this.lessonDAO = lessonDAO;
     }
 
     @Override
@@ -95,7 +104,12 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public boolean addLesson(String email, String lessonName) {
-
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        Lesson l = lessonDAO.getLessonByName(lessonName);
+        List ll = t.getLessons();
+        ll.add(l);
+        t.setLessons(ll);
+        teacherDAO.update(t);
         return true;
     }
 
