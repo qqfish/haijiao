@@ -11,5 +11,5 @@ import com.haijiao.Domain.bean.Lesson;
  * @author hp
  */
 public interface ILessonDAO extends GenericDAO<Lesson,Integer>{
-    public Lesson getLessonByName(String lesson);
+    public Lesson getLessonByName(String email, String lesson);
 }

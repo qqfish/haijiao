@@ -105,7 +105,12 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public boolean addLesson(String email, String lessonName) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
-        Lesson l = lessonDAO.getLessonByName(lessonName);
+        Lesson l = lessonDAO.getLessonByName(email,lessonName);
+        if(l == null){
+            l = new Lesson();
+            l.setName(lessonName);
+            lessonDAO.makePersistent(l);
+        }
         List ll = t.getLessons();
         ll.add(l);
         t.setLessons(ll);

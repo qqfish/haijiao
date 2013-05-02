@@ -18,8 +18,8 @@ import org.springframework.stereotype.Repository;
 public class LessonDAOImpl extends GenericHibernateDAO<Lesson,Integer> implements ILessonDAO{
 
     @Override
-    public Lesson getLessonByName(String lesson) {
-        String hql = "select distinct l from lesson l where l.name = '" + lesson + "'";
+    public Lesson getLessonByName(String email, String lesson) {
+        String hql = "select l from Teacher t right join t.lessons l where l.name = '" + lesson + "' and t.email='" + email +"'";
         List<Lesson> ll = findByQuery(hql);
         if(ll.size() == 1)
             return ll.get(0);
