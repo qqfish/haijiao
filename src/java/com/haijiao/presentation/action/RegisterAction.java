@@ -5,6 +5,8 @@
 
 package com.haijiao.presentation.action;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.service.IStudentService;
+import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 
 public class RegisterAction extends SessionAction{
@@ -13,16 +15,22 @@ public class RegisterAction extends SessionAction{
     private String password2;
     private String userType;
     private IUserService userService;
+    private ITeacherService teacherService;
+    private IStudentService studentService;
     
     @Override
     public String execute(){
         if(!userService.confirmExist(email)){
             userService.register(email, password1, userType);
             User theUser = userService.getUserByEmail(email);
-            this.sessionPutIn("user", theUser);
+            this.sessionPutIn("name", theUser.getName());
             this.sessionPutIn("userType", userType);
-            this.sessionPutIn("login", true);
-            this.sessionPutIn("email", email);
+            this.sessionPutIn("email",email);
+            if(userType.equals("teacher")){
+                this.sessionPutIn("todayClazz", teacherService.getTodayClasses(email));
+            } else {
+                this.sessionPutIn("todayClazz", studentService.getTodayClasses(email));
+            }
             userService.setStatus(email, User.Status.onlineAndAvailable);
             this.sessionPutIn("message", this.getText("registerSuccess"));
             return SUCCESS;
@@ -108,6 +116,22 @@ public class RegisterAction extends SessionAction{
 
     public void setUserType(String userType) {
         this.userType = userType;
+    }
+
+    public ITeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
+    public IStudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
     }
 
 }

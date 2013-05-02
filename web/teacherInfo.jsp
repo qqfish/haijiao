@@ -23,7 +23,7 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/superfish.js"></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-		<script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
+        <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
         <!--[if lt IE 8]>
@@ -167,17 +167,21 @@
                     <div id="confirm_panel" style="display:none">
                         <s:form id="schedule_form" action="bookTeacher.action">
                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
+                            <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
                             <s:textfield id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus" style="margin:0px 0px 0px 30px;height: 30px;width: 300px;font-size: 20px;"></s:textfield>
-                                <session id="schedule_error"></session>
-                                <div id="lesson_select">
-                                    <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 30px">语文</a>
-                                    <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 2px">数学</a>
-                                    <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 2px">英文</a>
-                                    <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 2px">物理</a> 
-                                </div>
-                                <a class="login-btn" id="upload" style="padding:0px 10px;margin-top: 20px;margin-right: 10px;margin-bottom: 20px" >提交</a>
-                                <a class="login-btn" id="pre" style="padding:0px 10px;margin-top: 20px;margin-right: 10px;margin-bottom: 20px" >上一步</a>
+                            <session id="schedule_error"></session>
+                            <div id="lesson_select">
+                                <s:iterator value="tea.lessons" status="st">
+                                    <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 30px" onclick="$('#schedule_lesson').val('<s:property value="name"/>')"><s:property value="name"/></a>
+                                </s:iterator>
+                                <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 30px">语文</a>
+                                <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 2px">数学</a>
+                                <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 2px">英文</a>
+                                <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 2px">物理</a> 
+                            </div>
+                            <a class="login-btn" id="upload" style="padding:0px 10px;margin-top: 20px;margin-right: 10px;margin-bottom: 20px" >提交</a>
+                            <a class="login-btn" id="pre" style="padding:0px 10px;margin-top: 20px;margin-right: 10px;margin-bottom: 20px" >上一步</a>
                         </s:form>
                         <br/>
                         <p></p>

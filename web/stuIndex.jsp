@@ -14,8 +14,7 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="TeacherIndex/js/addSchedule.js"></script>
-        <script type="text/javascript" src="TeacherIndex/js/viewSchedule.js"></script>
+        <script type="text/javascript" src="StudentIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
@@ -36,8 +35,7 @@
                 <![endif]-->
 
     </head>
-    <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
+    <body onload="viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>

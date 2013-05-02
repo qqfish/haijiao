@@ -22,6 +22,7 @@ public class BookTeacherAction extends SessionAction {
     IUserService userService;
     String teacherEmail;
     String json;
+    String lesson;
     int times;
 
     public BookTeacherAction() {
@@ -38,11 +39,11 @@ public class BookTeacherAction extends SessionAction {
             return "teacher";
         }
         Gson gson = new Gson();
-        System.out.println(json);
+        System.out.println(lesson);
         ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
         List<scheduleLocation> sList = array.toList();
         System.out.println(sList.size());
-        classService.bookTeacher(teacherEmail, (String)this.getSessionValue("email"), "tmp", sList, times);
+        classService.bookTeacher(teacherEmail, (String)this.getSessionValue("email"), lesson, sList, times);
         
         this.sessionPutIn("message", this.getText("successMessage"));
         return SUCCESS;
@@ -102,5 +103,13 @@ public class BookTeacherAction extends SessionAction {
 
     public void setUserService(IUserService userService) {
         this.userService = userService;
+    }
+
+    public String getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(String lesson) {
+        this.lesson = lesson;
     }
 }

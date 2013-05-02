@@ -67,13 +67,13 @@
             <result name="success">teaInfo.jsp</result>
         </action>
         <action name="bookTeacher" class="BookTeacherAction">
-            <result name="success">teacherInfo.jsp</result>
+            <result name="success" type="chain">index</result>
             <result name="input">index.jsp</result>
             <result name="teacher">teacherIndex.jsp</result>
         </action>
         <action name="addFreeTime" class="AddFreeTimeAction">
-            <result name="success">teacherInfo.jsp</result>
-            <result name="input">teacherInfo.jsp</result>
+            <result name="success" type="chain">index</result>
+            <result name="input" type="chain">index</result>
         </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>

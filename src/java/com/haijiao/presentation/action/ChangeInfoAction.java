@@ -51,8 +51,9 @@ public class ChangeInfoAction extends SessionAction {
     public String teacherRegister() throws ParseException{
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, null, province)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("teacher", theTeacher);
-            this.sessionPutIn("message", this.getText("teaRegisterSuccess"));
+            this.sessionPutIn("name", theTeacher.getName());
+            this.sessionPutIn("userType", "teacher");
+            this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
             this.sessionPutIn("message", this.getText("teaRegisterFailure"));
@@ -63,8 +64,9 @@ public class ChangeInfoAction extends SessionAction {
     public String studentRegister() throws ParseException{
         if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, null, grade, school, null, null)){
             Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("student", s);
-            this.sessionPutIn("message", this.getText("stuRegisterSuccess"));
+            this.sessionPutIn("name", s.getName());
+            this.sessionPutIn("userType", "student");
+            this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
             this.sessionPutIn("message", this.getText("stuRegisterFailure"));
@@ -76,8 +78,9 @@ public class ChangeInfoAction extends SessionAction {
         parseDate();
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, tel, province)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("teacher", theTeacher);
-            this.sessionPutIn("message", this.getText("teaChangeSuccess"));
+            this.sessionPutIn("name", theTeacher.getName());
+            this.sessionPutIn("userType", "teacher");
+            this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
             this.sessionPutIn("message", this.getText("teaChangeFailure"));
@@ -89,8 +92,9 @@ public class ChangeInfoAction extends SessionAction {
         parseDate();
         if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, date, grade, school, tel, telType)){
             Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("student", s);
-            this.sessionPutIn("message", this.getText("stuChangeSuccess"));
+            this.sessionPutIn("name", s.getName());
+            this.sessionPutIn("userType", "student");
+            this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
             this.sessionPutIn("message", this.getText("stuChangeFailure"));

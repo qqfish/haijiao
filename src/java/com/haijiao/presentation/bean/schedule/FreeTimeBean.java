@@ -40,6 +40,20 @@ public class FreeTimeBean {
         remain = first.getRemain();
     }
     
+    public FreeTimeBean(Clazz first){
+        if(first.getFreeTime().getTeacher() != null)
+            teacherEmail = first.getFreeTime().getTeacher().getEmail();
+        if(first.getStudent() != null)
+            studentEmail = first.getStudent().getEmail();
+        if(first.getLesson() != null)
+            lesson = first.getLesson().getName();
+        
+        day = first.getFreeTime().getWeekday();
+        index = first.getFreeTime().getSliceIndex();
+        status = first.getStatus();
+        remain = first.getRemain();
+    }
+    
     public FreeTimeBean() {
     }
 
@@ -97,6 +111,32 @@ public class FreeTimeBean {
 
     public void setRemain(int remain) {
         this.remain = remain;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 31 * hash + this.day;
+        hash = 31 * hash + this.index;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final FreeTimeBean other = (FreeTimeBean) obj;
+        if (this.day != other.day) {
+            return false;
+        }
+        if (this.index != other.index) {
+            return false;
+        }
+        return true;
     }
 
 }

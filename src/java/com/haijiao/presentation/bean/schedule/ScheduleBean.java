@@ -5,7 +5,10 @@
 package com.haijiao.presentation.bean.schedule;
 
 import com.google.gson.Gson;
+import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.FreeTime;
+import com.haijiao.Domain.bean.Student;
+import com.haijiao.Domain.bean.Teacher;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,11 +19,21 @@ import java.util.List;
 public class ScheduleBean {
     private List<FreeTimeBean> clazzes;
     
-    public ScheduleBean(List<FreeTime> f) {
+    public ScheduleBean(Teacher tea) {
         clazzes = new ArrayList();
-        for(int i = 0; i < f.size(); i++){
-            FreeTimeBean newClazz = new FreeTimeBean(f.get(i));
+        for(int i = 0; i < tea.getSchedule().size(); i++){
+            FreeTimeBean newClazz = new FreeTimeBean(tea.getSchedule().get(i));
             clazzes.add(newClazz);
+        }
+    }
+    
+    public ScheduleBean(List<Clazz> c) {
+        clazzes = new ArrayList();
+        for(int i = 0; i < c.size(); i++){
+            FreeTimeBean newClazz = new FreeTimeBean(c.get(i));
+            if(!clazzes.contains(newClazz)){
+                clazzes.add(newClazz);
+            }
         }
     }
 

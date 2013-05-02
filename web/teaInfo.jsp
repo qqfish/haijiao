@@ -64,10 +64,15 @@
                             </tr>
                         </tbody>
                     </table>
-                    <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                    <a class="btn btn-primary" href="mail.jsp?id=<s:property value="tea.id" />">发送私信</a>
-                    <s:if test="tea.status=1">
-                        <a class="btn btn-primary" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">公共课程</a>
+                    <s:if test="#session.userType=='teacher'">
+                        <a class="btn btn-primary" href="mail.jsp?id=<s:property value="tea.id" />">发送私信</a>
+                    </s:if>
+                    <s:if test="#session.userType=='student'">
+                        <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
+                        <a class="btn btn-primary" href="mail.jsp?id=<s:property value="tea.id" />">发送私信</a>
+                        <s:if test="tea.status=1">
+                            <a class="btn btn-primary" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">公共课程</a>
+                        </s:if>
                     </s:if>
                 </div>
                 <div class="span9">
@@ -223,11 +228,15 @@
                     <div id="confirm_panel" style="display:none">
                         <s:form id="schedule_form" action="bookTeacher.action">
                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
+                            <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
                             <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
                             <session id="schedule_error"></session>
                             <div id="lesson_select">
-                                <a href="#" class="label label-info">语文</a>
+                                <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
+                                <s:iterator value="tea.lessons" status="st">
+                                    <a href="#" class="label label-info" onclick="$('#schedule_lesson').val('<s:property value="name"/>')"><s:property value="name"/></a>
+                                </s:iterator>
                             </div>
                             <a class="btn btn-info btn-small pull-right" id="pre">上一步</a>
                             <a class="btn btn-primary btn-small pull-right" id="upload">提交</a>
