@@ -93,4 +93,10 @@ public class TeacherServiceImpl implements ITeacherService {
         return classDAO.getTeacherTodayClazz(email);
     }
 
+    @Override
+    public boolean addLesson(String email, String lessonName) {
+
+        return true;
+    }
+
 }

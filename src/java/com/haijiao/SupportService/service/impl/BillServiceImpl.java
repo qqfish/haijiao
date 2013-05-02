@@ -64,15 +64,15 @@ public class BillServiceImpl implements IBillService{
     @Override
     public boolean produceBill(String studentEmail, String teacherEmail, int money, String message) {
         Student s = studentDAO.getStudentByEmail(studentEmail);
+        Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
         Bill studentBill = new Bill();
         studentBill.setEarn(false);
-        studentBill.setFrom(s);
+        studentBill.setFrom(t);
         studentBill.setMessage(message);
         studentBill.setMoney(money);
-        Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
         Bill taecherBill = new Bill();
         taecherBill.setEarn(true);
-        taecherBill.setFrom(t);
+        taecherBill.setFrom(s);
         taecherBill.setMessage(message);
         taecherBill.setMoney(money);
         boolean sbill = billDAO.makePersistent(studentBill);

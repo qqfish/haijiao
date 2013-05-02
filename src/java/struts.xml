@@ -47,9 +47,13 @@
             <result name="input">changePassword.jsp</result>
             <result name="success" type="chain">index</result>
         </action>
+        <action name="changeInfo" class="ChangeInfoAction" method="addLesson">
+            <result name="input">changeInfo.jsp</result>
+            <result name="success" type="chain">index</result>
+        </action>
         <action name="changeIntro" class="ChangeIntroAction">
-            <result name="input">changeIntro.jsp</result>
-            <result name="success">teaInfo.jsp</result>
+            <result name="input">changeInfo.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="dealApply" class="DealApplyAction">
             <result name="success" type="chain">index</result>

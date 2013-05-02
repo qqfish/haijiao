@@ -34,6 +34,7 @@ public class ChangeInfoAction extends SessionAction {
     SimpleDateFormat sdf;
     SimpleDateFormat sdf2;
     Date date;
+    String lessonName;
     
     public ChangeInfoAction() throws ParseException{
         sdf= new SimpleDateFormat("MM/dd/yyyy");
@@ -114,6 +115,11 @@ public class ChangeInfoAction extends SessionAction {
         }
         userService.changePassword( u.getEmail(), newpwd );
         this.sessionPutIn("message", this.getText("changePasswordSuccess"));
+        return SUCCESS;
+    }
+    
+    public String addLesson(){
+        teacherService.addLesson((String)this.getSessionValue("email"), lessonName);
         return SUCCESS;
     }
 
@@ -259,5 +265,13 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getLessonName() {
+        return lessonName;
+    }
+
+    public void setLessonName(String lessonName) {
+        this.lessonName = lessonName;
     }
 }

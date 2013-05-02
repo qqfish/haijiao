@@ -84,6 +84,9 @@
                         <li><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
+                        <s:if test="#session.userType == 'teacher'">
+                            <li><a href="#5" data-toggle="tab">添加课程<i class="icon-chevron-right pull-right"></i></a></li>
+                        </s:if>
                     </ul>
                 </div>
                 <div class="span9">
@@ -190,6 +193,22 @@
                                 <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
                             </s:form>
                         </div>
+                        <s:if test="#session.userType == 'teacher'">
+                            <div class="tab-pane fade"  id='5'>
+                                <h3>添加课程</h3>
+                                <hr/>
+                                老师您好，您现在已经开设了
+                                <s:iterator value="tea.lessons" id="ls">
+                                    【<s:property value="name" />】
+                                </s:iterator>
+                                ，共<s:property value="tea.lessons.size()"/>门课程。<br/>
+                                您可以继续添加：<br/>
+                                <s:form action="changeInfo.action">
+                                    <s:textfield cssClass="span4" type="text" name="lessonName" placeholder="请输入您要添加的课程"/>
+                                    <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交" method="addLesson"/>
+                                </s:form>
+                            </div>
+                        </s:if>
                     </div>
                 </div>
             </div>      

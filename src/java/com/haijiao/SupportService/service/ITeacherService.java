@@ -24,6 +24,8 @@ public interface ITeacherService {
     //设置试听
     public boolean changeAudition(String email);
     
+    public boolean addLesson(String email, String lessonName);
+    
     //获取老师的课程
     public List<Clazz> getClasses(String email);
     //获取老师当天课程
