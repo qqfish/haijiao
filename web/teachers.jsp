@@ -36,9 +36,11 @@
             <div class="span9 offset1">
                 <div class="accordion" id="choice">
                     <div class="accordion-heading">
+                        <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                         <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>评分</button>
                         <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>价格</button>
                         <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>人气</button>
+                        </div>
                         <button class="btn btn-primary pull-right" data-toggle="collapse"  href="#collapseOne">搜索筛选<i class="icon-arrow-down icon-white"></i></button>
                     </div>
                     <div id="collapseOne" class="collapse">

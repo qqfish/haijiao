@@ -16,16 +16,26 @@ function validate_required(field, tip)
 function validate_email(field, tip){
     with (field)
     {
-        apos=value.indexOf("@")
-        dotpos=value.lastIndexOf(".")
+        apos=value.indexOf("@");
+        dotpos=value.lastIndexOf(".");
         if (apos<1||dotpos-apos<2) {
             $(tip).text("* 您输入的邮箱地址有误哦！");
             $(tip).fadeIn();
             return false;
         }
         else {
-            $(tip).fadeOut();
-            return true;
+            $.post("checkUsername.action", {email : value},
+                function(data){
+                    if(data == "true"){  
+                        $(tip).fadeOut();
+                        return true;
+                    }
+                    else{
+                        $(tip).text("* 该邮箱已注册！");
+                        $(tip).fadeIn();
+                        return false;
+                    }
+                });
         }
     }
 }

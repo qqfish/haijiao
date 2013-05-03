@@ -7,13 +7,11 @@ package com.haijiao.presentation.action;
 
 import com.google.gson.Gson;
 import com.haijiao.presentation.bean.schedule.ScheduleArray;
-import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.global.scheduleLocation;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BookTeacherAction extends SessionAction {

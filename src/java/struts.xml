@@ -95,7 +95,7 @@
             <result name="unconnected">error.jsp</result>
         </action>
         <action name="sendMail" class="SendMailAction">
-            <result name="success" type="">index.jsp</result>
+            <result name="success" type="">mail.jsp</result>
             <result name="input">error.jsp</result>
         </action>
         <action name="getMail" class="GetMailAction">
@@ -113,5 +113,6 @@
         <action name="makeComment" class="MakeCommentAction">
             <result name="success">teacherIndex.jsp</result>
         </action>
+        <action name="checkEmail" class="CheckEmailAction"></action>
     </package>
 </struts>
