@@ -13,9 +13,9 @@
                     <li><a href="searchTeacher.action">去逛逛</a></li>
                     <li><a href="contact.jsp">联系我们</a></li>
                     <li><a href="">意见反馈</a></li>
-                    <s:form cssClass="navbar-search pull-left" action="searchTeacher.action">
+                    <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action">
                         <s:textfield  name="searchContent" cssClass=" span3" placeholder="搜索"></s:textfield>
-                        <i class="icon-search icon-white"></i>
+                    <a href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white"></i></a>
                     </s:form>
                 </ul>
                 <ul class="nav" style="float: right">

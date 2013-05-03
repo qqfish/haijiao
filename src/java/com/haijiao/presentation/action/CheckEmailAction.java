@@ -15,7 +15,7 @@ import org.apache.struts2.ServletActionContext;
  *
  * @author hp
  */
-public class CheckEmailAction extends RequestAction{
+public class CheckEmailAction extends SessionAction{
     IUserService userService;
     String email;
     
