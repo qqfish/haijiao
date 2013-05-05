@@ -20,6 +20,8 @@ public class Bill extends BaseBean{
     @JoinColumn(name = "uid")
     private User from;
     
+    private String toName;
+    
     private int money;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "lid")
@@ -88,5 +90,13 @@ public class Bill extends BaseBean{
 
     public void setLesson(Lesson lesson) {
         this.lesson = lesson;
+    }
+
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName;
     }
 }

@@ -121,11 +121,11 @@
                                 <s:param name="teacherEmail"><s:property value="email"/></s:param>
                                     <li class="span3">
                                         <div class="thumbnail">
-                                            <img src="<s:property value="picUrl"/>" alt="">
+                                            <img src="<s:property value="picUrl"/>" width="100%" alt="">
                                         <div class="caption">
                                             <h4><s:property value="name"/><label class="label label-important pull-right">评分：<s:property value="score"/></label></h4>
                                             <p>
-                                                <label class="label label-info">每小时报酬<s:property value="wagePerhour"/>元</label>
+                                                <label class="label label-info"><s:property value="wagePerhour"/>元/时</label>
                                                 <s:iterator value="lessons" status="st">
                                                     <label class="label label-info" ><s:property value="name"/></label>
                                                 </s:iterator>

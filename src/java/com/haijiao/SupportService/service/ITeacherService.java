@@ -26,6 +26,8 @@ public interface ITeacherService {
     
     public boolean addLesson(String email, String lessonName);
     
+    public boolean deleteLesson(String email, String lessonName);
+    
     //获取老师的课程
     public List<Clazz> getClasses(String email);
     //获取老师当天课程

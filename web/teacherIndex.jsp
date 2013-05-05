@@ -285,8 +285,8 @@
                                 <tbody>        
                                     <s:iterator value="billList" id="billList">
                                         <tr>
-                                            <td><s:property value="from.name" /></td>
-                                            <td><s:property value="from.lesson" /></td>
+                                            <td><s:property value="toName" /></td>
+                                            <td><s:property value="lesson.name" /></td>
                                             <td><s:property value="getRealMoney()" /></td>
                                             <td><s:property value="createdateToString()" /></td>
                                             <td><s:property value="message" /></td>
@@ -328,7 +328,7 @@
                                                 <s:else>
                                                 <s:iterator value="billList" id="billList">
                                                     <s:if test="comment != null">
-                                                        <h4><s:property value="from.name" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
+                                                        <h4><s:property value="toName" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
                                                         <small>
                                                             <span><s:property value="comment.content" /></span>
                                                             <span class="pull-right">

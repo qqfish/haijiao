@@ -51,6 +51,14 @@
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
+                                   <td class="span1">课程</td>
+                                   <td>
+                                         <s:iterator value="tea.lessons" status="st">
+                                              <label class="label label-info" ><s:property value="name"/></label>
+                                         </s:iterator>
+                                    </td>
+                            </tr>
+                            <tr>
                                 <td>预约数</td>
                                 <td><s:property value="tea.reserveNum"/></td>
                             </tr>
@@ -144,12 +152,9 @@
                                                 </s:if>
                                                 <s:else>
                                                     <s:iterator value="billList" id="billList">
-                                                        <h4><s:property value="from.name" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
+                                                        <h4><s:property value="toName" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
                                                         <small>
-                                                            <span><s:property value="from.content" /></span>
-                                                            <span class="pull-right">
-                                                                <button type="button" class="btn btn-info btn-mini">回复</button>
-                                                            </span>
+                                                            <span><s:property value="comment.content" /></span>
                                                         </small>
                                                     </s:iterator>
                                                 </s:else>

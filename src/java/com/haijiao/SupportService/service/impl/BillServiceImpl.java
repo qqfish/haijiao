@@ -67,16 +67,18 @@ public class BillServiceImpl implements IBillService{
         Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
         Bill studentBill = new Bill();
         studentBill.setEarn(false);
-        studentBill.setFrom(t);
+        studentBill.setFrom(s);
+        studentBill.setToName(t.getName());
         studentBill.setMessage(message);
         studentBill.setMoney(money);
-        Bill taecherBill = new Bill();
-        taecherBill.setEarn(true);
-        taecherBill.setFrom(s);
-        taecherBill.setMessage(message);
-        taecherBill.setMoney(money);
+        Bill teacherBill = new Bill();
+        teacherBill.setEarn(true);
+        teacherBill.setFrom(t);
+        teacherBill.setToName(s.getName());
+        teacherBill.setMessage(message);
+        teacherBill.setMoney(money);
         boolean sbill = billDAO.makePersistent(studentBill);
-        boolean tbill = billDAO.makePersistent(taecherBill);
+        boolean tbill = billDAO.makePersistent(teacherBill);
         return (sbill && tbill);
     }
 

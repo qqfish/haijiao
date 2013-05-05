@@ -54,6 +54,7 @@
     </bean>
     <bean id="GetTeacherInfoAction" class="com.haijiao.presentation.action.GetTeacherInfoAction" scope="prototype">
         <property name="teacherService" ref="teacherServiceImpl" />
+        <property name="billService" ref="billServiceImpl" />
     </bean>   
     <bean id="BookTeacherAction" class="com.haijiao.presentation.action.BookTeacherAction" scope="prototype">
         <property name="teacherService" ref="teacherServiceImpl" />

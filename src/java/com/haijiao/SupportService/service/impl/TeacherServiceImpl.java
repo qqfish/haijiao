@@ -118,4 +118,9 @@ public class TeacherServiceImpl implements ITeacherService {
         return true;
     }
 
+    @Override
+    public boolean deleteLesson(String email, String lessonName) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
