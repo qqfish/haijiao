@@ -55,6 +55,11 @@ function Table(containerName, tool){
     setMouse();
 
     this.sendChangeFile = function(uuid){
+        $('#alertContext').empty().html("<h3>请稍等</h3>");
+        theBar = $("<div></div>").attr("class","bar").css("width","100%");
+        progressBar = $("<div></div>").attr("class","progress progress-striped active").append(theBar);
+        $('#alertContext').append(progressBar);
+        lockType("warn");
         lock();
         setStageToSave();
         stage.toDataURL({
@@ -70,6 +75,11 @@ function Table(containerName, tool){
     }
     
     this.sendChangePage = function(uuid,page){
+        $('#alertContext').empty().html("<strong>请稍等!</strong>信息正在加载中");
+        theBar = $("<div></div>").attr("class","bar").css("width","100%");
+        progressBar = $("<div></div>").attr("class","progress progress-striped active").append(theBar);
+        $('#alertContext').append(progressBar);
+        lockType("warn");
         lock();
         setStageToSave();
         stage.toDataURL({
@@ -284,7 +294,8 @@ function Table(containerName, tool){
                         var tmpLine = new Kinetic.Line({
                             points: [result[result.length-2], result[result.length-1]],
                             stroke: toolkit.getColor(),
-                            strokeWidth: toolkit.getWidth()
+                            strokeWidth: toolkit.getWidth(),
+                            alpha: toolkit.getAlpha()
                         });
                         var message = {};
                         message.type = Request.TmpShape;
@@ -304,8 +315,9 @@ function Table(containerName, tool){
                         };
                         var tmpLine = new Kinetic.Line({
                             points:[result.erasePath[result.erasePath.length-2],result.erasePath[result.erasePath.length-1]],
-                            stroke: toolkit.getColor(),
-                            strokeWidth: toolkit.getWidth()
+                            stroke: "white",
+                            strokeWidth: 15,
+                            alpha: 0.5
                         });
                         var message = {};
                         message.type = Request.TmpShape;
@@ -349,7 +361,8 @@ function Table(containerName, tool){
                         var tmpLine = new Kinetic.Line({
                             points: result,
                             stroke: toolkit.getColor(),
-                            strokeWidth: toolkit.getWidth()
+                            strokeWidth: toolkit.getWidth(),
+                            alpha: toolkit.getAlpha()
                         });
                         var message = {};
                         message.type = Request.DrawShape;
@@ -382,7 +395,8 @@ function Table(containerName, tool){
                         var tmpLine = new Kinetic.Line({
                             points: result,
                             stroke: toolkit.getColor(),
-                            strokeWidth: toolkit.getWidth()
+                            strokeWidth: toolkit.getWidth(),
+                            alpha: toolkit.getAlpha()
                         });
                         var message = {};
                         message.type = Request.DrawShape;

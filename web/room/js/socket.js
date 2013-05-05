@@ -4,25 +4,26 @@ connection.socket = null;
 
 connection.connect = (function(host) {
     if ('WebSocket' in window) {
-	connection.socket = new WebSocket(host);
+        connection.socket = new WebSocket(host);
     } else if ('MozWebSocket' in window) {
-	connection.socket = new MozWebSocket(host);
+        connection.socket = new MozWebSocket(host);
     } else {
-	console.log('Error: WebSocket is not supported by this browser.');
-	return;
+        console.log('Error: WebSocket is not supported by this browser.');
+        return;
     }
 
     connection.socket.onopen = function () {
-	    console.log('Info: WebSocket connection opened.');
-	    setInterval("connection.sendMessage('')",1000 * 10);
+        console.log('Info: WebSocket connection opened.');
+        setInterval("connection.sendMessage('')",1000 * 10);
     };
 
     connection.socket.onclose = function () {
-	    console.log('Info: WebSocket closed.');
+        pError("链接已经断开！！");
+        console.log('Info: WebSocket closed.');
     };
 
     connection.socket.onmessage = function (message) {
-	console.log('S->C: ' + message.data);
+        console.log('S->C: ' + message.data);
         var socketData = JSON.parse(message.data);
         switch(socketData.type){
             case Response.TmpShape:
@@ -66,9 +67,9 @@ connection.connect = (function(host) {
 connection.initialize = function(clazzId, teaEmail, email) {
     console.log(email);
     if (window.location.protocol == 'http:') {
-	connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     } else {
-	connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     }
 };
 

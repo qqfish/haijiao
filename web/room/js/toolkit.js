@@ -15,6 +15,7 @@ function Toolkit(){
 	var tool = Tooltype.Hand;
 	var color = "black";
 	var width = 5;
+        var alpha = 1;
 	//tooltype:
 	//hand : move the paper
 	//pen
@@ -45,4 +46,12 @@ function Toolkit(){
 	this.getWidth = function(){
 		return width;
 	}
+        
+        this.changeAlpha = function(a){
+            alpha = a;
+        }
+        
+        this.getAlpha = function(a) {
+            return alpha;
+        }
 }

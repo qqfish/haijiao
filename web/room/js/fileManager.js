@@ -150,9 +150,20 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
         var type = file.name.substring(pos+1, file.name.length);
         if(file.type.indexOf('image') != -1){
             type = "image";
+            theBar = $("<div></div>").attr("class","bar");
+            progressBar = $("<div></div>").attr("class","progress").append(theBar);
             reader.readAsDataURL(blob);
-            reader.onstart = function(e){
-                lock();
+            $('#alarmContext').empty().html("<p>上传中</p>").append(progressBar);
+            theBar.css("width","0");
+            lockType("info");
+            lock();
+            reader.onprogress = function updateProgress(evt){
+                if (evt.lengthComputable){
+                    var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+                    if (percentLoaded < 100) {
+                        theBar.css("width",percentLoaded+"%");
+                    }
+                }
             }
             reader.onload = function loaded(evt) {
                 var imgObj = new Image();
@@ -160,11 +171,30 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                     table.uploadImage(this);
                 };
                 imgObj.src = evt.target.result;
+                theBar.css("width","100%");
+                $("#closeAlarm").show();
             }
         } else if(type == "pdf"){
             reader.readAsDataURL(blob);
-            reader.onstart = function(e){
-                lock();
+            theBar = $("<div></div>").attr("class","bar");
+            progressBar = $("<div></div>").attr("class","progress").append(theBar);
+            progressWord = $("<h3></h3>").text("上传中");
+            $('#alertContext').empty().append(progressWord).append(progressBar);
+            theBar.css("width","0");
+            lockType("info");
+            lock();
+            reader.onprogress = function updateProgress(evt){
+                if (evt.lengthComputable){
+                    var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
+                    if (percentLoaded < 100) {
+                        theBar.css("width",percentLoaded+"%");
+                    }
+                }
+            }
+            reader.onerror = function (evt) {
+                progressWord = $("<h3></h3>").text("上传失败");
+                lockType("error");
+                $("#closeAlert").show();
             }
             reader.onload = function loaded(evt) {
                 var message = {};
@@ -173,6 +203,9 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 message.name = file.name;
                 message.data = evt.target.result;
                 connection.sendObject(message);
+                progressWord.text("上传成功")
+                theBar.css("width","100%");
+                $("#closeAlert").show();
             }
         }
     }

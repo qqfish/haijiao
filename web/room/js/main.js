@@ -40,6 +40,9 @@ function init(clazzId, teaEmail, email){
         file.prePage();
     });
     
+    $("#pen").popover(function(){
+        
+    })
     $("#pen").click(function(){
         toolkit.changeTool(Tooltype.Pen);
         table.setUndraggable();

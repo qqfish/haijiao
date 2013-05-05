@@ -14,8 +14,7 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="TeacherIndex/js/addSchedule.js"></script>
-        <script type="text/javascript" src="TeacherIndex/js/viewSchedule.js"></script>
+        <script type="text/javascript" src="StudentIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
@@ -36,8 +35,7 @@
                 <![endif]-->
 
     </head>
-    <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
+    <body onload="viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
@@ -165,76 +163,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">增加空闲时间</a>
-                            <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
-                                <div class="modal-header" style="height: 50px">
-                                    <a class="close" data-dismiss="modal">×</a>
-                                    <h3>请选择课程时间</h3>
-                                    <p id="chooseError"></p>
-                                </div>
-                                <div class="modal-body" >
-                                    <div class="schedule_panel" id="schedule_panel">
-                                        <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
-                                            <tbody>
-                                                <tr>
-                                                    <th ></th>
-                                                    <th>Mon.</th>
-                                                    <th>Tue.</th>
-                                                    <th>Wed.</th>
-                                                    <th>Thu.</th>
-                                                    <th>Fri.</th>
-                                                    <th style="width:24px">Sat.</th>
-                                                    <th style="width:24px">Sun.</th>
-                                                </tr>
-                                                <tr class="class_1">
-                                                    <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_2">
-                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_3">
-                                                    <th rowspan="2">10:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_4">
-                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_5">
-                                                    <th rowspan="2">中 午</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_6">
-                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_7">
-                                                    <th rowspan="2">14：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_8">
-                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_9">
-                                                    <th rowspan="2">16：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_10">
-                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_11">
-                                                    <th rowspan="3">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_12">
-                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                                <tr class="class_13">
-                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <s:form id="schedule_form" action="addFreeTime.action">
-                                            <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
-                                                <a class="btn btn-primary pull-right" id="upload" >添加</a>
-                                        </s:form>
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover table-striped">

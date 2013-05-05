@@ -62,7 +62,7 @@
         <div class="line-top"></div>
         <!--==============================content=================================-->
         <div id="content"> 
-            <a id="showAlarm" data-toggle="modal" data-target="#alarmMessage" class="btn btn-danger btn-large" style="display: none;"/>
+            <a id="showAlert" data-toggle="modal" data-target="#alertMessage" class="btn btn-danger btn-large" style="display: none;"/>
             <div id="tools" class="navbar navbar-inverse">
                 <div  class="navbar-inner">
                     <div class="span12 offset2">
@@ -71,7 +71,7 @@
                             <li><a id="toggleTimer">暂停/开始</a></li>
                             <li><a id="stopTimer">停止</a></li>
                             <li><session id="timerPanel"></session></li>
-                        <li><session id="currentPage"></session> / <session id="totalPage"></session></li>
+                            <li><session id="currentPage"></session> / <session id="totalPage"></session></li>
                             <li>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <button id="pointer" type="button" value="0" class="btn active" data-toggle="tooltip" data-placement="bottom" data-original-title="指针">指针</button>
@@ -107,9 +107,11 @@
                 </div>
             </div>
 
-            <div class="modal hide" id="alarmMessage">
-                <a class="close" id="closeAlarm" data-dismiss="modal" style="display: none;"></a>
-                <session>Loading...</session>       
+            <div class="modal hide" id="alertMessage">
+                <button type="button" class="close" id="closeAlert" data-dismiss="modal" style="display: none;">&times;</button>
+                <div id="alertContext">
+                    <session>Loading...</session>
+                </div>
             </div>
             <div id="desktop" style="position: absolute;top: 50px;overflow: hidden;">
                 <div id="table">
