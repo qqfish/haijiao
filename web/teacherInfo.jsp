@@ -173,7 +173,7 @@
                             <session id="schedule_error"></session>
                             <div id="lesson_select">
                                 <s:iterator value="tea.lessons" status="st">
-                                    <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 30px" onclick="$('#schedule_lesson').val('<s:property value="name"/>')"><s:property value="name"/></a>
+                                    <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 30px" onclick="$('#schedule_lesson').val('<s:property value="name"/>');"><s:property value="name"/></a>
                                 </s:iterator>
                                 <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 30px">语文</a>
                                 <a href="#" class="label-btn" style="height: 25px;margin:20px 0px 0px 2px">数学</a>

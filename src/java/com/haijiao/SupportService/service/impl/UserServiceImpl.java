@@ -129,6 +129,16 @@ public class UserServiceImpl implements IUserService{
     public List<Teacher> searchTeacher(List<String> strList) {
         return teacherDAO.searchTeacher(strList);
     }
+    
+    @Override
+    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize){
+        return teacherDAO.searchTeacherPage(strList, first, pagesize);
+    }
+            
+    @Override
+    public int getTeacherNum(List<String> strList) {
+        return teacherDAO.getTeacherNum(strList);
+    }
 
     @Override
     public boolean uploadFile(String account, Object file) {

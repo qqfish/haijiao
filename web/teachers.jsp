@@ -37,9 +37,9 @@
                 <div class="accordion" id="choice">
                     <div class="accordion-heading">
                         <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                        <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>评分</button>
-                        <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>价格</button>
-                        <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>人气</button>
+                            <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>评分</button>
+                            <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>价格</button>
+                            <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>人气</button>
                         </div>
                         <button class="btn btn-primary pull-right" data-toggle="collapse"  href="#collapseOne">搜索筛选<i class="icon-arrow-down icon-white"></i></button>
                     </div>
@@ -81,22 +81,55 @@
                 </div>
             </div>
             <div  id="resultPanel" class="span9 offset1">
+                <div class="pagination pagination-right">
+                    <s:form id="search" action="searchTeacher.action">
+                        <s:textfield id="page" name="currentPage" cssStyle="display:none;"></s:textfield>
+                        <s:textfield name="searchContent" cssStyle="display:none;"></s:textfield>
+                            <ul>        
+                            <s:if test="pb.currentPage == 1">
+                                <li class="disabled"><a href="javascript:;">Prev</a></li>
+                                </s:if>
+                                <s:else>
+                                <li><s:a href="searchTeacher.action?currentPage=%{pb.currentPage -1}">
+                                        Prev</s:a></li>
+                                </s:else>
+                                <s:iterator value="new int[pb.totalPage]" status="i">
+                                    <s:if test="pb.currentPage == #i.index+1">
+                                    <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
+                                    </s:if>
+                                    <s:else>
+                                    <li><s:a href="searchTeacher.action?currentPage=%{#i.index +1}">
+                                            <s:property value="#i.index+1"/>
+                                        </s:a></li>
+                                    </s:else>
+                                </s:iterator>
+                                <s:if test="pb.currentPage == pb.totalPage">
+                                <li class="disabled"><a href="javascript:;">Next</a></li>
+                                </s:if>
+                                <s:else>
+                                <li><s:a href="searchTeacher.action?currentPage=%{pb.currentPage +1}">
+                                        Next
+                                    </s:a></li>
+                            </s:else>
+                        </ul>
+                    </s:form>
+                </div>
                 <div class="row-fluid">
                     <ul class="thumbnails">
-                        <s:iterator value="teacherlist" id="list">
+                        <s:iterator value="pb.list" id="list">
                             <s:a action="getTeacherInfo.action" id="resultBar">
                                 <s:param name="teacherEmail"><s:property value="email"/></s:param>
-                                <li class="span3">
-                                    <div class="thumbnail">
-                                        <img src="<s:property value="picUrl"/>" alt="">
+                                    <li class="span3">
+                                        <div class="thumbnail">
+                                            <img src="<s:property value="picUrl"/>" alt="">
                                         <div class="caption">
                                             <h4><s:property value="name"/><label class="label label-important pull-right">评分：<s:property value="score"/></label></h4>
-                                                <p>
-                                                    <label class="label label-info">每小时报酬<s:property value="wagePerhour"/>元</label>
-                                                    <s:iterator value="lessons" status="st">
-                                                        <label class="label label-info" ><s:property value="name"/></label>
-                                                    </s:iterator>
-                                                </p>
+                                            <p>
+                                                <label class="label label-info">每小时报酬<s:property value="wagePerhour"/>元</label>
+                                                <s:iterator value="lessons" status="st">
+                                                    <label class="label label-info" ><s:property value="name"/></label>
+                                                </s:iterator>
+                                            </p>
                                         </div>
                                     </div>
                                 </li>

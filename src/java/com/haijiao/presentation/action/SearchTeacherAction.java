@@ -6,15 +6,20 @@ package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IUserService;
+import com.haijiao.global.PageBean;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SearchTeacherAction extends SessionAction {
+public class SearchTeacherAction extends RequestSessionAction {
 
     IUserService userService;
     String searchContent;
-    List<Teacher> teacherlist;
+    String currentPage;
+    PageBean pb;
+
+    public SearchTeacherAction() {
+    }
 
     @Override
     public String execute() throws Exception {
@@ -25,12 +30,20 @@ public class SearchTeacherAction extends SessionAction {
         } else {
             strList.add("");
         }
-        teacherlist = new ArrayList<Teacher>();
-        teacherlist = userService.searchTeacher(strList);
+        int cp;
+        System.out.println(currentPage);
+        if(currentPage == null)
+            cp =1;
+        else
+            cp = Integer.parseInt(currentPage);
+        int pageSize = 1;
+        List<Teacher> teacherlist = userService.searchTeacherPage(strList, (cp - 1) * pageSize, pageSize);
+        int num = userService.getTeacherNum(strList);
+        pb = new PageBean(teacherlist, num, cp, pageSize);
         if (!teacherlist.isEmpty()) {
-            this.sessionPutIn("message", this.getText("searchSuccess"));
+            this.putIn("message", this.getText("searchSuccess"));
         } else {
-            this.sessionPutIn("message", this.getText("searchNull"));
+            this.putIn("message", this.getText("searchNull"));
         }
         return SUCCESS;
         /**
@@ -55,11 +68,19 @@ public class SearchTeacherAction extends SessionAction {
         this.searchContent = searchContent;
     }
 
-    public List<Teacher> getTeacherlist() {
-        return teacherlist;
+    public String getCurrentPage() {
+        return currentPage;
     }
 
-    public void setTeacherlist(List<Teacher> teacherlist) {
-        this.teacherlist = teacherlist;
+    public void setCurrentPage(String currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    public PageBean getPb() {
+        return pb;
+    }
+
+    public void setPb(PageBean pb) {
+        this.pb = pb;
     }
 }
