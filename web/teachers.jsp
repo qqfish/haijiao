@@ -82,9 +82,6 @@
             </div>
             <div  id="resultPanel" class="span9 offset1">
                 <div class="pagination pagination-right">
-                    <s:form id="search" action="searchTeacher.action">
-                        <s:textfield id="page" name="currentPage" cssStyle="display:none;"></s:textfield>
-                        <s:textfield name="searchContent" cssStyle="display:none;"></s:textfield>
                             <ul>        
                             <s:if test="pb.currentPage == 1">
                                 <li class="disabled"><a href="javascript:;">Prev</a></li>
@@ -112,7 +109,6 @@
                                     </s:a></li>
                             </s:else>
                         </ul>
-                    </s:form>
                 </div>
                 <div class="row-fluid">
                     <ul class="thumbnails">

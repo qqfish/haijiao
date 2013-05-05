@@ -33,6 +33,7 @@ public class User extends BaseBean{
     protected String name;      //用户的真实姓名
     protected String userType;  //用户的类型："teacher" or "student"
     protected Integer score;    //用户的评分
+    protected Integer scoreNum; //评分数
     protected String password;  //用户密码
     protected int coin;         //该账户中剩下的智慧币
     protected String intro;     //用户的个人简介，显示在个人主页上

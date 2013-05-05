@@ -17,7 +17,9 @@
         <script type="text/javascript" src="TeacherIndex/js/addSchedule.js"></script>
         <script type="text/javascript" src="TeacherIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -34,7 +36,6 @@
                  <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400italic' rel='stylesheet' type='text/css'>
                <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
                 <![endif]-->
-
     </head>
     <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
             viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
@@ -299,16 +300,24 @@
                                             </div>
                                             <s:form action="makeComment.action">
                                             <div class="modal-body">
-                                                <s:textfield name="id" value="%{id}"></s:textfield>
+                                                <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
                                                 <br/>
-                                                <s:textarea name="content" autofocus="autofocus"></s:textarea>
-                                                <br/>
-                                                评分<s:textfield name="score"></s:textfield>
+                                                评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
                                             </div>
                                             <div class="modal-footer">
                                                 <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                <s:submit cssClass="btn btn-primary" value="提交"></s:submit>
+                                                <s:submit cssClass="btn btn-primary" value="提交" id="cmtsmt"></s:submit>
                                             </div>
+                                            <script type="text/javascript">
+                                                $("#rate").bind('rated', function (event, value){ $('#score').val(value);});
+                                                $("#rate").bind('over', function(event,value){ $(this).attr('title', value);});                                                
+                                                $("#cmtsmt").click(function(event){
+                                                    if(/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                        event.preventDefault();
+                                                });
+                                            </script>
                                             </s:form>
                                         </div>
                                     </s:iterator>
