@@ -51,6 +51,10 @@
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">index</result>
         </action>
+        <action name="changeInfo" class="ChangeInfoAction" method="deleteLesson">
+            <result name="input">changeInfo.jsp</result>
+            <result name="success" type="chain">index</result>
+        </action>
         <action name="changeIntro" class="ChangeIntroAction">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">index</result>
@@ -111,7 +115,7 @@
             <result name="false">index.jsp</result>
         </action>
         <action name="makeComment" class="MakeCommentAction">
-            <result name="success">teacherIndex.jsp</result>
+            <result name="success" type="chain">index</result>
         </action>
         <action name="checkEmail" class="CheckEmailAction"></action>
     </package>

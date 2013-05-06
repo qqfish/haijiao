@@ -122,6 +122,11 @@ public class ChangeInfoAction extends SessionAction {
         teacherService.addLesson((String)this.getSessionValue("email"), lessonName);
         return SUCCESS;
     }
+    
+    public String deleteLesson(){
+        teacherService.deleteLesson((String)this.getSessionValue("email"), lessonName);
+        return SUCCESS;
+    }
 
     public ITeacherService getTeacherService() {
         return teacherService;

@@ -123,7 +123,9 @@
                                             <p>
                                                 <label class="label label-info"><s:property value="wagePerhour"/>元/时</label>
                                                 <s:iterator value="lessons" status="st">
-                                                    <label class="label label-info" ><s:property value="name"/></label>
+                                                    <s:if test="delete==false">
+                                                        <label class="label label-info" ><s:property value="name"/></label>
+                                                    </s:if>
                                                 </s:iterator>
                                             </p>
                                         </div>

@@ -194,7 +194,34 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">增加空闲时间</a>
+                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">增加空闲时间</a><br/>
+                            <hr/>
+                            <div>
+                                <s:property value="teacher.name" />老师您好，您目前开设课程的情况如下：
+                                <table>
+                                    <tr>
+                                        <td>课程名</td>
+                                        <td>操作</td>
+                                    </tr>
+                                    <s:iterator value="teacher.lessons" id="ls">
+                                        <s:if test="delete==false">
+                                            <tr>
+                                                <s:form action="changeInfo.action">
+                                                    <td>【<s:property value="name" />】</td>
+                                                    <td style="display:none;"><s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName" placeholder="请输入新的课程名"/></td>
+                                                    <td><s:submit cssClass="btn" value="delete" method="deleteLesson"/></td>
+                                                </s:form>
+                                           </tr>
+                                        </s:if>
+                                    </s:iterator>
+                                <s:form action="changeInfo.action">
+                                    <tr>
+                                        <td><s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/></td>
+                                        <td><s:submit cssClass="btn" value="add" method="addLesson"/></td>
+                                    </tr>
+                                </s:form>
+                                </table>
+                            </div>
                             <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
                                 <div class="modal-header" style="height: 50px">
                                     <a class="close" data-dismiss="modal">×</a>

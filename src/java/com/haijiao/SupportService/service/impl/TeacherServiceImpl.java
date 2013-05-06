@@ -106,21 +106,34 @@ public class TeacherServiceImpl implements ITeacherService {
     public boolean addLesson(String email, String lessonName) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         Lesson l = lessonDAO.getLessonByName(email,lessonName);
-        if(l == null){
-            l = new Lesson();
-            l.setName(lessonName);
-            lessonDAO.makePersistent(l);
+        if(l == null || l.isDelete()){
+            if(l != null){
+                l.setDelete(false);
+                lessonDAO.update(l);
+            } else {
+                l = new Lesson();
+                l.setName(lessonName);
+                lessonDAO.makePersistent(l);
+            }
+            List ll = t.getLessons();
+            ll.add(l);
+            t.setLessons(ll);
+            teacherDAO.update(t);
+            return true;
+        } else {
+            return false;
         }
-        List ll = t.getLessons();
-        ll.add(l);
-        t.setLessons(ll);
-        teacherDAO.update(t);
-        return true;
     }
 
     @Override
     public boolean deleteLesson(String email, String lessonName) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        Lesson l = lessonDAO.getLessonByName(email,lessonName);
+        if(l != null){
+            l.setDelete(true);
+            lessonDAO.update(l);
+        }
+        return true;
     }
 
 }

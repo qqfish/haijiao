@@ -54,7 +54,9 @@
                                    <td class="span1">课程</td>
                                    <td>
                                          <s:iterator value="tea.lessons" status="st">
-                                              <label class="label label-info" ><s:property value="name"/></label>
+                                              <s:if test="delete==false">
+                                                 <label class="label label-info" ><s:property value="name"/></label>
+                                              </s:if>
                                          </s:iterator>
                                     </td>
                             </tr>
@@ -241,7 +243,9 @@
                                 <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <s:iterator value="tea.lessons" status="st">
-                                        <button type="button" class="btn"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
+                                        <s:if test="delete==false">
+                                            <button type="button" class="btn"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
+                                        </s:if>
                                     </s:iterator>
                                 </div>
                             </div>
