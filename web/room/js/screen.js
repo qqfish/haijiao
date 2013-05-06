@@ -44,3 +44,14 @@ function pError(str){
     lock();
     $("#closeAlert").show();
 }
+
+function processError(errorType){
+    switch(errorType){
+        case ErrorType.AddFileFromUser:
+            pError("没有找到相应的文件");
+            break;
+        case ErrorType.TimerNoPermission:
+            pError("没用控制计时器的权限");
+            break;
+    }
+}

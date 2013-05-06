@@ -12,9 +12,9 @@
         <script src="/haijiao/room/js/lib/jquery-ui-1.10.1.custom.min.js"></script>
         <script src="/haijiao/room/js/lib/jQueryRotate.2.2.js"></script>
         <script src="/haijiao/room/js/lib/kinetic.js"></script>
+        <script src="/haijiao/room/js/message.js"></script>
         <script src="/haijiao/room/js/adapter.js"></script>
         <script src="/haijiao/room/js/screen.js"></script>
-        <script src="/haijiao/room/js/message.js"></script>
         <script src="/haijiao/room/js/timer.js"></script>
         <script src="/haijiao/room/js/toolkit.js"></script>
         <script src="/haijiao/room/js/textChat.js"></script>
@@ -68,8 +68,10 @@
                     <div class="span12 offset2">
                         <a class="brand" href="index.jsp">Haijiao</a>
                         <ul class="nav">
-                            <li><a id="toggleTimer">暂停/开始</a></li>
-                            <li><a id="stopTimer">停止</a></li>
+                            <s:if test="isHolder!=0">
+                                <li><a id="toggleTimer">暂停/开始</a></li>
+                                <li><a id="stopTimer">停止</a></li>
+                            </s:if>
                             <li><session id="timerPanel"></session></li>
                             <li><session id="currentPage"></session> / <session id="totalPage"></session></li>
                             <li>

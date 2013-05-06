@@ -45,10 +45,10 @@ public class FcMessageInbound extends MessageInbound {
         System.out.println(this.toString() + " ,new connection created");
         //room file list
         sendtoUser(gson.toJson(new ResponseAddRoomFile(room.getRoomFile())));
-        
+
         sendtoUser(gson.toJson(room.getResponseChangePage()));
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
-        
+
         sendtoUser(gson.toJson(new ResponseSetUserFile(user)));
     }
 
@@ -82,7 +82,7 @@ public class FcMessageInbound extends MessageInbound {
             case Request.TmpShape:
                 RequestTmpShape rts = gson.fromJson(str, RequestTmpShape.class);
                 ResponseTmpShape tmpResult = new ResponseTmpShape(rts);
-                room.broadcastOther(gson.toJson(tmpResult),this);
+                room.broadcastOther(gson.toJson(tmpResult), this);
                 break;
             case Request.DrawShape:
                 RequestDrawShape shape = gson.fromJson(str, RequestDrawShape.class);
@@ -128,7 +128,7 @@ public class FcMessageInbound extends MessageInbound {
             case Request.AddFileFromUser:
                 RequestAddFileFromUser addFile = gson.fromJson(str, RequestAddFileFromUser.class);
                 UserFile userFile = user.getFile(addFile.getGroup(), addFile.getName());
-                if(userFile != null){
+                if (userFile != null) {
                     room.loadFile(userFile);
                 } else {
                     ErrorData error = new ErrorData();
@@ -141,12 +141,24 @@ public class FcMessageInbound extends MessageInbound {
                 room.uploadFile(upload.getPostfix(), upload.getData(), upload.getName());
                 break;
             case Request.ToggleTimer:
-                room.getTimer().toggle();
+                if (user.equals(room.getHolder())) {
+                    room.getTimer().toggle();
+                } else {
+                    ErrorData error = new ErrorData();
+                    error.setErrorType(ErrorType.TimerNoPermission);
+                    sendtoUser(gson.toJson(error));
+                }
                 break;
             case Request.StopTimer:
-                room.getTimer().stop();
+                if (user.equals(room.getHolder())) {
+                    room.getTimer().stop();
+                } else {
+                    ErrorData error = new ErrorData();
+                    error.setErrorType(ErrorType.TimerNoPermission);
+                    sendtoUser(gson.toJson(error));
+                }
                 break;
-                
+
         }
 
 

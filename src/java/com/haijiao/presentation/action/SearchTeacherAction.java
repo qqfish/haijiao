@@ -32,18 +32,21 @@ public class SearchTeacherAction extends RequestSessionAction {
         }
         int cp;
         System.out.println(currentPage);
-        if(currentPage == null)
-            cp =1;
-        else
+        if (currentPage == null) {
+            cp = 1;
+        } else {
             cp = Integer.parseInt(currentPage);
+        }
         int pageSize = 1;
         List<Teacher> teacherlist = userService.searchTeacherPage(strList, (cp - 1) * pageSize, pageSize);
         int num = userService.getTeacherNum(strList);
         pb = new PageBean(teacherlist, num, cp, pageSize);
+
         if (!teacherlist.isEmpty()) {
             this.putIn("message", this.getText("searchSuccess"));
         } else {
             this.putIn("message", this.getText("searchNull"));
+
         }
         return SUCCESS;
         /**
@@ -79,7 +82,7 @@ public class SearchTeacherAction extends RequestSessionAction {
     public PageBean getPb() {
         return pb;
     }
-
+    
     public void setPb(PageBean pb) {
         this.pb = pb;
     }

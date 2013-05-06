@@ -2,7 +2,6 @@
  *
  * @author Jerry Zou
  */
-
 package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Bill;
@@ -22,16 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class UserServiceImpl implements IUserService{
+public class UserServiceImpl implements IUserService {
+
     @Resource
     IUserDAO userDAO;
-    
     @Resource
     ITeacherDAO teacherDAO;
-    
     @Resource
     IStudentDAO studentDAO;
-    
     @Resource
     ICommentDAO commentDAO;
 
@@ -56,17 +53,15 @@ public class UserServiceImpl implements IUserService{
     public User getUserByEmail(String email) {
         User u = userDAO.getUserByEmail(email);
         String type = u.getUserType();
-        if(type.equals("teacher")) {
+        if (type.equals("teacher")) {
             return teacherDAO.getTeacherByEmail(email);
-        }
-        else if(type.equals("student")) {
+        } else if (type.equals("student")) {
             return studentDAO.getStudentByEmail(email);
-        }
-        else {
+        } else {
             return null;
         }
     }
-    
+
     @Override
     public boolean setStatus(String email, int status) {
         User u = userDAO.getUserByEmail(email);
@@ -74,15 +69,15 @@ public class UserServiceImpl implements IUserService{
         userDAO.update(u);
         return true;
     }
-        
+
     @Override
-    public boolean changePassword(String email, String password){
+    public boolean changePassword(String email, String password) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         t.setPassword(password);
         teacherDAO.update(t);
         return true;
     }
-    
+
     @Override
     public boolean changeIntro(String email, String intro) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
@@ -90,7 +85,7 @@ public class UserServiceImpl implements IUserService{
         teacherDAO.update(t);
         return true;
     }
-    
+
     @Override
     public String confirmLogin(String email, String password) {
         return userDAO.confirmLogin(email, password);
@@ -98,29 +93,27 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public boolean register(String account, String password, String userType) {
-        if(userType.equals("student")){
+        if (userType.equals("student")) {
             Student s = new Student();
             s.setEmail(account);
             s.setPassword(password);
             s.setUserType(userType);
-            java.util.Date datetime=new java.util.Date();
-            Date time=new Date(datetime.getTime());
+            java.util.Date datetime = new java.util.Date();
+            Date time = new Date(datetime.getTime());
             s.setCreateTime(time);
             s.setPicUrl("images/page2-img3.jpg"); //temp
             return studentDAO.makePersistent(s);
-        }
-        else if(userType.equals("teacher")){
+        } else if (userType.equals("teacher")) {
             Teacher t = new Teacher();
             t.setEmail(account);
             t.setPassword(password);
             t.setUserType(userType);
-            java.util.Date datetime=new java.util.Date();
-            Date time=new Date(datetime.getTime());
+            java.util.Date datetime = new java.util.Date();
+            Date time = new Date(datetime.getTime());
             t.setCreateTime(time);
             t.setPicUrl("images/page2-img1.jpg"); //temp
             return teacherDAO.makePersistent(t);
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -129,12 +122,12 @@ public class UserServiceImpl implements IUserService{
     public List<Teacher> searchTeacher(List<String> strList) {
         return teacherDAO.searchTeacher(strList);
     }
-    
+
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize){
+    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize) {
         return teacherDAO.searchTeacherPage(strList, first, pagesize);
     }
-            
+
     @Override
     public int getTeacherNum(List<String> strList) {
         return teacherDAO.getTeacherNum(strList);
@@ -149,5 +142,11 @@ public class UserServiceImpl implements IUserService{
     public Object download(String fileuri) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-    
+
+    @Override
+    public void setPicUrl(String email, String url) {
+        User user = userDAO.getUserByEmail(email);
+        user.setPicUrl(url);
+        userDAO.update(user);
+    }
 }

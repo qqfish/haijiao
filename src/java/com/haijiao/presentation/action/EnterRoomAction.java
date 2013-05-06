@@ -10,11 +10,19 @@ package com.haijiao.presentation.action;
  */
 public class EnterRoomAction extends RequestSessionAction{
     int clazzId;
+    int isHolder;
     
     @Override
     public String execute(){
         clazzId = -1;
         clazzId = Integer.parseInt((String)this.getOutRequest("clazzId"));
+        isHolder = 0;
+        String userType = (String) this.getOutSession("userType");
+        System.out.println(userType);
+        if( userType!=null && userType.equals("teacher")){
+            isHolder = 1;
+        }
+        System.out.println(isHolder);
         if(clazzId < 0){
             return "false";
         }
@@ -30,6 +38,14 @@ public class EnterRoomAction extends RequestSessionAction{
 
     public void setClazzId(int clazzId) {
         this.clazzId = clazzId;
+    }
+
+    public int getIsHolder() {
+        return isHolder;
+    }
+
+    public void setIsHolder(int isHolder) {
+        this.isHolder = isHolder;
     }
     
 }

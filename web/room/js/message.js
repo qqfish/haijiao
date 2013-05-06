@@ -32,5 +32,6 @@ var Response = {
 }
 
 var ErroType = {
-    AddFileFromUser: 0
+    AddFileFromUser: 0,
+    TimerNoPermission: 1
 }

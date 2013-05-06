@@ -59,6 +59,11 @@
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">index</result>
         </action>
+        <action name="uploadPic" class="UploadPicAction">
+            <interceptor-ref name ="fileUploadStack" /> 
+            <result name="success" type="chain">index</result>
+            <result name="input" type="chain">index</result>
+        </action>
         <action name="dealApply" class="DealApplyAction">
             <result name="success" type="chain">index</result>
         </action>
@@ -104,7 +109,7 @@
         </action>
         <action name="getMail" class="GetMailAction">
             <result name="success" type="">mail.jsp</result>
-	    <result name="input">error.jsp</result>
+            <result name="input">error.jsp</result>
         </action>
         <action name="enterRoom" class="EnterRoomAction">
             <result name="success">/room/index.jsp</result>

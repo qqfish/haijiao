@@ -60,6 +60,9 @@ connection.connect = (function(host) {
             case Response.ShowTimer:
                 timer.showTimer(socketData);
                 break;
+            case Response.Error:
+                processError(socketData.errorType);
+                break;
         }
     };
 });

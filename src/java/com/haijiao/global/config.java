@@ -19,4 +19,11 @@ public class config {
     //File config
     static public String fileRoot = "e:\\file";
     static public String defaultGroupName = "no group";
+    
+    
+    //User file
+    static public String userHome = "~/home";
+    static public String imageFolder = "image";
+    static public String videoFolder = "video";
+    static public String fileFolder = "file";
 }
