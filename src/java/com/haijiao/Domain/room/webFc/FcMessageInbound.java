@@ -15,6 +15,8 @@ import com.haijiao.Domain.room.webFc.message.request.*;
 import com.haijiao.Domain.room.webFc.message.response.*;
 import com.haijiao.Domain.room.webFc.message.response.Error.ErrorData;
 import com.haijiao.Domain.room.webFc.message.response.Error.ErrorType;
+import com.haijiao.Domain.room.webFc.message.response.Info.InfoData;
+import com.haijiao.Domain.room.webFc.message.response.Info.InfoType;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -43,6 +45,13 @@ public class FcMessageInbound extends MessageInbound {
     @Override
     protected void onOpen(WsOutbound outbound) {
         System.out.println(this.toString() + " ,new connection created");
+        
+        //info other someone enter
+        InfoData enterInfo = new InfoData();
+        enterInfo.setInfoType(InfoType.SomeoneEnter);
+        enterInfo.setMessage(user.getName());
+        
+        room.broadcastOther(gson.toJson(enterInfo), this);
         //room file list
         sendtoUser(gson.toJson(new ResponseAddRoomFile(room.getRoomFile())));
 
@@ -142,7 +151,11 @@ public class FcMessageInbound extends MessageInbound {
                 break;
             case Request.ToggleTimer:
                 if (user.equals(room.getHolder())) {
-                    room.getTimer().toggle();
+                    if(!room.getTimer().toggle()){
+                        ErrorData error = new ErrorData();
+                        error.setErrorType(ErrorType.NoStudentEnter);
+                        sendtoUser(gson.toJson(error));
+                    }
                 } else {
                     ErrorData error = new ErrorData();
                     error.setErrorType(ErrorType.TimerNoPermission);
@@ -152,6 +165,9 @@ public class FcMessageInbound extends MessageInbound {
             case Request.StopTimer:
                 if (user.equals(room.getHolder())) {
                     room.getTimer().stop();
+                    InfoData info = new InfoData();
+                    info.setInfoType(InfoType.ClazzFinish);
+                    room.broadcast(gson.toJson(info));
                 } else {
                     ErrorData error = new ErrorData();
                     error.setErrorType(ErrorType.TimerNoPermission);

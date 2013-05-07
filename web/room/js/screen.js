@@ -45,6 +45,15 @@ function pError(str){
     $("#closeAlert").show();
 }
 
+function pInfo(str) {
+    unlock();
+    $('#alertContext').empty();
+    $('#alertContext').html("<h3>"+str + '</h3>');
+    lockType("info");
+    lock();
+    $("#closeAlert").show(); 
+}
+
 function processError(errorType){
     switch(errorType){
         case ErrorType.AddFileFromUser:
@@ -52,6 +61,20 @@ function processError(errorType){
             break;
         case ErrorType.TimerNoPermission:
             pError("没用控制计时器的权限");
+            break;
+        case ErrorType.NoStudentEnter:
+            pError("学生还未进入房间");
+            break;
+    }
+}
+
+function processInfo(infoType, message){
+    switch(infoType){
+        case InfoType.ClazzFinish:
+            pInfo("课程已经完成");
+            break;
+        case InfoType.SomeoneEnter:
+            pInfo(message + " 进入了房间");
             break;
     }
 }

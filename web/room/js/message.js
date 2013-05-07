@@ -28,10 +28,17 @@ var Response = {
     SetUserFile : 8,
     UploadBackground : 9,
     ShowTimer : 10,
-    Error: 100
+    Error: 100,
+    Info: 101
 }
 
 var ErroType = {
     AddFileFromUser: 0,
-    TimerNoPermission: 1
+    TimerNoPermission: 1,
+    NoStudentEnter: 2
+}
+
+var InfoType = {
+    ClazzFinish: 0,
+    SomeoneEnter: 1
 }

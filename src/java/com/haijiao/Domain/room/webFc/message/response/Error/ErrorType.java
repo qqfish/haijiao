@@ -11,4 +11,5 @@ package com.haijiao.Domain.room.webFc.message.response.Error;
 public class ErrorType {
     public static final int AddFileFromUser = 0;
     public static final int TimerNoPermission = 1;
+    public static final int NoStudentEnter = 2;
 }

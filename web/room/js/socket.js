@@ -63,6 +63,9 @@ connection.connect = (function(host) {
             case Response.Error:
                 processError(socketData.errorType);
                 break;
+            case Response.Info:
+                processInfo(socketData.infoType, socketData.message);
+                break;
         }
     };
 });

@@ -39,10 +39,8 @@ function init(clazzId, teaEmail, email){
     $("#prePage").click(function(){
         file.prePage();
     });
-    
-    $("#pen").popover(function(){
-        
-    })
+
+    $("#pen").attr("data-content",$("#colorPanel").html());
     $("#pen").click(function(){
         toolkit.changeTool(Tooltype.Pen);
         table.setUndraggable();
@@ -50,11 +48,13 @@ function init(clazzId, teaEmail, email){
     $("#pointer").click(function(){
         toolkit.changeTool(Tooltype.Hand);
         table.setDraggable();
+        $("#pen").popover('hide');
     //table.removeMouse();
     });
     $("#eraser").click(function(){
         toolkit.changeTool(Tooltype.Eraser);
         table.setUndraggable();
+        $("#pen").popover('hide');
     //table.removeMouse();
     });
     
@@ -67,6 +67,35 @@ function init(clazzId, teaEmail, email){
     });
     
     $("#pointer").click();
+    
+    $("#gotoSubmit").click(function(){
+        var value = $("#gotoInput").val();
+        if(value == null || value == ""){
+            $("#gotoError").text("请输入跳转页面");
+            $("#gotoGroup").attr("class","control-group input-append error");
+            return;
+        } else if(parseInt(value) <= 0 || parseInt(value) > parseInt($("#totalPage").text())){
+            $("#gotoError").text("跳转页面在1~"+$("#totalPage").text());
+            $("#gotoGroup").attr("class","control-group input-append error");
+            return;
+        } else {
+            $("#gotoError").text("");
+            $("#gotoGroup").attr("class","control-group input-append");
+            $("#gotoClose").click();
+            file.gotoPage(value);
+        }
+    });
+    
+    $("#uploadFileInput").change(function(e){
+        var fileList = e.target.files;
+        for(var i = 0; i < fileList.length; i++){
+            file.uploadFile(fileList[0]);
+        }
+    });
+    
+    $("#uploadFile").click(function(){
+        $("#uploadFileInput").click();
+    });
     
     $(document).on({
         dragleave:function(e){    //拖离 

@@ -142,6 +142,10 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
         table.sendChangePage(currentUuid, pageNum - 1);
     }
     
+    this.gotoPage = function(page){
+        table.sendChangePage(currentUuid, page - 1);
+    }
+    
     this.uploadFile = function(file){
         var blob = null;
         blob = sliceFile(file);
@@ -150,10 +154,11 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
         var type = file.name.substring(pos+1, file.name.length);
         if(file.type.indexOf('image') != -1){
             type = "image";
+            reader.readAsDataURL(blob);
             theBar = $("<div></div>").attr("class","bar");
             progressBar = $("<div></div>").attr("class","progress").append(theBar);
-            reader.readAsDataURL(blob);
-            $('#alarmContext').empty().html("<p>上传中</p>").append(progressBar);
+            progressWord = $("<h3></h3>").text("上传中");
+            $('#alertContext').empty().append(progressWord).append(progressBar);
             theBar.css("width","0");
             lockType("info");
             lock();
@@ -165,14 +170,20 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                     }
                 }
             }
+            reader.onerror = function (evt) {
+                progressWord = $("<h3></h3>").text("上传失败");
+                lockType("error");
+                $("#closeAlert").show();
+            }
             reader.onload = function loaded(evt) {
                 var imgObj = new Image();
                 imgObj.onload = function(){
                     table.uploadImage(this);
                 };
                 imgObj.src = evt.target.result;
+                progressWord.text("上传成功(移动图片位置，双击图片确认)")
                 theBar.css("width","100%");
-                $("#closeAlarm").show();
+                $("#closeAlert").show();
             }
         } else if(type == "pdf"){
             reader.readAsDataURL(blob);
@@ -203,10 +214,12 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 message.name = file.name;
                 message.data = evt.target.result;
                 connection.sendObject(message);
-                progressWord.text("上传成功")
+                progressWord.text("上传成功(由文件列表中打开上传文件)");
                 theBar.css("width","100%");
                 $("#closeAlert").show();
             }
+        } else {
+            pError("该格式的文档尚未支持(目前支持图片和pdf)")
         }
     }
 }

@@ -39,20 +39,24 @@ public class RoomTimer {
         billService = (IBillService) SpringContext.getContext().getBean("billServiceImpl");
     }
 
-    public void start() {
-        if(room.isReady())
+    public boolean start() {
+        if(room.isReady()){
             counter.setStart(true);
+            return true;
+        }
+        return false;
     }
 
     public void pause() {
         counter.setStart(false);
     }
 
-    public void toggle() {
+    public boolean toggle() {
         if (counter.isStart()) {
             pause();
+            return true;
         } else {
-            start();
+            return start();
         }
     }
 

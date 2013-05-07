@@ -55,12 +55,7 @@ function Table(containerName, tool){
     setMouse();
 
     this.sendChangeFile = function(uuid){
-        $('#alertContext').empty().html("<h3>请稍等</h3>");
-        theBar = $("<div></div>").attr("class","bar").css("width","100%");
-        progressBar = $("<div></div>").attr("class","progress progress-striped active").append(theBar);
-        $('#alertContext').append(progressBar);
-        lockType("warn");
-        lock();
+        changePageLock();
         setStageToSave();
         stage.toDataURL({
             callback: function(dataUrl) {
@@ -75,12 +70,7 @@ function Table(containerName, tool){
     }
     
     this.sendChangePage = function(uuid,page){
-        $('#alertContext').empty().html("<strong>请稍等!</strong>信息正在加载中");
-        theBar = $("<div></div>").attr("class","bar").css("width","100%");
-        progressBar = $("<div></div>").attr("class","progress progress-striped active").append(theBar);
-        $('#alertContext').append(progressBar);
-        lockType("warn");
-        lock();
+        changePageLock();
         setStageToSave();
         stage.toDataURL({
             callback: function(dataUrl) {
@@ -474,6 +464,7 @@ function Table(containerName, tool){
         tmpLayer.add(img);
         stage.draw();
         img.on("dblclick dbltouch", function(){
+            changePageLock();
             setStageToSave();
             drawLayer.remove();
             stage.draw();
@@ -547,6 +538,15 @@ function Table(containerName, tool){
             $("#prePage").click(function(){
                 file.prePage();
             });
+    }
+    
+    function changePageLock(){
+        $('#alertContext').empty().html("<strong>请稍等!</strong>信息正在加载中");
+        theBar = $("<div></div>").attr("class","bar").css("width","100%");
+        progressBar = $("<div></div>").attr("class","progress progress-striped active").append(theBar);
+        $('#alertContext').append(progressBar);
+        lockType("warn");
+        lock();
     }
 }
     
