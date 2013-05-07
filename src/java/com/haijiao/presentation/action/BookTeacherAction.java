@@ -21,6 +21,7 @@ public class BookTeacherAction extends SessionAction {
     String teacherEmail;
     String json;
     String lesson;
+    String nextPageMessage;
     int times;
 
     public BookTeacherAction() {
@@ -43,7 +44,7 @@ public class BookTeacherAction extends SessionAction {
         System.out.println(sList.size());
         classService.bookTeacher(teacherEmail, (String)this.getSessionValue("email"), lesson, sList, times);
         
-        this.sessionPutIn("message", this.getText("successMessage"));
+        nextPageMessage = this.getText("successMessage");
         return SUCCESS;
     }
 
@@ -109,5 +110,13 @@ public class BookTeacherAction extends SessionAction {
 
     public void setLesson(String lesson) {
         this.lesson = lesson;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }

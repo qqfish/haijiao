@@ -17,6 +17,7 @@ public class RegisterAction extends SessionAction{
     private IUserService userService;
     private ITeacherService teacherService;
     private IStudentService studentService;
+    private String nextPageMessage;
     
     @Override
     public String execute(){
@@ -32,10 +33,10 @@ public class RegisterAction extends SessionAction{
                 this.sessionPutIn("todayClazz", studentService.getTodayClasses(email));
             }
             userService.setStatus(email, User.Status.onlineAndAvailable);
-            this.sessionPutIn("message", this.getText("registerSuccess"));
+            nextPageMessage = this.getText("registerSuccess");
             return SUCCESS;
         } else {
-            this.sessionPutIn("message", this.getText("userExist"));
+            nextPageMessage = this.getText("userExist");
             return INPUT;
         }
     }
@@ -53,27 +54,27 @@ public class RegisterAction extends SessionAction{
     @Override
     public void validate() {
         if(email==null || email.trim().length()==0){
-            this.sessionPutIn("message", this.getText("emailNull"));
+            nextPageMessage = this.getText("emailNull");
             this.addActionError(null);
         }
         if(password1==null || password1.trim().length()==0){
-            this.sessionPutIn("message", this.getText("passwordNull"));
+            nextPageMessage = this.getText("passwordNull");
             this.addActionError(null);
         }
         else if(password1.trim().length()<6){
-            this.sessionPutIn("message", this.getText("passwordShort"));
+            nextPageMessage = this.getText("passwordShort");
             this.addActionError(null);
         }
         if(password2==null || password2.trim().length()==0){
-            this.sessionPutIn("message", this.getText("passwordNull"));
+            nextPageMessage = this.getText("passwordNull");
             this.addActionError(null);
         }
         else if(password2==null || password2.trim().length()<6){
-            this.sessionPutIn("message", this.getText("passwordShort"));
+            nextPageMessage = this.getText("passwordShort");
             this.addActionError(null);
         }
         else if(!password1.trim().equals(password2.trim())){
-            this.sessionPutIn("message", this.getText("passwordNotEqual"));
+            nextPageMessage = this.getText("passwordNotEqual");
             this.addActionError(null);
         }
     }

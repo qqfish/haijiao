@@ -16,6 +16,7 @@ public class ChangeIntroAction extends SessionAction {
     ITeacherService teacherService;
     IStudentService studentService;
     String intro;
+    String nextPageMessage;
     
     @Override
     public String execute(){
@@ -27,10 +28,10 @@ public class ChangeIntroAction extends SessionAction {
                 Student theStudent = studentService.getStudentByEmail((String)this.getSessionValue("email"));
                 this.sessionPutIn("student", theStudent);
             }
-            this.sessionPutIn("message", this.getText("changeIntroSuccess"));
+            nextPageMessage = "修改详细介绍成功！";
             return SUCCESS;
         } else {
-            this.sessionPutIn("message", this.getText("changeIntroFailure"));
+            nextPageMessage = "修改详细介绍失败！";
             return "input";
         }
     }
@@ -57,5 +58,13 @@ public class ChangeIntroAction extends SessionAction {
 
     public void setIntro(String intro) {
         this.intro = intro;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }

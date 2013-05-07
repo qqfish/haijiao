@@ -35,14 +35,12 @@ public class IndexAction extends SessionAction {
             User user = userService.getUserByEmail(email);
             if(user.getUserType().equals("teacher")){
                 teacher = (Teacher) user;
-                this.sessionPutIn("message", this.getText("teacherInfo"));
                 scheduleBean = new ScheduleBean(teacher);
                 billList = billService.getBill(email, "teacher");
                 classList = teacherService.getClasses(email);
                 System.out.println(classList.size());
                 return "teacher";
             } else {
-                this.sessionPutIn("message", this.getText("studentInfo"));
                 student = (Student) user;              
                 student = studentService.getStudentByEmail(email);
                 billList = billService.getBill(email, "student");

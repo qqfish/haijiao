@@ -67,9 +67,6 @@
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
         <property name="studentService" ref="studentServiceImpl" />
     </bean>
-    <bean id="ChangeAuditionAction" class="com.haijiao.presentation.action.ChangeAuditionAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-    </bean>
     <bean id="GetCommonFileAction" class="com.haijiao.presentation.action.GetCommonFileAction" scope="prototype"/>
     <bean id="SendMailAction" class="com.haijiao.presentation.action.SendMailAction" scope="prototype">
         <property name="mailService" ref="mailServiceImpl" />

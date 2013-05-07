@@ -11,27 +11,21 @@ public class DealWithReservation extends SessionAction {
     private IClassService classService;
     private Integer clazzId;
     private boolean accept;
+    String nextPageMessage;
     
+    @Override
     public String execute(){
         if (classService.dealWithReservation(clazzId, accept)) {
             if(accept == true){
-                this.sessionPutIn("message", this.getText("successMessage"));
+                nextPageMessage = this.getText("successMessage");
             } else {
-                this.sessionPutIn("message", this.getText("refuseMessage"));
+                nextPageMessage = this.getText("refuseMessage");
             }
             return SUCCESS;
         } else {
-            this.sessionPutIn("message", this.getText("errorMessage"));
+            nextPageMessage = this.getText("errorMessage");
             return "error";
         }
-    }
-
-    public IClassService getTeacherService() {
-        return classService;
-    }
-
-    public void setTeacherService(IClassService classService) {
-        this.classService = classService;
     }
 
     public Integer getClazzId() {
@@ -49,5 +43,21 @@ public class DealWithReservation extends SessionAction {
 
     public void setAccept(boolean accept) {
         this.accept = accept;
+    }
+
+    public IClassService getClassService() {
+        return classService;
+    }
+
+    public void setClassService(IClassService classService) {
+        this.classService = classService;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }

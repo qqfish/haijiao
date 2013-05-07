@@ -16,12 +16,13 @@ public class LoginAction extends SessionAction {
     private IStudentService studentService;
     private String email;
     private String password;
+    private String nextPageMessage;
     
     @Override
     public String execute() throws Exception {
         String userType = userService.confirmLogin(email, password);
         if(userType == null){
-            this.sessionPutIn("message",this.getText("loginFail"));
+            nextPageMessage = this.getText("loginFail");
             return INPUT;
         } else {
             User theUser = userService.getUserByEmail(email);
@@ -34,7 +35,6 @@ public class LoginAction extends SessionAction {
             } else {
                 this.sessionPutIn("todayClazz", studentService.getTodayClasses(email));
             }
-            this.sessionPutIn("message",this.getText("loginsuccess"));
             return SUCCESS;
         }
         
@@ -43,15 +43,15 @@ public class LoginAction extends SessionAction {
     @Override
     public void validate(){
         if(email.isEmpty() || email.trim().length()==0){
-            this.sessionPutIn("message",this.getText("emailNull"));
+            nextPageMessage = this.getText("emailNull");
             this.addActionError(null);
         }
         else if(password.isEmpty() || password.trim().length()==0){
-            this.sessionPutIn("message",this.getText("passwordNull"));
+            nextPageMessage = this.getText("passwordNull");
             this.addActionError(null);
         }
         else if(password.trim().length()<6){
-            this.sessionPutIn("message",this.getText("passwordShort"));
+            nextPageMessage = this.getText("passwordShort");
             this.addActionError(null);
         }
     }
@@ -94,5 +94,13 @@ public class LoginAction extends SessionAction {
 
     public void setStudentService(IStudentService studentService) {
         this.studentService = studentService;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }

@@ -35,6 +35,7 @@ public class ChangeInfoAction extends SessionAction {
     SimpleDateFormat sdf2;
     Date date;
     String lessonName;
+    String nextPageMessage;
     
     public ChangeInfoAction() throws ParseException{
         sdf= new SimpleDateFormat("MM/dd/yyyy");
@@ -57,7 +58,7 @@ public class ChangeInfoAction extends SessionAction {
             this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
-            this.sessionPutIn("message", this.getText("teaRegisterFailure"));
+            nextPageMessage = this.getText("teaRegisterFailure");
             return "input";
         }
     }
@@ -70,7 +71,7 @@ public class ChangeInfoAction extends SessionAction {
             this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
-            this.sessionPutIn("message", this.getText("stuRegisterFailure"));
+            nextPageMessage = this.getText("stuRegisterFailure");
             return "input";
         }
     }
@@ -84,7 +85,7 @@ public class ChangeInfoAction extends SessionAction {
             this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
-            this.sessionPutIn("message", this.getText("teaChangeFailure"));
+            nextPageMessage = this.getText("teaChangeFailure");
             return "input";
         }
     }
@@ -98,7 +99,7 @@ public class ChangeInfoAction extends SessionAction {
             this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
-            this.sessionPutIn("message", this.getText("stuChangeFailure"));
+            nextPageMessage = this.getText("stuChangeFailure");
             return "input";
         }
     }
@@ -106,15 +107,15 @@ public class ChangeInfoAction extends SessionAction {
     public String changePassword(){
         User u = userService.getUserByEmail((String)this.getSessionValue("email"));
         if ( !oldpwd.equals(u.getPassword())) {
-            this.sessionPutIn("message", this.getText("passwordWrong"));
+            nextPageMessage = this.getText("passwordWrong");
             return "input";
         } 
         if ( !newpwd.equals(newpwd2) ) {
-            this.sessionPutIn("message", this.getText("passwordNotEqual"));
+            nextPageMessage = this.getText("passwordNotEqual");
             return "input";
         }
         userService.changePassword( u.getEmail(), newpwd );
-        this.sessionPutIn("message", this.getText("changePasswordSuccess"));
+        nextPageMessage = this.getText("changePasswordSuccess");
         return SUCCESS;
     }
     
@@ -278,5 +279,13 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setLessonName(String lessonName) {
         this.lessonName = lessonName;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }
