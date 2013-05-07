@@ -47,11 +47,16 @@ public class Teacher extends User{
     @Fetch(value = FetchMode.SUBSELECT)
     private List<FreeTime> schedule;//记录老师的时间表
     
+    @OneToMany(mappedBy = "teacher",fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    protected List<Bill> billList;  //账单列表
+    
     private int wagePerhour;        //老师每小时的辅导费
     
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
         this.labels = new ArrayList<Label>();
+        this.billList = new ArrayList<Bill>();
     }
 
     public String getSchool() {
@@ -140,6 +145,14 @@ public class Teacher extends User{
 
     public void setWagePerhour(int wagePerhour) {
         this.wagePerhour = wagePerhour;
+    }
+
+    public List<Bill> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(List<Bill> billList) {
+        this.billList = billList;
     }
     
     public Lesson getLessonByName(String lesson){

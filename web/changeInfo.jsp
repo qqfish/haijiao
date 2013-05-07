@@ -84,9 +84,6 @@
                         <li><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
-                        <s:if test="#session.userType == 'teacher'">
-                            <li><a href="#5" data-toggle="tab">添加或删除课程<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>
                     </ul>
                 </div>
                 <div class="span9">
@@ -196,34 +193,6 @@
                                 </s:if>
                                 <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
                             </s:form>
-                        </div>
-                        <div class="tab-pane fade"  id='5'>
-                            <h3>修改课程状况</h3>
-                            <hr/>
-                            <s:property value="tea.name" />老师您好，您目前开设课程的情况如下：
-                                <table>
-                                    <tr>
-                                        <td>课程名</td>
-                                        <td>操作</td>
-                                    </tr>
-                                    <s:iterator value="tea.lessons" id="ls">
-                                        <s:if test="delete==false">
-                                            <tr>
-                                                <s:form action="changeInfo.action">
-                                                    <td>【<s:property value="name" />】</td>
-                                                    <td style="display:none;"><s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName" placeholder="请输入新的课程名"/></td>
-                                                    <td><s:submit cssClass="btn" value="delete" method="deleteLesson"/></td>
-                                                </s:form>
-                                           </tr>
-                                        </s:if>
-                                    </s:iterator>
-                                <s:form action="changeInfo.action">
-                                    <tr>
-                                        <td><s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/></td>
-                                        <td><s:submit cssClass="btn" value="add" method="addLesson"/></td>
-                                    </tr>
-                                </s:form>
-                            </table>
                         </div>
                     </div>
                 </div>

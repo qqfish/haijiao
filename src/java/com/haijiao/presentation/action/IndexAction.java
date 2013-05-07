@@ -37,7 +37,7 @@ public class IndexAction extends SessionAction {
                 teacher = (Teacher) user;
                 this.sessionPutIn("message", this.getText("teacherInfo"));
                 scheduleBean = new ScheduleBean(teacher);
-                billList = billService.getBill(email);
+                billList = billService.getBill(email, "teacher");
                 classList = teacherService.getClasses(email);
                 System.out.println(classList.size());
                 return "teacher";
@@ -45,7 +45,7 @@ public class IndexAction extends SessionAction {
                 this.sessionPutIn("message", this.getText("studentInfo"));
                 student = (Student) user;              
                 student = studentService.getStudentByEmail(email);
-                billList = billService.getBill(email);
+                billList = billService.getBill(email, "student");
                 classList = studentService.getClasses(email);
                 scheduleBean = new ScheduleBean(classList);
                 return "student";

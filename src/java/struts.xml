@@ -119,7 +119,10 @@
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>
         </action>
-        <action name="makeComment" class="MakeCommentAction">
+        <action name="makeCommentReply" class="MakeCommentReplyAction" method="comment">
+            <result name="success" type="chain">index</result>
+        </action>
+        <action name="makeCommentReply" class="MakeCommentReplyAction" method="reply">
             <result name="success" type="chain">index</result>
         </action>
         <action name="checkEmail" class="CheckEmailAction"></action>

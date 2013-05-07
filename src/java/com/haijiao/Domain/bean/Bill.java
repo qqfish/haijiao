@@ -17,24 +17,29 @@ import javax.persistence.Table;
 @Table(name="bill")
 public class Bill extends BaseBean{
     @ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST})
-    @JoinColumn(name = "uid")
-    private User from;
+    @JoinColumn(name = "tid")
+    private Teacher teacher;
     
-    private String toName;
+    @ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST})
+    @JoinColumn(name = "sid")
+    private Student student;
     
     private int money;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "lid")
     private Lesson lesson;
-    private boolean earn;   //收入或支出
     private String message; //账单说明
     
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "commentid", unique = true)
-    private Comment comment;
+    @JoinColumn(name = "scommentid", unique = true)
+    private Comment stot; //学生对老师的评论
     
-    public int getRealMoney(){
-        if (earn==true) {
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "tcommentid", unique = true)
+    private Comment ttos; //老师对学生的评论
+    
+    public int getRealMoney(String userType){
+        if (userType.equals("teacher")) {
             return money;
         } else {
             return -money;
@@ -42,14 +47,6 @@ public class Bill extends BaseBean{
     }
 
     public Bill() {
-    }
-
-    public User getFrom() {
-        return from;
-    }
-
-    public void setFrom(User from) {
-        this.from = from;
     }
 
     public int getMoney() {
@@ -60,14 +57,6 @@ public class Bill extends BaseBean{
         this.money = money;
     }
 
-    public boolean isEarn() {
-        return earn;
-    }
-
-    public void setEarn(boolean earn) {
-        this.earn = earn;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -76,12 +65,20 @@ public class Bill extends BaseBean{
         this.message = message;
     }
 
-    public Comment getComment() {
-        return comment;
+    public Comment getStot() {
+        return stot;
     }
 
-    public void setComment(Comment comment) {
-        this.comment = comment;
+    public void setStot(Comment stot) {
+        this.stot = stot;
+    }
+
+    public Comment getTtos() {
+        return ttos;
+    }
+
+    public void setTtos(Comment ttos) {
+        this.ttos = ttos;
     }
 
     public Lesson getLesson() {
@@ -92,11 +89,19 @@ public class Bill extends BaseBean{
         this.lesson = lesson;
     }
 
-    public String getToName() {
-        return toName;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setToName(String toName) {
-        this.toName = toName;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }

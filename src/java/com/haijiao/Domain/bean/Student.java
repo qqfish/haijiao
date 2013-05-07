@@ -31,6 +31,10 @@ public class Student extends User{
     @OneToMany(mappedBy="student")
     private List<Clazz> schedule;      //学生的时间表
     
+    @OneToMany(mappedBy = "student",fetch=FetchType.EAGER)
+    @Fetch(value = FetchMode.SUBSELECT)
+    protected List<Bill> billList;  //账单列表
+    
     @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
     @Fetch(value = FetchMode.SUBSELECT)
     @JoinTable(
@@ -41,6 +45,7 @@ public class Student extends User{
     private List<Teacher> teacherList;   //收藏老师的列表
 
     public Student() {
+        this.billList = new ArrayList<Bill>();
         this.teacherList = new ArrayList<Teacher>();
     }
 
@@ -92,4 +97,11 @@ public class Student extends User{
         this.teacherList = teacherList;
     }
 
+    public List<Bill> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(List<Bill> billList) {
+        this.billList = billList;
+    }
 }

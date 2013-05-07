@@ -77,7 +77,7 @@
     <bean id="GetMailAction" class="com.haijiao.presentation.action.GetMailAction" scope="prototype">
         <property name="mailService" ref="mailServiceImpl" />
     </bean>
-    <bean id="MakeCommentAction" class="com.haijiao.presentation.action.MakeCommentAction" scope="prototype">
+    <bean id="MakeCommentReplyAction" class="com.haijiao.presentation.action.MakeCommentReplyAction" scope="prototype">
         <property name="billService" ref="billServiceImpl" />
     </bean>
     <bean id="CheckEmailAction" class="com.haijiao.presentation.action.CheckEmailAction" scope="prototype">

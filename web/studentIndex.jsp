@@ -16,7 +16,9 @@
         <script type="text/javascript" src="js/teachers.js"></script>
         <script type="text/javascript" src="StudentIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -178,18 +180,47 @@
                                         <th>课程</th>
                                         <th>金额</th>
                                         <th>时间</th>
+                                        <th>信息</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>        
                                     <s:iterator value="billList" id="billList">
                                         <tr>
-                                            <td><s:property value="from.name" /></td>
-                                            <td><s:property value="from.lesson" /></td>
-                                            <td><s:property value="getRealMoney()" /></td>
+                                            <td><s:property value="teacher.name" /></td>
+                                            <td><s:property value="lesson.name" /></td>
+                                            <td><s:property value="getRealMoney('student')" /></td>
                                             <td><s:property value="createdateToString()" /></td>
-                                            <td><button type="button" class="btn btn-info btn-mini">评论</button></td>
+                                            <td><s:property value="message" /></td>
+                                            <td><a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a></td>
                                         </tr>
+                                        <div id="comment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h3 id="myModalLabel">评论</h3>
+                                            </div>
+                                            <s:form action="makeCommentReply.action">
+                                            <div class="modal-body">
+                                                <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                <br/>
+                                                评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
+                                            </div>
+                                            <script type="text/javascript">
+                                                $("#rate").bind('rated', function (event, value){ $('#score').val(value);});
+                                                $("#rate").bind('over', function(event,value){ $(this).attr('title', value);});                                                
+                                                $("#cmtsmt").click(function(event){
+                                                    if(/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                        event.preventDefault();
+                                                });
+                                            </script>
+                                            </s:form>
+                                        </div>
                                     </s:iterator>
                                 </tbody>
                                 </s:else>
@@ -206,13 +237,33 @@
                                                 </s:if>
                                                 <s:else>
                                                 <s:iterator value="billList" id="billList">
-                                                    <h4><s:property value="from.name" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
-                                                    <small>
-                                                        <span><s:property value="from.content" /></span>
-                                                        <span class="pull-right">
-                                                            <button type="button" class="btn btn-info btn-mini">回复</button>
-                                                        </span>
-                                                    </small>
+                                                    <s:if test="ttos != null">
+                                                        <h4><s:property value="teacher.name" /><label class="label label-important pull-right">评分:<s:property value="ttos.score" /></label></h4>
+                                                        <small>
+                                                            <span><s:property value="ttos.content" /></span>
+                                                            <span class="pull-right">
+                                                                <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                            </span>
+                                                            <br/><br/>
+                                                            <span>您的回复：<s:property value="ttos.reply" /></span>
+                                                        </small>
+                                                        <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                <h3 id="myModalLabel">回复</h3>
+                                                            </div>
+                                                            <s:form action="makeCommentReply.action">
+                                                                <div class="modal-body">
+                                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                                    <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                    <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
+                                                                </div>
+                                                            </s:form>
+                                                        </div>
+                                                    </s:if>
                                                 </s:iterator>
                                                 </s:else>
                                             </blockquote>

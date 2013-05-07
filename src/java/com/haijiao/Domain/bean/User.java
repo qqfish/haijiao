@@ -42,9 +42,6 @@ public class User extends BaseBean{
     protected Date birthday;    //生日
     protected int status;       //可选项为Status
     
-    @OneToMany(mappedBy = "from",fetch=FetchType.EAGER)
-    protected List<Bill> billList;  //账单列表
-    
     @OneToMany(mappedBy = "to")
     protected List<Mail> mailBox;   //收到的私信
     
@@ -55,7 +52,6 @@ public class User extends BaseBean{
 
     public User() {
         fileGroups = new ArrayList();
-        billList = new ArrayList<Bill>();
         mailBox = new ArrayList<Mail>();
     }
 
@@ -145,14 +141,6 @@ public class User extends BaseBean{
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public List<Bill> getBillList() {
-        return billList;
-    }
-
-    public void setBillList(List<Bill> billList) {
-        this.billList = billList;
     }
 
     public List<Mail> getMailBox() {

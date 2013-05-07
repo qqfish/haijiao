@@ -13,6 +13,7 @@ import com.haijiao.SupportService.dao.ICommentDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.service.IBillService;
+import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -57,49 +58,77 @@ public class BillServiceImpl implements IBillService{
     }
 
     @Override
-    public List<Bill> getBill(String email) {
-        return billDAO.getBillByEmail(email);
+    public List<Bill> getBill(String email, String userType) {
+        return billDAO.getBillByEmail(email, userType);
     }
 
     @Override
     public boolean produceBill(String studentEmail, String teacherEmail, int money, String message) {
         Student s = studentDAO.getStudentByEmail(studentEmail);
         Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
-        Bill studentBill = new Bill();
-        studentBill.setEarn(false);
-        studentBill.setFrom(s);
-        studentBill.setToName(t.getName());
-        studentBill.setMessage(message);
-        studentBill.setMoney(money);
-        Bill teacherBill = new Bill();
-        teacherBill.setEarn(true);
-        teacherBill.setFrom(t);
-        teacherBill.setToName(s.getName());
-        teacherBill.setMessage(message);
-        teacherBill.setMoney(money);
-        boolean sbill = billDAO.makePersistent(studentBill);
-        boolean tbill = billDAO.makePersistent(teacherBill);
-        return (sbill && tbill);
+        Bill bill = new Bill();
+        java.util.Date datetime = new java.util.Date();
+        Date time = new Date(datetime.getTime());
+        bill.setCreateTime(time);
+        bill.setDelete(false);
+        bill.setMessage(message);
+        bill.setMoney(money);
+        bill.setStudent(s);
+        bill.setTeacher(t);
+        boolean bbill = billDAO.makePersistent(bill);
+        return bbill;
     }
 
     @Override
-    public boolean commentBill(int billId, String content, int score) {
+    public boolean commentBill(int billId, String content, int score, String userType) {
         Bill b = billDAO.findById(billId);
-        Comment c = new Comment();
-        c.setContent(content);
-        c.setScore(score);
-        b.setComment(c);
-        commentDAO.makePersistent(c);
-        billDAO.update(b);
-        return true;
+        if(userType.equals("teacher")){
+            if(b.getTtos()==null){
+                Comment c = new Comment();
+                c.setContent(content);
+                c.setScore(score);
+                b.setTtos(c);
+                commentDAO.makePersistent(c);
+                billDAO.update(b);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if(b.getStot()==null){
+                Comment c = new Comment();
+                c.setContent(content);
+                c.setScore(score);
+                b.setStot(c);
+                commentDAO.makePersistent(c);
+                billDAO.update(b);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     @Override
-    public boolean replyComment(int billId, String reply) {
+    public boolean replyComment(int billId, String reply, String userType) {
         Bill b = billDAO.findById(billId);
-        b.getComment().setReply(reply);
-        billDAO.update(b);
-        return true;
+        if(userType.equals("teacher")){
+            if(b.getStot().getReply()==null || b.getStot().getReply().isEmpty()){
+                b.getStot().setReply(reply);
+                billDAO.update(b);
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            if(b.getTtos().getReply()==null || b.getTtos().getReply().isEmpty()){
+                b.getTtos().setReply(reply);
+                billDAO.update(b);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
     
 }

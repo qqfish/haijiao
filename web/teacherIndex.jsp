@@ -76,6 +76,7 @@
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
                         <li><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
+                        <li><a href="#lesson_area" data-toggle="tab" >添加/删除课程</a></li>
                         <li><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                         <li><a href="#comment_area" data-toggle="tab" >评论</a></li>
                     </ul>
@@ -268,6 +269,32 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="tab-pane fade" id='lesson_area'>
+                            <s:property value="teacher.name" />老师您好，您目前开设课程的情况如下：
+                            <table>
+                                <tr>
+                                    <td>课程名</td>
+                                    <td>操作</td>
+                                </tr>
+                                <s:iterator value="teacher.lessons" id="ls">
+                                    <s:if test="delete==false">
+                                        <tr>
+                                            <s:form action="changeInfo.action">
+                                                <td>【<s:property value="name" />】</td>
+                                                <td style="display:none;"><s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName" placeholder="请输入新的课程名"/></td>
+                                                <td><s:submit cssClass="btn" value="delete" method="deleteLesson"/></td>
+                                           </s:form>
+                                       </tr>
+                                    </s:if>
+                                </s:iterator>
+                                <s:form action="changeInfo.action">
+                                    <tr>
+                                        <td><s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/></td>
+                                        <td><s:submit cssClass="btn" value="add" method="addLesson"/></td>
+                                    </tr>
+                                </s:form>
+                            </table>
+                        </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover table-striped">
                                 <s:if test="billList.size()<=0">
@@ -289,9 +316,9 @@
                                 <tbody>        
                                     <s:iterator value="billList" id="billList">
                                         <tr>
-                                            <td><s:property value="toName" /></td>
+                                            <td><s:property value="student.name" /></td>
                                             <td><s:property value="lesson.name" /></td>
-                                            <td><s:property value="getRealMoney()" /></td>
+                                            <td><s:property value="getRealMoney('teacher')" /></td>
                                             <td><s:property value="createdateToString()" /></td>
                                             <td><s:property value="message" /></td>
                                             <td><a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a></td>
@@ -301,7 +328,7 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                 <h3 id="myModalLabel">评论</h3>
                                             </div>
-                                            <s:form action="makeComment.action">
+                                            <s:form action="makeCommentReply.action">
                                             <div class="modal-body">
                                                 <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                 内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
@@ -311,7 +338,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                <s:submit cssClass="btn btn-primary" value="提交" id="cmtsmt"></s:submit>
+                                                <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                             </div>
                                             <script type="text/javascript">
                                                 $("#rate").bind('rated', function (event, value){ $('#score').val(value);});
@@ -339,14 +366,32 @@
                                                 </s:if>
                                                 <s:else>
                                                 <s:iterator value="billList" id="billList">
-                                                    <s:if test="comment != null">
-                                                        <h4><s:property value="toName" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
+                                                    <s:if test="stot != null">
+                                                        <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
                                                         <small>
-                                                            <span><s:property value="comment.content" /></span>
+                                                            <span><s:property value="stot.content" /></span>
                                                             <span class="pull-right">
-                                                                <button type="button" class="btn btn-info btn-mini">回复</button>
+                                                                <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
                                                             </span>
+                                                            <br/><br/>
+                                                            <span>您的回复：<s:property value="stot.reply" /></span>
                                                         </small>
+                                                        <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                <h3 id="myModalLabel">回复</h3>
+                                                            </div>
+                                                            <s:form action="makeCommentReply.action">
+                                                                <div class="modal-body">
+                                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                                    <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                    <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
+                                                                </div>
+                                                            </s:form>
+                                                        </div>
                                                     </s:if>
                                                 </s:iterator>
                                                 </s:else>
