@@ -126,5 +126,8 @@
             <result name="success" type="chain">index</result>
         </action>
         <action name="checkEmail" class="CheckEmailAction"></action>
+        <action name="contactUs" class="ContactUsAction">
+            <result name="success" type="chain">index</result>
+        </action>
     </package>
 </struts>

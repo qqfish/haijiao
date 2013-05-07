@@ -11,4 +11,5 @@ package com.haijiao.Domain.room.webFc.message.response.Info;
 public class InfoType {
     public static final int ClazzFinish = 0;
     public static final int SomeoneEnter = 1;
+    public static final int SomeoneExit = 2;
 }

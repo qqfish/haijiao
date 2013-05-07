@@ -46,12 +46,9 @@ function pError(str){
 }
 
 function pInfo(str) {
-    unlock();
-    $('#alertContext').empty();
-    $('#alertContext').html("<h3>"+str + '</h3>');
-    lockType("info");
-    lock();
-    $("#closeAlert").show(); 
+    $('#infoMessageContext').text(str);
+    $('#infoMessage').fadeIn();
+    setTimeout("$('#infoMessage').fadeOut()",3000); 
 }
 
 function processError(errorType){
@@ -75,6 +72,9 @@ function processInfo(infoType, message){
             break;
         case InfoType.SomeoneEnter:
             pInfo(message + " 进入了房间");
+            break;
+        case InfoType.SomeoneExit:
+            pInfo(message + " 退出了房间");
             break;
     }
 }

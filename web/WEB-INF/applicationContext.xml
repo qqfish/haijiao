@@ -85,6 +85,7 @@
     </bean>
     <bean id="EnterRoomAction" class="com.haijiao.presentation.action.EnterRoomAction" scope="prototype" />   
     <bean id="EnterPublicRoomAction" class="com.haijiao.presentation.action.EnterPublicRoomAction" scope="prototype" />     
+    <bean id="ContactUsAction" class="com.haijiao.presentation.action.ContactUsAction" scope="prototype" />
     <bean id="roomTimer" class="com.haijiao.Domain.room.RoomTimer" scope="prototype">
         <property name="billService" ref="billServiceImpl" />
     </bean>

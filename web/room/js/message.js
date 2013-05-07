@@ -40,5 +40,6 @@ var ErroType = {
 
 var InfoType = {
     ClazzFinish: 0,
-    SomeoneEnter: 1
+    SomeoneEnter: 1,
+    SomeoneExit: 2
 }

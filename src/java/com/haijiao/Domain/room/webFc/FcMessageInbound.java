@@ -67,6 +67,10 @@ public class FcMessageInbound extends MessageInbound {
         bye.setFrom(user.getName());
         bye.setData("{\"type\":\"bye\"}");
         room.broadcastOther(gson.toJson(bye), this);
+        InfoData exitInfo = new InfoData();
+        exitInfo.setInfoType(InfoType.SomeoneExit);
+        exitInfo.setMessage(user.getName());
+        room.broadcastOther(gson.toJson(exitInfo), this);
         room.exitRoom(this);
         room.getTimer().pause();
         System.out.println(this.toString() + "closed");

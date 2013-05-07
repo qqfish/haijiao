@@ -1,0 +1,75 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.haijiao.presentation.action;
+
+import com.haijiao.global.config;
+import java.io.File;
+import java.io.FileWriter;
+
+/**
+ *
+ * @author fish
+ */
+public class ContactUsAction extends RequestSessionAction {
+
+    private String name;
+    private String email;
+    private String subject;
+    private String context;
+    private String nextPageMessage;
+
+    @Override
+    public String execute() throws Exception {
+        File file = new File(config.contactFile);
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        FileWriter writer = new FileWriter(file,true);
+        writer.write(name + "," + email + "," + subject + "," + context + "\n");
+        writer.close();
+        nextPageMessage = "感谢您的宝贵意见";
+        return SUCCESS;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getContext() {
+        return context;
+    }
+
+    public void setContext(String context) {
+        this.context = context;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
+    }
+}
