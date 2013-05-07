@@ -111,23 +111,26 @@
                                                             <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
                                                             <span style="margin-left: 10px"class="pull-right">
                                                                 <s:if test="status==3">
-                                                                    <s:a action="dealApply.action">
-                                                                        <s:param name="button">stop</s:param>
-                                                                        <s:param name="classId"><s:property value="id"/></s:param>
-                                                                        <button type="button" class="btn btn-info btn-mini">暂停</button>
-                                                                    </s:a>
+                                                                    <s:form action="dealApply.action">
+                                                                        <s:textfield style="display:none;" name="button" value="stop"></s:textfield>
+                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                        <s:submit style="display:none;" id="stopSubmit" class="btn btn-info btn-mini"></s:submit>
+                                                                        <button type="button" id="stopButton" class="btn btn-info btn-mini">暂停</button>
+                                                                    </s:form>
                                                                 </s:if>
                                                                 <s:if test="status==2">
-                                                                    <s:a action="dealApply.action">
-                                                                        <s:param name="button">accept</s:param>
-                                                                        <s:param name="classId"><s:property value="id"/></s:param>
-                                                                        <button type="button" class="btn btn-info btn-mini">确认</button>
-                                                                    </s:a>
-                                                                    <s:a action="dealApply.action">
-                                                                        <s:param name="button">decline</s:param>
-                                                                        <s:param name="classId"><s:property value="id"/></s:param>
-                                                                        <button type="button" class="btn btn-info btn-mini">拒绝</button>
-                                                                    </s:a>
+                                                                    <button type="button" id="acceptButton" class="btn btn-info btn-mini">接受</button>
+                                                                    <button type="button" id="declineButton" class="btn btn-info btn-mini">拒绝</button>
+                                                                    <s:form action="dealApply.action">
+                                                                        <s:textfield style="display:none;" name="button" value="accept"></s:textfield>
+                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                        <s:submit style="display:none;" id="acceptSubmit" class="btn btn-info btn-mini"></s:submit>
+                                                                    </s:form>
+                                                                    <s:form action="dealApply.action">
+                                                                        <s:textfield style="display:none;" name="button" value="decline"></s:textfield>
+                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                        <s:submit style="display:none;" id="declineSubmit" class="btn btn-info btn-mini"></s:submit>
+                                                                    </s:form>
                                                                 </s:if>
                                                             </span>
                                                         </small>
@@ -195,33 +198,6 @@
                                 </tbody>
                             </table>
                             <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">增加空闲时间</a><br/>
-                            <hr/>
-                            <div>
-                                <s:property value="teacher.name" />老师您好，您目前开设课程的情况如下：
-                                <table>
-                                    <tr>
-                                        <td>课程名</td>
-                                        <td>操作</td>
-                                    </tr>
-                                    <s:iterator value="teacher.lessons" id="ls">
-                                        <s:if test="delete==false">
-                                            <tr>
-                                                <s:form action="changeInfo.action">
-                                                    <td>【<s:property value="name" />】</td>
-                                                    <td style="display:none;"><s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName" placeholder="请输入新的课程名"/></td>
-                                                    <td><s:submit cssClass="btn" value="delete" method="deleteLesson"/></td>
-                                                </s:form>
-                                           </tr>
-                                        </s:if>
-                                    </s:iterator>
-                                <s:form action="changeInfo.action">
-                                    <tr>
-                                        <td><s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/></td>
-                                        <td><s:submit cssClass="btn" value="add" method="addLesson"/></td>
-                                    </tr>
-                                </s:form>
-                                </table>
-                            </div>
                             <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
                                 <div class="modal-header" style="height: 50px">
                                     <a class="close" data-dismiss="modal">×</a>

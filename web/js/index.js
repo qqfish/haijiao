@@ -13,4 +13,16 @@ jQuery(document).ready(function($){
         $('#studentbutton').click(function(){
             $('#studentsubmit').click();
         });
+        
+        $('#stopButton').click(function(){
+           $('#stopSubmit').click(); 
+        });
+        
+        $('#acceptButton').click(function(){
+           $('#acceptSubmit').click(); 
+        });
+        
+        $('#declineButton').click(function(){
+           $('#declineSubmit').click(); 
+        });
 });

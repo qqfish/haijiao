@@ -9,6 +9,7 @@ import com.haijiao.SupportService.service.IClassService;
 public class DealApplyAction extends RequestSessionAction {
 
     IClassService classService;
+    String nextPageMessage;
 
     @Override
     public String execute() {
@@ -29,16 +30,19 @@ public class DealApplyAction extends RequestSessionAction {
     public void stop() {
         Integer classId = Integer.parseInt((String) this.getOutRequest("classId"));
         classService.teacherPauseBook(classId, 1);
+        nextPageMessage = "成功暂停一周";
     }
 
     public void accept() {
         Integer classId = Integer.parseInt((String) this.getOutRequest("classId"));
         classService.dealWithReservation(classId, true);
+        nextPageMessage = "成功接受该课程";
     }
 
     public void decline() {
         Integer classId = Integer.parseInt((String) this.getOutRequest("classId"));
         classService.dealWithReservation(classId, false);
+        nextPageMessage = "成功拒绝接受该课程";
     }
     
     public void studentStop(){
@@ -53,4 +57,13 @@ public class DealApplyAction extends RequestSessionAction {
     public void setClassService(IClassService classService) {
         this.classService = classService;
     }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
+    }
+    
 }

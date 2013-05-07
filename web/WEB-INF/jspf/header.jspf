@@ -58,11 +58,11 @@
                 </ul>
             </div>  
             <s:if test="nextPageMessage!=null">
-                <div class="alert span5" style="z-index: 4;position:absolute;top:0px;left:35%;">
+                <div id="nextPageMessageDiv" class="alert span5" style="z-index: 4;width:200px;position:absolute;top:0px;left:35%;">
                     <button id="nextPageMessageClose" type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong><s:property value="nextPageMessage" default="Warning!!"/><strong> 
                     <script>
-                        setTimeout("$('#nextPageMessageClose').click()",3000);
+                        setTimeout("$('#nextPageMessageDiv').fadeOut()",3000);
                     </script>
                 </div>
             </s:if>
