@@ -7,6 +7,11 @@
     <constant name="struts.i18n.encoding" value="UTF-8" />
     <constant name="struts.objectFactory" value="spring"/>
     <constant name="struts.ui.theme" value="simple" />
+   
+    <bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="requestParser"
+        class="com.haijiao.presentation.bean.upload.OurMultiPartRequest" scope="default" optional="true" />
+    <constant name="struts.multipart.handler" value="requestParser" />
+    <constant name="struts.multipart.saveDir" value="d:/tmp" />
     
     <package name="haijiao" namespace="/" extends="struts-default">
         <action name="login" class="LoginAction">
@@ -58,11 +63,6 @@
         <action name="changeIntro" class="ChangeIntroAction">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">index</result>
-        </action>
-        <action name="uploadPic" class="UploadPicAction">
-            <interceptor-ref name ="fileUploadStack" /> 
-            <result name="success" type="chain">index</result>
-            <result name="input" type="chain">index</result>
         </action>
         <action name="dealApply" class="DealApplyAction">
             <result name="success" type="chain">index</result>
@@ -129,5 +129,18 @@
         <action name="contactUs" class="ContactUsAction">
             <result name="success" type="chain">index</result>
         </action>
+        <action name="upload" class="UploadAction">
+            <result name="success" type="chain">index</result>
+            <result name="input">error.jsp</result>
+            <interceptor-ref name="fileUpload">
+                <!-- 文件过滤 -->
+                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
+                <!-- 文件大小, 以字节为单位 -->
+                <param name="maximumSize">1025956</param>
+            </interceptor-ref>
+            <!-- 默认拦截器必须放在fileUpload之后，否则无效 -->
+            <interceptor-ref name="defaultStack" />
+        </action>
+        <action name="uploadProcess" class="UploadProcessAction"/>
     </package>
 </struts>

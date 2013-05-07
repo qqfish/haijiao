@@ -24,16 +24,16 @@ function validate_email(field, tip){
             return false;
         }
         else {
-            $.post("checkUsername.action", {email : value},
+            $.post("checkEmail.action", {email : value},
                 function(data){
-                    if(data == "true"){  
-                        $(tip).fadeOut();
-                        return true;
-                    }
-                    else{
+                    if(data == "true"){
                         $(tip).text("* 该邮箱已注册！");
                         $(tip).fadeIn();
                         return false;
+                    }
+                    else{
+                        $(tip).fadeOut();
+                        return true;
                     }
                 });
         }

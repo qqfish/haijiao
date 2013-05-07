@@ -55,7 +55,7 @@
                   <dt>出生地</dt>
                   <dd><s:select cssClass="span4" headerValue="请选择你出生的省份" name="province" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
                   <dt>毕业学校</dt>
-                  <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" /></dd>
+                  <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" /></dd>
                   <br/>
                   <br/>
                   <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherRegister"/></dd>
@@ -79,7 +79,7 @@
                   <dt>年级</dt>
                   <dd><s:select cssClass="span4" headerValue="请选择你的年级" name="grade" list="{'一年级', '二年级', '三年级', '四年级', '五年级', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}"/></dd>
                   <dt>就读学校</dt>
-                  <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" /></dd>
+                  <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" /></dd>
                   <br/>
                   <br/>
                   <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="studentRegister"/></dd>

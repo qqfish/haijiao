@@ -26,7 +26,4 @@ public class config {
     static public String imageFolder = "image";
     static public String videoFolder = "video";
     static public String fileFolder = "file";
-    
-    //contact
-    static public String contactFile = "~/contact.csv";
 }

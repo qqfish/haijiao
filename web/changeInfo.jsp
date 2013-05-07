@@ -14,7 +14,7 @@
         <title>海角教育</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/datepicker.css">
-        <link rel="stylesheet" href="kindeditor/theme/default/default.css" />
+        <link rel="stylesheet" href="kindeditor/themes/default/default.css" />
         <link rel="stylesheet" href="css/validate.css">
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
@@ -38,7 +38,18 @@
             });
 
             jQuery(window).load(function() {
-                jQuery('.flexslider').flexslider({
+                $("#upload").submit(function(){
+                    var wait = setInterval(function(){
+                        $.post("uploadProcess.action",
+                            function (data){
+                                console.log("in");
+                                if(data == "100")
+                                    clearInterval(wait);
+                            });
+                    },1000);
+                });
+            
+                /*jQuery('.flexslider').flexslider({
                     animation: "fade",
                     slideshow: true,
                     slideshowSpeed: 7000,
@@ -46,8 +57,11 @@
                     prevText: "",
                     nextText: "",
                     controlNav: false
-                });
+                });*/
+                
             });
+            
+            
         </script>
 
 
@@ -180,6 +194,10 @@
                             <s:if test="#session.userType=='teacher'">
                                 <img src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
+                            <s:form action="upload" id="upload" enctype="multipart/form-data">
+                                <s:file name="upload" value="上传"/>
+                                <s:submit value="提交"/>
+                            </s:form>
                         </div>
                         <div class="tab-pane fade"  id='4'>
                             <h3>修改个人介绍</h3>
