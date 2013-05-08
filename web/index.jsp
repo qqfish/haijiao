@@ -106,6 +106,7 @@
                                         <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
                                         <s:submit cssClass="btn btn-success " style="margin-top:90px;margin-left:8px;width:220px" value="登录"></s:submit>
                                     </s:form>
+                                    <a href="forgetPassword.jsp">忘记密码</a>
                                 </div>
                             </div>
                         </div>

@@ -152,5 +152,12 @@
             <interceptor-ref name="defaultStack" />
         </action>
         <action name="uploadProcess" class="UploadProcessAction"/>
+        <action name="forgetPassword" class="ForgetPasswordAction">
+            <result name="success" type="chain">index</result>
+        </action>
+        <action name="resetPassword" class="ResetPasswordAction">
+            <result name="success">resetPassword.jsp</result>
+            <result name="input">error.jsp</result>
+        </action>
     </package>
 </struts>

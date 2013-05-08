@@ -103,6 +103,14 @@ public class User extends BaseBean{
         this.score = score;
     }
 
+    public Integer getScoreNum() {
+        return scoreNum;
+    }
+
+    public void setScoreNum(Integer scoreNum) {
+        this.scoreNum = scoreNum;
+    }
+
     public String getPassword() {
         return password;
     }

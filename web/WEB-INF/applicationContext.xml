@@ -92,6 +92,12 @@
         <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="UploadProcessAction" class="com.haijiao.presentation.action.UploadProcessAction" scope="prototype"/>
+    <bean id="ForgetPasswordAction" class="com.haijiao.presentation.action.ForgetPasswordAction" scope="prototype" >
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
+    <bean id="ResetPasswordAction" class="com.haijiao.presentation.action.ResetPasswordAction" scope="prototype" >
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
     
     <bean id="springContext" class="com.haijiao.SupportService.SpringContext"></bean>
     <!-- persist -->

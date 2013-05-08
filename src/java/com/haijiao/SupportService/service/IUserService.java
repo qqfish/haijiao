@@ -4,7 +4,6 @@
  */
 package com.haijiao.SupportService.service;
 
-import com.haijiao.Domain.bean.Bill;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import java.util.List;
@@ -50,4 +49,7 @@ public interface IUserService {
     //下载文件
 
     public Object download(String fileuri);
+    
+    public boolean validateCheckcode(int id, String checkCode);
+    public void saveResetInfo(int id, String checkCode);
 }

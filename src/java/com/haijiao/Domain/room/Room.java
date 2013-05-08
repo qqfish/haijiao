@@ -5,7 +5,6 @@
 package com.haijiao.Domain.room;
 
 import com.google.gson.Gson;
-import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.room.webFc.FcMessageInbound;
@@ -20,7 +19,6 @@ import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.TreeMap;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
