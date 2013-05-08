@@ -101,7 +101,7 @@ public class UserServiceImpl implements IUserService {
             java.util.Date datetime = new java.util.Date();
             Date time = new Date(datetime.getTime());
             s.setCreateTime(time);
-            s.setPicUrl("images/page2-img3.jpg"); //temp
+            s.setPicUrl("images/figure-default.png"); //temp
             return studentDAO.makePersistent(s);
         } else if (userType.equals("teacher")) {
             Teacher t = new Teacher();

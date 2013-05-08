@@ -196,7 +196,7 @@
                             </s:if>
                             <s:form action="upload" id="upload" enctype="multipart/form-data">
                                 <s:file name="upload" value="上传"/>
-                                <s:submit value="提交"/>
+                                <s:submit cssClass="btn btn-primary btn-small" value="提交"/>
                             </s:form>
                         </div>
                         <div class="tab-pane fade"  id='4'>
@@ -204,12 +204,12 @@
                             <hr/>
                             <s:form action="changeIntro.action">
                                 <s:if test="#session.userType == 'teacher'">
-                                    <s:textarea name="intro" value="%{tea.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                                    <s:textarea name="intro" value="%{tea.intro}" autofocus="autofocus"/><br/>
                                 </s:if>
                                 <s:if test="#session.userType == 'student'">
-                                    <s:textarea name="intro" value="%{stu.intro}" autofocus="autofocus" style="margin:10px 0px 0px 60px;height: 30px;width: 300px;font-size: 20px;"/><br/>
+                                    <s:textarea name="intro" value="%{stu.intro}" autofocus="autofocus"/><br/>
                                 </s:if>
-                                <s:submit cssClass="login-btn" style="font-size: 20px; margin: 40px 0px 0px 0px;" value="提交"/>
+                                <s:submit cssClass="btn btn-primary btn-small pull-right" value="提交"/>
                             </s:form>
                         </div>
                     </div>

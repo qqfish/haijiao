@@ -79,7 +79,7 @@
                   <dt>年级</dt>
                   <dd><s:select cssClass="span4" headerValue="请选择你的年级" name="grade" list="{'一年级', '二年级', '三年级', '四年级', '五年级', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}"/></dd>
                   <dt>就读学校</dt>
-                  <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" /></dd>
+                  <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" /></dd>
                   <br/>
                   <br/>
                   <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="studentRegister"/></dd>
