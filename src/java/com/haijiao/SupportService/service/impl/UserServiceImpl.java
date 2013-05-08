@@ -4,11 +4,12 @@
  */
 package com.haijiao.SupportService.service.impl;
 
-import com.haijiao.Domain.bean.Bill;
+import com.haijiao.Domain.bean.ResetInfo;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.dao.ICommentDAO;
+import com.haijiao.SupportService.dao.IResetInfoDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
@@ -31,6 +32,8 @@ public class UserServiceImpl implements IUserService {
     IStudentDAO studentDAO;
     @Resource
     ICommentDAO commentDAO;
+    @Resource
+    IResetInfoDAO resetInfoDAO;
 
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -42,6 +45,14 @@ public class UserServiceImpl implements IUserService {
 
     public void setStudentDAO(IStudentDAO studentDAO) {
         this.studentDAO = studentDAO;
+    }
+
+    public void setCommentDAO(ICommentDAO commentDAO) {
+        this.commentDAO = commentDAO;
+    }
+
+    public void setReserInfoDAO(IResetInfoDAO resetInfoDAO) {
+        this.resetInfoDAO = resetInfoDAO;
     }
 
     @Override
@@ -148,5 +159,25 @@ public class UserServiceImpl implements IUserService {
         User user = userDAO.getUserByEmail(email);
         user.setPicUrl(url);
         userDAO.update(user);
+    }
+
+    @Override
+    public boolean validateCheckcode(int id, String checkcode) {
+        List<ResetInfo> lr = resetInfoDAO.getResetInfoByUser(id);
+        if(lr.size() == 1)
+            return lr.get(0).getCheckcode().equals(checkcode);
+        else
+            return false;
+    }
+
+    @Override
+    public void saveResetInfo(int id, String checkCode) {
+        ResetInfo r = new ResetInfo();
+        r.setUserid(id);
+        r.setCheckcode(checkCode);
+        java.util.Date datetime = new java.util.Date();
+        Date time = new Date(datetime.getTime());
+        r.setCreateTime(time);
+        resetInfoDAO.makePersistent(r);
     }
 }
