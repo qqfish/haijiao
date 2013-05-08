@@ -6,99 +6,92 @@ package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.global.config;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Date;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.struts2.ServletActionContext;
 
 /**
  *
- * @author fish
+ * @author hp
  */
-public class UploadPicAction extends SessionAction {
-
-    private static final long serialVersionUID = 572146812454l;
+public class UploadPicAction extends SessionAction{
     private static final int BUFFER_SIZE = 16 * 1024;
-    private File picFile;
-    private String contentType;
-    private String fileName;
-    private String imageFileName;
-    private String caption;
+    private File upload;
+    private String uploadFileName;
+    private String uploadContentType;
     private IUserService userService;
-
-    private static void copy(File src, File dst) {
-        try {
-            InputStream in = null;
-            OutputStream out = null;
-            try {
-                in = new BufferedInputStream(new FileInputStream(src), BUFFER_SIZE);
-                out = new BufferedOutputStream(new FileOutputStream(dst), BUFFER_SIZE);
-                byte[] buffer = new byte[BUFFER_SIZE];
-                while (in.read(buffer) > 0) {
-                    out.write(buffer);
-                }
-            } finally {
-                if (null != in) {
-                    in.close();
-                }
-                if (null != out) {
-                    out.close();
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static String getExtention(String fileName) {
-        int pos = fileName.lastIndexOf(".");
-        return fileName.substring(pos);
-    }
-
+    
     @Override
-    public String execute() {
-        imageFileName = new Date().getTime() + getExtention(fileName);
-        String email = (String) this.getSessionValue("email");
-        if(email == null)
-            return INPUT;
-        String locFilePath = config.userHome + "/" + config.imageFolder;
-        File folder = new File(locFilePath);
-        for(int i = 0; i < folder.listFiles().length; i++){
-            folder.listFiles()[i].delete();
+    public String execute(){
+        try{
+            FileInputStream in = new FileInputStream(upload);
+            String email = (String) this.getSessionValue("email");
+            if(email == null){
+                return "error";
+            }
+            String path = config.userHome + "/" + email + "/" + config.imageFolder;
+            File folder = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
+            if(!folder.exists()){
+                folder.mkdirs();
+            } else if(!folder.isDirectory()){
+                folder.delete();
+                folder.mkdirs();
+            }
+            for(int i = 0; i < folder.listFiles().length; i++){
+                folder.listFiles()[i].delete();
+            }
+            path = path + "/" + uploadFileName;
+            File imageFile = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
+            System.out.println(ServletActionContext.getServletContext().getRealPath("/"));
+            if(!imageFile.exists()){
+                imageFile.createNewFile();
+            }
+            FileOutputStream out = new FileOutputStream(imageFile);
+            byte[] b = new byte[BUFFER_SIZE];
+            int len = 0;
+            while((len=in.read(b))>0){  
+                out.write(b,0,len);
+            }
+            out.close();
+            userService.setPicUrl(email, path);
+            return SUCCESS;
         }
-        locFilePath += "/" + imageFileName;
-        File locFile = new File(locFilePath);
-        copy(picFile, locFile);
-        userService.setPicUrl(email, locFilePath);
-        return SUCCESS;
+        catch(FileNotFoundException ex){
+            Logger.getLogger(UploadPicAction.class.getName()).log(Level.SEVERE, null, ex);
+            return INPUT;
+        } catch (IOException ex) {
+            Logger.getLogger(UploadPicAction.class.getName()).log(Level.SEVERE, null, ex);
+            return INPUT;
+        }
     }
 
-    public void setPicFileContentType(String contentType) {
-        this.contentType = contentType;
+    public File getUpload() {
+        return upload;
     }
 
-    public void setPicFileFileName(String fileName) {
-        this.fileName = fileName;
+    public void setUpload(File upload) {
+        this.upload = upload;
     }
 
-    public void setPicFile(File picFile) {
-        this.picFile = picFile;
+    public String getUploadFileName() {
+        return uploadFileName;
     }
 
-    public String getImageFileName() {
-        return imageFileName;
+    public void setUploadFileName(String uploadFileName) {
+        this.uploadFileName = uploadFileName;
     }
 
-    public String getCaption() {
-        return caption;
+    public String getUploadContentType() {
+        return uploadContentType;
     }
 
-    public void setCaption(String caption) {
-        this.caption = caption;
+    public void setUploadContentType(String uploadContentType) {
+        this.uploadContentType = uploadContentType;
     }
 
     public IUserService getUserService() {
@@ -108,4 +101,5 @@ public class UploadPicAction extends SessionAction {
     public void setUserService(IUserService userService) {
         this.userService = userService;
     }
+    
 }

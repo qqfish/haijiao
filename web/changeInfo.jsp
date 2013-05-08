@@ -194,7 +194,7 @@
                             <s:if test="#session.userType=='teacher'">
                                 <img src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
-                            <s:form action="upload" id="upload" enctype="multipart/form-data">
+                            <s:form action="uploadPic" id="upload" enctype="multipart/form-data">
                                 <s:file name="upload" value="上传"/>
                                 <s:submit cssClass="btn btn-primary btn-small" value="提交"/>
                             </s:form>

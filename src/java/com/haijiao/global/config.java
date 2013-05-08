@@ -10,11 +10,11 @@ package com.haijiao.global;
  */
 public class config {
     // room config
-    static public String roomFileUrl = "~/roomFile";
+    static public String roomFileUrl = "upload/roomFile";
     static public String pageImageType = "png";
     static public String pageDataUriPrefix = "data:image/png;base64,";
     static public String newDocumentName = "new document";
-    static public String tmpRoomFile = "~/tmp";
+    static public String tmpRoomFile = "upload/tmp";
     
     //File config
     static public String fileRoot = "e:\\file";
@@ -22,12 +22,11 @@ public class config {
     
     
     //User file
-    static public String userHome = "~/home";
+    static public String userHome = "upload/user";
     static public String imageFolder = "image";
     static public String videoFolder = "video";
     static public String fileFolder = "file";
     
     //contact
     static public String contactFile = "~/contact.csv";
-
 }

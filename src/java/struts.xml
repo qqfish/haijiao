@@ -11,7 +11,7 @@
     <bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="requestParser"
         class="com.haijiao.presentation.bean.upload.OurMultiPartRequest" scope="default" optional="true" />
     <constant name="struts.multipart.handler" value="requestParser" />
-    <constant name="struts.multipart.saveDir" value="d:/tmp" />
+    <constant name="struts.multipart.saveDir" value="tmp" />
     
     <package name="haijiao" namespace="/" extends="struts-default">
         <action name="login" class="LoginAction">
@@ -139,7 +139,7 @@
         <action name="contactUs" class="ContactUsAction">
             <result name="success" type="chain">index</result>
         </action>
-        <action name="upload" class="UploadAction">
+        <action name="uploadPic" class="UploadPicAction">
             <result name="success" type="chain">index</result>
             <result name="input">error.jsp</result>
             <interceptor-ref name="fileUpload">
