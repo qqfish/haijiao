@@ -5,11 +5,15 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IClassService;
+import com.haijiao.SupportService.service.IStudentService;
+import com.haijiao.SupportService.service.ITeacherService;
 
 public class DealApplyAction extends RequestSessionAction {
 
     IClassService classService;
     String nextPageMessage;
+    ITeacherService teacherService;
+    IStudentService studentService;
 
     @Override
     public String execute() {
@@ -19,10 +23,17 @@ public class DealApplyAction extends RequestSessionAction {
             accept();
         } else if ("decline".equals((String) this.getOutRequest("button"))) {
             decline();
-        } else if("studentStop".equals((String)this.getOutRequest("button"))){
+        } else if ("studentStop".equals((String) this.getOutRequest("button"))) {
             studentStop();
         } else {
             //do nothing;
+        }
+        String userType = (String) this.getOutSession("userType");
+        String email = (String) this.getOutSession("email");
+        if (userType.equals("teacher")) {
+            this.putIn("todayClazz", teacherService.getTodayClasses(email));
+        } else {
+            this.putIn("todayClazz", studentService.getTodayClasses(email));
         }
         return SUCCESS;
     }
@@ -44,9 +55,9 @@ public class DealApplyAction extends RequestSessionAction {
         classService.dealWithReservation(classId, false);
         nextPageMessage = "成功拒绝接受该课程";
     }
-    
-    public void studentStop(){
-        Integer classId = Integer.parseInt((String)this.getOutRequest("classId"));
+
+    public void studentStop() {
+        Integer classId = Integer.parseInt((String) this.getOutRequest("classId"));
         classService.studentPauseBook(classId, 1);
     }
 
@@ -65,5 +76,20 @@ public class DealApplyAction extends RequestSessionAction {
     public void setNextPageMessage(String nextPageMessage) {
         this.nextPageMessage = nextPageMessage;
     }
-    
+
+    public ITeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
+    public IStudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
+    }
 }

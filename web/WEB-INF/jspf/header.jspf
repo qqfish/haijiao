@@ -25,8 +25,8 @@
                         <li><a href="getMail.action">收件箱</a></li>
                         <li>
                             <div class="btn-group">
-                                <button class="btn btn-inverse">去上课</button>
                                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+                                    去上课
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">

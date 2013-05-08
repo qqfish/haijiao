@@ -104,4 +104,14 @@ public class Student extends User{
     public void setBillList(List<Bill> billList) {
         this.billList = billList;
     }
+    
+    public int getRemainCoin(){
+        int current = coin;
+        for(int i = 0; i < schedule.size(); i++){
+            current -= schedule.get(0).getRemain() * schedule.get(i).getFreeTime().getTeacher().getWagePerhour();
+            if(current < 0)
+                return current;
+        }
+        return current;
+    }
 }

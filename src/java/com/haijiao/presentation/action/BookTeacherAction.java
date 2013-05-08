@@ -2,10 +2,11 @@
  *
  * @author Jerry Zou
  */
-
 package com.haijiao.presentation.action;
 
 import com.google.gson.Gson;
+import com.haijiao.Domain.bean.Student;
+import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.presentation.bean.schedule.ScheduleArray;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IClassService;
@@ -15,6 +16,7 @@ import com.haijiao.global.scheduleLocation;
 import java.util.List;
 
 public class BookTeacherAction extends SessionAction {
+
     IClassService classService;
     ITeacherService teacherService;
     IUserService userService;
@@ -26,26 +28,33 @@ public class BookTeacherAction extends SessionAction {
 
     public BookTeacherAction() {
     }
-    
+
     @Override
-    public String execute(){
+    public String execute() {
         //List<List<Integer>> array = sa.getArray();
-        User stu = userService.getUserByEmail((String)this.getSessionValue("email"));
-        if(stu == null){
-            return INPUT;
+        User stu = userService.getUserByEmail((String) this.getSessionValue("email"));
+        if (stu == null) {
+            nextPageMessage = this.getText("noLogin");
+            return SUCCESS;
         }
-        if(stu.getUserType().equals("teacher")){
-            return "teacher";
+        if (stu.getUserType().equals("teacher")) {
+            return SUCCESS;
         }
         Gson gson = new Gson();
-        System.out.println(lesson);
         ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
         List<scheduleLocation> sList = array.toList();
-        System.out.println(sList.size());
-        classService.bookTeacher(teacherEmail, (String)this.getSessionValue("email"), lesson, sList, times);
-        
-        nextPageMessage = this.getText("successMessage");
-        return SUCCESS;
+        int remainCoin = ((Student) stu).getRemainCoin();
+        Teacher tea = teacherService.getTeacherByEmail(teacherEmail);
+        remainCoin -= (tea.getWagePerhour() * sList.size() * times);
+        if (remainCoin > 0) {
+            classService.bookTeacher(teacherEmail, (String) this.getSessionValue("email"), lesson, sList, times);
+
+            nextPageMessage = this.getText("successMessage");
+            return SUCCESS;
+        } else {
+            nextPageMessage = this.getText("noEnoughMoney");
+            return SUCCESS;
+        }
     }
 
     public String getTeacherEmail() {

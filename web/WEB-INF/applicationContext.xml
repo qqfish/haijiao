@@ -48,6 +48,8 @@
     </bean>
     <bean id="DealApplyAction" class="com.haijiao.presentation.action.DealApplyAction" scope="prototype">
         <property name="classService" ref="classServiceImpl" />
+        <property name="teacherService" ref="teacherServiceImpl" />
+        <property name="studentService" ref="studentServiceImpl" />
     </bean>
     <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />
