@@ -40,7 +40,7 @@ public interface IUserService {
 
     public List<Teacher> searchTeacher(List<String> strList);
 
-    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize);
+    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize, String extOrder, int desc);
 
     public int getTeacherNum(List<String> strList);
     //文件系统相关操作

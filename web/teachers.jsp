@@ -37,9 +37,16 @@
                 <div class="accordion" id="choice">
                     <div class="accordion-heading">
                         <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>评分</button>
-                            <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>价格</button>
-                            <button type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>人气</button>
+                            <s:form action="searchTeacher.action" cssStyle="display:none;">
+                                <s:textfield name="searchContent" value="%{searchContent}"/>
+                                <s:textfield name="desc" />
+                                <s:submit id="score_submit" method="score" />
+                                <s:submit id="hot_submit" method="hot" />
+                                <s:submit id="price_submit" method="price" />
+                            </s:form>
+                            <button id="score_button" type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>评分</button>
+                            <button id="price_button" type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>价格</button>
+                            <button id="hot_button" type="button" class="btn btn-navbar btn-primary" href="" data-toggle="button"><i class="icon-arrow-down icon-white"></i>人气</button>
                         </div>
                         <button class="btn btn-primary pull-right" data-toggle="collapse"  href="#collapseOne">搜索筛选<i class="icon-arrow-down icon-white"></i></button>
                     </div>

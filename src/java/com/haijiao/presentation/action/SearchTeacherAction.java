@@ -17,12 +17,36 @@ public class SearchTeacherAction extends RequestSessionAction {
     String searchContent;
     String currentPage;
     PageBean pb;
+    String extOrder;
+    Integer desc;
 
     public SearchTeacherAction() {
+    }
+    
+    public String score() throws Exception{
+        System.out.println("score");
+        extOrder="score";
+        return execute();
+    }
+    
+    public String hot() throws Exception{
+        System.out.println("hot");
+        extOrder="reserveNum";
+        return execute();
+    }
+    
+    public String price() throws Exception{
+        System.out.println("price");
+        extOrder="wagePerhour";
+        return execute();
     }
 
     @Override
     public String execute() throws Exception {
+        if (desc==null) {
+            desc = 0;
+        }
+        System.out.println("desc:" + desc);
         List<String> strList = new ArrayList<String>();
         if (searchContent != null) {
             String[] strArray = searchContent.split(" ");
@@ -37,8 +61,8 @@ public class SearchTeacherAction extends RequestSessionAction {
         } else {
             cp = Integer.parseInt(currentPage);
         }
-        int pageSize = 1;
-        List<Teacher> teacherlist = userService.searchTeacherPage(strList, (cp - 1) * pageSize, pageSize);
+        int pageSize = 20;
+        List<Teacher> teacherlist = userService.searchTeacherPage(strList, (cp - 1) * pageSize, pageSize, extOrder, desc);
         int num = userService.getTeacherNum(strList);
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
@@ -85,5 +109,21 @@ public class SearchTeacherAction extends RequestSessionAction {
     
     public void setPb(PageBean pb) {
         this.pb = pb;
+    }
+
+    public String getExtOrder() {
+        return extOrder;
+    }
+
+    public void setExtOrder(String extOrder) {
+        this.extOrder = extOrder;
+    }
+
+    public Integer getDesc() {
+        return desc;
+    }
+
+    public void setDesc(Integer desc) {
+        this.desc = desc;
     }
 }

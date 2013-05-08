@@ -44,8 +44,17 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize) {
+    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize, String extOrder, int desc) { //desc->降序
         String hql = "select distinct t from Teacher t left join t.lessons l";
+        if (extOrder!=null && !extOrder.isEmpty()){
+            hql += " order by t." + extOrder;
+            if (desc==1) {
+                hql += " desc"; //降序
+            } else if (desc==-1) {
+                hql += " asc"; //升序
+            }
+        }
+        
         String where = " where ";
         String or = " or ";
         for (int i = 0; i < strList.size(); i++) {
