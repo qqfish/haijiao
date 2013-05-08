@@ -21,6 +21,7 @@
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="js/changeInfo.js"></script>
         <script type="text/javascript" src="js/validate.js"></script>
+        <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
         <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
         <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
         <script>
@@ -195,8 +196,7 @@
                                 <img src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
                             <s:form action="uploadPic" id="upload" enctype="multipart/form-data">
-                                <s:file name="upload" value="上传"/>
-                                <s:submit cssClass="btn btn-primary btn-small" value="提交"/>
+                                <s:file name="upload" title="上传" onchange="$('#upload').submit();"/>
                             </s:form>
                         </div>
                         <div class="tab-pane fade"  id='4'>

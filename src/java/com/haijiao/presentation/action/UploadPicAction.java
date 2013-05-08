@@ -24,6 +24,7 @@ public class UploadPicAction extends SessionAction{
     private File upload;
     private String uploadFileName;
     private String uploadContentType;
+    private String nextPageMessage;
     private IUserService userService;
     
     @Override
@@ -32,6 +33,7 @@ public class UploadPicAction extends SessionAction{
             FileInputStream in = new FileInputStream(upload);
             String email = (String) this.getSessionValue("email");
             if(email == null){
+                nextPageMessage="请先登陆";
                 return "error";
             }
             String path = config.userHome + "/" + email + "/" + config.imageFolder;
@@ -59,13 +61,16 @@ public class UploadPicAction extends SessionAction{
             }
             out.close();
             userService.setPicUrl(email, path);
+            nextPageMessage = "上传完成";
             return SUCCESS;
         }
         catch(FileNotFoundException ex){
             Logger.getLogger(UploadPicAction.class.getName()).log(Level.SEVERE, null, ex);
+            nextPageMessage = "没有找到对应文件";
             return INPUT;
         } catch (IOException ex) {
             Logger.getLogger(UploadPicAction.class.getName()).log(Level.SEVERE, null, ex);
+            nextPageMessage = "上传出错";
             return INPUT;
         }
     }
@@ -100,6 +105,14 @@ public class UploadPicAction extends SessionAction{
 
     public void setUserService(IUserService userService) {
         this.userService = userService;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
     
 }
