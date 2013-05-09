@@ -20,12 +20,17 @@ import sun.misc.BASE64Encoder;
  * @author hp
  */
 public class ForgetPasswordAction extends RequestAction{
-    String email;
     IUserService userService;
+    String email;
+    String nextPageMessage;
     
     @Override
     public String execute(){
         User u = userService.getUserByEmail(email);
+        if(u == null){
+            nextPageMessage = "未注册的用户,请检查邮箱是否填写正确";
+            return INPUT;
+        }
         u.getPassword();
         SendMail sm = new SendMail();
         MessageDigest md;
@@ -38,6 +43,7 @@ public class ForgetPasswordAction extends RequestAction{
                 u.getId() + "&checkCode=" + checkCode;
             userService.saveResetInfo(u.getId(), checkCode);
             sm.send(email, "忘记密码", content);
+            nextPageMessage = "已发送至邮箱，请查收";
             return SUCCESS;
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(ForgetPasswordAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,6 +64,14 @@ public class ForgetPasswordAction extends RequestAction{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
     
 }

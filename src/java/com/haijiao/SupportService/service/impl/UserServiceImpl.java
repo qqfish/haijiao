@@ -113,6 +113,7 @@ public class UserServiceImpl implements IUserService {
             Date time = new Date(datetime.getTime());
             s.setCreateTime(time);
             s.setPicUrl("images/figure-default.png"); //temp
+            s.setScoreNum(0);
             return studentDAO.makePersistent(s);
         } else if (userType.equals("teacher")) {
             Teacher t = new Teacher();
@@ -123,6 +124,7 @@ public class UserServiceImpl implements IUserService {
             Date time = new Date(datetime.getTime());
             t.setCreateTime(time);
             t.setPicUrl("images/page2-img1.jpg"); //temp
+            t.setScoreNum(0);
             return teacherDAO.makePersistent(t);
         } else {
             return false;
@@ -164,14 +166,26 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean validateCheckcode(int id, String checkcode) {
         List<ResetInfo> lr = resetInfoDAO.getResetInfoByUser(id);
-        if(lr.size() == 1)
-            return lr.get(0).getCheckcode().equals(checkcode);
+        if(lr.size() == 1 && lr.get(0).getCheckcode().equals(checkcode)){
+            long between = new java.util.Date().getTime() - lr.get(0).getCreateTime().getTime();
+            if((between / (60 * 60 * 1000)) < 1)
+                return true;
+            else{
+                resetInfoDAO.makeTransient(lr.get(0));
+                return false;
+            }
+        }
         else
             return false;
     }
 
     @Override
     public void saveResetInfo(int id, String checkCode) {
+        List<ResetInfo> lr = resetInfoDAO.getResetInfoByUser(id);
+        if(!lr.isEmpty()){
+            for(int i =0;i < lr.size(); i ++)
+                resetInfoDAO.makeTransient(lr.get(i));
+        }
         ResetInfo r = new ResetInfo();
         r.setUserid(id);
         r.setCheckcode(checkCode);

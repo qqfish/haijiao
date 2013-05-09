@@ -11,19 +11,23 @@ import com.haijiao.SupportService.service.IUserService;
  * @author hp
  */
 public class ResetPasswordAction extends RequestAction{
+    IUserService userService;
     String id;
     String checkcode;
-    IUserService userService;
+    String nextPageMessage;
     
     @Override
     public String execute(){
         id = (String) this.getRequestValue("id");
         checkcode = (String) this.getRequestValue("checkCode");
         checkcode = checkcode.replace(" ", "+");
-        if(userService.validateCheckcode(Integer.parseInt(id), checkcode))
+        if(userService.validateCheckcode(Integer.parseInt(id), checkcode)){
             return SUCCESS;
-        else
+        }
+        else{
+            nextPageMessage = "无效的地址";
             return INPUT;
+        }
     }
 
     public void setUserService(IUserService userService) {
@@ -44,6 +48,14 @@ public class ResetPasswordAction extends RequestAction{
 
     public void setCheckcode(String checkcode) {
         this.checkcode = checkcode;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
     
 }

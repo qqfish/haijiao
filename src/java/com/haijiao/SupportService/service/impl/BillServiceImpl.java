@@ -88,6 +88,11 @@ public class BillServiceImpl implements IBillService{
                 c.setContent(content);
                 c.setScore(score);
                 b.setTtos(c);
+                Student s = b.getStudent();
+                int num = s.getScoreNum();
+                int newScore = (num == 0) ? score : ((num * s.getScore() + score) / (num +1)); 
+                s.setScoreNum(num + 1);
+                s.setScore(newScore);
                 commentDAO.makePersistent(c);
                 billDAO.update(b);
                 return true;
@@ -100,6 +105,11 @@ public class BillServiceImpl implements IBillService{
                 c.setContent(content);
                 c.setScore(score);
                 b.setStot(c);
+                Teacher t = b.getTeacher();
+                int num = t.getScoreNum();
+                int newScore = (num == 0) ? score : ((num * t.getScore() + score) / (num +1)); 
+                t.setScoreNum(num + 1);
+                t.setScore(newScore);
                 commentDAO.makePersistent(c);
                 billDAO.update(b);
                 return true;
