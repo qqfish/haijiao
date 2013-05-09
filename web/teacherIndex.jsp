@@ -374,7 +374,9 @@
                                                                 <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
                                                             </span>
                                                             <br/><br/>
-                                                            <span>您的回复：<s:property value="stot.reply" /></span>
+                                                            <s:if test="stot.reply != null">
+                                                                <span>您的回复：<s:property value="stot.reply" /></span>
+                                                            </s:if>
                                                         </small>
                                                         <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                             <div class="modal-header">
