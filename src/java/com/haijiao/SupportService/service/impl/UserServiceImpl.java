@@ -132,13 +132,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<Teacher> searchTeacher(List<String> strList) {
-        return teacherDAO.searchTeacher(strList);
+    public List<Teacher> searchTeacher(List<String> strList, List<String> strList2) {
+        return teacherDAO.searchTeacher(strList, strList2);
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize, String extOrder, int desc) {
-        return teacherDAO.searchTeacherPage(strList, first, pagesize, extOrder, desc);
+    public List<Teacher> searchTeacherPage(List<String> strList, List<String> strList2, int first, int pagesize, String extOrder, int desc) {
+        return teacherDAO.searchTeacherPage(strList, strList2, first, pagesize, extOrder, desc);
     }
 
     @Override

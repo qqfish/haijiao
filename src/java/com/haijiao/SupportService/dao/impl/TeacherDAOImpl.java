@@ -25,17 +25,27 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacher(List<String> strList) {
+    public List<Teacher> searchTeacher(List<String> strList, List<String> strList2) {
         String hql = "select distinct t from Teacher t left join t.lessons l";
         String where = " where ";
         String or = " or ";
+        String and = " and ";
         for (int i = 0; i < strList.size(); i++) {
             String keyword = strList.get(i);
-            where += "l.name like '%" + keyword + "%'";
+            where += "(l.name like '%" + keyword + "%'";
             where += or;
-            where += "t.name like '%" + keyword + "%'";
+            where += "t.name like '%" + keyword + "%')";
             if (i + 1 < strList.size()) {
-                where += or;
+                where += and;
+            }
+        }
+        if(!strList2.isEmpty())
+            where += and;
+        for(int i =0; i < strList2.size();i ++){
+            String keyword = strList2.get(i);
+            where += "l.name like '%" + keyword + "%'";
+            if (i + 1 < strList2.size()) {
+                where += and;
             }
         }
         hql += where;
@@ -44,7 +54,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, int first, int pagesize, String extOrder, int desc) { //desc->降序
+    public List<Teacher> searchTeacherPage(List<String> strList, List<String> strList2, int first, int pagesize, String extOrder, int desc) { //desc->降序
         String hql = "select distinct t from Teacher t left join t.lessons l";
         if (extOrder!=null && !extOrder.isEmpty()){
             hql += " order by t." + extOrder;
@@ -57,13 +67,23 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         
         String where = " where ";
         String or = " or ";
+        String and = " and ";
         for (int i = 0; i < strList.size(); i++) {
             String keyword = strList.get(i);
-            where += "l.name like '%" + keyword + "%'";
+            where += "(l.name like '%" + keyword + "%'";
             where += or;
-            where += "t.name like '%" + keyword + "%'";
+            where += "t.name like '%" + keyword + "%')";
             if (i + 1 < strList.size()) {
-                where += or;
+                where += and;
+            }
+        }
+        if(!strList2.isEmpty())
+            where += and;
+        for(int i =0; i < strList2.size();i ++){
+            String keyword = strList2.get(i);
+            where += "l.name like '%" + keyword + "%'";
+            if (i + 1 < strList2.size()) {
+                where += and;
             }
         }
         hql += where;

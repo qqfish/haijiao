@@ -16,6 +16,10 @@
                     <li><a href="contact.jsp">意见反馈</a></li>
                     <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action">
                         <s:textfield  name="searchContent" cssClass=" span3" placeholder="搜索"></s:textfield>
+                        <div style="display: none;">
+                            <s:textfield  name="lessonGet" cssClass=" span3"></s:textfield>
+                            <s:textfield  name="gradeGet" cssClass=" span3"></s:textfield>
+                        </div>
                         <a href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white"></i></a>
                     </s:form>
                 </ul>

@@ -152,7 +152,7 @@
                                         <dt>学校</dt>
                                         <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" value="%{stu.school}"/></dd>
                                         <dt>年级</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="grade" placeholder="请输入您就读的年级" value="%{stu.grade}"/></dd>
+                                        <dd><s:select cssClass="span4" headerValue="请选择你的年级" name="grade" list="{'小学', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}" value="%{stu.grade}"/></dd>
                                         <dt>手机</dt>
                                         <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{stu.tel}"/></dd>                                
                                         <dd style="display: none;"><s:radio list="{'student', 'parent'}" name="telType" value="%{stu.telType}"/></dd>

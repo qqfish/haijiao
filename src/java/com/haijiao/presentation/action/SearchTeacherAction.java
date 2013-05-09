@@ -18,24 +18,23 @@ public class SearchTeacherAction extends RequestSessionAction {
     String currentPage;
     PageBean pb;
     Integer desc;
+    String lessonGet;
+    String gradeGet;
 
     public SearchTeacherAction() {
     }
     
     public String score() throws Exception{
-        System.out.println("score");
         this.putIn("extOrder", "score");
         return execute();
     }
     
     public String hot() throws Exception{
-        System.out.println("hot");
         this.putIn("extOrder", "reserveNum");
         return execute();
     }
     
     public String price() throws Exception{
-        System.out.println("price");
         this.putIn("extOrder", "wagePerhour");
         return execute();
     }
@@ -46,7 +45,6 @@ public class SearchTeacherAction extends RequestSessionAction {
         if (desc==null) {
             desc = 0;
         }
-        System.out.println("desc:" + desc);
         List<String> strList = new ArrayList<String>();
         if (searchContent != null) {
             String[] strArray = searchContent.split(" ");
@@ -54,15 +52,17 @@ public class SearchTeacherAction extends RequestSessionAction {
         } else {
             strList.add("");
         }
+        List<String> strList2 = new ArrayList<String>();
+        strList2.add(lessonGet);
+        strList2.add(gradeGet);
         int cp;
-        System.out.println(currentPage);
         if (currentPage == null) {
             cp = 1;
         } else {
             cp = Integer.parseInt(currentPage);
         }
         int pageSize = 20;
-        List<Teacher> teacherlist = userService.searchTeacherPage(strList, (cp - 1) * pageSize, pageSize, extOrder, desc);
+        List<Teacher> teacherlist = userService.searchTeacherPage(strList, strList2, (cp - 1) * pageSize, pageSize, extOrder, desc);
         int num = userService.getTeacherNum(strList);
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
@@ -117,5 +117,21 @@ public class SearchTeacherAction extends RequestSessionAction {
 
     public void setDesc(Integer desc) {
         this.desc = desc;
+    }
+
+    public String getLessonGet() {
+        return lessonGet;
+    }
+
+    public void setLessonGet(String lessonGet) {
+        this.lessonGet = lessonGet;
+    }
+
+    public String getGradeGet() {
+        return gradeGet;
+    }
+
+    public void setGradeGet(String gradeGet) {
+        this.gradeGet = gradeGet;
     }
 }
