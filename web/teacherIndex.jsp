@@ -17,6 +17,7 @@
         <script type="text/javascript" src="TeacherIndex/js/addSchedule.js"></script>
         <script type="text/javascript" src="TeacherIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
@@ -271,28 +272,29 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id='lesson_area'>
-                            <s:property value="teacher.name" />老师您好，您目前开设课程的情况如下：
+                            <h4>老师您好，您目前开设课程的情况如下：</h4>
                             <table>
-                                <tr>
-                                    <td>课程名</td>
-                                    <td>操作</td>
-                                </tr>
                                 <s:iterator value="teacher.lessons" id="ls">
                                     <s:if test="delete==false">
-                                        <tr>
                                             <s:form action="changeInfo.action">
-                                                <td>【<s:property value="name" />】</td>
-                                                <td style="display:none;"><s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName" placeholder="请输入新的课程名"/></td>
-                                                <td><s:submit cssClass="btn" value="delete" method="deleteLesson"/></td>
+                                                <div style="display:none;">
+                                                    <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
+                                                    <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
+                                                </div>
+                                                    [<s:property value="name" />]<a href="#" id="delete_click_<s:property value="name" />"><img width="20px" height="20px" src="images/delete.png"></a>  
                                            </s:form>
-                                       </tr>
                                     </s:if>
                                 </s:iterator>
+                                <br/><br/>
+                                <p style="font-size: 9px;">
+                                    * 小提示①：点击课程后面的小叉可以取消开设该课程哦！<br/>
+                                    * 小提示②：您可以通过下面的输入框开设新的课程哦！
+                                </p>
+                                <br/><br/>
                                 <s:form action="changeInfo.action">
-                                    <tr>
-                                        <td><s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/></td>
-                                        <td><s:submit cssClass="btn" value="add" method="addLesson"/></td>
-                                    </tr>
+                                    <s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/>
+                                    <a href="#" id="add_click"><img width="20px" height="20px" src="images/add.gif"></a>
+                                    <div style="display: none;"><s:submit cssClass="btn" value="add" method="addLesson"/></div>
                                 </s:form>
                             </table>
                         </div>

@@ -121,11 +121,13 @@ public class ChangeInfoAction extends SessionAction {
     
     public String addLesson(){
         teacherService.addLesson((String)this.getSessionValue("email"), lessonName);
+        nextPageMessage = "成功添加课程";
         return SUCCESS;
     }
     
     public String deleteLesson(){
         teacherService.deleteLesson((String)this.getSessionValue("email"), lessonName);
+        nextPageMessage = "成功删除课程【" + lessonName + "】";
         return SUCCESS;
     }
 

@@ -17,7 +17,6 @@ public class SearchTeacherAction extends RequestSessionAction {
     String searchContent;
     String currentPage;
     PageBean pb;
-    String extOrder;
     Integer desc;
 
     public SearchTeacherAction() {
@@ -25,24 +24,25 @@ public class SearchTeacherAction extends RequestSessionAction {
     
     public String score() throws Exception{
         System.out.println("score");
-        extOrder="score";
+        this.putIn("extOrder", "score");
         return execute();
     }
     
     public String hot() throws Exception{
         System.out.println("hot");
-        extOrder="reserveNum";
+        this.putIn("extOrder", "reserveNum");
         return execute();
     }
     
     public String price() throws Exception{
         System.out.println("price");
-        extOrder="wagePerhour";
+        this.putIn("extOrder", "wagePerhour");
         return execute();
     }
 
     @Override
     public String execute() throws Exception {
+        String extOrder = (String) this.getOutSession("extOrder");
         if (desc==null) {
             desc = 0;
         }
@@ -109,14 +109,6 @@ public class SearchTeacherAction extends RequestSessionAction {
     
     public void setPb(PageBean pb) {
         this.pb = pb;
-    }
-
-    public String getExtOrder() {
-        return extOrder;
-    }
-
-    public void setExtOrder(String extOrder) {
-        this.extOrder = extOrder;
     }
 
     public Integer getDesc() {
