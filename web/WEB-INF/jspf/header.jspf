@@ -14,7 +14,7 @@
                     <li><a href="searchTeacher.action">去逛逛</a></li>
                     <li><a href="contact.jsp">关于我们</a></li>
                     <li><a href="contact.jsp">意见反馈</a></li>
-                    <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action">
+                    <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">
                         <s:textfield  name="searchContent" cssClass=" span3" placeholder="搜索"></s:textfield>
                         <div style="display: none;">
                             <s:textfield  name="lessonGet" cssClass=" span3"></s:textfield>
