@@ -1,0 +1,33 @@
+/* 
+    Document   : myBootstrap.css
+    Created on : May 8, 2013, 6:51:52 PM
+    Author     : fish
+    Description:
+        Purpose of the stylesheet follows.
+*/
+.module {
+    position: relative;
+    margin-bottom: 10px;
+    line-height: 16px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    text-shadow: 0 1px 0 #fff;
+    border: 1px solid #eee;
+    border: 1px solid rgba(0,0,0,.1);
+
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    
+    background-color: #f9f9f9;
+    padding: 12px;
+    line-height: 16px;
+}
+

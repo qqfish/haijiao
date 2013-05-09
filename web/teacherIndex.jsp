@@ -38,14 +38,15 @@
                 <![endif]-->
     </head>
     <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);">
+            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
+            style="background: url(images/background.jpg);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
-        <div class="container">
+        <div class="container" style="background: url(https://abs.twimg.com/a/1367451715/t1/img/wash-white-30.png);">
             <div class="row">
-                <div id="sideInfo" class="span3">
+                <div id="sideInfo" class="span3 module">
                     <img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/>
                     <h1><s:property value="teacher.name"/></h1>          
                     <hr/>
@@ -69,7 +70,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="span9">
+                <div class="span8 module">
                     <s:a action="toChangeInfo.action">
                         <button type="button" class="btn btn-primary pull-right"><i class="icon-pencil icon-white"></i>修改资料</button>
                     </s:a>
