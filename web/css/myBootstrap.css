@@ -7,7 +7,6 @@
 */
 .module {
     position: relative;
-    margin-bottom: 10px;
     line-height: 16px;
     -webkit-border-radius: 6px;
     -moz-border-radius: 6px;
@@ -25,9 +24,15 @@
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    
+
     background-color: #f9f9f9;
-    padding: 12px;
     line-height: 16px;
+    margin-bottom: 12px;
+}
+
+.wrapper {
+    min-height: 100%;
+    padding-top: 14px;
+    background: url(https://abs.twimg.com/a/1367451715/t1/img/wash-white-30.png);
 }
 

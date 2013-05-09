@@ -37,14 +37,15 @@
                 <![endif]-->
 
     </head>
-    <body onload="viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);">
+    <body onload="viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);"
+          style="background: url(images/background.jpg);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
-        <div class="container">
-            <div class="row">
-                <div id="sideInfo" class="span3">
+        <div class="container wrapper">
+            <div class="row" style="margin:-5px;">
+                <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="student.picUrl"/>" class="img-polaroid"/>
                     <h1><s:property value="student.name"/></h1>          
                     <hr/>
@@ -52,7 +53,7 @@
                     <p><s:property value="student.email"/></p>
                     <p><s:property value="student.createdateToString()"/> 加入</p>
                 </div>
-                <div class="span9">
+                <div class="span8 module" style="padding:12px">
                     <s:a action="toChangeInfo.action">
                         <button type="button" class="btn btn-primary pull-right"><i class="icon-pencil icon-white"></i>修改资料</button>
                     </s:a>

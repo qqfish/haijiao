@@ -34,14 +34,15 @@
         <![endif]-->
 
     </head>
-    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);">
+    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);"
+          style="background: url(images/background.jpg);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
-        <div class="container">
-            <div class="row">
-                <div id="sideInfo" class="span3">
+        <div class="container wrapper">
+            <div class="row" style="margin:-5px;">
+                <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
                     <h1><s:property value="tea.name"/></h1>          
                     <hr/>
@@ -85,7 +86,7 @@
                         </s:if>
                     </s:if>
                 </div>
-                <div class="span9">
+                <div class="span8 module" style="padding:12px;">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
                         <li><a href="#detail_area" data-toggle="tab">详细信息</a></li>
@@ -96,7 +97,7 @@
                             <div class="span5 well">
 
                             </div>
-                            <div class="span3">
+                            <div class="span2">
                                 <table class="table table-hover table-striped ">
                                     <tbody>
                                         <tr>
@@ -153,18 +154,12 @@
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
-                                                <s:iterator value="billList" id="billList">
-                                                    <s:if test="stot != null">
-                                                        <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
+                                                    <s:iterator value="billList" id="billList">
+                                                        <h4><s:property value="toName" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
                                                         <small>
-                                                            <span><s:property value="stot.content" /></span>
-                                                            <br/><br/>
-                                                            <s:if test="stot.reply != null">
-                                                                <span>老师的回复：<s:property value="stot.reply" /></span>
-                                                            </s:if>
+                                                            <span><s:property value="comment.content" /></span>
                                                         </small>
-                                                    </s:if>
-                                                </s:iterator>
+                                                    </s:iterator>
                                                 </s:else>
                                             </blockquote>
                                         </td>
