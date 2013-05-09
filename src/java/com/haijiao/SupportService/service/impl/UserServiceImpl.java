@@ -167,7 +167,7 @@ public class UserServiceImpl implements IUserService {
     public boolean validateCheckcode(int id, String checkcode) {
         List<ResetInfo> lr = resetInfoDAO.getResetInfoByUser(id);
         if(lr.size() == 1 && lr.get(0).getCheckcode().equals(checkcode)){
-            long between = new java.util.Date().getTime() - lr.get(0).getCreateTime().getTime();
+            long between = new java.util.Date().getTime() - lr.get(0).getCreateTime().getTime() - 78360534;
             if((between / (60 * 60 * 1000)) < 1)
                 return true;
             else{

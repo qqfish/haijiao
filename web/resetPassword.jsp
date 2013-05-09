@@ -15,6 +15,7 @@
     </head>
     <body>
         <s:form action="changePassword.action">
+            <s:textfield name="id" value="%{id}" cssStyle="display:none;"/>
             <s:textfield name=""/>
             <s:textfield name=""/>
         </s:form>
