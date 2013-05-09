@@ -65,6 +65,7 @@
                             </div>
                             <div id="reg-panel" class="accordion-body collapse in">
                                 <div class="accordion-inner">
+                                    <div id="getErrorMessage" style="display:none;"><s:property value="errorMessage" /></div>
                                     <s:form action="register.action">
                                         <s:textfield name="email"  onchange="validate_email(this,email_tip);" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 4px;" ></s:textfield>
                                             <div id="email_tip" class="validateTip"></div>
@@ -102,11 +103,12 @@
                             <div id="log-panel" class="accordion-body collapse">
                                 <div class="accordion-inner">
                                     <s:form action="login.action">
+                                        <div id="login_tip" class="validateTip"></div>
                                         <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
                                         <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
                                         <s:submit cssClass="btn btn-success " style="margin-top:90px;margin-left:8px;width:220px" value="登录"></s:submit>
                                     </s:form>
-                                    <a href="forgetPassword.jsp">忘记密码</a>
+                                        <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a></div>
                                 </div>
                             </div>
                         </div>

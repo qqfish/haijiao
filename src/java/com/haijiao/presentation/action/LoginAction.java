@@ -16,13 +16,13 @@ public class LoginAction extends SessionAction {
     private IStudentService studentService;
     private String email;
     private String password;
-    private String nextPageMessage;
+    private String errorMessage;
     
     @Override
     public String execute() throws Exception {
         String userType = userService.confirmLogin(email, password);
         if(userType == null){
-            nextPageMessage = this.getText("loginFail");
+            errorMessage = "loginFail";
             return INPUT;
         } else {
             User theUser = userService.getUserByEmail(email);
@@ -43,15 +43,11 @@ public class LoginAction extends SessionAction {
     @Override
     public void validate(){
         if(email.isEmpty() || email.trim().length()==0){
-            nextPageMessage = this.getText("emailNull");
+            errorMessage = "LemailNull";
             this.addActionError(null);
         }
         else if(password.isEmpty() || password.trim().length()==0){
-            nextPageMessage = this.getText("passwordNull");
-            this.addActionError(null);
-        }
-        else if(password.trim().length()<6){
-            nextPageMessage = this.getText("passwordShort");
+            errorMessage = "LpasswordNull";
             this.addActionError(null);
         }
     }
@@ -96,11 +92,11 @@ public class LoginAction extends SessionAction {
         this.studentService = studentService;
     }
 
-    public String getNextPageMessage() {
-        return nextPageMessage;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }
