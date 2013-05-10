@@ -83,15 +83,15 @@
         <![endif]-->
 
     </head>
-    <body>
+    <body style="background: url(images/background.jpg);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
         <link rel="stylesheet" href="css/tooltik.css">
-        <div class="container">
-            <div class="row">
-                <div class="span3">
+        <div class="container wrapper" >
+            <div class="row" style="margin:-5px;">
+                <div class="span3 module" style="padding:12px">
                     <h3>修改信息</h3>
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
@@ -101,7 +101,7 @@
                         <li><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
                     </ul>
                 </div>
-                <div class="span9">
+                <div class="span8 module" style="padding:12px;">
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id='1'>
                             <s:form action="changeInfo.action">
