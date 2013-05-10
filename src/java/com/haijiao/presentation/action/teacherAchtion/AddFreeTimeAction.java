@@ -22,6 +22,7 @@ public class AddFreeTimeAction extends SessionAction {
 
     IClassService classService;
     String json;
+    String nextPageMessage;
 
     @Override
     public String execute() {
@@ -30,8 +31,10 @@ public class AddFreeTimeAction extends SessionAction {
         ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
         List<scheduleLocation> sList = array.toList();
         if(classService.teacherAddClazz((String)this.getSessionValue("email"), sList)){
+            nextPageMessage = "成功添加空闲时间";
             return SUCCESS;
         } else {
+            nextPageMessage = "添加空闲时间失败";
             return INPUT;
         }
     }
@@ -50,5 +53,13 @@ public class AddFreeTimeAction extends SessionAction {
 
     public void setJson(String json) {
         this.json = json;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }

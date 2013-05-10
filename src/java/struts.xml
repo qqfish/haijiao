@@ -114,8 +114,8 @@
             <result name="unconnected">error.jsp</result>
         </action>
         <action name="sendMail" class="SendMailAction">
-            <result name="success" type="">mail.jsp</result>
-            <result name="input">error.jsp</result>
+            <result name="success" type="chain">getMail</result>
+            <result name="input" type="chain">getMail</result>
         </action>
         <action name="getMail" class="GetMailAction">
             <result name="success" type="">mail.jsp</result>

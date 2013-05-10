@@ -46,7 +46,7 @@ public class BookTeacherAction extends SessionAction {
         int remainCoin = ((Student) stu).getRemainCoin();
         Teacher tea = teacherService.getTeacherByEmail(teacherEmail);
         remainCoin -= (tea.getWagePerhour() * sList.size() * times);
-        if (remainCoin > 0) {
+        if (remainCoin >= 0) {
             classService.bookTeacher(teacherEmail, (String) this.getSessionValue("email"), lesson, sList, times);
 
             nextPageMessage = this.getText("successMessage");

@@ -15,6 +15,7 @@ public class SendMailAction extends SessionAction{
     IMailService mailService;
     String email;
     String content;
+    String nextPageMessage;
 
     public String getName() {
         return name;
@@ -47,14 +48,29 @@ public class SendMailAction extends SessionAction{
     public void setContent(String content) {
         this.content = content;
     }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
+    }
     
     @Override
     public String execute(){
         System.out.println(content);
-        int id = Integer.parseInt(name);
-        if(content.isEmpty())
+        if(name.isEmpty()){
+            nextPageMessage = "发送失败，收件人不能为空";
             return INPUT;
+        }
+        int id = Integer.parseInt(name);
+        if(content.isEmpty()){
+            nextPageMessage = "发送失败，消息内容不能为空";
+            return INPUT;
+        }
         mailService.sendMail((String)this.getSessionValue("email"), id, content);
+        nextPageMessage = "发送成功";
         return SUCCESS;
     }
 }

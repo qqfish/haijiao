@@ -71,7 +71,7 @@
             <div id="tools" class="navbar navbar-inverse">
                 <div  class="navbar-inner">
                     <div class="span10 offset2">
-                        <a class="brand" href="index.jsp">Haijiao</a>
+                        <a class="brand" href="index.action">Haijiao</a>
                         <ul class="nav">
                             <s:if test="isHolder!=0">
                                 <li><a id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>

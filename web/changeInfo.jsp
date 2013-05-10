@@ -31,6 +31,7 @@
                     resizeType : 1,
                     allowPreviewEmoticons : false,
                     allowImageUpload : false,
+                    width : '95%',
                     items : [
                         'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
@@ -204,10 +205,10 @@
                             <hr/>
                             <s:form action="changeIntro.action">
                                 <s:if test="#session.userType == 'teacher'">
-                                    <s:textarea name="intro" value="%{tea.intro}" autofocus="autofocus"/><br/>
+                                    <s:textarea name="intro" value="%{tea.intro}" autofocus="autofocus" cssClass="span7"/><br/>
                                 </s:if>
                                 <s:if test="#session.userType == 'student'">
-                                    <s:textarea name="intro" value="%{stu.intro}" autofocus="autofocus"/><br/>
+                                    <s:textarea name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/><br/>
                                 </s:if>
                                 <s:submit cssClass="btn btn-primary btn-small pull-right" value="提交"/>
                             </s:form>

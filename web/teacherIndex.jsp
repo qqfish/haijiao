@@ -38,9 +38,9 @@
                <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
                 <![endif]-->
     </head>
-    <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
-            style="background: url(images/background.jpg);">
+          <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
+        viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
+          style="background: url(images/background.jpg);">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
@@ -90,58 +90,58 @@
                                         还没有学生选你哦~！
                                     </s:if>
                                     <s:else>
-                                    <s:iterator value="classList" id="list">
-                                        <s:if test="status>=2">
-                                            <tr>
-                                                <td>
-                                                    <blockquote>
-                                                        <h4><s:property value="student.name"/>
-                                                            <label class="label label-info pull-right">
-                                                                <s:if test="status==2">
-                                                                    等待审批
-                                                                </s:if>
-                                                                <s:if test="status==3">
-                                                                    已确认
-                                                                </s:if>
-                                                            </label>
-                                                        </h4>
-                                                        <small>
+                                        <s:iterator value="classList" id="list">
+                                            <s:if test="status>=2">
+                                                <tr>
+                                                    <td>
+                                                        <blockquote>
+                                                            <h4><s:property value="student.name"/>
+                                                                <label class="label label-info pull-right">
+                                                                    <s:if test="status==2">
+                                                                        等待审批
+                                                                    </s:if>
+                                                                    <s:if test="status==3">
+                                                                        已确认
+                                                                    </s:if>
+                                                                </label>
+                                                            </h4>
+                                                            <small>
                                                                 <span>
                                                                     <s:property value="freeTime.strWeekday()"/>
-                                                                <s:property value="freeTime.strSliceIndex()"/>
-                                                            </span>
-                                                            <span style="margin-left: 10px">剩余<s:property value="remain"/>次课程</span>
-                                                            <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
-                                                            <span style="margin-left: 10px"class="pull-right">
-                                                                <s:if test="status==3">
-                                                                    <s:form action="dealApply.action">
-                                                                        <s:textfield style="display:none;" name="button" value="stop"></s:textfield>
-                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
-                                                                        <s:submit style="display:none;" id="stopSubmit" class="btn btn-info btn-mini"></s:submit>
-                                                                        <button type="button" id="stopButton" class="btn btn-info btn-mini">暂停</button>
-                                                                    </s:form>
-                                                                </s:if>
-                                                                <s:if test="status==2">
-                                                                    <button type="button" id="acceptButton" class="btn btn-info btn-mini">接受</button>
-                                                                    <button type="button" id="declineButton" class="btn btn-info btn-mini">拒绝</button>
-                                                                    <s:form action="dealApply.action">
-                                                                        <s:textfield style="display:none;" name="button" value="accept"></s:textfield>
-                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
-                                                                        <s:submit style="display:none;" id="acceptSubmit" class="btn btn-info btn-mini"></s:submit>
-                                                                    </s:form>
-                                                                    <s:form action="dealApply.action">
-                                                                        <s:textfield style="display:none;" name="button" value="decline"></s:textfield>
-                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
-                                                                        <s:submit style="display:none;" id="declineSubmit" class="btn btn-info btn-mini"></s:submit>
-                                                                    </s:form>
-                                                                </s:if>
-                                                            </span>
-                                                        </small>
-                                                    </blockquote>
-                                                </td>
-                                            </tr>
-                                        </s:if>
-                                    </s:iterator>
+                                                                    <s:property value="freeTime.strSliceIndex()"/>
+                                                                </span>
+                                                                <span style="margin-left: 10px">剩余<s:property value="remain"/>次课程</span>
+                                                                <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
+                                                                <span style="margin-left: 10px"class="pull-right">
+                                                                    <s:if test="status==3">
+                                                                        <s:form action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="stop"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:submit style="display:none;" id="stopSubmit" class="btn btn-info btn-mini"></s:submit>
+                                                                                <button type="button" id="stopButton" class="btn btn-info btn-mini">暂停</button>
+                                                                        </s:form>
+                                                                    </s:if>
+                                                                    <s:if test="status==2">
+                                                                        <button type="button" id="acceptButton" class="btn btn-info btn-mini">接受</button>
+                                                                        <button type="button" id="declineButton" class="btn btn-info btn-mini">拒绝</button>
+                                                                        <s:form action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="accept"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:submit style="display:none;" id="acceptSubmit" class="btn btn-info btn-mini"></s:submit>
+                                                                        </s:form>
+                                                                        <s:form action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="decline"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:submit style="display:none;" id="declineSubmit" class="btn btn-info btn-mini"></s:submit>
+                                                                        </s:form>
+                                                                    </s:if>
+                                                                </span>
+                                                            </small>
+                                                        </blockquote>
+                                                    </td>
+                                                </tr>
+                                            </s:if>
+                                        </s:iterator>
                                     </s:else>
                                 </tbody>
                             </table>
@@ -276,15 +276,15 @@
                             <table>
                                 <s:iterator value="teacher.lessons" id="ls">
                                     <s:if test="delete==false">
-                                            <s:form action="changeInfo.action">
-                                                <div style="display:none;">
-                                                    <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
-                                                    <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
-                                                </div>
-                                                    [<s:property value="name" />]<a href="#" id="delete_click_<s:property value="name" />"><img width="20px" height="20px" src="images/delete.png"></a>  
-                                           </s:form>
-                                    </s:if>
-                                </s:iterator>
+                                        <s:form action="changeInfo.action">
+                                            <div style="display:none;">
+                                                <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
+                                                <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
+                                            </div>
+                                            [<s:property value="name" />]<a href="#" id="delete_click_<s:property value="name" />"><img width="20px" height="20px" src="images/delete.png"></a>  
+                                            </s:form>
+                                        </s:if>
+                                    </s:iterator>
                                 <br/><br/>
                                 <p style="font-size: 9px;">
                                     * 小提示①：点击课程后面的小叉可以取消开设该课程哦！<br/>
@@ -306,55 +306,62 @@
                                     </tbody>
                                 </s:if>
                                 <s:else>
-                                <thead>
-                                    <tr>
-                                        <th>姓名</th>
-                                        <th>课程</th>
-                                        <th>金额</th>
-                                        <th>时间</th>
-                                        <th>信息</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>        
-                                    <s:iterator value="billList" id="billList">
+                                    <thead>
                                         <tr>
-                                            <td><s:property value="student.name" /></td>
-                                            <td><s:property value="lesson.name" /></td>
-                                            <td><s:property value="getRealMoney('teacher')" /></td>
-                                            <td><s:property value="createdateToString()" /></td>
-                                            <td><s:property value="message" /></td>
-                                            <td><a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a></td>
+                                            <th>姓名</th>
+                                            <th>课程</th>
+                                            <th>金额</th>
+                                            <th>时间</th>
+                                            <th>信息</th>
+                                            <th></th>
                                         </tr>
+                                    </thead>
+                                    <tbody>        
+                                        <s:iterator value="billList" id="billList">
+                                            <tr>
+                                                <td><s:property value="student.name" /></td>
+                                                <td><s:property value="lesson.name" /></td>
+                                                <td><s:property value="getRealMoney('teacher')" /></td>
+                                                <td><s:property value="createdateToString()" /></td>
+                                                <td><s:property value="message" /></td>
+                                                <td>
+                                                    <s:if test="ttos==null">
+                                                        <a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                    </s:if>
+                                                    <s:else>
+                                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                                    </s:else>
+                                                </td>
+                                            </tr>
                                         <div id="comment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                 <h3 id="myModalLabel">评论</h3>
                                             </div>
                                             <s:form action="makeCommentReply.action">
-                                            <div class="modal-body">
-                                                <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                                内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                <br/>
-                                                评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                                <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                            </div>
-                                            <script type="text/javascript">
-                                                $("#rate").bind('rated', function (event, value){ $('#score').val(value);});
-                                                $("#rate").bind('over', function(event,value){ $(this).attr('title', value);});                                                
-                                                $("#cmtsmt").click(function(event){
-                                                    if(/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                        event.preventDefault();
-                                                });
-                                            </script>
+                                                <div class="modal-body">
+                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                    内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                        <br/>
+                                                        评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                    <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                    <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
+                                                    </div>
+                                                    <script type="text/javascript">
+                                                        $("#rate").bind('rated', function (event, value){ $('#score').val(value);});
+                                                        $("#rate").bind('over', function(event,value){ $(this).attr('title', value);});                                                
+                                                        $("#cmtsmt").click(function(event){
+                                                            if(/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                event.preventDefault();
+                                                        });
+                                                    </script>
                                             </s:form>
                                         </div>
                                     </s:iterator>
-                                </tbody>
+                                    </tbody>
                                 </s:else>
                             </table>
                         </div>
@@ -368,37 +375,37 @@
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
-                                                <s:iterator value="billList" id="billList">
-                                                    <s:if test="stot != null">
-                                                        <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
-                                                        <small>
-                                                            <span><s:property value="stot.content" /></span>
-                                                            <span class="pull-right">
-                                                                <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
-                                                            </span>
-                                                            <br/><br/>
-                                                            <s:if test="stot.reply != null">
-                                                                <span>您的回复：<s:property value="stot.reply" /></span>
-                                                            </s:if>
-                                                        </small>
-                                                        <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                <h3 id="myModalLabel">回复</h3>
+                                                    <s:iterator value="billList" id="billList">
+                                                        <s:if test="stot != null">
+                                                            <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
+                                                            <small>
+                                                                <span><s:property value="stot.content" /></span>
+                                                                <span class="pull-right">
+                                                                    <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                                </span>
+                                                                <br/><br/>
+                                                                <s:if test="stot.reply != null">
+                                                                    <span>您的回复：<s:property value="stot.reply" /></span>
+                                                                </s:if>
+                                                            </small>
+                                                            <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                    <h3 id="myModalLabel">回复</h3>
+                                                                </div>
+                                                                <s:form action="makeCommentReply.action">
+                                                                    <div class="modal-body">
+                                                                        <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                                        <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                        <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
+                                                                        </div>
+                                                                </s:form>
                                                             </div>
-                                                            <s:form action="makeCommentReply.action">
-                                                                <div class="modal-body">
-                                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                                                    <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                                    <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                </div>
-                                                            </s:form>
-                                                        </div>
-                                                    </s:if>
-                                                </s:iterator>
+                                                        </s:if>
+                                                    </s:iterator>
                                                 </s:else>
                                             </blockquote>
                                         </td>
