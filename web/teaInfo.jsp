@@ -154,11 +154,17 @@
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
-                                                    <s:iterator value="billList" id="billList">
-                                                        <h4><s:property value="toName" /><label class="label label-important pull-right">评分:<s:property value="comment.score" /></label></h4>
-                                                        <small>
-                                                            <span><s:property value="comment.content" /></span>
-                                                        </small>
+                                                   <s:iterator value="billList" id="billList">
+                                                    <s:if test="stot != null">
+                                                        <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
+                                                         <small>
+                                                            <span><s:property value="stot.content" /></span>
+                                                            <br/><br/>
+                                                            <s:if test="stot.reply != null">
+                                                                <span>老师的回复：<s:property value="stot.reply" /></span>
+                                                            </s:if>
+                                                         </small>
+                                                       </s:if>
                                                     </s:iterator>
                                                 </s:else>
                                             </blockquote>

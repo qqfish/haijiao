@@ -4,18 +4,22 @@ jQuery(document).ready(function($){
             backdrop: "static"
         });
         
+        $('#normal_button').click(function(){
+            $('#normal_submit').click();
+        });
+        
         $('#score_button').click(function(){
-            $('#searchTeacher_desc').val("1");
+            $('#search2_desc').val("1");
             $('#score_submit').click();
         });
         
         $('#price_button').click(function(){
-            $('#searchTeacher_desc').val("1");
+            $('#search2_desc').val("1");
             $('#price_submit').click();
         });
         
         $('#hot_button').click(function(){
-            $('#searchTeacher_desc').val("1");
+            $('#search2_desc').val("1");
             $('#hot_submit').click();
         });
         
@@ -69,11 +73,13 @@ jQuery(document).ready(function($){
         $('.lesson').click(function(){
             lesson = $(this).text();
             $("#search_lessonGet").val(lesson);
+            $("#search2_lessonGet").val(lesson);
         })
         
         $('.grade').click(function(){
             grade = $(this).text();
             $("#search_gradeGet").val(grade); 
+            $("#search2_gradeGet").val(grade); 
         })
         
 });

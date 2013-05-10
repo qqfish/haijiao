@@ -22,7 +22,7 @@
             <div style="width:1000px;margin-left: auto;margin-right:auto;">
                 <a class="brand" href="index.action">Haijiao</a>
                 <ul class="nav">
-                    <li><a href="searchTeacher.action">去逛逛</a></li>
+                    <li><a href="#" onclick="$('#searchSubmit').click();">去逛逛</a></li>
                     <li><a href="contact.jsp">关于我们</a></li>
                     <li><a href="contact.jsp">意见反馈</a></li>
                     <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">
@@ -31,7 +31,7 @@
                             <s:textfield  name="lessonGet" cssClass=" span3"></s:textfield>
                             <s:textfield  name="gradeGet" cssClass=" span3"></s:textfield>
                         </div>
-                        <a href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white"></i></a>
+                        <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white"></i></a>
                     </s:form>
                 </ul>
                 <ul class="nav" style="float: right">

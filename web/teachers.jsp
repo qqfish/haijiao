@@ -80,13 +80,16 @@
                         <h3>
                             老师列表
                             <small>
-                                <a>默认</a>/<a id="score_button">评分</a>/<a id="price_button">价格</a>/<a id="hot_button">人气</a>
+                                <a id="normal_button">默认</a>/<a id="score_button">评分</a>/<a id="price_button">价格</a>/<a id="hot_button">人气</a>
                                 <button class="btn btn-small pull-right">仅显示在线</button>
                             </small>
                         </h3>
-                        <s:form action="searchTeacher.action" cssStyle="display:none;">
+                        <s:form id="search2" action="searchTeacher.action" cssStyle="display:none;" method="get">
                             <s:textfield name="searchContent" value="%{searchContent}"/>
                             <s:textfield name="desc" />
+                            <s:textfield  name="lessonGet" cssClass=" span3"></s:textfield>
+                            <s:textfield  name="gradeGet" cssClass=" span3"></s:textfield>
+                            <s:submit id="normal_submit"/>
                             <s:submit id="score_submit" method="score" />
                             <s:submit id="hot_submit" method="hot" />
                             <s:submit id="price_submit" method="price" />

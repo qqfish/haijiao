@@ -114,6 +114,7 @@ public class UserServiceImpl implements IUserService {
             s.setCreateTime(time);
             s.setPicUrl("images/figure-default.png"); //temp
             s.setScoreNum(0);
+            s.setScore(0);
             return studentDAO.makePersistent(s);
         } else if (userType.equals("teacher")) {
             Teacher t = new Teacher();
@@ -125,6 +126,7 @@ public class UserServiceImpl implements IUserService {
             t.setCreateTime(time);
             t.setPicUrl("images/page2-img1.jpg"); //temp
             t.setScoreNum(0);
+            t.setScore(0);
             return teacherDAO.makePersistent(t);
         } else {
             return false;
