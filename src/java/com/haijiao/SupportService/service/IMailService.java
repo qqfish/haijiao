@@ -18,6 +18,7 @@ public interface IMailService {
     public List<Mail> getMail(String email);
     //获取本用户未收到的私信
     public List<Mail> getUnreadMail(String email);
+    public int getUnreadMailNum(String email);
     //发送一封私信
     public boolean sendMail(String emailFrom, int id, String message);
     public boolean sendMail(String emailFrom, String emailTo, String message);

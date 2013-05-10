@@ -121,6 +121,7 @@
             <result name="success" type="">mail.jsp</result>
             <result name="input">error.jsp</result>
         </action>
+        <action name="getMailNum" class="GetMailNumAction"/>
         <action name="enterRoom" class="EnterRoomAction">
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>

@@ -1,6 +1,17 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="s" uri="/struts-tags"  %>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function getMailNum(){
+        var id = null;
+        $.post("getMailNum.action",function(data) {
+            console.log(data);
+            console.log($('#mailNum').text());
+            if($('#mailNum').text() != data)
+                $('#mailNum').text(data);
+        });
+    }
+</script>
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/myBootstrap.css">
@@ -25,9 +36,12 @@
                 </ul>
                 <ul class="nav" style="float: right">
                     <s:if test="#session.email!=null">
+                        <script>
+                            id = setInterval(getMailNum,60000);
+                        </script>
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>
                         <li><a href="">余额</a></li>
-                        <li><a href="getMail.action">收件箱</a></li>
+                        <li><a href="getMail.action">收件箱<span id="mailNum" class="badge badge-inverse">0</span></a></li>
                         <li>
                             <div class="btn-group">
                                 <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
@@ -56,7 +70,11 @@
                         </li>
                         <li><a href="logout.action">登出</a></li>
                     </s:if>
-                    <s:else>            
+                    <s:else>
+                        <script>
+                            if(id == null)
+                                clearInterval(id);
+                        </script>
                         <li><a href="index.action">注册</a></li>
                         <li><a href="index.action">登陆</a></li>
                     </s:else>

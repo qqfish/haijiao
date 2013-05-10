@@ -51,6 +51,11 @@ public class MailServiceImpl implements IMailService{
     }
     
     @Override
+    public int getUnreadMailNum(String email){
+        return mailDAO.getUnreadMailNum(email);
+    }
+    
+    @Override
     public boolean sendMail(String emailFrom, int id, String message) {
         Mail m = new Mail();
         User from = userDAO.getUserByEmail(emailFrom);
