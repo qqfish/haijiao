@@ -70,7 +70,7 @@
             <a id="showAlert" data-toggle="modal" data-target="#alertMessage" class="btn btn-danger btn-large" style="display: none;"/>
             <div id="tools" class="navbar navbar-inverse">
                 <div  class="navbar-inner">
-                    <div class="span10 offset2">
+                    <div style="width:880px;margin-left:auto;margin-right:auto">
                         <a class="brand" href="index.action">Haijiao</a>
                         <ul class="nav">
                             <s:if test="isHolder!=0">
@@ -86,11 +86,11 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-                                        <button class="btn btn-primary" id="stopTimer"" data-dismiss="modal" aria-hidden="true">确认</button>
+                                        <button class="btn btn-primary" id="stopTimer" data-dismiss="modal" aria-hidden="true">确认</button>
                                     </div>
                                 </div>
                             </s:if>
-                            <li><session id="timerPanel">00:00:00</session></li>
+                            <li><div class="well-mini"><session id="timerPanel">00:00:00</session></div></li>
                             <li><session id="currentPage"></session> / <session id="totalPage"></session></li>
                             <li>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">

@@ -1,11 +1,20 @@
 body {	
-	line-height:24px;
-	color:#343434;
-	min-width:1020px;
-        background-color: white;
+        width: 1366px;
 /*	background:url(../images/bg-body.gif) #e6e4d7;*/
         background:url(../images/bkg.jpg);
+        filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/bkg.jpg',sizingMethod='scale')";
 }
 html, body {
 	height:100%;
+}
+
+.copyright{
+    color:#FFFFFF;
+}
+
+.copyright a{
+    color:#FFFFFF;
+}
+.copyright a:hover{
+    color:#FFFFFF;
 }

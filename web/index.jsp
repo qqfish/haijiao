@@ -19,51 +19,38 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
-        <div class="container">
-            <div class="row" style="height:375px">
+        <div class="container"  style="margin-top:7%;">
+            <div class="row" style="overflow: hidden">
                 <div class="span8">
-                    <!--                    <div id="myCarousel" class="carousel slide" style="height:400px;overflow: hidden">
-                                            <ol class="carousel-indicators">
-                                                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                                <li data-target="#myCarousel" data-slide-to="1"></li>
-                                                <li data-target="#myCarousel" data-slide-to="2"></li>
-                                            </ol>
-                                            <div class="carousel-inner">
-                                                <div class="item active">
-                                                    <img src="images/1.jpg" alt="">
-                                                    <div class="carousel-caption">
-                                                        <h4>First Thumbnail label</h4>
-                                                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="item">
-                                                    <img src="images/1.jpg" alt="">
-                                                    <div class="carousel-caption">
-                                                        <h4>Second Thumbnail label</h4>
-                                                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                                    </div>
-                                                </div>
-                                                <div class="item">
-                                                    <img src="images/1.jpg" alt="">
-                                                    <div class="carousel-caption">
-                                                        <h4>Third Thumbnail label</h4>
-                                                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-                                            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-                                        </div>-->
+                    <img src="images/title.png" alt="">
                 </div>
-                <div class="span4" style="width:265px">
+                <div class="span4" style="width:265px;height:375px;">
                     <div class="accordion" id="accordion2">
+                        <div class="accordion-group">
+                            <div class="accordion-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#log-panel">
+                                    <img src="images/log-text.png" alt="">
+                                </a>
+                            </div>
+                            <div id="log-panel" class="accordion-body collapse in">
+                                <div class="accordion-inner">
+                                    <s:form action="login.action">
+                                        <div id="login_tip" class="validateTip"></div>
+                                        <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
+                                        <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
+                                        <s:submit cssClass="btn btn-success " style="margin-top:90px;margin-left:8px;width:220px" value="登录"></s:submit>
+                                    </s:form>
+                                    <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a></div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="accordion-group">
                             <div class="accordion-heading">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">
                                     <img src="images/reg-text.png" alt="">
                                 </a>
                             </div>
-                            <div id="reg-panel" class="accordion-body collapse in">
+                            <div id="reg-panel" class="accordion-body collapse">
                                 <div class="accordion-inner">
                                     <div id="getErrorMessage" style="display:none;"><s:property value="errorMessage" /></div>
                                     <s:form action="register.action">
@@ -94,31 +81,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="accordion-group">
-                            <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#log-panel">
-                                    <img src="images/log-text.png" alt="">
-                                </a>
-                            </div>
-                            <div id="log-panel" class="accordion-body collapse">
-                                <div class="accordion-inner">
-                                    <s:form action="login.action">
-                                        <div id="login_tip" class="validateTip"></div>
-                                        <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
-                                        <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
-                                        <s:submit cssClass="btn btn-success " style="margin-top:90px;margin-left:8px;width:220px" value="登录"></s:submit>
-                                    </s:form>
-                                        <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a></div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
-            <hr/>
             <div class="row">
-                <div class="span6"><img src="images/index-intro L.png" alt=""></div>
-                <div class="span6"><img src="images/index-intro R.png" alt=""></div>
+                <div class="copyright">
+                    <p class="text-center"><a href="#">关于海角教育 ABOUT</a> | <a href="#">联系我们 CONTACT</a> | <a href="#">免责声明 DISCLAIMER</a> | <a href="#">帮助中心 HELP</a> </p>
+                    <p class="text-center">Copyright <span style="font-family: Microsoft Yahei;">©</span> 2013 haijiaoedu.com <a target="_blank" href="#">All Rights Reserved</a>.</p>
+                    <p class="text-center">海角教育 <a href="#" target="_blank">版权所有</a> <a href="http://www.miitbeian.gov.cn">沪ICP备12023789-2号</a></p>
+                </div>
             </div>
         </div>
         <!--==============================footer=================================-->

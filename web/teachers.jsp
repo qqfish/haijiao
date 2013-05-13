@@ -73,6 +73,7 @@
                         </div> 
                         <p></p>
                         <button type="button" class="btn btn-danger">地址</button>
+                        <p></p>
                     </div>
                 </div>
                 <div  id="resultPanel" class="span11 module">

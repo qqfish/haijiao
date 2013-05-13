@@ -281,7 +281,7 @@
                                                 <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
-                                            [<s:property value="name" />]<a href="#" id="delete_click_<s:property value="name" />"><img width="20px" height="20px" src="images/delete.png"></a>  
+                                            [<s:property value="name" />]<a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
                                             </s:form>
                                         </s:if>
                                     </s:iterator>
@@ -293,7 +293,7 @@
                                 <br/><br/>
                                 <s:form action="changeInfo.action">
                                     <s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/>
-                                    <a href="#" id="add_click"><img width="20px" height="20px" src="images/add.gif"></a>
+                                    <a href="#" id="add_click"><i class="icon-plus" style='margin-left:5px;margin-top: -4px'></i></a>
                                     <div style="display: none;"><s:submit cssClass="btn" value="add" method="addLesson"/></div>
                                 </s:form>
                             </table>

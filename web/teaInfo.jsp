@@ -44,7 +44,8 @@
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
-                    <h1><s:property value="tea.name"/></h1>          
+                    <h1><s:property value="tea.name"/></h1>
+                    <button class='btn btn-primary btn-small'>在线试讲</button>
                     <hr/>
                     <p><s:property value="tea.province"/></p>
                     <p><s:property value="tea.email" /></p>
