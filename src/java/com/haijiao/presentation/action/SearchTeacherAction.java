@@ -56,10 +56,13 @@ public class SearchTeacherAction extends RequestSessionAction {
         strList2.add(lessonGet);
         strList2.add(gradeGet);
         int cp;
+        String returnValue;
         if (currentPage == null) {
             cp = 1;
+            returnValue = SUCCESS;
         } else {
             cp = Integer.parseInt(currentPage);
+            returnValue = "dynamic";
         }
         int pageSize = 20;
         List<Teacher> teacherlist = userService.searchTeacherPage(strList, strList2, (cp - 1) * pageSize, pageSize, extOrder, desc);
@@ -72,7 +75,7 @@ public class SearchTeacherAction extends RequestSessionAction {
             this.putIn("message", this.getText("searchNull"));
 
         }
-        return SUCCESS;
+        return returnValue;
         /**
          * *
          * 此处加入出错处理

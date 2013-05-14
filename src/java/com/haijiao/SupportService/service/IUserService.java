@@ -25,6 +25,7 @@ public interface IUserService {
     public boolean setStatus(String email, int status);
     
     //修改密码
+
     public boolean changePassword(String email, String password);
     public boolean changePasswordById(String id, String password);
     

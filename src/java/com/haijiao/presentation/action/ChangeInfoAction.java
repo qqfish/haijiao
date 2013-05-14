@@ -129,7 +129,7 @@ public class ChangeInfoAction extends SessionAction {
         nextPageMessage = this.getText("changePasswordSuccess");
         return SUCCESS;
     }
-    
+
     public String addLesson(){
         teacherService.addLesson((String)this.getSessionValue("email"), lessonName);
         nextPageMessage = "成功添加课程";

@@ -86,12 +86,20 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean changePassword(String email, String password) {
-        Teacher t = teacherDAO.getTeacherByEmail(email);
-        t.setPassword(password);
-        teacherDAO.update(t);
+        User u = userDAO.getUserByEmail(email);
+        u.setPassword(password);
+        userDAO.update(u);
         return true;
     }
 
+    @Override
+    public boolean changePasswordById(String id, String password) {
+        User u = userDAO.findById(Integer.parseInt(id));
+        u.setPassword(password);
+        userDAO.update(u);
+        return true;
+    }
+    
     @Override
     public boolean changeIntro(String email, String intro) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
@@ -198,10 +206,5 @@ public class UserServiceImpl implements IUserService {
         Date time = new Date(datetime.getTime());
         r.setCreateTime(time);
         resetInfoDAO.makePersistent(r);
-    }
-
-    @Override
-    public boolean changePasswordById(String id, String password) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

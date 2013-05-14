@@ -72,7 +72,7 @@
                     </s:if>
                     <s:else>
                         <script>
-                            if(id == null)
+                            if(typeof(id) == 'undifined')
                                 clearInterval(id);
                         </script>
                         <li><a href="index.action">注册</a></li>

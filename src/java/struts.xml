@@ -78,6 +78,7 @@
         </action>
         <action name="searchTeacher" class="SearchTeacherAction">
             <result name="success">teachers.jsp</result>
+            <result name="dynamic">teacherspart.jsp</result>
             <result name="input">teachers.jsp</result>
         </action>
         <action name="searchTeacher" class="SearchTeacherAction" method="score">
