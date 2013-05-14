@@ -61,7 +61,7 @@
                                         <s:password name="password2" onchange="validate_passwordequal(password1,this,password_tip2);" placeholder="请重复密码"  style="margin: 20px 0px 0px 4px;"></s:password>
                                             <div id="password_tip2" class="validateTip"></div>
                                             <a id="reg-btn" data-toggle="modal" data-target="#choosemodal" class="btn btn-success" style="width:195px;margin-top:40px;margin-left: 4px">注册</a>
-                                            <div class="modal fade hide" id="choosemodal">
+                                            <div class="modal fade hide" id="choosemodal" style="margin-top:9%">
                                                 <div class="modal-header" >
                                                     <a class="close" data-dismiss="modal">×</a>
                                                     <h3>选择您的身份</h3>
