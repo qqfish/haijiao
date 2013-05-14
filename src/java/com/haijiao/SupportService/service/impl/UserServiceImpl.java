@@ -63,6 +63,9 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User getUserByEmail(String email) {
         User u = userDAO.getUserByEmail(email);
+        if (u==null) {
+            return null;
+        }
         String type = u.getUserType();
         if (type.equals("teacher")) {
             return teacherDAO.getTeacherByEmail(email);
@@ -195,5 +198,10 @@ public class UserServiceImpl implements IUserService {
         Date time = new Date(datetime.getTime());
         r.setCreateTime(time);
         resetInfoDAO.makePersistent(r);
+    }
+
+    @Override
+    public boolean changePasswordById(String id, String password) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -23,9 +23,11 @@ public interface IUserService {
     //修改用户当前状态
 
     public boolean setStatus(String email, int status);
+    
     //修改密码
-
     public boolean changePassword(String email, String password);
+    public boolean changePasswordById(String id, String password);
+    
     //修改详细资料
 
     public boolean changeIntro(String email, String intro);

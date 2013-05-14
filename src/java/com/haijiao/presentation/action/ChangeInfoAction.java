@@ -19,6 +19,7 @@ public class ChangeInfoAction extends SessionAction {
     ITeacherService teacherService;
     IStudentService studentService;
     IUserService userService;
+    String id;
     String password;
     String name;
     String sex;
@@ -115,6 +116,16 @@ public class ChangeInfoAction extends SessionAction {
             return "input";
         }
         userService.changePassword( u.getEmail(), newpwd );
+        nextPageMessage = this.getText("changePasswordSuccess");
+        return SUCCESS;
+    }
+    
+    public String changePasswordById(){
+        if ( !newpwd.equals(newpwd2) ) {
+            nextPageMessage = this.getText("passwordNotEqual");
+            return "input";
+        }
+        userService.changePasswordById( id, newpwd );
         nextPageMessage = this.getText("changePasswordSuccess");
         return SUCCESS;
     }

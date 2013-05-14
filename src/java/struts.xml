@@ -52,6 +52,10 @@
             <result name="input">changePassword.jsp</result>
             <result name="success" type="chain">index</result>
         </action>
+        <action name="changeInfo" class="ChangeInfoAction" method="changePasswordById">
+            <result name="input">resetPassword.jsp</result>
+            <result name="success" type="chain">index</result>
+        </action>
         <action name="changeInfo" class="ChangeInfoAction" method="addLesson">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">index</result>
@@ -155,10 +159,10 @@
         <action name="uploadProcess" class="UploadProcessAction"/>
         <action name="forgetPassword" class="ForgetPasswordAction">
             <result name="success" type="chain">index</result>
+            <result name="input">forgetPassword.jsp</result>
         </action>
         <action name="resetPassword" class="ResetPasswordAction">
             <result name="success">resetPassword.jsp</result>
-            <result name="input">error.jsp</result>
         </action>
     </package>
 </struts>

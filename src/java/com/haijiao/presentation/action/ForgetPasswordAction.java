@@ -6,6 +6,7 @@ package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IUserService;
+import com.haijiao.global.config;
 import com.haijiao.presentation.bean.mail.SendMail;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
@@ -39,7 +40,7 @@ public class ForgetPasswordAction extends RequestAction{
             md.update(UUID.randomUUID().toString().getBytes("UTF-8"));
             BASE64Encoder base64en = new BASE64Encoder();
             String checkCode = base64en.encode(md.digest());
-            String content = "请点击以下链接设置新密码：http://localhost:8080/haijiao/resetPassword.action?id="+
+            String content = "请点击以下链接设置新密码：http://"+config.websiteURI+"/haijiao/resetPassword.action?id="+
                 u.getId() + "&checkCode=" + checkCode;
             userService.saveResetInfo(u.getId(), checkCode);
             sm.send(email, "忘记密码", content);
