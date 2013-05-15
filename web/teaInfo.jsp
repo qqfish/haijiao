@@ -15,6 +15,7 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+                <script type="text/javascript" src="js/teaInfo.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
 
@@ -44,6 +45,8 @@
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
+                    <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
+                    <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
                     <h1><s:property value="tea.name"/></h1>
                     <button class='btn btn-primary btn-small'>在线试讲</button>
                     <hr/>
