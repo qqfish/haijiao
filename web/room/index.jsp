@@ -35,7 +35,7 @@
         <script src="/haijiao/room/js/lib/bootstrap.file-input.js"></script>
         <!--js-->
         <!--<script type="text/javascript" src="../js/superfish.js"></script>-->
-        <script type="text/javascript" src="/haijiao/room/js/sidebar.js"></script>
+        <!--<script type="text/javascript" src="/haijiao/room/js/sidebar.js"></script>-->
         <script type="text/javascript" src="/haijiao/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
@@ -68,14 +68,14 @@
                 <p id="infoMessageContext"></p>
             </div>
             <a id="showAlert" data-toggle="modal" data-target="#alertMessage" class="btn btn-danger btn-large" style="display: none;"/>
-            <div id="tools" class="navbar navbar-inverse">
+            <div id="tools" class="navbar navbar-inverse" style="margin-bottom: 0px;">
                 <div  class="navbar-inner">
                     <div style="width:880px;margin-left:auto;margin-right:auto">
-                        <a class="brand" href="index.action">Haijiao</a>
                         <ul class="nav">
+                            <li><a class="brand" href="index.action">Haijiao</a></li>
                             <s:if test="isHolder!=0">
-                                <li><a id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>
-                                <li><a id="stopTimerButton" data-target="#finishModal" role="button" data-toggle="modal"data-placement="bottom" data-original-title="停止"><i class="icon-stop icon-white"></i></a></li>
+                                <li><a class="tooltipButton" id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>
+                                <li><a class="tooltipButton" id="stopTimerButton" data-target="#finishModal" role="button" data-toggle="modal"data-placement="bottom" data-original-title="停止"><i class="icon-stop icon-white"></i></a></li>
                                 <div id="finishModal" class="modal hide fade" tabindex="-1" role="dialog">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -90,12 +90,44 @@
                                     </div>
                                 </div>
                             </s:if>
-                            <li><div class="well-mini"><session id="timerPanel">00:00:00</session></div></li>
-                            <li><session id="currentPage"></session> / <session id="totalPage"></session></li>
+                            <li><div class="well-mini"><span id="timerPanel">00:00:00</span></div></li>
+                            <li>
+                                <div class="btn-group">
+                                    <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="书签"><i class="icon-tags icon-white"></i></a>
+                                    <ul class="dropdown-menu" id="bookmark"></ul>
+                                </div>
+                            </li>
+                            <!--
+                            <li>
+                                <div class="btn-group">
+                                    <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="用户文件"><i class="icon-th-list icon-white"></i></a>
+                                    <ul class="dropdown-menu" id="userFile"></ul>
+                                </div>
+                            </li>
+                            -->
+                            <li>
+                                <div class="btn-group">
+                                    <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="用户列表"><i class="icon-user icon-white"></i></a>
+                                    <ul class="dropdown-menu" id="users"></ul>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="btn-group">
+                                    <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="文件列表"><i class="icon-folder-open icon-white"></i></a>
+                                    <ul class="dropdown-menu" id="roomFile"></ul>
+                                </div>
+                            </li>
+                            <li><a class="tooltipButton" id="uploadFile" data-toggle="tooltip" data-placement="bottom" data-original-title="上传文件"><i class="icon-circle-arrow-up icon-white"></i></a></li>
+                            <div class="control-group input-append" style="display: none;">
+                                <input class="span2" id="uploadFileInput" type="file" title="上传"/>
+                            </div>
+                            <!--
+                            <li><a class="close-sidebar tooltipButton" data-toggle="tooltip" data-placement="bottom" data-original-title="关闭侧边栏"><i class="icon-remove icon-white"></i></a></li>
+                            -->
                             <li>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                                    <button id="pointer" type="button" value="0" class="btn active" data-toggle="tooltip" data-placement="bottom" data-original-title="指针">指针</button>
-                                    <button id="pen" type="button" value="1" class="btn" data-toggle="popover" data-trigger="click" data-placement="bottom" data-html="true" data-title="调色板" data-container="#popoverContainer"><i class="icon-pencil"></i></button>
+                                    <button class="btn active tooltipButton" id="pointer" type="button" value="0" data-toggle="tooltip" data-placement="bottom" data-original-title="指针"><i class="icon-hand-up"></i></button>
+                                    <button class="btn tooltipButton" id="pen" type="button" value="1" data-toggle="popover" data-trigger="click" data-placement="bottom" data-html="true" data-title="调色板" data-container="#popoverContainer"><i class="icon-pencil"></i></button>
                                     <div id="colorPanel" style="display:none;">
                                         <div>
                                             <p>颜色</p>
@@ -118,13 +150,18 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button id="eraser" type="button" value="2" class="btn" data-toggle="tooltip" data-placement="bottom" data-original-title="橡皮"><i class="icon-hdd"></i></button>
+                                    <button class="btn tooltipButton" id="eraser" type="button" value="2" data-toggle="tooltip" data-placement="bottom" data-original-title="橡皮"><i class="icon-hdd"></i></button>
                                 </div>
                                 <div id="popoverContainer">
                                 </div>
                             </li>
-                            <li><a id="prePage" data-toggle="tooltip" data-placement="bottom" data-original-title="上一页"><i class="icon-arrow-left icon-white"></i></a></li>
-                            <li><a id="nextPage" data-toggle="tooltip" data-placement="bottom" data-original-title="下一页"><i class="icon-arrow-right icon-white" ></i></a></li>  
+                            <li><a class="tooltipButton" id="prePage" data-toggle="tooltip" data-placement="bottom" data-original-title="上一页"><i class="icon-arrow-left icon-white"></i></a></li>
+                            <li>
+                                <div class="well-mini">
+                                    <span id="currentPage"></span> / <span id="totalPage"></span>
+                                </div>
+                            </li>
+                            <li><a class="tooltipButton" id="nextPage" data-toggle="tooltip" data-placement="bottom" data-original-title="下一页"><i class="icon-arrow-right icon-white" ></i></a></li>  
                             <div class="modal hide fade" id="gotoModal">
                                 <div class="modal-header">
                                     <button type="button" id="gotoClose" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -138,34 +175,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <li><a id="gotoPage" data-toggle="modal" data-target="#gotoModal" data-placement="bottom" data-original-title="跳转"><i class="icon-share-alt icon-white" ></i></a></li>
-                            <li><a id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
-                            <li><a id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
-                            <li><a class="favor-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="书签"><i class="icon-tags icon-white"></i></a></li>
-                            <li><a class="userFile-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="用户文件"><i class="icon-th-list icon-white"></i></a></li>
-                            <li><a class="user-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="用户列表"><i class="icon-user icon-white"></i></a></li>
-                            <li><a class="file-close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="文件列表"><i class="icon-folder-open icon-white"></i></a></li>
-                            <li><a id="uploadFile" data-toggle="tooltip" data-placement="bottom" data-original-title="上传文件"><i class="icon-circle-arrow-up icon-white"></i></a></li>
-                            <div class="control-group input-append" style="display: none;">
-                                <input class="span2" id="uploadFileInput" type="file" title="上传"/>
-                            </div>
-                            <li><a class="close-sidebar" data-toggle="tooltip" data-placement="bottom" data-original-title="关闭侧边栏"><i class="icon-remove icon-white"></i></a></li>
+                            <li><a class="tooltipButton" id="gotoPage" data-toggle="modal" data-target="#gotoModal" data-placement="bottom" data-original-title="跳转"><i class="icon-share-alt icon-white" ></i></a></li>
+                            <li><a class="tooltipButton" id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
+                            <li><a class="tooltipButton" id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
                         </ul>               
                     </div> 
                 </div>
-                <div class="well span2" id ="side" style="margin:0px;float: bottom;overflow-y: auto;overflow-x: visible;white-space: nowrap;word-break: break-all">   
-                    <div id="favor-content" style="display:none;">
-                        <ul id="bookmark"></ul>
-                    </div>
-                    <div id="userFile-content" style="display:none ">
-                        <ul id="userFile"></ul>
-                    </div>
-                    <div id="user-content" style="display:none">
-                        <ul id="users"></ul>
-                    </div>
-                    <div id="file-content" style="display: none">
-                        <ul id="roomFile"></ul>
-                    </div>        
+                <div class="well span2" id ="side" style="margin:0px;float: bottom;overflow-y: auto;overflow-x: visible;white-space: nowrap;word-break: break-all;padding: 0px;">     
                 </div>
             </div>
 
@@ -175,7 +191,7 @@
                     <session>Loading...</session>
                 </div>
             </div>
-            <div id="desktop" style="position: absolute;top: 50px;overflow: hidden;">
+            <div id="desktop" style="position: absolute;overflow: hidden;">
                 <div id="table">
                 </div>
             </div>

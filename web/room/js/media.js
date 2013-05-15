@@ -287,11 +287,11 @@ function Media(parentId, text, userList){
         current.video = $("<video></video>").attr("user",user).attr("class","video").attr("autoplay","autoplay").css("opacaity",1);
         current.video.height(height).width(width);
         attachMediaStream(current.video,current.stream);
-        current.userButton = $("<li></li>").attr("class","sideBarButton").attr("user",user).attr("class","userButton");
+        current.userButton = $("<li></li>").attr("user",user);
         if(user == localUserId){
-            current.userButton.text("自己");
+            current.userButton.html("<a tabindex='-1' href='#'>自己</a>");
         } else {
-            current.userButton.text(user);
+            current.userButton.text("<a tabindex='-1' href='#'>" + user + "</a>");
         }
         current.userButton.click(function(){
             var u = $(this).attr("user");

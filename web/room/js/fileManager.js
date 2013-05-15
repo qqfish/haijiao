@@ -15,39 +15,63 @@ function Bookmark(uuid){
     this.element = null;
     this.children = new Array();
     
+//    this.scan = function(node){
+//        this.title = node.title;
+//        this.page = node.page;
+//        this.element = $("<li></li>").attr("class","sideBarButton");
+//        var link = $("<span></span>").text(node.title).attr("page",node.page);
+//        if(node.children.length > 0){
+//            var childDiv = $("<ul></ul>").attr("title",node.title);
+//            for(var i = 0; i < node.children.length; i++){
+//                var child = new Bookmark(uuid);
+//                child.scan(node.children[i]);
+//                childDiv.append(child.element);
+//                this.children[this.children.length] = child;
+//            }
+//            var show = $("<IMG></IMG>").attr("src","image/jiantou.png").attr("status","-");
+//            show.rotate(90);
+//            this.element.append(show);
+//            show.click(function(){
+//                if($(this).attr("status") == "+"){
+//                    $(this).rotate({
+//                        animateTo:90
+//                    });
+//                    $(this).attr("status","-");
+//                } else {
+//                    $(this).rotate({
+//                        animateTo:0
+//                    });
+//                    $(this).attr("status","+");
+//                }
+//                childDiv.slideToggle();
+//            });
+//            this.element.append(link);
+//            this.element.append(childDiv);
+//            childDiv.slideToggle();
+//        } else {
+//            this.element.append(link);
+//        }
+//        link.click(function(){
+//            table.sendChangePage(uuid, $(this).attr("page"));
+//        });
+//    }
+    
     this.scan = function(node){
         this.title = node.title;
         this.page = node.page;
-        this.element = $("<li></li>").attr("class","sideBarButton");
-        var link = $("<span></span>").text(node.title).attr("page",node.page);
+        this.element = $("<li></li>");
+        var link = $("<a></a>").text(node.title).attr("page",node.page).attr("tabindex","-1");
         if(node.children.length > 0){
-            var childDiv = $("<ul></ul>").attr("title",node.title);
+            var childDiv = $("<ul></ul>").attr("class","dropdown-menu");
             for(var i = 0; i < node.children.length; i++){
                 var child = new Bookmark(uuid);
                 child.scan(node.children[i]);
                 childDiv.append(child.element);
                 this.children[this.children.length] = child;
             }
-            var show = $("<IMG></IMG>").attr("src","image/jiantou.png").attr("status","-");
-            show.rotate(90);
-            this.element.append(show);
-            show.click(function(){
-                if($(this).attr("status") == "+"){
-                    $(this).rotate({
-                        animateTo:90
-                    });
-                    $(this).attr("status","-");
-                } else {
-                    $(this).rotate({
-                        animateTo:0
-                    });
-                    $(this).attr("status","+");
-                }
-                childDiv.slideToggle();
-            });
+            this.element.attr("class","dropdown-submenu");
             this.element.append(link);
             this.element.append(childDiv);
-            childDiv.slideToggle();
         } else {
             this.element.append(link);
         }
@@ -94,7 +118,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             var r = response.fileList[i];
             file.fileName = r.fileName;
             file.uuid = r.uuid;
-            file.element = $("<li></li>").attr("class","sideBarButton").text(file.fileName).attr("uuid",file.uuid);
+            file.element = $("<li></li>").html("<a tabindex='-10' href='#'>" + file.fileName + "</a>").attr("uuid",file.uuid);
             roomFileDiv.append(file.element);
             file.element.click(function(){
                 table.sendChangeFile($(this).attr("uuid"));

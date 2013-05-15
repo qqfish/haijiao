@@ -13,24 +13,24 @@ function init(clazzId, teaEmail, email){
     textChat = new TextChat("textConsole");
     toolkit = new Toolkit();
     table = new Table("table",toolkit);
-    table.setStageSize($(window).width(),$(window).height());
     media = new Media("desktop", textChat, "users");
-    media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
+    media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
     file = new fileManager("roomFile","bookmark","userFile");
     
     $(window).resize(function(){
-        $("#desktop").height($(window).height()-52).width($(window).width() - 250 + $(".slide-bar").css("left"));
+        $("#desktop").height($(window).height()-42).width($(window).width());
         table.setStageSize($(window).width(), $("#desktop").height());
-        media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
+        table.setDefaultLoc();
+        media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
 
-        $("#side").height($(window).height()-52);
+        $("#side").height($(window).height()-44);
     });
     
     var w=$(window).width();//可见区域宽度
     var h=$(window).height();//可见区域高度
-    $("#desktop").height(h-52).width(w);
-
-    $("#side").height(h-52).css("marginLeft","-250px");
+    $("#desktop").height(h-42).width(w);
+    table.setStageSize($(window).width(),$("#desktop").height());
+    $("#side").height(h-44).css("marginLeft","-250px");
     
     //just for test
     $("#nextPage").click(function(){

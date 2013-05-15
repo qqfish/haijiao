@@ -1,17 +1,3 @@
 jQuery(document).ready(function($){
-    $('#stopTimerButton').tooltip();
-    $('#toggleTimer').tooltip();
-    $('#pointer').tooltip();
-    $('#eraser').tooltip();
-    $('#prePage').tooltip();
-    $('#nextPage').tooltip();
-    $('#scaleUp').tooltip();
-    $('#scaleDown').tooltip();
-    $('#gotoPage').tooltip();
-    $("#uploadFile").tooltip();
-    $('.favor-close-sidebar').tooltip();
-    $('.userFile-close-sidebar').tooltip();
-    $('.user-close-sidebar').tooltip();
-    $('.file-close-sidebar').tooltip();
-    $('.close-sidebar').tooltip();
+    $('.tooltipButton').tooltip();
 });

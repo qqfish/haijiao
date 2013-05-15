@@ -32,7 +32,7 @@ var Response = {
     Info: 101
 }
 
-var ErroType = {
+var ErrorType = {
     AddFileFromUser: 0,
     TimerNoPermission: 1,
     NoStudentEnter: 2

@@ -88,61 +88,6 @@ jQuery(document).ready(function($){
    $('#side').animate({width: "0px"}, 1000); //以1000毫秒让“文章主体部分”的宽度收缩回705px
    
    $('#favor-content').hide();});   */
-   
-    $('.user-close-sidebar').click(function() {  //点击class=“close-sidebar”的对象,即导航中“关闭侧边栏”时
- 
-        //$('.user-close-sidebar,.sidebar').hide();       //隐藏class=“close-sidebar”和“sidebar”的对象,即导航中“关闭侧边栏”和主题的“侧边栏”
- 
-        $('.user-show-sidebar').show();      //显示class=“show-sidebar”的对象,即导航中“显示侧边栏”
- 
-        $('#favor-content').hide();
- 
-        $('#file-content').hide();
-        
-        $('#userFile-content').hide();
-        if(sideShow){
-            $('#side').animate({
-                marginLeft: "-250px"
-            }, 'fast', function(){
-                $('#user-content').show();
-            
-                $('#favor-content').hide();
- 
-                $('#file-content').hide();
-        
-                $('#userFile-content').hide();
-            });
-        
-            $('#desktop').animate({
-                left: "0",
-                width: $(window).width()
-            },'fast');
-        } else {
-            $('#user-content').show();
-            
-            $('#favor-content').hide();
- 
-            $('#file-content').hide();
-        
-            $('#userFile-content').hide();
-        }
-        
-        $('#desktop').animate({
-            left: "250px",
-            width: '-=250px'
-        },'fast');
-  
-        $('#side').animate({
-            marginLeft: "0px"
-        }, 'fast');
-        
-        $("#desktop").click(function(){
-            sideReturn();
-        });
-        media.setDragPlace(250, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
-
-        sideShow = true;
-    }); //以1000毫秒让id=“content”的对象,即“文章主体部分”的宽度增加到960px
  
     /*$('.user-show-sidebar').click(function() {  //点击导航中“显示侧边栏”时
  
@@ -154,7 +99,7 @@ jQuery(document).ready(function($){
    
    $('#user-content').hide();});   */
    
-    $('.file-close-sidebar').click(function() {  //点击class=“close-sidebar”的对象,即导航中“关闭侧边栏”时
+    /*$('.file-close-sidebar').click(function() {  //点击class=“close-sidebar”的对象,即导航中“关闭侧边栏”时
  
         //$('.file-close-sidebar,.sidebar').hide();       //隐藏class=“close-sidebar”和“sidebar”的对象,即导航中“关闭侧边栏”和主题的“侧边栏”
 
@@ -201,7 +146,7 @@ jQuery(document).ready(function($){
 
         sideShow = true;
 
-    }); //以1000毫秒让id=“content”的对象,即“文章主体部分”的宽度增加到960px
+    }); //以1000毫秒让id=“content”的对象,即“文章主体部分”的宽度增加到960px */
  
     /*$('.file-show-sidebar').click(function() {  //点击导航中“显示侧边栏”时
  

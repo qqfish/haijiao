@@ -441,7 +441,15 @@ function Table(containerName, tool){
     
     function setDefaultLocation(){
         stage.setX(stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2);
+        if(stage.getY() > 0)
+            stage.setY(0);
+        else if(stage.getY() < stage.getHeight() - imageSize.height * scaleRange[scaleChoice])
+            stage.setY(stage.getHeight() - imageSize.height * scaleRange[scaleChoice]);
         stage.draw();
+    }
+
+    this.setDefaultLoc = function(){
+        setDefaultLocation();
     }
     
     this.uploadImage = function(imageObj){
