@@ -1,0 +1,1 @@
+location="/haijiao/index.action";

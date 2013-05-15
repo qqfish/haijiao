@@ -11,16 +11,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Redirecting...</title>
+        <script type="text/javascript" src="js/redirect.js"></script>
     </head>
     <body>
-        <s:if test="#session.userType == 'teacher'">
-            <jsp:forward page="teacherInfo.jsp" />
-        </s:if>
-        <s:elseif test="#session.userType == 'student'">
-            <jsp:forward page="studentInfo.jsp" />
-        </s:elseif>
-        <s:else>
-            <jsp:forward page="index.jsp" />
-        </s:else>
+         redirecting...
     </body>
 </html>
