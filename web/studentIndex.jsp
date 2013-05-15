@@ -17,6 +17,7 @@
         <script type="text/javascript" src="StudentIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
+        <script type="text/javascript" src="js/studentIndex.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
@@ -95,11 +96,11 @@
                                                             <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
                                                             <span style="margin-left: 10px"class="pull-right">
                                                                 <s:if test="status==3">
-                                                                    <s:a action="dealApply.action">
-                                                                        <s:param name="button">studentStop</s:param>
-                                                                        <s:param name="classId"><s:property value="id"/></s:param>
-                                                                        <button type="button" class="btn btn-info btn-mini">暂停</button>
-                                                                    </s:a>
+                                                                    <s:form id="dealApply_stop_%{id}" action="dealApply.action">
+                                                                        <s:textfield style="display:none;" name="button" value="studentStop"></s:textfield>
+                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                        <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">暂停</button>
+                                                                    </s:form>
                                                                 </s:if>
                                                             </span>
                                                         </small>
