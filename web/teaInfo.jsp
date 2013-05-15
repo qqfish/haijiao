@@ -15,7 +15,7 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-                <script type="text/javascript" src="js/teaInfo.js"></script>
+        <script type="text/javascript" src="js/teaInfo.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
 
@@ -56,14 +56,14 @@
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
-                                   <td class="span1">课程</td>
-                                   <td>
-                                         <s:iterator value="tea.lessons" status="st">
-                                              <s:if test="delete==false">
-                                                 <label class="label label-info" ><s:property value="name"/></label>
-                                              </s:if>
-                                         </s:iterator>
-                                    </td>
+                                <td class="span1">课程</td>
+                                <td>
+                                    <s:iterator value="tea.lessons" status="st">
+                                        <s:if test="delete==false">
+                                            <label class="label label-info" ><s:property value="name"/></label>
+                                        </s:if>
+                                    </s:iterator>
+                                </td>
                             </tr>
                             <tr>
                                 <td>预约数</td>
@@ -93,7 +93,6 @@
                 <div class="span8 module" style="padding:12px;">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
-                        <li><a href="#detail_area" data-toggle="tab">详细信息</a></li>
                         <li><a href="#comment_area" data-toggle="tab">评论</a></li>
                     </ul>
                     <div class="tab-content">
@@ -139,10 +138,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                        <div class="tab-pane fade" id='detail_area'>
                             <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
-                            <div id="teaintro">
+                            <hr class="span8"/>
+                            <div class="span8" id="teaintro">
                                 <script>
                                     $("#teaintro").html($("#tmp").text());
                                 </script>
@@ -158,17 +156,17 @@
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
-                                                   <s:iterator value="billList" id="billList">
-                                                    <s:if test="stot != null">
-                                                        <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
-                                                         <small>
-                                                            <span><s:property value="stot.content" /></span>
-                                                            <br/><br/>
-                                                            <s:if test="stot.reply != null">
-                                                                <span>老师的回复：<s:property value="stot.reply" /></span>
-                                                            </s:if>
-                                                         </small>
-                                                       </s:if>
+                                                    <s:iterator value="billList" id="billList">
+                                                        <s:if test="stot != null">
+                                                            <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
+                                                            <small>
+                                                                <span><s:property value="stot.content" /></span>
+                                                                <br/><br/>
+                                                                <s:if test="stot.reply != null">
+                                                                    <span>老师的回复：<s:property value="stot.reply" /></span>
+                                                                </s:if>
+                                                            </small>
+                                                        </s:if>
                                                     </s:iterator>
                                                 </s:else>
                                             </blockquote>

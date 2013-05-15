@@ -35,11 +35,7 @@
         <div class="wrapper container">
             <div class="span11">
                 <div class="span11 module">
-                    <div class="accordion-heading" data-toggle="collapse"  href="#collapseOne" style="margin: 0px 12px;">
-                        <h3>过滤器</h3>
-                    </div>
-                    <hr style="margin:12px 12px 0px 12px;"/>
-                    <div id="collapseOne" class="collapse" style="padding-left: 16px;">
+                    <div id="collapseOne" style="padding: 16px;">
                         <button type="button" class="btn btn-danger">年级</button>
                         <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button id="prischool" type="button" value="0" class="btn grade" data-toggle="button">小学</button>

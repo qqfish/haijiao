@@ -58,8 +58,8 @@
                     <div class="span6 module" style="padding:12px;">
 
                         <s:form action="contactUs.action">
-                            <dt><label>姓名</label></dt>
-                            <dd><s:textfield name="name" placeholder="请输入您的姓名" /></dd>
+                            <dt style="display: none;"><label>姓名</label></dt>
+                            <dd style="display: none;"><s:textfield name="name" placeholder="请输入您的姓名" /></dd>
                             <dt><label>邮箱</label></dt>
                             <dd>
                                 <s:textfield id="emailInput" name="email" placeholder="请输入您的邮箱" />
@@ -69,8 +69,8 @@
                                     </script>
                                 </s:if>
                             </dd>
-                            <dt><label>主题</label></dt>
-                            <dd><s:textfield name="subject" placeholder="请输入主题" /></dd>
+                            <dt style="display: none;"><label>主题</label></dt>
+                            <dd style="display: none;"><s:textfield name="subject" placeholder="请输入主题" /></dd>
                             <dt><label for="user_body">内容</label></dt>
                             <dd>
                                 <s:textarea name="context" cssClass="span5" rows="5" value=""/>
