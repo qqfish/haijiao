@@ -1,4 +1,35 @@
 jQuery(document).ready(function($){
+     if( $('#nextPageMessage').val() == "成功添加空闲时间"  
+        || $('#nextPageMessage').val() == "添加空闲时间失败" ){
+        $('#schedule_area').addClass("active in");
+        $('#student_area').removeClass("active in");
+        $('#l2').addClass("active");
+        $('#l1').removeClass("active");
+    }
+    
+    if( $('#nextPageMessage').val() == "成功添加课程"  
+        || $('#nextPageMessage').val() == "成功删除课程" ){
+        $('#lesson_area').addClass("active in");
+        $('#student_area').removeClass("active in");
+        $('#l3').addClass("active");
+        $('#l1').removeClass("active");
+    }
+    
+    if( $('#nextPageMessage').val() == "评论成功！"  
+        || $('#nextPageMessage').val() == "你已经评论过了哦！" ){
+        $('#bill_area').addClass("active in");
+        $('#student_area').removeClass("active in");
+        $('#l4').addClass("active");
+        $('#l1').removeClass("active");
+    }
+    
+    if( $('#nextPageMessage').val() == "回复成功！"  
+        || $('#nextPageMessage').val() == "你已经回复过了哦！" ){
+        $('#comment_area').addClass("active in");
+        $('#student_area').removeClass("active in");
+        $('#l5').addClass("active");
+        $('#l1').removeClass("active");
+    }
     
     $('#add_click').click(function(){
         $('#changeInfo__addLesson').click();
@@ -27,5 +58,4 @@ jQuery(document).ready(function($){
         id = id.substring(25, id.length);
         $("#dealApply_decline_"+id).submit();
     })
-    
 });

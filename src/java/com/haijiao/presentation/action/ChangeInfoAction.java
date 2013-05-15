@@ -138,7 +138,7 @@ public class ChangeInfoAction extends SessionAction {
     
     public String deleteLesson(){
         teacherService.deleteLesson((String)this.getSessionValue("email"), lessonName);
-        nextPageMessage = "成功删除课程【" + lessonName + "】";
+        nextPageMessage = "成功删除课程";
         return SUCCESS;
     }
 

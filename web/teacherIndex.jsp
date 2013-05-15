@@ -45,6 +45,7 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
+        <input type="hidden" id="nextPageMessage" value="<s:property value="nextPageMessage" />"/>
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
@@ -76,11 +77,11 @@
                         <button type="button" class="btn btn-primary pull-right"><i class="icon-pencil icon-white"></i>修改资料</button>
                     </s:a>
                     <ul class="nav nav-pills">
-                        <li class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
-                        <li><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
-                        <li><a href="#lesson_area" data-toggle="tab" >添加/删除课程</a></li>
-                        <li><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
-                        <li><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                        <li id="l1" class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
+                        <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
+                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >添加/删除课程</a></li>
+                        <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id='student_area'>
