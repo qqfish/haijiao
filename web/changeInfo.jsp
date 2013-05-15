@@ -90,16 +90,17 @@
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
         <link rel="stylesheet" href="css/tooltik.css">
+        <input type="hidden" id="nextPageMessage" value="<s:property value="nextPageMessage" />"/>
         <div class="container wrapper" >
             <div class="row" style="margin:-5px;">
                 <div class="span3 module" style="padding:12px">
                     <h3>修改信息</h3>
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
-                        <li class="active"><a href="#1" data-toggle="tab">修改资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l1" class="active"><a href="#1" data-toggle="tab">修改资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l2" ><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l3" ><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l4"><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">

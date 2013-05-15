@@ -42,15 +42,15 @@
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="teacherChange">
             <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">index</result>
+            <result name="success" type="chain">toChangeInfo</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="studentChange">
             <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">index</result>
+            <result name="success" type="chain">toChangeInfo</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="changePassword">
             <result name="input">changePassword.jsp</result>
-            <result name="success" type="chain">index</result>
+            <result name="success" type="chain">toChangeInfo</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="changePasswordById">
             <result name="input">resetPassword.jsp</result>
@@ -66,7 +66,7 @@
         </action>
         <action name="changeIntro" class="ChangeIntroAction">
             <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">index</result>
+            <result name="success" type="chain">toChangeInfo</result>
         </action>
         <action name="dealApply" class="DealApplyAction">
             <result name="success" type="chain">index</result>
@@ -146,7 +146,7 @@
             <result name="success" type="chain">index</result>
         </action>
         <action name="uploadPic" class="UploadPicAction">
-            <result name="success" type="chain">index</result>
+            <result name="success" type="chain">toChangeInfo</result>
             <result name="input">error.jsp</result>
             <interceptor-ref name="fileUpload">
                 <!-- 文件过滤 -->

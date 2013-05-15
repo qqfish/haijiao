@@ -28,4 +28,31 @@ jQuery(document).ready(function($){
     $('#parentButton').click(function(){
         $('#changeInfo_telTypeparent').click();
     });
+    
+    if( $('#nextPageMessage').val() == "密码错误"  
+        || $('#nextPageMessage').val() == "两次输入的密码不一致"
+        || $('#nextPageMessage').val() == "修改密码成功" ){
+        $('#2').addClass("active in");
+        $('#1').removeClass("active in");
+        $('#l2').addClass("active");
+        $('#l1').removeClass("active");
+    }
+    
+    if( $('#nextPageMessage').val() == "修改详细介绍成功！"  
+        || $('#nextPageMessage').val() == "修改详细介绍失败！" ){
+        $('#4').addClass("active in");
+        $('#1').removeClass("active in");
+        $('#l4').addClass("active");
+        $('#l1').removeClass("active");
+    }
+    
+    if( $('#nextPageMessage').val() == "上传完成"  
+        || $('#nextPageMessage').val() == "没有找到对应文件"
+        || $('#nextPageMessage').val() == "上传出错" ){
+        $('#3').addClass("active in");
+        $('#1').removeClass("active in");
+        $('#l3').addClass("active");
+        $('#l1').removeClass("active");
+    }
+    
 });
