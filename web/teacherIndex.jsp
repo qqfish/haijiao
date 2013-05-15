@@ -335,6 +335,7 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                 <h3 id="myModalLabel">评论</h3>
                                             </div>
+                                            
                                             <s:form action="makeCommentReply.action">
                                                 <div class="modal-body">
                                                     <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
@@ -378,7 +379,12 @@
                                                             <small>
                                                                 <span><s:property value="stot.content" /></span>
                                                                 <span class="pull-right">
-                                                                    <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                                    <s:if test="stot.reply == null">
+                                                                        <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                                    </s:if>
+                                                                    <s:else>
+                                                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">回复</a>
+                                                                    </s:else>
                                                                 </span>
                                                                 <br/><br/>
                                                                 <s:if test="stot.reply != null">

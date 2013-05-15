@@ -194,7 +194,14 @@
                                             <td><s:property value="getRealMoney('student')" /></td>
                                             <td><s:property value="createdateToString()" /></td>
                                             <td><s:property value="message" /></td>
-                                            <td><a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a></td>
+                                            <td>
+                                                <s:if test="stot==null">
+                                                    <a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                </s:if>
+                                                <s:else>
+                                                    <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                                </s:else>
+                                            </td>
                                         </tr>
                                         <div id="comment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header">
@@ -244,7 +251,12 @@
                                                         <small>
                                                             <span><s:property value="ttos.content" /></span>
                                                             <span class="pull-right">
-                                                                <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                                <s:if test="ttos.reply==null">
+                                                                    <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                                </s:if>
+                                                                <s:else>
+                                                                    <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">回复</a>
+                                                                </s:else>
                                                             </span>
                                                             <br/><br/>
                                                             <span>您的回复：<s:property value="ttos.reply" /></span>
