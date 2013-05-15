@@ -114,22 +114,25 @@
                                                                 <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
                                                                 <span style="margin-left: 10px"class="pull-right">
                                                                     <s:if test="status==3">
-                                                                        <s:form id="dealApply_stop_%{id}" action="dealApply.action">
+                                                                        <s:form action="dealApply.action">
                                                                             <s:textfield style="display:none;" name="button" value="stop"></s:textfield>
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
-                                                                            <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">暂停</button>
+                                                                            <s:submit style="display:none;" id="stopSubmit" class="btn btn-info btn-mini"></s:submit>
+                                                                                <button type="button" id="stopButton" class="btn btn-info btn-mini">暂停</button>
                                                                         </s:form>
                                                                     </s:if>
                                                                     <s:if test="status==2">
-                                                                        <button type="button" id="dealApply_accept_button_<s:property value="id"/>" class="btn btn-info btn-mini">接受</button>
-                                                                        <button type="button" id="dealApply_decline_button_<s:property value="id"/>" class="btn btn-info btn-mini">拒绝</button>
-                                                                        <s:form id="dealApply_accept_%{id}" action="dealApply.action">
+                                                                        <button type="button" id="acceptButton" class="btn btn-info btn-mini">接受</button>
+                                                                        <button type="button" id="declineButton" class="btn btn-info btn-mini">拒绝</button>
+                                                                        <s:form action="dealApply.action">
                                                                             <s:textfield style="display:none;" name="button" value="accept"></s:textfield>
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:submit style="display:none;" id="acceptSubmit" class="btn btn-info btn-mini"></s:submit>
                                                                         </s:form>
-                                                                        <s:form id="dealApply_decline_%{id}" action="dealApply.action">
+                                                                        <s:form action="dealApply.action">
                                                                             <s:textfield style="display:none;" name="button" value="decline"></s:textfield>
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:submit style="display:none;" id="declineSubmit" class="btn btn-info btn-mini"></s:submit>
                                                                         </s:form>
                                                                     </s:if>
                                                                 </span>
