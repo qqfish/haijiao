@@ -31,7 +31,7 @@
                             <s:textfield  name="lessonGet" cssClass=" span3"></s:textfield>
                             <s:textfield  name="gradeGet" cssClass=" span3"></s:textfield>
                         </div>
-                        <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white"></i></a>
+                        <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-3px"></i></a>
                     </s:form>
                 </ul>
                 <ul class="nav" style="float: right">
