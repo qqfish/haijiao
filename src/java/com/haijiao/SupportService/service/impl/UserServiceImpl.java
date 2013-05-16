@@ -18,6 +18,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -56,11 +57,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public boolean confirmExist(String email) {
         return userDAO.confirmExist(email);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public User getUserByEmail(String email) {
         User u = userDAO.getUserByEmail(email);
         if (u==null) {
@@ -109,6 +112,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public String confirmLogin(String email, String password) {
         return userDAO.confirmLogin(email, password);
     }
@@ -145,16 +149,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Teacher> searchTeacher(List<String> strList, List<String> strList2) {
         return teacherDAO.searchTeacher(strList, strList2);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Teacher> searchTeacherPage(List<String> strList, List<String> strList2, int first, int pagesize, String extOrder, int desc) {
         return teacherDAO.searchTeacherPage(strList, strList2, first, pagesize, extOrder, desc);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public int getTeacherNum(List<String> strList) {
         return teacherDAO.getTeacherNum(strList);
     }

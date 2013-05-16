@@ -12,6 +12,7 @@ import com.haijiao.SupportService.service.IMailService;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -36,21 +37,25 @@ public class MailServiceImpl implements IMailService{
     }
     
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public Mail getMailById(int id) {
         return mailDAO.findById(id);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Mail> getMail(String email) {
         return mailDAO.getMailByEmail(email);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Mail> getUnreadMail(String email){
         return mailDAO.getUnreadMailByEmail(email);
     }
     
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public int getUnreadMailNum(String email){
         return mailDAO.getUnreadMailNum(email);
     }
@@ -85,6 +90,18 @@ public class MailServiceImpl implements IMailService{
         m.setRead(read);
         mailDAO.update(m);
         return true;
+    }
+    
+    @Override
+    public boolean setAllMailStatus(String email){
+        mailDAO.setAllMailStatus(email);
+        return true;
+    }
+    
+    @Override
+    public boolean deleteMail(int mailId) {
+        Mail m = mailDAO.findById(mailId);
+        return mailDAO.makeTransient(m);
     }
     
 }

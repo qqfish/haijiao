@@ -78,7 +78,7 @@
                             老师列表
                             <small>
                                 <a id="normal_button">默认</a>/<a id="score_button">评分</a>/<a id="price_button">价格</a>/<a id="hot_button">人气</a>
-                                <button class="btn btn-small pull-right">仅显示在线</button>
+                                <button class="btn btn-small pull-right" data-toggle="button">仅显示在线</button>
                             </small>
                         </h3>
                         <s:form id="search2" action="searchTeacher.action" cssStyle="display:none;" method="get">
@@ -106,7 +106,8 @@
                                                         <s:if test="status==0"><label class="label">离线</label></s:if>
                                                         <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                         <s:else><label class="label label-warning">忙碌</label></s:else></small>
-                                                    <label class="label label-important pull-right">评分：<s:property value="score"/></label></h4>
+                                                        <label class="label label-important pull-right">评分：<s:if test="score == 0">无</s:if>
+                                                            <s:else><s:property value="score"/></s:else></label></h4>
                                                 <p>
                                                     <label class="label label-info"><s:property value="wagePerhour"/>元/时</label>
                                                     <s:iterator value="lessons" status="st">

@@ -13,6 +13,28 @@
         <title>海角教育</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+        <script>
+            $(function(){
+                if($("#newMsg").children("div").length == 0)
+                    $("#markAll").addClass("disabled");
+            })
+            
+            function mark(id){
+                $.ajax({
+                    url:"markMail.action",
+                    type:"POST",
+                    context:event.srcElement,
+                    data:{id:id},
+                    success:function(data){
+                        if($(this).parent().parent().children("div").length == 1){
+                            $(this).parent().parent().append("暂无未读消息哦~！");
+                            $(this).parent().remove();
+                        }
+                        else
+                            $(this).parent().remove();
+                    }});
+            }
+        </script>
     </head>
     <body style="background: url(images/background.jpg);">
         <!--==============================header=================================-->
@@ -38,7 +60,7 @@
                             <div class="span7">
                                 <s:form class="form-horizontal" action="sendMail.action" method="post">
                                     <h5>收件人:</h5>
-                                    <s:textfield cssClass="span7" name="name" id="inputEmail" value="%{#parameters.id}"/>
+                                    <s:textfield cssClass="span7" name="name" id="inputEmail" value="%{#parameters.email}"/>
                                     <h5>内容:</h5>
                                     <s:textarea cssClass="span7" name="content" rows="10"></s:textarea>
                                         <button type="submit" class="btn btn-primary pull-right span1">取消</button>
@@ -47,26 +69,37 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id='newMsg'>
-                            <h3>新信息</h3>
+                            <h3>新信息<small><a href="markMail!markAll.action" id="markAll" class="btn btn-mini pull-right" type="button">标记所有为已读</a></small></h3>
                             <hr/>
-                            <s:iterator value="unreadMailList">
-                                <div class="well">
-                                    <h5><s:property value="from.name"/></h5>
-                                    <p><s:property value="message"/></p>                            
-                                    <a href="mail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
-                                </div>
-                            </s:iterator>
+                            <s:if test="unreadMailList.size == 0">
+                                暂无未读消息哦~！
+                            </s:if>
+                            <s:else>
+                                <s:iterator value="unreadMailList">
+                                    <div class="well">
+                                        <h5><s:property value="from.name"/></h5>
+                                        <p><s:property value="message"/></p>
+                                        <a href="javascript:;" onclick="mark(<s:property value="id" />);" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px" data-loading-text="loading">标记已读</a>                            
+                                        <a href="mail.jsp?email=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                    </div>
+                                </s:iterator>
+                            </s:else>
                         </div>
                         <div class="tab-pane fade" id='allMsg'>
                             <h3>所有信息</h3>
                             <hr/>
-                            <s:iterator value="unreadMailList">
-                                <div class="well">
-                                    <h5><s:property value="from.name"/></h5>
-                                    <p><s:property value="message"/></p>                         
-                                    <a href="mail.jsp?id=<s:property value="from.id" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
-                                </div>
-                            </s:iterator>
+                            <s:if test="allMailList.size == 0">
+                                暂无消息哦~！
+                            </s:if>
+                            <s:else>
+                                <s:iterator value="allMailList">
+                                    <div class="well">
+                                        <h5><s:property value="from.name"/></h5>
+                                        <p><s:property value="message"/></p>
+                                        <a href="mail.jsp?email=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                    </div>
+                                </s:iterator>
+                            </s:else>
                         </div>
                     </div>
                 </div>

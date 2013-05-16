@@ -24,4 +24,6 @@ public interface IMailService {
     public boolean sendMail(String emailFrom, String emailTo, String message);
     //设置私信状态（已读/未读）
     public boolean setMailStatus(int mailId, boolean read);
+    public boolean setAllMailStatus(String email);
+    public boolean deleteMail(int mailId);
 }

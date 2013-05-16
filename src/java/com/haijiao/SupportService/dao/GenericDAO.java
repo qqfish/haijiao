@@ -19,6 +19,7 @@ public interface GenericDAO <T,ID extends Serializable>{
     //remove
     boolean makeTransient(T entity);
     void update(T instance);
+    void updateByQuery(String hql);
     public List<T> findByQuery(String hql);
     public List<T> findPageByQuery(String hql, int first, int pagesize);
     public Number getNumber(String hql);

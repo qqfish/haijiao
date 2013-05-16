@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -83,7 +84,6 @@ public class ClassServiceImpl implements IClassService {
             clazzDAO.update(clazzList.get(0));
             freeTimeDAO.update(ft);
         }
-        System.out.println("fuck");
         return true;
     }
 
@@ -202,6 +202,7 @@ public class ClassServiceImpl implements IClassService {
     }
     
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public Clazz getClazzById(int clazzId) {
         return clazzDAO.findById(clazzId);
     }

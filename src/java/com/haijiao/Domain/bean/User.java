@@ -45,8 +45,7 @@ public class User extends BaseBean{
     @OneToMany(mappedBy = "to")
     protected List<Mail> mailBox;   //收到的私信
     
-    @OneToMany(fetch=FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany
     @JoinColumn(name="uid")
     protected List<UserFileGroup> fileGroups;
 

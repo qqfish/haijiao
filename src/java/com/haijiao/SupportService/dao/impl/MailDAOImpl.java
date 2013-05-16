@@ -41,4 +41,11 @@ public class MailDAOImpl extends GenericHibernateDAO<Mail,Integer> implements IM
         String hql = "select count(m) from Mail m where m.to.email = '" + email + "' and m.read is false";
         return getNumber(hql).intValue();
     }
+
+    @Override
+    public boolean setAllMailStatus(String email) {
+        String hql = "update Mail set read = true where toid = (select id from User where email = '" + email + "')";
+        updateByQuery(hql);
+        return true;
+    }
 }

@@ -79,6 +79,12 @@
     <bean id="GetMailNumAction" class="com.haijiao.presentation.action.GetMailNumAction" scope="prototype">
         <property name="mailService" ref="mailServiceImpl" />
     </bean>
+    <bean id="MarkMailAction" class="com.haijiao.presentation.action.MarkMailAction" scope="prototype">
+        <property name="mailService" ref="mailServiceImpl" />
+    </bean>
+    <bean id="DeleteMailAction" class="com.haijiao.presentation.action.DeleteMailAction" scope="prototype">
+        <property name="mailService" ref="mailServiceImpl" />
+    </bean>
     <bean id="MakeCommentReplyAction" class="com.haijiao.presentation.action.MakeCommentReplyAction" scope="prototype">
         <property name="billService" ref="billServiceImpl" />
     </bean>

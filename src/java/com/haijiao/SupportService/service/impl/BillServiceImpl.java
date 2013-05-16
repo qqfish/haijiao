@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -53,11 +54,13 @@ public class BillServiceImpl implements IBillService{
     }
     
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public Bill getBillById(int id) {
         return billDAO.findById(id);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Bill> getBill(String email, String userType) {
         return billDAO.getBillByEmail(email, userType);
     }

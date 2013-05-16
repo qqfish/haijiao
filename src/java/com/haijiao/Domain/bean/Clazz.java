@@ -22,13 +22,13 @@ public class Clazz extends BaseBean { //clazz -> class
         static public final int notAccept = 2;
         static public final int accept = 3;
     }
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "sid")
     private Student student;  //学生
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "lid")
     private Lesson lesson;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "freetimeid")
     private FreeTime freeTime;
     private int status;  //本次预约的状态，可选值在Status类中

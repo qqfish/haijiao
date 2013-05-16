@@ -38,7 +38,6 @@ public class IndexAction extends SessionAction {
                 scheduleBean = new ScheduleBean(teacher);
                 billList = billService.getBill(email, "teacher");
                 classList = teacherService.getClasses(email);
-                System.out.println(classList.size());
                 return "teacher";
             } else {
                 student = (Student) user;              

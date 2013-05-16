@@ -67,7 +67,8 @@
                             </tr>
                             <tr>
                                 <td>评分</td>
-                                <td><s:property value="teacher.score"/></td>
+                                <td><s:if test="teacher.score == 0">无评分</s:if>
+                                    <s:else><s:property value="teacher.score"/></s:else></td>
                             </tr>
                         </tbody>
                     </table>
@@ -279,7 +280,7 @@
                                                 <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
-                                            [<s:property value="name" />]<a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
+                                                <span class="label label-info"><s:property value="name" /></span><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
                                             </s:form>
                                         </s:if>
                                     </s:iterator>
@@ -336,7 +337,6 @@
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                 <h3 id="myModalLabel">评论</h3>
                                             </div>
-                                            
                                             <s:form action="makeCommentReply.action">
                                                 <div class="modal-body">
                                                     <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>

@@ -15,6 +15,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -80,11 +81,13 @@ public class StudentServiceImpl implements IStudentService{
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Clazz> getClasses(String email) {
         return clazzDAO.getStudentClazz(email);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Clazz> getTodayClasses(String email) {
         return clazzDAO.getStudentTodayClazz(email);
     }

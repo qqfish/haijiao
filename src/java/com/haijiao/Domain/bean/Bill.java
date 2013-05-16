@@ -16,11 +16,11 @@ import javax.persistence.Table;
 @Entity    
 @Table(name="bill")
 public class Bill extends BaseBean{
-    @ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "tid")
     private Teacher teacher;
     
-    @ManyToOne(fetch=FetchType.EAGER,cascade = {CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "sid")
     private Student student;
     

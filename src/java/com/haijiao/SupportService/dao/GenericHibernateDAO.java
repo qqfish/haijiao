@@ -9,7 +9,6 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import javax.annotation.Resource;
 import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 
@@ -70,6 +69,11 @@ public abstract class GenericHibernateDAO <T,ID extends Serializable> implements
         sessionFactory.getCurrentSession().saveOrUpdate(instance);
     }
 
+    @Override
+    public void updateByQuery(String hql){
+        sessionFactory.getCurrentSession().createQuery(hql).executeUpdate();
+    }
+    
     @Override
     public List<T> findByQuery(String hql) {
         return sessionFactory.getCurrentSession().createQuery(hql).list();

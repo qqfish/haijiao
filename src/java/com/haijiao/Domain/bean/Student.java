@@ -31,12 +31,11 @@ public class Student extends User{
     @OneToMany(mappedBy="student")
     private List<Clazz> schedule;      //学生的时间表
     
-    @OneToMany(mappedBy = "student",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy = "student")
     @Fetch(value = FetchMode.SUBSELECT)
     protected List<Bill> billList;  //账单列表
     
-    @ManyToMany(fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST})
-    @Fetch(value = FetchMode.SUBSELECT)
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(
             name = "favorite",
             joinColumns = @JoinColumn(name="sid"),

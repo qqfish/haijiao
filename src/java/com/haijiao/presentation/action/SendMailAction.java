@@ -59,17 +59,15 @@ public class SendMailAction extends SessionAction{
     
     @Override
     public String execute(){
-        System.out.println(content);
         if(name.isEmpty()){
             nextPageMessage = "发送失败，收件人不能为空";
             return INPUT;
         }
-        int id = Integer.parseInt(name);
         if(content.isEmpty()){
             nextPageMessage = "发送失败，消息内容不能为空";
             return INPUT;
         }
-        mailService.sendMail((String)this.getSessionValue("email"), id, content);
+        mailService.sendMail((String)this.getSessionValue("email"), name, content);
         nextPageMessage = "发送成功";
         return SUCCESS;
     }

@@ -5,8 +5,6 @@
     function getMailNum(){
         var id = null;
         $.post("getMailNum.action",function(data) {
-            console.log(data);
-            console.log($('#mailNum').text());
             if($('#mailNum').text() != data)
                 $('#mailNum').text(data);
         });
@@ -31,12 +29,13 @@
                             <s:textfield  name="lessonGet" cssClass=" span3"></s:textfield>
                             <s:textfield  name="gradeGet" cssClass=" span3"></s:textfield>
                         </div>
-                        <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-3px"></i></a>
+                    <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-3px"></i></a>
                     </s:form>
                 </ul>
                 <ul class="nav" style="float: right">
                     <s:if test="#session.email!=null">
                         <script>
+                            getMailNum();
                             id = setInterval(getMailNum,60000);
                         </script>
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>

@@ -23,7 +23,6 @@ public class GetMailNumAction extends SessionAction{
         String email = (String)this.getSessionValue("email");
         HttpServletResponse response = ServletActionContext.getResponse();
         int num = mailService.getUnreadMailNum(email);
-        System.out.println(num);
         try {
             response.getWriter().write(String.valueOf(num));
         } catch (IOException ex) {

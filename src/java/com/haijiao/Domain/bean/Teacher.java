@@ -31,24 +31,20 @@ public class Teacher extends User{
     private String tel;         //老师的手机
     private String videoUrl;    //老师的介绍视频地址
     
-    @OneToMany(fetch=FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany
     @JoinColumn(name = "lid")
     private List<Label> labels; //老师的标签 
     
-    @OneToMany(fetch=FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     
     private boolean audition;       //该老师是否接受试听
     
-    @OneToMany(mappedBy = "teacher",fetch=FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "teacher")
     private List<FreeTime> schedule;//记录老师的时间表
     
-    @OneToMany(mappedBy = "teacher",fetch=FetchType.EAGER)
-    @Fetch(value = FetchMode.SUBSELECT)
+    @OneToMany(mappedBy = "teacher")
     protected List<Bill> billList;  //账单列表
     
     private int wagePerhour;        //老师每小时的辅导费

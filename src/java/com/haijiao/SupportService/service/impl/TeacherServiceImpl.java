@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -44,6 +45,7 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public Teacher getTeacherByEmail(String email) {
         return teacherDAO.getTeacherByEmail(email);
     }
@@ -87,17 +89,20 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<FreeTime> getSchedule(String email) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         return t.getSchedule();
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Clazz> getClasses(String email) {
         return classDAO.getTeacherClazz(email);
     }
 
     @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
     public List<Clazz> getTodayClasses(String email) {
         return classDAO.getTeacherTodayClazz(email);
     }

@@ -127,6 +127,10 @@
             <result name="input">error.jsp</result>
         </action>
         <action name="getMailNum" class="GetMailNumAction"/>
+        <action name="markMail" class="MarkMailAction"/>
+        <action name="markMail" class="MarkMailAction" method="markAll">
+            <result name="success" type="chain">getMail</result>
+        </action>
         <action name="enterRoom" class="EnterRoomAction">
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>
