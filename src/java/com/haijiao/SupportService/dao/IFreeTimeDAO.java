@@ -5,6 +5,7 @@
 package com.haijiao.SupportService.dao;
 
 import com.haijiao.Domain.bean.FreeTime;
+import java.util.List;
 
 /**
  *
@@ -12,4 +13,6 @@ import com.haijiao.Domain.bean.FreeTime;
  */
 public interface IFreeTimeDAO extends GenericDAO<FreeTime,Integer>{
     public FreeTime getTeacherFreeTime(String eamil, int day, int index);
+    
+    public List<FreeTime> getFreeTimeByDay(int day);
 }

@@ -7,6 +7,7 @@ package com.haijiao.SupportService.dao.impl;
 import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IFreeTimeDAO;
+import com.haijiao.global.timer;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +29,12 @@ public class FreeTimeDAOImpl extends GenericHibernateDAO<FreeTime,Integer> imple
         else
             return lf.get(0);
     }
+
+    @Override
+    public List<FreeTime> getFreeTimeByDay(int day) {
+        String hql = "from FreeTime f where f.weekday = " + day;
+        return findByQuery(hql);
+    }
+    
     
 }

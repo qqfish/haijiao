@@ -5,6 +5,7 @@
 package com.haijiao.SupportService.dao;
 
 import com.haijiao.Domain.bean.Clazz;
+import com.haijiao.Domain.bean.FreeTime;
 import java.util.List;
 
 /**

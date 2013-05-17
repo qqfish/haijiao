@@ -30,4 +30,6 @@ public interface IClassService {
     
     public Clazz getClazzById(int clazzId);
     
+    public boolean finishDay(int day);
+    
 }

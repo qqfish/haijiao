@@ -206,4 +206,34 @@ public class ClassServiceImpl implements IClassService {
     public Clazz getClazzById(int clazzId) {
         return clazzDAO.findById(clazzId);
     }
+
+    @Override
+    public boolean finishDay(int day) {
+        List<FreeTime> freeTimeList = freeTimeDAO.getFreeTimeByDay(day);
+        for(int i = 0; i < freeTimeList.size(); i++){
+            if(freeTimeList.get(i).getClazzList().size() == 0){
+                freeTimeDAO.makeTransient(freeTimeList.get(i));
+                teacherDAO.update(freeTimeList.get(i).getTeacher());
+                freeTimeList.remove(i);
+                i--;
+                continue;
+            }
+            List<Clazz> clazzList = freeTimeList.get(i).getClazzList();
+            if(clazzList.get(0).getRemain() > 0){
+                clazzList.get(0).setRemain(clazzList.get(0).getRemain() - 1);
+                if(clazzList.get(0).getRemain() == 0){
+                    clazzDAO.makeTransient(clazzList.get(0));
+                    clazzList.remove(0);
+                    clazzList.get(0).addTimeToBegin(-1);
+                }
+                clazzDAO.update(clazzList.get(0));
+            }
+            for(int j = 1; j < clazzList.size(); j++){
+                clazzList.get(j).addTimeToBegin(-1);
+                clazzDAO.update(clazzList.get(0));
+            }
+            freeTimeDAO.update(freeTimeList.get(i));
+        }
+        return true;
+    }
 }

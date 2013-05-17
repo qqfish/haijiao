@@ -94,11 +94,12 @@
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
                         <li><a href="#comment_area" data-toggle="tab">评论</a></li>
+                        <li><a href="#bill_area" data-toggle="tab">交易记录</a>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane row fade active in" id='info_area'>
                             <div class="span5 well">
-
+                                <video herf="#"></video>
                             </div>
                             <div class="span2">
                                 <table class="table table-hover table-striped ">
@@ -173,6 +174,33 @@
                                         </td>
                                     </tr>
                                 </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id='bill_area'>
+                            <table class="table table-hover table-striped">
+                                <s:if test="billList.size()<=0">
+                                    <tbody>
+                                        暂无交易记录哦~！
+                                    </tbody>
+                                </s:if>
+                                <s:else>
+                                    <thead>
+                                        <tr>
+                                            <th>时间</th>
+                                            <th>姓名</th>
+                                            <th>金额</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>        
+                                        <s:iterator value="billList" id="billList">
+                                            <tr>
+                                                <td><s:property value="createdateToString()" /></td>
+                                                <td><s:property value="student.name" /></td>
+                                                <td><s:property value="getRealMoney('teacher')" /></td>
+                                            </tr>
+                                        </s:iterator>
+                                    </tbody>
+                                </s:else>
                             </table>
                         </div>
                     </div>

@@ -58,7 +58,8 @@ public class FcMessageInbound extends MessageInbound {
         sendtoUser(gson.toJson(room.getResponseChangePage()));
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
 
-        sendtoUser(gson.toJson(new ResponseSetUserFile(user)));
+        //send to user their user file
+        //sendtoUser(gson.toJson(new ResponseSetUserFile(user)));
     }
 
     @Override
