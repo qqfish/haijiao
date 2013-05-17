@@ -6,6 +6,7 @@
     </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>com.haijiao.presentation.OnlineUserListener</listener-class>
     </listener>
     <servlet>
         <servlet-name>dispatcher</servlet-name>

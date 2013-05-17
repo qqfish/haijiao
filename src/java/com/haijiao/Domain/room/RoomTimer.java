@@ -9,9 +9,6 @@ import com.haijiao.SupportService.SpringContext;
 import com.haijiao.SupportService.service.IBillService;
 import java.util.List;
 import java.util.Timer;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  *
@@ -35,7 +32,6 @@ public class RoomTimer {
         timer.schedule(counter, 1000, 1000);
         this.room = room;
         this.price = price;
-        ApplicationContext context1 = new XmlWebApplicationContext();
         billService = (IBillService) SpringContext.getContext().getBean("billServiceImpl");
     }
 

@@ -21,12 +21,14 @@ public class GetMailNumAction extends SessionAction{
     @Override
     public String execute(){
         String email = (String)this.getSessionValue("email");
-        HttpServletResponse response = ServletActionContext.getResponse();
-        int num = mailService.getUnreadMailNum(email);
-        try {
-            response.getWriter().write(String.valueOf(num));
-        } catch (IOException ex) {
-            Logger.getLogger(GetMailNumAction.class.getName()).log(Level.SEVERE, null, ex);
+        if(email != null){
+            HttpServletResponse response = ServletActionContext.getResponse();
+            int num = mailService.getUnreadMailNum(email);
+            try {
+                response.getWriter().write(String.valueOf(num));
+            } catch (IOException ex) {
+                Logger.getLogger(GetMailNumAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return null;
     }
