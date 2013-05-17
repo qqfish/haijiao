@@ -42,13 +42,11 @@
             jQuery(window).load(function() {
                 $("#upload").submit(function(){
                     var wait = setInterval(function(){
-                        $.post("uploadProcess.action",
-                            function (data){
-                                console.log("in");
-                                if(data == "100")
-                                    clearInterval(wait);
-                            });
-                    },1000);
+                        var data =  '<%=session.getAttribute("currentProcess")%>';
+                        $(".bar").css("width",data + "%");
+                        if(Number(data) == 100)
+                            clearInterval(wait);
+                    },100);
                 });
             
                 /*jQuery('.flexslider').flexslider({
@@ -200,6 +198,7 @@
                             <s:form action="uploadPic" id="upload" enctype="multipart/form-data">
                                 <s:file name="upload" title="上传" onchange="$('#upload').submit();"/>
                             </s:form>
+                                <div class="progress"><div class="bar"></div></div>
                         </div>
                         <div class="tab-pane fade"  id='4'>
                             <h3>修改个人介绍</h3>

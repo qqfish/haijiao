@@ -161,7 +161,6 @@
             <!-- 默认拦截器必须放在fileUpload之后，否则无效 -->
             <interceptor-ref name="defaultStack" />
         </action>
-        <action name="uploadProcess" class="UploadProcessAction"/>
         <action name="forgetPassword" class="ForgetPasswordAction">
             <result name="success" type="chain">index</result>
             <result name="input">forgetPassword.jsp</result>

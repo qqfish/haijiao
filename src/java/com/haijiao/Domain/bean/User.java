@@ -11,14 +11,11 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table    
@@ -40,6 +37,7 @@ public class User extends BaseBean{
     protected String picUrl;    //用户头像的URL
     protected String sex;       //性别
     protected Date birthday;    //生日
+    protected Date lastActiveDate;//最近活跃时间
     protected int status;       //可选项为Status
     
     @OneToMany(mappedBy = "to")
@@ -140,6 +138,14 @@ public class User extends BaseBean{
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Date getLastActiveDate() {
+        return lastActiveDate;
+    }
+
+    public void setLastActiveDate(Date lastActiveDate) {
+        this.lastActiveDate = lastActiveDate;
     }
 
     public int getStatus() {
