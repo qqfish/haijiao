@@ -27,6 +27,7 @@ public class LoginAction extends SessionAction {
         } else {
             User theUser = userService.getUserByEmail(email);
             userService.setStatus(email, User.Status.onlineAndAvailable);
+            userService.setActiveDate(email);
             this.sessionPutIn("name", theUser.getName());
             this.sessionPutIn("userType", userType);
             this.sessionPutIn("email",email);

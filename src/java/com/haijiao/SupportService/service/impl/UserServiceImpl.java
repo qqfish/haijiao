@@ -88,6 +88,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public boolean setActiveDate(String email){
+        User u = userDAO.getUserByEmail(email);
+        java.util.Date datetime = new java.util.Date();
+        Date time = new Date(datetime.getTime());
+        u.setLastActiveDate(time);
+        userDAO.update(u);
+        return true;
+    }
+    
+    @Override
     public boolean changePassword(String email, String password) {
         User u = userDAO.getUserByEmail(email);
         u.setPassword(password);
