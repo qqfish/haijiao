@@ -100,7 +100,6 @@
     <bean id="UploadPicAction" class="com.haijiao.presentation.action.UploadPicAction" scope="prototype" >
         <property name="userService" ref="userServiceImpl" />
     </bean>
-    <bean id="UploadProcessAction" class="com.haijiao.presentation.action.UploadProcessAction" scope="prototype"/>
     <bean id="ForgetPasswordAction" class="com.haijiao.presentation.action.ForgetPasswordAction" scope="prototype" >
         <property name="userService" ref="userServiceImpl" />
     </bean>
