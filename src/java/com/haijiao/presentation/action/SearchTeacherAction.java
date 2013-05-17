@@ -53,8 +53,10 @@ public class SearchTeacherAction extends RequestSessionAction {
             strList.add("");
         }
         List<String> strList2 = new ArrayList<String>();
-        strList2.add(lessonGet);
-        strList2.add(gradeGet);
+        if(!lessonGet.equals(""))
+            strList2.add(lessonGet);
+        if(!gradeGet.equals(""))
+            strList2.add(gradeGet);
         int cp;
         String returnValue;
         if (currentPage == null) {

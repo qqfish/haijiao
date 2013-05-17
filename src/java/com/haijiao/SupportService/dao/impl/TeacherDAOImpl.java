@@ -70,6 +70,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         String and = " and ";
         for (int i = 0; i < strList.size(); i++) {
             String keyword = strList.get(i);
+            if(keyword.equals(""))
+                continue;
             where += "(l.name like '%" + keyword + "%'";
             where += or;
             where += "t.name like '%" + keyword + "%')";
@@ -81,12 +83,15 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
             where += and;
         for(int i =0; i < strList2.size();i ++){
             String keyword = strList2.get(i);
+            if(keyword.equals(""))
+                continue;
             where += "l.name like '%" + keyword + "%'";
             if (i + 1 < strList2.size()) {
                 where += and;
             }
         }
-        hql += where;
+        if(!where.equals(" where "))
+            hql += where;
         List<Teacher> t = findPageByQuery(hql, first, pagesize);
         return t;
     }
