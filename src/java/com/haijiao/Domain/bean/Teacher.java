@@ -20,6 +20,7 @@ import javax.persistence.Table;
 public class Teacher extends User{
     private String school;      //就读大学
     private String province;    //省份
+    private String net;            //网络环境
     private int classNum;    //成功完成课程的次数
     
     @Column(columnDefinition="int default 0")
@@ -66,6 +67,14 @@ public class Teacher extends User{
 
     public void setProvince(String province) {
         this.province = province;
+    }
+
+    public String getNet() {
+        return net;
+    }
+
+    public void setNet(String net) {
+        this.net = net;
     }
 
     public int getClassNum() {

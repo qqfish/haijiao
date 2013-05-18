@@ -1,30 +1,30 @@
-jQuery(document).ready(function($){
-     if( $('#nextPageMessage').val() == "³É¹¦Ìí¼Ó¿ÕÏĞÊ±¼ä"  
-        || $('#nextPageMessage').val() == "Ìí¼Ó¿ÕÏĞÊ±¼äÊ§°Ü" ){
+ï»¿jQuery(document).ready(function($){
+     if( $('#nextPageMessage').val() == "æˆåŠŸæ·»åŠ ç©ºé—²æ—¶é—´"  
+        || $('#nextPageMessage').val() == "æ·»åŠ ç©ºé—²æ—¶é—´å¤±è´¥" ){
         $('#schedule_area').addClass("active in");
         $('#student_area').removeClass("active in");
         $('#l2').addClass("active");
         $('#l1').removeClass("active");
     }
     
-    if( $('#nextPageMessage').val() == "³É¹¦Ìí¼Ó¿Î³Ì"  
-        || $('#nextPageMessage').val() == "³É¹¦É¾³ı¿Î³Ì" ){
+    if( $('#nextPageMessage').val() == "æˆåŠŸæ·»åŠ è¯¾ç¨‹"  
+        || $('#nextPageMessage').val() == "æˆåŠŸåˆ é™¤è¯¾ç¨‹" ){
         $('#lesson_area').addClass("active in");
         $('#student_area').removeClass("active in");
         $('#l3').addClass("active");
         $('#l1').removeClass("active");
     }
     
-    if( $('#nextPageMessage').val() == "ÆÀÂÛ³É¹¦£¡"  
-        || $('#nextPageMessage').val() == "ÄãÒÑ¾­ÆÀÂÛ¹ıÁËÅ¶£¡" ){
+    if( $('#nextPageMessage').val() == "è¯„è®ºæˆåŠŸï¼"  
+        || $('#nextPageMessage').val() == "ä½ å·²ç»è¯„è®ºè¿‡äº†å“¦ï¼" ){
         $('#bill_area').addClass("active in");
         $('#student_area').removeClass("active in");
         $('#l4').addClass("active");
         $('#l1').removeClass("active");
     }
     
-    if( $('#nextPageMessage').val() == "»Ø¸´³É¹¦£¡"  
-        || $('#nextPageMessage').val() == "ÄãÒÑ¾­»Ø¸´¹ıÁËÅ¶£¡" ){
+    if( $('#nextPageMessage').val() == "å›å¤æˆåŠŸï¼"  
+        || $('#nextPageMessage').val() == "ä½ å·²ç»å›å¤è¿‡äº†å“¦ï¼" ){
         $('#comment_area').addClass("active in");
         $('#student_area').removeClass("active in");
         $('#l5').addClass("active");
@@ -32,7 +32,7 @@ jQuery(document).ready(function($){
     }
     
     $('#add_click').click(function(){
-        $('#changeInfo__addLesson').click();
+        $('#add').click();
     })
     
     $("[id*='delete_click']").click(function(){

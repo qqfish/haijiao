@@ -278,7 +278,7 @@
                             <table>
                                 <s:iterator value="teacher.lessons" id="ls">
                                     <s:if test="delete==false">
-                                        <s:form action="changeInfo.action">
+                                        <s:form action="dealLesson.action">
                                             <div style="display:none;">
                                                 <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
@@ -293,10 +293,10 @@
                                     * 小提示②：您可以通过下面的输入框开设新的课程哦！
                                 </p>
                                 <br/><br/>
-                                <s:form action="changeInfo.action">
+                                <s:form action="dealLesson.action">
                                     <s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/>
                                     <a href="#" id="add_click"><i class="icon-plus" style='margin-left:5px;margin-top: -4px'></i></a>
-                                    <div style="display: none;"><s:submit cssClass="btn" value="add" method="addLesson"/></div>
+                                    <div style="display: none;"><s:submit id="add" cssClass="btn" value="add" method="addLesson"/></div>
                                 </s:form>
                             </table>
                         </div>

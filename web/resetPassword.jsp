@@ -53,7 +53,7 @@
                 <div class="span8 module" style="padding:12px;">
                     <div class="tab-content">
                         <div class="tab-pane fade"  id='1'>
-                            <s:form action="changeInfo.action">
+                            <s:form action="resetChangePassword.action">
                                 <h3>修改密码</h3>
                                 <hr/>
                                 <dl>

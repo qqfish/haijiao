@@ -126,6 +126,8 @@
                                         <dd><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{tea.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
                                         <dt>大学</dt>
                                         <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{tea.school}"/></dd>
+                                        <dt>网络环境</dt>
+                                        <dd><s:select cssClass="span4" name="net" list="{'电信', '联通', '教育网', '其他'}" value="%{tea.net}"/></dd>
                                         <dt>手机</dt>
                                         <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{tea.tel}"/></dd>                                
                                         <br/>

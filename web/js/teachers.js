@@ -25,6 +25,7 @@ jQuery(document).ready(function($) {
 
     var lesson = null;
     var grade = null;
+    var net = null;
 
     if ($("#search_lessonGet").val() != null) {
         lesson = $("#search_lessonGet").val();
@@ -69,6 +70,19 @@ jQuery(document).ready(function($) {
             $('#grade12').click();
         }
     }
+    
+    if ($("#search_netGet").val() != null) {
+        net = $("#search_netGet").val();
+        if (net == "电信") {
+            $('#dx').click();
+        } else if (net == "联通") {
+            $('#lt').click();
+        } else if (net == "教育网") {
+            $('#jyw').click();
+        } else if (net == "其他") {
+            $('#qt').click();
+        }
+    }
 
     $('.lesson').click(function() {
         lesson = $(this).text();
@@ -80,6 +94,12 @@ jQuery(document).ready(function($) {
         grade = $(this).text();
         $("#search_gradeGet").val(grade);
         $("#search2_gradeGet").val(grade);
+    })
+    
+    $('.net').click(function() {
+        net = $(this).text();
+        $("#search_netGet").val(net);
+        $("#search2_netGet").val(net);
     })
 
 });

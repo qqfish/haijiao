@@ -1,4 +1,4 @@
-/**
+ï»¿/**
  *
  * @author Jerry Zou
  */
@@ -51,8 +51,8 @@ public class BookTeacherAction extends SessionAction {
         if (remainCoin >= 0) {
             classService.bookTeacher(teacherEmail, (String) this.getSessionValue("email"), lesson, sList, times);
             mailService.sendMail( (String)this.getSessionValue("email"), teacherEmail,
-                "ÀÏÊ¦ÄúºÃ£¬ÓĞÑ§ÉúÑ¡ÔñÁËÄúµÄ¿Î³Ì£¬Çë¾¡¿ìÈ·ÈÏ¡£"
-                + "±¾ÓÊ¼şÓÉÏµÍ³·¢ËÍ£¬¾ßÌåÇé¿ö¿É»Ø¸´±¾ÓÊ¼şÓëÑ§ÉúÁªÏµ¡£"
+                "è€å¸ˆæ‚¨å¥½ï¼Œæœ‰å­¦ç”Ÿé€‰æ‹©äº†æ‚¨çš„è¯¾ç¨‹ï¼Œè¯·å°½å¿«ç¡®è®¤ã€‚"
+                + "æœ¬é‚®ä»¶ç”±ç³»ç»Ÿå‘é€ï¼Œå…·ä½“æƒ…å†µå¯å›å¤æœ¬é‚®ä»¶ä¸å­¦ç”Ÿè”ç³»ã€‚"
         );
             nextPageMessage = this.getText("successMessage");
             return SUCCESS;

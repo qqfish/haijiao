@@ -20,6 +20,7 @@ public class SearchTeacherAction extends RequestSessionAction {
     Integer desc;
     String lessonGet;
     String gradeGet;
+    String netGet;
 
     public SearchTeacherAction() {
     }
@@ -138,5 +139,13 @@ public class SearchTeacherAction extends RequestSessionAction {
 
     public void setGradeGet(String gradeGet) {
         this.gradeGet = gradeGet;
+    }
+
+    public String getNetGet() {
+        return netGet;
+    }
+
+    public void setNetGet(String netGet) {
+        this.netGet = netGet;
     }
 }

@@ -46,6 +46,9 @@
         <property name="studentService" ref="studentServiceImpl"/>
         <property name="userService" ref="userServiceImpl" />
     </bean>
+    <bean id="DealLessonAction" class="com.haijiao.presentation.action.DealLessonAction" scope="prototype">
+        <property name="teacherService" ref="teacherServiceImpl" />
+    </bean>
     <bean id="DealApplyAction" class="com.haijiao.presentation.action.DealApplyAction" scope="prototype">
         <property name="classService" ref="classServiceImpl" />
         <property name="teacherService" ref="teacherServiceImpl" />
@@ -106,6 +109,9 @@
         <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="ResetPasswordAction" class="com.haijiao.presentation.action.ResetPasswordAction" scope="prototype" >
+        <property name="userService" ref="userServiceImpl" />
+    </bean>
+    <bean id="ResetChangePasswordAction" class="com.haijiao.presentation.action.ResetChangePasswordAction" scope="prototype" >
         <property name="userService" ref="userServiceImpl" />
     </bean>
     

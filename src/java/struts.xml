@@ -49,19 +49,19 @@
             <result name="success" type="chain">toChangeInfo</result>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="changePassword">
-            <result name="input">changePassword.jsp</result>
+            <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">toChangeInfo</result>
         </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="changePasswordById">
+        <action name="resetChangePassword" class="ResetChangePasswordAction">
             <result name="input">resetPassword.jsp</result>
             <result name="success" type="chain">index</result>
         </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="addLesson">
-            <result name="input">changeInfo.jsp</result>
+        <action name="dealLesson" class="DealLessonAction" method="addLesson">
+            <result name="input">teacherIndex.jsp</result>
             <result name="success" type="chain">index</result>
         </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="deleteLesson">
-            <result name="input">changeInfo.jsp</result>
+        <action name="dealLesson" class="DealLessonAction" method="deleteLesson">
+            <result name="input">teacherIndex.jsp</result>
             <result name="success" type="chain">index</result>
         </action>
         <action name="changeIntro" class="ChangeIntroAction">

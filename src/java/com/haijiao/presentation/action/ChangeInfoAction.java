@@ -32,6 +32,7 @@ public class ChangeInfoAction extends SessionAction {
     String newpwd;
     String newpwd2;
     String province;
+    String net;
     SimpleDateFormat sdf;
     SimpleDateFormat sdf2;
     Date date;
@@ -47,12 +48,16 @@ public class ChangeInfoAction extends SessionAction {
         try{
             date = new Date(sdf.parse(birthday).getTime());
         } catch(ParseException e){
-            date = new Date(sdf2.parse(birthday).getTime());
+            try{
+                date = new Date(sdf2.parse(birthday).getTime());
+            } catch(ParseException e2) {
+                //do nothing;
+            }
         }
     }
     
     public String teacherRegister() throws ParseException{
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, null, province)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, null, province, net)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", theTeacher.getName());
             this.sessionPutIn("userType", "teacher");
@@ -79,11 +84,8 @@ public class ChangeInfoAction extends SessionAction {
     
     public String teacherChange() throws ParseException{
         parseDate();
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, tel, province)){
-            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("name", theTeacher.getName());
-            this.sessionPutIn("userType", "teacher");
-            this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, tel, province, net)){
+            nextPageMessage = this.getText("teaChangeSuccess");
             return SUCCESS;
         } else {
             nextPageMessage = this.getText("teaChangeFailure");
@@ -94,10 +96,7 @@ public class ChangeInfoAction extends SessionAction {
     public String studentChange() throws ParseException{
         parseDate();
         if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, date, grade, school, tel, telType)){
-            Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("name", s.getName());
-            this.sessionPutIn("userType", "student");
-            this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
+            nextPageMessage = this.getText("teaChangeSuccess");
             return SUCCESS;
         } else {
             nextPageMessage = this.getText("stuChangeFailure");
@@ -127,18 +126,6 @@ public class ChangeInfoAction extends SessionAction {
         }
         userService.changePasswordById( id, newpwd );
         nextPageMessage = this.getText("changePasswordSuccess");
-        return SUCCESS;
-    }
-
-    public String addLesson(){
-        teacherService.addLesson((String)this.getSessionValue("email"), lessonName);
-        nextPageMessage = "成功添加课程";
-        return SUCCESS;
-    }
-    
-    public String deleteLesson(){
-        teacherService.deleteLesson((String)this.getSessionValue("email"), lessonName);
-        nextPageMessage = "成功删除课程";
         return SUCCESS;
     }
 
@@ -264,6 +251,22 @@ public class ChangeInfoAction extends SessionAction {
     
     public String getProvince() {
         return province;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNet() {
+        return net;
+    }
+
+    public void setNet(String net) {
+        this.net = net;
     }
 
     public void setProvince(String province) {

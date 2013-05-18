@@ -63,9 +63,10 @@
                         <p></p>
                         <button type="button" class="btn btn-danger">网络</button>
                         <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button type="button" value="0" class="btn" data-toggle="button">电信</button>
-                            <button type="button" value="1" class="btn" data-toggle="button">网通</button>
-                            <button type="button" value="2" class="btn" data-toggle="button">教育网</button>
+                            <button id="dx" type="button" value="0" class="btn net" data-toggle="button">电信</button>
+                            <button id="lt" type="button" value="1" class="btn net" data-toggle="button">联通</button>
+                            <button id="jyw" type="button" value="2" class="btn net" data-toggle="button">教育网</button>
+                            <button id="qt" type="button" value="2" class="btn net" data-toggle="button">其他</button>
                         </div> 
                         <p></p>
                         <button type="button" class="btn btn-danger">地址</button>
@@ -84,8 +85,9 @@
                         <s:form id="search2" action="searchTeacher.action" cssStyle="display:none;" method="get">
                             <s:textfield name="searchContent" value="%{searchContent}"/>
                             <s:textfield name="desc" />
-                            <s:textfield name="lessonGet" cssClass=" span3"/>
-                            <s:textfield name="gradeGet" cssClass=" span3"/>
+                            <s:textfield name="lessonGet"/>
+                            <s:textfield name="gradeGet"/>
+                            <s:textfield name="netGet" />
                             <s:submit id="normal_submit"/>
                             <s:submit id="score_submit" method="score" />
                             <s:submit id="hot_submit" method="hot" />
