@@ -100,6 +100,7 @@
                                                                     <s:form id="dealApply_stop_%{id}" action="dealApply.action">
                                                                         <s:textfield style="display:none;" name="button" value="studentStop"></s:textfield>
                                                                         <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                        <s:textfield style="display:none;" name="toEmail" value="%{freeTime.teacher.email}"></s:textfield>
                                                                         <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">暂停</button>
                                                                     </s:form>
                                                                 </s:if>

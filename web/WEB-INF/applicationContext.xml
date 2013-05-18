@@ -50,6 +50,7 @@
         <property name="classService" ref="classServiceImpl" />
         <property name="teacherService" ref="teacherServiceImpl" />
         <property name="studentService" ref="studentServiceImpl" />
+        <property name="mailService" ref="mailServiceImpl"/>
     </bean>
     <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />
@@ -62,6 +63,7 @@
         <property name="teacherService" ref="teacherServiceImpl" />
         <property name="classService" ref="classServiceImpl" />
         <property name="userService" ref="userServiceImpl" />
+        <property name="mailService" ref="mailServiceImpl"/>
     </bean>
     <bean id="AddFreeTimeAction" class="com.haijiao.presentation.action.teacherAchtion.AddFreeTimeAction" scope="prototype">
         <property name="classService" ref="classServiceImpl" />

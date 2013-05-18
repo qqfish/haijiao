@@ -119,6 +119,7 @@
                                                                         <s:form id="dealApply_stop_%{id}" action="dealApply.action">
                                                                             <s:textfield style="display:none;" name="button" value="stop"></s:textfield>
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
                                                                             <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">暂停</button>
                                                                         </s:form>
                                                                     </s:if>
@@ -128,10 +129,12 @@
                                                                         <s:form id="dealApply_accept_%{id}" action="dealApply.action">
                                                                             <s:textfield style="display:none;" name="button" value="accept"></s:textfield>
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
                                                                         </s:form>
                                                                         <s:form id="dealApply_decline_%{id}" action="dealApply.action">
                                                                             <s:textfield style="display:none;" name="button" value="decline"></s:textfield>
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
                                                                         </s:form>
                                                                     </s:if>
                                                                 </span>

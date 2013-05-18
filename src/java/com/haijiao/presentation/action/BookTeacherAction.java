@@ -10,6 +10,7 @@ import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.presentation.bean.schedule.ScheduleArray;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IClassService;
+import com.haijiao.SupportService.service.IMailService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.global.scheduleLocation;
@@ -20,6 +21,7 @@ public class BookTeacherAction extends SessionAction {
     IClassService classService;
     ITeacherService teacherService;
     IUserService userService;
+    IMailService mailService;
     String teacherEmail;
     String json;
     String lesson;
@@ -48,7 +50,10 @@ public class BookTeacherAction extends SessionAction {
         remainCoin -= (tea.getWagePerhour() * sList.size() * times);
         if (remainCoin >= 0) {
             classService.bookTeacher(teacherEmail, (String) this.getSessionValue("email"), lesson, sList, times);
-
+            mailService.sendMail( (String)this.getSessionValue("email"), teacherEmail,
+                "老师您好，有学生选择了您的课程，请尽快确认。"
+                + "本邮件由系统发送，具体情况可回复本邮件与学生联系。"
+        );
             nextPageMessage = this.getText("successMessage");
             return SUCCESS;
         } else {
@@ -127,5 +132,13 @@ public class BookTeacherAction extends SessionAction {
 
     public void setNextPageMessage(String nextPageMessage) {
         this.nextPageMessage = nextPageMessage;
+    }
+
+    public IMailService getMailService() {
+        return mailService;
+    }
+
+    public void setMailService(IMailService mailService) {
+        this.mailService = mailService;
     }
 }
