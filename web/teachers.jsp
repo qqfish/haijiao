@@ -35,6 +35,14 @@
         <div class="wrapper container">
             <div class="span11">
                 <div class="span11 module">
+                    <div class="span1" style="line-height: 47px">搜索教师</div>
+                    <s:select cssClass="span2 choosetext" list="{'请选择家教科目','语文', '数学', '英语', '物理', '化学', '生物', '政治', '历史', '地理'}"/>
+                    <s:select cssClass="span2 choosetext" list="{'请选择家教年级','小学', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}"/>
+                    <s:select cssClass="span2 choosetext" list="{'请选择家教地区','北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/>
+                    <s:select cssClass="span2 choosetext" list="{'性别','男', '女', '不限'}"/>
+                    <button class="btn btn-small btn-inverse"><i class="icon-search icon-white"></i> 搜索</button>
+                </div>
+                <div class="span11 module">
                     <div id="collapseOne" style="padding: 16px;">
                         <button type="button" class="btn btn-danger">年级</button>
                         <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
@@ -63,10 +71,9 @@
                         <p></p>
                         <button type="button" class="btn btn-danger">网络</button>
                         <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button id="dx" type="button" value="0" class="btn net" data-toggle="button">电信</button>
-                            <button id="lt" type="button" value="1" class="btn net" data-toggle="button">联通</button>
-                            <button id="jyw" type="button" value="2" class="btn net" data-toggle="button">教育网</button>
-                            <button id="qt" type="button" value="2" class="btn net" data-toggle="button">其他</button>
+                            <button type="button" value="0" class="btn" data-toggle="button">电信</button>
+                            <button type="button" value="1" class="btn" data-toggle="button">网通</button>
+                            <button type="button" value="2" class="btn" data-toggle="button">教育网</button>
                         </div> 
                         <p></p>
                         <button type="button" class="btn btn-danger">地址</button>
@@ -78,16 +85,21 @@
                         <h3>
                             老师列表
                             <small>
-                                <a id="normal_button">默认</a>/<a id="score_button">评分</a>/<a id="price_button">价格</a>/<a id="hot_button">人气</a>
-                                <button class="btn btn-small pull-right" data-toggle="button">仅显示在线</button>
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-small btn-inverse" id="normal_button" data-toggle="button">默认<i class="icon-arrow-down icon-white"></i></button>
+                                    <button class="btn btn-small btn-inverse" id="score_button" data-toggle="button">评分<i class="icon-arrow-down"></i></button>
+                                    <button class="btn btn-small btn-inverse" id="price_button" data-toggle="button">价格</button>
+                                    <button class="btn btn-small btn-inverse" id="hot_button" data-toggle="button">人气</button>
+                                    <button class="btn btn-small btn-danger">仅显示在线</button>
+                                </div>
+
                             </small>
                         </h3>
                         <s:form id="search2" action="searchTeacher.action" cssStyle="display:none;" method="get">
                             <s:textfield name="searchContent" value="%{searchContent}"/>
                             <s:textfield name="desc" />
-                            <s:textfield name="lessonGet"/>
-                            <s:textfield name="gradeGet"/>
-                            <s:textfield name="netGet" />
+                            <s:textfield name="lessonGet" cssClass=" span3"/>
+                            <s:textfield name="gradeGet" cssClass=" span3"/>
                             <s:submit id="normal_submit"/>
                             <s:submit id="score_submit" method="score" />
                             <s:submit id="hot_submit" method="hot" />
@@ -108,8 +120,7 @@
                                                         <s:if test="status==0"><label class="label">离线</label></s:if>
                                                         <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                         <s:else><label class="label label-warning">忙碌</label></s:else></small>
-                                                        <label class="label label-important pull-right">评分：<s:if test="score == 0">无</s:if>
-                                                            <s:else><s:property value="score"/></s:else></label></h4>
+                                                    <label class="label label-important pull-right">评分：<s:property value="score"/></label></h4>
                                                 <p>
                                                     <label class="label label-info"><s:property value="wagePerhour"/>元/时</label>
                                                     <s:iterator value="lessons" status="st">

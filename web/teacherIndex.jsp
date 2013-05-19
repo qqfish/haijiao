@@ -38,7 +38,7 @@
                <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
                 <![endif]-->
     </head>
-          <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
+    <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
         viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
           style="background: url(images/background.jpg);">
 
@@ -69,11 +69,11 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="span8 module" style="padding:12px;">
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span8 module" style="padding:12px;">
                     <s:a action="toChangeInfo.action">
                         <button type="button" class="btn btn-primary pull-right"><i class="icon-pencil icon-white"></i>修改资料</button>
                     </s:a>
@@ -121,11 +121,13 @@
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
                                                                             <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
                                                                             <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">暂停</button>
+                                                                            <a class="btn btn-info btn-mini" href="getMail.action?toEmail=<s:property value="student.email" />">私信</a>
                                                                         </s:form>
                                                                     </s:if>
                                                                     <s:if test="status==2">
                                                                         <button type="button" id="dealApply_accept_button_<s:property value="id"/>" class="btn btn-info btn-mini">接受</button>
                                                                         <button type="button" id="dealApply_decline_button_<s:property value="id"/>" class="btn btn-info btn-mini">拒绝</button>
+                                                                        <button class="btn btn-info btn-mini" href="mail.jsp?id=<s:property value="student.email" />">私信</button>
                                                                         <s:form id="dealApply_accept_%{id}" action="dealApply.action">
                                                                             <s:textfield style="display:none;" name="button" value="accept"></s:textfield>
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
@@ -149,7 +151,7 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id='schedule_area'>
-                            <table class="static_schedule_table" width="100%" border="0" style="z-index: 1">
+                            <table class="static_schedule_table" width="100%" border="0" style="z-index: 1;text-align: center;table-layout: fixed;">
                                 <tbody>
                                     <tr>
                                         <th ></th>
@@ -158,8 +160,8 @@
                                         <th>Wed.</th>
                                         <th>Thu.</th>
                                         <th>Fri.</th>
-                                        <th style="width:24px">Sat.</th>
-                                        <th style="width:24px">Sun.</th>
+                                        <th>Sat.</th>
+                                        <th>Sun.</th>
                                     </tr>
                                     <tr class="class_1">
                                         <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -220,8 +222,8 @@
                                                     <th>Wed.</th>
                                                     <th>Thu.</th>
                                                     <th>Fri.</th>
-                                                    <th style="width:24px">Sat.</th>
-                                                    <th style="width:24px">Sun.</th>
+                                                    <th>Sat.</th>
+                                                    <th>Sun.</th>
                                                 </tr>
                                                 <tr class="class_1">
                                                     <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -283,10 +285,10 @@
                                                 <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
-                                                <span class="label label-info"><s:property value="name" /></span><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
-                                            </s:form>
-                                        </s:if>
-                                    </s:iterator>
+                                            <span class="label label-info"><s:property value="name" /></span><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
+                                        </s:form>
+                                    </s:if>
+                                </s:iterator>
                                 <br/><br/>
                                 <p style="font-size: 9px;">
                                     * 小提示①：点击课程后面的小叉可以取消开设该课程哦！<br/>

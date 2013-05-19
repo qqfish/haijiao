@@ -18,7 +18,7 @@
     <div class="navbar navbar-inverse" style="margin-bottom: 0px;">
         <div class="navbar-inner">
             <div style="width:1000px;margin-left: auto;margin-right:auto;">
-                <a class="brand" href="index.action">Haijiao</a>
+                <a class="brand" href="index.action">Haijiao<span style="color: #008db8;">EDU</span></a>
                 <ul class="nav">
                     <li><a href="#" onclick="$('#searchSubmit').click();">去逛逛</a></li>
                     <li><a href="contact.jsp">关于我们</a></li>
@@ -54,7 +54,7 @@
                                             <li>今天没有课程哦</li>
                                         </s:if>
                                         <s:iterator value="#session.todayClazz">
-                                            <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">学生:<s:property value="student.name"/>   第<s:property value="freeTime.sliceIndex"/>节课</a></li>
+                                            <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">学生:<s:property value="student.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
                                         </s:iterator>
                                     </s:if>
                                     <s:else>
@@ -62,7 +62,7 @@
                                             <p>今天没有课程哦</p>
                                         </s:if>
                                         <s:iterator value="#session.todayClazz">
-                                            <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">老师:<s:property value="freeTime.teacher.name"/>   第<s:property value="freeTime.sliceIndex"/>节课</a></li>
+                                            <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">老师:<s:property value="freeTime.teacher.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
                                         </s:iterator>
                                     </s:else>
                                 </ul>

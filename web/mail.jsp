@@ -48,7 +48,7 @@
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
                         <li class="active"><a href="#sendMsg" data-toggle="tab">写信息<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li><a href="#newMsg" data-toggle="tab">新消息<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li><a id="newMsgButton" href="#newMsg" data-toggle="tab">新消息<i class="icon-chevron-right pull-right"></i></a></li>
                         <li><a href="#allMsg" data-toggle="tab">所有消息<i class="icon-chevron-right pull-right"></i></a></li>
                     </ul>
                 </div>
@@ -60,7 +60,7 @@
                             <div class="span7">
                                 <s:form class="form-horizontal" action="sendMail.action" method="post">
                                     <h5>收件人:</h5>
-                                    <s:textfield cssClass="span7" name="name" id="inputEmail" value="%{#parameters.email}"/>
+                                    <s:textfield cssClass="span7" name="name" id="inputEmail" value="%{#request.toEmail}"/>
                                     <h5>内容:</h5>
                                     <s:textarea cssClass="span7" name="content" rows="10"></s:textarea>
                                         <button type="submit" class="btn btn-primary pull-right span1">取消</button>
@@ -107,5 +107,9 @@
         </div>
         <!--==============================footer=================================-->
         <%@ include file="WEB-INF/jspf/footer.jspf"%>
+        <s:if test="toEmail==null"><script>
+            $("#newMsgButton").click();
+        </script></s:if>
+        
     </body>
 </html>

@@ -5,7 +5,13 @@
     Description:
         Purpose of the stylesheet follows.
 */
-
+body {	
+	line-height:24px;
+	color:#343434;
+	min-width:1020px;
+	background:url(../../images/bg-body.gif) #e6e4d7;
+       /* background:url(../images/bkg.jpg);*/
+}
 
 video{
     height: 100px;

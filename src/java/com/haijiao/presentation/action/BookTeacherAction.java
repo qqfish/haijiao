@@ -1,7 +1,4 @@
-﻿/**
- *
- * @author Jerry Zou
- */
+
 package com.haijiao.presentation.action;
 
 import com.google.gson.Gson;

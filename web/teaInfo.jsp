@@ -80,11 +80,11 @@
                         </tbody>
                     </table>
                     <s:if test="#session.userType=='teacher'">
-                        <a class="btn btn-primary btn-small" href="mail.jsp?id=<s:property value="tea.id" />">发送私信</a>
+                        <a class="btn btn-primary btn-small" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                     </s:if>
                     <s:if test="#session.userType=='student'">
                         <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                        <a class="btn btn-primary btn-small" href="mail.jsp?id=<s:property value="tea.id" />">发送私信</a>
+                        <a class="btn btn-primary btn-small" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                         <s:if test="tea.status=1">
                             <a class="btn btn-primary btn-small" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">公共课程</a>
                         </s:if>

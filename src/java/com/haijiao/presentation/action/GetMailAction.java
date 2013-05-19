@@ -13,7 +13,8 @@ import java.util.List;
  *
  * @author hp
  */
-public class GetMailAction extends SessionAction{
+public class GetMailAction extends RequestSessionAction{
+    String toEmail;
     IMailService mailService;
     List<Mail> allMailList;
     List<Mail> unreadMailList;
@@ -41,12 +42,21 @@ public class GetMailAction extends SessionAction{
     public void setUnreadMailList(List<Mail> unreadMailList) {
         this.unreadMailList = unreadMailList;
     }
+
+    public String getToEmail() {
+        return toEmail;
+    }
+
+    public void setToEmail(String toEmail) {
+        this.toEmail = toEmail;
+    }
     
     @Override
     public String execute() throws Exception {
+        toEmail = (String) this.getOutRequest("toEmail");
         allMailList = new ArrayList<Mail>();
         unreadMailList = new ArrayList<Mail>();
-        String email = (String)this.getSessionValue("email");
+        String email = (String)this.getOutSession("email");
         allMailList = mailService.getMail(email);
         unreadMailList = mailService.getUnreadMail(email);
         return SUCCESS;

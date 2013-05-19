@@ -116,7 +116,7 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id='schedule_area'>
-                            <table class="static_schedule_table" width="100%" border="0" style="z-index: 1">
+                            <table class="static_schedule_table" width="100%" border="0" style="z-index: 1;text-align: center;table-layout: fixed;">
                                 <tbody>
                                     <tr>
                                         <th ></th>
