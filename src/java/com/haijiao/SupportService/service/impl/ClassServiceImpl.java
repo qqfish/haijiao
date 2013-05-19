@@ -211,7 +211,7 @@ public class ClassServiceImpl implements IClassService {
     public boolean finishDay(int day) {
         List<FreeTime> freeTimeList = freeTimeDAO.getFreeTimeByDay(day);
         for(int i = 0; i < freeTimeList.size(); i++){
-            if(freeTimeList.get(i).getClazzList().size() == 0){
+            if(freeTimeList.get(i).getClazzList().isEmpty()){
                 freeTimeDAO.makeTransient(freeTimeList.get(i));
                 teacherDAO.update(freeTimeList.get(i).getTeacher());
                 freeTimeList.remove(i);
@@ -236,4 +236,5 @@ public class ClassServiceImpl implements IClassService {
         }
         return true;
     }
+    
 }

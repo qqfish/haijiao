@@ -12,29 +12,9 @@
     <head>
         <title>海角教育</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="css/validate.css" />
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-        <script>
-            $(function(){
-                if($("#newMsg").children("div").length == 0)
-                    $("#markAll").addClass("disabled");
-            })
-            
-            function mark(id){
-                $.ajax({
-                    url:"markMail.action",
-                    type:"POST",
-                    context:event.srcElement,
-                    data:{id:id},
-                    success:function(data){
-                        if($(this).parent().parent().children("div").length == 1){
-                            $(this).parent().parent().append("暂无未读消息哦~！");
-                            $(this).parent().remove();
-                        }
-                        else
-                            $(this).parent().remove();
-                    }});
-            }
-        </script>
+        <script type="text/javascript" src="js/mail.js"></script>
     </head>
     <body style="background: url(images/background.jpg);">
         <!--==============================header=================================-->
@@ -60,11 +40,12 @@
                             <div class="span7">
                                 <s:form class="form-horizontal" action="sendMail.action" method="post">
                                     <h5>收件人:</h5>
-                                    <s:textfield cssClass="span7" name="name" id="inputEmail" value="%{#request.toEmail}"/>
+                                    <s:textfield cssClass="span7" name="name" id="inputEmail" onchange="validate_email(this,email_tip);" placeholder="请输入邮箱" value="%{#request.toEmail}"/>
+                                    <div id="email_tip" class="validateTip"></div>
                                     <h5>内容:</h5>
                                     <s:textarea cssClass="span7" name="content" rows="10"></s:textarea>
-                                        <button type="submit" class="btn btn-primary pull-right span1">取消</button>
-                                        <button type="submit" class="btn btn-primary pull-right span1">发送</button>
+                                        <button class="btn btn-primary pull-right span1">取消</button>
+                                        <button type="submit" id="send" class="btn btn-primary pull-right span1">发送</button>
                                 </s:form>
                             </div>
                         </div>

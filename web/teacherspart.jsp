@@ -22,16 +22,6 @@
                     <button class="btn btn-small pull-right">仅显示在线</button>
                 </small>
             </h3>
-            <s:form id="search2" action="searchTeacher.action" cssStyle="display:none;" method="get">
-                <s:textfield name="searchContent" value="%{searchContent}"/>
-                <s:textfield name="desc" />
-                <s:textfield name="lessonGet" cssClass=" span3"/>
-                <s:textfield name="gradeGet" cssClass=" span3"/>
-                <s:submit id="normal_submit"/>
-                <s:submit id="score_submit" method="score" />
-                <s:submit id="hot_submit" method="hot" />
-                <s:submit id="price_submit" method="price" />
-            </s:form>
         </div>
         <hr style="margin:12px 12px 0px 12px;"/>
         <div class="row-fluid" style="margin: 0px 28px;">

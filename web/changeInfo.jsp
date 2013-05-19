@@ -15,7 +15,8 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/datepicker.css">
         <link rel="stylesheet" href="kindeditor/themes/default/default.css" />
-        <link rel="stylesheet" href="css/validate.css">
+        <link rel="stylesheet" href="css/validate.css"/>
+        <link rel="stylesheet" href="css/jquery.Jcrop.min.css"/>
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
@@ -24,44 +25,121 @@
         <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
         <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
         <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+        <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
         <script>
             var editor;
             KindEditor.ready(function(K) {
                 editor = K.create('textarea[name="intro"]', {
-                    resizeType : 1,
-                    allowPreviewEmoticons : false,
-                    allowImageUpload : false,
-                    width : '95%',
-                    items : [
+                    resizeType: 1,
+                    allowPreviewEmoticons: false,
+                    allowImageUpload: false,
+                    width: '95%',
+                    items: [
                         'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-                    });
+                        'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                        'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+                });
             });
 
+            // 获取本地上传的照片路径  
+            function getPath(obj) {
+                if (obj) {
+                    //ie  
+                    if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+                        obj.select();
+                        // IE下取得图片的本地路径  
+                        return document.selection.createRange().text;
+                    }
+                    //firefox  
+                    else if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
+                        if (obj.files) {
+                            // Firefox下取得的是图片的数据  
+                            return obj.files.item(0).getAsDataURL();
+                        }
+                        return obj.value;
+                    }
+                    return obj.value;
+                }
+            }
+
+            //显示图片
+            function previewPhoto() {
+                var picsrc = getPath(document.all.fileid);
+                var picpreview = document.getElementById("preview");
+                if (!picsrc) {
+                    return;
+                }
+                if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+                    if (picpreview) {
+                        try {
+                            picpreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = picsrc;
+                        } catch (ex) {
+                            alert("文件路径非法，请重新选择！");
+                            return false;
+                        }
+                    } else {
+                        $("#preimg").attr("src", picsrc);
+                    }
+                }
+            }
+
+
+
+            function preImg(fileid, imgid) {
+                if (typeof FileReader == 'undefined') {
+                    var picsrc = getPath(document.all.fileid)
+                    $("#preimg").attr({src: picsrc});
+                    previewPhoto();
+                }
+                else {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $("#preimg").attr("src", this.result);
+                        $("#cutimg").attr("src", this.result);
+                        $("#preimg").Jcrop({
+                            onChange: showPreview,
+                            onSelect: showPreview,
+                            aspectRatio: 1
+                        });
+                    };
+                    reader.readAsDataURL(document.getElementById(fileid).files[0]);
+                }
+            }
+            
+            function showPreview(coords) {
+                if (parseInt(coords.w) > 0) {
+                    //计算预览区域图片缩放的比例，通过计算显示区域的宽度(与高度)与剪裁的宽度(与高度)之比得到
+                    var rx = $("#cutview").width() / coords.w;
+                    var ry = $("#cutview").height() / coords.h;
+                    //通过比例值控制图片的样式与显示
+                    $("#cutimg").css({
+                        width: Math.round(rx * $("#preimg").width()) + "px", //预览图片宽度为计算比例值与原图片宽度的乘积
+                        height: Math.round(ry * $("#preimg").height()) + "px", //预览图片高度为计算比例值与原图片高度的乘积
+                        marginLeft: "-" + Math.round(rx * coords.x) + "px",
+                        marginTop: "-" + Math.round(ry * coords.y) + "px"
+                    });
+                }
+            }
+
+            function showimg(imgFile) {
+                console.log($(imgFile).val());
+                $("#imgcontainer").html("<img id='preview' src='" + $(event.srcElement).val() + "'/>");
+                $("#preview").Jcrop();
+            }
+
             jQuery(window).load(function() {
-                $("#upload").submit(function(){
-                    var wait = setInterval(function(){
-                        var data =  '<%=session.getAttribute("currentProcess")%>';
-                        $(".bar").css("width",data + "%");
-                        if(Number(data) == 100)
+                $("#upload").submit(function() {
+                    var wait = setInterval(function() {
+                        var data = '<%=session.getAttribute("currentProcess")%>';
+                        $(".bar").css("width", data + "%");
+                        if (Number(data) == 100)
                             clearInterval(wait);
-                    },100);
+                    }, 100);
                 });
-            
-                /*jQuery('.flexslider').flexslider({
-                    animation: "fade",
-                    slideshow: true,
-                    slideshowSpeed: 7000,
-                    animationDuration: 600,
-                    prevText: "",
-                    nextText: "",
-                    controlNav: false
-                });*/
-                
+
             });
-            
-            
+
+
         </script>
 
 
@@ -198,9 +276,17 @@
                                 <img src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
                             <s:form action="uploadPic" id="upload" enctype="multipart/form-data">
-                                <s:file name="upload" title="上传" onchange="$('#upload').submit();"/>
+                                <s:file name="upload" title="上传" id="fileid" onchange="preImg(this.id,preimg);"/>
                             </s:form>
-                                <div class="progress"><div class="bar"></div></div>
+                            <div class="progress"><div class="bar"></div></div>
+                            <div>
+                            <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
+                                <img id="preimg"/>
+                            </div>
+                            <div id="cutview" class="right" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);width:145px;height:145px;overflow: hidden;">
+                                <img id="cutimg"/>
+                            </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade"  id='4'>
                             <h3>修改个人介绍</h3>

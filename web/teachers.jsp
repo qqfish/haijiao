@@ -37,7 +37,7 @@
                 <div class="span11 module">
                     <div id="collapseOne" style="padding: 16px;">
                         <button type="button" class="btn btn-danger disabled">年级</button>
-                        <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                        <div id="grade" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button id="prischool" type="button" value="0" class="btn grade active" data-toggle="button">不限</button>
                             <button id="prischool" type="button" value="1" class="btn grade" data-toggle="button">小学</button>
                             <button id="grade6" type="button" value="2" class="btn grade" data-toggle="button">六年级</button>
@@ -50,7 +50,7 @@
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-danger disabled">学科</button>
-                        <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                        <div id="lesson" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button id="chinese" type="button" value="0" class="lesson btn active" data-toggle="button">不限</button>
                             <button id="chinese" type="button" value="1" class="lesson btn " data-toggle="button">语文</button>
                             <button id="math" type="button" value="2" class="btn lesson" data-toggle="button">数学</button>
@@ -64,7 +64,7 @@
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-danger disabled">网络</button>
-                        <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                        <div id="net" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button type="button" value="0" class="btn active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn" data-toggle="button">电信</button>
                             <button type="button" value="2" class="btn" data-toggle="button">网通</button>
@@ -100,8 +100,9 @@
                         <s:form id="search2" action="searchTeacher.action" cssStyle="display:none;" method="get">
                             <s:textfield name="searchContent" value="%{searchContent}"/>
                             <s:textfield name="desc" />
-                            <s:textfield name="lessonGet" cssClass=" span3"/>
-                            <s:textfield name="gradeGet" cssClass=" span3"/>
+                            <s:textfield name="lessonGet"/>
+                            <s:textfield name="gradeGet"/>
+                            <s:textfield name="netGet" />
                             <s:submit id="normal_submit"/>
                             <s:submit id="score_submit" method="score" />
                             <s:submit id="hot_submit" method="hot" />
@@ -122,7 +123,8 @@
                                                         <s:if test="status==0"><label class="label">离线</label></s:if>
                                                         <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                         <s:else><label class="label label-warning">忙碌</label></s:else></small>
-                                                    <label class="label label-important pull-right">评分：<s:property value="score"/></label></h4>
+                                                        <label class="label label-important pull-right">评分：<s:if test="score == 0">无</s:if>
+                                                            <s:else><s:property value="score"/></s:else></label></h4>
                                                 <p>
                                                     <label class="label label-info"><s:property value="wagePerhour"/>元/时</label>
                                                     <s:iterator value="lessons" status="st">

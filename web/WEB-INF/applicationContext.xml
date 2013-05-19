@@ -118,7 +118,7 @@
     <bean id="taskTimer" class="com.haijiao.global.timerTask" scope="prototype" >
         <property name="classService" ref="classServiceImpl" />
     </bean>
-    
+
     <bean id="springContext" class="com.haijiao.SupportService.SpringContext"></bean>
     <!-- persist -->
 

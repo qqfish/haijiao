@@ -39,7 +39,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
                 where += and;
             }
         }
-        if(!strList2.isEmpty())
+        if(!strList2.isEmpty() && !strList.isEmpty())
             where += and;
         for(int i =0; i < strList2.size();i ++){
             String keyword = strList2.get(i);
@@ -70,12 +70,10 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
                 where += and;
             }
         }
-        if(!strList2.isEmpty())
+        if(!where.equals(" where ") && !strList2.isEmpty())
             where += and;
         for(int i =0; i < strList2.size();i ++){
             String keyword = strList2.get(i);
-            if(keyword.equals(""))
-                continue;
             where += "l.name like '%" + keyword + "%'";
             if (i + 1 < strList2.size()) {
                 where += and;

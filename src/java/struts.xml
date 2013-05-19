@@ -83,14 +83,17 @@
         </action>
         <action name="searchTeacher" class="SearchTeacherAction" method="score">
             <result name="success">teachers.jsp</result>
+            <result name="dynamic">teacherspart.jsp</result>
             <result name="input">teachers.jsp</result>
         </action>
         <action name="searchTeacher" class="SearchTeacherAction" method="price">
             <result name="success">teachers.jsp</result>
+            <result name="dynamic">teacherspart.jsp</result>
             <result name="input">teachers.jsp</result>
         </action>
         <action name="searchTeacher" class="SearchTeacherAction" method="hot">
             <result name="success">teachers.jsp</result>
+            <result name="dynamic">teacherspart.jsp</result>
             <result name="input">teachers.jsp</result>
         </action>
         <action name="getTeacherInfo" class="GetTeacherInfoAction">
