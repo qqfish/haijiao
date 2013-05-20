@@ -86,6 +86,8 @@
 
 
             function preImg(fileid, imgid) {
+                $('#pic_org').fadeOut();
+                $('#pre_area').fadeIn();
                 if (typeof FileReader == 'undefined') {
                     var picsrc = getPath(document.all.fileid)
                     $("#preimg").attr({src: picsrc});
@@ -95,7 +97,6 @@
                     var reader = new FileReader();
                     reader.onload = function(e) {
                         $("#preimg").attr("src", this.result);
-                        $("#cutimg").attr("src", this.result);
                         $("#preimg").Jcrop({
                             onChange: showPreview,
                             onSelect: showPreview,
@@ -107,24 +108,42 @@
             }
             
             function showPreview(coords) {
-                if (parseInt(coords.w) > 0) {
-                    //计算预览区域图片缩放的比例，通过计算显示区域的宽度(与高度)与剪裁的宽度(与高度)之比得到
-                    var rx = $("#cutview").width() / coords.w;
-                    var ry = $("#cutview").height() / coords.h;
-                    //通过比例值控制图片的样式与显示
-                    $("#cutimg").css({
-                        width: Math.round(rx * $("#preimg").width()) + "px", //预览图片宽度为计算比例值与原图片宽度的乘积
-                        height: Math.round(ry * $("#preimg").height()) + "px", //预览图片高度为计算比例值与原图片高度的乘积
-                        marginLeft: "-" + Math.round(rx * coords.x) + "px",
-                        marginTop: "-" + Math.round(ry * coords.y) + "px"
-                    });
-                }
+                $('#pic_x').val(coords.x);
+                $('#pic_y').val(coords.y);
+                $('#pic_rate').val(this.getBounds()[0] / width);
+                $('#pic_w').val(coords.w);
+                $('#pic_h').val(coords.h);
             }
 
             function showimg(imgFile) {
                 console.log($(imgFile).val());
                 $("#imgcontainer").html("<img id='preview' src='" + $(event.srcElement).val() + "'/>");
                 $("#preview").Jcrop();
+            }
+            
+            function checkSubmit(){
+                if( $('#pic_w').val()==null || $('#pic_w').val()<=10 ){
+                    alert("未选中区域或选中区域太小");
+                } else if( $('#pic_h').val()==null || $('#pic_h').val()<=10 ){
+                    alert("未选中区域或选中区域太小");
+                } else {
+                    $('#upload').submit();
+                }
+            }
+            
+            var width;
+            
+            function getSize(img)
+            {
+                if(typeof(img)!='object')
+                    img=document.getElementById(img);
+                if(img==null)
+                    return;
+                var image=document.createElement("img");
+                image.onload=function (){
+                width=this.width;
+                };
+                image.src=img.src;
             }
 
             jQuery(window).load(function() {
@@ -269,24 +288,27 @@
                         <div class="tab-pane fade"  id='3'>
                             <h3>修改头像</h3>
                             <hr/>
+                            <div id="pre_area" style="display:none;">
+                            <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
+                                <img id="preimg" onload="getSize(this)"/>
+                            </div>
+                            </div>
                             <s:if test="#session.userType=='student'">
-                                <img src="<s:property value="stu.picUrl"/>" style="height: 230px;width: 230px;"/>
+                                <img id="pic_org" src="<s:property value="stu.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
                             <s:if test="#session.userType=='teacher'">
-                                <img src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
+                                <img id="pic_org" src="<s:property value="tea.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
                             <s:form action="uploadPic" id="upload" enctype="multipart/form-data">
-                                <s:file name="upload" title="上传" id="fileid" onchange="preImg(this.id,preimg);"/>
+                                <s:textfield id="pic_x" name="x" style="display:none;"/>
+                                <s:textfield id="pic_y" name="y" style="display:none;"/>
+                                <s:textfield id="pic_rate" name="rate" style="display:none;"/>
+                                <s:textfield id="pic_w" name="w" style="display:none;"/>
+                                <s:textfield id="pic_h" name="h" style="display:none;"/>
+                                <s:file name="upload" title="选择文件" id="fileid" onchange="preImg(this.id,preimg);"/>
+                                <button type="button" class="btn" data-toggle="button" onclick="checkSubmit();" >上传文件</button>
                             </s:form>
                             <div class="progress"><div class="bar"></div></div>
-                            <div>
-                            <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
-                                <img id="preimg"/>
-                            </div>
-                            <div id="cutview" class="right" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);width:145px;height:145px;overflow: hidden;">
-                                <img id="cutimg"/>
-                            </div>
-                            </div>
                         </div>
                         <div class="tab-pane fade"  id='4'>
                             <h3>修改个人介绍</h3>
