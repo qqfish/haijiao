@@ -67,11 +67,11 @@
                                                     <h3>选择您的身份</h3>
                                                 </div>       
                                                 <div class="modal-body">
-                                                    <div style="width:49%;float:left;border:0px solid #CCC">
+                                                    <div style="width:50%;float:left">
                                                         <a href="#" id="teacherbutton" onclick="$('#teachersubmit').click();"><img src="images/imteacher.png"/></a>
                                                         <s:submit value="老师" id="teachersubmit" cssStyle="display:none;" method="teacher"></s:submit>     
                                                     </div>     
-                                                    <div style="width:49%;float:left;border:0px solid #CCC">
+                                                    <div style="width:50%;float:left">
                                                         <a href="#" id="studentbutton" onclick="$('#studentsubmit').click();"><img src="images/imstudent.png"/></a>
                                                         <s:submit value="学生" id="studentsubmit" cssStyle="display:none;" method="student"></s:submit>
                                                     </div> 

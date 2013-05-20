@@ -1,4 +1,10 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
 <footer>
+    <div class="copyright">
+        <span class="offset1">Copyright&copy;2013 haijiaoedu.com, all rights reserved </span>
+        <span class="pull-right">
+            <a href="#">关于海角 ABOUT</a> | <a href="#">联系我们 CONTACT</a> | <a href="#">免责声明 DISCLAIMER</a> | <a href="#">帮助中心 HELP</a>
+        </span> 
+    </div>
 </footer>

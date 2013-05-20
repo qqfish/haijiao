@@ -1,19 +1,8 @@
 body {	
 /*	background:url(../images/bg-body.gif) #e6e4d7;*/
-        background:url(../images/bkg.jpg);
+        background:url(../images/bkg3.jpg);
         background-size: 100% 100%;
 }
 html, body {
 	height:100%;
-}
-
-.copyright{
-    color:#FFFFFF;
-}
-
-.copyright a{
-    color:#FFFFFF;
-}
-.copyright a:hover{
-    color:#FFFFFF;
 }

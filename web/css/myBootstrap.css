@@ -31,8 +31,20 @@
 }
 
 .wrapper {
-    min-height: 90%;
+    min-height: 85%;
     padding-top: 14px;
     background: url(https://abs.twimg.com/a/1367451715/t1/img/wash-white-30.png);
+}
+
+
+.copyright{
+    color:#FFFFFF;
+}
+
+.copyright a{
+    color:#FFFFFF;
+}
+.copyright a:hover{
+    color:#FFFFFF;
 }
 
