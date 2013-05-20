@@ -42,10 +42,6 @@ public class UploadPicAction extends SessionAction{
     @Override
     public String execute(){
         try{
-            System.out.println(x);
-            System.out.println(y);
-            System.out.println(w);
-            System.out.println(h);
             FileInputStream in = new FileInputStream(upload);
             String email = (String) this.getSessionValue("email");
             if(email == null){

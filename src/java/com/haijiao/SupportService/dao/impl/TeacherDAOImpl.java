@@ -54,7 +54,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, List<String> strList2, int first, int pagesize, String extOrder, int desc) { //desc->降序
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String grade, String net, String sex, String city, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
         String hql = "select distinct t from Teacher t left join t.lessons l";       
         String where = " where ";
         String or = " or ";
@@ -66,21 +66,24 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
             where += "(l.name like '%" + keyword + "%'";
             where += or;
             where += "t.name like '%" + keyword + "%')";
-            if (i + 1 < strList.size()) {
-                where += and;
-            }
-        }
-        if(!where.equals(" where ") && !strList2.isEmpty())
             where += and;
-        for(int i =0; i < strList2.size();i ++){
-            String keyword = strList2.get(i);
-            where += "l.name like '%" + keyword + "%'";
-            if (i + 1 < strList2.size()) {
-                where += and;
-            }
         }
-        if(!where.equals(" where "))
+        if(lesson != null && !lesson.equals(""))
+            where += "l.name like '%" + lesson + "%' and ";
+        if(grade != null && !grade.equals(""))
+            where += "l.name like '%" + grade + "%' and ";
+        if(net != null && !net.equals(""))
+            where += "t.net = '" + net + "' and ";
+        if(sex != null && !sex.equals(""))
+            where += "t.sex ='" + sex + "' and ";
+        if(city != null && !city.equals(""))
+            where += "t.province = '" + city + "' and ";
+        if(status != null && !status.equals(""))
+            where += "t.status = '" + status + "' and ";
+        if(!where.equals(" where ")){
+            where += "l.delete=0";
             hql += where;
+        }
         if (extOrder!=null && !extOrder.isEmpty()){
             hql += " order by t." + extOrder;
             if (desc==1) {

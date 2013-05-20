@@ -21,6 +21,9 @@ public class SearchTeacherAction extends RequestSessionAction {
     String lessonGet;
     String gradeGet;
     String netGet;
+    String status;
+    String province;
+    String sex;
 
     public SearchTeacherAction() {
     }
@@ -39,6 +42,11 @@ public class SearchTeacherAction extends RequestSessionAction {
         this.putIn("extOrder", "wagePerhour");
         return execute();
     }
+    
+    public String time() throws Exception{
+        this.putIn("extOrder", "lastActiveDate");
+        return execute();
+    }
 
     @Override
     public String execute() throws Exception {
@@ -53,11 +61,6 @@ public class SearchTeacherAction extends RequestSessionAction {
         } else {
             strList.add("");
         }
-        List<String> strList2 = new ArrayList<String>();
-        if(!lessonGet.equals(""))
-            strList2.add(lessonGet);
-        if(!gradeGet.equals(""))
-            strList2.add(gradeGet);
         int cp;
         String returnValue;
         if (currentPage == null) {
@@ -68,7 +71,7 @@ public class SearchTeacherAction extends RequestSessionAction {
             returnValue = "dynamic";
         }
         int pageSize = 20;
-        List<Teacher> teacherlist = userService.searchTeacherPage(strList, strList2, (cp - 1) * pageSize, pageSize, extOrder, desc);
+        List<Teacher> teacherlist = userService.searchTeacherPage(strList, lessonGet, gradeGet, netGet, sex, province, status, (cp - 1) * pageSize, pageSize, extOrder, desc);
         int num = userService.getTeacherNum(strList);
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
@@ -148,4 +151,29 @@ public class SearchTeacherAction extends RequestSessionAction {
     public void setNetGet(String netGet) {
         this.netGet = netGet;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+    
 }

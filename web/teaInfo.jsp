@@ -47,38 +47,8 @@
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
-                    <h1><s:property value="tea.name"/>
-                        <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
-                        <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
-                        <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
-                    </h1>
-                    <s:if test="#session.email != null&&tea.status!=1">
-                        <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
-                        <div class="modal fade hide" id="publicRoom">
-                            <div class="modal-body">
-                                <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">确定</a>
-                                <button class="btn" data-dismiss="modal">取消</button>
-                            </div>
-                        </div>
-                    </s:if>
-                    <s:elseif test="#session.email != null">
-                        <a class='btn btn-primary btn-small' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
-                    </s:elseif>
-                    <s:else>
-                        <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
-                        <div class="modal fade hide" id="publicRoom">
-                            <div class="modal-body">
-                                <h3>请先登陆</h3>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-success" href="index.action">登陆</a>
-                                <button class="btn" data-dismiss="modal">取消</button>
-                            </div>
-                        </div>
-                    </s:else>
+                    <h1><s:property value="tea.name"/></h1>
+                    <button class='btn btn-primary btn-small'>在线试讲</button>
                     <hr/>
                     <p><s:property value="tea.province"/></p>
                     <p><s:property value="tea.email" /></p>
@@ -115,6 +85,9 @@
                     <s:if test="#session.userType=='student'">
                         <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#choosemodal">我要预约</a>
                         <a class="btn btn-primary btn-small" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                        <s:if test="tea.status=1">
+                            <a class="btn btn-primary btn-small" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">公共课程</a>
+                        </s:if>
                     </s:if>
                 </div>
                 <div class="span8 module" style="padding:12px;">

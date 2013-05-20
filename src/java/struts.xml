@@ -96,6 +96,11 @@
             <result name="dynamic">teacherspart.jsp</result>
             <result name="input">teachers.jsp</result>
         </action>
+        <action name="searchTeacher" class="SearchTeacherAction" method="time">
+            <result name="success">teachers.jsp</result>
+            <result name="dynamic">teacherspart.jsp</result>
+            <result name="input">teachers.jsp</result>
+        </action>
         <action name="getTeacherInfo" class="GetTeacherInfoAction">
             <result name="success">teaInfo.jsp</result>
         </action>

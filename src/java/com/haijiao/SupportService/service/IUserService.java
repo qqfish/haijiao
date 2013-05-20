@@ -38,7 +38,7 @@ public interface IUserService {
     
     //搜索老师（名字，年级，科目、网络状况）
     public List<Teacher> searchTeacher(List<String> strList, List<String> strList2);
-    public List<Teacher> searchTeacherPage(List<String> strList, List<String> strList2, int first, int pagesize, String extOrder, int desc);
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String grade, String net, String sex, String city, String status, int first, int pagesize, String extOrder, int desc);
     public int getTeacherNum(List<String> strList);
     
     //文件系统相关操作

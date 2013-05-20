@@ -166,8 +166,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(propagation=Propagation.SUPPORTS)
-    public List<Teacher> searchTeacherPage(List<String> strList, List<String> strList2, int first, int pagesize, String extOrder, int desc) {
-        return teacherDAO.searchTeacherPage(strList, strList2, first, pagesize, extOrder, desc);
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String grade, String net, String sex, String city, String status, int first, int pagesize, String extOrder, int desc) {
+        return teacherDAO.searchTeacherPage(strList, lesson, grade, net, sex, city, status, first, pagesize, extOrder, desc);
     }
 
     @Override
