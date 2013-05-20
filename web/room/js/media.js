@@ -304,6 +304,7 @@ function Media(parentId, text, userList){
                 dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
         ],scroll:false});
         userListDiv.append(current.userButton);
+        current.userButton.click();
         
     }
     

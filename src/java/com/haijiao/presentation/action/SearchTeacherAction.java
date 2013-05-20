@@ -66,7 +66,11 @@ public class SearchTeacherAction extends RequestSessionAction {
         if (currentPage == null) {
             cp = 1;
             returnValue = SUCCESS;
-        } else {
+        } else if(currentPage.equals("")){
+            cp = 1;
+            returnValue = "dynamic";
+        }
+        else {
             cp = Integer.parseInt(currentPage);
             returnValue = "dynamic";
         }
