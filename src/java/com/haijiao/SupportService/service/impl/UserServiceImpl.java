@@ -172,8 +172,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(propagation=Propagation.SUPPORTS)
-    public int getTeacherNum(List<String> strList) {
-        return teacherDAO.getTeacherNum(strList);
+    public int getTeacherNum(List<String> strList, String lesson, String grade, String net, String sex, String city, String status, String extOrder, int desc) {
+        return teacherDAO.getTeacherNum(strList, lesson, grade, net, sex, city, status, extOrder, desc);
     }
 
     @Override

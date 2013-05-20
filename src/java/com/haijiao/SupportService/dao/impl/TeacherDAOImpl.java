@@ -84,7 +84,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
             where += "l.delete=0";
             hql += where;
         }
-        if (extOrder!=null && !extOrder.isEmpty()){
+        if (extOrder!=null){
             hql += " order by t." + extOrder;
             if (desc==1) {
                 hql += " desc"; //降序
@@ -97,20 +97,44 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public int getTeacherNum(List<String> strList) {
+    public int getTeacherNum(List<String> strList,  String lesson, String grade, String net, String sex, String city, String status, String extOrder, int desc){
         String hql = "select count(distinct t) from Teacher t left join t.lessons l";
         String where = " where ";
         String or = " or ";
+        String and = " and ";
         for (int i = 0; i < strList.size(); i++) {
             String keyword = strList.get(i);
-            where += "l.name like '%" + keyword + "%'";
+            if(keyword.equals(""))
+                continue;
+            where += "(l.name like '%" + keyword + "%'";
             where += or;
-            where += "t.name like '%" + keyword + "%'";
-            if (i + 1 < strList.size()) {
-                where += or;
+            where += "t.name like '%" + keyword + "%')";
+            where += and;
+        }
+        if(lesson != null && !lesson.equals(""))
+            where += "l.name like '%" + lesson + "%' and ";
+        if(grade != null && !grade.equals(""))
+            where += "l.name like '%" + grade + "%' and ";
+        if(net != null && !net.equals(""))
+            where += "t.net = '" + net + "' and ";
+        if(sex != null && !sex.equals(""))
+            where += "t.sex ='" + sex + "' and ";
+        if(city != null && !city.equals(""))
+            where += "t.province = '" + city + "' and ";
+        if(status != null && !status.equals(""))
+            where += "t.status = '" + status + "' and ";
+        if(!where.equals(" where ")){
+            where += "l.delete=0";
+            hql += where;
+        }
+        if (extOrder!=null && !extOrder.isEmpty()){
+            hql += " order by t." + extOrder;
+            if (desc==1) {
+                hql += " desc"; //降序
+            } else if (desc==-1) {
+                hql += " asc"; //升序
             }
         }
-        hql += where;
         return getNumber(hql).intValue();
     }
 }

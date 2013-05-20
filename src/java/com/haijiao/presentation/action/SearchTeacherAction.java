@@ -72,7 +72,7 @@ public class SearchTeacherAction extends RequestSessionAction {
         }
         int pageSize = 20;
         List<Teacher> teacherlist = userService.searchTeacherPage(strList, lessonGet, gradeGet, netGet, sex, province, status, (cp - 1) * pageSize, pageSize, extOrder, desc);
-        int num = userService.getTeacherNum(strList);
+        int num = userService.getTeacherNum(strList, lessonGet, gradeGet, netGet, sex, province, status, extOrder, desc);
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
         if (!teacherlist.isEmpty()) {
