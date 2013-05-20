@@ -114,10 +114,6 @@
     <bean id="ResetChangePasswordAction" class="com.haijiao.presentation.action.ResetChangePasswordAction" scope="prototype" >
         <property name="userService" ref="userServiceImpl" />
     </bean>
-    
-    <bean id="taskTimer" class="com.haijiao.global.timerTask" scope="prototype" >
-        <property name="classService" ref="classServiceImpl" />
-    </bean>
 
     <bean id="springContext" class="com.haijiao.SupportService.SpringContext"></bean>
     <!-- persist -->

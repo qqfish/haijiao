@@ -17,6 +17,8 @@ import com.haijiao.Domain.room.webFc.message.response.Error.ErrorData;
 import com.haijiao.Domain.room.webFc.message.response.Error.ErrorType;
 import com.haijiao.Domain.room.webFc.message.response.Info.InfoData;
 import com.haijiao.Domain.room.webFc.message.response.Info.InfoType;
+import com.haijiao.SupportService.SpringContext;
+import com.haijiao.SupportService.service.IUserService;
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
@@ -34,12 +36,14 @@ public class FcMessageInbound extends MessageInbound {
     User user;
     Room room;
     Gson gson;
+    IUserService userService;
 
     public FcMessageInbound(User user, Room room) {
         this.user = user;
         this.room = room;
         gson = new Gson();
         room.enterRoom(this);
+        userService = (IUserService)SpringContext.getContext().getBean("userServiceImpl");
     }
 
     @Override
@@ -57,6 +61,8 @@ public class FcMessageInbound extends MessageInbound {
 
         sendtoUser(gson.toJson(room.getResponseChangePage()));
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
+        
+        userService.setStatus(user.getEmail(), User.Status.onlineAndBusy);
 
         //send to user their user file
         //sendtoUser(gson.toJson(new ResponseSetUserFile(user)));
@@ -75,6 +81,7 @@ public class FcMessageInbound extends MessageInbound {
         room.exitRoom(this);
         room.getTimer().pause();
         System.out.println(this.toString() + "closed");
+        userService.setStatus(user.getEmail(), User.Status.onlineAndAvailable);
     }
 
     @Override
@@ -196,5 +203,13 @@ public class FcMessageInbound extends MessageInbound {
         } catch (IOException ex) {
             Logger.getLogger(FcMessageInbound.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
     }
 }

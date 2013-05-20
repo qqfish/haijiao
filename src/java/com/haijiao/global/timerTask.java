@@ -4,6 +4,7 @@
  */
 package com.haijiao.global;
 
+import com.haijiao.SupportService.SpringContext;
 import com.haijiao.SupportService.service.IClassService;
 import java.util.TimerTask;
 
@@ -15,6 +16,10 @@ public class timerTask extends TimerTask {
 
     private int nowDay;
     IClassService classService;
+    
+    public timerTask(){
+        classService = (IClassService) SpringContext.getContext().getBean("classServiceImpl");
+    }
 
     @Override
     public void run() {
