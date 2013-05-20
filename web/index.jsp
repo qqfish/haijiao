@@ -68,11 +68,11 @@
                                                 </div>       
                                                 <div class="modal-body">
                                                     <div style="width:49%;float:left;border:0px solid #CCC">
-                                                        <a href="#" id="teacherbutton"><img src="images/imteacher.png"/></a>
+                                                        <a href="#" id="teacherbutton" onclick="$('#teachersubmit').click();"><img src="images/imteacher.png"/></a>
                                                         <s:submit value="老师" id="teachersubmit" cssStyle="display:none;" method="teacher"></s:submit>     
                                                     </div>     
                                                     <div style="width:49%;float:left;border:0px solid #CCC">
-                                                        <a href="#" id="studentbutton"><img src="images/imstudent.png"/></a>
+                                                        <a href="#" id="studentbutton" onclick="$('#studentsubmit').click();"><img src="images/imstudent.png"/></a>
                                                         <s:submit value="学生" id="studentsubmit" cssStyle="display:none;" method="student"></s:submit>
                                                     </div> 
                                                 </div>        
