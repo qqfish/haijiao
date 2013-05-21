@@ -83,9 +83,17 @@
                 }
             }
 
-
+            var uploadButton = false;
 
             function preImg(fileid, imgid) {
+                var src = getPath(document.all.fileid);
+                $('#pic_tip2').css("color","black");
+                if (src.substr(src.length-3,src.length)!= "jpg"){
+                    $('#pic_tip2').css("color","red");
+                    return;
+                }
+                $('#uploadButton').removeClass("disabled");
+                uploadButton = true;
                 $('#pic_org').fadeOut();
                 $('#pre_area').fadeIn();
                 if (typeof FileReader == 'undefined') {
@@ -122,6 +130,9 @@
             }
             
             function checkSubmit(){
+                if(uploadButton===false){
+                    return;
+                }
                 if( $('#pic_w').val()==null || $('#pic_w').val()<=10 ){
                     alert("未选中区域或选中区域太小");
                 } else if( $('#pic_h').val()==null || $('#pic_h').val()<=10 ){
@@ -288,7 +299,9 @@
                         <div class="tab-pane fade"  id='3'>
                             <h3>修改头像</h3>
                             <hr/>
-                            <p>请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。(请确保图片小于2MB)</p>
+                            <p style="font-size: 9px;">请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。<br/>
+                                <div id="pic_tip1">注意①：请确保图片小于2MB<br/></div>
+                                <div id="pic_tip2">注意②：目前只支持上传JPG类型的图片哦</div></p>
                             <div id="pre_area" style="display:none;">
                             <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
                                 <img id="preimg" onload="getSize(this)"/>
@@ -307,7 +320,7 @@
                                 <s:textfield id="pic_w" name="w" style="display:none;"/>
                                 <s:textfield id="pic_h" name="h" style="display:none;"/>
                                 <s:file name="upload" title="选择文件" id="fileid" onchange="preImg(this.id,preimg);"/>
-                                <button type="button" class="btn" data-toggle="button" onclick="checkSubmit();" >上传文件</button>
+                                <button type="button" id="uploadButton" class="btn disabled" data-toggle="button" onclick="checkSubmit();" >上传文件</button>
                             </s:form>
                             <div class="progress"><div class="bar"></div></div>
                         </div>
