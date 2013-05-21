@@ -87,9 +87,9 @@
 
             function preImg(fileid, imgid) {
                 var src = getPath(document.all.fileid);
-                $('#pic_tip2').css("color","black");
-                if (src.substr(src.length-3,src.length)!= "jpg"){
-                    $('#pic_tip2').css("color","red");
+                $('#pic_tip2').css("color", "black");
+                if (src.substr(src.length - 3, src.length) != "jpg") {
+                    $('#pic_tip2').css("color", "red");
                     return;
                 }
                 $('#uploadButton').removeClass("disabled");
@@ -104,17 +104,12 @@
                 else {
                     var reader = new FileReader();
                     reader.onload = function(e) {
-                        $("#preimg").attr("src", this.result);
-                        $("#preimg").Jcrop({
-                            onChange: showPreview,
-                            onSelect: showPreview,
-                            aspectRatio: 1
-                        });
+                        jcrop_api.setImage(this.data);
                     };
                     reader.readAsDataURL(document.getElementById(fileid).files[0]);
                 }
             }
-            
+
             function showPreview(coords) {
                 $('#pic_x').val(coords.x);
                 $('#pic_y').val(coords.y);
@@ -123,38 +118,32 @@
                 $('#pic_h').val(coords.h);
             }
 
-            function showimg(imgFile) {
-                console.log($(imgFile).val());
-                $("#imgcontainer").html("<img id='preview' src='" + $(event.srcElement).val() + "'/>");
-                $("#preview").Jcrop();
-            }
-            
-            function checkSubmit(){
-                if(uploadButton===false){
+            function checkSubmit() {
+                if (uploadButton === false) {
                     return;
                 }
-                if( $('#pic_w').val()==null || $('#pic_w').val()<=10 ){
+                if ($('#pic_w').val() == null || $('#pic_w').val() <= 10) {
                     alert("未选中区域或选中区域太小");
-                } else if( $('#pic_h').val()==null || $('#pic_h').val()<=10 ){
+                } else if ($('#pic_h').val() == null || $('#pic_h').val() <= 10) {
                     alert("未选中区域或选中区域太小");
                 } else {
                     $('#upload').submit();
                 }
             }
-            
+
             var width;
-            
+
             function getSize(img)
             {
-                if(typeof(img)!='object')
-                    img=document.getElementById(img);
-                if(img==null)
+                if (typeof(img) != 'object')
+                    img = document.getElementById(img);
+                if (img == null)
                     return;
-                var image=document.createElement("img");
-                image.onload=function (){
-                width=this.width;
+                var image = document.createElement("img");
+                image.onload = function() {
+                    width = this.width;
                 };
-                image.src=img.src;
+                image.src = img.src;
             }
 
             jQuery(window).load(function() {
@@ -166,7 +155,12 @@
                             clearInterval(wait);
                     }, 100);
                 });
-
+                
+                var jcrop_api = $.Jcrop("#preimg", {
+                    onChange: showPreview,
+                    onSelect: showPreview,
+                    aspectRatio: 1
+                });
             });
 
 
@@ -300,12 +294,12 @@
                             <h3>修改头像</h3>
                             <hr/>
                             <p style="font-size: 9px;">请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。<br/>
-                                <div id="pic_tip1">注意①：请确保图片小于2MB<br/></div>
-                                <div id="pic_tip2">注意②：目前只支持上传JPG类型的图片哦</div></p>
+                            <div id="pic_tip1">注意①：请确保图片小于2MB<br/></div>
+                            <div id="pic_tip2">注意②：目前只支持上传JPG类型的图片哦</div></p>
                             <div id="pre_area" style="display:none;">
-                            <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
-                                <img id="preimg" onload="getSize(this)"/>
-                            </div>
+                                <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
+                                    <img id="preimg" onload="getSize(this)"/>
+                                </div>
                             </div>
                             <s:if test="#session.userType=='student'">
                                 <img id="pic_org" src="<s:property value="stu.picUrl"/>" style="height: 230px;width: 230px;"/>

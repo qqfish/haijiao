@@ -45,7 +45,7 @@
                                         </s:if>
                                     </s:iterator>
                                     <p style="margin:0;"></p>
-                                    <label><p class="muted pull-right" style="margin-bottom: 5px;"><small>上次登陆时间<s:property value="tea.lastActiveDate" default="null"/></small></p></label>
+                                    <label><p class="muted pull-right" style="margin-bottom: 5px;"><small>上次登陆时间<s:property value="lastActiveDate" default="null"/></small></p></label>
                                 </div>
                             </div>
                         </li>

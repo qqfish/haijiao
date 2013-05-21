@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
         else
             url = 'searchTeacher.action';
         var status;
-        if ($("#online_buttton").hasClass("active"))
+        if($("#online_button").hasClass("active"))
             status = "1";
         else
             status = "";
@@ -36,15 +36,15 @@ jQuery(document).ready(function($) {
             gradeGet: grade,
             netGet: net,
             sex: sex,
-            status: status,
-            province: city
+            province: city,
+            status:status
         }, function(data) {
             $('#resultdetail').html(data);
         });
     }
 
     $('#normal_button').click(function() {
-
+        gotopage(null, "normal.action")
     });
 
     $('#score_button').click(function() {
@@ -61,6 +61,18 @@ jQuery(document).ready(function($) {
 
     $('#time_button').click(function() {
         gotopage(null, "time.action");
+    });
+    
+    $('#online_button').click(function() {
+        if($(this).hasClass("active")){
+            $(this).removeClass("active");
+            gotopage(1, null);
+        }
+        else{
+            $(this).addClass("active");
+            gotopage(1, null);
+        }
+            
     });
 
     $('#lesson').children().click(function() {

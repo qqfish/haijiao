@@ -94,7 +94,7 @@
                                         <button class="btn btn-small btn-inverse" id="hot_button">人气<i class="icon-arrow-down"></i></button>
                                         <button class="btn btn-small btn-inverse" id="time_button">最后活跃时间<i class="icon-arrow-down"></i></button>
                                     </div>
-                                    <button class="btn btn-small btn-danger" id="online_button" data-toggle="button">仅显示在线</button>
+                                    <button class="btn btn-small btn-danger" id="online_button">仅显示在线</button>
                                 </div>
                             </small>
                         </h3>

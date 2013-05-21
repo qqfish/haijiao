@@ -21,11 +21,16 @@ public class SearchTeacherAction extends RequestSessionAction {
     String lessonGet;
     String gradeGet;
     String netGet;
-    String status;
     String province;
     String sex;
+    String status;
 
     public SearchTeacherAction() {
+    }
+    
+    public String normal() throws Exception{
+        this.putIn("extOrder", null);
+        return execute();
     }
     
     public String score() throws Exception{
@@ -156,14 +161,6 @@ public class SearchTeacherAction extends RequestSessionAction {
         this.netGet = netGet;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getProvince() {
         return province;
     }
@@ -178,6 +175,14 @@ public class SearchTeacherAction extends RequestSessionAction {
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
 }
