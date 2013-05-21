@@ -44,6 +44,7 @@ public class FcMessageInbound extends MessageInbound {
         gson = new Gson();
         room.enterRoom(this);
         userService = (IUserService)SpringContext.getContext().getBean("userServiceImpl");
+        this.setCharBufferMaxSize(10 * 1024 * 1024);
     }
 
     @Override

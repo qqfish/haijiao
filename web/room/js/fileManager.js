@@ -237,6 +237,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 message.postfix = type;
                 message.name = file.name;
                 message.data = evt.target.result;
+                console.log("befor send");
                 connection.sendObject(message);
                 progressWord.text("上传成功(由文件列表中打开上传文件)");
                 theBar.css("width","100%");
