@@ -239,6 +239,12 @@
                     <h3>请选择课程时间</h3>
                 </div>
                 <div class="modal-body" >
+                    <div style="font-size: 9px">
+                        &nbsp;&nbsp;
+                        <img src="images/colorCCF.png" height="15px" width="15px">&nbsp;老师忙碌时段&nbsp;
+                        <img src="images/colorCCC.png" height="15px" width="15px">&nbsp;老师空闲时段&nbsp;
+                        <img src="images/colorFC9.png" height="15px" width="15px">&nbsp;您已选中时段&nbsp;
+                    </div>
                     <div class="schedule_panel" id="schedule_panel" >
                         <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
                             <tbody>
