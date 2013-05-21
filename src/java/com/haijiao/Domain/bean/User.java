@@ -10,10 +10,14 @@ import com.haijiao.Domain.file.UserFileGroup;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,6 +37,9 @@ public class User extends BaseBean{
     protected Integer scoreNum; //评分数
     protected String password;  //用户密码
     protected int coin;         //该账户中剩下的智慧币
+    @Lob
+    @Basic(fetch = FetchType.LAZY) 
+    @Column(name="intro", columnDefinition="CLOB", nullable=true)
     protected String intro;     //用户的个人简介，显示在个人主页上
     protected String picUrl;    //用户头像的URL
     protected String sex;       //性别

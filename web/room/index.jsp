@@ -177,7 +177,7 @@
                             <li><a class="tooltipButton" id="gotoPage" data-toggle="modal" data-target="#gotoModal" data-placement="bottom" data-original-title="跳转"><i class="icon-share-alt icon-white" ></i></a></li>
                             <li><a class="tooltipButton" id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
                             <li><a class="tooltipButton" id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
-                            <li><a class="tooltipButton" id="sideBarButton" data-toggle="tooltip" data-placement="bottom" data-original-title="侧边栏"><i class="icon-zoom-out icon-white"></i></a></li>
+                            <li><a class="tooltipButton" id="sideBarButton" data-toggle="tooltip" data-placement="bottom" data-original-title="侧边栏"><i class="icon-list icon-white"></i></a></li>
                             <li><a class="tooltipButton" data-toogle="tooltip" data-placement="bottom" data-original-title="退出房间" href="index.action"><i class="icon-remove icon-white"></i></a></li>
                         </ul>               
                     </div> 
