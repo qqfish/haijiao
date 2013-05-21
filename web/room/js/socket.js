@@ -36,7 +36,7 @@ connection.connect = (function(host) {
                 table.eraseFromArray(socketData.idArray);
                 break;
             case Response.TextChat:
-                textChat.printMeesage(socketData.message);
+                textChat.printMeesage(socketData.from, socketData.message);
                 break;
             case Response.VideoChat:
                 media.processSignalingMessage(socketData);

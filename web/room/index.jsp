@@ -35,7 +35,6 @@
         <script src="/haijiao/room/js/lib/bootstrap.file-input.js"></script>
         <!--js-->
         <!--<script type="text/javascript" src="../js/superfish.js"></script>-->
-        <!--<script type="text/javascript" src="/haijiao/room/js/sidebar.js"></script>-->
         <script type="text/javascript" src="/haijiao/js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
@@ -178,11 +177,21 @@
                             <li><a class="tooltipButton" id="gotoPage" data-toggle="modal" data-target="#gotoModal" data-placement="bottom" data-original-title="跳转"><i class="icon-share-alt icon-white" ></i></a></li>
                             <li><a class="tooltipButton" id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
                             <li><a class="tooltipButton" id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
+                            <li><a class="tooltipButton" id="sideBarButton" data-toggle="tooltip" data-placement="bottom" data-original-title="侧边栏"><i class="icon-zoom-out icon-white"></i></a></li>
                             <li><a class="tooltipButton" data-toogle="tooltip" data-placement="bottom" data-original-title="退出房间" href="index.action"><i class="icon-remove icon-white"></i></a></li>
                         </ul>               
                     </div> 
                 </div>
-                <div class="well span2" id ="side" style="margin:0px;float: bottom;overflow-y: auto;overflow-x: visible;white-space: nowrap;word-break: break-all;padding: 0px;">     
+                <div class="well span3" id ="side" style="margin:0px;float: bottom;overflow-y: hidden;">   
+                    <div id="sideVideoArea" style="height:400px;width:258px;overflow-y: visible;"></div>
+                    <div style="float: bottom;">
+                        <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:238px;height: 250px;white-space:normal; overflow-y: auto;"></div>
+                        <p style="margin: 0px;"/>
+                        <div class="input-append">
+                            <input class="span2" id="chatInput" type="text">
+                            <button class="btn" type="button" id="chatSend">发送</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

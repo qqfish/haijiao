@@ -10,29 +10,40 @@ var timer;
 function init(clazzId, teaEmail, email){
     connection.initialize(clazzId, teaEmail, email);
     timer = new Timer("timerPanel");
-    textChat = new TextChat("textConsole");
+    textChat = new TextChat("charShowArea","chatSend","chatInput");
     toolkit = new Toolkit();
     table = new Table("table",toolkit);
-    media = new Media("desktop", textChat, "users");
+    media = new Media("sideVideoArea", textChat, "users");
     media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
     file = new fileManager("roomFile","bookmark","userFile");
     
+    var sideShow = true;
+    var sideWidth = 310;
+    
+    
     $(window).resize(function(){
-        $("#desktop").height($(window).height()-42).width($(window).width());
+        if(sideShow)
+            $("#desktop").height($(window).height()-42).width($(window).width() - sideWidth).css("left",sideWidth);
+        else
+            $("#desktop").height($(window).height()-42).width($(window).width());
         table.setStageSize($(window).width(), $("#desktop").height());
         table.setDefaultLoc();
-        media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
+        
+        //media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
 
-        $("#side").height($(window).height()-44);
+        $("#side").height($(window).height()-82);
     });
     
     var w=$(window).width();//可见区域宽度
     var h=$(window).height();//可见区域高度
-    $("#desktop").height(h-42).width(w);
-    table.setStageSize($(window).width(),$("#desktop").height());
-    $("#side").height(h-44).css("marginLeft","-250px");
+    console.log(w + " , " + h);
+    $("#desktop").height(h-42).width(w - sideWidth).css("left",sideWidth);
+    table.setStageSize(w,$("#desktop").height());
+    $("#side").height(h-82).css("marginLeft","0px");
     
-    //just for test
+    
+    
+    //button initialization
     $("#nextPage").click(function(){
         file.nextPage();
     });
@@ -93,6 +104,8 @@ function init(clazzId, teaEmail, email){
         }
     });
     
+    
+    //drag to upload
     $("#uploadFile").click(function(){
         $("#uploadFileInput").click();
     });
@@ -118,5 +131,49 @@ function init(clazzId, teaEmail, email){
         for(var i = 0; i < fileList.length; i++){
             file.uploadFile(fileList[i]);
         }
+    });
+    
+    
+    
+    //side bar
+    
+    function sideReturn(){
+        $('#side').animate({
+            marginLeft: - sideWidth
+        }, 'fast');
+        
+        $('#desktop').animate({
+            left: "0",
+            width: $(window).width()
+        },'fast');
+        //media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
+        
+//        $("#desktop").unbind("click");
+        
+        sideShow = false;
+    }
+ 
+    $('#sideBarButton').click(function() {
+
+        if(sideShow){
+            sideReturn();
+        } else {
+            $('#desktop').animate({
+                left: sideWidth,
+                width: '-=' + sideWidth + 'px'
+            },'fast');
+  
+            $('#side').animate({
+                marginLeft: "0px"
+            }, 'fast'); //以1000毫秒让“文章主体部分”的宽度收缩回705px
+        
+//            $("#desktop").click(function(){
+//                sideReturn();
+//            });
+        
+//            media.setDragPlace(250, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
+            sideShow = true;
+        }
+       
     });
 }

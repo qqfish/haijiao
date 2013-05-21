@@ -15,8 +15,8 @@ function UserMedia(){
 
 function Media(parentId, text, userList){
   
-    var width = 320;
-    var height = 240;
+    var width = 240;
+    var height = 180;
     var userListDiv = $("#" + userList);
     var dragPlace = {};
     dragPlace.x1 = 0;
@@ -255,6 +255,7 @@ function Media(parentId, text, userList){
         if(mediaList[remoteUser].video) {
             mediaList[remoteUser].video.hide();
             mediaList[remoteUser].video.remove();
+            mediaList[remoteUser].container.remove();
             mediaList[remoteUser].userButton.remove();
         }
         if(mediaList[remoteUser].pc) {
@@ -284,7 +285,7 @@ function Media(parentId, text, userList){
     
     function addVideo(stream, user){
         var current = mediaList[user];
-        current.container = $("<div></div>").attr("class","container").attr("user",user).height(height).width(width).css("top","52px").css("left","250px").css("position","absolute").hide();
+        current.container = $("<div></div>").attr("class","container").attr("user",user).css("margin","0px").height(height).width(width).hide();
         current.video = $("<video></video>").attr("user",user).attr("class","video").attr("autoplay","autoplay").css("opacaity",1);
         current.video.height(height).width(width);
         attachMediaStream(current.video,current.stream);
@@ -301,9 +302,11 @@ function Media(parentId, text, userList){
         });
         current.container.append(current.video)
         parentDiv.append(current.container);
-        current.container.draggable({containment: [
-                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
-        ],scroll:false});
+        
+        //set ability to be drag
+//        current.container.draggable({containment: [
+//                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
+//        ],scroll:false});
         userListDiv.append(current.userButton);
         current.userButton.click();
         

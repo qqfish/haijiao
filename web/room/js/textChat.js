@@ -4,11 +4,33 @@
  */
 
 
-function TextChat(windowId){
-    var chatWindow;
+function TextChat(windowId, sendButtonId, chatInputId){
+    var chatWindow = $("#"+windowId);
+    var sendButton = $("#"+sendButtonId);
+    var chatInput = $("#"+chatInputId);
     
-    this.printMeesage = function(message){
-        
+    sendButton.click(function(){
+        if(chatInput.val() != null && chatInput.val()!=""){
+            var message = {};
+            message.type = Request.TextChat;
+            message.message = chatInput.val();
+            connection.sendObject(message);
+            chatInput.val("");
+        } else {
+            
+        }
+    });
+    
+    this.printMeesage = function(user,message){
+        var newM = $("<p></p");
+        newM.text(user + " : " + message);
+        chatWindow.append(newM);
     }
+    
+    chatInput.keypress(function(e){
+        if(e.keyCode==13){
+            sendButton.click();
+        }
+    });
     
 }
