@@ -38,7 +38,7 @@
                                         <div id="login_tip" class="validateTip"></div>
                                         <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
                                         <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
-                                        <s:submit cssClass="btn btn-success " style="margin-top:90px;margin-left:8px;width:220px" value="登录"></s:submit>
+                                        <s:submit cssClass="btn btn-success " style="margin-top:70px;margin-left:8px;width:220px" value="登录"></s:submit>
                                     </s:form>
                                     <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a></div>
                                 </div>
@@ -92,7 +92,5 @@
                 </div>
             </div>
         </div>
-        <!--==============================footer=================================-->
-        <%@ include file="WEB-INF/jspf/footer.jspf"%>
     </body>
 </html>

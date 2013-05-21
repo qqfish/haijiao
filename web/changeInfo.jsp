@@ -288,7 +288,7 @@
                         <div class="tab-pane fade"  id='3'>
                             <h3>修改头像</h3>
                             <hr/>
-                            <p>请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。</p>
+                            <p>请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。(请确保图片小于2MB)</p>
                             <div id="pre_area" style="display:none;">
                             <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
                                 <img id="preimg" onload="getSize(this)"/>

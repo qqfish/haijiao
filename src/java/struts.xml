@@ -159,7 +159,8 @@
         </action>
         <action name="uploadPic" class="UploadPicAction">
             <result name="success" type="chain">toChangeInfo</result>
-            <result name="input">error.jsp</result>
+            <result name="input">toChangeInfo</result>
+            <result name="error" type="chain">index</result>
             <interceptor-ref name="fileUpload">
                 <!-- 文件过滤 -->
                 <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>

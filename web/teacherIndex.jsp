@@ -50,7 +50,9 @@
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/>
-                    <h1><s:property value="teacher.name"/></h1>          
+                    <h1><s:property value="teacher.name"/>
+                    <a class='btn btn-primary btn-small' href="enterPublicRoom.action?teaEmail=<s:property value='teacher.email' default='null' />">在线试讲</a>
+                    </h1>          
                     <hr/>
                     <p><s:property value="teacher.province"/></p>
                     <p><s:property value="teacher.email"/></p>

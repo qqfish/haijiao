@@ -84,6 +84,8 @@ public class ClassServiceImpl implements IClassService {
             clazzDAO.update(clazzList.get(0));
             freeTimeDAO.update(ft);
         }
+        tea.setReserveNum(tea.getReserveNum() + cList.size());
+        teacherDAO.update(tea);
         return true;
     }
 
@@ -176,6 +178,9 @@ public class ClassServiceImpl implements IClassService {
         }
         Clazz clazz = clazzDAO.findById(clazzId);
         if (clazz == null) {
+            return false;
+        }
+        if(clazz.getStudent() == null){
             return false;
         }
         clazz.setStatus(Clazz.Status.accept);

@@ -242,6 +242,7 @@ function Media(parentId, text, userList){
     
     function onRemoteStreamRemoved(event) {
         console.log("Remote stream removed.");
+        removeMedia(remoteUser);
     }
    
     function onRemoteHangup(remoteUser) {
@@ -252,9 +253,9 @@ function Media(parentId, text, userList){
     function removeMedia(remoteUser) {
         console.log("remove user:" + remoteUser);
         if(mediaList[remoteUser].video) {
-            mediaList[user].video.hide();
-            mediaList[user].video.remove();
-            mediaList[user].userButton.remove();
+            mediaList[remoteUser].video.hide();
+            mediaList[remoteUser].video.remove();
+            mediaList[remoteUser].userButton.remove();
         }
         if(mediaList[remoteUser].pc) {
             mediaList[remoteUser].pc.close();
@@ -291,7 +292,7 @@ function Media(parentId, text, userList){
         if(user == localUserId){
             current.userButton.html("<a tabindex='-1' href='#'>自己</a>");
         } else {
-            current.userButton.text("<a tabindex='-1' href='#'>" + user + "</a>");
+            current.userButton.html("<a tabindex='-1' href='#'>" + user + "</a>");
         }
         current.userButton.click(function(){
             var u = $(this).attr("user");
