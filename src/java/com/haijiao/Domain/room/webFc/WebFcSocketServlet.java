@@ -6,6 +6,7 @@ package com.haijiao.Domain.room.webFc;
  */
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.room.Room;
+import com.haijiao.SupportService.SpringContext;
 import com.haijiao.SupportService.service.IRoomService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.SupportService.service.impl.RoomServiceImpl;
@@ -34,10 +35,9 @@ public class WebFcSocketServlet extends WebSocketServlet {
         String clazzIdStr = hsr.getParameter("clazzId");
         String email = hsr.getParameter("email");
         String teaEmail = hsr.getParameter("teaEmail");
-        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(hsr.getSession().getServletContext());
 
-        roomService = (IRoomService) context.getBean("roomServiceImpl");
-        userService = (IUserService) context.getBean("userServiceImpl");
+        roomService = (IRoomService) SpringContext.getContext().getBean("roomServiceImpl");
+        userService = (IUserService) SpringContext.getContext().getBean("userServiceImpl");
         Room room = null;
         if(!clazzIdStr.equals("null"))
             room = roomService.checkAndApplyRoom(Integer.parseInt(clazzIdStr));
