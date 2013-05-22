@@ -13,9 +13,14 @@ public class LogoutAction extends SessionAction {
     
     @Override
     public String execute(){
-        userService.setStatus((String)(this.getSessionValue("email")), User.Status.offline);
-        this.sessionClear();
-        this.sessionPutIn("message", "退出成功");
+        String email = (String)this.getSessionValue("email");
+        if(email != null){
+            userService.setStatus(email, User.Status.offline);
+            this.sessionClear();
+            this.sessionPutIn("message", "退出成功");
+        }
+        else
+            this.sessionPutIn("message", "已退出");
         return SUCCESS;
     }
 
