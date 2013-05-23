@@ -16,7 +16,7 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/mail.js"></script>
     </head>
-    <body style="background: url(images/background.jpg);">
+    <body>
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <link rel="stylesheet" href="css/tooltik.css">

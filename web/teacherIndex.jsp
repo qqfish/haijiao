@@ -40,7 +40,7 @@
     </head>
     <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
         viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
-          style="background: url(images/background.jpg);">
+          >
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>

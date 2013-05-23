@@ -39,7 +39,7 @@
                 <![endif]-->
 
     </head>
-    <body style="background: url(images/background.jpg);">
+    <body>
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
