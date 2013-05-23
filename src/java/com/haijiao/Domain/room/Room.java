@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
@@ -38,6 +39,7 @@ public class Room {
     private RoomPage currentPage;
     private RoomTimer timer;
     private int max;
+    private boolean exitBit;
 
     public Room(User holder, int price, int max) {
         gson = new Gson();
@@ -192,6 +194,16 @@ public class Room {
             broadcast(gson.toJson(new ResponseAddRoomFile(list)));
         }
     }
+    
+    
+    public void releaseFile(){
+        if(roomSocket.size()==0){
+            for(int i = 0 ; i < roomFile.size(); i++){
+                roomFile.get(i).release();
+            }
+            exitBit = false;
+        }
+    }
 
     public void broadcast(String message) {
         for (int i = 0; i < roomSocket.size(); i++) {
@@ -228,6 +240,7 @@ public class Room {
 
     public void exitRoom(FcMessageInbound socket) {
         roomSocket.remove(socket);
+        releaseFile();
     }
 
     public List<RoomFile> getRoomFile() {
@@ -258,4 +271,14 @@ public class Room {
         return roomSocket.size() > 1;
     }
     
+    public boolean isEmpty(){
+        return roomSocket.size() == 0;
+    }
+    
+    public boolean checkAndUpdateExitBit(){
+        boolean result = exitBit;
+        if(!exitBit)
+            exitBit = true;
+        return result;
+    }
 }

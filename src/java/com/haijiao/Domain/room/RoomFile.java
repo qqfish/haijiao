@@ -42,62 +42,28 @@ public class RoomFile extends DataFile {
     private int lastPage;
 
     public RoomFile(DataFile file, Room room) {
-        try {
-            this.room = room;
-            uuid = UUID.randomUUID().toString();
-            name = file.getName();
-            url = file.getUrl();
-            doc = PDDocument.load(url);
-            bookmarks = new RootBookmark(doc);
-            pages = new ArrayList();
-            for (int i = 0; i < doc.getNumberOfPages(); i++) {
-                pages.add(new RoomPage(this));
-            }
-            lastPage = 0;
-        } catch (IOException ex) {
-            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.room = room;
+        uuid = UUID.randomUUID().toString();
+        name = file.getName();
+        url = file.getUrl();
+
+
     }
 
     public RoomFile(UserFile file, Room room) {
-        try {
-            this.room = room;
-            uuid = UUID.randomUUID().toString();
-            name = file.getName();
-            url = file.getUrl();
-            doc = PDDocument.load(url);
-            bookmarks = new RootBookmark(doc);
-            pages = new ArrayList();
-            for (int i = 0; i < doc.getNumberOfPages(); i++) {
-                pages.add(new RoomPage(this));
-            }
-            lastPage = 0;
-        } catch (IOException ex) {
-            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        this.room = room;
+        uuid = UUID.randomUUID().toString();
+        name = file.getName();
+        url = file.getUrl();
     }
 
     public RoomFile(Room room) {
-        try {
-            this.room = room;
-            uuid = UUID.randomUUID().toString();
-            name = config.newDocumentName;
-            url = null;
-            doc = new PDDocument();
-            bookmarks = new RootBookmark(doc);
-            pages = new ArrayList();
-            PDPage newPage = new PDPage();
-            doc.addPage(newPage);
-            for (int i = 0; i < doc.getNumberOfPages(); i++) {
-                pages.add(new RoomPage(this));
-            }
-            lastPage = 0;
-        } catch (IOException ex) {
-            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        this.room = room;
+        uuid = UUID.randomUUID().toString();
+        name = config.newDocumentName;
+        url = null;
     }
-    
+
     public RoomFile(String name, String data, Room room) {
         try {
             this.room = room;
@@ -105,26 +71,54 @@ public class RoomFile extends DataFile {
             this.name = name;
             url = config.tmpRoomFile + "/" + this.room.getId();
             File dir = new File(url);
-            if(!dir.exists())
+            if (!dir.exists()) {
                 dir.mkdirs();
+            }
             url = url + "/" + uuid + ".pdf";
             File newFile = new File(url);
-            if(!newFile.exists())
+            if (!newFile.exists()) {
                 newFile.createNewFile();
+            }
             FileOutputStream fos = new FileOutputStream(newFile);
             fos.write(Base64.decode(data));
             fos.close();
-            doc = PDDocument.load(url);
-            bookmarks = new RootBookmark(doc);
-            pages = new ArrayList();
-            for (int i = 0; i < doc.getNumberOfPages(); i++) {
-                pages.add(new RoomPage(this));
-            }
-            lastPage = 0;
         } catch (IOException ex) {
-            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RoomFile.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    private void checkAndOpenFile() {
+        if (doc == null) {
+            try {
+                if (url == null) {
+                    doc = new PDDocument();
+                    PDPage newPage = new PDPage();
+                    doc.addPage(newPage);
+                } else {
+                    doc = PDDocument.load(url);
+                }
+                if (bookmarks == null) {
+                    bookmarks = new RootBookmark(doc);
+                }
+                if (pages == null) {
+                    pages = new ArrayList();
+                    for (int i = 0; i < doc.getNumberOfPages(); i++) {
+                        pages.add(new RoomPage(this));
+                    }
+                    lastPage = 0;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void checkAndSetPages() {
+        if (pages == null) {
+            checkAndOpenFile();
+        }
     }
 
     public boolean addBookmark(String indexName, int page) {
@@ -136,28 +130,28 @@ public class RoomFile extends DataFile {
     }
 
     public RoomPage getPage(int i) {
-        if (i < doc.getNumberOfPages()) {
-            if(i >= pages.size())
-                i = pages.size() - 1;
-            lastPage = i;
-            RoomPage result = pages.get(i);
-            if (result.getOriginUrl() == null) {
-                try {
-                    PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
-                    BufferedImage image = page.convertToImage();
-                    ByteArrayOutputStream os = new ByteArrayOutputStream();
-                    ImageIO.write(image, config.pageImageType, os);
-                    byte[] bytes = os.toByteArray();
-                    String url = config.pageDataUriPrefix + Base64.encode(bytes);
-                    result.setOriginUrl(url);
-                } catch (IOException ex) {
-                    Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            return result;
-        } else {
-            return null;
+        checkAndSetPages();
+        if (i >= pages.size()) {
+            i = pages.size() - 1;
         }
+        lastPage = i;
+        RoomPage result = pages.get(i);
+        if (result.getOriginUrl() == null) {
+            checkAndOpenFile();
+            try {
+                PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
+                BufferedImage image = page.convertToImage();
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                ImageIO.write(image, config.pageImageType, os);
+                byte[] bytes = os.toByteArray();
+                String url = config.pageDataUriPrefix + Base64.encode(bytes);
+                result.setOriginUrl(url);
+            } catch (IOException ex) {
+                Logger.getLogger(RoomFile.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return result;
     }
 
     public RoomPage getLastPage() {
@@ -170,6 +164,7 @@ public class RoomFile extends DataFile {
     }
 
     public void addPage() {
+        checkAndOpenFile();
         PDPage lastPage = (PDPage) doc.getDocumentCatalog().getAllPages().get(doc.getNumberOfPages() - 1);
         PDRectangle r = new PDRectangle(lastPage.getMediaBox().getWidth(), lastPage.getMediaBox().getHeight());
         PDPage newPage = new PDPage(r);
@@ -189,29 +184,49 @@ public class RoomFile extends DataFile {
     }
 
     public void save() throws IOException {
-        try {
-            doc.save(url);
-        } catch (COSVisitorException ex) {
-            Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+        if (doc != null) {
+            try {
+                doc.save(url);
+            } catch (COSVisitorException ex) {
+                Logger.getLogger(RoomFile.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
     public void clearPage(int index) {
+        checkAndOpenFile();
         if (index < doc.getNumberOfPages()) {
             try {
                 PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(index);
                 page.getContents().getStream().clear();
+
+
+
+
+            } catch (IOException ex) {
+                Logger.getLogger(RoomFile.class
+                        .getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void release() {
+        if (doc != null) {
+            try {
+                doc.close();
             } catch (IOException ex) {
                 Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        doc = null;
     }
 
     public int getPageNumber(RoomPage page) {
         return pages.indexOf(page);
     }
-    
-    public int getTotalPageNumber(){
+
+    public int getTotalPageNumber() {
         return pages.size();
     }
 

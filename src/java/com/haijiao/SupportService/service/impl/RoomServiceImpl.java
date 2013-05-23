@@ -11,7 +11,10 @@ import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.IRoomService;
 import com.haijiao.SupportService.service.ITeacherService;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.TreeMap;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -70,16 +73,40 @@ public class RoomServiceImpl implements IRoomService {
             return true;
         }
     }
+
+    private class RoomTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            Iterator iter = roomTable.entrySet().iterator();
+            while (iter.hasNext()) {
+                Map.Entry entry = (Map.Entry) iter.next();
+                TeaAndStu key = (TeaAndStu) entry.getKey();
+                Room val = (Room) entry.getValue();
+                if(val.isEmpty()){
+                    if(val.checkAndUpdateExitBit())
+                        roomTable.remove(key);
+                }
+            }
+        }
+    }
     private static Map<TeaAndStu, Room> roomTable;
+    private static Timer roomTimer;
     @Resource
     IClassService classService;
     @Resource
     ITeacherService teacherService;
 
+    private void initialize() {
+        roomTable = new Hashtable();
+        roomTimer = new Timer();
+        roomTimer.schedule(new RoomTimerTask(), 1000*60*60, 1000*60*60);
+    }
+
     @Override
     public Room checkAndApplyRoom(int clazzId) {
         if (roomTable == null) {
-            roomTable = new Hashtable();
+            initialize();
         }
         Clazz clazz = classService.getClazzById(clazzId);
         if (clazz == null) {
@@ -94,7 +121,7 @@ public class RoomServiceImpl implements IRoomService {
         aas.setTeaEmail(clazz.getFreeTime().getTeacher().getEmail());
         Room result = roomTable.get(aas);
         if (result == null) {
-            result = new Room(clazz.getFreeTime().getTeacher(), clazz.getFreeTime().getTeacher().getWagePerhour(),2);
+            result = new Room(clazz.getFreeTime().getTeacher(), clazz.getFreeTime().getTeacher().getWagePerhour(), 2);
             result.addAttendance(clazz.getStudent());
             roomTable.put(aas, result);
         }
@@ -104,20 +131,21 @@ public class RoomServiceImpl implements IRoomService {
     @Override
     public Room enterPublicRoom(String teacherEmail) {
         if (roomTable == null) {
-            roomTable = new Hashtable();
+            initialize();
         }
-        
+
         Teacher tea = teacherService.getTeacherByEmail(teacherEmail);
-        
-        if(tea == null)
+
+        if (tea == null) {
             return null;
+        }
 
         TeaAndStu aas = new TeaAndStu();
         aas.setTeaEmail(teacherEmail);
-        
+
         Room result = roomTable.get(aas);
         if (result == null) {
-            result = new Room(tea, 0,2);
+            result = new Room(tea, 0, 2);
             roomTable.put(aas, result);
         }
         return result;
@@ -126,7 +154,7 @@ public class RoomServiceImpl implements IRoomService {
     @Override
     public void removeRoom(int clazzId) {
         if (roomTable == null) {
-            roomTable = new TreeMap();
+            initialize();
         }
         Clazz clazz = classService.getClazzById(clazzId);
         if (clazz == null) {
