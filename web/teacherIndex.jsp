@@ -39,7 +39,7 @@
                 <![endif]-->
     </head>
     <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-        viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
+            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
           >
 
         <!--==============================header=================================-->
@@ -50,13 +50,17 @@
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/>
-                    <h1><s:property value="teacher.name"/>
-                    <a class='btn btn-primary btn-small' href="enterPublicRoom.action?teaEmail=<s:property value='teacher.email' default='null' />">在线试讲</a>
-                    </h1>          
+                    <h1 style="margin-left: 10px;"><s:property value="teacher.name"/></h1>     
+                    <a class='btn btn-primary btn-small' style="margin-left: 15px;" href="enterPublicRoom.action?teaEmail=<s:property value='teacher.email' default='null' />"><i class="icon-user icon-white"></i>在线试讲</a>
+                    <s:a action="toChangeInfo.action">
+                        <button type="button" class="btn btn-small btn-primary pull-right" style="margin-right: 15px;"><i class="icon-pencil icon-white"></i>修改资料</button>
+                    </s:a>
                     <hr/>
-                    <p><s:property value="teacher.province"/></p>
-                    <p><s:property value="teacher.email"/></p>
-                    <p><s:property value="teacher.createdateToString()"/> 加入</p>
+                    <div style="margin-left: 10px;">
+                        <p><s:property value="teacher.province"/></p>
+                        <p><s:property value="teacher.email"/></p>
+                        <p><s:property value="teacher.createdateToString()"/> 加入</p>
+                    </div>
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
@@ -76,20 +80,17 @@
                         </table>
                     </div>
                     <div class="span8 module" style="padding:12px;">
-                    <s:a action="toChangeInfo.action">
-                        <button type="button" class="btn btn-primary pull-right"><i class="icon-pencil icon-white"></i>修改资料</button>
-                    </s:a>
-                    <ul class="nav nav-pills">
-                        <li id="l1" class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
-                        <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
-                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >添加/删除课程</a></li>
-                        <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
-                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade active in" id='student_area'>
-                            <table class="table table-hover table-striped">
-                                <tbody>
+                        <ul class="nav nav-pills">
+                            <li id="l1" class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
+                            <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
+                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >添加/删除课程</a></li>
+                            <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id='student_area'>
+                                <table class="table table-hover table-striped">
+                                    <tbody>
                                     <s:if test="classList.size()<=0">
                                         还没有学生选你哦~！
                                     </s:if>
@@ -288,9 +289,9 @@
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
                                             <span class="label label-info"><s:property value="name" /></span><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
-                                        </s:form>
-                                    </s:if>
-                                </s:iterator>
+                                            </s:form>
+                                        </s:if>
+                                    </s:iterator>
                                 <br/><br/>
                                 <p style="font-size: 9px;">
                                     * 小提示①：点击课程后面的小叉可以取消开设该课程哦！<br/>
@@ -357,12 +358,16 @@
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                                     </div>
                                                     <script type="text/javascript">
-                                                        $("#rate").bind('rated', function (event, value){ $('#score').val(value);});
-                                                        $("#rate").bind('over', function(event,value){ $(this).attr('title', value);});                                                
-                                                        $("#cmtsmt").click(function(event){
-                                                            if(/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                                event.preventDefault();
-                                                        });
+        $("#rate").bind('rated', function(event, value) {
+            $('#score').val(value);
+        });
+        $("#rate").bind('over', function(event, value) {
+            $(this).attr('title', value);
+        });
+        $("#cmtsmt").click(function(event) {
+            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                event.preventDefault();
+        });
                                                     </script>
                                             </s:form>
                                         </div>

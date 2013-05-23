@@ -36,46 +36,46 @@
             <div class="span11">
                 <div class="span11 module">
                     <div id="collapseOne" style="padding: 16px;">
-                        <button type="button" class="btn btn-danger disabled">年级</button>
+                        <button type="button" class="btn btn-small btn-danger disabled">年级</button>
                         <div id="grade" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button id="prischool" type="button" value="0" class="btn grade active" data-toggle="button">不限</button>
-                            <button id="prischool" type="button" value="1" class="btn grade" data-toggle="button">小学</button>
-                            <button id="grade6" type="button" value="2" class="btn grade" data-toggle="button">六年级</button>
-                            <button id="grade7" type="button" value="3" class="btn grade" data-toggle="button">初一</button>
-                            <button id="grade8" type="button" value="4" class="btn grade" data-toggle="button">初二</button>
-                            <button id="grade9" type="button" value="5" class="btn grade" data-toggle="button">初三</button>
-                            <button id="grade10" type="button" value="6" class="btn grade" data-toggle="button">高一</button>
-                            <button id="grade11" type="button" value="7" class="btn grade" data-toggle="button">高二</button>
-                            <button id="grade12" type="button" value="8" class="btn grade" data-toggle="button">高三</button>
+                            <button id="prischool" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                            <button id="prischool" type="button" value="1" class="btn btn-small" data-toggle="button">小学</button>
+                            <button id="grade6" type="button" value="2" class="btn btn-small" data-toggle="button">六年级</button>
+                            <button id="grade7" type="button" value="3" class="btn btn-small" data-toggle="button">初一</button>
+                            <button id="grade8" type="button" value="4" class="btn btn-small" data-toggle="button">初二</button>
+                            <button id="grade9" type="button" value="5" class="btn btn-small" data-toggle="button">初三</button>
+                            <button id="grade10" type="button" value="6" class="btn btn-small" data-toggle="button">高一</button>
+                            <button id="grade11" type="button" value="7" class="btn btn-small" data-toggle="button">高二</button>
+                            <button id="grade12" type="button" value="8" class="btn btn-small" data-toggle="button">高三</button>
                         </div>
                         <p></p>
-                        <button type="button" class="btn btn-danger disabled">学科</button>
+                        <button type="button" class="btn btn-small btn-danger disabled">学科</button>
                         <div id="lesson" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button id="chinese" type="button" value="0" class="lesson btn active" data-toggle="button">不限</button>
-                            <button id="chinese" type="button" value="1" class="lesson btn " data-toggle="button">语文</button>
-                            <button id="math" type="button" value="2" class="btn lesson" data-toggle="button">数学</button>
-                            <button id="english" type="button" value="3" class="btn lesson" data-toggle="button">英语</button>
-                            <button id="physics" type="button" value="4" class="btn lesson" data-toggle="button">物理</button>
-                            <button id="chem" type="button" value="5" class="btn lesson" data-toggle="button">化学</button>
-                            <button id="bio" type="button" value="6" class="btn lesson" data-toggle="button">生物</button>
-                            <button id="poli" type="button" value="7" class="btn lesson" data-toggle="button">政治</button>
-                            <button id="history" type="button" value="8" class="btn lesson" data-toggle="button">历史</button>
-                            <button id="geo" type="button" value="9" class="btn lesson" data-toggle="button">地理</button>
+                            <button id="chinese" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                            <button id="chinese" type="button" value="1" class="btn btn-small " data-toggle="button">语文</button>
+                            <button id="math" type="button" value="2" class="btn btn-small" data-toggle="button">数学</button>
+                            <button id="english" type="button" value="3" class="btn btn-small" data-toggle="button">英语</button>
+                            <button id="physics" type="button" value="4" class="btn btn-small" data-toggle="button">物理</button>
+                            <button id="chem" type="button" value="5" class="btn btn-small" data-toggle="button">化学</button>
+                            <button id="bio" type="button" value="6" class="btn btn-small" data-toggle="button">生物</button>
+                            <button id="poli" type="button" value="7" class="btn btn-small" data-toggle="button">政治</button>
+                            <button id="history" type="button" value="8" class="btn btn-small" data-toggle="button">历史</button>
+                            <button id="geo" type="button" value="9" class="btn btn-small" data-toggle="button">地理</button>
                         </div>
                         <p></p>
-                        <button type="button" class="btn btn-danger disabled">网络</button>
+                        <button type="button" class="btn btn-small btn-danger disabled">网络</button>
                         <div id="net" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button type="button" value="0" class="btn active" data-toggle="button">不限</button>
-                            <button type="button" value="1" class="btn" data-toggle="button">电信</button>
-                            <button type="button" value="2" class="btn" data-toggle="button">网通</button>
-                            <button type="button" value="3" class="btn" data-toggle="button">教育网</button>
+                            <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                            <button type="button" value="1" class="btn btn-small" data-toggle="button">电信</button>
+                            <button type="button" value="2" class="btn btn-small" data-toggle="button">网通</button>
+                            <button type="button" value="3" class="btn btn-small" data-toggle="button">教育网</button>
                         </div> 
                         <p></p>
-                        <button type="button" class="btn btn-danger disabled">性别</button>
+                        <button type="button" class="btn btn-small btn-danger disabled">性别</button>
                         <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button type="button" value="0" class="btn active" data-toggle="button">不限</button>
-                            <button type="button" value="1" class="btn" data-toggle="button">男</button>
-                            <button type="button" value="2" class="btn" data-toggle="button">女</button>
+                            <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                            <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
+                            <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
                         </div> 
                         <p></p>
                     </div>

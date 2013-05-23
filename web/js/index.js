@@ -51,4 +51,5 @@ jQuery(document).ready(function($){
                 $('#login_tip').fadeIn();
             }
         }
+        
 });

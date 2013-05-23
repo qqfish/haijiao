@@ -76,32 +76,31 @@ jQuery(document).ready(function($) {
     });
 
     $('#lesson').children().click(function() {
-        $('#lesson').children().attr("class","btn");
-        $(this).attr("class","btn active");
+        $('#lesson').children().attr("class","btn btn-small");
+        $(this).attr("class","btn btn-small active");
         gotopage(1, null);
     })
 
     $('#grade').children().click(function() {
-        $('#grade').children().attr("class","btn");
-        $(this).attr("class","btn active");
+        $('#grade').children().attr("class","btn btn-small");
+        $(this).attr("class","btn btn-small active");
         gotopage(1, null);
     })
 
     $('#net').children().click(function() {
-        $('#net').children().attr("class","btn");
-        $(this).attr("class","btn active");
+        $('#net').children().attr("class","btn btn-small");
+        $(this).attr("class","btn btn-small active");
         gotopage(1, null);
     })
 
     $('#sex').children().click(function() {
-        $('#sex').children().attr("class","btn");
-        $(this).attr("class","btn active");
+        $('#sex').children().attr("class","btn btn-small");
+        $(this).attr("class","btn btn-small active");
         gotopage(1, null);
     })
     
     $('#area').change(function() {
-        $('#area').children().attr("class","btn");
-        $(this).attr("class","btn active");
+        $(this).attr("class","span2 choosetext");
         gotopage(1,null);
     })
     
