@@ -29,10 +29,12 @@ public class EnterPublicRoomAction extends RequestSessionAction {
         if(email.equals(teaEmail)){
             isHolder = 1;
         }
-        mailService.sendMail( (String)this.getOutSession("email"), teaEmail,
-                "ÀÏÊ¦ÄúºÃ£¬ÓĞÍ¬Ñ§½øÈëÁËÄúµÄ¹«¹²·¿¼äÏëÒªÊÔÌıÄúµÄ¿Î³Ì¡£"
-                + "±¾ÓÊ¼şÓÉÏµÍ³·¢ËÍ£¬¾ßÌåÇé¿ö¿É»Ø¸´±¾ÓÊ¼şÓëÑ§Éú±¾ÈËÁªÏµ¡£"
-        );
+		if(teaEmail.equals((String)this.getOutSession("email"))){
+			mailService.sendMail( (String)this.getOutSession("email"), teaEmail,
+					"è€å¸ˆæ‚¨å¥½ï¼Œæœ‰åŒå­¦è¿›å…¥äº†æ‚¨çš„å…¬å…±æˆ¿é—´æƒ³è¦è¯•å¬æ‚¨çš„è¯¾ç¨‹ã€‚"
+					+ "æœ¬é‚®ä»¶ç”±ç³»ç»Ÿå‘é€ï¼Œå…·ä½“æƒ…å†µå¯å›å¤æœ¬é‚®ä»¶ä¸å­¦ç”Ÿæœ¬äººè”ç³»ã€‚"
+			);
+		}
         return SUCCESS;
     }
 
