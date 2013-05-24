@@ -299,9 +299,11 @@
                                 </p>
                                 <br/><br/>
                                 <s:form action="dealLesson.action">
-                                    <s:textfield cssClass="span2" type="text" value="" name="lessonName" placeholder="请输入新的课程名"/>
+                                    <s:select cssClass="span2" id="deal_grade" name="grade" list="{'开课年级','小学', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}"/>
+                                    <s:select cssClass="span2" id="deal_lesson" name="lesson" list="{'开设课程','语文', '数学', '英语', '物理', '化学', '生物', '政治', '历史', '地理'}"/>
                                     <a href="#" id="add_click"><i class="icon-plus" style='margin-left:5px;margin-top: -4px'></i></a>
                                     <div style="display: none;"><s:submit id="add" cssClass="btn" value="add" method="addLesson"/></div>
+                                    <div id="lesson_tip" style="font-size:9px; color: red; display: none;"></div>
                                 </s:form>
                             </table>
                         </div>

@@ -60,7 +60,8 @@
                                     <div class="well">
                                         <h5><s:property value="from.name"/></h5>
                                         <p><s:property value="message"/></p>
-                                        <a href="javascript:;" onclick="mark(<s:property value="id" />);" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px" data-loading-text="loading">标记已读</a>                            
+                                        <a href="javascript:;" onclick="mark(<s:property value="id" />);" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px" data-loading-text="loading">标记已读</a>
+                                        <span class="pull-right">&nbsp;&nbsp;</span>
                                         <a href="getMail.action?toEmail=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
                                     </div>
                                 </s:iterator>

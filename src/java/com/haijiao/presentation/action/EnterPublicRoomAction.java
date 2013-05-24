@@ -29,12 +29,12 @@ public class EnterPublicRoomAction extends RequestSessionAction {
         if(email.equals(teaEmail)){
             isHolder = 1;
         }
-		if(teaEmail.equals((String)this.getOutSession("email"))){
-			mailService.sendMail( (String)this.getOutSession("email"), teaEmail,
-					"老师您好，有同学进入了您的公共房间想要试听您的课程。"
-					+ "本邮件由系统发送，具体情况可回复本邮件与学生本人联系。"
-			);
-		}
+        if(!teaEmail.equals((String)this.getOutSession("email"))){
+            mailService.sendMail( (String)this.getOutSession("email"), teaEmail,
+                "老师您好，有同学进入了您的公共房间想要试听您的课程。"
+                + "本邮件由系统发送，具体情况可回复本邮件与学生本人联系。"
+            );
+        }
         return SUCCESS;
     }
 

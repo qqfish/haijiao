@@ -14,6 +14,21 @@
     <constant name="struts.multipart.saveDir" value="tmp" />
     
     <package name="haijiao" namespace="/" extends="struts-default">
+        <interceptors>  
+            <interceptor name="LoginChecker" class="com.haijiao.presentation.interceptor.SessionCheckInterceptor"/>  
+            <interceptor-stack name="LoginCheckerStack">  
+                <interceptor-ref name="LoginChecker">  
+                    <param name="sessionAttribute">email</param>  
+                    <param name="reloginResult">login</param>  
+                </interceptor-ref>  
+                <interceptor-ref name="defaultStack"/>  
+            </interceptor-stack>  
+        </interceptors>
+        
+        <global-results>  
+            <result name="login">index.jsp</result>  
+        </global-results>  
+        
         <action name="login" class="LoginAction">
             <result name="input">index.jsp</result>
             <result name="success" type="chain">index</result>
@@ -31,26 +46,32 @@
         </action>
         <action name="toChangeInfo" class="ToChangeInfoAction">
             <result name="success">changeInfo.jsp</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="teacherRegister">
             <result name="input">register.jsp</result>
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="studentRegister">
             <result name="input">register.jsp</result>
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="teacherChange">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">toChangeInfo</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="studentChange">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">toChangeInfo</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="changeInfo" class="ChangeInfoAction" method="changePassword">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">toChangeInfo</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="resetChangePassword" class="ResetChangePasswordAction">
             <result name="input">resetPassword.jsp</result>
@@ -59,17 +80,21 @@
         <action name="dealLesson" class="DealLessonAction" method="addLesson">
             <result name="input">teacherIndex.jsp</result>
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="dealLesson" class="DealLessonAction" method="deleteLesson">
             <result name="input">teacherIndex.jsp</result>
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="changeIntro" class="ChangeIntroAction">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">toChangeInfo</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="dealApply" class="DealApplyAction">
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="index" class="IndexAction">
             <result name="success">index.jsp</result>
@@ -111,52 +136,54 @@
         </action>
         <action name="bookTeacher" class="BookTeacherAction">
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="addFreeTime" class="AddFreeTimeAction">
             <result name="success" type="chain">index</result>
             <result name="input" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>
         </action>
-        <action name="changeAudition" class="ChangeAuditionAction">
-            <result name="success">personal.jsp</result>
-            <result name="unconnected">error.jsp</result>
-        </action>
-        <action name="changeSchedule" class="ChangeScheduleAction">
-            <result name="success">personal.jsp</result>
-            <result name="unconnected">error.jsp</result>
-        </action>
         <action name="getCommonFile" class="GetCommonFileAction">
             <result name="success">fileList.jsp</result>
             <result name="unconnected">error.jsp</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="sendMail" class="SendMailAction">
             <result name="success" type="chain">getMail</result>
             <result name="input" type="chain">getMail</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="getMail" class="GetMailAction">
             <result name="success" type="">mail.jsp</result>
             <result name="input">error.jsp</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="getMailNum" class="GetMailNumAction"/>
         <action name="markMail" class="MarkMailAction"/>
         <action name="markMail" class="MarkMailAction" method="markAll">
             <result name="success" type="chain">getMail</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="enterRoom" class="EnterRoomAction">
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="enterPublicRoom" class="EnterPublicRoomAction">
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="makeCommentReply" class="MakeCommentReplyAction" method="comment">
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="makeCommentReply" class="MakeCommentReplyAction" method="reply">
             <result name="success" type="chain">index</result>
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="checkEmail" class="CheckEmailAction"></action>
         <action name="contactUs" class="ContactUsAction">
@@ -172,8 +199,7 @@
                 <!-- 文件大小, 以字节为单位 -->
                 <param name="maximumSize">1025956</param>
             </interceptor-ref>
-            <!-- 默认拦截器必须放在fileUpload之后，否则无效 -->
-            <interceptor-ref name="defaultStack" />
+            <interceptor-ref name="LoginCheckerStack"/>
         </action>
         <action name="forgetPassword" class="ForgetPasswordAction">
             <result name="success" type="chain">index</result>
