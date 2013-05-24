@@ -7,7 +7,7 @@
         $.post("getMailNum.action",function(data) {
             if($('#mailNum').text() != data)
                 $('#mailNum').text(data);
-        });
+        },"text");
     }
 </script>
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -35,7 +35,7 @@
                             id = setInterval(getMailNum,60000);
                         </script>
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>
-                        <li><a href="">余额</a></li>
+                        <li><a href="#">余额</a></li>
                         <li><a href="getMail.action">收件箱<span id="mailNum" class="badge badge-inverse">0</span></a></li>
                         <li>
                             <div class="btn-group">

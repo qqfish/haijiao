@@ -76,31 +76,30 @@ jQuery(document).ready(function($) {
     });
 
     $('#lesson').children().click(function() {
-        $('#lesson').children().attr("class","btn btn-small");
-        $(this).attr("class","btn btn-small active");
+        $('#lesson').children().removeClass("active");
+        $(this).addClass("active");
         gotopage(1, null);
     })
 
     $('#grade').children().click(function() {
-        $('#grade').children().attr("class","btn btn-small");
-        $(this).attr("class","btn btn-small active");
+        $('#grade').children().removeClass("active");
+        $(this).addClass("active");
         gotopage(1, null);
     })
 
     $('#net').children().click(function() {
-        $('#net').children().attr("class","btn btn-small");
-        $(this).attr("class","btn btn-small active");
+        $('#net').children().removeClass("active");
+        $(this).addClass("active");
         gotopage(1, null);
     })
 
     $('#sex').children().click(function() {
-        $('#sex').children().attr("class","btn btn-small");
-        $(this).attr("class","btn btn-small active");
+        $('#sex').children().removeClass("active");
+        $(this).addClass("active");
         gotopage(1, null);
     })
     
     $('#area').change(function() {
-        $(this).attr("class","span2 choosetext");
         gotopage(1,null);
     })
     

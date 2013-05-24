@@ -63,6 +63,8 @@
                 }
             }
 
+            var jcrop_api;
+            
             //显示图片
             function previewPhoto() {
                 var picsrc = getPath(document.all.fileid);
@@ -87,7 +89,7 @@
             var uploadButton = false;
 
             function preImg(fileid, imgid) {
-                var src = getPath(document.all.fileid);
+                var src = $("#fileid").val();
                 $('#pic_tip2').css("color", "black");
                 if (src.substr(src.length - 3, src.length) != "jpg") {
                     $('#pic_tip2').css("color", "red");
@@ -98,14 +100,14 @@
                 $('#pic_org').fadeOut();
                 $('#pre_area').fadeIn();
                 if (typeof FileReader == 'undefined') {
-                    var picsrc = getPath(document.all.fileid)
-                    $("#preimg").attr({src: picsrc});
-                    previewPhoto();
+                    var picsrc = getPath(document.all.fileid);
+                    jcrop_api.setImage(picsrc);
+                    //previewPhoto();
                 }
                 else {
                     var reader = new FileReader();
                     reader.onload = function(e) {
-                        jcrop_api.setImage(this.data);
+                        jcrop_api.setImage(this.result);
                     };
                     reader.readAsDataURL(document.getElementById(fileid).files[0]);
                 }
@@ -157,7 +159,7 @@
                     }, 100);
                 });
                 
-                var jcrop_api = $.Jcrop("#preimg", {
+                jcrop_api = $.Jcrop("#preimg", {
                     onChange: showPreview,
                     onSelect: showPreview,
                     aspectRatio: 1
