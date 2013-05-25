@@ -83,7 +83,7 @@
                         <ul class="nav nav-pills">
                             <li id="l1" class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
                             <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
-                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >添加/删除课程</a></li>
+                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
                             <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
                         </ul>
@@ -302,6 +302,55 @@
                                     <s:select cssClass="span2" id="deal_grade" name="grade" list="{'开课年级','小学', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}"/>
                                     <s:select cssClass="span2" id="deal_lesson" name="lesson" list="{'开设课程','语文', '数学', '英语', '物理', '化学', '生物', '政治', '历史', '地理'}"/>
                                     <a href="#" id="add_click"><i class="icon-plus" style='margin-left:5px;margin-top: -4px'></i></a>
+                                    <ul class="nav nav-pills">
+                                        <li id="l1" class="active"><a href="#p_school" data-toggle="tab">小学</a></li>
+                                        <li id="l2"><a href="#j_school" data-toggle="tab" >初中</a></li>
+                                        <li id="l3"><a href="#s_school" data-toggle="tab" >高中</a></li>
+                                        <li id="l4"><a href="#eng" data-toggle="tab" >英语</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active in" id='p_school'>
+                                            <label class="label label-info">小学语文</label>
+                                            <label class="label label-info">小学数学</label>
+                                            <label class="label label-info">小学英语</label>
+                                            <label class="label label-info">小学奥数</label>
+                                        </div>
+                                        <div class="tab-pane fade" id='j_school'>
+                                            <label class="label label-info">初一初二语文</label>
+                                            <label class="label label-info">初一初二数学</label>
+                                            <label class="label label-info">初一初二英语</label>
+                                            <label class="label label-info">初三语文</label>
+                                            <label class="label label-info">初三数学</label>
+                                            <label class="label label-info">初三英语</label>
+                                            <label class="label label-info">初中物理</label>
+                                            <label class="label label-info">初中化学</label>
+                                            <label class="label label-info">初中历史</label>
+                                            <label class="label label-info">初中地理</label>
+                                        </div>
+                                        <div class="tab-pane fade" id='s_school'>
+                                            <label class="label label-info">高一高二语文</label>
+                                            <label class="label label-info">高一高二数学</label>
+                                            <label class="label label-info">高一高二英语</label>
+                                            <label class="label label-info">高三语文</label>
+                                            <label class="label label-info">高三数学</label>
+                                            <label class="label label-info">高三英语</label>
+                                            <label class="label label-info">高中物理</label>
+                                            <label class="label label-info">高中化学</label>
+                                            <label class="label label-info">高中政治</label>
+                                            <label class="label label-info">高中历史</label>
+                                            <label class="label label-info">高中生物</label>
+                                            <label class="label label-info">高中地理</label>
+                                            <label class="label label-info">高考报考咨询</label>
+                                        </div>
+                                        <div class="tab-pane fade" id='eng'>
+                                            <label class="label label-info">大学四级</label>
+                                            <label class="label label-info">大学六级</label>
+                                            <label class="label label-info">托福</label>
+                                            <label class="label label-info">GRE</label>
+                                            <label class="label label-info">雅思</label>
+                                            <label class="label label-info">口语</label>
+                                        </div>
+                                    </div>
                                     <div style="display: none;"><s:submit id="add" cssClass="btn" value="add" method="addLesson"/></div>
                                     <div id="lesson_tip" style="font-size:9px; color: red; display: none;"></div>
                                 </s:form>
@@ -360,16 +409,16 @@
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                                     </div>
                                                     <script type="text/javascript">
-        $("#rate").bind('rated', function(event, value) {
-            $('#score').val(value);
-        });
-        $("#rate").bind('over', function(event, value) {
-            $(this).attr('title', value);
-        });
-        $("#cmtsmt").click(function(event) {
-            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                event.preventDefault();
-        });
+$("#rate").bind('rated', function(event, value) {
+$('#score').val(value);
+});
+$("#rate").bind('over', function(event, value) {
+$(this).attr('title', value);
+});
+$("#cmtsmt").click(function(event) {
+if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+    event.preventDefault();
+});
                                                     </script>
                                             </s:form>
                                         </div>

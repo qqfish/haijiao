@@ -47,13 +47,13 @@
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
-                    <h1><s:property value="tea.name"/>
+                    <h1 style="margin-left:5px"><s:property value="tea.name"/>
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
-                    </h1>
+                        </h1>
                     <s:if test="#session.email != null&&tea.status!=1">
-                        <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-primary btn-mini" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
@@ -65,10 +65,10 @@
                         </div>
                     </s:if>
                     <s:elseif test="#session.email != null">
-                        <a class='btn btn-primary btn-small' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
+                        <a class='btn btn-primary btn-mini' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
                     </s:elseif>
                     <s:else>
-                        <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-primary btn-mini" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>请先登陆</h3>
@@ -79,22 +79,21 @@
                             </div>
                         </div>
                     </s:else>
+                    <s:if test="#session.userType=='teacher'">
+                        <a class="btn btn-primary btn-mini" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                    </s:if>
+                    <s:if test="#session.userType=='student'">
+                        <a class="btn btn-primary btn-mini" data-toggle="modal" data-target="#choosemodal">我要预约</a>
+                        <a class="btn btn-primary btn-mini" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                    </s:if>
                     <hr/>
-                    <p><s:property value="tea.province"/></p>
-                    <p><s:property value="tea.email" /></p>
-                    <p><s:property value="tea.createTime" /> 加入</p>
+                    <div style="margin-left: 10px">
+                        <p><s:property value="tea.province"/></p>
+                        <p><s:property value="tea.email" /></p>
+                        <p><s:property value="tea.createTime" /> 加入</p>
+                    </div>
                     <table class="table table-hover table-striped">
                         <tbody>
-                            <tr>
-                                <td class="span1">课程</td>
-                                <td>
-                                    <s:iterator value="tea.lessons" status="st">
-                                        <s:if test="delete==false">
-                                            <label class="label label-info" ><s:property value="name"/></label>
-                                        </s:if>
-                                    </s:iterator>
-                                </td>
-                            </tr>
                             <tr>
                                 <td>预约数</td>
                                 <td><s:property value="tea.reserveNum"/></td>
@@ -109,13 +108,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <s:if test="#session.userType=='teacher'">
-                        <a class="btn btn-primary btn-small" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
-                    </s:if>
-                    <s:if test="#session.userType=='student'">
-                        <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                        <a class="btn btn-primary btn-small" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
-                    </s:if>
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <ul class="nav nav-pills">
@@ -125,10 +117,7 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane row fade active in" id='info_area'>
-                            <div class="span5 well">
-                                <video herf="#"></video>
-                            </div>
-                            <div class="span2">
+                            <div class="span4">
                                 <table class="table table-hover table-striped ">
                                     <tbody>
                                         <tr>
@@ -155,22 +144,55 @@
                                                 <s:property value="tea.school"/>
                                             </td>
                                         </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="span4">
+                                <table class="table table-hover table-striped ">
+                                    <tbody>
                                         <tr>
-                                            <td>
-                                                <strong>手机</strong>
+                                            <td class="span2">
+                                                <strong>目前身份</strong>
                                             </td>
                                             <td>
-                                                <s:property value="tea.tel"/>
+                                                <s:property value="tea.sex"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>家庭住址</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.birthday"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>授课方式</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.school"/>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
+                            <div class="span8">
+                                <hr/>
+                                <h5>开设课程</h5>
+                                <div>
+                                    <s:iterator value="tea.lessons" status="st">
+                                        <s:if test="delete==false">
+                                            <label class="label label-info" ><s:property value="name"/></label>
+                                        </s:if>
+                                    </s:iterator>
+                                </div>
+                            </div>
                             <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
                             <hr class="span8"/>
                             <div class="span8" id="teaintro">
                                 <script>
-                                    $("#teaintro").html($("#tmp").text());
+        $("#teaintro").html($("#tmp").text());
                                 </script>
                             </div>
                         </div>
@@ -308,10 +330,10 @@
                             <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
                             <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
-                            <session id="schedule_error"></session>
-                            <div id="lesson_select">
+                                <session id="schedule_error"></session>
+                                <div id="lesson_select">
                                 <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                    <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <s:iterator value="tea.lessons" status="st">
                                         <s:if test="delete==false">
                                             <button type="button" class="btn"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>

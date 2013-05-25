@@ -37,9 +37,10 @@
                                     <div id="login_tip" class="validateTip"></div>
                                     <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
                                     <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
+                                    
                                     <s:submit cssClass="btn btn-success " style="margin-top:20px;margin-left:3px;width:220px" value="登录"></s:submit>
                                 </s:form>
-                                <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a></div>
+                                <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a> <a style="color:white;" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">注册账号</a></div>
                             </div>
                         </div>
                         <div class="accordion-group">
