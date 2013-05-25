@@ -18,7 +18,7 @@ connection.connect = (function(host) {
     };
 
     connection.socket.onclose = function () {
-        pError("链接已经断开！！");
+        disconnected();
         console.log('Info: WebSocket closed.');
     };
 
@@ -59,6 +59,9 @@ connection.connect = (function(host) {
                 break;
             case Response.ShowTimer:
                 timer.showTimer(socketData);
+                break;
+            case Response.UserEnter:
+                media.userEnter(socketData.email, socketData.name);
                 break;
             case Response.Error:
                 processError(socketData.errorType);

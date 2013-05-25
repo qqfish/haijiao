@@ -43,26 +43,40 @@ public class FcMessageInbound extends MessageInbound {
         this.room = room;
         gson = new Gson();
         room.enterRoom(this);
-        userService = (IUserService)SpringContext.getContext().getBean("userServiceImpl");
+        userService = (IUserService) SpringContext.getContext().getBean("userServiceImpl");
         this.setCharBufferMaxSize(10 * 1024 * 1024);
     }
 
     @Override
     protected void onOpen(WsOutbound outbound) {
         System.out.println(this.toString() + " ,new connection created");
-        
+
         //info other someone enter
         InfoData enterInfo = new InfoData();
         enterInfo.setInfoType(InfoType.SomeoneEnter);
         enterInfo.setMessage(user.getName());
-        
+
+        for (int i = 0; i < room.getRoomSocket().size(); i++) {
+            ResponseUserEnter rue = new ResponseUserEnter();
+            User u = room.getRoomSocket().get(i).getUser();
+            if (!u.equals(user)) {
+                rue.setEmail(u.getEmail());
+                rue.setName(u.getName());
+                sendtoUser(gson.toJson(rue));
+            } else {
+                rue.setEmail(u.getEmail());
+                rue.setName(u.getName());
+                room.broadcastOther(gson.toJson(rue),this);
+            }
+        }
+
         room.broadcastOther(gson.toJson(enterInfo), this);
         //room file list
         sendtoUser(gson.toJson(new ResponseAddRoomFile(room.getRoomFile())));
 
         sendtoUser(gson.toJson(room.getResponseChangePage()));
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
-        
+
         userService.setStatus(user.getEmail(), User.Status.onlineAndBusy);
 
         //send to user their user file
@@ -72,7 +86,8 @@ public class FcMessageInbound extends MessageInbound {
     @Override
     protected void onClose(int status) {
         ResponseVideoChat bye = new ResponseVideoChat();
-        bye.setFrom(user.getName());
+        bye.setFrom(user.getEmail());
+        bye.setFromName(user.getName());
         bye.setData("{\"type\":\"bye\"}");
         room.broadcastOther(gson.toJson(bye), this);
         InfoData exitInfo = new InfoData();
@@ -117,7 +132,8 @@ public class FcMessageInbound extends MessageInbound {
             case Request.VideoChat:
                 RequestVideoChat rvc = gson.fromJson(str, RequestVideoChat.class);
                 ResponseVideoChat videoResult = new ResponseVideoChat(rvc);
-                videoResult.setFrom(user.getName());
+                videoResult.setFrom(user.getEmail());
+                videoResult.setFromName(user.getName());
                 if (videoResult.getTo() == null) {
                     room.broadcastOther(gson.toJson(videoResult), this);
                 } else {
@@ -164,7 +180,7 @@ public class FcMessageInbound extends MessageInbound {
                 break;
             case Request.ToggleTimer:
                 if (user.equals(room.getHolder())) {
-                    if(!room.getTimer().toggle()){
+                    if (!room.getTimer().toggle()) {
                         ErrorData error = new ErrorData();
                         error.setErrorType(ErrorType.NoStudentEnter);
                         sendtoUser(gson.toJson(error));
@@ -186,6 +202,10 @@ public class FcMessageInbound extends MessageInbound {
                     error.setErrorType(ErrorType.TimerNoPermission);
                     sendtoUser(gson.toJson(error));
                 }
+                break;
+            case Request.DownloadPdf:
+                String downloadUrl = room.prepareDownloadFile();
+                System.out.println(downloadUrl);
                 break;
 
         }

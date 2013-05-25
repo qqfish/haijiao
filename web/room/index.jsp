@@ -113,10 +113,13 @@
                             <li>
                                 <div class="btn-group">
                                     <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="文件列表"><i class="icon-folder-open icon-white"></i></a>
-                                    <ul class="dropdown-menu" id="roomFile"></ul>
+                                    <ul class="dropdown-menu" id="roomFile">
+                                        <li class="divider"></li>
+                                        <li><a tabindex="-1" id="uploadFile" href="#">上传文件</a></li>
+                                        <li><a tabindex="-1" href="#" onclick="file.downloadFile()">下载文件</a></li>
+                                    </ul>
                                 </div>
                             </li>
-                            <li><a class="tooltipButton" id="uploadFile" data-toggle="tooltip" data-placement="bottom" data-original-title="上传文件"><i class="icon-circle-arrow-up icon-white"></i></a></li>
                             <div class="control-group input-append" style="display: none;">
                                 <input class="span2" id="uploadFileInput" type="file" title="上传"/>
                             </div>

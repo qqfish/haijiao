@@ -10,6 +10,8 @@ import com.haijiao.Domain.room.Room;
 import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.IRoomService;
 import com.haijiao.SupportService.service.ITeacherService;
+import com.haijiao.global.config;
+import java.io.File;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
@@ -83,10 +85,25 @@ public class RoomServiceImpl implements IRoomService {
                 Map.Entry entry = (Map.Entry) iter.next();
                 TeaAndStu key = (TeaAndStu) entry.getKey();
                 Room val = (Room) entry.getValue();
-                if(val.isEmpty()){
-                    if(val.checkAndUpdateExitBit())
+                if (val.isEmpty()) {
+                    if (val.checkAndUpdateExitBit()) {
+                        File dir = new File(config.tmpRoomFile + "/" + val.getId());
+                        deleteDir(dir);
                         roomTable.remove(key);
+                    }
                 }
+            }
+        }
+
+        private void deleteDir(File dir) {
+            if (dir.exists()) {
+                if (dir.isDirectory()) {
+                    File delFile[] = dir.listFiles();
+                    for (int i = 0; i < delFile.length; i++) {
+                        deleteDir(delFile[i]);
+                    }
+                }
+                dir.delete();
             }
         }
     }
@@ -100,7 +117,7 @@ public class RoomServiceImpl implements IRoomService {
     private void initialize() {
         roomTable = new Hashtable();
         roomTimer = new Timer();
-        roomTimer.schedule(new RoomTimerTask(), 1000*60*60, 1000*60*60);
+        roomTimer.schedule(new RoomTimerTask(), 1000 * 60 * 60, 1000 * 60 * 60);
     }
 
     @Override

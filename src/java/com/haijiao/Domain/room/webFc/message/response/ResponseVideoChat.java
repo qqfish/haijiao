@@ -14,6 +14,7 @@ import com.haijiao.Domain.room.webFc.message.request.RequestVideoChat;
 public class ResponseVideoChat extends ResponseData {
 
     private String from;
+    private String fromName;
     private String to;
     private String data;
 
@@ -49,5 +50,13 @@ public class ResponseVideoChat extends ResponseData {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getFromName() {
+        return fromName;
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
     }
 }

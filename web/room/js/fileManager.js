@@ -110,6 +110,11 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             bookmardDiv.append(child.element);
             bookmarks[bookmarks.length] = child;
         }
+        if(bookmarks.length == 0){
+            var empty = $("<li></li>");
+            empty.html("<a tabindex='-1' href='#'>该文档没有书签</a>").attr("class","disabled");
+            bookmardDiv.append(empty);
+        }
     }
     
     this.addRoomFile = function(response){
@@ -119,7 +124,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             file.fileName = r.fileName;
             file.uuid = r.uuid;
             file.element = $("<li></li>").html("<a tabindex='-10' href='#'>" + file.fileName + "</a>").attr("uuid",file.uuid);
-            roomFileDiv.append(file.element);
+            roomFileDiv.prepend(file.element);
             file.element.click(function(){
                 table.sendChangeFile($(this).attr("uuid"));
             });
@@ -168,6 +173,12 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
     
     this.gotoPage = function(page){
         table.sendChangePage(currentUuid, page - 1);
+    }
+    
+    this.downloadFile = function(){
+        var message = {};
+        message.type = Request.DownloadPdf;
+        connection.sendObject(message);
     }
     
     this.uploadFile = function(file){

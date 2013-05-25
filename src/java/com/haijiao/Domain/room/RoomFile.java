@@ -10,6 +10,7 @@ import com.haijiao.global.config;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -27,6 +28,11 @@ import org.apache.pdfbox.exceptions.COSVisitorException;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDJpeg;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDPixelMap;
+import org.apache.pdfbox.pdmodel.graphics.xobject.PDXObjectImage;
+import org.apache.struts2.ServletActionContext;
 
 /**
  *
@@ -40,6 +46,7 @@ public class RoomFile extends DataFile {
     private PDDocument doc;
     private RootBookmark bookmarks;
     private int lastPage;
+    private String downloadUrl;
 
     public RoomFile(DataFile file, Room room) {
         this.room = room;
@@ -158,9 +165,43 @@ public class RoomFile extends DataFile {
         return getPage(lastPage);
     }
 
-    public String getUrl() {
-        //change the file into a pdf and return the URL of this pdf.
-        return null;
+    public String getDownloadUrl() throws IOException, COSVisitorException {
+        if (downloadUrl != null) {
+            return downloadUrl;
+        }
+        checkAndOpenFile();
+        for (int i = 0; i < pages.size(); i++) {
+            if (pages.get(i).getTmpUrl() != null) {
+                PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
+                page.getContents().getStream().clear();
+                byte[] decodedBytes = Base64.decode(pages.get(i).getTmpUrl().split("^data:image/(png|jpg);base64,")[1]);
+                BufferedImage imag = ImageIO.read(new ByteArrayInputStream(decodedBytes));
+                ImageIO.write(imag, "PNG", new File("/Users/fish/test.png"));
+                PDXObjectImage ximage = new PDPixelMap(doc, imag);
+                PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+                contentStream.drawXObject(ximage, 0, 0, page.getMediaBox().getWidth(), page.getMediaBox().getHeight());
+                contentStream.close();
+            }
+        }
+        downloadUrl = config.tmpRoomFile + "/" + this.room.getId() + "/" + config.downloadDir;
+        System.out.println(downloadUrl);
+        File dir = new File(downloadUrl);
+        System.out.println("hello");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        File file;
+        file = new File(downloadUrl + "/" + name);
+        int i = 0;
+        while (file.exists()) {
+            i++;
+            file = new File(downloadUrl + "/" + i + name);
+        }
+        downloadUrl = downloadUrl + "/" + i + name;
+        doc.save(downloadUrl);
+        release();
+        return downloadUrl;
     }
 
     public void addPage() {
@@ -232,5 +273,9 @@ public class RoomFile extends DataFile {
 
     public RootBookmark getBookmarks() {
         return bookmarks;
+    }
+
+    public void pageUpdate() {
+        downloadUrl = null;
     }
 }

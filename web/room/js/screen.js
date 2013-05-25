@@ -45,6 +45,16 @@ function pError(str){
     $("#closeAlert").show();
 }
 
+function disconnected(){
+    unlock();
+    $('#alertContext').empty();
+    $('#alertContext').html("<h3>连接已经断开</h3>" +
+        "<button class='btn btn-success pull-right' onclick='window.location.reload();'>重新连接</button>"+
+        "<a class='btn pull-right' href='index.action'>退出房间</a>");
+    lockType("error");
+    lock();
+}
+
 function pInfo(str) {
     $('#infoMessageContext').text(str);
     $('#infoMessage').fadeIn();

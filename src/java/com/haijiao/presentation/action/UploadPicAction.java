@@ -61,7 +61,6 @@ public class UploadPicAction extends SessionAction{
             }
             path = path + "/" + uploadFileName;
             File imageFile = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
-            System.out.println(ServletActionContext.getServletContext().getRealPath("/"));
             if(!imageFile.exists()){
                 imageFile.createNewFile();
             }

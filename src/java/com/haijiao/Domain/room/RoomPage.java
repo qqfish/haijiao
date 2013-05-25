@@ -68,6 +68,7 @@ public class RoomPage {
     }
 
     public void saveTmp(String dataUri) throws IOException {
+        file.pageUpdate();
         tmpUrl = dataUri;
     }
 

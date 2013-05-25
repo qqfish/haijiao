@@ -13,7 +13,8 @@ var Request = {
         AddFileFromUser : 8,
         UploadFile: 9,
         ToggleTimer: 10,
-        StopTimer: 11
+        StopTimer: 11,
+        DownloadPdf: 12
 }
 
 var Response = {
@@ -28,6 +29,7 @@ var Response = {
     SetUserFile : 8,
     UploadBackground : 9,
     ShowTimer : 10,
+    UserEnter : 11,
     Error: 100,
     Info: 101
 }

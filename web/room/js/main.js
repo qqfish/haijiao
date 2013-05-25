@@ -17,6 +17,8 @@ function init(clazzId, teaEmail, email){
     media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
     file = new fileManager("roomFile","bookmark","userFile");
     
+    media.userEnter("__localUser","__localUser");
+    
     var sideShow = true;
     var sideWidth = 310;
     

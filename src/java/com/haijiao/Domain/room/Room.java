@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.pdfbox.exceptions.COSVisitorException;
 
 /**
  *
@@ -229,10 +230,10 @@ public class Room {
         }
     }
 
-    public void sentto(String message, String userId) throws IOException {
+    public void sentto(String message, String userEmail) throws IOException {
         CharBuffer buffer = CharBuffer.wrap(message);
         for (int i = 0; i < roomSocket.size(); i++) {
-            if (roomSocket.get(i).getUser().getName().equals(userId)) {
+            if (roomSocket.get(i).getUser().getEmail().equals(userEmail)) {
                 roomSocket.get(i).getWsOutbound().writeTextMessage(buffer);
             }
         }
@@ -280,5 +281,21 @@ public class Room {
         if(!exitBit)
             exitBit = true;
         return result;
+    }
+    
+    public String prepareDownloadFile(){
+        if(currentPage == null)
+            return null;
+            String result=null;
+        try {
+            result = currentPage.getFile().getDownloadUrl();
+        } catch (Exception ex) {
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return result;
+    }
+    
+    public List<FcMessageInbound> getRoomSocket(){
+        return roomSocket;
     }
 }

@@ -66,7 +66,7 @@ function Media(parentId, text, userList){
         }
     }
 
-    function createPeerConnection(remoteUser) {
+    function createPeerConnection(remoteUser, remoteName) {
         var pc_config = {
             iceServers: new Array()
         };
@@ -116,17 +116,16 @@ function Media(parentId, text, userList){
             //addVideo(event.stream, remoteUser);
             //attachMediaStream(mediaList[remoteUser].video, event.stream);
             mediaList[remoteUser].stream = event.stream;
-            addVideo(mediaList[remoteUser].stream, remoteUser);
+            addVideo(mediaList[remoteUser].stream, remoteUser, remoteName);
             waitForRemoteVideo(remoteUser); 
         };
         mediaList[remoteUser].pc.onremovestream = onRemoteStreamRemoved;
     }
 
-    function maybeStart(remoteUser) {
-        if (!mediaList[remoteUser] && mediaList[localUserId].stream) {
-            mediaList[remoteUser] = new UserMedia();
+    function maybeStart(remoteUser,remoteName) {
+        if (!mediaList[remoteUser].pc && mediaList[localUserId].stream) {
             console.log("Creating PeerConnection.");
-            createPeerConnection(remoteUser);
+            createPeerConnection(remoteUser,remoteName);
             if(!mediaList[remoteUser].pc) {
                 console.log("failed to create PeerConnection.");
                 removeMedia(remoteUser);
@@ -178,10 +177,10 @@ function Media(parentId, text, userList){
     this.processSignalingMessage = function(message) {
         var msg = JSON.parse(message.data);
         var remoteUser = message.from;
+        var remoteName = message.fromName;
         if (msg.type === 'offer') {
             // Callee creates PeerConnection
-            if (!mediaList[remoteUser])
-                maybeStart(remoteUser);
+            maybeStart(remoteUser, remoteName);
 
             mediaList[remoteUser].pc.setRemoteDescription(new RTCSessionDescription(msg));
             doAnswer(remoteUser);
@@ -196,8 +195,7 @@ function Media(parentId, text, userList){
         } else if (msg.type === 'bye' && mediaList[remoteUser]) {
             onRemoteHangup(remoteUser);
         } else if (msg.type === 'ready' && mediaList[localUserId].stream) {
-            if (!mediaList[remoteUser])
-                maybeStart(remoteUser);
+            maybeStart(remoteUser,remoteName);
                     
             doCall(remoteUser);
         } else if (msg.type === 'fail') {
@@ -209,7 +207,7 @@ function Media(parentId, text, userList){
         console.log("User has granted access to local media.");
         // Call the polyfill wrapper to attach the media stream to this element.
         mediaList[localUserId].stream = stream;
-        addVideo(stream,localUserId);
+        addVideo(stream,localUserId,localUserId);
         var ready = {
             type:"ready"
         };
@@ -283,17 +281,19 @@ function Media(parentId, text, userList){
         mediaList[remoteUser].status = "connected";
     }
     
-    function addVideo(stream, user){
-        var current = mediaList[user];
-        current.container = $("<div></div>").attr("class","container").attr("user",user).css("margin","0px").height(height).width(width).hide();
-        current.video = $("<video></video>").attr("user",user).attr("class","video").attr("autoplay","autoplay").css("opacaity",1);
+    function addVideo(stream, userEmail, userName){
+        var current = mediaList[userEmail];
+        current.container = $("<div></div>").attr("class","container").attr("user",userEmail).css("margin","0px").height(height).width(width).hide();
+        current.video = $("<video></video>").attr("user",userEmail).attr("class","video").attr("autoplay","autoplay").css("opacaity",1);
         current.video.height(height).width(width);
         attachMediaStream(current.video,current.stream);
-        current.userButton = $("<li></li>").attr("user",user);
-        if(user == localUserId){
+        current.userButton.attr("class","");
+        if(userEmail == localUserId){
+            current.userButton.empty();
             current.userButton.html("<a tabindex='-1' href='#'>自己</a>");
         } else {
-            current.userButton.html("<a tabindex='-1' href='#'>" + user + "</a>");
+            current.userButton.empty();
+            current.userButton.html("<a tabindex='-1' href='#'>" + userName + "</a>");
         }
         current.userButton.click(function(){
             var u = $(this).attr("user");
@@ -307,9 +307,19 @@ function Media(parentId, text, userList){
 //        current.container.draggable({containment: [
 //                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
 //        ],scroll:false});
+        current.userButton.click();     
+    }
+    
+    this.userEnter = function(user,userName){
+        mediaList[user] = new UserMedia();
+        var current = mediaList[user];
+        current.userButton = $("<li></li>").attr("user",user).attr("class","disabled");
+        if(user == localUserId){
+            current.userButton.html("<a tabindex='-1' href='#'>自己(未连接)</a>");
+        } else {
+            current.userButton.html("<a tabindex='-1' href='#'>" + userName + "(未连接)</a>");
+        }
         userListDiv.append(current.userButton);
-        current.userButton.click();
-        
     }
     
     this.setDragPlace = function(x1,y1,x2,y2){
