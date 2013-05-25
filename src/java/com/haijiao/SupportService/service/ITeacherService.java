@@ -24,6 +24,8 @@ public interface ITeacherService {
     //设置试听
     public boolean changeAudition(String email);
     
+    public boolean increseObNum(String email);
+    
     public boolean addLesson(String email, String lessonName);
     
     public boolean deleteLesson(String email, String lessonName);

@@ -35,6 +35,7 @@ public class User extends BaseBean{
     protected String userType;  //用户的类型："teacher" or "student"
     protected Integer score;    //用户的评分
     protected Integer scoreNum; //评分数
+    protected Integer loginNum; //登录数
     protected String password;  //用户密码
     protected int coin;         //该账户中剩下的智慧币
     @Lob
@@ -113,6 +114,14 @@ public class User extends BaseBean{
 
     public void setScoreNum(Integer scoreNum) {
         this.scoreNum = scoreNum;
+    }
+
+    public Integer getLoginNum() {
+        return loginNum;
+    }
+
+    public void setLoginNum(Integer loginNum) {
+        this.loginNum = loginNum;
     }
 
     public String getPassword() {

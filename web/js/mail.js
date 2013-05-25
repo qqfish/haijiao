@@ -3,6 +3,8 @@ $(function() {
         $("#markAll").addClass("disabled");
     if($("#inputEmail").val() == "")
         $("#send").addClass("disabled");
+    if ($("#allMsg").children("div").length == 0)
+        $("#removeAll").addClass("disabled");
 });
 
 function validate_email(field, tip) {
@@ -50,5 +52,4 @@ function mark(id) {
                 $(this).parent().remove();
         }});
 }
-
 

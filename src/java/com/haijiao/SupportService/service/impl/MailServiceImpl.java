@@ -9,6 +9,7 @@ import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.dao.IMailDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import com.haijiao.SupportService.service.IMailService;
+import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,9 @@ public class MailServiceImpl implements IMailService{
         m.setMessage(message);
         m.setRead(false);
         m.setTo(to);
+        java.util.Date datetime = new java.util.Date();
+        Date time = new Date(datetime.getTime());
+        m.setCreateTime(time);
         return mailDAO.makePersistent(m);
     }
     
@@ -81,6 +85,9 @@ public class MailServiceImpl implements IMailService{
         m.setMessage(message);
         m.setRead(false);
         m.setTo(to);
+        java.util.Date datetime = new java.util.Date();
+        Date time = new Date(datetime.getTime());
+        m.setCreateTime(time);
         return mailDAO.makePersistent(m);
     }
 
@@ -102,6 +109,12 @@ public class MailServiceImpl implements IMailService{
     public boolean deleteMail(int mailId) {
         Mail m = mailDAO.findById(mailId);
         return mailDAO.makeTransient(m);
+    }
+
+    @Override
+    public boolean deletaAll(String email) {
+        mailDAO.removeAllMail(email);
+        return true;
     }
     
 }

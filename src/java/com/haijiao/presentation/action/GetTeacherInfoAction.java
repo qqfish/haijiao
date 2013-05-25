@@ -23,9 +23,9 @@ public class GetTeacherInfoAction extends RequestAction{
     public String execute(){
         String email = (String)this.getRequestValue("teacherEmail");
         tea = teacherService.getTeacherByEmail(email);
+        teacherService.increseObNum(email);
         scheduleBean = new ScheduleBean(tea);
         billList = billService.getBill(email, "teacher");
-        System.out.println(scheduleBean.toJson());
         return SUCCESS;
     }
 

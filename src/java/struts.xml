@@ -167,6 +167,14 @@
             <result name="success" type="chain">getMail</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>
+        <action name="removeMail" class="RemoveMailAction">
+            <result name="success" type="chain">getMail</result>
+            <interceptor-ref name="LoginCheckerStack"/>
+        </action>
+        <action name="removeMail" class="RemoveMailAction" method="removeAll">
+            <result name="success" type="chain">getMail</result>
+            <interceptor-ref name="LoginCheckerStack"/>
+        </action>
         <action name="enterRoom" class="EnterRoomAction">
             <result name="success">/room/index.jsp</result>
             <result name="false">index.jsp</result>
