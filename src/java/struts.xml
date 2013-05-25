@@ -48,12 +48,12 @@
             <result name="success">changeInfo.jsp</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="teacherRegister">
+        <action name="registerThen" class="RegisterThenAction" method="teacherRegister">
             <result name="input">register.jsp</result>
             <result name="success" type="chain">index</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="studentRegister">
+        <action name="registerThen" class="RegisterThenAction" method="studentRegister">
             <result name="input">register.jsp</result>
             <result name="success" type="chain">index</result>
             <interceptor-ref name="LoginCheckerStack"/>
