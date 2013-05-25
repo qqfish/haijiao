@@ -20,12 +20,13 @@ function init(clazzId, teaEmail, email){
     media.userEnter("__localUser","__localUser");
     
     var sideShow = true;
-    var sideWidth = 310;
+    var sideWidth = 250;
+    var sideButton = 25;
     
     
     $(window).resize(function(){
         if(sideShow)
-            $("#desktop").height($(window).height()-42).width($(window).width() - sideWidth).css("left",sideWidth);
+            $("#desktop").height($(window).height()-42).width($(window).width() - sideWidth - sideButton).css("left",sideWidth + sideButton);
         else
             $("#desktop").height($(window).height()-42).width($(window).width());
         table.setStageSize($(window).width(), $("#desktop").height());
@@ -33,15 +34,15 @@ function init(clazzId, teaEmail, email){
         
         //media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
 
-        $("#side").height($(window).height()-82);
+        $("#side").height($(window).height()-44);
+        $("#charShowArea").height($("#side").height() - 450);
     });
     
     var w=$(window).width();//可见区域宽度
     var h=$(window).height();//可见区域高度
-    console.log(w + " , " + h);
-    $("#desktop").height(h-42).width(w - sideWidth).css("left",sideWidth);
+    $("#desktop").height(h-42).width(w - sideWidth - sideButton).css("left",sideWidth + sideButton);
     table.setStageSize(w,$("#desktop").height());
-    $("#side").height(h-82).css("marginLeft","0px");
+    $("#side").height(h-44).css("marginLeft","0px");
     
     
     
@@ -145,8 +146,8 @@ function init(clazzId, teaEmail, email){
         }, 'fast');
         
         $('#desktop').animate({
-            left: "0",
-            width: $(window).width()
+            left: sideButton,
+            width: $(window).width() - sideButton
         },'fast');
         //media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
         
@@ -156,12 +157,11 @@ function init(clazzId, teaEmail, email){
     }
  
     $('#sideBarButton').click(function() {
-
         if(sideShow){
             sideReturn();
         } else {
             $('#desktop').animate({
-                left: sideWidth,
+                left: sideWidth + sideButton,
                 width: '-=' + sideWidth + 'px'
             },'fast');
   

@@ -39,7 +39,7 @@ public class User extends BaseBean{
     protected int coin;         //该账户中剩下的智慧币
     @Lob
     @Basic(fetch = FetchType.LAZY) 
-    @Column(name="intro", columnDefinition="CLOB", nullable=true)
+    @Column(name="intro", columnDefinition="text", nullable=true)
     protected String intro;     //用户的个人简介，显示在个人主页上
     protected String picUrl;    //用户头像的URL
     protected String sex;       //性别

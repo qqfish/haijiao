@@ -180,16 +180,15 @@
                             <li><a class="tooltipButton" id="gotoPage" data-toggle="modal" data-target="#gotoModal" data-placement="bottom" data-original-title="跳转"><i class="icon-share-alt icon-white" ></i></a></li>
                             <li><a class="tooltipButton" id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
                             <li><a class="tooltipButton" id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
-                            <li><a class="tooltipButton" id="sideBarButton" data-toggle="tooltip" data-placement="bottom" data-original-title="侧边栏"><i class="icon-list icon-white"></i></a></li>
                             <li><a class="tooltipButton" data-toogle="tooltip" data-placement="bottom" data-original-title="退出房间" href="index.action"><i class="icon-remove icon-white"></i></a></li>
                         </ul>               
                     </div> 
                 </div>
-                <div class="span3" id ="side" style="margin:0px;float:bottom;">
-                    <div style="width:260px;float: left">
-                        <div id="sideVideoArea" style="height:400px;width:258px;overflow-y: visible;"></div>
+                <div class="well span3" id ="side" style="margin:0px;float:bottom;padding:0;">
+                    <div style="width:240px;float: left">
+                        <div id="sideVideoArea" style="height:380px;width:240px;overflow-y: visible;"></div>
                         <div style="float: bottom;">
-                            <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:238px;height: 250px;white-space:normal; overflow-y: auto;"></div>
+                            <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:228px;height: 250px;white-space:normal; overflow-y: auto;"></div>
                             <p style="margin: 0px;"/>
                             <div class="input-append">
                                 <input class="span2" id="chatInput" type="text">
@@ -197,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ctlbar" style="width:10px;height:100%;background-color: white;float: left"></div>
+                    <div class="ctlbar" id="sideBarButton" style="width:25px;height:100%;background-color: white;float: right"></div>
                 </div>
             </div>
 
