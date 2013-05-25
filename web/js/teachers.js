@@ -83,7 +83,34 @@ jQuery(document).ready(function($) {
 
     $('#grade').children().click(function() {
         $('#grade').children().removeClass("active");
+        $('#allLesson').click();
         $(this).addClass("active");
+        if($(this).html()=="小学"){
+            $(".mschool").fadeOut(1, null);
+            $(".hschool").fadeOut(1, null);
+            $(".english").fadeOut(1, null);
+            $(".pschool").fadeIn();
+        } else if($(this).html()=="初中"){
+            $(".pschool").fadeOut(1, null);
+            $(".hschool").fadeOut(1, null);
+            $(".english").fadeOut(1, null);
+            $(".mschool").fadeIn();
+        } else if($(this).html()=="高中"){
+            $(".pschool").fadeOut(1, null);
+            $(".mschool").fadeOut(1, null);
+            $(".english").fadeOut(1, null);
+            $(".hschool").fadeIn();
+        } else if($(this).html()=="英语"){
+            $(".pschool").fadeOut(1, null);
+            $(".mschool").fadeOut(1, null);
+            $(".hschool").fadeOut(1, null);
+            $(".english").fadeIn();
+        } else {
+            $(".pschool").fadeOut(1, null);
+            $(".mschool").fadeOut(1, null);
+            $(".hschool").fadeOut(1, null);
+            $(".english").fadeOut(1, null);
+        }
         gotopage(1, null);
     })
 

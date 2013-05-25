@@ -35,7 +35,7 @@
         $("#deal_lesson").val($(this).html());
         $("#add").click();
     })
-    
+
     $("[id*='delete_click']").click(function(){
         var id = this.id;
         id = id.substring(13, id.length);

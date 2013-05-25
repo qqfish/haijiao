@@ -38,29 +38,49 @@
                     <div id="collapseOne" style="padding: 16px;">
                         <button type="button" class="btn btn-small btn-danger disabled">年级</button>
                         <div id="grade" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button id="prischool" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
-                            <button id="prischool" type="button" value="1" class="btn btn-small" data-toggle="button">小学</button>
-                            <button id="grade6" type="button" value="2" class="btn btn-small" data-toggle="button">六年级</button>
-                            <button id="grade7" type="button" value="3" class="btn btn-small" data-toggle="button">初一</button>
-                            <button id="grade8" type="button" value="4" class="btn btn-small" data-toggle="button">初二</button>
-                            <button id="grade9" type="button" value="5" class="btn btn-small" data-toggle="button">初三</button>
-                            <button id="grade10" type="button" value="6" class="btn btn-small" data-toggle="button">高一</button>
-                            <button id="grade11" type="button" value="7" class="btn btn-small" data-toggle="button">高二</button>
-                            <button id="grade12" type="button" value="8" class="btn btn-small" data-toggle="button">高三</button>
+                            <button id="allGrade" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                            <button id="pschool" type="button" value="1" class="btn btn-small" data-toggle="button">小学</button>
+                            <button id="mschool" type="button" value="2" class="btn btn-small" data-toggle="button">初中</button>
+                            <button id="hschool" type="button" value="8" class="btn btn-small" data-toggle="button">高中</button>
+                            <button id="english" type="button" value="8" class="btn btn-small" data-toggle="button">英语</button>
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-small btn-danger disabled">学科</button>
-                        <div id="lesson" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button id="chinese" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
-                            <button id="chinese" type="button" value="1" class="btn btn-small " data-toggle="button">语文</button>
-                            <button id="math" type="button" value="2" class="btn btn-small" data-toggle="button">数学</button>
-                            <button id="english" type="button" value="3" class="btn btn-small" data-toggle="button">英语</button>
-                            <button id="physics" type="button" value="4" class="btn btn-small" data-toggle="button">物理</button>
-                            <button id="chem" type="button" value="5" class="btn btn-small" data-toggle="button">化学</button>
-                            <button id="bio" type="button" value="6" class="btn btn-small" data-toggle="button">生物</button>
-                            <button id="poli" type="button" value="7" class="btn btn-small" data-toggle="button">政治</button>
-                            <button id="history" type="button" value="8" class="btn btn-small" data-toggle="button">历史</button>
-                            <button id="geo" type="button" value="9" class="btn btn-small" data-toggle="button">地理</button>
+                        <div id="lesson" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio" sty>
+                            <button id="allLesson" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                            <button type="button" value="1" class="btn btn-small pschool" data-toggle="button" style="display: none;">小学语文</button>
+                            <button type="button" value="2" class="btn btn-small pschool" data-toggle="button" style="display: none;">小学数学</button>
+                            <button type="button" value="3" class="btn btn-small pschool" data-toggle="button" style="display: none;">小学英语</button>
+                            <button type="button" value="4" class="btn btn-small pschool" data-toggle="button" style="display: none;">小学奥数</button>
+                            <button type="button" value="5" class="btn btn-small mschool" data-toggle="button" style="display: none;">初一初二语文</button>
+                            <button type="button" value="6" class="btn btn-small mschool" data-toggle="button" style="display: none;">初一初二数学</button>
+                            <button type="button" value="7" class="btn btn-small mschool" data-toggle="button" style="display: none;">初一初二英语</button>
+                            <button type="button" value="8" class="btn btn-small mschool" data-toggle="button" style="display: none;">初三语文</button><span class="mschool"style="display: none;"><br/></span>
+                            <button type="button" value="9" class="btn btn-small mschool" data-toggle="button" style="display: none;">初三数学</button>
+                            <button type="button" value="10" class="btn btn-small mschool" data-toggle="button" style="display: none;">初三英语</button>
+                            <button type="button" value="11" class="btn btn-small mschool" data-toggle="button" style="display: none;">初中物理</button>
+                            <button type="button" value="12" class="btn btn-small mschool" data-toggle="button" style="display: none;">初中化学</button>
+                            <button type="button" value="13" class="btn btn-small mschool" data-toggle="button" style="display: none;">初中历史</button>
+                            <button type="button" value="14" class="btn btn-small mschool" data-toggle="button" style="display: none;">初中地理</button>
+                            <button type="button" value="15" class="btn btn-small hschool" data-toggle="button" style="display: none;">高一高二语文</button>
+                            <button type="button" value="16" class="btn btn-small hschool" data-toggle="button" style="display: none;">高一高二数学</button>
+                            <button type="button" value="17" class="btn btn-small hschool" data-toggle="button" style="display: none;">高一高二英语</button>
+                            <button type="button" value="18" class="btn btn-small hschool" data-toggle="button" style="display: none;">高三语文</button>
+                            <button type="button" value="19" class="btn btn-small hschool" data-toggle="button" style="display: none;">高三数学</button>
+                            <button type="button" value="20" class="btn btn-small hschool" data-toggle="button" style="display: none;">高三英语</button><span class="hschool"style="display: none;"><br/></span>
+                            <button type="button" value="21" class="btn btn-small hschool" data-toggle="button" style="display: none;">高中物理</button>
+                            <button type="button" value="22" class="btn btn-small hschool" data-toggle="button" style="display: none;">高中化学</button>
+                            <button type="button" value="23" class="btn btn-small hschool" data-toggle="button" style="display: none;">高中生物</button>
+                            <button type="button" value="24" class="btn btn-small hschool" data-toggle="button" style="display: none;">高中历史</button>
+                            <button type="button" value="25" class="btn btn-small hschool" data-toggle="button" style="display: none;">高中政治</button>
+                            <button type="button" value="26" class="btn btn-small hschool" data-toggle="button" style="display: none;">高中地理</button>
+                            <button type="button" value="27" class="btn btn-small hschool" data-toggle="button" style="display: none;">高中报考咨询</button>
+                            <button type="button" value="28" class="btn btn-small english" data-toggle="button" style="display: none;">大学四级</button>
+                            <button type="button" value="29" class="btn btn-small english" data-toggle="button" style="display: none;">大学六级</button>
+                            <button type="button" value="30" class="btn btn-small english" data-toggle="button" style="display: none;">托福</button>
+                            <button type="button" value="31" class="btn btn-small english" data-toggle="button" style="display: none;">雅思</button>
+                            <button type="button" value="32" class="btn btn-small english" data-toggle="button" style="display: none;">GRE</button>
+                            <button type="button" value="33" class="btn btn-small english" data-toggle="button" style="display: none;">口语</button>
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-small btn-danger disabled">网络</button>
