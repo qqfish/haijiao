@@ -79,7 +79,9 @@
                                     <div class="well">
                                         <h5><s:property value="from.name"/></h5>
                                         <p><s:property value="message"/></p>
-                                        <a href="getMail.action?toEmail=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                        <a class="btn btn-danger btn-mini pull-right" style="margin-top:-10px;">删除</a>
+                                        <a href="getMail.action?toEmail=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px;margin-right:5px">回复</a>
+                                        
                                     </div>
                                 </s:iterator>
                             </s:else>

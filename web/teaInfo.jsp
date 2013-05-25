@@ -53,7 +53,7 @@
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
                         </h1>
                     <s:if test="#session.email != null&&tea.status!=1">
-                        <a class="btn btn-primary btn-mini" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
@@ -68,7 +68,7 @@
                         <a class='btn btn-primary btn-mini' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
                     </s:elseif>
                     <s:else>
-                        <a class="btn btn-primary btn-mini" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>请先登陆</h3>

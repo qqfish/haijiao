@@ -185,16 +185,19 @@
                         </ul>               
                     </div> 
                 </div>
-                <div class="well span3" id ="side" style="margin:0px;float: bottom;overflow-y: hidden;">   
-                    <div id="sideVideoArea" style="height:400px;width:258px;overflow-y: visible;"></div>
-                    <div style="float: bottom;">
-                        <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:238px;height: 250px;white-space:normal; overflow-y: auto;"></div>
-                        <p style="margin: 0px;"/>
-                        <div class="input-append">
-                            <input class="span2" id="chatInput" type="text">
-                            <button class="btn" type="button" id="chatSend">发送</button>
+                <div class="span3" id ="side" style="margin:0px;float:bottom;">
+                    <div style="width:260px;float: left">
+                        <div id="sideVideoArea" style="height:400px;width:258px;overflow-y: visible;"></div>
+                        <div style="float: bottom;">
+                            <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:238px;height: 250px;white-space:normal; overflow-y: auto;"></div>
+                            <p style="margin: 0px;"/>
+                            <div class="input-append">
+                                <input class="span2" id="chatInput" type="text">
+                                <button class="btn" type="button" id="chatSend">发送</button>
+                            </div>
                         </div>
                     </div>
+                    <div class="ctlbar" style="width:10px;height:100%;background-color: white;float: left"></div>
                 </div>
             </div>
 
