@@ -48,4 +48,12 @@ public class MailDAOImpl extends GenericHibernateDAO<Mail,Integer> implements IM
         updateByQuery(hql);
         return true;
     }
+
+    @Override
+    public boolean removeAllMail(String email) {
+        String hql = "delete Mail where toid = (select id from User where email = '" + email + "')";
+        updateByQuery(hql);
+        return true;
+    }
+    
 }

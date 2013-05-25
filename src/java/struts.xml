@@ -48,12 +48,12 @@
             <result name="success">changeInfo.jsp</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="teacherRegister">
+        <action name="registerThen" class="RegisterThenAction" method="teacherRegister">
             <result name="input">register.jsp</result>
             <result name="success" type="chain">index</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="studentRegister">
+        <action name="registerThen" class="RegisterThenAction" method="studentRegister">
             <result name="input">register.jsp</result>
             <result name="success" type="chain">index</result>
             <interceptor-ref name="LoginCheckerStack"/>
@@ -164,6 +164,14 @@
         <action name="getMailNum" class="GetMailNumAction"/>
         <action name="markMail" class="MarkMailAction"/>
         <action name="markMail" class="MarkMailAction" method="markAll">
+            <result name="success" type="chain">getMail</result>
+            <interceptor-ref name="LoginCheckerStack"/>
+        </action>
+        <action name="removeMail" class="RemoveMailAction">
+            <result name="success" type="chain">getMail</result>
+            <interceptor-ref name="LoginCheckerStack"/>
+        </action>
+        <action name="removeMail" class="RemoveMailAction" method="removeAll">
             <result name="success" type="chain">getMail</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>

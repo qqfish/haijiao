@@ -39,7 +39,7 @@
         <div class="container wrapper">
             <div class="container-fluid">
                 <div class="span11 module">
-                <s:form action="changeInfo.action">
+                <s:form action="registerThen.action">
                     <s:if test="#session.userType == 'teacher'">
                         <h2 class="offset2">老师您好，请填写您的详细信息^ ^</h2>
                         <hr/>

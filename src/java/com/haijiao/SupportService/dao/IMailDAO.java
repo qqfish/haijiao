@@ -17,4 +17,5 @@ public interface IMailDAO extends GenericDAO<Mail,Integer>{
     public List<Mail> getUnreadMailByEmail(String email);
     public int getUnreadMailNum(String email);
     public boolean setAllMailStatus(String email);
+    public boolean removeAllMail(String email);
 }

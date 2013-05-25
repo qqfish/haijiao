@@ -26,4 +26,5 @@ public interface IMailService {
     public boolean setMailStatus(int mailId, boolean read);
     public boolean setAllMailStatus(String email);
     public boolean deleteMail(int mailId);
+    public boolean deletaAll(String email);
 }

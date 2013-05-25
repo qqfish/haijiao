@@ -31,14 +31,9 @@
         $('#l1').removeClass("active");
     }
     
-    $('#add_click').click(function(){
-        if($('#deal_grade').val()=='开课年级' || $('#deal_lesson').val()=='开设课程'){
-            $('#lesson_tip').text(" * 请选择正确的开课年级和开设课程");
-            $('#lesson_tip').fadeIn();
-        } else {
-            $('#lesson_tip').fadeOut();
-            $('#add').click();
-        }
+    $(".lessonName").click(function(){
+        $("#deal_lesson").val($(this).html());
+        $("#add").click();
     })
     
     $("[id*='delete_click']").click(function(){

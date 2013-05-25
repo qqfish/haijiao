@@ -56,32 +56,6 @@ public class ChangeInfoAction extends SessionAction {
         }
     }
     
-    public String teacherRegister() throws ParseException{
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, null, province, net)){
-            Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("name", theTeacher.getName());
-            this.sessionPutIn("userType", "teacher");
-            this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
-            return SUCCESS;
-        } else {
-            nextPageMessage = this.getText("teaRegisterFailure");
-            return "input";
-        }
-    }
-    
-    public String studentRegister() throws ParseException{
-        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, null, grade, school, null, null)){
-            Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
-            this.sessionPutIn("name", s.getName());
-            this.sessionPutIn("userType", "student");
-            this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
-            return SUCCESS;
-        } else {
-            nextPageMessage = this.getText("stuRegisterFailure");
-            return "input";
-        }
-    }
-    
     public String teacherChange() throws ParseException{
         parseDate();
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, tel, province, net)){

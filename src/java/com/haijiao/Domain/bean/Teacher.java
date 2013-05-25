@@ -20,11 +20,13 @@ import javax.persistence.Table;
 public class Teacher extends User{
     private String school;      //就读大学
     private String province;    //省份
-    private String net;            //网络环境
-    private int classNum;    //成功完成课程的次数
+    private String net;         //网络环境
+    private String role;        //教师身份
+    private int classNum;       //成功完成课程的次数
+    private int obNum;          //浏览数
     
     @Column(columnDefinition="int default 0")
-    private int reserveNum;  //预约次数
+    private int reserveNum;     //预约次数
     
     private String tel;         //老师的手机
     private String videoUrl;    //老师的介绍视频地址
@@ -77,6 +79,14 @@ public class Teacher extends User{
         this.net = net;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public int getClassNum() {
         return classNum;
     }
@@ -91,6 +101,14 @@ public class Teacher extends User{
 
     public void setReserveNum(int reserveNum) {
         this.reserveNum = reserveNum;
+    }
+
+    public int getObNum() {
+        return obNum;
+    }
+
+    public void setObNum(int obNum) {
+        this.obNum = obNum;
     }
 
     public String getTel() {
