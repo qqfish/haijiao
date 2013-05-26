@@ -18,7 +18,8 @@ public interface ITeacherService {
     public Teacher getTeacherByEmail(String email);
     
     //修改基本资料
-    public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String major, String tel, String studyStatus, String province, String net);
+    public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String major,
+                String tel, String studyStatus, String province, String city, String district, String net);
     //获取报酬
     public boolean takeMoney(String email, int numberOfCoin);
     //设置试听

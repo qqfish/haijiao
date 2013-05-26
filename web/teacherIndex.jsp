@@ -57,7 +57,11 @@
                     </s:a>
                     <hr/>
                     <div style="margin-left: 10px;">
-                        <p><s:property value="teacher.province"/></p>
+                        <small>
+                            <s:property value="teacher.getDirectProvince()"/> - 
+                            <s:property value="teacher.getDirectCity()"/> - 
+                            <s:property value="teacher.getDirectDistrict()"/><br/><br/>
+                        </small>
                         <p><s:property value="teacher.email"/></p>
                         <p><s:property value="teacher.createdateToString()"/> 加入</p>
                     </div>

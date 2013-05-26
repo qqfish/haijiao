@@ -20,8 +20,10 @@ import javax.persistence.Table;
 public class Teacher extends User{
     private String school;      //就读大学
     private String major;       //就读专业
-    private String studyStatus;  //目前学历
+    private String studyStatus;  //目前学历状况
     private String province;    //省份
+    private String city;            //市级
+    private String district;       //县级
     private String net;         //网络环境
     private String role;        //教师身份
     private int classNum;       //成功完成课程的次数
@@ -55,6 +57,18 @@ public class Teacher extends User{
         this.lessons = new ArrayList<Lesson>();
         this.labels = new ArrayList<Label>();
         this.billList = new ArrayList<Bill>();
+    }
+    
+    public String getDirectProvince() {
+        return province.substring(7);
+    }
+    
+    public String getDirectCity() {
+        return city.substring(7);
+    }
+    
+    public String getDirectDistrict() {
+        return district.substring(7);
     }
 
     public String getSchool() {
@@ -127,6 +141,22 @@ public class Teacher extends User{
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
     public String getStudyStatus() {

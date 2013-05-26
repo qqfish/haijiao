@@ -9,6 +9,12 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+        <script type="text/javascript" src="js/ling.chinaArea.sort.min-1.0.js"></script>
+        <script type="text/javascript">
+            window.onload = function() {
+                $ling.chinaArea.init("selProvince", "selCity", "selDistrict");
+            }
+        </script>
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -94,15 +100,24 @@
                             <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
                             <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
-                        </div> 
-                        <p></p>
+                        </div>
+                        <br/>
+                        <button type="button" class="btn btn-small btn-danger disabled">身份</button>
+                        <s:select cssClass="span2" cssStyle="margin-top: 8px; height:25px; font-size:8px;" name="studyStatus" list="{'不限','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
+                        <br/>
+                        <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
+                        <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
+                            <s:select id="selProvince" cssClass="span2" cssStyle="height:25px; margin-right:4px; font-size:8px;" name="province" list="{'不限'}" value="%{tea.province}"></s:select>
+                            <s:select id="selCity" cssClass="span2" cssStyle="height:25px; margin-right:4px; font-size:8px;" name="city" list="{'不限'}" value="%{tea.city}"></s:select>
+                            <s:select id="selDistrict" cssClass="span2" cssStyle="height:25px; font-size:8px;" name="district" list="{'不限'}" value="%{tea.district}"></s:select>
+                        </div>
+                        <br/>
                     </div>
                 </div>
                 <div  id="resultPanel" class="span11 module">
                     <div style="margin:0px 12px;">
                         <h3>
                             老师列表
-                            <s:select id="area" cssClass="span2 choosetext" list="{'请选择家教地区','北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/>
                             <small>
                                 <div class="btn-toolbar pull-right">
                                     <div class="btn-group" data-toggle="buttons-radio">
@@ -152,7 +167,7 @@
                                                         </s:iterator>
                                                 </s:else>
                                                 <br/>
-                                                授课区域：闵行(莘庄),闵行(颛桥),闵行(江川路街道),闵行(吴泾/塘湾),交大闵行校区附近。<br/>
+                                                线下授课区域：闵行(莘庄),闵行(颛桥),闵行(江川路街道),闵行(吴泾/塘湾),交大闵行校区附近。<br/>
                                                 个人经历：本人性格坦诚，工作脚踏实地。爱人如己，热爱且忠诚于人类教育事业。九四年毕业于安……<br/>
                                                 </small>
                                             </div>
