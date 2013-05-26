@@ -226,8 +226,9 @@
                                     <hr/>
                                     <dl>
                                         <dt>姓名</dt>
-                                        <dd><s:textfield cssClass="span4" onchange="validate_required(this,name_tip);" type="text" name="name" placeholder="请输入您的大名" value="%{tea.name}" autofocus="autofocus" /></dd>
+                                        <dd><s:textfield id="TAName" cssClass="span4" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip2, 8);" type="text" name="name" placeholder="请输入您的大名" value="%{tea.name}" autofocus="autofocus" /></dd>
                                         <dd id="name_tip" class="validateTip" style="text-align: left;"></dd>
+                                        <dd id="name_tip2" class="validateTip" style="text-align: left;"></dd>
                                         <dt>性别</dt>
                                         <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></dd>
                                         <dd>
@@ -258,7 +259,10 @@
                                         <dt>手机</dt>
                                         <dd><s:textfield cssClass="span2" type="text" name="tel" placeholder="请输入您的手机号" value="%{tea.tel}"/></dd>                                
                                         <br/>
-                                        <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherChange"/></dd>
+                                        <dd>
+                                            <input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testSubmit();"/>
+                                            <s:submit id="form_submit" cssClass="btn btn-primary" style="width:300px; display:none;" value="提交" method="teacherChange"/>
+                                        </dd>
                                     </dl>
                                 </s:if>
                                 <s:if test="#session.userType == 'student'">
@@ -266,8 +270,9 @@
                                     <hr/>
                                     <dl>
                                         <dt>姓名</dt>
-                                        <dd><s:textfield cssClass="span4" onchange="validate_required(this,name_tip);" type="text" name="name" placeholder="请输入您的大名" value="%{stu.name}" autofocus="autofocus" /></dd>
+                                        <dd><s:textfield id="TAName" cssClass="span4" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip2, 8);" type="text" name="name" placeholder="请输入您的大名" value="%{stu.name}" autofocus="autofocus" /></dd>
                                         <dd id="name_tip" class="validateTip" style="text-align: left;"></dd>
+                                        <dd id="name_tip2" class="validateTip" style="text-align: left;"></dd>
                                         <dt>性别</dt>
                                         <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{stu.sex}"/></dd>
                                         <dd>
@@ -292,7 +297,10 @@
                                             </div>
                                         </dd>
                                         <br/>
-                                        <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="studentChange"/></dd>
+                                        <dd>
+                                            <input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testSubmit();"/>
+                                            <s:submit id="form_submit" cssClass="btn btn-primary" style="width:300px; display:none;" value="提交" method="studentChange"/>
+                                        </dd>
                                     </dl>
                                 </s:if>
                             </s:form>
