@@ -80,6 +80,18 @@ public class TeacherServiceImpl implements ITeacherService {
         teacherDAO.update(t);
         return true;
     }
+    
+    @Override
+    public boolean changeMoreInfo(String email, String underlineArea, String experience){
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        if (underlineArea!=null) {
+            t.setUnderlineArea(underlineArea);
+        } if (experience!=null) {
+            t.setExperience(experience);
+        }
+        teacherDAO.update(t);
+        return true;
+    }
 
     @Override
     public boolean takeMoney(String email, int numberOfCoin) {

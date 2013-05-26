@@ -63,6 +63,11 @@
             <result name="success" type="chain">toChangeInfo</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>
+        <action name="changeInfo" class="ChangeInfoAction" method="teacherMoreChange">
+            <result name="input">changeInfo.jsp</result>
+            <result name="success" type="chain">toChangeInfo</result>
+            <interceptor-ref name="LoginCheckerStack"/>
+        </action>
         <action name="changeInfo" class="ChangeInfoAction" method="studentChange">
             <result name="input">changeInfo.jsp</result>
             <result name="success" type="chain">toChangeInfo</result>

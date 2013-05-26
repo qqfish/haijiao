@@ -28,6 +28,8 @@ public class Teacher extends User{
     private String role;        //教师身份
     private int classNum;       //成功完成课程的次数
     private int obNum;          //浏览数
+    private String underlineArea;   //线下授课区域
+    private String experience;        //个人经历
     
     @Column(columnDefinition="int default 0")
     private int reserveNum;     //预约次数
@@ -193,6 +195,22 @@ public class Teacher extends User{
 
     public boolean isAudition() {
         return audition;
+    }
+
+    public String getUnderlineArea() {
+        return underlineArea;
+    }
+
+    public void setUnderlineArea(String underlineArea) {
+        this.underlineArea = underlineArea;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
     }
 
     public void setAudition(boolean audition) {
