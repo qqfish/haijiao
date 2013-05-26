@@ -56,8 +56,9 @@ public class ClassServiceImpl implements IClassService {
         Student s = studentDAO.getStudentByEmail(studentEmail);
         Teacher tea = teacherDAO.getTeacherByEmail(teacherEmail);
         Lesson l = tea.getLessonByName(lesson);
-        if(l == null)
+        if (l == null) {
             return false;
+        }
         for (int i = 0; i < cList.size(); i++) {
             FreeTime ft = freeTimeDAO.getTeacherFreeTime(teacherEmail, cList.get(i).getDay(), cList.get(i).getIndex());
             List<Clazz> clazzList = ft.getClazzList();
@@ -161,11 +162,25 @@ public class ClassServiceImpl implements IClassService {
         Teacher tea = teacherDAO.getTeacherByEmail(teacherEmail);
         for (int i = 0; i < cList.size(); i++) {
             FreeTime freeTime = tea.getFreeTime(cList.get(i).getDay(), cList.get(i).getIndex());
-            if (freeTime == null) {
-                return false;
+            if (freeTime != null) {
+                if (freeTime.getClazzList().size() == 0) {
+                    tea.getSchedule().remove(freeTime);
+                    freeTimeDAO.makeTransient(freeTime);
+                } else {
+                    int last = freeTime.getClazzList().size() - 1;
+                    Clazz lastClazz = freeTime.getClazzList().get(last);
+                    if (lastClazz.getStatus() == Clazz.Status.available) {
+                        clazzDAO.makeTransient(lastClazz);
+                        freeTime.getClazzList().remove(lastClazz);
+                        if (freeTime.getClazzList().size() == 0) {
+                            tea.getSchedule().remove(freeTime);
+                            freeTimeDAO.makeTransient(freeTime);
+                        } else {
+                            freeTimeDAO.update(freeTime);
+                        }
+                    }
+                }
             }
-            tea.getSchedule().remove(freeTime);
-            freeTimeDAO.makeTransient(freeTime);
         }
         teacherDAO.update(tea);
         return true;
@@ -180,7 +195,7 @@ public class ClassServiceImpl implements IClassService {
         if (clazz == null) {
             return false;
         }
-        if(clazz.getStudent() == null){
+        if (clazz.getStudent() == null) {
             return false;
         }
         clazz.setStatus(Clazz.Status.accept);
@@ -205,9 +220,9 @@ public class ClassServiceImpl implements IClassService {
         freeTimeDAO.update(clazz.getFreeTime());
         return true;
     }
-    
+
     @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Clazz getClazzById(int clazzId) {
         return clazzDAO.findById(clazzId);
     }
@@ -215,8 +230,8 @@ public class ClassServiceImpl implements IClassService {
     @Override
     public boolean finishDay(int day) {
         List<FreeTime> freeTimeList = freeTimeDAO.getFreeTimeByDay(day);
-        for(int i = 0; i < freeTimeList.size(); i++){
-            if(freeTimeList.get(i).getClazzList().isEmpty()){
+        for (int i = 0; i < freeTimeList.size(); i++) {
+            if (freeTimeList.get(i).getClazzList().isEmpty()) {
                 freeTimeDAO.makeTransient(freeTimeList.get(i));
                 teacherDAO.update(freeTimeList.get(i).getTeacher());
                 freeTimeList.remove(i);
@@ -224,16 +239,16 @@ public class ClassServiceImpl implements IClassService {
                 continue;
             }
             List<Clazz> clazzList = freeTimeList.get(i).getClazzList();
-            if(clazzList.get(0).getRemain() > 0){
+            if (clazzList.get(0).getRemain() > 0) {
                 clazzList.get(0).setRemain(clazzList.get(0).getRemain() - 1);
-                if(clazzList.get(0).getRemain() == 0){
+                if (clazzList.get(0).getRemain() == 0) {
                     clazzDAO.makeTransient(clazzList.get(0));
                     clazzList.remove(0);
                     clazzList.get(0).addTimeToBegin(-1);
                 }
                 clazzDAO.update(clazzList.get(0));
             }
-            for(int j = 1; j < clazzList.size(); j++){
+            for (int j = 1; j < clazzList.size(); j++) {
                 clazzList.get(j).addTimeToBegin(-1);
                 clazzDAO.update(clazzList.get(0));
             }
@@ -241,5 +256,4 @@ public class ClassServiceImpl implements IClassService {
         }
         return true;
     }
-    
 }

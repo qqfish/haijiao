@@ -200,7 +200,7 @@
                             <hr class="span8"/>
                             <div class="span8" id="teaintro">
                                 <script>
-        $("#teaintro").html($("#tmp").text());
+                                    $("#teaintro").html($("#tmp").text());
                                 </script>
                             </div>
                         </div>
@@ -319,12 +319,21 @@
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_11">
-                                    <th rowspan="3">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_12">
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_13">
+                                    <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_14">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_15">
+                                    <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_16">
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                             </tbody>

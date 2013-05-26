@@ -71,7 +71,7 @@
                 <div  class="navbar-inner">
                     <div style="width:880px;margin-left:auto;margin-right:auto">
                         <ul class="nav">
-                            <li><a class="brand" href="index.action">Haijiao</a></li>
+                            <a class="brand" href="index.action">Haijiao<span style="color: #008db8;">EDU</span></a>
                             <!--<s:if test="isHolder!=0">
                                 <li><a class="tooltipButton" id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>
                                 <li><a class="tooltipButton" id="stopTimerButton" data-target="#finishModal" role="button" data-toggle="modal"data-placement="bottom" data-original-title="停止"><i class="icon-stop icon-white"></i></a></li>
@@ -200,7 +200,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ctlbar" id="sideBarButton" style="width:25px;height:100%;background-color: white;float: right;opacity: 0.5;"><img id="ctlbar" style="height:100%;width:100%" src="images/ctlbar1.png"></div>
+                    <div class="ctlbar" id="sideBarButton" style="width:25px;height:100%;background-color: white;float: right;opacity: 0.5;"><img id="ctlbar" style="height:100%;width:100%" src="images/ctlbar2.png"></div>
                 </div>
             </div>
 

@@ -28,7 +28,7 @@ function init(clazzId, teaEmail, email){
         if(sideShow)
             $("#desktop").height($(window).height()-42).width($(window).width() - sideWidth - sideButton).css("left",sideWidth + sideButton);
         else
-            $("#desktop").height($(window).height()-42).width($(window).width());
+            $("#desktop").height($(window).height()-42).width($(window).width() - sideButton);
         table.setStageSize($(window).width(), $("#desktop").height());
         table.setDefaultLoc();
         
@@ -153,7 +153,7 @@ function init(clazzId, teaEmail, email){
         //media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
         
 //        $("#desktop").unbind("click");
-        $("#ctlbar").attr("src","images/ctlbar2.png");
+        $("#ctlbar").attr("src","images/ctlbar1.png");
         sideShow = false;
     }
  
@@ -173,7 +173,7 @@ function init(clazzId, teaEmail, email){
 //            $("#desktop").click(function(){
 //                sideReturn();
 //            });
-            $("#ctlbar").attr("src","images/ctlbar1.png");
+            $("#ctlbar").attr("src","images/ctlbar2.png");
 //            media.setDragPlace(250, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
             sideShow = true;
         }

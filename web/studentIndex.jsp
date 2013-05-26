@@ -126,8 +126,8 @@
                                         <th>Wed.</th>
                                         <th>Thu.</th>
                                         <th>Fri.</th>
-                                        <th style="width:24px">Sat.</th>
-                                        <th style="width:24px">Sun.</th>
+                                        <th>Sat.</th>
+                                        <th>Sun.</th>
                                     </tr>
                                     <tr class="class_1">
                                         <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -160,12 +160,21 @@
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_11">
-                                        <th rowspan="3">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_12">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_13">
+                                        <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_14">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_15">
+                                        <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_16">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                 </tbody>

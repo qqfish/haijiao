@@ -124,6 +124,6 @@ $(document).ready(function() {
             }
         }
     }
-    schedule = new Schedule(13,7);
+    schedule = new Schedule(16,7);
 });
 

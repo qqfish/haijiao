@@ -41,7 +41,7 @@ public class BookTeacherAction extends SessionAction {
         }
         Gson gson = new Gson();
         ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
-        List<scheduleLocation> sList = array.toList();
+        List<scheduleLocation> sList = array.toList(1);
         int remainCoin = ((Student) stu).getRemainCoin();
         Teacher tea = teacherService.getTeacherByEmail(teacherEmail);
         remainCoin -= (tea.getWagePerhour() * sList.size() * times);

@@ -81,6 +81,6 @@ $(document).ready(function() {
             }
         }
     }
-    viewSchedule = new ViewSchedule(13,7);
+    viewSchedule = new ViewSchedule(16,7);
 });
 

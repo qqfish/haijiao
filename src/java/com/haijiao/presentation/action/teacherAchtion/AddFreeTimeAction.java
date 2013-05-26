@@ -29,12 +29,16 @@ public class AddFreeTimeAction extends SessionAction {
         //List<List<Integer>> array = sa.getArray();
         Gson gson = new Gson();
         ScheduleArray array = gson.fromJson(json, ScheduleArray.class);
-        List<scheduleLocation> sList = array.toList();
-        if(classService.teacherAddClazz((String)this.getSessionValue("email"), sList)){
-            nextPageMessage = "成功添加空闲时间";
+        //create list
+        List<scheduleLocation> sList = array.toList(1);
+        //remove list
+        List<scheduleLocation> rList = array.toList(2);
+        if (classService.teacherAddClazz((String) this.getSessionValue("email"), sList)
+                && classService.teacherRemoveClazz((String) this.getSessionValue("email"), rList)) {
+            nextPageMessage = "成功修改空闲时间";
             return SUCCESS;
         } else {
-            nextPageMessage = "添加空闲时间失败";
+            nextPageMessage = "修改空闲时间失败";
             return INPUT;
         }
     }

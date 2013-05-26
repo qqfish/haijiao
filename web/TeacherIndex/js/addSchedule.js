@@ -36,6 +36,9 @@ $(document).ready(function() {
                     if($(this).attr("status") == 0 && $(this).attr("select") == 0){
                         $(this).css("background-color", "#CFC");
                         $(this).css("border", "1px solid #CCC");
+                    } else if($(this).attr("select") == 0) {
+                        $(this).css("background-color", "#FFC");
+                        $(this).css("border", "1px solid #CCC");
                     }
                 });
                 
@@ -43,6 +46,9 @@ $(document).ready(function() {
                     $(this).css("border", "0px solid #CCC");
                     if ($(this).attr("status") == 0 && $(this).attr("select") == 0) {
                         $(this).removeAttr("style");
+                    } else if ($(this).attr("select") == 0){
+                        $(this).removeAttr("style");
+                        $(this).css("background-color","#CCF");
                     }
 
                 });
@@ -53,11 +59,18 @@ $(document).ready(function() {
                         $(this).css("background-color", "#FC9");
                         $(this).attr("select",1);
                         result.array[$(this).attr("day")][$(this).attr("index")] = TYPE.create;
-                    } else if ($(this).attr("select") == 1){
+                    } else if($(this).attr("select") == 0){
+                        select++;
+                        $(this).css("background-color", "#FAA");
+                        $(this).attr("select",1);
+                        result.array[$(this).attr("day")][$(this).attr("index")] = TYPE.remove;
+                    }else if ($(this).attr("select") == 1){
                         select--;
                         result.array[$(this).attr("day")][$(this).attr("index")] = TYPE.nothing;
                         $(this).removeAttr("style");
                         $(this).attr("select",0);
+                        if($(this).attr("status") != 0)
+                            $(this).css("background-color","#CCF");
                     }
                 });  
             });        
@@ -83,6 +96,6 @@ $(document).ready(function() {
             }
         }
     }
-    addSchedule = new AddSchedule(13,7);
+    addSchedule = new AddSchedule(16,7);
 });
 

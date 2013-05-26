@@ -39,7 +39,7 @@
                 <![endif]-->
     </head>
     <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
+        viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
           >
 
         <!--==============================header=================================-->
@@ -197,17 +197,26 @@
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_11">
-                                        <th rowspan="3">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_12">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_13">
+                                        <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_14">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_15">
+                                        <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_16">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                 </tbody>
                             </table>
-                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">增加空闲时间</a><br/>
+                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">修改空闲时间</a><br/>
                             <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
                                 <div class="modal-header" style="height: 50px">
                                     <a class="close" data-dismiss="modal">×</a>
@@ -259,19 +268,28 @@
                                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                                 </tr>
                                                 <tr class="class_11">
-                                                    <th rowspan="3">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                    <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                                 </tr>
                                                 <tr class="class_12">
                                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                                 </tr>
                                                 <tr class="class_13">
+                                                    <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_14">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_15">
+                                                    <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_16">
                                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                         <s:form id="schedule_form" action="addFreeTime.action">
                                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
-                                                <a class="btn btn-primary pull-right" id="upload" >添加</a>
+                                                <a class="btn btn-primary pull-right" id="upload" >完成</a>
                                         </s:form>
                                         <p></p>
                                     </div>
@@ -289,9 +307,9 @@
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
                                             <span class="label label-info"><s:property value="name" /></span><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
-                                            </s:form>
-                                        </s:if>
-                                    </s:iterator>
+                                        </s:form>
+                                    </s:if>
+                                </s:iterator>
                                 <br/><br/>
                                 <p style="font-size: 9px;">
                                     * 小提示①：点击课程后面的小叉可以取消开设该课程哦！<br/>
@@ -407,16 +425,16 @@
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                                     </div>
                                                     <script type="text/javascript">
-$("#rate").bind('rated', function(event, value) {
-$('#score').val(value);
-});
-$("#rate").bind('over', function(event, value) {
-$(this).attr('title', value);
-});
-$("#cmtsmt").click(function(event) {
-if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-    event.preventDefault();
-});
+                                                        $("#rate").bind('rated', function(event, value) {
+                                                            $('#score').val(value);
+                                                        });
+                                                        $("#rate").bind('over', function(event, value) {
+                                                            $(this).attr('title', value);
+                                                        });
+                                                        $("#cmtsmt").click(function(event) {
+                                                            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                event.preventDefault();
+                                                        });
                                                     </script>
                                             </s:form>
                                         </div>

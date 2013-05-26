@@ -24,11 +24,11 @@ public class ScheduleArray {
         this.array = array;
     }
     
-    public List<scheduleLocation> toList(){
+    public List<scheduleLocation> toList(int type){
         List<scheduleLocation> result = new ArrayList();
         for(int i = 0; i < array.size(); i++){
             for(int j = 0; j < array.get(i).size(); j++){
-                if(array.get(i).get(j) > 0){
+                if(array.get(i).get(j) == type){
                     scheduleLocation sc = new scheduleLocation();
                     sc.setDay(i);
                     sc.setIndex(j);
