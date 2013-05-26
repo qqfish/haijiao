@@ -30,6 +30,10 @@ public class Teacher extends User{
     private int obNum;          //浏览数
     private String underlineArea;   //线下授课区域
     private String experience;        //个人经历
+    private String address;             //家庭地址
+    private Boolean sprtOnline;      //支持线上
+    private Boolean sprtUnderline; //支持线下
+    
     
     @Column(columnDefinition="int default 0")
     private int reserveNum;     //预约次数
@@ -211,6 +215,30 @@ public class Teacher extends User{
 
     public void setExperience(String experience) {
         this.experience = experience;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public Boolean getSprtOnline() {
+        return sprtOnline;
+    }
+
+    public void setSprtOnline(Boolean sprtOnline) {
+        this.sprtOnline = sprtOnline;
+    }
+
+    public Boolean getSprtUnderline() {
+        return sprtUnderline;
+    }
+
+    public void setSprtUnderline(Boolean sprtUnderline) {
+        this.sprtUnderline = sprtUnderline;
     }
 
     public void setAudition(boolean audition) {

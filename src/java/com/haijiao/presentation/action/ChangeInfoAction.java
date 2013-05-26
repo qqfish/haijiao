@@ -42,6 +42,8 @@ public class ChangeInfoAction extends SessionAction {
     private String nextPageMessage;
     private String underlineArea;
     private String experience;
+    private Boolean sprtUnderline;
+    private Boolean sprtOnline;
     
     public ChangeInfoAction() throws ParseException{
         sdf= new SimpleDateFormat("MM/dd/yyyy");
@@ -72,7 +74,7 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String teacherMoreChange() {
-        if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, experience)){
+        if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, experience, sprtUnderline, sprtOnline)){
             nextPageMessage = this.getText("teaMoreChangeSuccess");
             return SUCCESS;
         } else {
@@ -339,5 +341,21 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setExperience(String experience) {
         this.experience = experience;
+    }
+
+    public Boolean getSprtUnderline() {
+        return sprtUnderline;
+    }
+
+    public void setSprtUnderline(Boolean sprtUnderline) {
+        this.sprtUnderline = sprtUnderline;
+    }
+
+    public Boolean getSprtOnline() {
+        return sprtOnline;
+    }
+
+    public void setSprtOnline(Boolean sprtOnline) {
+        this.sprtOnline = sprtOnline;
     }
 }

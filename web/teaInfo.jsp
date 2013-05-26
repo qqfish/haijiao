@@ -135,7 +135,7 @@
                                 <table class="table table-hover table-striped ">
                                     <tbody>
                                         <tr>
-                                            <td class="span1">
+                                            <td class="span2">
                                                 <strong>性别</strong>
                                             </td>
                                             <td>
@@ -152,10 +152,24 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                                <strong>大学</strong>
+                                                <strong>授课方式</strong>
                                             </td>
                                             <td>
-                                                <s:property value="tea.school"/>
+                                                <s:if test="tea.sprtOnline==true && tea.sprtUnderline==true">
+                                                    线上授课 与 线下授课
+                                                </s:if>
+                                                <s:elseif test="tea.sprtOnline==false && tea.sprtUnderline==true">
+                                                    线下授课 
+                                                </s:elseif>
+                                                <s:elseif test="tea.sprtOnline==true && tea.sprtUnderline==false">
+                                                    线上授课
+                                                </s:elseif>
+                                                <s:elseif test="tea.sprtUnderline==false && tea.sprtOnline==false">
+                                                     暂未选择授课方式
+                                                </s:elseif>
+                                                <s:else>
+                                                     暂未选择授课方式
+                                                </s:else>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -165,27 +179,27 @@
                                 <table class="table table-hover table-striped ">
                                     <tbody>
                                         <tr>
+                                            <td>
+                                                <strong>大学</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.school"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>专业</strong>
+                                            </td>
+                                            <td>
+                                                <s:property value="tea.major"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td class="span2">
                                                 <strong>目前身份</strong>
                                             </td>
                                             <td>
                                                 <s:property value="tea.studyStatus"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>家庭住址</strong>
-                                            </td>
-                                            <td>
-                                                <s:property value="tea.birthday"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>授课方式</strong>
-                                            </td>
-                                            <td>
-                                                <s:property value="tea.school"/>
                                             </td>
                                         </tr>
                                     </tbody>

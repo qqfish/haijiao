@@ -21,7 +21,7 @@ public interface ITeacherService {
     public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String major,
                 String tel, String studyStatus, String province, String city, String district, String net);
     
-    public boolean changeMoreInfo(String email, String underlineArea, String experience);
+    public boolean changeMoreInfo(String email, String underlineArea, String experience, Boolean sprtUnderline, Boolean sprtOnline);
     //获取报酬
     public boolean takeMoney(String email, int numberOfCoin);
     //设置试听

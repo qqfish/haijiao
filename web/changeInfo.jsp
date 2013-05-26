@@ -302,6 +302,11 @@
                                 <h3>修改详细资料</h3>
                                 <hr/>
                                 <dl>
+                                    <dt>授课方式</dt>
+                                    <dd style="margin-bottom: 5px; margin-top: 5px;">
+                                        <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}"/> 线上授课
+                                        <s:checkbox name="sprtUnderline" value="%{tea.sprtUnderline}"/> 线下授课
+                                    </dd>
                                     <dt>线下授课区域</dt>
                                     <dd><s:textarea cssStyle="height:100px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
                                     <dt>个人经历</dt>
