@@ -269,15 +269,16 @@
                 <div class="modal-header" style="height: 50px">
                     <a class="close" data-dismiss="modal">×</a>
                     <h3>请选择课程时间</h3>
+                    <p id="schedule_error" style="color: red;"></p>
                 </div>
-                <div class="modal-body" style='height:350px'>
-                    <div style="font-size: 9px">
-                        &nbsp;&nbsp;
-                        <img src="images/colorCCF.png" height="15px" width="15px">&nbsp;老师忙碌时段&nbsp;
-                        <img src="images/colorCCC.png" height="15px" width="15px">&nbsp;老师空闲时段&nbsp;
-                        <img src="images/colorFC9.png" height="15px" width="15px">&nbsp;您已选中时段&nbsp;
-                    </div>
+                <div class="modal-body" style='height:380px'>
                     <div class="schedule_panel" id="schedule_panel" >
+                        <div style="font-size: 9px">
+                            &nbsp;&nbsp;
+                            <img src="images/colorCCF.png" height="15px" width="15px">&nbsp;老师忙碌时段&nbsp;
+                            <img src="images/colorCCC.png" height="15px" width="15px">&nbsp;老师空闲时段&nbsp;
+                            <img src="images/colorFC9.png" height="15px" width="15px">&nbsp;您已选中时段&nbsp;
+                        </div>
                         <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
                             <tbody>
                                 <tr>
@@ -287,8 +288,8 @@
                                     <th>Wed.</th>
                                     <th>Thu.</th>
                                     <th>Fri.</th>
-                                    <th style="width:24px">Sat.</th>
-                                    <th style="width:24px">Sun.</th>
+                                    <th>Sat.</th>
+                                    <th>Sun.</th>
                                 </tr>
                                 <tr class="class_1">
                                     <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -349,7 +350,6 @@
                             <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
                             <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
-                                <session id="schedule_error"></session>
                                 <div id="lesson_select">
                                 <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
                                     <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">

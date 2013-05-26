@@ -79,22 +79,22 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="span8 module" style="padding:12px;">
-                        <ul class="nav nav-pills">
-                            <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                            <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
-                            <li id="l1"><a href="#student_area" data-toggle="tab">学生列表</a></li>
-                            <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
-                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane fade" id='student_area'>
-                                <table class="table table-hover table-striped">
-                                    <tbody>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="span8 module" style="padding:12px;">
+                    <ul class="nav nav-pills">
+                        <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                        <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
+                        <li id="l1"><a href="#student_area" data-toggle="tab">预约列表</a></li>
+                        <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade" id='student_area'>
+                            <table class="table table-hover table-striped">
+                                <tbody>
                                     <s:if test="classList.size()<=0">
                                         还没有学生选你哦~！
                                     </s:if>
@@ -225,10 +225,25 @@
                                 <div class="modal-header" style="height: 50px">
                                     <a class="close" data-dismiss="modal">×</a>
                                     <h3>请选择课程时间</h3>
-                                    <p id="chooseError"></p>
+                                    <p id="chooseError" style="color:red;"></p>
                                 </div>
-                                <div class="modal-body" style="height: 320px">
+                                <div class="modal-body" style="height: 380px">
                                     <div class="schedule_panel" id="schedule_panel">
+                                        <div style="font-size: 9px">
+                                            &nbsp;&nbsp;
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #CCF;height: 15px; width: 15px;"></div>已经添加的空闲时间&nbsp;
+                                            </div>
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #CCC;height: 15px; width: 15px;"></div>未分配时间&nbsp;
+                                            </div>
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #FC9;height: 15px; width: 15px;"></div>新添加空闲时间&nbsp;
+                                            </div>
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #FAA;height: 15px; width: 15px;"></div>删除空闲时间&nbsp;
+                                            </div>
+                                        </div>
                                         <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
                                             <tbody>
                                                 <tr>
@@ -293,7 +308,7 @@
                                         </table>
                                         <s:form id="schedule_form" action="addFreeTime.action">
                                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
-                                                <a class="btn btn-primary pull-right" id="upload" >完成</a>
+                                            <a class="btn btn-primary pull-right" id="upload" >完成</a>
                                         </s:form>
                                         <p></p>
                                     </div>
@@ -428,26 +443,26 @@
                                                 <div class="modal-body">
                                                     <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                     内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                        <br/>
-                                                        评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                    <br/>
+                                                    评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
                                                     <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                                    </div>
-                                                    <script type="text/javascript">
-                                                        $("#rate").bind('rated', function(event, value) {
-                                                            $('#score').val(value);
-                                                        });
-                                                        $("#rate").bind('over', function(event, value) {
-                                                            $(this).attr('title', value);
-                                                        });
-                                                        $("#cmtsmt").click(function(event) {
-                                                            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                                event.preventDefault();
-                                                        });
-                                                    </script>
+                                                </div>
+                                                <script type="text/javascript">
+                                                    $("#rate").bind('rated', function(event, value) {
+                                                        $('#score').val(value);
+                                                    });
+                                                    $("#rate").bind('over', function(event, value) {
+                                                        $(this).attr('title', value);
+                                                    });
+                                                    $("#cmtsmt").click(function(event) {
+                                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                            event.preventDefault();
+                                                    });
+                                                </script>
                                             </s:form>
                                         </div>
                                     </s:iterator>
@@ -492,11 +507,11 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                        </div>
+                                                                    </div>
                                                                 </s:form>
                                                             </div>
                                                         </s:if>

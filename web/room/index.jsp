@@ -55,7 +55,8 @@
         <![endif]-->
 
     </head>
-    <body onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='#session.email' default='null' />');">
+    <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
+        onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='#session.email' default='null' />');">
 
         <!--==============================header=================================-->
         <!--<!--%@ include file="WEB-INF/jspf/header.jspf"%>-->
@@ -70,11 +71,11 @@
             <div id="tools" class="navbar navbar-inverse" style="margin-bottom: 0px;">
                 <div  class="navbar-inner">
                     <div style="width:880px;margin-left:auto;margin-right:auto">
-                        <ul class="nav">
+                        <ul class="nav" style="width: 1080px;">
                             <a class="brand" href="index.action">Haijiao<span style="color: #008db8;">EDU</span></a>
-                            <!--<s:if test="isHolder!=0">
-                                <li><a class="tooltipButton" id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>
-                                <li><a class="tooltipButton" id="stopTimerButton" data-target="#finishModal" role="button" data-toggle="modal"data-placement="bottom" data-original-title="停止"><i class="icon-stop icon-white"></i></a></li>
+                            <<s:if test="isHolder!=0">
+                                <!--<li><a class="tooltipButton" id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>-->
+                                <li><a class="tooltipButton" id="stopTimerButton" data-target="#finishModal" role="button" data-toggle="modal"data-placement="bottom" data-original-title="完成授课"><i class="icon-stop icon-white"></i></a></li>
                                 <div id="finishModal" class="modal hide fade" tabindex="-1" role="dialog">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -88,7 +89,7 @@
                                         <button class="btn btn-primary" id="stopTimer" data-dismiss="modal" aria-hidden="true">确认</button>
                                     </div>
                                 </div>
-                            </s:if>-->
+                            </s:if>
                             <li><div class="well-mini"><span id="timerPanel">00:00:00</span></div></li>
                             <li>
                                 <div class="btn-group">

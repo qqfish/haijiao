@@ -361,7 +361,7 @@ function Table(containerName, tool){
                 }
             });
             
-            $("#desktop").mouseup(function(){
+            $(window).mouseup(function(){
                 if(toolkit.getTool() == Tooltype.Hand) return;
                 
                 if(!mousedown) return;
@@ -395,7 +395,7 @@ function Table(containerName, tool){
                 result = null;
             });
 
-            stage.on(" touchend", function() {
+            stage.on("touchend", function() {
                 if(toolkit.getTool() == Tooltype.Hand) return;
                         
                 if(!mousedown) return;

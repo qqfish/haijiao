@@ -87,9 +87,13 @@ $(document).ready(function() {
    
         $('#next').click(function(){
             console.log(JSON.stringify(result));
-            $("#schedule_json").val(JSON.stringify(result));
-            $('#schedule_panel').hide();
-            $('#confirm_panel').show();
+            if(min != 0){
+                $("#schedule_json").val(JSON.stringify(result));
+                $('#schedule_panel').hide();
+                $('#confirm_panel').show();
+            } else {
+                $("#schedule_error").text("请选择预约时间");
+            }
         });
         $('#pre').click(function(){
             $('#schedule_panel').show();
@@ -97,9 +101,7 @@ $(document).ready(function() {
         });
         
         $('#upload').click(function(){
-            if(min == 0){
-                $("#schedule_error").text("请返回上一步选择预约时间");
-            } else if($("#schedule_times").val() == "") {
+            if($("#schedule_times").val() == "") {
                 $("#schedule_error").text("请输入课程次数");
             } else if(min > 0 && $("#schedule_times").val() > min) {
                 $("#schedule_error").text("课程次数最大为"+ min);
@@ -118,7 +120,6 @@ $(document).ready(function() {
                 var clazz = schedule.clazzes[i];
                 console.log(clazz.status == status.available);
                 if(clazz.status == status.available){
-                    console.log("fuck");
                     $("td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("times",clazz.remain).removeAttr("style");;
                 }
             }

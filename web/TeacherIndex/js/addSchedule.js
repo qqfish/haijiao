@@ -78,7 +78,7 @@ $(document).ready(function() {
         
         $('#upload').click(function(){
             if(select == 0) {
-                $("#chooseError").text("没有选择添加课程");
+                $("#chooseError").text("没有修改空闲时间");
             } else {
                 $("#schedule_json").val(JSON.stringify(result));
                 $("#schedule_form").submit();

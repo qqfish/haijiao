@@ -19,34 +19,37 @@
                 <s:iterator value="pb.list" id="list">
                     <s:a action="getTeacherInfo.action" id="resultBar">
                         <s:param name="teacherEmail"><s:property value="email"/></s:param>
-                            <li class="span3">
+                            <li class="span11" style="margin-top: 15px;">
                                 <div class="thumbnail">
-                                    <img src="<s:property value="picUrl"/>" width="100%" alt="">
-                                <div class="caption">
-                                    <h4><s:property value="name"/><small>
-                                            <s:if test="status==0"><label class="label">离线</label></s:if>
-                                            <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
-                                            <s:else><label class="label label-warning">忙碌</label></s:else></small>
-                                        <label class="label pull-right"><s:property value="wagePerhour"/>元/时</label>
-                                    </h4>
-                                    <p style="margin:0;"></p>
-                                    <label class="label label-important">评分：<s:property value="score"/></label>
-                                    <label class="label label-important"><s:property value="reserveNum"/>人预约</label>
-                                    <p style="margin:0;"></p> 
+                                    <img class="pull-left" style="margin: 0px 10px 0px 0px;" src="<s:property value="picUrl"/>" width="110px"/>
+                                <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
+                                <s:if test="status==0"><label class="label">离线</label></s:if>
+                                <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
+                                <s:else><label class="label label-warning">忙碌</label></s:else>
+                                <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:property value="lastActiveDate" default="null"/></small>
+                                <label class="label pull-right"><s:property value="wagePerhour"/>元/时</label>
+                                <span class="pull-right">&nbsp;</span>
+                                <label class="label label-info pull-right">评分：<s:property value="score"/></label>
+                                <span class="pull-right">&nbsp;</span>
+                                <label class="label label-info pull-right"><s:property value="reserveNum"/>人预约</label>
+                                <br/>
+                                <small style="color:black;" >
+                                    <s:property value="school"/> | <s:property value="major"/> <br/>
                                     <s:if test="lessons.size()==0">
-                                        <label class="label label-info" >该老师还没有开课哦</label>
+                                        开设课程：该老师还没有开课。
                                     </s:if>
                                     <s:else>
-                                        <label class="label label-info" >课程:</label>
+                                        开设课程：
+                                        <s:iterator value="lessons" status="st">
+                                            <s:if test="delete==false">
+                                                <s:property value="name"/> | 
+                                            </s:if>
+                                        </s:iterator>
                                     </s:else>
-                                    <s:iterator value="lessons" status="st">
-                                        <s:if test="delete==false">
-                                            <label class="label label-info" ><s:property value="name"/></label>
-                                        </s:if>
-                                    </s:iterator>
-                                    <p style="margin:0;"></p>
-                                    <label><p class="muted pull-right" style="margin-bottom: 5px;"><small>上次登陆时间<s:property value="lastActiveDate" default="null"/></small></p></label>
-                                </div>
+                                    <br/>
+                                    线下授课区域：闵行(莘庄),闵行(颛桥),闵行(江川路街道),闵行(吴泾/塘湾),交大闵行校区附近。<br/>
+                                    个人经历：本人性格坦诚，工作脚踏实地。爱人如己，热爱且忠诚于人类教育事业。九四年毕业于安……<br/>
+                                </small>
                             </div>
                         </li>
                     </s:a>

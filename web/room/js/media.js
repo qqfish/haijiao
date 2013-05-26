@@ -61,7 +61,7 @@ function Media(parentId, text, userList){
             console.log("Requested access to local media with mediaConstraints:\n" +
                 "  \"" + JSON.stringify(constraints) + "\"");
         } catch (e) {
-            alert("getUserMedia() failed. Is this a WebRTC capable browser?");
+            alert("该浏览器版本太旧，不支持视频聊天功能，请到http://www.google.cn/intl/zh-CN/chrome/browser/下载最新报Chrome浏览器");
             console.log("getUserMedia failed with exception: " + e.message);
         }
     }

@@ -9,6 +9,7 @@ connection.connect = (function(host) {
         connection.socket = new MozWebSocket(host);
     } else {
         console.log('Error: WebSocket is not supported by this browser.');
+        pError("该浏览器版本太旧，不支持白板功能，请到http://www.google.cn/intl/zh-CN/chrome/browser/下载最新报Chrome浏览器");
         return;
     }
 
