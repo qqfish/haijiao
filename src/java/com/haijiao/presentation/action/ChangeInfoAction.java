@@ -5,8 +5,6 @@
 
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.bean.Student;
-import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
@@ -34,6 +32,8 @@ public class ChangeInfoAction extends SessionAction {
     String newpwd;
     String newpwd2;
     String province;
+    String city;
+    String district;
     String net;
     SimpleDateFormat sdf;
     SimpleDateFormat sdf2;
@@ -60,7 +60,7 @@ public class ChangeInfoAction extends SessionAction {
     
     public String teacherChange() throws ParseException{
         parseDate();
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, net)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, city, district, net)){
             nextPageMessage = this.getText("teaChangeSuccess");
             return SUCCESS;
         } else {
@@ -295,5 +295,21 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setStudyStatus(String studyStatus) {
         this.studyStatus = studyStatus;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
     }
 }

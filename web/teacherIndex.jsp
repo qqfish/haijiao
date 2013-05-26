@@ -57,7 +57,11 @@
                     </s:a>
                     <hr/>
                     <div style="margin-left: 10px;">
-                        <p><s:property value="teacher.province"/></p>
+                        <small>
+                            <s:property value="teacher.getDirectProvince()"/> - 
+                            <s:property value="teacher.getDirectCity()"/> - 
+                            <s:property value="teacher.getDirectDistrict()"/><br/><br/>
+                        </small>
                         <p><s:property value="teacher.email"/></p>
                         <p><s:property value="teacher.createdateToString()"/> 加入</p>
                     </div>
@@ -81,14 +85,14 @@
                     </div>
                     <div class="span8 module" style="padding:12px;">
                         <ul class="nav nav-pills">
-                            <li id="l1" class="active"><a href="#student_area" data-toggle="tab">学生列表</a></li>
+                            <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
                             <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
-                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                            <li id="l1"><a href="#student_area" data-toggle="tab">学生列表</a></li>
                             <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade active in" id='student_area'>
+                            <div class="tab-pane fade" id='student_area'>
                                 <table class="table table-hover table-striped">
                                     <tbody>
                                     <s:if test="classList.size()<=0">
@@ -96,7 +100,7 @@
                                     </s:if>
                                     <s:else>
                                         <s:iterator value="classList" id="list">
-                                            <s:if test="status>=2">
+                                            <s:if test="status>=2"> 
                                                 <tr>
                                                     <td>
                                                         <blockquote>
@@ -296,7 +300,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id='lesson_area'>
+                        <div class="tab-pane fade  active in" id='lesson_area'>
                             <h4>老师您好，您目前开设课程的情况如下：</h4>
                             <table>
                                 <s:iterator value="teacher.lessons" id="ls">
@@ -312,10 +316,16 @@
                                 </s:iterator>
                                 <br/><br/>
                                 <p style="font-size: 9px;">
-                                    * 小提示①：点击课程后面的小叉可以取消开设该课程哦！<br/>
-                                    * 小提示②：您可以通过下面的输入框开设新的课程哦！
+                                    <strong>第一步：选择课程</strong><br/>
+                                    * 小提示①：您可以通过下面的输入框开设新的课程！<br/>
+                                    * 小提示②：点击课程后面的小叉可以取消开设该课程！<br/>
+                                    <strong>第二步：设置空闲时间</strong><br/>
+                                    * 小提示③：您可以在课程表界面中设置空闲时间！<br/>
+                                    <strong>第三步：确认学生信息</strong>   
                                 </p>
-                                <br/><br/>
+                                <br/>
+                                <hr/>
+                                <h5>课程列表</h5>
                                 <s:form action="dealLesson.action">
                                     <span style="display:none;"><s:textfield cssClass="span2" id="deal_lesson" name="lessonName"/></span>
                                     <ul class="nav nav-pills">
@@ -371,6 +381,8 @@
                                     <div id="lesson_tip" style="font-size:9px; color: red; display: none;"></div>
                                 </s:form>
                             </table>
+                            <hr/>
+                            <h5>线下授课区域<button class='btn btn-primary btn-small pull-right'><i class='icon-pencil icon-white'></i>编辑</button></h5>
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover table-striped">

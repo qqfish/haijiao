@@ -22,11 +22,13 @@ public class RegisterThenAction extends SessionAction {
     String studyStatus;
     String grade;
     String province;
+    String city;
+    String district;
     String net;
     String nextPageMessage;
     
     public String teacherRegister(){
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major, studyStatus, null, province, net)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major,studyStatus, null, province, city, district, net)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", theTeacher.getName());
             this.sessionPutIn("userType", "teacher");
@@ -154,5 +156,20 @@ public class RegisterThenAction extends SessionAction {
     public void setMajor(String major) {
         this.major = major;
     }
-    
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
 }

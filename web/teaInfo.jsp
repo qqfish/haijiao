@@ -53,7 +53,7 @@
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
                         </h1>
                     <s:if test="#session.email != null&&tea.status!=1">
-                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
@@ -195,6 +195,8 @@
                                         </s:if>
                                     </s:iterator>
                                 </div>
+                                <hr/>
+                                <h5>线下授课区域</h5>
                             </div>
                             <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
                             <hr class="span8"/>
@@ -268,7 +270,7 @@
                     <a class="close" data-dismiss="modal">×</a>
                     <h3>请选择课程时间</h3>
                 </div>
-                <div class="modal-body" >
+                <div class="modal-body" style='height:350px'>
                     <div style="font-size: 9px">
                         &nbsp;&nbsp;
                         <img src="images/colorCCF.png" height="15px" width="15px">&nbsp;老师忙碌时段&nbsp;
