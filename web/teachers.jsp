@@ -103,13 +103,13 @@
                         </div>
                         <br/>
                         <button type="button" class="btn btn-small btn-danger disabled">身份</button>
-                        <s:select cssClass="span2" cssStyle="margin-top: 8px; height:25px; font-size:8px;" name="studyStatus" list="{'不限','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
+                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" name="studyStatus" list="{'不限','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
                         <br/>
                         <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
                         <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <s:select id="selProvince" cssClass="span2" cssStyle="height:25px; margin-right:4px; font-size:8px;" name="province" list="{'不限'}" value="%{tea.province}"></s:select>
-                            <s:select id="selCity" cssClass="span2" cssStyle="height:25px; margin-right:4px; font-size:8px;" name="city" list="{'不限'}" value="%{tea.city}"></s:select>
-                            <s:select id="selDistrict" cssClass="span2" cssStyle="height:25px; font-size:8px;" name="district" list="{'不限'}" value="%{tea.district}"></s:select>
+                            <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{'不限'}" value="%{tea.province}"></s:select>
+                            <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="city" list="{'不限'}" value="%{tea.city}"></s:select>
+                            <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="district" list="{'不限'}" value="%{tea.district}"></s:select>
                         </div>
                         <br/>
                     </div>
