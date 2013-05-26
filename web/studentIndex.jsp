@@ -48,12 +48,12 @@
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="student.picUrl"/>" class="img-polaroid"/>
-                    <h1 style="margin-left:10px"><s:property value="student.name"/></h1> 
+                    <h4 style="margin-left:10px;"><s:property value="student.name"/></h4> 
                     <s:a action="toChangeInfo.action">
-                        <button type="button" class="btn btn-mini btn-primary" style="margin-left:15px"><i class="icon-pencil icon-white"></i>修改资料</button>
+                        <button type="button" class="btn btn-mini btn-primary" style="margin-left:10px"><i class="icon-pencil icon-white"></i>修改资料</button>
                     </s:a>
                     <hr/>
-                    <div style="margin-left:15px">
+                    <div style="margin-left:10px">
                         <p><s:property value="student.grade"/></p>
                         <p><s:property value="student.email"/></p>
                         <p><s:property value="student.createdateToString()"/> 加入</p>
