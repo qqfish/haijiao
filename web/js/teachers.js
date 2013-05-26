@@ -19,24 +19,38 @@ jQuery(document).ready(function($) {
         var grade = $('#grade').children('.active').text();
         var net = $('#net').children('.active').text();
         var sex = $('#sex').children('.active').text();
-        var city = $('#area').find('option:selected').text();
-        if (lesson == "不限")
+        var role = $('#studyStatus').find('option:selected').text();
+        var province = $('#selProvince').find('option:selected').text();
+        var city = $('#selCity').find('option:selected').text();
+        var district = $('#selDistrict').find('option:selected').text();
+        if (lesson == "不限"){
             lesson = "";
+            grade = "";
+        }
         if (grade == "不限")
             grade = "";
         if (net == "不限")
             net = "";
         if (sex == "不限")
             sex = "";
-        if (city == "请选择家教地区")
+        if (role == "不限")
+            role = "";
+        if (province == "不限")
+            province = "";
+        if (city == "不限")
             city = "";
+        if (district == "不限")
+            district = "";
         $.post(url, {currentPage: pagenum,
             searchContent: $('#search_searchContent').val(),
             lessonGet: lesson,
             gradeGet: grade,
             netGet: net,
             sex: sex,
+            role: role,
+            province:province,
             province: city,
+            district: district,
             status:status
         }, function(data) {
             $('#resultdetail').html(data);
@@ -137,7 +151,19 @@ jQuery(document).ready(function($) {
         gotopage(1, null);
     })
     
-    $('#area').change(function() {
+    $('#selProvince').change(function() {
+        gotopage(1,null);
+    })
+    
+    $('#selCity').change(function() {
+        gotopage(1,null);
+    })
+    
+    $('#selDistrict').change(function() {
+        gotopage(1,null);
+    })
+    
+    $('#studyStatus').change(function() {
         gotopage(1,null);
     })
     

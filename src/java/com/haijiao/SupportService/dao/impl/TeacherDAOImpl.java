@@ -54,7 +54,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String grade, String net, String sex, String city, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String grade, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
         String hql = "select distinct t from Teacher t left join t.lessons l";       
         String where = " where ";
         String or = " or ";
@@ -76,8 +76,14 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
             where += "t.net = '" + net + "' and ";
         if(sex != null && !sex.equals(""))
             where += "t.sex ='" + sex + "' and ";
+        if(role != null && !role.equals(""))
+            where += "t.role = '" + role + "' and ";
+        if(province != null && !province.equals(""))
+            where += "t.province = '" + province + "' and ";
         if(city != null && !city.equals(""))
-            where += "t.province = '" + city + "' and ";
+            where += "t.city = '" + city + "' and ";
+        if(district != null && !district.equals(""))
+            where += "t.district = '" + district + "' and ";
         if(status != null && !status.equals(""))
             where += "t.status = '" + status + "' and ";
         if(!where.equals(" where ")){
@@ -97,7 +103,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public int getTeacherNum(List<String> strList,  String lesson, String grade, String net, String sex, String city, String status, String extOrder, int desc){
+    public int getTeacherNum(List<String> strList,  String lesson, String grade, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc){
         String hql = "select count(distinct t) from Teacher t left join t.lessons l";
         String where = " where ";
         String or = " or ";
@@ -119,8 +125,14 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
             where += "t.net = '" + net + "' and ";
         if(sex != null && !sex.equals(""))
             where += "t.sex ='" + sex + "' and ";
+        if(role != null && !role.equals(""))
+            where += "t.role = '" + role + "' and ";
+        if(province != null && !province.equals(""))
+            where += "t.province = '" + province + "' and ";
         if(city != null && !city.equals(""))
-            where += "t.province = '" + city + "' and ";
+            where += "t.city = '" + city + "' and ";
+        if(district != null && !district.equals(""))
+            where += "t.district = '" + district + "' and ";
         if(status != null && !status.equals(""))
             where += "t.status = '" + status + "' and ";
         if(!where.equals(" where ")){
