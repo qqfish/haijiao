@@ -209,7 +209,9 @@
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
                         <li id="l1" class="active"><a href="#1" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li id="l5"><a href="#5" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        <s:if test="#session.userType=='teacher'">
+                            <li id="l5"><a href="#5" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        </s:if>
                         <li id="l2" ><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l4"><a href="#4" data-toggle="tab">修改主页介绍<i class="icon-chevron-right pull-right"></i></a></li>
@@ -301,9 +303,9 @@
                                 <hr/>
                                 <dl>
                                     <dt>线下授课区域</dt>
-                                    <dd><s:textarea cssClass="span5" name="underlineArea" autofocus="autofocus"/></dd>
+                                    <dd><s:textarea cssStyle="height:100px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
                                     <dt>个人经历</dt>
-                                    <dd><s:textarea cssClass="span5" name="experience" autofocus="autofocus"/></dd>
+                                    <dd><s:textarea cssStyle="height:100px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>
                                     <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherMoreChange"/></dd>
                                 </dl>
                             </s:form>

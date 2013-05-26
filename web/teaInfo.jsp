@@ -48,9 +48,9 @@
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
                     <h1 style="margin-left:5px"><s:property value="tea.name"/>
-                        <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
-                        <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
-                        <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
+                        <s:if test="tea.status==0"><label class="label">离线</label></s:if>
+                        <s:elseif test="tea.status==1"><label class="label label-success">在线</label></s:elseif>
+                        <s:else><label class="label label-warning">忙碌</label></s:else></small>
                         </h1>
                     <s:if test="#session.email != null&&tea.status!=1">
                         <a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
@@ -69,6 +69,8 @@
                     </s:elseif>
                     <s:else>
                         <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
+                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">我要预约</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>请先登陆</h3>
@@ -88,7 +90,11 @@
                     </s:if>
                     <hr/>
                     <div style="margin-left: 10px">
-                        <p><s:property value="tea.province"/></p>
+                        <small>
+                            <s:property value="tea.getDirectProvince()"/> - 
+                            <s:property value="tea.getDirectCity()"/> - 
+                            <s:property value="tea.getDirectDistrict()"/><br/><br/>
+                        </small>
                         <p><s:property value="tea.email" /></p>
                         <p><s:property value="tea.createTime" /> 加入</p>
                     </div>
@@ -163,7 +169,7 @@
                                                 <strong>目前身份</strong>
                                             </td>
                                             <td>
-                                                <s:property value="tea.sex"/>
+                                                <s:property value="tea.studyStatus"/>
                                             </td>
                                         </tr>
                                         <tr>
@@ -185,8 +191,8 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <hr class="span8"/>
                             <div class="span8">
-                                <hr/>
                                 <h5>开设课程</h5>
                                 <div>
                                     <s:iterator value="tea.lessons" status="st">
@@ -195,15 +201,26 @@
                                         </s:if>
                                     </s:iterator>
                                 </div>
-                                <hr/>
-                                <h5>线下授课区域</h5>
                             </div>
-                            <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
                             <hr class="span8"/>
-                            <div class="span8" id="teaintro">
-                                <script>
-                                    $("#teaintro").html($("#tmp").text());
-                                </script>
+                            <div class="span8">
+                                <h5>线下授课区域</h5>
+                                <textarea id="tmp2" style="display:none"><s:property value="tea.underlineArea"/></textarea>
+                                <div class="span6" id="teaArea">
+                                    <script>
+                                        $("#teaArea").html($("#tmp2").text());
+                                    </script>
+                                </div>
+                            </div>
+                            <hr class="span8"/>
+                            <div class="span8">
+                                <h5>主页介绍</h5>
+                                <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
+                                <div class="span6" id="teaintro">
+                                    <script>
+                                        $("#teaintro").html($("#tmp").text());
+                                    </script>
+                                </div>
                             </div>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>

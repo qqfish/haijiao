@@ -108,8 +108,8 @@
                         <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
                         <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{'不限'}" value="%{tea.province}"></s:select>
-                            <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="city" list="{'不限'}" value="%{tea.city}"></s:select>
-                            <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4   px;" name="district" list="{'不限'}" value="%{tea.district}"></s:select>
+                            <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px; display:none;" name="city" list="{}" value="%{tea.city}"></s:select>
+                            <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px; display:none;" name="district" list="{}" value="%{tea.district}"></s:select>
                         </div>
                         <br/>
                     </div>
