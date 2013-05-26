@@ -1,4 +1,5 @@
-﻿(function () {
+﻿jQuery(document).ready(function($) {
+(function () {
     var areaData = [
     { code: "340000", name: "安徽省", city: [
         { code: "340800", name: "安庆市", area: [
@@ -4058,11 +4059,13 @@
         if (this._provinceSelectId && this._citySelectId) {
             addEvent("change", document.getElementById(this._provinceSelectId), function (instance) {
                 return function () {
+					gotopage(1, null);
                     instance.initCities();
                 };
             } (this));
 			addEvent("click", document.getElementById(this._provinceSelectId), function (instance) {
                 return function () {
+					gotopage(1, null);
                     instance.initCities();
                 };
             } (this));
@@ -4070,11 +4073,13 @@
         if (this._citySelectId && this._districtSelectId) {
             addEvent("change", document.getElementById(this._citySelectId), function (instance) {
                 return function () {
+					gotopage(1, null);
                     instance.initDistricts();
                 };
             } (this));
 			addEvent("click", document.getElementById(this._citySelectId), function (instance) {
                 return function () {
+					gotopage(1, null);
                     instance.initDistricts();
                 };
             } (this));
@@ -4178,3 +4183,61 @@
     window.$ling = window.$ling || {};
     window.$ling.chinaArea = chinaArea;
 })();
+
+
+    function gotopage(pagenum, action) {
+        var url;
+        if (action != null)
+            url = 'searchTeacher!' + action;
+        else
+            url = 'searchTeacher.action';
+        var status;
+        if($("#online_button").hasClass("active"))
+            status = "1";
+        else
+            status = "";
+        var lesson = $('#lesson').children('.active').text();
+        var grade = $('#grade').children('.active').text();
+        var net = $('#net').children('.active').text();
+        var sex = $('#sex').children('.active').text();
+        var role = $('#studyStatus').find('option:selected').text();
+        var province = $('#selProvince').find('option:selected').val();
+        var city = $('#selCity').find('option:selected').val();
+        var district = $('#selDistrict').find('option:selected').val();
+        if (lesson == "不限"){
+            lesson = "";
+            grade = "";
+        }
+        if (grade == "不限")
+            grade = "";
+        if (net == "不限")
+            net = "";
+        if (sex == "不限")
+            sex = "";
+        if (role == "不限")
+            role = "";
+        if (province == "不限"){
+            province = "";
+            city = "";
+            district = "";
+        }
+        if (city == "不限")
+            city = "";
+        if (district == "不限")
+            district = "";
+        $.post(url, {currentPage: pagenum,
+            searchContent: $('#search_searchContent').val(),
+            lessonGet: lesson,
+            gradeGet: grade,
+            netGet: net,
+            sex: sex,
+            role: role,
+            province: province,
+            city: city,
+            district: district,
+            status:status
+        }, function(data) {
+            $('#resultdetail').html(data);
+        });
+    }
+});

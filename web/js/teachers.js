@@ -20,9 +20,9 @@ jQuery(document).ready(function($) {
         var net = $('#net').children('.active').text();
         var sex = $('#sex').children('.active').text();
         var role = $('#studyStatus').find('option:selected').text();
-        var province = $('#selProvince').find('option:selected').text();
-        var city = $('#selCity').find('option:selected').text();
-        var district = $('#selDistrict').find('option:selected').text();
+        var province = $('#selProvince').find('option:selected').val();
+        var city = $('#selCity').find('option:selected').val();
+        var district = $('#selDistrict').find('option:selected').val();
         if (lesson == "不限"){
             lesson = "";
             grade = "";
@@ -35,8 +35,11 @@ jQuery(document).ready(function($) {
             sex = "";
         if (role == "不限")
             role = "";
-        if (province == "不限")
+        if (province == "不限"){
             province = "";
+            city = "";
+            district = "";
+        }
         if (city == "不限")
             city = "";
         if (district == "不限")
@@ -48,8 +51,8 @@ jQuery(document).ready(function($) {
             netGet: net,
             sex: sex,
             role: role,
-            province:province,
-            province: city,
+            province: province,
+            city: city,
             district: district,
             status:status
         }, function(data) {
@@ -151,19 +154,11 @@ jQuery(document).ready(function($) {
         gotopage(1, null);
     })
     
-    $('#selProvince').change(function() {
-        gotopage(1,null);
-    })
-    
-    $('#selCity').change(function() {
-        gotopage(1,null);
-    })
-    
-    $('#selDistrict').change(function() {
-        gotopage(1,null);
-    })
-    
     $('#studyStatus').change(function() {
+        gotopage(1,null);
+    })
+	
+	$('#selDistrict').change(function() {
         gotopage(1,null);
     })
     

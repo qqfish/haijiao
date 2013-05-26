@@ -8,13 +8,13 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-        <script type="text/javascript" src="js/ling.chinaArea.sort.min-1.0.js"></script>
+        <script type="text/javascript" src="js/ling.chinaArea.sort-1.0.js"></script>
         <script type="text/javascript">
             window.onload = function() {
                 $ling.chinaArea.init("selProvince", "selCity", "selDistrict");
             }
         </script>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>

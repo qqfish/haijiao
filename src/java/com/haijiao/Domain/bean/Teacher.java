@@ -20,12 +20,11 @@ import javax.persistence.Table;
 public class Teacher extends User{
     private String school;      //就读大学
     private String major;       //就读专业
-    private String studyStatus;  //目前学历状况
+    private String studyStatus;  //教师身份
     private String province;    //省份
     private String city;            //市级
     private String district;       //县级
     private String net;         //网络环境
-    private String role;        //教师身份
     private int classNum;       //成功完成课程的次数
     private int obNum;          //浏览数
     private String underlineArea;   //线下授课区域
@@ -107,14 +106,6 @@ public class Teacher extends User{
 
     public void setNet(String net) {
         this.net = net;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public int getClassNum() {

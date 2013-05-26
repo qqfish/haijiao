@@ -77,7 +77,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         if(sex != null && !sex.equals(""))
             where += "t.sex ='" + sex + "' and ";
         if(role != null && !role.equals(""))
-            where += "t.role = '" + role + "' and ";
+            where += "t.studyStatus = '" + role + "' and ";
         if(province != null && !province.equals(""))
             where += "t.province = '" + province + "' and ";
         if(city != null && !city.equals(""))
@@ -126,7 +126,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         if(sex != null && !sex.equals(""))
             where += "t.sex ='" + sex + "' and ";
         if(role != null && !role.equals(""))
-            where += "t.role = '" + role + "' and ";
+            where += "t.studyStatus = '" + role + "' and ";
         if(province != null && !province.equals(""))
             where += "t.province = '" + province + "' and ";
         if(city != null && !city.equals(""))
