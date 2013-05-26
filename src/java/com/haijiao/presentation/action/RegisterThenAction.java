@@ -18,13 +18,15 @@ public class RegisterThenAction extends SessionAction {
     String name;
     String sex;
     String school;
+    String major;
+    String studyStatus;
     String grade;
     String province;
     String net;
     String nextPageMessage;
     
     public String teacherRegister(){
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, null, province, net)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major, studyStatus, null, province, net)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", theTeacher.getName());
             this.sessionPutIn("userType", "teacher");
@@ -113,6 +115,14 @@ public class RegisterThenAction extends SessionAction {
         this.grade = grade;
     }
 
+    public String getStudyStatus() {
+        return studyStatus;
+    }
+
+    public void setStudyStatus(String studyStatus) {
+        this.studyStatus = studyStatus;
+    }
+
     public String getProvince() {
         return province;
     }
@@ -136,4 +146,13 @@ public class RegisterThenAction extends SessionAction {
     public void setNextPageMessage(String nextPageMessage) {
         this.nextPageMessage = nextPageMessage;
     }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+    
 }

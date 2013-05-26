@@ -19,6 +19,8 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn
 public class Teacher extends User{
     private String school;      //就读大学
+    private String major;       //就读专业
+    private String studyStatus;  //目前学历
     private String province;    //省份
     private String net;         //网络环境
     private String role;        //教师身份
@@ -61,6 +63,14 @@ public class Teacher extends User{
 
     public void setSchool(String school) {
         this.school = school;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
     }
 
     public String getProvince() {
@@ -117,6 +127,14 @@ public class Teacher extends User{
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getStudyStatus() {
+        return studyStatus;
+    }
+
+    public void setStudyStatus(String studyStatus) {
+        this.studyStatus = studyStatus;
     }
 
     public String getVideoUrl() {

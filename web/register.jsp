@@ -9,13 +9,11 @@
         <link rel="stylesheet" href="css/datepicker.css">
         <link rel="stylesheet" href="css/validate.css">
         <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="jock-citypicker-2.0/jock-citypicker-2.0.min.css">
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/reg.js"></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="js/validate.js"></script>
-        <script type="text/javascript" src="jock-citypicker-2.0/jock-citypicker-2.0.min.js"></script>
 
         <!--[if lt IE 8]>
       <div style=' clear: both; text-align:center; position: relative;'>

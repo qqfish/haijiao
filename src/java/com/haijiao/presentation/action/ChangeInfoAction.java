@@ -25,6 +25,8 @@ public class ChangeInfoAction extends SessionAction {
     String sex;
     String birthday;
     String school;
+    String major;
+    String studyStatus;
     String grade;
     String tel;
     String telType;
@@ -58,7 +60,7 @@ public class ChangeInfoAction extends SessionAction {
     
     public String teacherChange() throws ParseException{
         parseDate();
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, tel, province, net)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, net)){
             nextPageMessage = this.getText("teaChangeSuccess");
             return SUCCESS;
         } else {
@@ -277,5 +279,21 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setNextPageMessage(String nextPageMessage) {
         this.nextPageMessage = nextPageMessage;
+    }
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getStudyStatus() {
+        return studyStatus;
+    }
+
+    public void setStudyStatus(String studyStatus) {
+        this.studyStatus = studyStatus;
     }
 }

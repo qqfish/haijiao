@@ -158,7 +158,7 @@
                             clearInterval(wait);
                     }, 100);
                 });
-
+                
                 jcrop_api = $.Jcrop("#preimg", {
                     onChange: showPreview,
                     onSelect: showPreview,
