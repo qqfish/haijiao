@@ -41,8 +41,10 @@ public class WebFcSocketServlet extends WebSocketServlet {
         Room room = null;
         if(!clazzIdStr.equals("null"))
             room = roomService.checkAndApplyRoom(Integer.parseInt(clazzIdStr));
-        else if(!teaEmail.equals("null"))
+        else if(!teaEmail.equals("null")){
             room = roomService.enterPublicRoom(teaEmail);
+            room.getTimer().setMaxTime(15 * 60);
+        }
         System.out.println(room);
         User user = userService.getUserByEmail(email);
         System.out.println(email);

@@ -78,6 +78,8 @@ public class FcMessageInbound extends MessageInbound {
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
 
         userService.setStatus(user.getEmail(), User.Status.onlineAndBusy);
+        
+        room.getTimer().toggle();
 
         //send to user their user file
         //sendtoUser(gson.toJson(new ResponseSetUserFile(user)));

@@ -101,8 +101,10 @@ public class RoomFile extends DataFile {
             try {
                 if (url == null) {
                     doc = new PDDocument();
-                    PDPage newPage = new PDPage();
-                    doc.addPage(newPage);
+                    for (int i = 0; i < 10; i++) {
+                        PDPage newPage = new PDPage();
+                        doc.addPage(newPage);
+                    }
                 } else {
                     doc = PDDocument.load(url);
                 }

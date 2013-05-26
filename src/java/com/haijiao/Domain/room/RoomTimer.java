@@ -81,4 +81,7 @@ public class RoomTimer {
     public void setBillService(IBillService billService) {
         this.billService = billService;
     }
+    public void setMaxTime(int max){
+        counter.setMax(max);
+    }
 }

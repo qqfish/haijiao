@@ -22,9 +22,10 @@ function TextChat(windowId, sendButtonId, chatInputId){
     });
     
     this.printMeesage = function(user,message){
-        var newM = $("<p></p");
+        var newM = $("<p></p>");
         newM.text(user + " : " + message);
         chatWindow.append(newM);
+        chatWindow.scrollTop(100000000000000);
     }
     
     chatInput.keypress(function(e){

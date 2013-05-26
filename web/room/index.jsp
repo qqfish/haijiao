@@ -72,7 +72,7 @@
                     <div style="width:880px;margin-left:auto;margin-right:auto">
                         <ul class="nav">
                             <li><a class="brand" href="index.action">Haijiao</a></li>
-                            <s:if test="isHolder!=0">
+                            <!--<s:if test="isHolder!=0">
                                 <li><a class="tooltipButton" id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>
                                 <li><a class="tooltipButton" id="stopTimerButton" data-target="#finishModal" role="button" data-toggle="modal"data-placement="bottom" data-original-title="停止"><i class="icon-stop icon-white"></i></a></li>
                                 <div id="finishModal" class="modal hide fade" tabindex="-1" role="dialog">
@@ -88,7 +88,7 @@
                                         <button class="btn btn-primary" id="stopTimer" data-dismiss="modal" aria-hidden="true">确认</button>
                                     </div>
                                 </div>
-                            </s:if>
+                            </s:if>-->
                             <li><div class="well-mini"><span id="timerPanel">00:00:00</span></div></li>
                             <li>
                                 <div class="btn-group">
@@ -116,7 +116,7 @@
                                     <ul class="dropdown-menu" id="roomFile">
                                         <li class="divider"></li>
                                         <li><a tabindex="-1" id="uploadFile" href="#">上传文件</a></li>
-                                        <li><a tabindex="-1" href="#" onclick="file.downloadFile()">下载文件</a></li>
+                                        <!--<li><a tabindex="-1" href="#" onclick="file.downloadFile()">下载文件</a></li>-->
                                     </ul>
                                 </div>
                             </li>
@@ -129,9 +129,14 @@
                             <li>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <button class="btn active tooltipButton" id="pointer" type="button" value="0" data-toggle="tooltip" data-placement="bottom" data-original-title="指针"><i class="icon-hand-up"></i></button>
-                                    <button class="btn tooltipButton" id="pen" type="button" value="1" data-toggle="popover" data-trigger="click" data-placement="bottom" data-html="true" data-title="调色板" data-container="#popoverContainer"><i class="icon-pencil"></i></button>
-                                    <div id="colorPanel" style="display:none;">
-                                        <div>
+                                    <button class="btn tooltipButton" id="eraser" type="button" value="2" data-toggle="tooltip" data-placement="bottom" data-original-title="橡皮"><i class="icon-hdd"></i></button>
+                                    <button class="btn tooltipButton" id="pen" type="button" value="1" data-toggle="tooltip" data-placement="bottom" data-original-title="画笔"><i class="icon-pencil"></i></button>
+                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <div class="dropdown-menu" role="menu"  id="colorPanel" style="padding-top: 0px;">
+                                        <div class="popover-title"><p style="margin-bottom: 0px;padding-bottom: 2px;">调色板</p></div>
+                                        <div style="margin: 12px;">
                                             <p>颜色</p>
                                             <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                                 <button class="btn" onclick="toolkit.changeColor('white');"></button>
@@ -152,7 +157,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn tooltipButton" id="eraser" type="button" value="2" data-toggle="tooltip" data-placement="bottom" data-original-title="橡皮"><i class="icon-hdd"></i></button>
                                 </div>
                                 <div id="popoverContainer">
                                 </div>
@@ -188,7 +192,7 @@
                     <div style="width:240px;float: left">
                         <div id="sideVideoArea" style="height:380px;width:240px;overflow-y: visible;"></div>
                         <div style="float: bottom;">
-                            <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:228px;height: 250px;white-space:normal; overflow-y: auto;"></div>
+                            <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:228px;height: 250px;white-space:normal; overflow-y: auto; "></div>
                             <p style="margin: 0px;"/>
                             <div class="input-append">
                                 <input class="span2" id="chatInput" type="text">

@@ -14,6 +14,7 @@ import java.util.TimerTask;
  */
 public class TimeCounter extends TimerTask {
 
+    private int max;
     private int seconds;
     private boolean start;
     Room room;
@@ -22,6 +23,7 @@ public class TimeCounter extends TimerTask {
         this.room = room;
         this.start = false;
         seconds = 0;
+        max = -1;
     }
 
     @Override
@@ -29,6 +31,11 @@ public class TimeCounter extends TimerTask {
         if (start) {
             seconds++;
             int tmp = seconds;
+            if(max > 0){
+                tmp = max - seconds;
+                if(tmp < 0)
+                    tmp = 0;
+            }
             String result = "" + tmp % 60;
             tmp = tmp / 60;
             result = tmp % 60 + ":" + result;
@@ -54,6 +61,14 @@ public class TimeCounter extends TimerTask {
 
     public boolean isStart() {
         return start;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
     
 }

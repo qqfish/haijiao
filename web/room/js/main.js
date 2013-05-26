@@ -54,21 +54,22 @@ function init(clazzId, teaEmail, email){
         file.prePage();
     });
 
-    $("#pen").attr("data-content",$("#colorPanel").html());
+    //$("#pen").attr("data-content",$("#colorPanel").html());
     $("#pen").click(function(){
         toolkit.changeTool(Tooltype.Pen);
         table.setUndraggable();
+        $("#colorPanel").dropdown();
     });
     $("#pointer").click(function(){
         toolkit.changeTool(Tooltype.Hand);
         table.setDraggable();
-        $("#pen").popover('hide');
+        //$("#pen").popover('hide');
     //table.removeMouse();
     });
     $("#eraser").click(function(){
         toolkit.changeTool(Tooltype.Eraser);
         table.setUndraggable();
-        $("#pen").popover('hide');
+        //$("#pen").popover('hide');
     //table.removeMouse();
     });
     
