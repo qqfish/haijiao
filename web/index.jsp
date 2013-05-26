@@ -37,7 +37,7 @@
                                     <div id="login_tip" class="validateTip"></div>
                                     <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
                                     <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
-                                    
+                                    <div class="pull-right"><div class='pull-left'><input type="checkbox" name="remAcc" value="ON" /></div><div class='pull-left' style='margin-top:3px;margin-left: 5px;margin-right: 5px;'>十天之内自动登录</div></div>
                                     <s:submit cssClass="btn btn-success " style="margin-top:20px;margin-left:3px;width:220px" value="登录"></s:submit>
                                 </s:form>
                                 <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a> <a style="color:white;" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">注册账号</a></div>

@@ -64,12 +64,11 @@ a p{
 }
 
 .ctlbar{
-    transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -webkit-transition: all 0.2s ease-in-out;
+    width:25px;
+    height:100%;
+    float: right;
 }
 
 .ctlbar:hover{
-    box-shadow: 20px 0px 0px 10px #000 inset;
-    opacity: 1;
+    box-shadow: 20px 0px 0px 10px #c5c2a9 inset;
 }
