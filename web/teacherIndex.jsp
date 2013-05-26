@@ -50,7 +50,7 @@
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/>
-                    <h1 style="margin-left: 10px;"><s:property value="teacher.name"/></h1>     
+                    <h4 style="margin-left: 10px;"><s:property value="teacher.name"/></h4>     
                     <a class='btn btn-primary btn-small' style="margin-left: 15px;" href="enterPublicRoom.action?teaEmail=<s:property value='teacher.email' default='null' />"><i class="icon-user icon-white"></i>在线试讲</a>
                     <s:a action="toChangeInfo.action">
                         <button type="button" class="btn btn-small btn-primary pull-right" style="margin-right: 15px;"><i class="icon-pencil icon-white"></i>修改资料</button>

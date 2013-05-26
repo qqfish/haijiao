@@ -1,5 +1,5 @@
 <%-- 
-    Document   : studentIndex
+    Document   : teaIndex
     Created on : 2013-3-26, 22:11:27
     Author     : Bx Yang
 --%>
@@ -47,11 +47,11 @@
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
-                    <h1 style="margin-left:5px"><s:property value="tea.name"/>
-                        <s:if test="tea.status==0"><label class="label">离线</label></s:if>
-                        <s:elseif test="tea.status==1"><label class="label label-success">在线</label></s:elseif>
-                        <s:else><label class="label label-warning">忙碌</label></s:else></small>
-                        </h1>
+                    <h4 style="margin-left:5px"><s:property value="tea.name"/>
+                        <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
+                        <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
+                        <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
+                        </h4>
                     <s:if test="#session.email != null&&tea.status!=1">
                         <a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <div class="modal fade hide" id="publicRoom">

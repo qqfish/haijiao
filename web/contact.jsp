@@ -52,9 +52,7 @@
                         <p>如果有任何意见以及建议，请及时联系我们</p>
                         <hr/>
                     </div>
-
                     <div class="span6 module" style="padding:12px;">
-
                         <s:form action="contactUs.action">
                             <dt style="display: none;"><label>姓名</label></dt>
                             <dd style="display: none;"><s:textfield name="name" placeholder="请输入您的姓名" /></dd>
@@ -71,7 +69,7 @@
                             <dd style="display: none;"><s:textfield name="subject" placeholder="请输入主题" /></dd>
                             <dt><label for="user_body">内容</label></dt>
                             <dd>
-                                <s:textarea name="context" cssClass="span5" rows="5" value=""/>
+                                <s:textarea name="context" cssClass="span5" cssStyle="height:240px" rows="5" value=""/>
                             </dd>
                             <s:submit cssClass="offset4 btn" type="button" value="提交" />
                         </s:form>
