@@ -208,10 +208,13 @@
                     <h3>修改信息</h3>
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
-                        <li id="l1" class="active"><a href="#1" data-toggle="tab">修改资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l1" class="active"><a href="#1" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        <s:if test="#session.userType=='teacher'">
+                            <li id="l5"><a href="#5" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        </s:if>
                         <li id="l2" ><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li id="l4"><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l4"><a href="#4" data-toggle="tab">修改主页介绍<i class="icon-chevron-right pull-right"></i></a></li>
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
@@ -294,6 +297,24 @@
                                 </s:if>
                             </s:form>
                         </div>
+                        <div class="tab-pane fade"  id='5'>
+                            <s:form action="changeInfo.action">
+                                <h3>修改详细资料</h3>
+                                <hr/>
+                                <dl>
+                                    <dt>授课方式</dt>
+                                    <dd style="margin-bottom: 5px; margin-top: 5px;">
+                                        <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}"/> 线上授课
+                                        <s:checkbox name="sprtUnderline" value="%{tea.sprtUnderline}"/> 线下授课
+                                    </dd>
+                                    <dt>线下授课区域</dt>
+                                    <dd><s:textarea cssStyle="height:100px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
+                                    <dt>个人经历</dt>
+                                    <dd><s:textarea cssStyle="height:100px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>
+                                    <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherMoreChange"/></dd>
+                                </dl>
+                            </s:form>
+                        </div>
                         <div class="tab-pane fade"  id='2'>
                             <s:form action="changeInfo.action">
                                 <h3>修改密码</h3>
@@ -341,7 +362,7 @@
                             <div class="progress"><div class="bar"></div></div>
                         </div>
                         <div class="tab-pane fade"  id='4'>
-                            <h3>修改个人介绍</h3>
+                            <h3>修改主页介绍</h3>
                             <hr/>
                             <s:form action="changeIntro.action">
                                 <s:if test="#session.userType == 'teacher'">

@@ -15,6 +15,15 @@
         $('#l1').removeClass("active");
     }
     
+    if( $('#nextPageMessage').val() == "成功暂停一周"  
+        || $('#nextPageMessage').val() == "成功接受该课程"
+        || $('#nextPageMessage').val() == "成功拒绝接受该课程"){
+        $('#lesson_area').addClass("active in");
+        $('#student_area').removeClass("active in");
+        $('#l1').addClass("active");
+        $('#l3').removeClass("active");
+    }
+    
     if( $('#nextPageMessage').val() == "评论成功！"  
         || $('#nextPageMessage').val() == "你已经评论过了哦！" ){
         $('#bill_area').addClass("active in");

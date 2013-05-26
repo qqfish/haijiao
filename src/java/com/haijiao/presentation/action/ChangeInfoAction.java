@@ -14,32 +14,36 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 public class ChangeInfoAction extends SessionAction {
-    ITeacherService teacherService;
-    IStudentService studentService;
-    IUserService userService;
-    String id;
-    String password;
-    String name;
-    String sex;
-    String birthday;
-    String school;
-    String major;
-    String studyStatus;
-    String grade;
-    String tel;
-    String telType;
-    String oldpwd;
-    String newpwd;
-    String newpwd2;
-    String province;
-    String city;
-    String district;
-    String net;
-    SimpleDateFormat sdf;
-    SimpleDateFormat sdf2;
-    Date date;
-    String lessonName;
-    String nextPageMessage;
+    private ITeacherService teacherService;
+    private IStudentService studentService;
+    private IUserService userService;
+    private String id;
+    private String password;
+    private String name;
+    private String sex;
+    private String birthday;
+    private String school;
+    private String major;
+    private String studyStatus;
+    private String grade;
+    private String tel;
+    private String telType;
+    private String oldpwd;
+    private String newpwd;
+    private String newpwd2;
+    private String province;
+    private String city;
+    private String district;
+    private String net;
+    private SimpleDateFormat sdf;
+    private SimpleDateFormat sdf2;
+    private Date date;
+    private String lessonName;
+    private String nextPageMessage;
+    private String underlineArea;
+    private String experience;
+    private Boolean sprtUnderline;
+    private Boolean sprtOnline;
     
     public ChangeInfoAction() throws ParseException{
         sdf= new SimpleDateFormat("MM/dd/yyyy");
@@ -65,6 +69,16 @@ public class ChangeInfoAction extends SessionAction {
             return SUCCESS;
         } else {
             nextPageMessage = this.getText("teaChangeFailure");
+            return "input";
+        }
+    }
+    
+    public String teacherMoreChange() {
+        if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, experience, sprtUnderline, sprtOnline)){
+            nextPageMessage = this.getText("teaMoreChangeSuccess");
+            return SUCCESS;
+        } else {
+            nextPageMessage = this.getText("teaMoreChangeFailure");
             return "input";
         }
     }
@@ -311,5 +325,37 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    public String getUnderlineArea() {
+        return underlineArea;
+    }
+
+    public void setUnderlineArea(String underlineArea) {
+        this.underlineArea = underlineArea;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public Boolean getSprtUnderline() {
+        return sprtUnderline;
+    }
+
+    public void setSprtUnderline(Boolean sprtUnderline) {
+        this.sprtUnderline = sprtUnderline;
+    }
+
+    public Boolean getSprtOnline() {
+        return sprtOnline;
+    }
+
+    public void setSprtOnline(Boolean sprtOnline) {
+        this.sprtOnline = sprtOnline;
     }
 }

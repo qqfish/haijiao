@@ -103,13 +103,13 @@
                         </div>
                         <br/>
                         <button type="button" class="btn btn-small btn-danger disabled">身份</button>
-                        <s:select cssClass="span2" cssStyle="margin-top: 8px; height:25px; font-size:8px;" name="studyStatus" list="{'不限','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
+                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" name="studyStatus" list="{'不限','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
                         <br/>
                         <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
                         <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <s:select id="selProvince" cssClass="span2" cssStyle="height:25px; margin-right:4px; font-size:8px;" name="province" list="{'不限'}" value="%{tea.province}"></s:select>
-                            <s:select id="selCity" cssClass="span2" cssStyle="height:25px; margin-right:4px; font-size:8px;" name="city" list="{'不限'}" value="%{tea.city}"></s:select>
-                            <s:select id="selDistrict" cssClass="span2" cssStyle="height:25px; font-size:8px;" name="district" list="{'不限'}" value="%{tea.district}"></s:select>
+                            <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{'不限'}" value="%{tea.province}"></s:select>
+                            <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px; display:none;" name="city" list="{}" value="%{tea.city}"></s:select>
+                            <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px; display:none;" name="district" list="{}" value="%{tea.district}"></s:select>
                         </div>
                         <br/>
                     </div>
@@ -167,8 +167,8 @@
                                                         </s:iterator>
                                                 </s:else>
                                                 <br/>
-                                                线下授课区域：闵行(莘庄),闵行(颛桥),闵行(江川路街道),闵行(吴泾/塘湾),交大闵行校区附近。<br/>
-                                                个人经历：本人性格坦诚，工作脚踏实地。爱人如己，热爱且忠诚于人类教育事业。九四年毕业于安……<br/>
+                                                线下授课区域：<s:property value="underlineArea" default="这个老师还没设置线下授课区域！"/><br/>
+                                                个人经历：<s:property value="experience" default="这个老师很懒，还没写好个人经历！"/><br/>
                                                 </small>
                                             </div>
                                         </li>

@@ -46,6 +46,14 @@ jQuery(document).ready(function($){
         $('#l1').removeClass("active");
     }
     
+    if( $('#nextPageMessage').val() == "修改详细信息成功！"  
+        || $('#nextPageMessage').val() == "囧，修改详细信息失败啦！" ){
+        $('#5').addClass("active in");
+        $('#1').removeClass("active in");
+        $('#l5').addClass("active");
+        $('#l1').removeClass("active");
+    }
+    
     if( $('#nextPageMessage').val() == "上传完成"  
         || $('#nextPageMessage').val() == "没有找到对应文件"
         || $('#nextPageMessage').val() == "上传出错" ){

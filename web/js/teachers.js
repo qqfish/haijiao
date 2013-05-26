@@ -80,6 +80,16 @@ jQuery(document).ready(function($) {
         $(this).addClass("active");
         gotopage(1, null);
     })
+    
+    $('#selProvince').change(function(){
+        if($(this).val()==="不限"){
+            $('#selCity').fadeOut(1,null);
+            $('#selDistrict').fadeOut(1,null);
+        } else {
+            $('#selCity').fadeIn(1,null);
+            $('#selDistrict').fadeIn(1,null);
+        }
+    })
 
     $('#grade').children().click(function() {
         $('#grade').children().removeClass("active");
