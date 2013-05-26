@@ -20,7 +20,7 @@
             <div style="width:1100px;margin-left: auto;margin-right:auto;">
                 <a class="brand" href="index.action">Haijiao<span style="color: #008db8;">EDU</span></a>
                 <ul class="nav">
-                    <li><a href="#" onclick="$('#searchSubmit').click();">去逛逛</a></li>
+                    <li><a href="#" onclick="$('#searchSubmit').click();">找老师</a></li>
                     <li><a href="contact.jsp">关于我们</a></li>
                     <li><a href="contact.jsp">意见反馈</a></li>
                     <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">

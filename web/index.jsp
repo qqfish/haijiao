@@ -19,7 +19,7 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
-        <div class="container"  style="margin-top:7%;">
+        <div class="container"  style="margin-top:10%;">
             <div class="row" style="overflow: hidden">
                 <div class="span8">
                     <img src="images/title.png" alt="">

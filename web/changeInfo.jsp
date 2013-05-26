@@ -18,7 +18,6 @@
         <link rel="stylesheet" href="css/validate.css"/>
         <link rel="stylesheet" href="css/jquery.Jcrop.min.css"/>
         <link rel="stylesheet" href="css/style.css"/>
-        <link rel="stylesheet" href="jock-citypicker-2.0/jock-citypicker-2.0.min.css">
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
@@ -28,7 +27,6 @@
         <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
         <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
         <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
-        <script type="text/javascript" src="jock-citypicker-2.0/jock-citypicker-2.0.min.js"></script>
         <script>
             var editor;
             KindEditor.ready(function(K) {
@@ -238,7 +236,17 @@
                                         <dt>生日</dt>
                                         <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" readOnly="readOnly" placeholder="请输入您的生日" value="%{tea.birthday}"/></dd>
                                         <dt>省份</dt>
-                                        <dd><input id="prov" type="text" name="city1" value="" readOnly="readOnly"/><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{tea.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
+                                        <dd><div class="info">
+                                                <div>
+                                                    <select class="span2" id="s_province" name="s_province"></select>
+                                                    <select id="s_city" name="s_city" ></select>
+                                                    <select id="s_county" name="s_county"></select>
+                                                    <script type="text/javascript" src="js/area.js"></script>
+                                                    <script type="text/javascript">_init_area();</script>
+                                                </div>
+                                                <div id="show"></div>
+                                            </div>
+                                            <s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{tea.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
                                         <dt>大学</dt>
                                         <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{tea.school}"/></dd>
                                         <dt>网络环境</dt>

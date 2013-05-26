@@ -80,7 +80,16 @@
                                 </dd>
                                 <br/>
                                 <dt>出生地</dt>
-                                <dd><input id="prov" type="text" name="city1" value="" readOnly="readOnly"/><s:select cssClass="span4" headerValue="请选择你出生的省份" name="province" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
+                                <dd><div>
+                                        <select class="span2" id="s_province" name="s_province"></select>
+                                        <select id="s_city" name="s_city" ></select>
+                                        <select id="s_county" name="s_county"></select>
+                                        <script type="text/javascript" src="js/area.js"></script>
+                                        <script type="text/javascript">_init_area();</script>
+                                    </div>
+                                    <div id="show"></div>
+                                    </div>
+                                    <s:select cssClass="span4" headerValue="请选择你出生的省份" name="province" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
                                 <br/>
                                 <dt>毕业学校</dt>
                                 <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" /></dd>
