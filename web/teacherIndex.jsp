@@ -227,7 +227,7 @@
                                     <h3>请选择课程时间</h3>
                                     <p id="chooseError"></p>
                                 </div>
-                                <div class="modal-body" style="height: 320px">
+                                <div class="modal-body" style="height: 400px">
                                     <div class="schedule_panel" id="schedule_panel">
                                         <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
                                             <tbody>

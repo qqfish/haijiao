@@ -54,13 +54,13 @@
                     </s:a>
                     <hr/>
                     <div style="margin-left:15px">
-                    <p><s:property value="student.grade"/></p>
-                    <p><s:property value="student.email"/></p>
-                    <p><s:property value="student.createdateToString()"/> 加入</p>
+                        <p><s:property value="student.grade"/></p>
+                        <p><s:property value="student.email"/></p>
+                        <p><s:property value="student.createdateToString()"/> 加入</p>
                     </div>
                 </div>
                 <div class="span8 module" style="padding:12px">
-                                     <ul class="nav nav-pills">
+                    <ul class="nav nav-pills">
                         <li id="l1" class="active"><a href="#student_area" data-toggle="tab">老师列表</a></li>
                         <li id="l2" ><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
                         <li id="l3" ><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
@@ -71,9 +71,13 @@
                             <table class="table table-hover table-striped">
                                 <tbody>
                                     <s:if test="classList.size()<=0">
-                                        你还没有选老师哦~！
-                                    </s:if>
-                                    <s:else>
+                                    <div style="margin-top:30%;margin-bottom: 30%;margin-left:20%">
+                                        你还没有选老师哦！<br/>
+                                        赶快寻找一位老师，开始你的学习之旅吧！
+                                        <a class="btn btn-primary" href="#" onclick="$('#searchSubmit').click();">找老师</a>
+                                    </div>
+                                </s:if>
+                                <s:else>
                                     <s:iterator value="classList" id="list">
                                         <s:if test="status>=2">
                                             <tr>
@@ -90,8 +94,8 @@
                                                             </label>
                                                         </h4>
                                                         <small>
-                                                                <span>
-                                                                    <s:property value="freeTime.strWeekday()"/>
+                                                            <span>
+                                                                <s:property value="freeTime.strWeekday()"/>
                                                                 <s:property value="freeTime.strSliceIndex()"/>
                                                             </span>
                                                             <span style="margin-left: 10px">剩余<s:property value="remain"/>次课程</span>
@@ -112,7 +116,7 @@
                                             </tr>
                                         </s:if>
                                     </s:iterator>
-                                    </s:else>
+                                </s:else>
                                 </tbody>
                             </table>
                         </div>
@@ -188,62 +192,66 @@
                                     </tbody>
                                 </s:if>
                                 <s:else>
-                                <thead>
-                                    <tr>
-                                        <th>姓名</th>
-                                        <th>课程</th>
-                                        <th>金额</th>
-                                        <th>时间</th>
-                                        <th>信息</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>        
-                                    <s:iterator value="billList" id="billList">
+                                    <thead>
                                         <tr>
-                                            <td><s:property value="teacher.name" /></td>
-                                            <td><s:property value="lesson.name" /></td>
-                                            <td><s:property value="getRealMoney('student')" /></td>
-                                            <td><s:property value="createdateToString()" /></td>
-                                            <td><s:property value="message" /></td>
-                                            <td>
-                                                <s:if test="stot==null">
-                                                    <a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a>
-                                                </s:if>
-                                                <s:else>
-                                                    <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
-                                                </s:else>
-                                            </td>
+                                            <th>姓名</th>
+                                            <th>课程</th>
+                                            <th>金额</th>
+                                            <th>时间</th>
+                                            <th>信息</th>
+                                            <th></th>
                                         </tr>
+                                    </thead>
+                                    <tbody>        
+                                        <s:iterator value="billList" id="billList">
+                                            <tr>
+                                                <td><s:property value="teacher.name" /></td>
+                                                <td><s:property value="lesson.name" /></td>
+                                                <td><s:property value="getRealMoney('student')" /></td>
+                                                <td><s:property value="createdateToString()" /></td>
+                                                <td><s:property value="message" /></td>
+                                                <td>
+                                                    <s:if test="stot==null">
+                                                        <a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                    </s:if>
+                                                    <s:else>
+                                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                                    </s:else>
+                                                </td>
+                                            </tr>
                                         <div id="comment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                 <h3 id="myModalLabel">评论</h3>
                                             </div>
                                             <s:form action="makeCommentReply.action">
-                                            <div class="modal-body">
-                                                <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                                <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                <br/>
-                                                评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                                <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
-                                            </div>
-                                            <script type="text/javascript">
-                                                $("#rate").bind('rated', function (event, value){ $('#score').val(value);});
-                                                $("#rate").bind('over', function(event,value){ $(this).attr('title', value);});                                                
-                                                $("#cmtsmt").click(function(event){
-                                                    if(/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                        event.preventDefault();
-                                                });
-                                            </script>
+                                                <div class="modal-body">
+                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                    <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                        <br/>
+                                                        评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                    <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                    <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
+                                                    </div>
+                                                    <script type="text/javascript">
+        $("#rate").bind('rated', function(event, value) {
+            $('#score').val(value);
+        });
+        $("#rate").bind('over', function(event, value) {
+            $(this).attr('title', value);
+        });
+        $("#cmtsmt").click(function(event) {
+            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                event.preventDefault();
+        });
+                                                    </script>
                                             </s:form>
                                         </div>
                                     </s:iterator>
-                                </tbody>
+                                    </tbody>
                                 </s:else>
                             </table>
                         </div>
@@ -257,40 +265,40 @@
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
-                                                <s:iterator value="billList" id="billList">
-                                                    <s:if test="ttos != null">
-                                                        <h4><s:property value="teacher.name" /><label class="label label-important pull-right">评分:<s:property value="ttos.score" /></label></h4>
-                                                        <small>
-                                                            <span><s:property value="ttos.content" /></span>
-                                                            <span class="pull-right">
-                                                                <s:if test="ttos.reply==null">
-                                                                    <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
-                                                                </s:if>
-                                                                <s:else>
-                                                                    <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">回复</a>
-                                                                </s:else>
-                                                            </span>
-                                                            <br/><br/>
-                                                            <span>您的回复：<s:property value="ttos.reply" /></span>
-                                                        </small>
-                                                        <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                            <div class="modal-header">
-                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                <h3 id="myModalLabel">回复</h3>
+                                                    <s:iterator value="billList" id="billList">
+                                                        <s:if test="ttos != null">
+                                                            <h4><s:property value="teacher.name" /><label class="label label-important pull-right">评分:<s:property value="ttos.score" /></label></h4>
+                                                            <small>
+                                                                <span><s:property value="ttos.content" /></span>
+                                                                <span class="pull-right">
+                                                                    <s:if test="ttos.reply==null">
+                                                                        <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                                    </s:if>
+                                                                    <s:else>
+                                                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">回复</a>
+                                                                    </s:else>
+                                                                </span>
+                                                                <br/><br/>
+                                                                <span>您的回复：<s:property value="ttos.reply" /></span>
+                                                            </small>
+                                                            <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                                    <h3 id="myModalLabel">回复</h3>
+                                                                </div>
+                                                                <s:form action="makeCommentReply.action">
+                                                                    <div class="modal-body">
+                                                                        <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                                        <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                        <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
+                                                                        </div>
+                                                                </s:form>
                                                             </div>
-                                                            <s:form action="makeCommentReply.action">
-                                                                <div class="modal-body">
-                                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                                                    <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                                    <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                </div>
-                                                            </s:form>
-                                                        </div>
-                                                    </s:if>
-                                                </s:iterator>
+                                                        </s:if>
+                                                    </s:iterator>
                                                 </s:else>
                                             </blockquote>
                                         </td>
