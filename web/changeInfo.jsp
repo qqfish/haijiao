@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="css/validate.css"/>
         <link rel="stylesheet" href="css/jquery.Jcrop.min.css"/>
         <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="jock-citypicker-2.0/jock-citypicker-2.0.min.css">
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
@@ -27,6 +28,7 @@
         <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
         <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
         <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
+        <script type="text/javascript" src="jock-citypicker-2.0/jock-citypicker-2.0.min.js"></script>
         <script>
             var editor;
             KindEditor.ready(function(K) {
@@ -64,7 +66,7 @@
             }
 
             var jcrop_api;
-            
+
             //显示图片
             function previewPhoto() {
                 var picsrc = getPath(document.all.fileid);
@@ -158,7 +160,7 @@
                             clearInterval(wait);
                     }, 100);
                 });
-                
+
                 jcrop_api = $.Jcrop("#preimg", {
                     onChange: showPreview,
                     onSelect: showPreview,
@@ -166,6 +168,14 @@
                 });
             });
 
+            window.onload = function() {
+                var a = document.getElementById("prov");
+                a.onclick = function() {
+                    citypicker.show({left: 545, top: 380}, function(data) {
+                        a.value = data;
+                    });
+                };
+            }
 
         </script>
 
@@ -226,13 +236,13 @@
                                             </div>
                                         </dd>
                                         <dt>生日</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{tea.birthday}"/></dd>
+                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" readOnly="readOnly" placeholder="请输入您的生日" value="%{tea.birthday}"/></dd>
                                         <dt>省份</dt>
-                                        <dd><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{tea.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
+                                        <dd><input id="prov" type="text" name="city1" value="" readOnly="readOnly"/><s:select cssClass="span4" headerKey="" headerValue="请选择你出生的省份" name="province" value="%{tea.province}" list="{'北京市', '上海市', '天津市', '重庆市', '河北', '山西', '内蒙古', '辽宁', '吉林', '黑龙江', '江苏', '浙江', '安徽', '福建', '江西', '山东', '河南', '湖北', '湖南', '广东', '广西', '海南', '四川', '贵州', '云南', '西藏', '陕西', '甘肃', '青海', '宁夏', '新壃', '香港', '澳门', '台湾'}"/></dd>
                                         <dt>大学</dt>
                                         <dd> <s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的大学" value="%{tea.school}"/></dd>
                                         <dt>网络环境</dt>
-                                        <dd><s:select cssClass="span4" name="net" list="{'电信', '联通', '教育网', '其他'}" value="%{tea.net}"/></dd>
+                                        <dd><s:select cssClass="span4" name="net" list="{'电信', '联通', '教育网','网通','铁通','移动','有线通'}" value="%{tea.net}"/></dd>
                                         <dt>手机</dt>
                                         <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{tea.tel}"/></dd>                                
                                         <br/>

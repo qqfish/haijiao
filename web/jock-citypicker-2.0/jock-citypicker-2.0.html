@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Jock-CityPicker</title>
+<link rel="stylesheet" rev="stylesheet" href="jock-citypicker-2.0.min.css" type="text/css" />
+<script type="text/javascript" src="jock-citypicker-2.0.min.js"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var a = document.getElementById("test1");
+	var b = document.getElementById("test2");
+	var c = document.getElementById("test3");
+
+	/*
+	*1：插件默认定位到网页原点(0,0)，需要自己给出插件的绝对定位
+	*2: 插件回调函数为空函数，需要自定义回调，插件返回被选择的城市作为回调的参数
+	*3: 在一个页面上，插件只产生一个实例
+	*/
+	//例一：
+	a.onclick = function(){
+		citypicker.show({left: 80, top : 20}, function(data){
+			a.value = data;
+		});
+	};
+	
+	//例二:
+	var p = {left: 323, top : 20};
+	var fn1 = function(city){
+		b.value = city;
+	};
+	
+	b.onclick = function(){
+		citypicker.bind(fn1).fix(p).show();
+	};
+
+	//例三:
+	var fn2 = function(city){
+		c.value = city;
+	};
+	c.onclick = function(){
+		citypicker.show({
+			left : 566,
+			top  : 20,
+			selected : fn2
+		});
+	};
+}
+</script>
+</head>
+<body>
+	选择城市：<input id="test1" type="text" name="city1" value="" readOnly="readOnly"/>
+	
+	选择城市：<input id="test2" type="text" name="city2" value="" readOnly="readOnly"/>
+
+	选择城市：<input id="test3" type="text" name="city3" value="" readOnly="readOnly"/>
+</body>
+</html>

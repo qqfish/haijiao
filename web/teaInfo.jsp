@@ -106,6 +106,14 @@
                                 <td>评分</td>
                                 <td><s:property value="tea.score"/></td>
                             </tr>
+                            <tr>
+                                <td>登录次数</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>最近在线时间</td>
+                                <td></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
