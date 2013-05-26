@@ -196,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ctlbar" id="sideBarButton" style="width:25px;height:100%;background-color: white;float: right"></div>
+                    <div class="ctlbar" id="sideBarButton" style="width:25px;height:100%;background-color: white;float: right;opacity: 0.5;"><img id="ctlbar" style="height:100%;width:100%" src="images/ctlbar1.png"></div>
                 </div>
             </div>
 

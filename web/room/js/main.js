@@ -152,7 +152,7 @@ function init(clazzId, teaEmail, email){
         //media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
         
 //        $("#desktop").unbind("click");
-        
+        $("#ctlbar").attr("src","images/ctlbar2.png");
         sideShow = false;
     }
  
@@ -172,7 +172,7 @@ function init(clazzId, teaEmail, email){
 //            $("#desktop").click(function(){
 //                sideReturn();
 //            });
-        
+            $("#ctlbar").attr("src","images/ctlbar1.png");
 //            media.setDragPlace(250, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
             sideShow = true;
         }
