@@ -4,14 +4,14 @@
  */
 package com.haijiao.presentation.action;
 
-import com.haijiao.SupportService.service.IMailService;
+import com.haijiao.SupportService.service.ITeacherService;
 
 /**
  *
  * @author fish
  */
 public class EnterPublicRoomAction extends RequestSessionAction {
-    private IMailService mailService;
+    private ITeacherService teacherService;
     private String teaEmail;
     private int isHolder;
     
@@ -30,10 +30,7 @@ public class EnterPublicRoomAction extends RequestSessionAction {
             isHolder = 1;
         }
         if(!teaEmail.equals((String)this.getOutSession("email"))){
-            mailService.sendMail( (String)this.getOutSession("email"), teaEmail,
-                "老师您好，有同学进入了您的公共房间想要试听您的课程。"
-                + "本邮件由系统发送，具体情况可回复本邮件与学生本人联系。"
-            );
+            teacherService.setRoomOccupied(teaEmail, true);
         }
         return SUCCESS;
     }
@@ -54,11 +51,12 @@ public class EnterPublicRoomAction extends RequestSessionAction {
         this.isHolder = isHolder;
     }
 
-    public IMailService getMailService() {
-        return mailService;
+    public ITeacherService getTeacherService() {
+        return teacherService;
     }
 
-    public void setMailService(IMailService mailService) {
-        this.mailService = mailService;
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
     }
+
 }

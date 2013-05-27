@@ -156,6 +156,7 @@ public class UserServiceImpl implements IUserService {
             t.setScore(0);
             t.setLoginNum(0);
             t.setObNum(0);
+            t.setStudentin(false);
             return teacherDAO.makePersistent(t);
         } else {
             return false;

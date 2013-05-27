@@ -124,6 +124,21 @@ public class TeacherServiceImpl implements ITeacherService {
     }
     
     @Override
+    public boolean setRoomOccupied(String email, boolean isOccupied){
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        t.setStudentin(isOccupied);
+        teacherDAO.update(t);
+        return false;
+    }
+    
+    @Override
+    @Transactional(propagation=Propagation.SUPPORTS)
+    public boolean getRoomStatus(String email){
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        return t.isStudentin();
+    }
+    
+    @Override
     @Transactional(propagation=Propagation.SUPPORTS)
     public List<FreeTime> getSchedule(String email) {
         Teacher t = teacherDAO.getTeacherByEmail(email);

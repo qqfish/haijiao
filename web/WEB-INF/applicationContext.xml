@@ -102,7 +102,7 @@
     </bean>
     <bean id="EnterRoomAction" class="com.haijiao.presentation.action.EnterRoomAction" scope="prototype" />   
     <bean id="EnterPublicRoomAction" class="com.haijiao.presentation.action.EnterPublicRoomAction" scope="prototype">
-        <property name="mailService" ref="mailServiceImpl" />
+        <property name="teacherService" ref="teacherServiceImpl" />
     </bean>
     <bean id="ContactUsAction" class="com.haijiao.presentation.action.ContactUsAction" scope="prototype" />    
     <bean id="roomTimer" class="com.haijiao.Domain.room.RoomTimer" scope="prototype">
@@ -119,6 +119,9 @@
     </bean>
     <bean id="ResetChangePasswordAction" class="com.haijiao.presentation.action.ResetChangePasswordAction" scope="prototype" >
         <property name="userService" ref="userServiceImpl" />
+    </bean>
+    <bean id="GetRoomStatusAction" class="com.haijiao.presentation.action.GetRoomStatusAction" scope="prototype">
+        <property name="teacherService" ref="teacherServiceImpl" />
     </bean>
 
     <bean id="springContext" class="com.haijiao.SupportService.SpringContext"></bean>

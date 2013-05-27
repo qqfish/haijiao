@@ -33,6 +33,10 @@ public interface ITeacherService {
     
     public boolean deleteLesson(String email, String lessonName);
     
+    public boolean setRoomOccupied(String email, boolean isOccupied);
+    
+    public boolean getRoomStatus(String email);
+    
     //获取老师的课程
     public List<Clazz> getClasses(String email);
     //获取老师当天课程

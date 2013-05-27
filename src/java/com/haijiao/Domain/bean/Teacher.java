@@ -32,6 +32,7 @@ public class Teacher extends User{
     private String address;             //家庭地址
     private Boolean sprtOnline;      //支持线上
     private Boolean sprtUnderline; //支持线下
+    private boolean studentin;  //是否有学生进入房间
     
     
     @Column(columnDefinition="int default 0")
@@ -234,6 +235,14 @@ public class Teacher extends User{
 
     public void setAudition(boolean audition) {
         this.audition = audition;
+    }
+
+    public boolean isStudentin() {
+        return studentin;
+    }
+
+    public void setStudentin(boolean studentin) {
+        this.studentin = studentin;
     }
 
     public List<FreeTime> getSchedule() {

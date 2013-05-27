@@ -18,11 +18,9 @@ public class EnterRoomAction extends RequestSessionAction{
         clazzId = Integer.parseInt((String)this.getOutRequest("clazzId"));
         isHolder = 0;
         String userType = (String) this.getOutSession("userType");
-        System.out.println(userType);
         if( userType!=null && userType.equals("teacher")){
             isHolder = 1;
         }
-        System.out.println(isHolder);
         if(clazzId < 0){
             return "false";
         }
