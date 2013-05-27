@@ -319,7 +319,7 @@
                                     <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="underlineArea" autofocus="autofocus"/></dd>
                                     <dt>个人经历</dt>
                                     <dd><s:textarea cssStyle="width:520px;height:200px;" cssClass="span5" name="experience" autofocus="autofocus"/></dd>
-                                    <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="teacherMoreChange"/></dd>
+                                    <dd><s:submit cssClass="btn btn-primary pull-right" value="提交" method="teacherMoreChange"/></dd>
                                 </dl>
                             </s:form>
                         </div>
@@ -374,10 +374,10 @@
                             <hr/>
                             <s:form action="changeIntro.action">
                                 <s:if test="#session.userType == 'teacher'">
-                                    <s:textarea name="intro" value="%{tea.intro}" autofocus="autofocus" cssClass="span7"/><br/>
+                                    <s:textarea cssStyle="height:400px" name="intro" value="%{tea.intro}" autofocus="autofocus" cssClass="span7"/><br/>
                                 </s:if>
                                 <s:if test="#session.userType == 'student'">
-                                    <s:textarea name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/><br/>
+                                    <s:textarea cssStyle="height:400px" name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/><br/>
                                 </s:if>
                                 <s:submit cssClass="btn btn-primary btn-small pull-right" value="提交"/>
                             </s:form>

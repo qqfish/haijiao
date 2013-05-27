@@ -17,7 +17,7 @@ function validate_lengthLimit(field, tip, length)
 {
     with (field) {
         if (value.length > length) {
-            $(tip).text("* 长度不能大于"+length+"！");
+            $(tip).text("* 长度不能大于"+length+"个汉字！");
             $(tip).fadeIn(1,null);
             return false;
         }
