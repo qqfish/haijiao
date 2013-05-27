@@ -1,6 +1,31 @@
 ﻿jQuery(document).ready(function($) {
 (function () {
     var areaData = [
+    { code: "310000", name: "上海", city: [
+        { code: "310100", name: "上海市", area: [
+            { code: "310112", name: "闵行区" },
+            { code: "310113", name: "宝山区" },
+            { code: "310230", name: "崇明县" },
+            { code: "310120", name: "奉贤区" },
+            { code: "310109", name: "虹口区" },
+            { code: "310101", name: "黄浦区" },
+            { code: "310114", name: "嘉定区" },
+            { code: "310116", name: "金山区" },
+            { code: "310106", name: "静安区" },
+            { code: "310103", name: "卢湾区" },
+            { code: "310119", name: "南汇区" },
+            { code: "310115", name: "浦东新区" },
+            { code: "310107", name: "普陀区" },
+            { code: "310118", name: "青浦区" },
+            { code: "310117", name: "松江区" },
+            { code: "310104", name: "徐汇区" },
+            { code: "310110", name: "杨浦区" },
+            { code: "310108", name: "闸北区" },
+            { code: "310105", name: "长宁区" }
+        ]
+        }
+    ]
+    },
     { code: "340000", name: "安徽省", city: [
         { code: "340800", name: "安庆市", area: [
             { code: "340823", name: "枞阳县" },
@@ -3104,31 +3129,6 @@
         }
     ]
     },
-    { code: "310000", name: "上海", city: [
-        { code: "310100", name: "上海市", area: [
-            { code: "310113", name: "宝山区" },
-            { code: "310230", name: "崇明县" },
-            { code: "310120", name: "奉贤区" },
-            { code: "310109", name: "虹口区" },
-            { code: "310101", name: "黄浦区" },
-            { code: "310114", name: "嘉定区" },
-            { code: "310116", name: "金山区" },
-            { code: "310106", name: "静安区" },
-            { code: "310103", name: "卢湾区" },
-            { code: "310112", name: "闵行区" },
-            { code: "310119", name: "南汇区" },
-            { code: "310115", name: "浦东新区" },
-            { code: "310107", name: "普陀区" },
-            { code: "310118", name: "青浦区" },
-            { code: "310117", name: "松江区" },
-            { code: "310104", name: "徐汇区" },
-            { code: "310110", name: "杨浦区" },
-            { code: "310108", name: "闸北区" },
-            { code: "310105", name: "长宁区" }
-        ]
-        }
-    ]
-    },
     { code: "510000", name: "四川省", city: [
         { code: "513200", name: "阿坝藏族羌族自治州", area: [
             { code: "513231", name: "阿坝县" },
@@ -4059,13 +4059,13 @@
         if (this._provinceSelectId && this._citySelectId) {
             addEvent("change", document.getElementById(this._provinceSelectId), function (instance) {
                 return function () {
-					gotopage(1, null);
+                    gotopage(1, null);
                     instance.initCities();
                 };
             } (this));
-			addEvent("click", document.getElementById(this._provinceSelectId), function (instance) {
+            addEvent("click", document.getElementById(this._provinceSelectId), function (instance) {
                 return function () {
-					gotopage(1, null);
+                    gotopage(1, null);
                     instance.initCities();
                 };
             } (this));
@@ -4073,13 +4073,13 @@
         if (this._citySelectId && this._districtSelectId) {
             addEvent("change", document.getElementById(this._citySelectId), function (instance) {
                 return function () {
-					gotopage(1, null);
+                    gotopage(1, null);
                     instance.initDistricts();
                 };
             } (this));
-			addEvent("click", document.getElementById(this._citySelectId), function (instance) {
+                addEvent("click", document.getElementById(this._citySelectId), function (instance) {
                 return function () {
-					gotopage(1, null);
+                    gotopage(1, null);
                     instance.initDistricts();
                 };
             } (this));

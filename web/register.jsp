@@ -14,7 +14,7 @@
         <script type="text/javascript" src="js/reg.js"></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="js/validate.js"></script>
-        <script type="text/javascript" src="js/ling.chinaArea.sort.min-1.0.js"></script>
+        <script type="text/javascript" src="js/ling.chinaArea.sort-1.0.js"></script>
 
         <!--[if lt IE 8]>
       <div style=' clear: both; text-align:center; position: relative;'>
