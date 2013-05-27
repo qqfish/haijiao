@@ -19,6 +19,7 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
+        <div class="bg"><img class="bg_pic" id="bg_pic" src="#"/></div>
         <div class="container"  style="margin-top:10%;">
             <div class="row" style="overflow: hidden">
                 <div class="span8">
