@@ -68,7 +68,7 @@
                         <a class='btn btn-primary btn-mini' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
                     </s:elseif>
                     <s:else>
-                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-danger btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
                         <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">我要预约</a>
                         <div class="modal fade hide" id="publicRoom">
@@ -302,7 +302,7 @@
                     <h3>请选择课程时间</h3>
                     <p id="schedule_error" style="color: red;"></p>
                 </div>
-                <div class="modal-body" style='height:380px'>
+                <div id="modalpanel" class="modal-body" style="height:400px">
                     <div class="schedule_panel" id="schedule_panel" >
                         <div style="font-size: 9px">
                             &nbsp;&nbsp;

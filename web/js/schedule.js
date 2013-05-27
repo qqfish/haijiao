@@ -90,10 +90,13 @@ $(document).ready(function() {
             $("#schedule_json").val(JSON.stringify(result));
             $('#schedule_panel').hide();
             $('#confirm_panel').show();
+            
         });
+        
         $('#pre').click(function(){
             $('#schedule_panel').show();
             $('#confirm_panel').hide();	
+            
         });
         
         $('#upload').click(function(){

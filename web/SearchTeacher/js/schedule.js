@@ -91,6 +91,7 @@ $(document).ready(function() {
                 $("#schedule_json").val(JSON.stringify(result));
                 $('#schedule_panel').hide();
                 $('#confirm_panel').show();
+                 $('#modalpanel').attr("height","200px");
             } else {
                 $("#schedule_error").text("请选择预约时间");
             }
@@ -98,6 +99,7 @@ $(document).ready(function() {
         $('#pre').click(function(){
             $('#schedule_panel').show();
             $('#confirm_panel').hide();	
+            $('#modalpanel').attr("height","400px");
         });
         
         $('#upload').click(function(){
