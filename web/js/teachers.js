@@ -16,19 +16,14 @@ jQuery(document).ready(function($) {
         else
             status = "";
         var lesson = $('#lesson').children('.active').text();
-        var grade = $('#grade').children('.active').text();
         var net = $('#net').children('.active').text();
         var sex = $('#sex').children('.active').text();
         var role = $('#studyStatus').find('option:selected').text();
         var province = $('#selProvince').find('option:selected').val();
         var city = $('#selCity').find('option:selected').val();
         var district = $('#selDistrict').find('option:selected').val();
-        if (lesson == "不限"){
+        if (lesson == "不限")
             lesson = "";
-            grade = "";
-        }
-        if (grade == "不限")
-            grade = "";
         if (net == "不限")
             net = "";
         if (sex == "不限")
@@ -47,7 +42,6 @@ jQuery(document).ready(function($) {
         $.post(url, {currentPage: pagenum,
             searchContent: $('#search_searchContent').val(),
             lessonGet: lesson,
-            gradeGet: grade,
             netGet: net,
             sex: sex,
             role: role,

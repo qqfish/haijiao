@@ -54,7 +54,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String grade, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
         String hql = "select distinct t from Teacher t left join t.lessons l";       
         String where = " where ";
         String or = " or ";
@@ -70,8 +70,6 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         }
         if(lesson != null && !lesson.equals(""))
             where += "l.name like '%" + lesson + "%' and ";
-        if(grade != null && !grade.equals(""))
-            where += "l.name like '%" + grade + "%' and ";
         if(net != null && !net.equals(""))
             where += "t.net = '" + net + "' and ";
         if(sex != null && !sex.equals(""))
@@ -103,7 +101,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public int getTeacherNum(List<String> strList,  String lesson, String grade, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc){
+    public int getTeacherNum(List<String> strList,  String lesson, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc){
         String hql = "select count(distinct t) from Teacher t left join t.lessons l";
         String where = " where ";
         String or = " or ";
@@ -119,8 +117,6 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         }
         if(lesson != null && !lesson.equals(""))
             where += "l.name like '%" + lesson + "%' and ";
-        if(grade != null && !grade.equals(""))
-            where += "l.name like '%" + grade + "%' and ";
         if(net != null && !net.equals(""))
             where += "t.net = '" + net + "' and ";
         if(sex != null && !sex.equals(""))

@@ -38,8 +38,8 @@ public interface IUserService {
     
     //搜索老师（名字，年级，科目、网络状况）
     public List<Teacher> searchTeacher(List<String> strList, List<String> strList2);
-    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String grade, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc);
-    public int getTeacherNum(List<String> strList, String lesson, String grade, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc);
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc);
+    public int getTeacherNum(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc);
     
     //文件系统相关操作
     //上传文件
