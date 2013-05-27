@@ -18,7 +18,7 @@ function Timer(panelSession){
        var message = {};
        message.type = Request.StopTimer;
        connection.sendObject(message);
-       
+       window.location.href = "index.action";
     });
     
     this.showTimer = function(t){

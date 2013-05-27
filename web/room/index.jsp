@@ -56,8 +56,13 @@
 
     </head>
     <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
-        onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='#session.email' default='null' />');">
-
+          onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='#session.email' default='null' />');">
+        <div class="modal fade" id="beginInfo" style="background:none;border: none;box-shadow:0 0px 0px rgba(0,0,0,0.3);left:80%;">
+            <image src="/haijiao/room/image/info.png" style="display: block;background:none;" />
+        </div>
+        <script>
+            $("#beginInfo").modal();
+        </script>
         <!--==============================header=================================-->
         <!--<!--%@ include file="WEB-INF/jspf/header.jspf"%>-->
         <div class="line-top"></div>
@@ -73,23 +78,6 @@
                     <div style="width:880px;margin-left:auto;margin-right:auto">
                         <ul class="nav" style="width: 1080px;">
                             <a class="brand" href="index.action">Haijiao<span style="color: #008db8;">EDU</span></a>
-                            <<s:if test="isHolder!=0">
-                                <!--<li><a class="tooltipButton" id="toggleTimer" data-toggle="tooltip" data-placement="bottom" data-original-title="开始/暂停"><i class="icon-play icon-white"></i></a></li>-->
-                                <li><a class="tooltipButton" id="stopTimerButton" data-target="#finishModal" role="button" data-toggle="modal"data-placement="bottom" data-original-title="完成授课"><i class="icon-stop icon-white"></i></a></li>
-                                <div id="finishModal" class="modal hide fade" tabindex="-1" role="dialog">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                        <h3>完成课程</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>该操作将结束本次课程并完成扣费操作。</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-                                        <button class="btn btn-primary" id="stopTimer" data-dismiss="modal" aria-hidden="true">确认</button>
-                                    </div>
-                                </div>
-                            </s:if>
                             <li><div class="well-mini"><span id="timerPanel">00:00:00</span></div></li>
                             <li>
                                 <div class="btn-group">
