@@ -1,14 +1,14 @@
 jQuery(document).ready(function($){
-    if( $('#nextPageMessage').val() == "ÆÀÂÛ³É¹¦£¡"  
-        || $('#nextPageMessage').val() == "ÄãÒÑ¾­ÆÀÂÛ¹ıÁËÅ¶£¡" ){
+    if( $('#nextPageMessage').val() == "è¯„è®ºæˆåŠŸï¼"  
+        || $('#nextPageMessage').val() == "ä½ å·²ç»è¯„è®ºè¿‡äº†å“¦ï¼" ){
         $('#bill_area').addClass("active in");
         $('#student_area').removeClass("active in");
         $('#l3').addClass("active");
         $('#l1').removeClass("active");
     }
     
-    if( $('#nextPageMessage').val() == "»Ø¸´³É¹¦£¡"  
-        || $('#nextPageMessage').val() == "ÄãÒÑ¾­»Ø¸´¹ıÁËÅ¶£¡" ){
+    if( $('#nextPageMessage').val() == "å›å¤æˆåŠŸï¼"  
+        || $('#nextPageMessage').val() == "ä½ å·²ç»å›å¤è¿‡äº†å“¦ï¼" ){
         $('#comment_area').addClass("active in");
         $('#student_area').removeClass("active in");
         $('#l4').addClass("active");

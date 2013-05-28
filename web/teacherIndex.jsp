@@ -427,14 +427,14 @@
                                                 <td><s:property value="message" /></td>
                                                 <td>
                                                     <s:if test="ttos==null">
-                                                        <a href="#comment" type="button" class="btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                        <a id="<s:property value="id" />" href="#comment_<s:property value="id" />" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
                                                     </s:if>
                                                     <s:else>
                                                         <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
                                                     </s:else>
                                                 </td>
                                             </tr>
-                                        <div id="comment" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div id="comment_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                 <h3 id="myModalLabel">评论</h3>
@@ -444,24 +444,27 @@
                                                     <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                     内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
                                                     <br/>
-                                                    评分<div id="rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                                    <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
+                                                    评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                    <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                                 </div>
                                                 <script type="text/javascript">
-                                                    $("#rate").bind('rated', function(event, value) {
-                                                        $('#score').val(value);
-                                                    });
-                                                    $("#rate").bind('over', function(event, value) {
-                                                        $(this).attr('title', value);
-                                                    });
-                                                    $("#cmtsmt").click(function(event) {
-                                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                            event.preventDefault();
-                                                    });
+                                                    $(".commentA").click(function(){
+                                                        var id = $(this).attr("id");            
+                                                        $("#rate_"+id).bind('rated', function(event, value) {
+                                                            $('#score_'+id).val(value);
+                                                        });
+                                                        $("#rate_"+id).bind('over', function(event, value) {
+                                                            $(this).attr('title', value);
+                                                        });
+                                                        $("#cmtsmt").click(function(event) {
+                                                            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                event.preventDefault();
+                                                        });
+                                                    })
                                                 </script>
                                             </s:form>
                                         </div>
@@ -487,7 +490,7 @@
                                                                 <span><s:property value="stot.content" /></span>
                                                                 <span class="pull-right">
                                                                     <s:if test="stot.reply == null">
-                                                                        <a href="#reply" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
+                                                                        <a href="#reply_<s:property value="id" />" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
                                                                     </s:if>
                                                                     <s:else>
                                                                         <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">回复</a>
@@ -498,7 +501,7 @@
                                                                     <span>您的回复：<s:property value="stot.reply" /></span>
                                                                 </s:if>
                                                             </small>
-                                                            <div id="reply" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                            <div id="reply_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                                                 <div class="modal-header">
                                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                                                     <h3 id="myModalLabel">回复</h3>
