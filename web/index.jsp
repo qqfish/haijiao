@@ -43,7 +43,7 @@
                                         </label>
                                     <s:submit cssClass="btn btn-success " style="margin-top:20px;margin-left:3px;width:220px" value="登录"></s:submit>
                                 </s:form>
-                                <div style="text-align: center;"><a style="color:white;" href="forgetPassword.jsp">忘记密码</a> <a style="color:white;" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">注册账号</a></div>
+                                <div style="text-align: center;"><a style="color:white;" data-toggle="modal" data-target="#forgetPwd" href="">忘记密码</a> <a style="color:white;" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">注册账号</a></div>
                             </div>
                         </div>
                         <div class="accordion-group">
@@ -83,6 +83,19 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="modal fade hide"  style="margin-top:10%" id="forgetPwd">
+                <div class="modal-header" >
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3>找回密码</h3>
+                </div> 
+                <div class="modal-body">
+                    请输入您的注册邮箱：
+                    <s:form action="forgetPassword.action">
+                        <s:textfield name="email" cssStyle="margin-top:9px"></s:textfield>
+                        <s:submit cssClass="btn btn-primary" value="提交"/>
+                    </s:form>
+                </div>    
             </div>
         </div>
         <footer>
