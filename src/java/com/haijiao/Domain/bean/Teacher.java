@@ -25,14 +25,14 @@ public class Teacher extends User{
     private String city;            //市级
     private String district;       //县级
     private String net;         //网络环境
-    private int classNum;       //成功完成课程的次数
-    private int obNum;          //浏览数
+    private Integer classNum;       //成功完成课程的次数
+    private Integer obNum;          //浏览数
     private String underlineArea;   //线下授课区域
     private String experience;        //个人经历
     private String address;             //家庭地址
     private Boolean sprtOnline;      //支持线上
     private Boolean sprtUnderline; //支持线下
-    private boolean studentin;  //是否有学生进入房间
+    private Boolean studentin;  //是否有学生进入房间
     
     
     @Column(columnDefinition="int default 0")

@@ -172,7 +172,7 @@
             <result name="success" type="chain">getMail</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>
-        <action name="removeMail" class="RemoveMailAction">
+        <action name="removeSingleMail" class="RemoveSingleMailAction">
             <result name="success" type="chain">getMail</result>
             <interceptor-ref name="LoginCheckerStack"/>
         </action>

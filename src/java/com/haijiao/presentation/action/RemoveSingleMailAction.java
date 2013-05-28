@@ -1,23 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author Jerry Zou
  */
+
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IMailService;
-import static com.opensymphony.xwork2.Action.SUCCESS;
 
-/**
- *
- * @author hp
- */
-public class RemoveMailAction extends SessionAction{
-    private IMailService mailService;
+public class RemoveSingleMailAction extends RequestAction{
+private IMailService mailService;
     private Integer id;
     
-    public String removeAll(){
-        String email = (String) this.getSessionValue("email");
-        mailService.deletaAll(email);
+    @Override
+    public String execute(){
+        id = Integer.parseInt((String)this.getRequestValue("id"));
+        mailService.deleteMail(id);
         return SUCCESS;
     }
 
@@ -36,5 +33,4 @@ public class RemoveMailAction extends SessionAction{
     public void setId(Integer id) {
         this.id = id;
     }
-    
 }

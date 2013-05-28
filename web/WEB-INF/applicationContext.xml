@@ -94,6 +94,9 @@
     <bean id="RemoveMailAction" class="com.haijiao.presentation.action.RemoveMailAction" scope="prototype">
         <property name="mailService" ref="mailServiceImpl" />
     </bean>
+    <bean id="RemoveSingleMailAction" class="com.haijiao.presentation.action.RemoveSingleMailAction" scope="prototype">
+        <property name="mailService" ref="mailServiceImpl" />
+    </bean>
     <bean id="MakeCommentReplyAction" class="com.haijiao.presentation.action.MakeCommentReplyAction" scope="prototype">
         <property name="billService" ref="billServiceImpl" />
     </bean>

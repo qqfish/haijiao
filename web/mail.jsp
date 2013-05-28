@@ -62,7 +62,7 @@
                                         <h5><s:property value="from.name"/></h5>
                                         <p><s:property value="message"/></p>
                                         <p><s:property value="createTime"/></p>
-                                        <a href="removeMail.action?id=<s:property value="id" />" class="btn btn-danger btn-mini pull-right" style="margin-top:-10px">删除</a>
+                                        <a href="removeSingleMail.action?id=<s:property value="id" />" class="btn btn-danger btn-mini pull-right" style="margin-top:-10px">删除</a>
                                         <span class="pull-right">&nbsp;&nbsp;</span>
                                         <a href="javascript:;" onclick="mark(<s:property value="id" />);" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px" data-loading-text="loading">标记已读</a>
                                         <span class="pull-right">&nbsp;&nbsp;</span>
@@ -83,7 +83,7 @@
                                         <h5><s:property value="from.name"/></h5>
                                         <p><s:property value="message"/></p>
                                         <p><s:property value="createTime"/></p>
-                                        <a href="javascript:;" onclick="rmmail(<s:property value="id" />);" class="btn btn-danger btn-mini pull-right" style="margin-top:-10px">删除</a>
+                                        <a href="removeSingleMail.action?id=<s:property value="id" />" class="btn btn-danger btn-mini pull-right" style="margin-top:-10px">删除</a>
                                         <span class="pull-right">&nbsp;&nbsp;</span>
                                         <a href="getMail.action?toEmail=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px;margin-right:5px">回复</a>
                                     </div>
