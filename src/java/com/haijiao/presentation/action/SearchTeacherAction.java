@@ -59,7 +59,7 @@ public class SearchTeacherAction extends RequestSessionAction {
     public String execute() throws Exception {
         String extOrder = (String) this.getOutSession("extOrder");
         if (desc==null) {
-            desc = 0;
+            desc = 1;
         }
         List<String> strList = new ArrayList<String>();
         if (searchContent != null) {

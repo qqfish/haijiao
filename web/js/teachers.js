@@ -30,14 +30,16 @@ jQuery(document).ready(function($) {
             sex = "";
         if (role == "不限")
             role = "";
-        if (province == "不限"){
+        if (province.substr(7, province.length) == "不限"){
             province = "";
             city = "";
             district = "";
         }
-        if (city == "不限")
+        if (city.substr(7, province.length) == "不限"){
             city = "";
-        if (district == "不限")
+            district = "";
+        }
+        if (district.substr(7, province.length) == "不限")
             district = "";
         $.post(url, {currentPage: pagenum,
             searchContent: $('#search_searchContent').val(),
@@ -90,16 +92,6 @@ jQuery(document).ready(function($) {
         $('#lesson').children().removeClass("active");
         $(this).addClass("active");
         gotopage(1, null);
-    })
-    
-    $('#selProvince').change(function(){
-        if($(this).val()==="不限"){
-            $('#selCity').fadeOut(1,null);
-            $('#selDistrict').fadeOut(1,null);
-        } else {
-            $('#selCity').fadeIn(1,null);
-            $('#selDistrict').fadeIn(1,null);
-        }
     })
 
     $('#grade').children().click(function() {

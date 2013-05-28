@@ -8,13 +8,15 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="js/ling.chinaArea.sort-1.0.js"></script>
+        <script type="text/javascript" src="js/my.ling.chinaArea.sort-1.0.js"></script>
         <script type="text/javascript">
             window.onload = function() {
                 $ling.chinaArea.init("selProvince", "selCity", "selDistrict");
             }
         </script>
+        <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -107,9 +109,9 @@
                         <br/>
                         <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
                         <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{'不限'}" value="%{tea.province}"></s:select>
-                            <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px; display:none;" name="city" list="{}" value="%{tea.city}"></s:select>
-                            <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px; display:none;" name="district" list="{}" value="%{tea.district}"></s:select>
+                            <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{}" value="%{tea.province}"></s:select>
+                            <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="city" list="{}" value="%{tea.city}"></s:select>
+                            <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="district" list="{}" value="%{tea.district}"></s:select>
                         </div>
                         <br/>
                     </div>
@@ -149,12 +151,12 @@
                                                 <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:property value="lastActiveDate" default="null"/></small>
                                                 <label class="label pull-right"><s:property value="wagePerhour"/>元/时</label>
                                                 <span class="pull-right">&nbsp;</span>
-                                                <label class="label label-info pull-right">评分：<s:property value="score"/></label>
-                                                <span class="pull-right">&nbsp;</span>
                                                 <label class="label label-info pull-right"><s:property value="reserveNum"/>人预约</label>
                                                 <br/>
                                                 <small style="color:black;" >
-                                                <s:property value="school"/> | <s:property value="major"/> <br/>
+                                                <s:property value="school"/> | <s:property value="major"/>
+                                                <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                                <br/>
                                                 <s:if test="lessons.size()==0">
                                                         开设课程：该老师还没有开课。
                                                  </s:if>
