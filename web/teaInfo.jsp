@@ -18,6 +18,8 @@
         <script type="text/javascript" src="js/teaInfo.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
+        <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
+        <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
         <!--[if lt IE 8]>
             <div style=' clear: both; text-align:center; position: relative;'>
@@ -240,16 +242,17 @@
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <blockquote>
+                                    
                                                 <s:if test="billList.size()<=0">
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
                                                     <s:iterator value="billList" id="billList">
+                                                        <tr>
+                                        <td>
+                                            <blockquote>
                                                         <s:if test="stot != null">
-                                                            <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
+                                                            <h4><s:property value="student.name" /><div class="rateit pull-right" data-rateit-value="<s:property value="stot.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                                             <small>
                                                                 <span><s:property value="stot.content" /></span>
                                                                 <br/><br/>
@@ -258,11 +261,12 @@
                                                                 </s:if>
                                                             </small>
                                                         </s:if>
-                                                    </s:iterator>
-                                                </s:else>
-                                            </blockquote>
+                                                            </blockquote>
                                         </td>
                                     </tr>
+                                                    </s:iterator>
+                                                </s:else>
+                                            
                                 </tbody>
                             </table>
                         </div>
@@ -277,7 +281,7 @@
                                     <thead>
                                         <tr>
                                             <th>时间</th>
-                                            <th>姓名</th>
+                                            <th>学生姓名</th>
                                             <th>金额</th>
                                         </tr>
                                     </thead>

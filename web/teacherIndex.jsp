@@ -476,14 +476,15 @@
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <blockquote>
+                                            
                                                 <s:if test="billList.size()<=0">
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
                                                     <s:iterator value="billList" id="billList">
+                                                        <tr>
+                                                    <td>
+                                                        <blockquote>
                                                         <s:if test="stot != null">
                                                             <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
                                                             <small>
@@ -518,11 +519,12 @@
                                                                 </s:form>
                                                             </div>
                                                         </s:if>
+                                                            </td>
+                                                            </tr>
+                                                            </blockquote>
                                                     </s:iterator>
                                                 </s:else>
-                                            </blockquote>
-                                        </td>
-                                    </tr>
+                                            
                                 </tbody>
                             </table>
                         </div>

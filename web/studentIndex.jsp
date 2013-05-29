@@ -261,14 +261,15 @@
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <blockquote>
+                                    
                                                 <s:if test="billList.size()<=0">
                                                     还没有评论哦~！
                                                 </s:if>
                                                 <s:else>
                                                     <s:iterator value="billList" id="billList">
+                                                        <tr>
+                                        <td>
+                                            <blockquote>
                                                         <s:if test="ttos != null">
                                                             <h4><s:property value="teacher.name" /><label class="label label-important pull-right">评分:<s:property value="ttos.score" /></label></h4>
                                                             <small>
@@ -301,11 +302,11 @@
                                                                 </s:form>
                                                             </div>
                                                         </s:if>
-                                                    </s:iterator>
-                                                </s:else>
-                                            </blockquote>
+                                                            </blockquote>
                                         </td>
                                     </tr>
+                                                    </s:iterator>
+                                                </s:else>
                                 </tbody>
                             </table>
                         </div>
