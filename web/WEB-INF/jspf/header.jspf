@@ -3,7 +3,7 @@
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
     var mid = null;
-    var rid =null;
+    var rid = null;
     function getMailNum() {
         $.post("getMailNum.action", function(data) {
             if ($('#mailNum').text() != data)
@@ -12,11 +12,11 @@
     }
     function getRoomStatus() {
         $.post("getRoomStatus.action", function(data) {
-            if (data == "true"){
+            if (data == "true") {
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
             }
-            else{
+            else {
                 $('#toClass').removeClass("btn-info");
                 $('#toClass').addClass("btn-inverse");
             }
@@ -56,8 +56,10 @@
                                     去上课
                                     <span class="caret"></span>
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <s:if test="#session.userType=='teacher'">
+                                <ul class="dropdown-menu" style="border-radius: 0px;">
+                                    <strong style="margin-left:10px">通知</strong>
+                                    <div class="divider"></div>
+                                    <s:if test="#session.userType=='teacher'">  
                                         <script>
                                             getRoomStatus();
                                             rid = setInterval(getRoomStatus, 60000);

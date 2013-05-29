@@ -14,10 +14,8 @@
         <meta charset="utf-8">
         <!--css-->
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
-        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
         <!--js-->
-        <script type="text/javascript" src="js/jquery-1.7.1.min.js" ></script>
+        <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/superfish.js"></script>
         <script type="text/javascript" src="js/forms.js"></script>
         <script type="text/javascript">

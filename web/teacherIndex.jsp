@@ -227,7 +227,7 @@
                                     <h3>请选择课程时间</h3>
                                     <p id="chooseError" style="color:red;"></p>
                                 </div>
-                                <div class="modal-body" style="height: 380px">
+                                <div class="modal-body" style="height: 400px">
                                     <div class="schedule_panel" id="schedule_panel">
                                         <div style="font-size: 9px">
                                             &nbsp;&nbsp;
@@ -336,9 +336,9 @@
                                     * 小提示②：点击课程后面的小叉可以取消开设该课程！<br/>
                                     <strong>第二步：设置空闲时间</strong><br/>
                                     * 小提示③：您可以在课程表界面中设置空闲时间！<br/>
-                                    <strong>第三步：确认学生信息</strong>   
+                                    <strong>第三步：确认学生信息</strong><br/>
+                                    * 小提示④：您可以前往学生列表页面查看是否有学生申请了您的课程！
                                 </p>
-                                <br/>
                                 <hr/>
                                 <h5>课程列表</h5>
                                 <s:form action="dealLesson.action">

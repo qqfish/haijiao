@@ -8,11 +8,12 @@
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/validate.css" />
+        <link rel="stylesheet" href="css/index.css" />
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/validate.js"></script>
-        <link rel="stylesheet" href="css/index.css" />
+
     </head>
     <body>
 
