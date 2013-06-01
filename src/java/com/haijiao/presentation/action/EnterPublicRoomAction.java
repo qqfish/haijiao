@@ -18,6 +18,7 @@ public class EnterPublicRoomAction extends RequestSessionAction {
     private String teaEmail;
     private int isHolder;
     private User user;
+    private String nextPageMessage;
     
     @Override
     public String execute(){
@@ -35,6 +36,10 @@ public class EnterPublicRoomAction extends RequestSessionAction {
             isHolder = 1;
         }
         if(!teaEmail.equals((String)this.getOutSession("email"))){
+            if(teacherService.getRoomStatus(teaEmail)){
+                nextPageMessage = "房间已被占用，请稍后再试。";
+                return "false";
+            }
             teacherService.setRoomOccupied(teaEmail, true);
         }
         return SUCCESS;

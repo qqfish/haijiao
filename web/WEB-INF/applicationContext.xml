@@ -103,9 +103,13 @@
     <bean id="CheckEmailAction" class="com.haijiao.presentation.action.CheckEmailAction" scope="prototype">
         <property name="userService" ref="userServiceImpl" />
     </bean>
-    <bean id="EnterRoomAction" class="com.haijiao.presentation.action.EnterRoomAction" scope="prototype" />   
+    <bean id="EnterRoomAction" class="com.haijiao.presentation.action.EnterRoomAction" scope="prototype">
+        <property name="userService" ref="userServiceImpl" />
+    </bean> 
+      
     <bean id="EnterPublicRoomAction" class="com.haijiao.presentation.action.EnterPublicRoomAction" scope="prototype">
         <property name="teacherService" ref="teacherServiceImpl" />
+        <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="ContactUsAction" class="com.haijiao.presentation.action.ContactUsAction" scope="prototype" />    
     <bean id="roomTimer" class="com.haijiao.Domain.room.RoomTimer" scope="prototype">
