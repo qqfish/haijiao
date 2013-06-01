@@ -48,11 +48,10 @@ public class ForgetPasswordAction extends RequestAction{
             return SUCCESS;
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(ForgetPasswordAction.class.getName()).log(Level.SEVERE, null, ex);
-            return INPUT;
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(ForgetPasswordAction.class.getName()).log(Level.SEVERE, null, ex);
-            return INPUT;
         }
+        return INPUT;
     }
 
     public void setUserService(IUserService userService) {

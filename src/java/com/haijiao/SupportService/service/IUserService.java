@@ -42,12 +42,15 @@ public interface IUserService {
     public int getTeacherNum(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc);
     
     //文件系统相关操作
+    public boolean createGroup(String email, String name);
+    public boolean deleteGroup(String email, String name);
+    public boolean moveFile(String email, String srcName, String destName, String fileName);
     //上传文件
-
-    public boolean uploadFile(String account, Object file);
+    
+    public boolean uploadFile(String email, String groupName, String name, String fileuri);
     //下载文件
 
-    public Object download(String fileuri);
+    public String download(String email, String groupName, String fileName);
     
     public boolean validateCheckcode(int id, String checkCode);
     public void saveResetInfo(int id, String checkCode);

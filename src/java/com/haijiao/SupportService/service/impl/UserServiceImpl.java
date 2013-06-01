@@ -8,11 +8,15 @@ import com.haijiao.Domain.bean.ResetInfo;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.UserFile;
+import com.haijiao.Domain.file.UserFileGroup;
 import com.haijiao.SupportService.dao.ICommentDAO;
 import com.haijiao.SupportService.dao.IResetInfoDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
+import com.haijiao.SupportService.dao.IUserFileDAO;
+import com.haijiao.SupportService.dao.IUserFileGroupDAO;
 import com.haijiao.SupportService.service.IUserService;
 import java.sql.Date;
 import java.util.List;
@@ -35,6 +39,10 @@ public class UserServiceImpl implements IUserService {
     ICommentDAO commentDAO;
     @Resource
     IResetInfoDAO resetInfoDAO;
+    @Resource
+    IUserFileDAO userFileDAO;
+    @Resource
+    IUserFileGroupDAO userFileGroupDAO;
 
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -52,8 +60,16 @@ public class UserServiceImpl implements IUserService {
         this.commentDAO = commentDAO;
     }
 
-    public void setReserInfoDAO(IResetInfoDAO resetInfoDAO) {
+    public void setResetInfoDAO(IResetInfoDAO resetInfoDAO) {
         this.resetInfoDAO = resetInfoDAO;
+    }
+
+    public void setUserFileDAO(IUserFileDAO userFileDAO) {
+        this.userFileDAO = userFileDAO;
+    }
+
+    public void setUserFileGroupDAO(IUserFileGroupDAO userFileGroupDAO) {
+        this.userFileGroupDAO = userFileGroupDAO;
     }
 
     @Override
@@ -183,13 +199,58 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean uploadFile(String account, Object file) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean createGroup(String email, String name){
+        UserFileGroup fg= userFileGroupDAO.getGroupByName(email, name);
+        if(fg == null)
+            return false;
+        else{
+            fg = new UserFileGroup();
+            return userFileGroupDAO.makePersistent(fg);
+        }
+    }
+    
+    @Override
+    public boolean deleteGroup(String email, String name){
+        UserFileGroup fg= userFileGroupDAO.getGroupByName(email, name);
+        if(fg == null)
+            return false;
+        else
+            return userFileGroupDAO.makeTransient(fg);
+    }
+    
+    @Override
+    public boolean moveFile(String email, String srcName, String destName, String fileName){
+        UserFileGroup src = userFileGroupDAO.getGroupByName(email, srcName);
+        if(src == null)
+            return false;
+        UserFileGroup dest = userFileGroupDAO.getGroupByName(email, destName);
+        if(dest == null)
+            return false;
+        UserFile uf = userFileDAO.getFile(src.getId(), fileName);
+        src.removeFile(uf);
+        dest.addFile(uf);
+        userFileGroupDAO.update(src);
+        userFileGroupDAO.update(dest);
+        return true;
+    }
+    
+    @Override
+    public boolean uploadFile(String email, String groupName, String name, String fileuri) {
+        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
+        UserFile uf = new UserFile();
+        uf.setName(name);
+        uf.setUrl(fileuri);
+        userFileDAO.makePersistent(uf);
+        fg.addFile(uf);
+        userFileGroupDAO.update(fg);
+        return true;
     }
 
     @Override
-    public Object download(String fileuri) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public String download(String email, String groupName, String fileName) {
+        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
+        UserFile uf = userFileDAO.getFile(fg.getId(), fileName);
+        return uf.getUrl();
     }
 
     @Override
