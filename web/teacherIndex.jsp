@@ -68,6 +68,10 @@
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
+                                <td>浏览数</td>
+                                <td><s:property value="teacher.obNum"/></td>
+                            </tr>
+                            <tr>
                                 <td>预约数</td>
                                 <td><s:property value="teacher.reserveNum"/></td>
                             </tr>
@@ -105,6 +109,8 @@
                                                     <td>
                                                         <blockquote>
                                                             <h4><s:property value="student.name"/>
+                                                                <s:if test="student.status==0"><label class="label">离线</label></s:if>
+                                                                <s:elseif test="student.status==1"><label class="label label-success">在线</label></s:elseif>
                                                                 <label class="label label-info pull-right">
                                                                     <s:if test="status==2">
                                                                         等待审批
@@ -128,7 +134,7 @@
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
                                                                             <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
                                                                             <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">顺延一周</button>
-                                                                            <button type="button">取消一周</button>
+                                                                            <button type="button" class="btn btn-info btn-mini">取消一周</button>
                                                                             <a class="btn btn-info btn-mini" href="getMail.action?toEmail=<s:property value="student.email" />">私信</a>
                                                                         </s:form>
                                                                     </s:if>

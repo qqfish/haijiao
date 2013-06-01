@@ -122,7 +122,7 @@
                             老师列表
                             <small>
                                 <div class="btn-toolbar pull-right">
-                                    <div class="btn-group" data-toggle="buttons-radio">
+                                    <div id="sort" class="btn-group" data-toggle="buttons-radio">
                                         <button class="btn btn-small btn-inverse" id="normal_button">默认<i class="icon-arrow-down icon-white"></i></button>
                                         <button class="btn btn-small btn-inverse" id="score_button">评分<i class="icon-arrow-down"></i></button>
                                         <button class="btn btn-small btn-inverse" id="price_button">价格<i class="icon-arrow-down"></i></button>

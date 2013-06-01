@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
         else
             url = 'searchTeacher.action';
         var status;
-        if($("#online_button").hasClass("active"))
+        if ($("#online_button").hasClass("active"))
             status = "1";
         else
             status = "";
@@ -30,12 +30,12 @@ jQuery(document).ready(function($) {
             sex = "";
         if (role == "不限")
             role = "";
-        if (province.substr(7, province.length) == "不限"){
+        if (province.substr(7, province.length) == "不限") {
             province = "";
             city = "";
             district = "";
         }
-        if (city.substr(7, province.length) == "不限"){
+        if (city.substr(7, province.length) == "不限") {
             city = "";
             district = "";
         }
@@ -50,14 +50,14 @@ jQuery(document).ready(function($) {
             province: province,
             city: city,
             district: district,
-            status:status
+            status: status
         }, function(data) {
             $('#resultdetail').html(data);
         });
     }
 
     $('#normal_button').click(function() {
-        gotopage(null, "normal.action")
+        gotopage(null, "normal.action");
     });
 
     $('#score_button').click(function() {
@@ -75,48 +75,48 @@ jQuery(document).ready(function($) {
     $('#time_button').click(function() {
         gotopage(null, "time.action");
     });
-    
+
     $('#online_button').click(function() {
-        if($(this).hasClass("active")){
+        if ($(this).hasClass("active")) {
             $(this).removeClass("active");
             gotopage(1, null);
         }
-        else{
+        else {
             $(this).addClass("active");
             gotopage(1, null);
         }
-            
+
     });
 
     $('#lesson').children().click(function() {
         $('#lesson').children().removeClass("active");
         $(this).addClass("active");
         gotopage(1, null);
-    })
+    });
 
     $('#grade').children().click(function() {
         $('#grade').children().removeClass("active");
         $('#allLesson').click();
         $(this).addClass("active");
-        if($(this).html()=="小学"){
+        if ($(this).html() == "小学") {
             $(".mschool").fadeOut(1, null);
             $(".hschool").fadeOut(1, null);
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".pschool").fadeIn(1, null);
-        } else if($(this).html()=="初中"){
+        } else if ($(this).html() == "初中") {
             $(".pschool").fadeOut(1, null);
             $(".hschool").fadeOut(1, null);
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".mschool").fadeIn(1, null);
-        } else if($(this).html()=="高中"){
+        } else if ($(this).html() == "高中") {
             $(".pschool").fadeOut(1, null);
             $(".mschool").fadeOut(1, null);
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".hschool").fadeIn(1, null);
-        } else if($(this).html()=="英语"){
+        } else if ($(this).html() == "英语") {
             $(".pschool").fadeOut(1, null);
             $(".mschool").fadeOut(1, null);
             $(".hschool").fadeOut(1, null);
@@ -126,26 +126,30 @@ jQuery(document).ready(function($) {
             $("#lesson").fadeOut(1, null);
         }
         gotopage(1, null);
-    })
+    });
 
     $('#net').children().click(function() {
         $('#net').children().removeClass("active");
         $(this).addClass("active");
         gotopage(1, null);
-    })
+    });
 
     $('#sex').children().click(function() {
         $('#sex').children().removeClass("active");
         $(this).addClass("active");
         gotopage(1, null);
-    })
-    
+    });
+
     $('#studyStatus').change(function() {
-        gotopage(1,null);
-    })
-	
-	$('#selDistrict').change(function() {
-        gotopage(1,null);
-    })
+        gotopage(1, null);
+    });
+
+    $('#selDistrict').change(function() {
+        gotopage(1, null);
+    });
     
+    $('#sort').children().click(function() {
+        $('#sort').children().children('i').removeClass("icon-white");
+        $(this).children('i').addClass("icon-white");
+    });
 });

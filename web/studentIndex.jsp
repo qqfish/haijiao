@@ -84,7 +84,9 @@
                                                 <td>
                                                     <blockquote>
                                                         <h4><s:property value="freeTime.teacher.name"/>
-                                                            <label class="label label-info pull-right">
+                                                            <s:if test="freeTime.teacher.status==0"><label class="label">离线</label></s:if>
+                                                            <s:elseif test="freeTime.teacher.status==1"><label class="label label-success">在线</label></s:elseif>
+                                                                <label class="label label-info pull-right">
                                                                 <s:if test="status==2">
                                                                     等待审批
                                                                 </s:if>
@@ -237,19 +239,19 @@
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
                                                     </div>
                                                     <script type="text/javascript">
-                                                        $(".commentA").click(function(){
-                                                            var id = $(this).attr("id");  
-                                                            $("#rate_"+id).bind('rated', function(event, value) {
-                                                                $('#score_'+id).val(value);
-                                                            });
-                                                            $("#rate_"+id).bind('over', function(event, value) {
-                                                                $(this).attr('title', value);
-                                                            });
-                                                            $("#cmtsmt").click(function(event) {
-                                                                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                                    event.preventDefault();
-                                                            });
-                                                        })
+        $(".commentA").click(function() {
+            var id = $(this).attr("id");
+            $("#rate_" + id).bind('rated', function(event, value) {
+                $('#score_' + id).val(value);
+            });
+            $("#rate_" + id).bind('over', function(event, value) {
+                $(this).attr('title', value);
+            });
+            $("#cmtsmt").click(function(event) {
+                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                    event.preventDefault();
+            });
+        })
                                                     </script>
                                             </s:form>
                                         </div>
@@ -261,15 +263,15 @@
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    
-                                                <s:if test="billList.size()<=0">
-                                                    还没有评论哦~！
-                                                </s:if>
-                                                <s:else>
-                                                    <s:iterator value="billList" id="billList">
-                                                        <tr>
-                                        <td>
-                                            <blockquote>
+
+                                    <s:if test="billList.size()<=0">
+                                        还没有评论哦~！
+                                    </s:if>
+                                    <s:else>
+                                        <s:iterator value="billList" id="billList">
+                                            <tr>
+                                                <td>
+                                                    <blockquote>
                                                         <s:if test="ttos != null">
                                                             <h4><s:property value="teacher.name" /><label class="label label-important pull-right">评分:<s:property value="ttos.score" /></label></h4>
                                                             <small>
@@ -302,11 +304,11 @@
                                                                 </s:form>
                                                             </div>
                                                         </s:if>
-                                                            </blockquote>
-                                        </td>
-                                    </tr>
-                                                    </s:iterator>
-                                                </s:else>
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                        </s:iterator>
+                                    </s:else>
                                 </tbody>
                             </table>
                         </div>

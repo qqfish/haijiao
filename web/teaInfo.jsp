@@ -115,6 +115,10 @@
                                 <td><s:property value="tea.score"/></td>
                             </tr>
                             <tr>
+                                <td>浏览数</td>
+                                <td><s:property value="tea.obNum"/></td>
+                            </tr>
+                            <tr>
                                 <td>登录次数</td>
                                 <td></td>
                             </tr>

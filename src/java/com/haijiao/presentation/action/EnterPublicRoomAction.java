@@ -13,30 +13,31 @@ import com.haijiao.SupportService.service.IUserService;
  * @author fish
  */
 public class EnterPublicRoomAction extends RequestSessionAction {
+
     private ITeacherService teacherService;
     private IUserService userService;
     private String teaEmail;
     private int isHolder;
     private User user;
     private String nextPageMessage;
-    
+
     @Override
-    public String execute(){
-        teaEmail = (String)this.getOutRequest("teaEmail");
+    public String execute() {
+        teaEmail = (String) this.getOutRequest("teaEmail");
         isHolder = 0;
-        if(teaEmail == null){
+        if (teaEmail == null) {
             return "false";
         }
         String email = (String) this.getOutSession("email");
-        if(email == null){
+        if (email == null) {
             return "false";
         }
         user = userService.getUserByEmail(email);
-        if(email.equals(teaEmail)){
+        if (email.equals(teaEmail)) {
             isHolder = 1;
         }
-        if(!teaEmail.equals((String)this.getOutSession("email"))){
-            if(teacherService.getRoomStatus(teaEmail)){
+        if (!teaEmail.equals((String) this.getOutSession("email"))) {
+            if (teacherService.getRoomStatus(teaEmail)) {
                 nextPageMessage = "房间已被占用，请稍后再试。";
                 return "false";
             }
@@ -84,5 +85,4 @@ public class EnterPublicRoomAction extends RequestSessionAction {
     public void setUser(User user) {
         this.user = user;
     }
-
 }

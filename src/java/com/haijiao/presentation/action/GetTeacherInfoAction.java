@@ -12,7 +12,7 @@ import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.presentation.bean.schedule.ScheduleBean;
 import java.util.List;
 
-public class GetTeacherInfoAction extends RequestAction{
+public class GetTeacherInfoAction extends RequestSessionAction{
     ITeacherService teacherService;
     Teacher tea;
     ScheduleBean scheduleBean;
@@ -21,9 +21,10 @@ public class GetTeacherInfoAction extends RequestAction{
 
     @Override
     public String execute(){
-        String email = (String)this.getRequestValue("teacherEmail");
+        String email = (String)this.getOutRequest("teacherEmail");
         tea = teacherService.getTeacherByEmail(email);
-        teacherService.increseObNum(email);
+        if(!email.equals(this.getOutSession("email")))
+            teacherService.increseObNum(email);
         scheduleBean = new ScheduleBean(tea);
         billList = billService.getBill(email, "teacher");
         return SUCCESS;

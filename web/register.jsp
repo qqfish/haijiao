@@ -91,7 +91,7 @@
                             <hr/>
                             <dl class="dl-horizontal offset1">
                                 <dt style='margin-top:5px'>姓名</dt>
-                                <dd><s:textfield cssClass="span4" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip2, 8);" type="text" name="name" placeholder="请输入您的全名" autofocus="autofocus"/></dd>
+                                <dd><s:textfield id="SAName" cssClass="span4" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip2, 8);" type="text" name="name" placeholder="请输入您的全名" autofocus="autofocus"/></dd>
                                 <div id="name_tip" class="validateTip"></div>
                                 <div id="name_tip2" class="validateTip"></div>
                                 <br/>
@@ -111,7 +111,7 @@
                                 <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" /></dd>
                                 <br/>
                                 <br/>
-                                <dd><input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testSubmit();"/>
+                                <dd><input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testStudentSubmit();"/>
                                     <s:submit id="form_submit" cssClass="btn btn-primary" style="width:300px; display:none;" value="提交" method="studentRegister"/></dd>
                             </dl>
                         </s:if>
