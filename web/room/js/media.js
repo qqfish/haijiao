@@ -291,6 +291,7 @@ function Media(parentId, text, userList){
         if(userEmail == localUserId){
             current.userButton.empty();
             current.userButton.html("<a tabindex='-1' href='#'>自己</a>");
+            current.video.get(0).muted = true;
         } else {
             current.userButton.empty();
             current.userButton.html("<a tabindex='-1' href='#'>" + userName + "</a>");

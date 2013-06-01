@@ -173,7 +173,6 @@
                                 </div>
                             </div>
                             <div class="modal hide fade" id="exitAlert">
-                                <button type="button" class="close" id="closeAlert" data-dismiss="modal" style="display: none;">&times;</button>
                                 <div class="modal-header">
                                     <h3>确认退出房间？</h3>
                                 </div>

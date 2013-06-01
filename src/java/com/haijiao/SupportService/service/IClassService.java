@@ -20,6 +20,8 @@ public interface IClassService {
     
     public boolean teacherPauseBook(int clazzId, int num);
     
+    public boolean teacherCancelBook(int clazzId, int num);
+    
     public boolean teacherAddClazz(String teacherEmail, List<scheduleLocation> cList);
     
     public boolean teacherRemoveClazz(String teacherEmail, List<scheduleLocation> cList);

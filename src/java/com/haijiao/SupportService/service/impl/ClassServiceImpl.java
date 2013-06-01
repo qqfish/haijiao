@@ -256,4 +256,31 @@ public class ClassServiceImpl implements IClassService {
         }
         return true;
     }
+
+    @Override
+    public boolean teacherCancelBook(int clazzId, int num) {
+        Clazz clazz = clazzDAO.findById(clazzId);
+        FreeTime freeTime = clazz.getFreeTime();
+        int cancelNum = num;
+        if(cancelNum > clazz.getRemain())
+            cancelNum = clazz.getRemain();
+        int pos = freeTime.getClazzList().indexOf(clazz);
+        if (pos < 0 || pos >= freeTime.getClazzList().size()) {
+            return false;
+        }
+        Clazz freeClazz = new Clazz(clazz);
+        freeClazz.setRemain(cancelNum);
+        freeClazz.setStatus(Clazz.Status.available);
+        clazzDAO.makePersistent(freeClazz);
+        freeTime.getClazzList().add(pos, freeClazz);
+        clazz.setRemain(clazz.getRemain() - cancelNum);
+        if(clazz.getRemain() == 0){
+            freeTime.getClazzList().remove(clazz);
+            clazzDAO.makeTransient(clazz);
+        } else {
+            clazzDAO.update(clazz);
+        }
+        freeTimeDAO.update(freeTime);
+        return true;
+    }
 }

@@ -4,6 +4,7 @@
  */
 package com.haijiao.SupportService.service;
 
+import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.room.Room;
 
 /**
@@ -15,4 +16,5 @@ public interface IRoomService {
     public void removeRoom(int clazzId);
     public void clearUnuseRoom();
     public Room enterPublicRoom(String teacherEmail);
+    public void removeRoom(Teacher teacher);
 }

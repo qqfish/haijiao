@@ -5,6 +5,7 @@
 package com.haijiao.Domain.room;
 
 import com.google.gson.Gson;
+import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.room.webFc.FcMessageInbound;
@@ -14,6 +15,9 @@ import com.haijiao.Domain.room.webFc.message.response.ResponseChangePage;
 import com.haijiao.Domain.room.webFc.message.response.ResponseDrawShape;
 import com.haijiao.Domain.room.webFc.message.response.ResponseEraseShape;
 import com.haijiao.Domain.room.webFc.message.response.ResponseUploadBackground;
+import com.haijiao.SupportService.SpringContext;
+import com.haijiao.SupportService.service.IRoomService;
+import com.haijiao.SupportService.service.ITeacherService;
 import java.io.IOException;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
@@ -203,6 +207,12 @@ public class Room {
                 roomFile.get(i).release();
             }
             exitBit = false;
+            if(attendance.size() < 2){
+                IRoomService roomService = (IRoomService) SpringContext.getContext().getBean("roomServiceImpl");
+                roomService.removeRoom((Teacher) holder);
+                ITeacherService teacherService = (ITeacherService) SpringContext.getContext().getBean("teacherServiceImpl");
+                teacherService.setRoomOccupied(holder.getEmail(), false);
+            }
         }
     }
 

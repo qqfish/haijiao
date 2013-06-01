@@ -18,7 +18,6 @@ import com.haijiao.Domain.room.webFc.message.response.Error.ErrorType;
 import com.haijiao.Domain.room.webFc.message.response.Info.InfoData;
 import com.haijiao.Domain.room.webFc.message.response.Info.InfoType;
 import com.haijiao.SupportService.SpringContext;
-import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import java.io.*;
 import java.nio.ByteBuffer;
@@ -101,10 +100,6 @@ public class FcMessageInbound extends MessageInbound {
         room.getTimer().pause();
         System.out.println(this.toString() + "closed");
         userService.setStatus(user.getEmail(), User.Status.onlineAndAvailable);
-        if (user.getUserType().equals("teacher")) {
-            ITeacherService teacherService = (ITeacherService) SpringContext.getContext().getBean("teacherServiceImpl");
-            teacherService.setRoomOccupied(user.getEmail(), false);
-        }
     }
 
     @Override

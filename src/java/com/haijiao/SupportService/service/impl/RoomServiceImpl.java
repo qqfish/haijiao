@@ -76,6 +76,13 @@ public class RoomServiceImpl implements IRoomService {
         }
     }
 
+    @Override
+    public void removeRoom(Teacher teacher) {
+        TeaAndStu aas = new TeaAndStu();
+        aas.setTeaEmail(teacher.getEmail());
+        roomTable.remove(aas);
+    }
+
     private class RoomTimerTask extends TimerTask {
 
         @Override
