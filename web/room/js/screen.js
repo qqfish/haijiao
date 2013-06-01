@@ -88,3 +88,14 @@ function processInfo(infoType, message){
             break;
     }
 }
+
+function lockTool(){
+    $("#pointer").click();
+    $("#pen").attr("class","btn tooltipButton disabled").attr("disabled","disabled");
+    $("#eraser").attr("class","btn tooltipButton disabled").attr("disabled","disabled");
+}
+
+function unlockTool(){
+    $("#pen").attr("class","btn tooltipButton").removeAttr("disabled");
+    $("#eraser").attr("class","btn tooltipButton").removeAttr("disabled");
+}

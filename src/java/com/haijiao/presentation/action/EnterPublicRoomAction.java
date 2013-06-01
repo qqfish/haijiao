@@ -4,7 +4,9 @@
  */
 package com.haijiao.presentation.action;
 
+import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.ITeacherService;
+import com.haijiao.SupportService.service.IUserService;
 
 /**
  *
@@ -12,8 +14,10 @@ import com.haijiao.SupportService.service.ITeacherService;
  */
 public class EnterPublicRoomAction extends RequestSessionAction {
     private ITeacherService teacherService;
+    private IUserService userService;
     private String teaEmail;
     private int isHolder;
+    private User user;
     
     @Override
     public String execute(){
@@ -26,6 +30,7 @@ public class EnterPublicRoomAction extends RequestSessionAction {
         if(email == null){
             return "false";
         }
+        user = userService.getUserByEmail(email);
         if(email.equals(teaEmail)){
             isHolder = 1;
         }
@@ -57,6 +62,22 @@ public class EnterPublicRoomAction extends RequestSessionAction {
 
     public void setTeacherService(ITeacherService teacherService) {
         this.teacherService = teacherService;
+    }
+
+    public IUserService getUserService() {
+        return userService;
+    }
+
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

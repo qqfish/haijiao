@@ -4,13 +4,18 @@
  */
 package com.haijiao.presentation.action;
 
+import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.service.IUserService;
+
 /**
  *
  * @author fish
  */
 public class EnterRoomAction extends RequestSessionAction{
+    private IUserService userService;
     int clazzId;
     int isHolder;
+    private User user;
     
     @Override
     public String execute(){
@@ -24,9 +29,11 @@ public class EnterRoomAction extends RequestSessionAction{
         if(clazzId < 0){
             return "false";
         }
-        if(this.getOutSession("email") == null){
+        String email = (String) this.getOutSession("email");
+        if(email == null){
             return "false";
         }
+        user = userService.getUserByEmail(email);
         return SUCCESS;
     }
 

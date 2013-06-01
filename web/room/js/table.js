@@ -489,18 +489,20 @@ function Table(containerName, tool){
             img.setWidth(img.getWidth() / img.getHeight() * imageSize.height);
             img.setHeight(imageSize.height);
         }
+        lockTool();
+        
         tmpLayer.add(img);
         stage.draw();
         img.on("dblclick dbltouch", function(){
+            unlockTool()
             changePageLock();
             setStageToSave();
-            drawLayer.remove();
+            drawLayer.removeChildren();
             stage.draw();
             stage.toDataURL({
                 callback: function(dataUrl) {
                     img.remove();
                     resetStage();
-                    stage.add(drawLayer);
                     var message = {};
                     message.type = Request.UploadFile;
                     message.postfix = "image";

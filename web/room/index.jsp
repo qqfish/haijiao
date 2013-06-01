@@ -57,12 +57,14 @@
     </head>
     <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
           onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='#session.email' default='null' />');">
-        <div class="modal fade" id="beginInfo" style="background:none;border: none;box-shadow:0 0px 0px rgba(0,0,0,0.3);left:80%;">
-            <image src="/haijiao/room/image/info.png" style="display: block;background:none;" />
-        </div>
-        <script>
-            $("#beginInfo").modal();
-        </script>
+        <s:if test="user.loginNum < 3">
+            <div class="modal fade" id="beginInfo" style="background:none;border: none;box-shadow:0 0px 0px rgba(0,0,0,0.3);left:80%;">
+                <image src="/haijiao/room/image/info.png" style="display: block;background:none;" />
+            </div>
+            <script>
+                $("#beginInfo").modal();
+            </script>
+        </s:if>
         <!--==============================header=================================-->
         <!--<!--%@ include file="WEB-INF/jspf/header.jspf"%>-->
         <div class="line-top"></div>
