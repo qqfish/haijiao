@@ -49,6 +49,12 @@
         $("#dealApply_stop_"+id).submit();
     })
     
+    $("[id*='dealApply_cancel_button_']").click(function(){
+        var id = this.id;
+        id = id.substring(24, id.length);
+        $("#dealApply_cancel_"+id).submit();
+    })
+    
     $("[id*='dealApply_accept_button_']").click(function(){
         var id = this.id;
         id = id.substring(24, id.length);

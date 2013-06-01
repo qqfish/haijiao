@@ -134,8 +134,13 @@
                                                                             <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
                                                                             <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
                                                                             <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">顺延一周</button>
-                                                                            <button type="button" class="btn btn-info btn-mini">取消一周</button>
+                                                                            <button type="button" id="dealApply_cancel_button_<s:property value="id"/>" class="btn btn-info btn-mini">取消一周</button>
                                                                             <a class="btn btn-info btn-mini" href="getMail.action?toEmail=<s:property value="student.email" />">私信</a>
+                                                                        </s:form>
+                                                                        <s:form id="dealApply_cancel_%{id}" action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="cancel"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
                                                                         </s:form>
                                                                     </s:if>
                                                                     <s:if test="status==2">

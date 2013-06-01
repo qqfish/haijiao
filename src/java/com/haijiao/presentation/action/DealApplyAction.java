@@ -23,6 +23,8 @@ public class DealApplyAction extends RequestSessionAction {
     public String execute() {
         if ("stop".equals((String) this.getOutRequest("button"))) {
             stop();
+        } else if ("cancel".equals((String) this.getOutRequest("button"))) {
+            cancel();
         } else if ("accept".equals((String) this.getOutRequest("button"))) {
             accept();
         } else if ("decline".equals((String) this.getOutRequest("button"))) {
@@ -44,9 +46,18 @@ public class DealApplyAction extends RequestSessionAction {
 
     public void stop() {
         classService.teacherPauseBook(classId, 1);
-        nextPageMessage = "成功暂停一周";
+        nextPageMessage = "成功顺延一周";
         mailService.sendMail( (String)this.getOutSession("email"), toEmail,
-                "同学您好，您的课程被老师暂停一周。"
+                "同学您好，您的课程被老师顺延一周。"
+                + "本邮件由系统发送，具体情况可回复本邮件与老师联系。"
+        );
+    }
+    
+    public void cancel() {
+        classService.teacherCancelBook(classId, 1);
+        nextPageMessage = "成功取消一周";
+        mailService.sendMail( (String)this.getOutSession("email"), toEmail,
+                "同学您好，您的课程被老师取消一周。"
                 + "本邮件由系统发送，具体情况可回复本邮件与老师联系。"
         );
     }
