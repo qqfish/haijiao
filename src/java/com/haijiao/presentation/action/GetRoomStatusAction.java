@@ -23,7 +23,7 @@ public class GetRoomStatusAction extends SessionAction{
         String email = (String)this.getSessionValue("email");
         if(email != null){
             HttpServletResponse response = ServletActionContext.getResponse();
-            boolean status = teacherService.getRoomStatus(email);
+            String status = teacherService.getRoomOccupied(email);
             try {
                 response.getWriter().write(String.valueOf(status));
             } catch (IOException ex) {

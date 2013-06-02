@@ -37,11 +37,11 @@ public class EnterPublicRoomAction extends RequestSessionAction {
             isHolder = 1;
         }
         if (!teaEmail.equals((String) this.getOutSession("email"))) {
-            if (teacherService.getRoomStatus(teaEmail)) {
+            if (teacherService.getRoomOccupied(teaEmail) != null && !teacherService.getRoomOccupied(teaEmail).equals(email)) {
                 nextPageMessage = "房间已被占用，请稍后再试。";
                 return "false";
             }
-            teacherService.setRoomOccupied(teaEmail, true);
+            teacherService.setRoomOccupied(teaEmail, email);
         }
         return SUCCESS;
     }

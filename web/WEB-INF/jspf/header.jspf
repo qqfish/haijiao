@@ -12,7 +12,8 @@
     }
     function getRoomStatus() {
         $.post("getRoomStatus.action", function(data) {
-            if (data == "true") {
+            console.log(data);
+            if (data != "null") {
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
             }

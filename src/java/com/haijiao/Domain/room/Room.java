@@ -211,7 +211,7 @@ public class Room {
                 IRoomService roomService = (IRoomService) SpringContext.getContext().getBean("roomServiceImpl");
                 roomService.removeRoom((Teacher) holder);
                 ITeacherService teacherService = (ITeacherService) SpringContext.getContext().getBean("teacherServiceImpl");
-                teacherService.setRoomOccupied(holder.getEmail(), false);
+                teacherService.setRoomOccupied(holder.getEmail(), null);
             }
         }
     }

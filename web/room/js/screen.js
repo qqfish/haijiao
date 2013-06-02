@@ -36,13 +36,16 @@ function lockType(t){
     }
 }
 
-function pError(str){
+function pError(str, dead){
     unlock();
     $('#alertContext').empty();
     $('#alertContext').html("<h3>"+str + '</h3>');
     lockType("error");
     lock();
-    $("#closeAlert").show();
+    if(dead == null || !dead)
+        $("#closeAlert").show();
+    else
+        $("#closeAlert").remove();
 }
 
 function disconnected(){

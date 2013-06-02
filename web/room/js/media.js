@@ -61,7 +61,7 @@ function Media(parentId, text, userList){
             console.log("Requested access to local media with mediaConstraints:\n" +
                 "  \"" + JSON.stringify(constraints) + "\"");
         } catch (e) {
-            alert("该浏览器版本太旧，不支持视频聊天功能，请到http://www.google.cn/intl/zh-CN/chrome/browser/下载最新报Chrome浏览器");
+            pError("该浏览器版本太旧，不支持视频聊天功能，请到<a href='http://www.google.cn/intl/zh-CN/chrome/browser/'>这里</a>下载最新版Chrome浏览器",true);
             console.log("getUserMedia failed with exception: " + e.message);
         }
     }
