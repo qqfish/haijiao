@@ -66,4 +66,8 @@
         id = id.substring(25, id.length);
         $("#dealApply_decline_"+id).submit();
     })
+    
+    $('.file_panel').click(function(){
+        
+    })
 });

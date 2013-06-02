@@ -39,7 +39,7 @@
                 <![endif]-->
     </head>
     <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-        viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
+            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
           >
 
         <!--==============================header=================================-->
@@ -83,22 +83,23 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="span8 module" style="padding:12px;">
-                    <ul class="nav nav-pills">
-                        <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                        <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
-                        <li id="l1"><a href="#student_area" data-toggle="tab">预约列表</a></li>
-                        <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
-                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade" id='student_area'>
-                            <table class="table table-hover table-striped">
-                                <tbody>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span8 module" style="padding:12px;">
+                        <ul class="nav nav-pills">
+                            <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                            <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
+                            <li id="l1"><a href="#student_area" data-toggle="tab">预约列表</a></li>
+                            <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab" >文件</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id='student_area'>
+                                <table class="table table-hover table-striped">
+                                    <tbody>
                                     <s:if test="classList.size()<=0">
                                         还没有学生选你哦~！
                                     </s:if>
@@ -111,7 +112,7 @@
                                                             <h4><s:property value="student.name"/>
                                                                 <s:if test="student.status==0"><label class="label">离线</label></s:if>
                                                                 <s:elseif test="student.status==1"><label class="label label-success">在线</label></s:elseif>
-                                                                <label class="label label-info pull-right">
+                                                                    <label class="label label-info pull-right">
                                                                     <s:if test="status==2">
                                                                         等待审批
                                                                     </s:if>
@@ -320,7 +321,7 @@
                                         </table>
                                         <s:form id="schedule_form" action="addFreeTime.action">
                                             <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
-                                            <a class="btn btn-primary pull-right" id="upload" >完成</a>
+                                                <a class="btn btn-primary pull-right" id="upload" >完成</a>
                                         </s:form>
                                         <p></p>
                                     </div>
@@ -338,9 +339,9 @@
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
                                             <span class="label label-info"><s:property value="name" /></span><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
-                                        </s:form>
-                                    </s:if>
-                                </s:iterator>
+                                            </s:form>
+                                        </s:if>
+                                    </s:iterator>
                                 <br/><br/>
                                 <p style="font-size: 9px;">
                                     <strong>第一步：选择课程</strong><br/>
@@ -455,29 +456,29 @@
                                                 <div class="modal-body">
                                                     <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                     内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                    <br/>
-                                                    评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                        <br/>
+                                                        评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
                                                     <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                                </div>
-                                                <script type="text/javascript">
-                                                    $(".commentA").click(function(){
-                                                        var id = $(this).attr("id");            
-                                                        $("#rate_"+id).bind('rated', function(event, value) {
-                                                            $('#score_'+id).val(value);
-                                                        });
-                                                        $("#rate_"+id).bind('over', function(event, value) {
-                                                            $(this).attr('title', value);
-                                                        });
-                                                        $("#cmtsmt").click(function(event) {
-                                                            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                                event.preventDefault();
-                                                        });
-                                                    })
-                                                </script>
+                                                    </div>
+                                                    <script type="text/javascript">
+        $(".commentA").click(function() {
+            var id = $(this).attr("id");
+            $("#rate_" + id).bind('rated', function(event, value) {
+                $('#score_' + id).val(value);
+            });
+            $("#rate_" + id).bind('over', function(event, value) {
+                $(this).attr('title', value);
+            });
+            $("#cmtsmt").click(function(event) {
+                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                    event.preventDefault();
+            });
+        })
+                                                    </script>
                                             </s:form>
                                         </div>
                                     </s:iterator>
@@ -488,15 +489,14 @@
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                            
-                                                <s:if test="billList.size()<=0">
-                                                    还没有评论哦~！
-                                                </s:if>
-                                                <s:else>
-                                                    <s:iterator value="billList" id="billList">
-                                                        <tr>
-                                                    <td>
-                                                        <blockquote>
+                                    <s:if test="billList.size()<=0">
+                                        还没有评论哦~！
+                                    </s:if>
+                                    <s:else>
+                                        <s:iterator value="billList" id="billList">
+                                            <tr>
+                                                <td>
+                                                    <blockquote>
                                                         <s:if test="stot != null">
                                                             <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
                                                             <small>
@@ -523,29 +523,48 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                    </div>
+                                                                        </div>
                                                                 </s:form>
                                                             </div>
                                                         </s:if>
-                                                            </td>
-                                                            </tr>
-                                                            </blockquote>
-                                                    </s:iterator>
-                                                </s:else>
-                                            
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                        </s:iterator>
+                                    </s:else>
                                 </tbody>
                             </table>
                         </div>
+                        <div class="tab-pane fade" id='file_area'>
+                            <s:select cssClass="span2" id="file_type" name="file_type" list="{'全部文件','我的文件'}"></s:select>
+                                <table class="table table-hover table-striped">
+                                    <tbody>
+                                        <tr class="file_panel">
+                                            <td>
+                                                <div class="pull-left" id="filename">
+                                                    教材名称
+                                                </div>
+                                                <div class="pull-right">
+                                                    <button class="btn btn-primary btn-mini">下载</button>
+                                                    <button class="btn btn-danger btn-mini">删除</button>
+                                                </div>
+                                                <br/>
+                                                <small>上传者  上传日期  持续时间  下载次数 文件大小</small>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>         
-        </div>
+                </div>         
+            </div>
 
-        <!--==============================footer=================================-->
+            <!--==============================footer=================================-->
         <%@ include file="WEB-INF/jspf/footer.jspf"%>
     </body>
 </html>
