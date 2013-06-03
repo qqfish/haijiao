@@ -127,9 +127,6 @@
     <bean id="ResetChangePasswordAction" class="com.haijiao.presentation.action.ResetChangePasswordAction" scope="prototype" >
         <property name="userService" ref="userServiceImpl" />
     </bean>
-    <bean id="GetRoomStatusAction" class="com.haijiao.presentation.action.GetRoomStatusAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-    </bean>
     <bean id="FileAction" class="com.haijiao.presentation.action.FileAction" scope="prototype">
     </bean>
     <bean id="SessionCheckInterceptor" class="com.haijiao.presentation.interceptor.SessionCheckInterceptor">

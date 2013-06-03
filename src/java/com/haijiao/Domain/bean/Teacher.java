@@ -36,7 +36,9 @@ public class Teacher extends User{
     
     
     @Column(columnDefinition="int default 0")
-    private int reserveNum;     //预约次数
+    private Integer reserveNum;     //预约次数
+    @Column(columnDefinition="int default 0")
+    private Integer newReserveNum;     //预约次数
     
     private String tel;         //老师的手机
     private String videoUrl;    //老师的介绍视频地址
@@ -49,7 +51,7 @@ public class Teacher extends User{
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     
-    private boolean audition;       //该老师是否接受试听
+    private Boolean audition;       //该老师是否接受试听
     
     @OneToMany(mappedBy = "teacher")
     private List<FreeTime> schedule;//记录老师的时间表
@@ -113,7 +115,7 @@ public class Teacher extends User{
         return classNum;
     }
 
-    public void setClassNum(int classNum) {
+    public void setClassNum(Integer classNum) {
         this.classNum = classNum;
     }
 
@@ -121,15 +123,23 @@ public class Teacher extends User{
         return reserveNum;
     }
 
-    public void setReserveNum(int reserveNum) {
+    public void setReserveNum(Integer reserveNum) {
         this.reserveNum = reserveNum;
+    }
+
+    public Integer getNewReserveNum() {
+        return newReserveNum;
+    }
+
+    public void setNewReserveNum(Integer newReserveNum) {
+        this.newReserveNum = newReserveNum;
     }
 
     public int getObNum() {
         return obNum;
     }
 
-    public void setObNum(int obNum) {
+    public void setObNum(Integer obNum) {
         this.obNum = obNum;
     }
 
@@ -233,16 +243,8 @@ public class Teacher extends User{
         this.sprtUnderline = sprtUnderline;
     }
 
-    public void setAudition(boolean audition) {
+    public void setAudition(Boolean audition) {
         this.audition = audition;
-    }
-
-    public void setClassNum(Integer classNum) {
-        this.classNum = classNum;
-    }
-
-    public void setObNum(Integer obNum) {
-        this.obNum = obNum;
     }
 
     public String getStudentin() {
@@ -265,7 +267,7 @@ public class Teacher extends User{
         return wagePerhour;
     }
 
-    public void setWagePerhour(int wagePerhour) {
+    public void setWagePerhour(Integer wagePerhour) {
         this.wagePerhour = wagePerhour;
     }
 

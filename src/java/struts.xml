@@ -221,7 +221,6 @@
         <action name="resetPassword" class="ResetPasswordAction">
             <result name="success">resetPassword.jsp</result>
         </action>
-        <action name="getRoomStatus" class="GetRoomStatusAction"/>
         <action name="file" class="FileAction"/>
     </package>
 </struts>

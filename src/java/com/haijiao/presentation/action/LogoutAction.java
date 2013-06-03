@@ -21,6 +21,7 @@ public class LogoutAction extends SessionAction {
             username.setMaxAge(1);
             username.setPath("/");
             ServletActionContext.getResponse().addCookie(username);
+
             userService.setStatus(email, User.Status.offline);
             this.sessionClear();
             this.sessionPutIn("message", "退出成功");

@@ -11,8 +11,12 @@
         }, "text");
     }
     function getRoomStatus() {
-        $.post("getRoomStatus.action", function(data) {
-            if (data != "null") {
+        $.post("getTeacherStatus.action", function(data) {
+            if (data.info.status != null) {
+                $('#toClass').removeClass("btn-inverse");
+                $('#toClass').addClass("btn-info");
+            }
+            else if(data.info.reserveNum != 0){
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
             }
@@ -20,7 +24,7 @@
                 $('#toClass').removeClass("btn-info");
                 $('#toClass').addClass("btn-inverse");
             }
-        }, "text");
+        }, "json");
     }
 </script>
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
