@@ -10,6 +10,7 @@ import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
+import com.haijiao.SupportService.MD5Util;
 import com.haijiao.SupportService.dao.ICommentDAO;
 import com.haijiao.SupportService.dao.IResetInfoDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
@@ -117,6 +118,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean changePassword(String email, String password) {
         User u = userDAO.getUserByEmail(email);
+        password = MD5Util.MD5(password);
         u.setPassword(password);
         userDAO.update(u);
         return true;
@@ -125,6 +127,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean changePasswordById(String id, String password) {
         User u = userDAO.findById(Integer.parseInt(id));
+        password = MD5Util.MD5(password);
         u.setPassword(password);
         userDAO.update(u);
         return true;
@@ -141,6 +144,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     @Transactional(propagation=Propagation.SUPPORTS)
     public String confirmLogin(String email, String password) {
+        password = MD5Util.MD5(password);
         return userDAO.confirmLogin(email, password);
     }
 
@@ -149,6 +153,7 @@ public class UserServiceImpl implements IUserService {
         if (userType.equals("student")) {
             Student s = new Student();
             s.setEmail(account);
+            password = MD5Util.MD5(password);
             s.setPassword(password);
             s.setUserType(userType);
             java.util.Date datetime = new java.util.Date();
@@ -162,6 +167,7 @@ public class UserServiceImpl implements IUserService {
         } else if (userType.equals("teacher")) {
             Teacher t = new Teacher();
             t.setEmail(account);
+            password = MD5Util.MD5(password);
             t.setPassword(password);
             t.setUserType(userType);
             java.util.Date datetime = new java.util.Date();

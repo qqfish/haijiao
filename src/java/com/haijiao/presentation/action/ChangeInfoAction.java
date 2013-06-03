@@ -6,6 +6,7 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.User;
+import com.haijiao.SupportService.MD5Util;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
@@ -96,7 +97,7 @@ public class ChangeInfoAction extends SessionAction {
 
     public String changePassword(){
         User u = userService.getUserByEmail((String)this.getSessionValue("email"));
-        if ( !oldpwd.equals(u.getPassword())) {
+        if ( !(MD5Util.MD5(oldpwd)).equals(u.getPassword())) {
             nextPageMessage = this.getText("passwordWrong");
             return "input";
         } 
