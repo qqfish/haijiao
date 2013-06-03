@@ -8,6 +8,7 @@ import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
+import javax.servlet.http.Cookie;
 
 public class LoginAction extends SessionAction {
 
@@ -16,6 +17,7 @@ public class LoginAction extends SessionAction {
     private IStudentService studentService;
     private String email;
     private String password;
+    private String autologin;
     private String errorMessage;
     
     @Override
@@ -25,6 +27,11 @@ public class LoginAction extends SessionAction {
             errorMessage = "loginFail";
             return INPUT;
         } else {
+            if(autologin.equals("on")){
+                Cookie username = new Cookie("user",email);
+                username.setMaxAge(10*24*60*60);
+                username.setPath("/");
+            }
             User theUser = userService.getUserByEmail(email);
             userService.setStatus(email, User.Status.onlineAndAvailable);
             userService.setActiveDate(email);
@@ -67,6 +74,14 @@ public class LoginAction extends SessionAction {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAutologin() {
+        return autologin;
+    }
+
+    public void setAutologin(String autologin) {
+        this.autologin = autologin;
     }
 
     public IUserService getUserService() {

@@ -253,8 +253,6 @@ public class Teacher extends User{
         this.studentin = studentin;
     }
 
-
-
     public List<FreeTime> getSchedule() {
         return schedule;
     }

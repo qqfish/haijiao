@@ -40,7 +40,7 @@
                                     <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
                                     <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
                                         <label class="checkbox pull-right" style='margin-right:10px'>
-                                            <input type="checkbox" style='width:30px'> 十天内自动登录
+                                        <s:checkbox name="autologin" fieldValue="on" cssStyle="width:30px"/>十天内自动登录
                                         </label>
                                     <s:submit cssClass="btn btn-success " style="margin-top:20px;margin-left:3px;width:220px" value="登录"></s:submit>
                                 </s:form>
