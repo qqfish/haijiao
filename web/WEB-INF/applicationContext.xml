@@ -132,6 +132,11 @@
     </bean>
     <bean id="FileAction" class="com.haijiao.presentation.action.FileAction" scope="prototype">
     </bean>
+    <bean id="SessionCheckInterceptor" class="com.haijiao.presentation.interceptor.SessionCheckInterceptor">
+        <property name="userService" ref="userServiceImpl" />
+        <property name="teacherService" ref="teacherServiceImpl" />
+        <property name="studentService" ref="studentServiceImpl"/>
+    </bean>
 
     <bean id="springContext" class="com.haijiao.SupportService.SpringContext"></bean>
     <!-- persist -->

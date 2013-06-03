@@ -15,6 +15,8 @@ import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.presentation.bean.schedule.ScheduleBean;
 import java.util.List;
+import javax.servlet.http.Cookie;
+import org.apache.struts2.ServletActionContext;
 
 public class IndexAction extends SessionAction {
     ScheduleBean scheduleBean;
@@ -31,6 +33,28 @@ public class IndexAction extends SessionAction {
     @Override
     public String execute() throws Exception {
         String email = (String)this.getSessionValue("email");
+        if(email==null){
+            Cookie[] cookies = ServletActionContext.getRequest().getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if(cookie.getName().equals("user")) {
+                        email = cookie.getValue();
+                        User theUser = userService.getUserByEmail(email);
+                        String userType = theUser.getUserType();
+                        userService.setStatus(email, User.Status.onlineAndAvailable);
+                        userService.setActiveDate(email);
+                        this.sessionPutIn("name", theUser.getName());
+                        this.sessionPutIn("userType", userType);
+                        this.sessionPutIn("email",email);
+                        if(userType.equals("teacher")){
+                            this.sessionPutIn("todayClazz", teacherService.getTodayClasses(email));
+                        } else {
+                            this.sessionPutIn("todayClazz", studentService.getTodayClasses(email));
+                        }
+                    }
+                }
+            }
+        }
         if(email!=null){
             User user = userService.getUserByEmail(email);
             if(user.getUserType().equals("teacher")){

@@ -9,6 +9,7 @@ import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import javax.servlet.http.Cookie;
+import org.apache.struts2.ServletActionContext;
 
 public class LoginAction extends SessionAction {
 
@@ -31,6 +32,7 @@ public class LoginAction extends SessionAction {
                 Cookie username = new Cookie("user",email);
                 username.setMaxAge(10*24*60*60);
                 username.setPath("/");
+                ServletActionContext.getResponse().addCookie(username);
             }
             User theUser = userService.getUserByEmail(email);
             userService.setStatus(email, User.Status.onlineAndAvailable);
