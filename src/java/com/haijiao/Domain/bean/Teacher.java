@@ -51,6 +51,7 @@ public class Teacher extends User{
     @JoinColumn(name="tid")
     private List<Lesson> lessons;   //该老师开设课程
     
+    @Column(columnDefinition="bool default false")
     private Boolean audition;       //该老师是否接受试听
     
     @OneToMany(mappedBy = "teacher")
@@ -59,6 +60,7 @@ public class Teacher extends User{
     @OneToMany(mappedBy = "teacher")
     protected List<Bill> billList;  //账单列表
     
+    @Column(columnDefinition="int default 0")
     private int wagePerhour;        //老师每小时的辅导费
     
     public Teacher() {

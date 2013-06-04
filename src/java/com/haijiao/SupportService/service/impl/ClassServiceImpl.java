@@ -86,6 +86,7 @@ public class ClassServiceImpl implements IClassService {
             freeTimeDAO.update(ft);
         }
         tea.setReserveNum(tea.getReserveNum() + cList.size());
+        tea.setNewReserveNum(tea.getNewReserveNum() + cList.size());
         teacherDAO.update(tea);
         return true;
     }
@@ -199,6 +200,9 @@ public class ClassServiceImpl implements IClassService {
             return false;
         }
         clazz.setStatus(Clazz.Status.accept);
+        Teacher tea = clazz.getFreeTime().getTeacher();
+        tea.setNewReserveNum(tea.getNewReserveNum() - 1);
+        teacherDAO.update(tea);
         return true;
     }
 

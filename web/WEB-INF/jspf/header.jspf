@@ -16,7 +16,7 @@
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
             }
-            else if(data.info.reserveNum != 0){
+            else if(data.info.reserveNum != null && data.info.reserveNum != 0){
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
             }

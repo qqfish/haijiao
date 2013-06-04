@@ -93,8 +93,11 @@
                         <div id="net" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">电信</button>
-                            <button type="button" value="2" class="btn btn-small" data-toggle="button">网通</button>
+                            <button type="button" value="2" class="btn btn-small" data-toggle="button">联通(网通)</button>
                             <button type="button" value="3" class="btn btn-small" data-toggle="button">教育网</button>
+                            <button type="button" value="4" class="btn btn-small" data-toggle="button">移动(铁通)</button>
+                            <button type="button" value="5" class="btn btn-small" data-toggle="button">有线通</button>
+                            <button type="button" value="6" class="btn btn-small" data-toggle="button">其他</button>
                         </div> 
                         <p></p>
                         <button type="button" class="btn btn-small btn-danger disabled">性别</button>
