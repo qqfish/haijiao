@@ -8,14 +8,25 @@ import com.haijiao.SupportService.service.IUserService;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author hp
  */
+
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("checkEmail")
 public class CheckEmailAction extends SessionAction{
+    @Resource
     IUserService userService;
     String email;
     

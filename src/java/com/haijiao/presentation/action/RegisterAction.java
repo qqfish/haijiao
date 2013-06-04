@@ -8,14 +8,30 @@ import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Results({
+    @Result(name="success",location="/register.jsp"),
+    @Result(name="input",location="/index.jsp")
+})
 public class RegisterAction extends SessionAction{
     private String email;
     private String password1;
     private String password2;
     private String userType;
+    @Resource
     private IUserService userService;
+    @Resource
     private ITeacherService teacherService;
+    @Resource
     private IStudentService studentService;
     private String errorMessage;
     

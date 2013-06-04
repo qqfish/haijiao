@@ -9,12 +9,33 @@ import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("toChangeInfo")
+@Results({
+    @Result(name="success",location="/changeInfo.jsp")
+})
 public class ToChangeInfoAction extends SessionAction {
-    ITeacherService teacherService;
-    IStudentService studentService;
-    Teacher tea;
-    Student stu;
+    @Resource
+    private ITeacherService teacherService;
+    @Resource
+    private IStudentService studentService;
+    private Teacher tea;
+    private Student stu;
     
     @Override
     public String execute() {

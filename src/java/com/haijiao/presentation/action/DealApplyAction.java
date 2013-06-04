@@ -8,16 +8,38 @@ import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.IMailService;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("dealApply")
+@Results({
+    @Result(name="success",type="chain",location="index")
+})
 public class DealApplyAction extends RequestSessionAction {
-
-    IClassService classService;
-    String nextPageMessage;
-    ITeacherService teacherService;
-    IStudentService studentService;
-    IMailService mailService;
-    Integer classId;
-    String toEmail;
+    @Resource
+    private IClassService classService;
+    private String nextPageMessage;
+    @Resource
+    private ITeacherService teacherService;
+    @Resource
+    private IStudentService studentService;
+    @Resource
+    private IMailService mailService;
+    private Integer classId;
+    private String toEmail;
 
     @Override
     public String execute() {

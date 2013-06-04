@@ -13,118 +13,20 @@
     <!-- action -->
     
     <bean id="fileManager" class="com.haijiao.Domain.file.FileManager"/>
-    <bean id="LoginAction" class="com.haijiao.presentation.action.LoginAction" scope="prototype">
-        <property name="userService" ref="userServiceImpl" />
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
-    </bean>
-    <bean id="LogoutAction" class="com.haijiao.presentation.action.LogoutAction" scope="prototype">
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="IndexAction" class="com.haijiao.presentation.action.IndexAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
-        <property name="userService" ref="userServiceImpl" />
-        <property name="billService" ref="billServiceImpl" />
-    </bean>
-    <bean id="RegisterAction" class="com.haijiao.presentation.action.RegisterAction" scope="prototype">
-        <property name="userService" ref="userServiceImpl" />
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
-    </bean>
-    <bean id="RegisterThenAction" class="com.haijiao.presentation.action.RegisterThenAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
-    </bean>
-    <bean id="ToChangeInfoAction" class="com.haijiao.presentation.action.ToChangeInfoAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
-    </bean>
-    <bean id="ChangeInfoAction" class="com.haijiao.presentation.action.ChangeInfoAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="ChangeIntroAction" class="com.haijiao.presentation.action.ChangeIntroAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="DealLessonAction" class="com.haijiao.presentation.action.DealLessonAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-    </bean>
-    <bean id="DealApplyAction" class="com.haijiao.presentation.action.DealApplyAction" scope="prototype">
-        <property name="classService" ref="classServiceImpl" />
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl" />
-        <property name="mailService" ref="mailServiceImpl"/>
-    </bean>
-    <bean id="SearchTeacherAction" class="com.haijiao.presentation.action.SearchTeacherAction" scope="prototype">
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="GetTeacherInfoAction" class="com.haijiao.presentation.action.GetTeacherInfoAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="billService" ref="billServiceImpl" />
-    </bean>   
-    <bean id="BookTeacherAction" class="com.haijiao.presentation.action.BookTeacherAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="classService" ref="classServiceImpl" />
-        <property name="userService" ref="userServiceImpl" />
-        <property name="mailService" ref="mailServiceImpl"/>
-    </bean>
+
     <bean id="AddFreeTimeAction" class="com.haijiao.presentation.action.teacherAchtion.AddFreeTimeAction" scope="prototype">
         <property name="classService" ref="classServiceImpl" />
     </bean>
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
         <property name="studentService" ref="studentServiceImpl" />
     </bean>
-    <bean id="GetCommonFileAction" class="com.haijiao.presentation.action.GetCommonFileAction" scope="prototype"/>
-    <bean id="SendMailAction" class="com.haijiao.presentation.action.SendMailAction" scope="prototype">
-        <property name="mailService" ref="mailServiceImpl" />
-    </bean>
-    <bean id="GetMailAction" class="com.haijiao.presentation.action.GetMailAction" scope="prototype">
-        <property name="mailService" ref="mailServiceImpl" />
-    </bean>
-    <bean id="GetMailNumAction" class="com.haijiao.presentation.action.GetMailNumAction" scope="prototype">
-        <property name="mailService" ref="mailServiceImpl" />
-    </bean>
-    <bean id="MarkMailAction" class="com.haijiao.presentation.action.MarkMailAction" scope="prototype">
-        <property name="mailService" ref="mailServiceImpl" />
-    </bean>
-    <bean id="RemoveMailAction" class="com.haijiao.presentation.action.RemoveMailAction" scope="prototype">
-        <property name="mailService" ref="mailServiceImpl" />
-    </bean>
     <bean id="RemoveSingleMailAction" class="com.haijiao.presentation.action.RemoveSingleMailAction" scope="prototype">
         <property name="mailService" ref="mailServiceImpl" />
     </bean>
-    <bean id="MakeCommentReplyAction" class="com.haijiao.presentation.action.MakeCommentReplyAction" scope="prototype">
-        <property name="billService" ref="billServiceImpl" />
-    </bean>
-    <bean id="CheckEmailAction" class="com.haijiao.presentation.action.CheckEmailAction" scope="prototype">
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="EnterRoomAction" class="com.haijiao.presentation.action.EnterRoomAction" scope="prototype">
-        <property name="userService" ref="userServiceImpl" />
-    </bean> 
-      
-    <bean id="EnterPublicRoomAction" class="com.haijiao.presentation.action.EnterPublicRoomAction" scope="prototype">
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="ContactUsAction" class="com.haijiao.presentation.action.ContactUsAction" scope="prototype" />    
     <bean id="roomTimer" class="com.haijiao.Domain.room.RoomTimer" scope="prototype">
         <property name="billService" ref="billServiceImpl" />
     </bean>
     <bean id="UploadPicAction" class="com.haijiao.presentation.action.UploadPicAction" scope="prototype" >
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="ForgetPasswordAction" class="com.haijiao.presentation.action.ForgetPasswordAction" scope="prototype" >
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="ResetPasswordAction" class="com.haijiao.presentation.action.ResetPasswordAction" scope="prototype" >
-        <property name="userService" ref="userServiceImpl" />
-    </bean>
-    <bean id="ResetChangePasswordAction" class="com.haijiao.presentation.action.ResetChangePasswordAction" scope="prototype" >
         <property name="userService" ref="userServiceImpl" />
     </bean>
     <bean id="FileAction" class="com.haijiao.presentation.action.FileAction" scope="prototype">

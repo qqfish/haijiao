@@ -10,22 +10,40 @@ import com.haijiao.global.PageBean;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("searchTeacher")
+@Results({
+    @Result(name="success",location="/teachers.jsp"),
+    @Result(name="input",location="/teachers.jsp"),
+    @Result(name="dynamic",location="/teacherspart.jsp")
+})
 public class SearchTeacherAction extends RequestSessionAction {
-
-    IUserService userService;
-    String searchContent;
-    String currentPage;
-    PageBean pb;
-    Integer desc;
-    String lessonGet;
-    String netGet;
-    String role;
-    String province;
-    String city;
-    String district;
-    String sex;
-    String status;
+    @Resource
+    private IUserService userService;
+    private String searchContent;
+    private String currentPage;
+    private PageBean pb;
+    private Integer desc;
+    private String lessonGet;
+    private String netGet;
+    private String role;
+    private String province;
+    private String city;
+    private String district;
+    private String sex;
+    private String status;
 
     public SearchTeacherAction() {
     }

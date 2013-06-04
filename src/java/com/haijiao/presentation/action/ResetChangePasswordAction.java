@@ -6,8 +6,24 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IUserService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("resetChangePassword")
+@Results({
+    @Result(name="success",type="chain",location="index"),
+    @Result(name="input",location="/resetPassword.jsp")
+})
 public class ResetChangePasswordAction extends SessionAction {
+    @Resource
     private IUserService userService;
     private String id;
     private String newpwd;

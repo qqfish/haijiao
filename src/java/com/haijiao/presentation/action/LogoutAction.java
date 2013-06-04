@@ -7,11 +7,24 @@ package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IUserService;
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Results({
+    @Result(name="success",location="/index.jsp")
+})
 public class LogoutAction extends SessionAction {
-    IUserService userService;
+    @Resource
+    private IUserService userService;
     
     @Override
     public String execute(){
@@ -21,7 +34,6 @@ public class LogoutAction extends SessionAction {
             username.setMaxAge(1);
             username.setPath("/");
             ServletActionContext.getResponse().addCookie(username);
-
             userService.setStatus(email, User.Status.offline);
             this.sessionClear();
             this.sessionPutIn("message", "退出成功");

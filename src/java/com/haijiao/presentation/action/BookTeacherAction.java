@@ -12,18 +12,40 @@ import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.global.scheduleLocation;
 import java.util.List;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("bookTeacher")
+@Results({
+    @Result(name="success",type="chain",location="index")
+})
 public class BookTeacherAction extends SessionAction {
-
-    IClassService classService;
-    ITeacherService teacherService;
-    IUserService userService;
-    IMailService mailService;
-    String teacherEmail;
-    String json;
-    String lesson;
-    String nextPageMessage;
-    int times;
+    @Resource
+    private IClassService classService;
+    @Resource
+    private ITeacherService teacherService;
+    @Resource
+    private IUserService userService;
+    @Resource
+    private IMailService mailService;
+    private String teacherEmail;
+    private String json;
+    private String lesson;
+    private String nextPageMessage;
+    private int times;
 
     public BookTeacherAction() {
     }

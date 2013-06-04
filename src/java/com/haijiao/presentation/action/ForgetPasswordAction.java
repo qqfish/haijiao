@@ -14,16 +14,32 @@ import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 import sun.misc.BASE64Encoder;
 
 /**
  *
  * @author hp
  */
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("forgetPassword")
+@Results({
+    @Result(name="success",type="chain",location="index"),
+    @Result(name="input",location="/forgetPassword.jsp")
+})
 public class ForgetPasswordAction extends RequestAction{
-    IUserService userService;
-    String email;
-    String nextPageMessage;
+    @Resource
+    private IUserService userService;
+    private String email;
+    private String nextPageMessage;
     
     @Override
     public String execute(){

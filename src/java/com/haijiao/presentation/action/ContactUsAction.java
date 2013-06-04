@@ -7,11 +7,24 @@ package com.haijiao.presentation.action;
 import com.haijiao.global.config;
 import java.io.File;
 import java.io.FileWriter;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author fish
  */
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("contactUs")
+@Results({
+    @Result(name="success",type="chain",location="index")
+})
 public class ContactUsAction extends RequestSessionAction {
 
     private String name;

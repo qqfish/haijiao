@@ -11,13 +11,29 @@ import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.presentation.bean.schedule.ScheduleBean;
 import java.util.List;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("getTeacherInfo")
+@Results({
+    @Result(name="success",location="/teaInfo.jsp")
+})
 public class GetTeacherInfoAction extends RequestSessionAction{
-    ITeacherService teacherService;
-    Teacher tea;
-    ScheduleBean scheduleBean;
-    List<Bill> billList;
-    IBillService billService;
+    @Resource
+    private ITeacherService teacherService;
+    private Teacher tea;
+    private ScheduleBean scheduleBean;
+    private List<Bill> billList;
+    @Resource
+    private IBillService billService;
 
     @Override
     public String execute(){

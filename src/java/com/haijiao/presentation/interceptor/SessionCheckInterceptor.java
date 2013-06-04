@@ -12,9 +12,7 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.StrutsStatics;
 
 public class SessionCheckInterceptor implements Interceptor {
     //设置参数  
@@ -71,7 +69,6 @@ public class SessionCheckInterceptor implements Interceptor {
                         String resultCode = invocation.invoke();
                         return resultCode;
                     }
-
                 }
             }
             return reloginResult;

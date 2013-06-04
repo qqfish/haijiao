@@ -28,121 +28,7 @@
         <global-results>  
             <result name="login">index.jsp</result>  
         </global-results>  
-        
-        <action name="login" class="LoginAction">
-            <result name="input">index.jsp</result>
-            <result name="success" type="chain">index</result>
-        </action>
-        <action name="logout" class="LogoutAction">
-            <result name="success">index.jsp</result>
-        </action>
-        <action name="register" class="RegisterAction" method="teacher">
-            <result name="input">index.jsp</result>
-            <result name="success">register.jsp</result>
-        </action>
-        <action name="register" class="RegisterAction" method="student">
-            <result name="input">index.jsp</result>
-            <result name="success">register.jsp</result>
-        </action>
-        <action name="toChangeInfo" class="ToChangeInfoAction">
-            <result name="success">changeInfo.jsp</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="registerThen" class="RegisterThenAction" method="teacherRegister">
-            <result name="input">register.jsp</result>
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="registerThen" class="RegisterThenAction" method="studentRegister">
-            <result name="input">register.jsp</result>
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="teacherChange">
-            <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">toChangeInfo</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="teacherMoreChange">
-            <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">toChangeInfo</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="studentChange">
-            <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">toChangeInfo</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="changeInfo" class="ChangeInfoAction" method="changePassword">
-            <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">toChangeInfo</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="resetChangePassword" class="ResetChangePasswordAction">
-            <result name="input">resetPassword.jsp</result>
-            <result name="success" type="chain">index</result>
-        </action>
-        <action name="dealLesson" class="DealLessonAction" method="addLesson">
-            <result name="input">teacherIndex.jsp</result>
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="dealLesson" class="DealLessonAction" method="deleteLesson">
-            <result name="input">teacherIndex.jsp</result>
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="changeIntro" class="ChangeIntroAction">
-            <result name="input">changeInfo.jsp</result>
-            <result name="success" type="chain">toChangeInfo</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="dealApply" class="DealApplyAction">
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="index" class="IndexAction">
-            <result name="success">index.jsp</result>
-            <result name="teacher">teacherIndex.jsp</result>
-            <result name="student">studentIndex.jsp</result>
-        </action>
-        <action name="searchTeacher" class="SearchTeacherAction">
-            <result name="success">teachers.jsp</result>
-            <result name="dynamic">teacherspart.jsp</result>
-            <result name="input">teachers.jsp</result>
-        </action>
-        <action name="searchTeacher" class="SearchTeacherAction" method="score">
-            <result name="success">teachers.jsp</result>
-            <result name="dynamic">teacherspart.jsp</result>
-            <result name="input">teachers.jsp</result>
-        </action>
-        <action name="searchTeacher" class="SearchTeacherAction" method="price">
-            <result name="success">teachers.jsp</result>
-            <result name="dynamic">teacherspart.jsp</result>
-            <result name="input">teachers.jsp</result>
-        </action>
-        <action name="searchTeacher" class="SearchTeacherAction" method="hot">
-            <result name="success">teachers.jsp</result>
-            <result name="dynamic">teacherspart.jsp</result>
-            <result name="input">teachers.jsp</result>
-        </action>
-        <action name="searchTeacher" class="SearchTeacherAction" method="time">
-            <result name="success">teachers.jsp</result>
-            <result name="dynamic">teacherspart.jsp</result>
-            <result name="input">teachers.jsp</result>
-        </action>
-        <action name="searchTeacher" class="SearchTeacherAction" method="normal">
-            <result name="success">teachers.jsp</result>
-            <result name="dynamic">teacherspart.jsp</result>
-            <result name="input">teachers.jsp</result>
-        </action>
-        <action name="getTeacherInfo" class="GetTeacherInfoAction">
-            <result name="success">teaInfo.jsp</result>
-        </action>
-        <action name="bookTeacher" class="BookTeacherAction">
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
+
         <action name="addFreeTime" class="AddFreeTimeAction">
             <result name="success" type="chain">index</result>
             <result name="input" type="chain">index</result>
@@ -150,57 +36,6 @@
         </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>
-        </action>
-        <action name="getCommonFile" class="GetCommonFileAction">
-            <result name="success">fileList.jsp</result>
-            <result name="unconnected">error.jsp</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="sendMail" class="SendMailAction">
-            <result name="success" type="chain">getMail</result>
-            <result name="input" type="chain">getMail</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="getMail" class="GetMailAction">
-            <result name="success" type="">mail.jsp</result>
-            <result name="input">error.jsp</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="getMailNum" class="GetMailNumAction"/>
-        <action name="markMail" class="MarkMailAction"/>
-        <action name="markMail" class="MarkMailAction" method="markAll">
-            <result name="success" type="chain">getMail</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="removeSingleMail" class="RemoveSingleMailAction">
-            <result name="success" type="chain">getMail</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="removeMail" class="RemoveMailAction" method="removeAll">
-            <result name="success" type="chain">getMail</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="enterRoom" class="EnterRoomAction">
-            <result name="success">/room/index.jsp</result>
-            <result name="false">index.jsp</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="enterPublicRoom" class="EnterPublicRoomAction">
-            <result name="success">/room/index.jsp</result>
-            <result name="false">index.jsp</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="makeCommentReply" class="MakeCommentReplyAction" method="comment">
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="makeCommentReply" class="MakeCommentReplyAction" method="reply">
-            <result name="success" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="checkEmail" class="CheckEmailAction"></action>
-        <action name="contactUs" class="ContactUsAction">
-            <result name="success" type="chain">index</result>
         </action>
         <action name="uploadPic" class="UploadPicAction">
             <result name="success" type="chain">toChangeInfo</result>
@@ -213,13 +48,6 @@
                 <param name="maximumSize">1025956</param>
             </interceptor-ref>
             <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="forgetPassword" class="ForgetPasswordAction">
-            <result name="success" type="chain">index</result>
-            <result name="input">forgetPassword.jsp</result>
-        </action>
-        <action name="resetPassword" class="ResetPasswordAction">
-            <result name="success">resetPassword.jsp</result>
         </action>
         <action name="file" class="FileAction"/>
     </package>

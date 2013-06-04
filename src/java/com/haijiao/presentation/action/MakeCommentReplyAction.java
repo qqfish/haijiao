@@ -5,17 +5,37 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IBillService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author hp
  */
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("makeCommentReply")
+@Results({
+    @Result(name="success",type="chain",location="index")
+})
 public class MakeCommentReplyAction extends SessionAction{
-    IBillService billService;
-    String content;
-    Integer score;
-    Integer id;
-    String nextPageMessage;
+    @Resource
+    private IBillService billService;
+    private String content;
+    private Integer score;
+    private Integer id;
+    private String nextPageMessage;
     
     public String comment(){
         String userType = (String)this.getSessionValue("userType");

@@ -6,8 +6,29 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.ITeacherService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("dealLesson")
+@Results({
+    @Result(name="input",location="/teacherIndex.jsp"),
+    @Result(name="success",type="chain",location="index")
+})
 public class DealLessonAction extends SessionAction {
+    @Resource
     private ITeacherService teacherService;
     private String nextPageMessage;
     private String lessonName;

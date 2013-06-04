@@ -15,19 +15,37 @@ import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.presentation.bean.schedule.ScheduleBean;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Results({
+    @Result(name="success",location="/index.jsp"),
+    @Result(name="teacher",location="/teacherIndex.jsp"),
+    @Result(name="student",location="/studentIndex.jsp")
+})
 public class IndexAction extends SessionAction {
-    ScheduleBean scheduleBean;
-    IUserService userService;
-    ITeacherService teacherService;
-    IStudentService studentService;
-    IBillService billService;
-    Teacher teacher;
-    Student student;
-    List<Bill> billList;
-    List<Clazz> classList;
+    private ScheduleBean scheduleBean;
+    @Resource
+    private IUserService userService;
+    @Resource
+    private ITeacherService teacherService;
+    @Resource
+    private IStudentService studentService;
+    @Resource
+    private IBillService billService;
+    private Teacher teacher;
+    private Student student;
+    private List<Bill> billList;
+    private List<Clazz> classList;
     
     
     @Override

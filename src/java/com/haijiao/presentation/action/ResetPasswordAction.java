@@ -5,16 +5,31 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IUserService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author hp
  */
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Action("resetPassword")
+@Results({
+    @Result(name="success",location="/resetPassword.jsp")
+})
 public class ResetPasswordAction extends RequestAction{
-    IUserService userService;
-    String id;
-    String checkcode;
-    String nextPageMessage;
+    @Resource
+    private IUserService userService;
+    private String id;
+    private String checkcode;
+    private String nextPageMessage;
     
     @Override
     public String execute(){

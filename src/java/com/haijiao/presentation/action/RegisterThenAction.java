@@ -9,23 +9,45 @@ import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("registerThen")
+@Results({
+    @Result(name="input",location="/register.jsp"),
+    @Result(name="success",type="chain",location="index")
+})
 public class RegisterThenAction extends SessionAction {
-    ITeacherService teacherService;
-    IStudentService studentService;
-    String id;
-    String password;
-    String name;
-    String sex;
-    String school;
-    String major;
-    String studyStatus;
-    String grade;
-    String province;
-    String city;
-    String district;
-    String net;
-    String nextPageMessage;
+    @Resource
+    private ITeacherService teacherService;
+    @Resource
+    private IStudentService studentService;
+    private String id;
+    private String password;
+    private String name;
+    private String sex;
+    private String school;
+    private String major;
+    private String studyStatus;
+    private String grade;
+    private String province;
+    private String city;
+    private String district;
+    private String net;
+    private String nextPageMessage;
     
     public String teacherRegister(){
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major,studyStatus, null, province, city, district, net)){

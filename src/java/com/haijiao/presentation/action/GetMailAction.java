@@ -8,16 +8,37 @@ import com.haijiao.Domain.bean.Mail;
 import com.haijiao.SupportService.service.IMailService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author hp
  */
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("getMail")
+@Results({
+    @Result(name="input",location="/error.jsp"),
+    @Result(name="success",location="/mail.jsp")
+})
 public class GetMailAction extends RequestSessionAction{
-    String toEmail;
-    IMailService mailService;
-    List<Mail> allMailList;
-    List<Mail> unreadMailList;
+    private String toEmail;
+    @Resource
+    private IMailService mailService;
+    private List<Mail> allMailList;
+    private List<Mail> unreadMailList;
 
     public IMailService getMailService() {
         return mailService;

@@ -8,13 +8,28 @@ import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("struts-default")
+@Namespace("/")
+@Results({
+    @Result(name="input",location="/index.jsp"),
+    @Result(name="success",type="chain",location="index")
+})
 public class LoginAction extends SessionAction {
-
+    @Resource
     private IUserService userService;
+    @Resource
     private ITeacherService teacherService;
+    @Resource
     private IStudentService studentService;
     private String email;
     private String password;

@@ -6,12 +6,33 @@ package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.User;
 import com.haijiao.SupportService.service.IUserService;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author fish
  */
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("enterRoom")
+@Results({
+    @Result(name="success",location="/room/index.jsp"),
+    @Result(name="false",location="/index.jsp")
+})
 public class EnterRoomAction extends RequestSessionAction{
+    @Resource
     private IUserService userService;
     int clazzId;
     int isHolder;

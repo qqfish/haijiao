@@ -13,10 +13,33 @@ import com.haijiao.SupportService.service.IUserService;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("changeInfo")
+@Results({
+    @Result(name="input",location="/register.jsp"),
+    @Result(name="success",type="chain",location="toChangeInfo")
+})
 public class ChangeInfoAction extends SessionAction {
+    @Resource
     private ITeacherService teacherService;
+    @Resource
     private IStudentService studentService;
+    @Resource
     private IUserService userService;
     private String id;
     private String password;
