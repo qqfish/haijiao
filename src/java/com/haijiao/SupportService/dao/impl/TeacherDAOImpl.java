@@ -85,8 +85,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         if(status != null && !status.equals(""))
             where += "t.status = '" + status + "' and ";
         if(!where.equals(" where ")){
-            where += "l.delete=0";
-            hql += where;
+            //where += "l.delete=0";
+            hql += where.substring(0, where.length() -4);
         }
         if (extOrder!=null){
             hql += " order by t." + extOrder;
@@ -96,6 +96,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
                 hql += " asc"; //升序
             }
         }
+        System.out.println(hql);
         List<Teacher> t = findPageByQuery(hql, first, pagesize);
         return t;
     }
@@ -132,8 +133,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         if(status != null && !status.equals(""))
             where += "t.status = '" + status + "' and ";
         if(!where.equals(" where ")){
-            where += "l.delete=0";
-            hql += where;
+            //where += "l.delete=0";
+            hql += where.substring(0, where.length() -4);
         }
         if (extOrder!=null && !extOrder.isEmpty()){
             hql += " order by t." + extOrder;
