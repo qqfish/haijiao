@@ -14,7 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-@Entity    
+@Entity
+@org.hibernate.annotations.Entity(dynamicUpdate=true,dynamicInsert=true)
 @Table(name="teacher")
 @PrimaryKeyJoinColumn
 public class Teacher extends User{
@@ -25,7 +26,9 @@ public class Teacher extends User{
     private String city;            //市级
     private String district;       //县级
     private String net;         //网络环境
+    @Column(columnDefinition="int default 0")
     private Integer classNum;       //成功完成课程的次数
+    @Column(columnDefinition="int default 0")
     private Integer obNum;          //浏览数
     private String underlineArea;   //线下授课区域
     private String experience;        //个人经历

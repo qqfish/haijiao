@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
+@org.hibernate.annotations.Entity(dynamicUpdate=true,dynamicInsert=true)
 @Table    
 @Inheritance(strategy = InheritanceType.JOINED )
 public class User extends BaseBean{
@@ -33,8 +34,11 @@ public class User extends BaseBean{
     protected String email;     //用户的账号,即Email
     protected String name;      //用户的真实姓名
     protected String userType;  //用户的类型："teacher" or "student"
+    @Column(columnDefinition="int default 0")
     protected Integer score;    //用户的评分
+    @Column(columnDefinition="int default 0")
     protected Integer scoreNum; //评分数
+    @Column(columnDefinition="int default 0")
     protected Integer loginNum; //登录数
     protected String password;  //用户密码
     protected int coin;         //该账户中剩下的智慧币
