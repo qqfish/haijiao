@@ -14,22 +14,11 @@
     
     <bean id="fileManager" class="com.haijiao.Domain.file.FileManager"/>
 
-    <bean id="AddFreeTimeAction" class="com.haijiao.presentation.action.teacherAchtion.AddFreeTimeAction" scope="prototype">
-        <property name="classService" ref="classServiceImpl" />
-    </bean>
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
         <property name="studentService" ref="studentServiceImpl" />
     </bean>
-    <bean id="RemoveSingleMailAction" class="com.haijiao.presentation.action.RemoveSingleMailAction" scope="prototype">
-        <property name="mailService" ref="mailServiceImpl" />
-    </bean>
     <bean id="roomTimer" class="com.haijiao.Domain.room.RoomTimer" scope="prototype">
         <property name="billService" ref="billServiceImpl" />
-    </bean>
-    <bean id="SessionCheckInterceptor" class="com.haijiao.presentation.interceptor.SessionCheckInterceptor">
-        <property name="userService" ref="userServiceImpl" />
-        <property name="teacherService" ref="teacherServiceImpl" />
-        <property name="studentService" ref="studentServiceImpl"/>
     </bean>
 
     <bean id="springContext" class="com.haijiao.SupportService.SpringContext"></bean>
@@ -41,7 +30,7 @@
         </property>
     </bean>
     
-    <context:component-scan base-package="com.haijiao.SupportService,com.haijiao.presentation.action"/>
+    <context:component-scan base-package="com.haijiao.SupportService,com.haijiao.presentation.action,com.haijiao.presentation.interceptor"/>
     <!-- Transaction -->
     
     <bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">  

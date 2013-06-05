@@ -24,7 +24,7 @@ import org.springframework.stereotype.Controller;
 })
 @Action("removeSingleMail")
 @Results({
-    @Result(name="success",type="chain",location="/getMail")
+    @Result(name="success",type="chain",location="getMail")
 })
 public class RemoveSingleMailAction extends RequestAction{
     @Resource

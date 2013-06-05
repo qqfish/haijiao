@@ -13,13 +13,34 @@ import com.haijiao.global.scheduleLocation;
 import com.haijiao.presentation.action.SessionAction;
 import com.haijiao.presentation.bean.schedule.ScheduleArray;
 import java.util.List;
+import javax.annotation.Resource;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author fish
  */
-public class AddFreeTimeAction extends SessionAction {
 
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack")  
+})  
+@Action("addFreeTime")
+@Results({
+    @Result(name="success",type="chain",location="index"),
+    @Result(name="input",type="chain",location="index")
+})
+public class AddFreeTimeAction extends SessionAction {
+    @Resource
     IClassService classService;
     String json;
     String nextPageMessage;

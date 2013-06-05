@@ -142,7 +142,7 @@
                             <div class="row-fluid" style="margin-top: 10px; margin-left: 10px;">
                                 <ul class="thumbnails">
                                 <s:iterator value="pb.list" id="list">
-                                    <a href="#" id="resultBar">
+                                    <div id="resultBar">
                                             <li class="span11">
                                                 <div class="thumbnail">
                                                     <img class="pull-left" style="margin: 0px 10px 0px 0px;" src="<s:property value="picUrl"/>" width="110px"/>
@@ -205,7 +205,7 @@
                                                 </small>
                                             </div>
                                         </li>
-                                    </a>
+                                    </div>
                                 </s:iterator>
                             </ul>
                         </div>
@@ -282,7 +282,7 @@
                                             </s:else>
                                         </s:iterator>
                                     </s:else>
-                                    <s:if test="pb.currentPage == pb.totalPage">
+                                    <s:if test="pb.currentPage == pb.totalPage || pb.totalPage == 0">
                                     <li class="disabled"><a href="javascript:;">Next</a></li>
                                 </s:if>
                                 <s:else>

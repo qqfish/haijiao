@@ -29,11 +29,6 @@
             <result name="login">index.jsp</result>  
         </global-results>  
 
-        <action name="addFreeTime" class="AddFreeTimeAction">
-            <result name="success" type="chain">index</result>
-            <result name="input" type="chain">index</result>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>
         </action>

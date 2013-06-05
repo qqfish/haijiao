@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
 })
 @Action("removeMail")
 @Results({
-    @Result(name="success",type="chain",location="/getMail")
+    @Result(name="success",type="chain",location="getMail")
 })
 public class RemoveMailAction extends SessionAction{
     @Resource

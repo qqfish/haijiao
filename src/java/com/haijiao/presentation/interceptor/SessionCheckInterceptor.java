@@ -11,16 +11,22 @@ import com.haijiao.SupportService.service.IUserService;
 import java.util.Map;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import org.apache.struts2.ServletActionContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SessionCheckInterceptor implements Interceptor {
     //设置参数  
 
     private String sessionAttribute;
     private String reloginResult;
+    @Resource
     private IUserService userService;
+    @Resource
     private ITeacherService teacherService;
+    @Resource
     private IStudentService studentService;
 
 
