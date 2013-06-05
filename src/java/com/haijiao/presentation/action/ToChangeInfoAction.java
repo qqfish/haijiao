@@ -48,7 +48,7 @@ public class ToChangeInfoAction extends RequestSessionAction {
             //return "failure";
         }
         if ("area".equals((String)this.getOutRequest("jump"))) {
-            nextPageMessage = "Äú¿ÉÒÔÔÚÏÂ·½ÊäÈë¿òÊäÈëÄúµÄÏßÏÂÊÚ¿ÎÇøÓò";
+            nextPageMessage = "æ‚¨å¯ä»¥åœ¨ä¸‹æ–¹è¾“å…¥æ¡†è¾“å…¥æ‚¨çš„çº¿ä¸‹æˆè¯¾åŒºåŸŸ";
         }
         return SUCCESS;
     }
