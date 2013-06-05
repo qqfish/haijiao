@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.haijiao.presentation.bean.schedule;
+package com.haijiao.presentation.bean.infoSchedule;
 
 import com.google.gson.Gson;
 import com.haijiao.Domain.bean.Clazz;
@@ -14,34 +14,32 @@ import java.util.List;
  *
  * @author fish
  */
-public class ScheduleBean {
-    private List<FreeTimeBean> clazzes;
+public class InfoScheduleBean {
+    private List<InfoFreeTimeBean> clazzes;
     
-    public ScheduleBean(Teacher tea) {
-        super();
+    public InfoScheduleBean(Teacher tea) {
         clazzes = new ArrayList();
         for(int i = 0; i < tea.getSchedule().size(); i++){
-            FreeTimeBean newClazz = new FreeTimeBean(tea.getSchedule().get(i));
+            InfoFreeTimeBean newClazz = new InfoFreeTimeBean(tea.getSchedule().get(i));
             clazzes.add(newClazz);
         }
     }
     
-    public ScheduleBean(List<Clazz> c) {
-        super();
+    public InfoScheduleBean(List<Clazz> c) {
         clazzes = new ArrayList();
         for(int i = 0; i < c.size(); i++){
-            FreeTimeBean newClazz = new FreeTimeBean(c.get(i));
+            InfoFreeTimeBean newClazz = new InfoFreeTimeBean(c.get(i));
             if(!clazzes.contains(newClazz)){
                 clazzes.add(newClazz);
             }
         }
     }
 
-    public List<FreeTimeBean> getClazzes() {
+    public List<InfoFreeTimeBean> getClazzes() {
         return clazzes;
     }
 
-    public void setClazzes(List<FreeTimeBean> clazzes) {
+    public void setClazzes(List<InfoFreeTimeBean> clazzes) {
         this.clazzes = clazzes;
     }
     

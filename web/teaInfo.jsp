@@ -37,9 +37,7 @@
         <![endif]-->
 
     </head>
-    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, null);"
-          >
-
+    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, <s:property value='studentScheduleBean.toJson()' default='null' />);"
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->

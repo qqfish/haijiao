@@ -189,7 +189,7 @@
                         </ul>               
                     </div> 
                 </div>
-                <div class="well span3" id ="side" style="margin:0px;float:bottom;padding:0;">
+                <div class="well span3" id ="side" style="width:270px;margin:0px;float:bottom;padding:0;">
                     <div style="width:240px;float: left">
                         <div id="sideVideoArea" style="height:380px;width:240px;overflow-y: visible;"></div>
                         <div style="float: bottom;">

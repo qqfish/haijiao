@@ -91,7 +91,7 @@ $(document).ready(function() {
                 $("#schedule_json").val(JSON.stringify(result));
                 $('#schedule_panel').hide();
                 $('#confirm_panel').show();
-                 $('#modalpanel').height(120);
+                $('#modalpanel').height(120);
             } else {
                 $("#schedule_error").text("请选择预约时间");
             }
@@ -114,16 +114,21 @@ $(document).ready(function() {
             }
         });
         
-        this.drawSchedule = function(schedule){
+        this.drawSchedule = function(schedule, iSchedule){
             if(schedule == null){
                 return;
             }
             for(var i = 0; i < schedule.clazzes.length; i++){
                 var clazz = schedule.clazzes[i];
-                console.log(clazz.status == status.available);
                 if(clazz.status == status.available){
                     $("td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("times",clazz.remain).removeAttr("style");;
                 }
+            }
+            if(iSchedule == null)
+                return;
+            for(var i = 0; i < iSchedule.clazzes.length; i++){
+                var clazz = schedule.clazzes[i];
+                $("td[index='" + clazz.index + "'][day='" + clazz.day +"']").attr("times",0).css("background-color","#CFF");
             }
         }
     }

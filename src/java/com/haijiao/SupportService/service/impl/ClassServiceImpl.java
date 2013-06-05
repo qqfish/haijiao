@@ -61,6 +61,7 @@ public class ClassServiceImpl implements IClassService {
         }
         for (int i = 0; i < cList.size(); i++) {
             FreeTime ft = freeTimeDAO.getTeacherFreeTime(teacherEmail, cList.get(i).getDay(), cList.get(i).getIndex());
+            System.out.println(ft);
             List<Clazz> clazzList = ft.getClazzList();
             Clazz nextClazz = new Clazz(clazzList.get(0));
             if (nextClazz.getStatus() != Clazz.Status.available) {

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.haijiao.presentation.bean.schedule;
+package com.haijiao.presentation.bean.infoSchedule;
 
 import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.FreeTime;
@@ -11,13 +11,7 @@ import com.haijiao.Domain.bean.FreeTime;
  *
  * @author fish
  */
-public class FreeTimeBean {
-
-    private String teacherEmail;
-
-    private String studentEmail;
-
-    private String lesson;
+public class InfoFreeTimeBean {
 
     private int day;   //星期X
     private int index;    //时间片index，比如 1对应 8:00-9:00，2对应 9:00-10:00
@@ -25,15 +19,8 @@ public class FreeTimeBean {
     private int status;  //本次预约的状态，可选值未Status类中
     private int remain;    //课程次数，-1为无限,每上一次减1，到0该课程被清除
     
-    public FreeTimeBean(FreeTime f){
-        super();
+    public InfoFreeTimeBean(FreeTime f){
         Clazz first = f.getClazzList().get(0);
-        if(first.getFreeTime().getTeacher() != null)
-            teacherEmail = first.getFreeTime().getTeacher().getEmail();
-        if(first.getStudent() != null)
-            studentEmail = first.getStudent().getEmail();
-        if(first.getLesson() != null)
-            lesson = first.getLesson().getName();
         
         day = first.getFreeTime().getWeekday();
         index = first.getFreeTime().getSliceIndex();
@@ -41,14 +28,7 @@ public class FreeTimeBean {
         remain = first.getRemain();
     }
     
-    public FreeTimeBean(Clazz first){
-        super();
-        if(first.getFreeTime().getTeacher() != null)
-            teacherEmail = first.getFreeTime().getTeacher().getEmail();
-        if(first.getStudent() != null)
-            studentEmail = first.getStudent().getEmail();
-        if(first.getLesson() != null)
-            lesson = first.getLesson().getName();
+    public InfoFreeTimeBean(Clazz first){
         
         day = first.getFreeTime().getWeekday();
         index = first.getFreeTime().getSliceIndex();
@@ -56,23 +36,7 @@ public class FreeTimeBean {
         remain = first.getRemain();
     }
     
-    public FreeTimeBean() {
-    }
-
-    public String getTeacherEmail() {
-        return teacherEmail;
-    }
-
-    public void setTeacherEmail(String teacherEmail) {
-        this.teacherEmail = teacherEmail;
-    }
-
-    public String getLesson() {
-        return lesson;
-    }
-
-    public void setLesson(String lesson) {
-        this.lesson = lesson;
+    public InfoFreeTimeBean() {
     }
 
     public int getDay() {
@@ -89,14 +53,6 @@ public class FreeTimeBean {
 
     public void setIndex(int index) {
         this.index = index;
-    }
-
-    public String getStudentEmail() {
-        return studentEmail;
-    }
-
-    public void setStudentEmail(String studentEmail) {
-        this.studentEmail = studentEmail;
     }
 
     public int getStatus() {
@@ -131,7 +87,7 @@ public class FreeTimeBean {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final FreeTimeBean other = (FreeTimeBean) obj;
+        final InfoFreeTimeBean other = (InfoFreeTimeBean) obj;
         if (this.day != other.day) {
             return false;
         }
