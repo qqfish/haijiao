@@ -118,7 +118,7 @@ public class TeacherServiceImpl implements ITeacherService {
     @Override
     public boolean increseObNum(String email){
         Teacher t = teacherDAO.getTeacherByEmail(email);
-        t.setObNum(t.getObNum() +1);
+        t.setObNum( t.getObNum() +1 );
         teacherDAO.update(t);
         return true;
     }
