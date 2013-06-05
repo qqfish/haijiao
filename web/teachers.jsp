@@ -172,8 +172,33 @@
                                                         </s:iterator>
                                                     </s:else>
                                                     <br/>
-                                                    <a class='btn btn-primary btn-small pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='email' default='null' />"><i class="icon-user icon-white"></i>在线试讲</a>
-
+                                                    <s:if test="#session.email != null&&tea.status!=1">
+                                                        <button class="btn btn-danger btn-mini pull-right" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                                        <div class="modal fade hide" id="publicRoom">
+                                                            <div class="modal-body">
+                                                                <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">确定</a>
+                                                                <button class="btn" data-dismiss="modal">取消</button>
+                                                            </div>
+                                                        </div>
+                                                    </s:if>
+                                                    <s:elseif test="#session.email != null">
+                                                        <button class='btn btn-primary btn-mini pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</button>
+                                                    </s:elseif>
+                                                    <s:else>
+                                                        <button class="btn btn-danger btn-mini pull-right" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                                        <div class="modal fade hide" id="publicRoom">
+                                                            <div class="modal-body">
+                                                                <h3>请先登陆</h3>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <a class="btn btn-success" href="index.action">登陆</a>
+                                                                <button class="btn" data-dismiss="modal">取消</button>
+                                                            </div>
+                                                        </div>
+                                                    </s:else>
                                                     线下授课区域：<s:property value="underlineArea" default="这个老师还没设置线下授课区域！"/><br/>
                                                     个人经历：<s:property value="experience" default="这个老师很懒，还没写好个人经历！"/><br/>
                                                 </small>

@@ -21,9 +21,9 @@
                 <s:iterator value="pb.list" id="list">
                     <s:a action="getTeacherInfo.action" id="resultBar">
                         <s:param name="teacherEmail"><s:property value="email"/></s:param>
-                        <li class="span11" style="margin-top: 15px;">
-                            <div class="thumbnail">
-                                <img class="pull-left" style="margin: 0px 10px 0px 0px;" src="<s:property value="picUrl"/>" width="110px"/>
+                            <li class="span11" style="margin-top: 15px;">
+                                <div class="thumbnail">
+                                    <img class="pull-left" style="margin: 0px 10px 0px 0px;" src="<s:property value="picUrl"/>" width="110px"/>
                                 <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
                                 <s:if test="status==0"><label class="label">离线</label></s:if>
                                 <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
@@ -34,23 +34,50 @@
                                 <label class="label label-info pull-right"><s:property value="reserveNum"/>人预约</label>
                                 <br/>
                                 <small style="color:black;" >
-                                <s:property value="school"/> | <s:property value="major"/>
-                                <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                                <br/>
-                                <s:if test="lessons.size()==0">
+                                    <s:property value="school"/> | <s:property value="major"/>
+                                    <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                    <br/>
+                                    <s:if test="lessons.size()==0">
                                         开设课程：该老师还没有开课。
-                                 </s:if>
-                                 <s:else>
+                                    </s:if>
+                                    <s:else>
                                         开设课程：
                                         <s:iterator value="lessons" status="st">
                                             <s:if test="delete==false">
                                                 <s:property value="name"/> | 
                                             </s:if>
                                         </s:iterator>
-                                </s:else>
-                                <br/>
-                                线下授课区域：<s:property value="underlineArea" default="这个老师还没设置线下授课区域！"/><br/>
-                                个人经历：<s:property value="experience" default="这个老师很懒，还没写好个人经历！"/><br/>
+                                    </s:else>
+                                    <br/>
+                                    <s:if test="#session.email != null&&tea.status!=1">
+                                        <button class="btn btn-danger btn-mini pull-right" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                        <div class="modal fade hide" id="publicRoom">
+                                            <div class="modal-body">
+                                                <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">确定</a>
+                                                <button class="btn" data-dismiss="modal">取消</button>
+                                            </div>
+                                        </div>
+                                    </s:if>
+                                    <s:elseif test="#session.email != null">
+                                        <button class='btn btn-primary btn-mini pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</button>
+                                    </s:elseif>
+                                    <s:else>
+                                        <button class="btn btn-danger btn-mini pull-right" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                        <div class="modal fade hide" id="publicRoom">
+                                            <div class="modal-body">
+                                                <h3>请先登陆</h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <a class="btn btn-success" href="index.action">登陆</a>
+                                                <button class="btn" data-dismiss="modal">取消</button>
+                                            </div>
+                                        </div>
+                                    </s:else>
+                                    线下授课区域：<s:property value="underlineArea" default="这个老师还没设置线下授课区域！"/><br/>
+                                    个人经历：<s:property value="experience" default="这个老师很懒，还没写好个人经历！"/><br/>
                                 </small>
                             </div>
                         </li>
