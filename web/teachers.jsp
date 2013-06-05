@@ -139,15 +139,16 @@
                         </div>
                         <hr style="margin:12px 12px 0px 12px;"/>
                         <div id="resultdetail">
-                            <div class="row-fluid" style="margin: 0px 28px;">
+                            <div class="row-fluid" style="margin-top: 10px; margin-left: 10px;">
                                 <ul class="thumbnails">
                                 <s:iterator value="pb.list" id="list">
-                                    <s:a action="getTeacherInfo.action" id="resultBar">
-                                        <s:param name="teacherEmail"><s:property value="email"/></s:param>
-                                            <li class="span11" style="margin-top: 15px;">
+                                    <a href="#" id="resultBar">
+                                            <li class="span11">
                                                 <div class="thumbnail">
                                                     <img class="pull-left" style="margin: 0px 10px 0px 0px;" src="<s:property value="picUrl"/>" width="110px"/>
-                                                <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
+                                                    <a href="getTeacherInfo.action?teacherEmail=<s:property value="email"/>" style="text-decoration: none;">
+                                                        <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
+                                                    </a>
                                                 <s:if test="status==0"><label class="label">离线</label></s:if>
                                                 <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                 <s:else><label class="label label-warning">忙碌</label></s:else>
@@ -204,7 +205,7 @@
                                                 </small>
                                             </div>
                                         </li>
-                                    </s:a>
+                                    </a>
                                 </s:iterator>
                             </ul>
                         </div>

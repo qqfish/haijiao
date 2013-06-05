@@ -76,7 +76,7 @@ public class IndexAction extends RequestSessionAction {
         }
         if(email!=null){
             if ("student".equals((String)this.getOutRequest("page"))) {
-                nextPageMessage = "您可以在下面的页面中接受或拒绝学生的课程预约";
+                nextPageMessage = "鎮ㄥ彲浠ュ湪涓嬮潰鐨勯〉闈腑鎺ュ彈鎴栨嫆缁濆鐢熺殑璇剧▼棰勭害";
             }
             User user = userService.getUserByEmail(email);
             if(user.getUserType().equals("teacher")){
