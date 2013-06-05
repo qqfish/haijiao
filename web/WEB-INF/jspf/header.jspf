@@ -20,7 +20,7 @@
             else if(data.info.reserveNum != null && data.info.reserveNum != 0){
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
-                $("#notification").text("有" + data.info.reserveNum + "个新的请求");
+                $("#notification").text("有" + data.info.reserveNum + "个新的请求，点击查看");
             }
             else {
                 $('#toClass').removeClass("btn-info");
@@ -73,7 +73,7 @@
                                             <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">学生:<s:property value="student.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
                                         </s:iterator>
                                         <div class="divider"></div>
-                                        <li><a id="notification">暂无新的请求</a></li>
+                                        <li><a href="index.action?page=student" id="notification">暂无新的请求</a></li>
                                     </s:if>
                                     <s:else>
                                         <s:if test="#session.todayClazz.size()==0">

@@ -32,7 +32,7 @@ import org.springframework.stereotype.Controller;
     @Result(name="teacher",location="/teacherIndex.jsp"),
     @Result(name="student",location="/studentIndex.jsp")
 })
-public class IndexAction extends SessionAction {
+public class IndexAction extends RequestSessionAction {
     private ScheduleBean scheduleBean;
     @Resource
     private IUserService userService;
@@ -46,11 +46,12 @@ public class IndexAction extends SessionAction {
     private Student student;
     private List<Bill> billList;
     private List<Clazz> classList;
+    private String nextPageMessage;
     
     
     @Override
     public String execute() throws Exception {
-        String email = (String)this.getSessionValue("email");
+        String email = (String)this.getOutSession("email");
         if(email==null){
             Cookie[] cookies = ServletActionContext.getRequest().getCookies();
             if (cookies != null) {
@@ -61,19 +62,22 @@ public class IndexAction extends SessionAction {
                         String userType = theUser.getUserType();
                         userService.setStatus(email, User.Status.onlineAndAvailable);
                         userService.setActiveDate(email);
-                        this.sessionPutIn("name", theUser.getName());
-                        this.sessionPutIn("userType", userType);
-                        this.sessionPutIn("email",email);
+                        this.putIn("name", theUser.getName());
+                        this.putIn("userType", userType);
+                        this.putIn("email",email);
                         if(userType.equals("teacher")){
-                            this.sessionPutIn("todayClazz", teacherService.getTodayClasses(email));
+                            this.putIn("todayClazz", teacherService.getTodayClasses(email));
                         } else {
-                            this.sessionPutIn("todayClazz", studentService.getTodayClasses(email));
+                            this.putIn("todayClazz", studentService.getTodayClasses(email));
                         }
                     }
                 }
             }
         }
         if(email!=null){
+            if ("student".equals((String)this.getOutRequest("page"))) {
+                nextPageMessage = "您可以在下面的页面中接受或拒绝学生的课程预约";
+            }
             User user = userService.getUserByEmail(email);
             if(user.getUserType().equals("teacher")){
                 teacher = (Teacher) user;
@@ -164,5 +168,13 @@ public class IndexAction extends SessionAction {
 
     public void setClassList(List<Clazz> classList) {
         this.classList = classList;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }

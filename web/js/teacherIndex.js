@@ -9,7 +9,8 @@
     
     if( $('#nextPageMessage').val() == "成功暂停一周"  
         || $('#nextPageMessage').val() == "成功接受该课程"
-        || $('#nextPageMessage').val() == "成功拒绝接受该课程"){
+        || $('#nextPageMessage').val() == "成功拒绝接受该课程"
+        || $('#nextPageMessage').val() == "您可以在下面的页面中接受或拒绝学生的课程预约"){
         $('#student_area').addClass("active in");
         $('#lesson_area').removeClass("active in");
         $('#l1').addClass("active");
