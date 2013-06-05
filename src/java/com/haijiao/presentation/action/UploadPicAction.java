@@ -16,22 +16,49 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author hp
  */
+
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack"),
+    @InterceptorRef(value="fileUpload",params={
+        "allowedTypes","image/bmp,image/png,image/gif,image/jpeg",
+        "maximumSize","1025956"
+    })
+})  
+@Action("uploadPic")
+@Results({
+    @Result(name="input",type="chain",location="toChangeInfo"),
+    @Result(name="error",type="chain",location="index"),
+    @Result(name="success",type="chain",location="toChangeInfo")
+})
 public class UploadPicAction extends SessionAction{
     private static final int BUFFER_SIZE = 16 * 1024;
     private File upload;
     private String uploadFileName;
     private String uploadContentType;
     private String nextPageMessage;
+    @Resource
     private IUserService userService;
     private Integer x;
     private Integer y;

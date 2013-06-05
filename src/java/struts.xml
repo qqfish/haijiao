@@ -16,7 +16,7 @@
     <package name="haijiao" namespace="/" extends="struts-default">
         <interceptors>  
             <interceptor name="LoginChecker" class="com.haijiao.presentation.interceptor.SessionCheckInterceptor"/>  
-            <interceptor-stack name="LoginCheckerStack">  
+            <interceptor-stack name="LoginCheckerStack"> 
                 <interceptor-ref name="LoginChecker">  
                     <param name="sessionAttribute">email</param>  
                     <param name="reloginResult">login</param>  
@@ -37,18 +37,5 @@
         <action name="getStudentInfo" class="GetStudentInfoAction">
             <result name="success">studentInfo.jsp</result>
         </action>
-        <action name="uploadPic" class="UploadPicAction">
-            <result name="success" type="chain">toChangeInfo</result>
-            <result name="input">toChangeInfo</result>
-            <result name="error" type="chain">index</result>
-            <interceptor-ref name="fileUpload">
-                <!-- 文件过滤 -->
-                <param name="allowedTypes">image/bmp,image/png,image/gif,image/jpeg</param>
-                <!-- 文件大小, 以字节为单位 -->
-                <param name="maximumSize">1025956</param>
-            </interceptor-ref>
-            <interceptor-ref name="LoginCheckerStack"/>
-        </action>
-        <action name="file" class="FileAction"/>
     </package>
 </struts>

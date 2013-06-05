@@ -27,8 +27,8 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("sendMail")
 @Results({
-    @Result(name="input",type="chain",location="/getMail"),
-    @Result(name="success",type="chain",location="/getMail")
+    @Result(name="input",type="chain",location="getMail"),
+    @Result(name="success",type="chain",location="getMail")
 })
 public class SendMailAction extends SessionAction{
     private String name;

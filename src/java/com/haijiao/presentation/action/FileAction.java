@@ -14,15 +14,39 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.annotation.Resource;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.InterceptorRef;
+import org.apache.struts2.convention.annotation.InterceptorRefs;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
+import org.springframework.stereotype.Controller;
 
 /**
  *
  * @author hp
  */
+@Controller
+@ParentPackage("haijiao")
+@Namespace("/")
+@InterceptorRefs({  
+    @InterceptorRef("LoginCheckerStack"),
+    @InterceptorRef(value="fileUpload",params={
+        "allowedTypes","application/octet-stream,application/x-zip-compressed",
+        "maximumSize","1025956"
+    })
+})
+@Results({
+    @Result(name="input",type="chain",location="index"),
+    @Result(name="error",type="chain",location="index"),
+    @Result(name="success",type="chain",location="index")
+})
 public class FileAction extends SessionAction {
 
     private static final int BUFFER_SIZE = 16 * 1024;
+    @Resource
     private IUserService userService;
     private String src;
     private String dest;
@@ -49,7 +73,7 @@ public class FileAction extends SessionAction {
         userService.deleteGroup(email, dest);
         return SUCCESS;
     }
-
+    
     public String upload() {
         FileInputStream in = null;
         try {
@@ -82,6 +106,8 @@ public class FileAction extends SessionAction {
                 out.write(b, 0, len);
             }
             out.close();
+            if(dest == null)
+                dest = "default";
             userService.uploadFile(email, dest, uploadFileName, path);
             return SUCCESS;
         } catch (FileNotFoundException ex) {
