@@ -410,7 +410,8 @@
                                 </s:form>
                             </table>
                             <hr/>
-                            <h5>线下授课区域<button class='btn btn-primary btn-small pull-right'><i class='icon-pencil icon-white'></i>编辑</button></h5>
+                            <h5>线下授课区域<a href="toChangeInfo.action?jump=area" class='btn btn-primary btn-small pull-right'><i class='icon-pencil icon-white'></i>编辑</a></h5>
+                            <p><s:property value="teacher.underlineArea"/></p>
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover table-striped">

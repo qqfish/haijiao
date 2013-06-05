@@ -39,7 +39,7 @@ jQuery(document).ready(function($){
     }
     
     if( $('#nextPageMessage').val() == "修改详细介绍成功！"  
-        || $('#nextPageMessage').val() == "修改详细介绍失败！" ){
+        || $('#nextPageMessage').val() == "修改详细介绍失败！"){
         $('#4').addClass("active in");
         $('#1').removeClass("active in");
         $('#l4').addClass("active");
@@ -47,7 +47,8 @@ jQuery(document).ready(function($){
     }
     
     if( $('#nextPageMessage').val() == "修改详细信息成功！"  
-        || $('#nextPageMessage').val() == "囧，修改详细信息失败啦！" ){
+        || $('#nextPageMessage').val() == "囧，修改详细信息失败啦！"
+        || $('#nextPageMessage').val() == "您可以在下方输入框输入您的线下授课区域"){
         $('#5').addClass("active in");
         $('#1').removeClass("active in");
         $('#l5').addClass("active");

@@ -316,9 +316,9 @@
                                         <s:checkbox name="sprtUnderline" value="%{tea.sprtUnderline}"/> 线下授课
                                     </dd>
                                     <dt>线下授课区域</dt>
-                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="underlineArea" autofocus="autofocus"/></dd>
+                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
                                     <dt>个人经历</dt>
-                                    <dd><s:textarea cssStyle="width:520px;height:200px;" cssClass="span5" name="experience" autofocus="autofocus"/></dd>
+                                    <dd><s:textarea cssStyle="width:520px;height:200px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>
                                     <dd><s:submit cssClass="btn btn-primary pull-right" value="提交" method="teacherMoreChange"/></dd>
                                 </dl>
                             </s:form>

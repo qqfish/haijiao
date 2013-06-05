@@ -29,22 +29,26 @@ import org.springframework.stereotype.Controller;
 @Results({
     @Result(name="success",location="/changeInfo.jsp")
 })
-public class ToChangeInfoAction extends SessionAction {
+public class ToChangeInfoAction extends RequestSessionAction {
     @Resource
     private ITeacherService teacherService;
     @Resource
     private IStudentService studentService;
     private Teacher tea;
     private Student stu;
+    private String nextPageMessage;
     
     @Override
     public String execute() {
-        if ("teacher".equals((String)this.getSessionValue("userType"))){
-            tea = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
-        } else if ("student".equals((String)this.getSessionValue("userType"))) {
-            stu = studentService.getStudentByEmail((String)this.getSessionValue("email"));
+        if ("teacher".equals((String)this.getOutSession("userType"))){
+            tea = teacherService.getTeacherByEmail((String)this.getOutSession("email"));
+        } else if ("student".equals((String)this.getOutSession("userType"))) {
+            stu = studentService.getStudentByEmail((String)this.getOutSession("email"));
         } else {
             //return "failure";
+        }
+        if ("area".equals((String)this.getOutRequest("jump"))) {
+            nextPageMessage = "您可以在下方输入框输入您的线下授课区域";
         }
         return SUCCESS;
     }
@@ -79,5 +83,13 @@ public class ToChangeInfoAction extends SessionAction {
 
     public void setStu(Student stu) {
         this.stu = stu;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
     }
 }
