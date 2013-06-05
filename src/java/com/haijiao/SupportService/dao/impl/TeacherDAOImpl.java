@@ -96,7 +96,6 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
                 hql += " asc"; //升序
             }
         }
-        System.out.println(hql);
         List<Teacher> t = findPageByQuery(hql, first, pagesize);
         return t;
     }
