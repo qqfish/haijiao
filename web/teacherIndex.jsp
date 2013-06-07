@@ -544,7 +544,7 @@
                             <s:select cssClass="span2" id="file_type" name="file_type" list="{'全部文件','我的文件'}"></s:select>
                             <s:form action="file" enctype="multipart/form-data" cssClass="pull-right">
                                 <s:file name="upload" title="选择文件" id="fileid"/>
-                                <s:submit cssClass="btn btn-primary" method="upload" value="上传" />
+                                <s:submit cssClass="btn btn-primary btn-mini" method="upload" value="上传" />
                             </s:form>
                                 <table class="table table-hover table-striped">
                                     <tbody>
