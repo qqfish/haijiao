@@ -22,6 +22,19 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
+        <script>
+            function typechange(v) {
+                if ($("#filetype").val() == "全部文件") {
+                    $("#publicfile").show();
+                    $("#userfile").hide();
+                }
+
+                if ($("#filetype").val() == "我的文件") {
+                    $("#userfile").show();
+                    $("#publicfile").hide();
+                }
+            }
+        </script>
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
                 <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -39,7 +52,7 @@
                 <![endif]-->
     </head>
     <body onload="addSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);
-            viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
+                viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />);"
           >
 
         <!--==============================header=================================-->
@@ -466,19 +479,19 @@
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                                     </div>
                                                     <script type="text/javascript">
-        $(".commentA").click(function() {
-            var id = $(this).attr("id");
-            $("#rate_" + id).bind('rated', function(event, value) {
-                $('#score_' + id).val(value);
-            });
-            $("#rate_" + id).bind('over', function(event, value) {
-                $(this).attr('title', value);
-            });
-            $("#cmtsmt").click(function(event) {
-                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                    event.preventDefault();
-            });
-        })
+            $(".commentA").click(function() {
+                var id = $(this).attr("id");
+                $("#rate_" + id).bind('rated', function(event, value) {
+                    $('#score_' + id).val(value);
+                });
+                $("#rate_" + id).bind('over', function(event, value) {
+                    $(this).attr('title', value);
+                });
+                $("#cmtsmt").click(function(event) {
+                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                        event.preventDefault();
+                });
+            })
                                                     </script>
                                             </s:form>
                                         </div>
@@ -541,35 +554,55 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id='file_area'>
-                            <s:select cssClass="span2" id="file_type" name="file_type" list="{'全部文件','我的文件'}"></s:select>
-                            <s:form action="file" enctype="multipart/form-data" cssClass="pull-right">
-                                <s:file name="upload" title="选择文件" id="fileid"/>
-                                <s:submit cssClass="btn btn-primary btn-mini" method="upload" value="上传" />
-                            </s:form>
-                                <table class="table table-hover table-striped">
-                                    <tbody>
-                                        <tr class="file_panel">
-                                            <td>
-                                                <div class="pull-left" id="filename">
-                                                    教材名称
-                                                </div>
-                                                <div class="pull-right">
-                                                    <button class="btn btn-primary btn-mini">下载</button>
-                                                    <button class="btn btn-danger btn-mini">删除</button>
-                                                </div>
-                                                <br/>
-                                                <small>上传者  上传日期  持续时间  下载次数 文件大小</small>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <s:select cssClass="span2" id="filetype" list="{'全部文件','我的文件'}" onchange="typechange(this.value)"></s:select>
+                                <div id="publicfile" style="display:inline;">
+                                    <input type="text" class="span2">
+                                    <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
+                                </div>
+                                <div id="userfile" style="display:inline">
+                                <s:select cssClass="span2" id="classify" list="{'选择分组','默认分组'}"></s:select>
+                                    <a data-toggle="modal" data-target="#uploadmodal" style="margin-top:-10px;" class="btn btn-primary">上传</a>
+                                </div>
+                                <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
+                                    <div class="modal-header" >
+                                        <a class="close" data-dismiss="modal">×</a>
+                                        <h3>上传文件</h3>
+                                    </div>       
+                                    <div class="modal-body">
+                                    <s:form action="file" enctype="multipart/form-data" cssClass="pull-right">
+                                        <s:file name="upload" title="选择文件" id="fileid"/>
+                                    </s:form>
+                                    <s:select cssClass="span2" id="classify" list="{'选择分组','默认分组','添加分组...'}"></s:select>
+                                    </div>
+                                    <div class="modal-footer">
+                                    <s:submit cssClass="btn btn-primary" method="upload" value="上传" />
+                                    <a class="btn" data-dismiss="modal">取消</a>
+                                </div>
                             </div>
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <tr class="file_panel">
+                                        <td>
+                                            <div class="pull-left" id="filename">
+                                                教材名称
+                                            </div>
+                                            <div class="pull-right">
+                                                <button class="btn btn-primary btn-mini">下载</button>
+                                                <button class="btn btn-danger btn-mini">删除</button>
+                                            </div>
+                                            <br/>
+                                            <small>上传者  上传日期  持续时间  下载次数 文件大小</small>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </div>         
-            </div>
+                </div>
+            </div>         
+        </div>
 
-            <!--==============================footer=================================-->
+        <!--==============================footer=================================-->
         <%@ include file="WEB-INF/jspf/footer.jspf"%>
     </body>
 </html>
