@@ -11,11 +11,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -31,17 +31,13 @@ import org.springframework.stereotype.Controller;
 @Controller
 @ParentPackage("haijiao")
 @Namespace("/")
-@InterceptorRefs({  
-    @InterceptorRef("LoginCheckerStack"),
-    @InterceptorRef(value="fileUpload",params={
-        "allowedTypes","application/octet-stream,application/x-zip-compressed",
-        "maximumSize","1025956"
-    })
+@InterceptorRefs({
+    @InterceptorRef("LoginCheckerStack")
 })
 @Results({
-    @Result(name="input",type="chain",location="index"),
-    @Result(name="error",type="chain",location="index"),
-    @Result(name="success",type="chain",location="index")
+    @Result(name = "input", type = "chain", location = "index"),
+    @Result(name = "error", type = "chain", location = "index"),
+    @Result(name = "success", type = "chain", location = "index")
 })
 public class FileAction extends SessionAction {
 
@@ -53,7 +49,6 @@ public class FileAction extends SessionAction {
     private File upload;
     private String uploadFileName;
     private String uploadContentType;
-    private String downloadFileName;
     private String nextPageMessage;
 
     public String move() {
@@ -73,7 +68,12 @@ public class FileAction extends SessionAction {
         userService.deleteGroup(email, dest);
         return SUCCESS;
     }
-    
+
+    @Action(value="upload",interceptorRefs =
+            @InterceptorRef(value = "fileUpload", params = {
+        "allowedTypes", "application/octet-stream,application/x-zip-compressed",
+        "maximumSize", "1025956"
+    }))
     public String upload() {
         FileInputStream in = null;
         try {
@@ -106,9 +106,8 @@ public class FileAction extends SessionAction {
                 out.write(b, 0, len);
             }
             out.close();
-            if(dest == null)
-                dest = "default";
             userService.uploadFile(email, dest, uploadFileName, path);
+            nextPageMessage = "上传成功";
             return SUCCESS;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,12 +123,6 @@ public class FileAction extends SessionAction {
         return INPUT;
     }
     
-    public InputStream getInputStream() throws Exception {
-        String email = (String) this.getSessionValue("email");
-        String path = userService.download(email, src, uploadFileName);
-        return new FileInputStream(new File(ServletActionContext.getServletContext().getRealPath("/") + path));   
-    }   
-
     public void setUserService(IUserService userService) {
         this.userService = userService;
     }
@@ -174,14 +167,6 @@ public class FileAction extends SessionAction {
         this.uploadContentType = uploadContentType;
     }
 
-    public String getDownloadFileName() {
-        return downloadFileName;
-    }
-
-    public void setDownloadFileName(String downloadFileName) {
-        this.downloadFileName = downloadFileName;
-    }
-
     public String getNextPageMessage() {
         return nextPageMessage;
     }
@@ -189,5 +174,4 @@ public class FileAction extends SessionAction {
     public void setNextPageMessage(String nextPageMessage) {
         this.nextPageMessage = nextPageMessage;
     }
-    
 }

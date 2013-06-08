@@ -560,7 +560,7 @@
                                     <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
                                 </div>
                                 <div id="userfile" style="display:inline">
-                                <s:select cssClass="span2" id="classify" list="{'选择分组','默认分组'}"></s:select>
+                                <s:select cssClass="span2" id="classify" list="teacher.fileGroups" listValue="groupName"></s:select>
                                     <a data-toggle="modal" data-target="#uploadmodal" style="margin-top:-10px;" class="btn btn-primary">上传</a>
                                 </div>
                                 <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
@@ -569,31 +569,39 @@
                                         <h3>上传文件</h3>
                                     </div>       
                                     <div class="modal-body">
-                                    <s:form action="file" enctype="multipart/form-data" cssClass="pull-right">
+                                    <s:form action="file" enctype="multipart/form-data" method="post">
+                                        <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups"  listValue="groupName" listKey="groupName"></s:select>
                                         <s:file name="upload" title="选择文件" id="fileid"/>
-                                    </s:form>
-                                    <s:select cssClass="span2" id="classify" list="{'选择分组','默认分组','添加分组...'}"></s:select>
                                     </div>
                                     <div class="modal-footer">
-                                    <s:submit cssClass="btn btn-primary" method="upload" value="上传" />
+                                        <s:submit cssClass="btn btn-primary" method="upload" value="上传" />
+                                    </s:form>
                                     <a class="btn" data-dismiss="modal">取消</a>
                                 </div>
                             </div>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    <tr class="file_panel">
-                                        <td>
-                                            <div class="pull-left" id="filename">
-                                                教材名称
-                                            </div>
-                                            <div class="pull-right">
-                                                <button class="btn btn-primary btn-mini">下载</button>
-                                                <button class="btn btn-danger btn-mini">删除</button>
-                                            </div>
-                                            <br/>
-                                            <small>上传者  上传日期  持续时间  下载次数 文件大小</small>
-                                        </td>
-                                    </tr>
+                                    <s:iterator value="teacher.fileGroups[0].files" id="files">
+                                        <tr class="file_panel">
+                                            <td>
+                                                <s:form action="download">
+                                                    <div class="pull-left" id="filename">
+                                                        <s:textfield name="downloadFileName" value="%{#files.name}" style="display:none;" />
+                                                        <s:textfield name="src" value="%{teacher.fileGroups[0].groupName}" style="display:none;" />
+                                                        <s:property value="#files.name"/>
+                                                    </div>
+                                                    <div class="pull-right">
+                                                    <s:submit cssClass="btn btn-primary btn-mini" value="下载"/>
+                                                </s:form>
+                                                <s:form action="file">
+                                                    <s:submit cssClass="btn btn-danger btn-mini" value="删除"/>
+                                                    </div>
+                                                    <br/>
+                                                    <small>上传者  上传日期  持续时间  下载次数 文件大小</small>
+                                                </s:form>
+                                            </td>
+                                        </tr>
+                                    </s:iterator>
                                 </tbody>
                             </table>
                         </div>

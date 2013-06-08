@@ -20,7 +20,7 @@ public class UserFileDAOImpl extends GenericHibernateDAO<UserFile, Integer> impl
     
     @Override
     public UserFile getFile(int groupId, String fileName){
-        String hql = "select distinct uf from UserFile uf right join UserFileGroup ufg where ufg.id = '"
+        String hql = "select distinct uf from UserFileGroup ufg left join ufg.files uf where ufg.id = '"
                 + groupId + "' and uf.name = '" + fileName + "'";
         List<UserFile> luf = findByQuery(hql);
         if(luf.isEmpty())

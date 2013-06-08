@@ -74,16 +74,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public boolean confirmExist(String email) {
         return userDAO.confirmExist(email);
     }
 
     @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public User getUserByEmail(String email) {
         User u = userDAO.getUserByEmail(email);
-        if (u==null) {
+        if (u == null) {
             return null;
         }
         String type = u.getUserType();
@@ -105,16 +105,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean setActiveDate(String email){
+    public boolean setActiveDate(String email) {
         User u = userDAO.getUserByEmail(email);
         java.util.Date datetime = new java.util.Date();
         Date time = new Date(datetime.getTime());
         u.setLastActiveDate(time);
-        u.setLoginNum(u.getLoginNum() +1);
+        u.setLoginNum(u.getLoginNum() + 1);
         userDAO.update(u);
         return true;
     }
-    
+
     @Override
     public boolean changePassword(String email, String password) {
         User u = userDAO.getUserByEmail(email);
@@ -132,7 +132,7 @@ public class UserServiceImpl implements IUserService {
         userDAO.update(u);
         return true;
     }
-    
+
     @Override
     public boolean changeIntro(String email, String intro) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
@@ -142,7 +142,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public String confirmLogin(String email, String password) {
         password = MD5Util.MD5(password);
         return userDAO.confirmLogin(email, password);
@@ -162,6 +162,10 @@ public class UserServiceImpl implements IUserService {
             s.setLastActiveDate(time);
             s.setPicUrl("images/figure-default.png"); //temp
             s.setLoginNum(0);
+            UserFileGroup fg = new UserFileGroup();
+            fg.setGroupName("默认分组");
+            s.addPersistFileGroup(fg);
+            userFileGroupDAO.makePersistent(fg);
             return studentDAO.makePersistent(s);
         } else if (userType.equals("teacher")) {
             Teacher t = new Teacher();
@@ -178,6 +182,10 @@ public class UserServiceImpl implements IUserService {
             t.setObNum(0);
             t.setLoginNum(0);
             t.setPicUrl("images/page2-img1.jpg"); //temp
+            UserFileGroup fg = new UserFileGroup();
+            fg.setGroupName("默认分组");
+            t.addPersistFileGroup(fg);
+            userFileGroupDAO.makePersistent(fg);
             return teacherDAO.makePersistent(t);
         } else {
             return false;
@@ -185,51 +193,54 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Teacher> searchTeacher(List<String> strList, List<String> strList2) {
         return teacherDAO.searchTeacher(strList, strList2);
     }
 
     @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) {
         return teacherDAO.searchTeacherPage(strList, lesson, net, sex, role, province, city, district, status, first, pagesize, extOrder, desc);
     }
 
     @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS)
     public int getTeacherNum(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc) {
         return teacherDAO.getTeacherNum(strList, lesson, net, sex, role, province, city, district, status, extOrder, desc);
     }
 
     @Override
-    public boolean createGroup(String email, String name){
-        UserFileGroup fg= userFileGroupDAO.getGroupByName(email, name);
-        if(fg == null)
+    public boolean createGroup(String email, String name) {
+        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, name);
+        if (fg == null) {
             return false;
-        else{
+        } else {
             fg = new UserFileGroup();
             return userFileGroupDAO.makePersistent(fg);
         }
     }
-    
+
     @Override
-    public boolean deleteGroup(String email, String name){
-        UserFileGroup fg= userFileGroupDAO.getGroupByName(email, name);
-        if(fg == null)
+    public boolean deleteGroup(String email, String name) {
+        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, name);
+        if (fg == null) {
             return false;
-        else
+        } else {
             return userFileGroupDAO.makeTransient(fg);
+        }
     }
-    
+
     @Override
-    public boolean moveFile(String email, String srcName, String destName, String fileName){
+    public boolean moveFile(String email, String srcName, String destName, String fileName) {
         UserFileGroup src = userFileGroupDAO.getGroupByName(email, srcName);
-        if(src == null)
+        if (src == null) {
             return false;
+        }
         UserFileGroup dest = userFileGroupDAO.getGroupByName(email, destName);
-        if(dest == null)
+        if (dest == null) {
             return false;
+        }
         UserFile uf = userFileDAO.getFile(src.getId(), fileName);
         src.removeFile(uf);
         dest.addFile(uf);
@@ -237,15 +248,18 @@ public class UserServiceImpl implements IUserService {
         userFileGroupDAO.update(dest);
         return true;
     }
-    
+
     @Override
     public boolean uploadFile(String email, String groupName, String name, String fileuri) {
-        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
         UserFile uf = new UserFile();
         uf.setName(name);
         uf.setUrl(fileuri);
-        userFileDAO.makePersistent(uf);
+        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
+        if (fg == null) {
+            return false;
+        }
         fg.addFile(uf);
+        userFileDAO.makePersistent(uf);
         userFileGroupDAO.update(fg);
         return true;
     }
@@ -253,7 +267,11 @@ public class UserServiceImpl implements IUserService {
     @Override
     public String download(String email, String groupName, String fileName) {
         UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
+        if(fg == null)
+            return null;
         UserFile uf = userFileDAO.getFile(fg.getId(), fileName);
+        if(uf == null)
+            return null;
         return uf.getUrl();
     }
 
@@ -267,25 +285,26 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean validateCheckcode(int id, String checkcode) {
         List<ResetInfo> lr = resetInfoDAO.getResetInfoByUser(id);
-        if(lr.size() == 1 && lr.get(0).getCheckcode().equals(checkcode)){
+        if (lr.size() == 1 && lr.get(0).getCheckcode().equals(checkcode)) {
             long between = new java.util.Date().getTime() - lr.get(0).getCreateTime().getTime() - 78360534;
-            if((between / (60 * 60 * 1000)) < 1)
+            if ((between / (60 * 60 * 1000)) < 1) {
                 return true;
-            else{
+            } else {
                 resetInfoDAO.makeTransient(lr.get(0));
                 return false;
             }
-        }
-        else
+        } else {
             return false;
+        }
     }
 
     @Override
     public void saveResetInfo(int id, String checkCode) {
         List<ResetInfo> lr = resetInfoDAO.getResetInfoByUser(id);
-        if(!lr.isEmpty()){
-            for(int i =0;i < lr.size(); i ++)
+        if (!lr.isEmpty()) {
+            for (int i = 0; i < lr.size(); i++) {
                 resetInfoDAO.makeTransient(lr.get(i));
+            }
         }
         ResetInfo r = new ResetInfo();
         r.setUserid(id);

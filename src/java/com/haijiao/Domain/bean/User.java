@@ -189,6 +189,10 @@ public class User extends BaseBean{
         fileGroups.add(group);
     }
     
+    public void addPersistFileGroup(UserFileGroup group){
+        fileGroups.add(group);
+    }
+    
     public UserFile getFile(String group, String name){
         UserFileGroup groupResult = null;
         for(int i = 0; i < fileGroups.size(); i++){
