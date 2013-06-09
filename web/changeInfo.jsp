@@ -99,6 +99,7 @@
             var uploadButton = false;
 
             function preImg(fileid, imgid) {
+                $('#myModal').modal("show", true);
                 var src = $("#fileid").val();
                 $('#pic_tip2').css("color", "black");
                 if (src.substr(src.length - 3, src.length) != "jpg") {
@@ -347,11 +348,7 @@
                             <p style="font-size: 9px;">请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。<br/>
                             <div id="pic_tip1">注意①：请确保图片小于2MB<br/></div>
                             <div id="pic_tip2">注意②：目前只支持上传JPG类型的图片哦</div></p>
-                            <div id="pre_area" style="display:none;">
-                                <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
-                                    <img id="preimg" onload="getSize(this)"/>
-                                </div>
-                            </div>
+
                             <s:if test="#session.userType=='student'">
                                 <img id="pic_org" src="<s:property value="stu.picUrl"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
@@ -365,7 +362,24 @@
                                 <s:textfield id="pic_w" name="w" style="display:none;"/>
                                 <s:textfield id="pic_h" name="h" style="display:none;"/>
                                 <s:file name="upload" title="选择文件" id="fileid" onchange="preImg(this.id,preimg);"/>
-                                <button type="button" id="uploadButton" class="btn disabled" data-toggle="button" onclick="checkSubmit();" >上传文件</button>
+
+                                <div id="myModal" class="modal hide fade">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>预览</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="pre_area" style="display:none;">
+                                            <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
+                                                <img id="preimg" onload="getSize(this)"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+                                        <button type="button" id="uploadButton" class="btn disabled" data-toggle="button" onclick="checkSubmit();" >上传文件</button>
+                                    </div>
+                                </div>
                             </s:form>
                             <div class="progress"><div class="bar"></div></div>
                         </div>
