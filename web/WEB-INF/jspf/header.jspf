@@ -12,18 +12,21 @@
     }
     function getRoomStatus() {
         $.post("getTeacherStatus.action", function(data) {
-            $("#notation").text("暂无新的请求");
             if (data.info.status != null) {
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
+                $('#publicRoomButton').addClass("btn-warning").text("试讲房间(有人)");
+ 
             }
             else if(data.info.reserveNum != null && data.info.reserveNum != 0){
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
-                $("#notification").text("有" + data.info.reserveNum + "个新的请求，点击查看");
+                $("#notification").text("有" + data.info.reserveNum + "个新的请求，点击查看").addClass("btn-warning");
             }
             else {
                 $('#toClass').removeClass("btn-info");
+                $("#notification").text("暂无新的请求").removeClass('btn-warning');
+                $('#publicRoomButton').removeClass('btn-warning').text("试讲房间(无人)");
                 $('#toClass').addClass("btn-inverse");
             }
         }, "json");
@@ -68,7 +71,7 @@
                                             getRoomStatus();
                                             rid = setInterval(getRoomStatus, 60000);
                                         </script>
-                                        <li><a href="enterPublicRoom.action?teaEmail=<s:property value="#session.email"/>">在线试讲房间</a></li>
+                                        <li><a id="publicRoomButton" href="enterPublicRoom.action?teaEmail=<s:property value="#session.email"/>">在线试讲房间</a></li>
                                         <s:iterator value="#session.todayClazz">
                                             <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">学生:<s:property value="student.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
                                         </s:iterator>

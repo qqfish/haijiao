@@ -143,12 +143,12 @@
                                 <ul class="thumbnails">
                                 <s:iterator value="pb.list" id="list">
                                     <div id="resultBar">
-                                            <li class="span11">
-                                                <div class="thumbnail">
-                                                    <img class="pull-left" style="margin: 0px 10px 0px 0px;" src="<s:property value="picUrl"/>" width="110px"/>
-                                                    <a href="getTeacherInfo.action?teacherEmail=<s:property value="email"/>" style="text-decoration: none;">
-                                                        <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
-                                                    </a>
+                                        <li class="span11">
+                                            <div class="thumbnail">
+                                                <img class="pull-left" style="margin: 0px 10px 0px 0px;" src="<s:property value="picUrl"/>" width="110px"/>
+                                                <a href="getTeacherInfo.action?teacherEmail=<s:property value="email"/>" style="text-decoration: none;">
+                                                    <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
+                                                </a>
                                                 <s:if test="status==0"><label class="label">离线</label></s:if>
                                                 <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                 <s:else><label class="label label-warning">忙碌</label></s:else>
@@ -173,23 +173,25 @@
                                                         </s:iterator>
                                                     </s:else>
                                                     <br/>
-                                                    <s:if test="#session.email != null&&tea.status!=1">
-                                                        <button class="btn btn-danger btn-mini pull-right" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                                    <s:if test="#session.email != null&&status!=1">
+                                                        <a class="btn btn btn-small pull-right" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                                                        <!--<a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>-->
                                                         <div class="modal fade hide" id="publicRoom">
                                                             <div class="modal-body">
                                                                 <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">确定</a>
+                                                                <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='email' default='null' />">确定</a>
                                                                 <button class="btn" data-dismiss="modal">取消</button>
                                                             </div>
                                                         </div>
                                                     </s:if>
                                                     <s:elseif test="#session.email != null">
-                                                        <button class='btn btn-primary btn-mini pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</button>
+                                                        <a class='btn btn-success btn-small  pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='email' default='null' />">在线试讲</a>
                                                     </s:elseif>
                                                     <s:else>
-                                                        <button class="btn btn-danger btn-mini pull-right" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                                        <a class="btn btn-success btn-small  pull-right" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                                                        <!--<a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>-->
                                                         <div class="modal fade hide" id="publicRoom">
                                                             <div class="modal-body">
                                                                 <h3>请先登陆</h3>

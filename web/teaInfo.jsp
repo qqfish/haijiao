@@ -38,10 +38,10 @@
 
     </head>
     <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, <s:property value='studentScheduleBean.toJson()' default='null' />);"
-        <!--==============================header=================================-->
-        <%@ include file="WEB-INF/jspf/header.jspf"%>
-        <!--==============================content=================================-->
-        <div class="container wrapper">
+          <!--==============================header=================================-->
+          <%@ include file="WEB-INF/jspf/header.jspf"%>
+          <!--==============================content=================================-->
+          <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
@@ -53,7 +53,8 @@
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
                         </h4>
                     <s:if test="#session.email != null&&tea.status!=1">
-                        <a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-primary" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                        <!--<a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>-->
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
@@ -65,12 +66,15 @@
                         </div>
                     </s:if>
                     <s:elseif test="#session.email != null">
-                        <a class='btn btn-primary btn-mini' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
+                        <a class='btn btn-success' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
+                        <s:if test="#session.userType=='student'">
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
+                        </s:if>
                     </s:elseif>
                     <s:else>
-                        <a class="btn btn-danger btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
-                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
-                        <a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">我要预约</a>
+                        <a class="btn btn-success" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <!--<a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>-->
+                        <a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">我要预约</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>请先登陆</h3>
@@ -81,13 +85,6 @@
                             </div>
                         </div>
                     </s:else>
-                    <s:if test="#session.userType=='teacher'">
-                        <a class="btn btn-primary btn-mini" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
-                    </s:if>
-                    <s:if test="#session.userType=='student'">
-                        <a class="btn btn-primary btn-mini" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                        <a class="btn btn-primary btn-mini" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
-                    </s:if>
                     <hr/>
                     <div style="margin-left: 10px">
                         <small>
@@ -169,10 +166,10 @@
                                                     线上授课
                                                 </s:elseif>
                                                 <s:elseif test="tea.sprtUnderline==false && tea.sprtOnline==false">
-                                                     暂未选择授课方式
+                                                    暂未选择授课方式
                                                 </s:elseif>
                                                 <s:else>
-                                                     暂未选择授课方式
+                                                    暂未选择授课方式
                                                 </s:else>
                                             </td>
                                         </tr>
@@ -244,31 +241,31 @@
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    
-                                                <s:if test="billList.size()<=0">
-                                                    还没有评论哦~！
-                                                </s:if>
-                                                <s:else>
-                                                    <s:iterator value="billList" id="billList">
-                                                        <tr>
-                                        <td>
-                                            <blockquote>
+
+                                    <s:if test="billList.size()<=0">
+                                        还没有评论哦~！
+                                    </s:if>
+                                    <s:else>
+                                        <s:iterator value="billList" id="billList">
+                                            <tr>
+                                                <td>
+                                                    <blockquote>
                                                         <s:if test="stot != null">
                                                             <h4><s:property value="student.name" /><div class="rateit pull-right" data-rateit-value="<s:property value="stot.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                                                            <small>
-                                                                <span><s:property value="stot.content" /></span>
-                                                                <br/><br/>
-                                                                <s:if test="stot.reply != null">
-                                                                    <span>老师的回复：<s:property value="stot.reply" /></span>
-                                                                </s:if>
-                                                            </small>
-                                                        </s:if>
-                                                            </blockquote>
-                                        </td>
-                                    </tr>
-                                                    </s:iterator>
-                                                </s:else>
-                                            
+                                                                <small>
+                                                                    <span><s:property value="stot.content" /></span>
+                                                                    <br/><br/>
+                                                                    <s:if test="stot.reply != null">
+                                                                        <span>老师的回复：<s:property value="stot.reply" /></span>
+                                                                    </s:if>
+                                                                </small>
+                                                            </s:if>
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                        </s:iterator>
+                                    </s:else>
+
                                 </tbody>
                             </table>
                         </div>
