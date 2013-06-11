@@ -13,8 +13,9 @@
         <title>海角教育</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/validate.css" />
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/style.css"/>
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/mail.js"></script>
     </head>
     <body>
@@ -35,7 +36,7 @@
                 </div>
                 <div class="span8 module" style="padding: 12px;">
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id='sendMsg'>
+                        <div class="tab-pane fade active in" id="sendMsg">
                             <h3>写信息</h3>
                             <hr/>
                             <div class="span7">
@@ -96,9 +97,10 @@
         </div>
         <!--==============================footer=================================-->
         <%@ include file="WEB-INF/jspf/footer.jspf"%>
-        <s:if test="toEmail==null"><script>
-            $("#newMsgButton").click();
-        </script></s:if>
-        
+        <s:if test="toEmail==null">
+            <script>
+                                            $("#newMsgButton").click();
+            </script>
+        </s:if>
     </body>
 </html>
