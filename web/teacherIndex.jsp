@@ -100,14 +100,17 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="span8 module" id="tippanel" style="padding:12px;">
+                        开课流程：①开设课程<i class=" icon-chevron-right"></i>②设定时间<i class=" icon-chevron-right"></i>③处理预约<i class=" icon-chevron-right"></i>④电子备课<a class="close pull-right" id="closetip">×</a>
+                    </div>
                     <div class="span8 module" style="padding:12px;">
                         <ul class="nav nav-pills">
                             <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                            <li id="l2"><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
-                            <li id="l1"><a href="#student_area" data-toggle="tab">预约列表</a></li>
+                            <li id="l2"><a href="#schedule_area" data-toggle="tab" >设定时间</a></li>
+                            <li id="l1"><a href="#student_area" data-toggle="tab">处理预约</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab" >电子备课</a></li>
                             <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
-                            <li id="l6"><a href="#file_area" data-toggle="tab" >文件</a></li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade" id='student_area'>
@@ -342,6 +345,15 @@
                             </div>
                         </div>
                         <div class="tab-pane fade  active in" id='lesson_area'>
+                            <a id="showtip"><i class="icon-question-sign"></i><small>如何开设课程</small></a>
+                            <br/>
+                            <br/>
+                            开课导航：<br/>
+                            <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
+                            <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
+                            <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
+                            <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
+                            <br/>
                             <h4>老师您好，您目前开设课程的情况如下：</h4>
                             <table>
                                 <s:iterator value="teacher.lessons" id="ls">
@@ -356,15 +368,6 @@
                                         </s:if>
                                     </s:iterator>
                                 <br/><br/>
-                                <p style="font-size: 9px;">
-                                    <strong>第一步：选择课程</strong><br/>
-                                    * 小提示①：您可以通过下面的输入框开设新的课程！<br/>
-                                    * 小提示②：点击课程后面的小叉可以取消开设该课程！<br/>
-                                    <strong>第二步：设置空闲时间</strong><br/>
-                                    * 小提示③：您可以在课程表界面中设置空闲时间！<br/>
-                                    <strong>第三步：确认学生信息</strong><br/>
-                                    * 小提示④：您可以前往学生列表页面查看是否有学生申请了您的课程！
-                                </p>
                                 <hr/>
                                 <h5>课程列表</h5>
                                 <s:form action="dealLesson.action">
@@ -591,10 +594,10 @@
                                                         <s:property value="#files.name"/>
                                                     </div>
                                                     <div class="pull-right">
-                                                    <s:submit cssClass="btn btn-primary btn-mini" value="下载"/>
-                                                </s:form>
-                                                <s:form action="file">
-                                                    <s:submit cssClass="btn btn-danger btn-mini" value="删除"/>
+                                                        <s:submit cssClass="btn btn-primary btn-mini" value="下载"/>
+                                                    </s:form>
+                                                    <s:form action="file">
+                                                        <s:submit cssClass="btn btn-danger btn-mini" value="删除"/>
                                                     </div>
                                                     <br/>
                                                     <small>上传者  上传日期  持续时间  下载次数 文件大小</small>
