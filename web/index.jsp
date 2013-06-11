@@ -41,7 +41,7 @@
                                     <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
                                         <label class="checkbox pull-right" style='margin-right:10px'>
                                         <s:checkbox name="autologin" fieldValue="on" cssStyle="width:30px"/>十天内自动登录
-                                        </label>
+                                    </label>
                                     <s:submit cssClass="btn btn-success " style="margin-top:20px;margin-left:3px;width:220px" value="登录"></s:submit>
                                 </s:form>
                                 <div style="text-align: center;"><a style="color:white;" data-toggle="modal" data-target="#forgetPwd" href="">忘记密码</a> <a style="color:white;" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">注册账号</a></div>
