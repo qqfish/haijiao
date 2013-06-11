@@ -29,7 +29,7 @@ import org.springframework.stereotype.Controller;
 @Action("enterRoom")
 @Results({
     @Result(name="success",location="/room/index.jsp"),
-    @Result(name="false",location="/index.jsp")
+    @Result(name="false",type="chain",location="index")
 })
 public class EnterRoomAction extends RequestSessionAction{
     @Resource

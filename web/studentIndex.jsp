@@ -138,19 +138,19 @@
                                         <th>Sun.</th>
                                     </tr>
                                     <tr class="class_1">
-                                        <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <th rowspan="2">8: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_2">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_3">
-                                        <th rowspan="2">10:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <th rowspan="2">10: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_4">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_5">
-                                        <th rowspan="2">中 午</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                        <th rowspan="2">12: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                     </tr>
                                     <tr class="class_6">
                                         <td></td><td></td><td></td><td></td><td></td><td></td><td></td>

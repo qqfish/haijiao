@@ -174,7 +174,7 @@
                                                     </s:else>
                                                     <br/>
                                                     <s:if test="#session.email != null&&status!=1">
-                                                        <a class="btn btn btn-small pull-right" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                                                        <a class="btn btn btn-small pull-right" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="email" />">发送私信</a>
                                                         <!--<a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>-->
                                                         <div class="modal fade hide" id="publicRoom">
                                                             <div class="modal-body">

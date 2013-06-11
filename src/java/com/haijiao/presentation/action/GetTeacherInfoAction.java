@@ -26,7 +26,8 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("getTeacherInfo")
 @Results({
-    @Result(name="success",location="/teaInfo.jsp")
+    @Result(name="success",location="/teaInfo.jsp"),
+    @Result(name="teacher",type="chain",location="index")
 })
 public class GetTeacherInfoAction extends RequestSessionAction{
     @Resource
@@ -50,6 +51,9 @@ public class GetTeacherInfoAction extends RequestSessionAction{
         billList = billService.getBill(email, "teacher");
         
         String stuEmail = (String) this.getOutSession("email");
+        if(stuEmail.equals(email)){
+            return "teacher";
+        }
         String userType = (String) this.getOutSession("userType");
         if(stuEmail != null && userType.equals("student")){
             Student stu = studentService.getStudentByEmail(stuEmail);

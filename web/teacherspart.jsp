@@ -51,23 +51,25 @@
                                             </s:iterator>
                                         </s:else>
                                         <br/>
-                                        <s:if test="#session.email != null&&tea.status!=1">
-                                            <button class="btn btn-danger btn-mini pull-right" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                        <s:if test="#session.email != null&&status!=1">
+                                            <a class="btn btn btn-small pull-right" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="email" />">发送私信</a>
+                                            <!--<a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>-->
                                             <div class="modal fade hide" id="publicRoom">
                                                 <div class="modal-body">
                                                     <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">确定</a>
+                                                    <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='email' default='null' />">确定</a>
                                                     <button class="btn" data-dismiss="modal">取消</button>
                                                 </div>
                                             </div>
                                         </s:if>
                                         <s:elseif test="#session.email != null">
-                                            <button class='btn btn-primary btn-mini pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</button>
+                                            <a class='btn btn-success btn-small  pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='email' default='null' />">在线试讲</a>
                                         </s:elseif>
                                         <s:else>
-                                            <button class="btn btn-danger btn-mini pull-right" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</button>
+                                            <a class="btn btn-success btn-small  pull-right" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                                            <!--<a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>-->
                                             <div class="modal fade hide" id="publicRoom">
                                                 <div class="modal-body">
                                                     <h3>请先登陆</h3>
@@ -91,8 +93,8 @@
                 <ul>        
                     <s:if test="pb.currentPage == 1">
                         <li class="disabled"><a href="javascript:;">Prev</a></li>
-                        </s:if>
-                        <s:else>
+                    </s:if>
+                    <s:else>
                         <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage -1});">
                                 Prev</s:a></li>
                         </s:else>
@@ -101,8 +103,8 @@
                                 <s:iterator value="new int[pb.currentPage +1]" status="i">
                                     <s:if test="pb.currentPage == #i.index+1">
                                     <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                    </s:if>
-                                    <s:else>
+                                </s:if>
+                                <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                             <s:property value="#i.index+1"/>
                                         </s:a></li>
@@ -113,8 +115,8 @@
                             <li><s:a href="javascript:;" onclick="gotopage(1);">1</s:a></li>
                             <li><s:a href="javascript:;" onclick="gotopage(2);">2</s:a></li>
                             <li class="disabled"><s:a href="javascript:;">...</s:a></li>
-                                <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
-                                    <s:if test="#i.index == 1">
+                            <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
+                                <s:if test="#i.index == 1">
                                     <li class="disabled"><s:a href="javascript:;">
                                             <s:property value="pb.currentPage"/>
                                         </s:a></li>
@@ -152,8 +154,8 @@
                             <s:iterator value="new int[pb.totalPage]" status="i">
                                 <s:if test="pb.currentPage == #i.index+1">
                                 <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                </s:if>
-                                <s:else>
+                            </s:if>
+                            <s:else>
                                 <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                         <s:property value="#i.index+1"/>
                                     </s:a></li>
@@ -162,8 +164,8 @@
                         </s:else>
                         <s:if test="pb.currentPage == pb.totalPage || pb.totalPage == 0">
                         <li class="disabled"><a href="javascript:;">Next</a></li>
-                        </s:if>
-                        <s:else>
+                    </s:if>
+                    <s:else>
                         <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage +1});">
                                 Next
                             </s:a></li>

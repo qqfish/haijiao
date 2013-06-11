@@ -1,41 +1,45 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-
+<%  
+  String path = request.getContextPath();  
+  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+%> 
 <!DOCTYPE html>
 <html lang="en">
+    <base href="<%=basePath%>">
     <head>
         <title>Class</title>
         <meta charset="utf-8">
-        <script src="/room/js/lib/jquery-1.9.1.js"></script>
+        <script src="room/js/lib/jquery-1.9.1.js"></script>
 
         <!--<script type="text/javascript" src="../js/jquery.flexslider-min.js"></script>-->
-        <script src="/room/js/lib/jquery-ui-1.10.1.custom.min.js"></script>
-        <script src="/room/js/lib/jQueryRotate.2.2.js"></script>
-        <script src="/room/js/lib/kinetic.js"></script>
-        <script src="/room/js/message.js"></script>
-        <script src="/room/js/adapter.js"></script>
-        <script src="/room/js/screen.js"></script>
-        <script src="/room/js/timer.js"></script>
-        <script src="/room/js/toolkit.js"></script>
-        <script src="/room/js/textChat.js"></script>
-        <script src="/room/js/socket.js"></script>
-        <script src="/room/js/media.js"></script>
-        <script src="/room/js/table.js"></script>
-        <script src="/room/js/fileManager.js"></script>
-        <script src="/room/js/main.js"></script>
-        <script src="/room/js/tooltip.js"></script>
+        <script src="room/js/lib/jquery-ui-1.10.1.custom.min.js"></script>
+        <script src="room/js/lib/jQueryRotate.2.2.js"></script>
+        <script src="room/js/lib/kinetic.js"></script>
+        <script src="room/js/message.js"></script>
+        <script src="room/js/adapter.js"></script>
+        <script src="room/js/screen.js"></script>
+        <script src="room/js/timer.js"></script>
+        <script src="room/js/toolkit.js"></script>
+        <script src="room/js/textChat.js"></script>
+        <script src="room/js/socket.js"></script>
+        <script src="room/js/media.js"></script>
+        <script src="room/js/table.js"></script>
+        <script src="room/js/fileManager.js"></script>
+        <script src="room/js/main.js"></script>
+        <script src="room/js/tooltip.js"></script>
         <!--css-->
-        <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="/room/css/room.css" type="text/css" media="screen">
-        <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-        <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="room/css/room.css" type="text/css" media="screen">
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
         <!--<link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400,400italic' rel='stylesheet' type='text/css'>-->
-        <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" media="screen">
-        <link rel="stylesheet" href="/css/bootstrap-responsive.min.css" type="text/css" media="screen">
-        <script src="/room/js/lib/bootstrap.file-input.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css" media="screen">
+        <script src="room/js/lib/bootstrap.file-input.js"></script>
         <!--js-->
         <!--<script type="text/javascript" src="../js/superfish.js"></script>-->
-        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
         <script type="text/javascript">
         </script>
@@ -59,7 +63,7 @@
           onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='#session.email' default='null' />');">
         <s:if test="user.loginNum < 3">
             <div class="modal fade" id="beginInfo" style="background:none;border: none;box-shadow:0 0px 0px rgba(0,0,0,0.3);left:80%;">
-                <image src="/haijiao/room/image/info.png" style="display: block;background:none;" />
+                <image src="room/image/info.png" style="display: block;background:none;" />
             </div>
             <script>
                 $("#beginInfo").modal();

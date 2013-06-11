@@ -30,7 +30,7 @@ import org.springframework.stereotype.Controller;
 @Action("enterPublicRoom")
 @Results({
     @Result(name="success",location="/room/index.jsp"),
-    @Result(name="false",location="/index.jsp")
+    @Result(name="false",type="chain",location="index")
 })
 public class EnterPublicRoomAction extends RequestSessionAction {
     @Resource

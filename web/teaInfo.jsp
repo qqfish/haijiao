@@ -15,7 +15,6 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript" src="js/teaInfo.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
@@ -51,9 +50,12 @@
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
-                        </h4>
+                    </h4>
                     <s:if test="#session.email != null&&tea.status!=1">
                         <a class="btn btn-primary" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                        <s:if test="#session.userType=='student'">
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
+                        </s:if>
                         <!--<a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>-->
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
@@ -326,19 +328,19 @@
                                     <th>Sun.</th>
                                 </tr>
                                 <tr class="class_1">
-                                    <th rowspan="2">8:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    <th rowspan="2">8: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_2">
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_3">
-                                    <th rowspan="2">10:00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    <th rowspan="2">10: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_4">
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_5">
-                                    <th rowspan="2">中 午</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    <th rowspan="2">12: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                                 </tr>
                                 <tr class="class_6">
                                     <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
@@ -384,9 +386,9 @@
                             <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
                             <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
-                                <div id="lesson_select">
+                            <div id="lesson_select">
                                 <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                                    <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <s:iterator value="tea.lessons" status="st">
                                         <s:if test="delete==false">
                                             <button type="button" class="btn"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
