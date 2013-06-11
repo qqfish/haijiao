@@ -80,6 +80,12 @@ public class RoomServiceImpl implements IRoomService {
     public void removeRoom(Teacher teacher) {
         TeaAndStu aas = new TeaAndStu();
         aas.setTeaEmail(teacher.getEmail());
+        Room room = roomTable.get(aas);
+        if (room == null) {
+            return;
+        }
+        File dir = new File(config.tmpRoomFile + "/" + room.getId());
+        deleteDir(dir);
         roomTable.remove(aas);
     }
 
@@ -188,9 +194,16 @@ public class RoomServiceImpl implements IRoomService {
             return;
         }
 
+
         TeaAndStu aas = new TeaAndStu();
         aas.setStuEmail(clazz.getStudent().getEmail());
         aas.setTeaEmail(clazz.getFreeTime().getTeacher().getEmail());
+        Room room = roomTable.get(aas);
+        if (room == null) {
+            return;
+        }
+        File dir = new File(config.tmpRoomFile + "/" + room.getId());
+        deleteDir(dir);
         roomTable.remove(aas);
     }
 
@@ -205,5 +218,20 @@ public class RoomServiceImpl implements IRoomService {
 
     public void setClassService(IClassService classService) {
         this.classService = classService;
+    }
+
+    private void deleteRoomFile(Room room) {
+    }
+
+    private void deleteDir(File dir) {
+        if (dir.exists()) {
+            if (dir.isDirectory()) {
+                File delFile[] = dir.listFiles();
+                for (int i = 0; i < delFile.length; i++) {
+                    deleteDir(delFile[i]);
+                }
+            }
+            dir.delete();
+        }
     }
 }

@@ -19,6 +19,8 @@ function init(clazzId, teaEmail, email){
     
     media.userEnter("__localUser","__localUser");
     
+    textChat.printMeesage("温馨提示", "1、按F11全屏效果更佳；2、使用音响请离麦克风保持距离；3、支持纯麦克风模式（无摄像头）");
+    
     var sideShow = true;
     var sideWidth = 250;
     var sideButton = 25;

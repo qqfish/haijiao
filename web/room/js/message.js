@@ -30,6 +30,7 @@ var Response = {
     UploadBackground : 9,
     ShowTimer : 10,
     UserEnter : 11,
+    DownloadPDF: 12,
     Error: 100,
     Info: 101
 }

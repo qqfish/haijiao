@@ -56,7 +56,12 @@
                         <s:if test="#session.userType=='student'">
                             <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
                         </s:if>
-                        <!--<a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>-->
+                    </s:if>
+                    <s:elseif test="#session.email != null && tea.status == 2">
+                        <a class="btn btn-danger btn-mini" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <s:if test="#session.userType=='student'">
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
+                        </s:if>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>老师不在线或忙碌，可能无法与您交流，仍要进入房间吗？</h3>
@@ -66,7 +71,7 @@
                                 <button class="btn" data-dismiss="modal">取消</button>
                             </div>
                         </div>
-                    </s:if>
+                    </s:elseif>
                     <s:elseif test="#session.email != null">
                         <a class='btn btn-success' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
                         <s:if test="#session.userType=='student'">
@@ -386,9 +391,9 @@
                             <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
                             <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
                             <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
-                            <div id="lesson_select">
+                                <div id="lesson_select">
                                 <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                    <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <s:iterator value="tea.lessons" status="st">
                                         <s:if test="delete==false">
                                             <button type="button" class="btn"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>

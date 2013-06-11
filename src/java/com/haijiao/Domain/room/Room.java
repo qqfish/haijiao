@@ -81,11 +81,12 @@ public class Room {
     }
 
     public boolean checkInroomUser(User user) {
-        if(roomSocket.size() >= max){
+        if (roomSocket.size() >= max) {
             return false;
         }
-        if(attendance.size() == 1)
+        if (attendance.size() == 1) {
             return true;
+        }
         for (int i = 0; i < attendance.size(); i++) {
             System.out.println("att: " + attendance.get(i).getEmail());
             if (attendance.get(i).equals(user)) {
@@ -115,28 +116,29 @@ public class Room {
     }
 
     public boolean choosePage(String uuid, int page) {
-        RoomFile file = null;
-        for (int i = 0; i < roomFile.size(); i++) {
-            if (roomFile.get(i).getUuid().equals(uuid)) {
-                file = roomFile.get(i);
-                break;
+        if (uuid != null && page > 0) {
+            RoomFile file = null;
+            for (int i = 0; i < roomFile.size(); i++) {
+                if (roomFile.get(i).getUuid().equals(uuid)) {
+                    file = roomFile.get(i);
+                    break;
+                }
             }
-        }
-        if (file == null) {
-            return false;
-        }
-        RoomPage result = null;
-        if (page < 0) {
-            result = file.getLastPage();
-        } else {
-            result = file.getPage(page);
-        }
+            if (file == null) {
+                return false;
+            }
+            RoomPage result = null;
+            if (page < 0) {
+                result = file.getLastPage();
+            } else {
+                result = file.getPage(page);
+            }
 
-        if (result == null) {
-            return false;
+            if (result == null) {
+                return false;
+            }
+            currentPage = result;
         }
-        currentPage = result;
-
         broadcast(gson.toJson(getResponseChangePage()));
         return true;
     }
@@ -191,7 +193,7 @@ public class Room {
             broadcast(gson.toJson(message));
         } else if (type.equals("pdf")) {
             int i = data.indexOf(",");
-            String rawData = data.substring(i+1);
+            String rawData = data.substring(i + 1);
             RoomFile newFile = new RoomFile(name, rawData, this);
             roomFile.add(newFile);
             List<RoomFile> list = new ArrayList();
@@ -199,15 +201,14 @@ public class Room {
             broadcast(gson.toJson(new ResponseAddRoomFile(list)));
         }
     }
-    
-    
-    public void releaseFile(){
-        if(roomSocket.size()==0){
-            for(int i = 0 ; i < roomFile.size(); i++){
+
+    public void releaseFile() {
+        if (roomSocket.size() == 0) {
+            for (int i = 0; i < roomFile.size(); i++) {
                 roomFile.get(i).release();
             }
             exitBit = false;
-            if(attendance.size() < 2){
+            if (attendance.size() < 2) {
                 IRoomService roomService = (IRoomService) SpringContext.getContext().getBean("roomServiceImpl");
                 roomService.removeRoom((Teacher) holder);
                 ITeacherService teacherService = (ITeacherService) SpringContext.getContext().getBean("teacherServiceImpl");
@@ -277,35 +278,37 @@ public class Room {
     public RoomTimer getTimer() {
         return timer;
     }
-    
-    public boolean isReady(){
+
+    public boolean isReady() {
         return roomSocket.size() > 1;
     }
-    
-    public boolean isEmpty(){
+
+    public boolean isEmpty() {
         return roomSocket.size() == 0;
     }
-    
-    public boolean checkAndUpdateExitBit(){
+
+    public boolean checkAndUpdateExitBit() {
         boolean result = exitBit;
-        if(!exitBit)
+        if (!exitBit) {
             exitBit = true;
+        }
         return result;
     }
-    
-    public String prepareDownloadFile(){
-        if(currentPage == null)
+
+    public String prepareDownloadFile() {
+        if (currentPage == null) {
             return null;
-            String result=null;
+        }
+        String result = null;
         try {
             result = currentPage.getFile().getDownloadUrl();
         } catch (Exception ex) {
             Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
         }
-            return result;
+        return result;
     }
-    
-    public List<FcMessageInbound> getRoomSocket(){
+
+    public List<FcMessageInbound> getRoomSocket() {
         return roomSocket;
     }
 }

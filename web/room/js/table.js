@@ -84,8 +84,23 @@ function Table(containerName, tool){
             }
         });
     }
+    
+    this.sendDownload = function(){
+        changePageLock();
+        setStageToSave();
+        stage.toDataURL({
+            callback: function(dataUrl) {
+                var message = {};
+                message.type = Request.DownloadPdf;
+                message.tmpUrl = dataUrl;
+        
+                connection.sendObject(message);
+            }
+        });
+    }
 
     this.changePage = function(response){
+        unlockTool();
         backLayer.removeChildren();
         drawLayer.removeChildren();
         tmpLayer.removeChildren();
@@ -162,60 +177,60 @@ function Table(containerName, tool){
     function setDragBound(){
         stage.setDragBoundFunc(function(pos) {
             //console.log(stage.getPosition());
-//            if(imageSize.width * scaleRange[scaleChoice] < stage.getWidth() && imageSize.height * scaleRange[scaleChoice] < stage.getHeight()){
-//                return {
-//                    x: stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2,
-//                    y: 0 
-//                }
-//            } else if(imageSize.width * scaleRange[scaleChoice] < stage.getWidth() && imageSize.height * scaleRange[scaleChoice] >= stage.getHeight()){
-//                var newY;
-//                if(pos.y > 0){
-//                    newY = 0;
-//                } else if(pos.y < stage.getHeight() - imageSize.height * scaleRange[scaleChoice]){
-//                    newY = stage.getHeight() - imageSize.height * scaleRange[scaleChoice];
-//                } else {
-//                    newY = pos.y;
-//                }
-//                return {
-//                    x: stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2,
-//                    y: newY
-//                }
-//            } else if(imageSize.width * scaleRange[scaleChoice] >= stage.getWidth() && imageSize.height * scaleRange[scaleChoice] < stage.getHeight()) {
-//                var newX;
-//                if(pos.x > 0){
-//                    newX = 0;
-//                } else if(pos.x < stage.getWidth() - imageSize.width * scaleRange[scaleChoice]) {
-//                    newX = stage.getWidth() - imageSize.width * scaleRange[scaleChoice];
-//                } else {
-//                    newX = pos.x;
-//                }
-//                return {
-//                    x: newX,
-//                    y: 0
-//                }
-//            } else {
-//                var newY;
-//                if(pos.y > 0){
-//                    newY = 0;
-//                } else if(pos.y < stage.getHeight() - imageSize.height * scaleRange[scaleChoice]){
-//                    newY = stage.getHeight() - imageSize.height * scaleRange[scaleChoice];
-//                } else {
-//                    newY = pos.y;
-//                }
-//                var newX;
-//                if(pos.x > 0){
-//                    newX = 0;
-//                } else if(pos.x < stage.getWidth() - imageSize.width * scaleRange[scaleChoice]) {
-//                    newX = stage.getWidth() - imageSize.width * scaleRange[scaleChoice];
-//                } else {
-//                    newX = pos.x;
-//                }
-//                return {
-//                    x: newX,
-//                    y: newY
-//                }
-//                
-//            }
+            //            if(imageSize.width * scaleRange[scaleChoice] < stage.getWidth() && imageSize.height * scaleRange[scaleChoice] < stage.getHeight()){
+            //                return {
+            //                    x: stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2,
+            //                    y: 0 
+            //                }
+            //            } else if(imageSize.width * scaleRange[scaleChoice] < stage.getWidth() && imageSize.height * scaleRange[scaleChoice] >= stage.getHeight()){
+            //                var newY;
+            //                if(pos.y > 0){
+            //                    newY = 0;
+            //                } else if(pos.y < stage.getHeight() - imageSize.height * scaleRange[scaleChoice]){
+            //                    newY = stage.getHeight() - imageSize.height * scaleRange[scaleChoice];
+            //                } else {
+            //                    newY = pos.y;
+            //                }
+            //                return {
+            //                    x: stage.getWidth() / 2 - imageSize.width * scaleRange[scaleChoice] / 2,
+            //                    y: newY
+            //                }
+            //            } else if(imageSize.width * scaleRange[scaleChoice] >= stage.getWidth() && imageSize.height * scaleRange[scaleChoice] < stage.getHeight()) {
+            //                var newX;
+            //                if(pos.x > 0){
+            //                    newX = 0;
+            //                } else if(pos.x < stage.getWidth() - imageSize.width * scaleRange[scaleChoice]) {
+            //                    newX = stage.getWidth() - imageSize.width * scaleRange[scaleChoice];
+            //                } else {
+            //                    newX = pos.x;
+            //                }
+            //                return {
+            //                    x: newX,
+            //                    y: 0
+            //                }
+            //            } else {
+            //                var newY;
+            //                if(pos.y > 0){
+            //                    newY = 0;
+            //                } else if(pos.y < stage.getHeight() - imageSize.height * scaleRange[scaleChoice]){
+            //                    newY = stage.getHeight() - imageSize.height * scaleRange[scaleChoice];
+            //                } else {
+            //                    newY = pos.y;
+            //                }
+            //                var newX;
+            //                if(pos.x > 0){
+            //                    newX = 0;
+            //                } else if(pos.x < stage.getWidth() - imageSize.width * scaleRange[scaleChoice]) {
+            //                    newX = stage.getWidth() - imageSize.width * scaleRange[scaleChoice];
+            //                } else {
+            //                    newX = pos.x;
+            //                }
+            //                return {
+            //                    x: newX,
+            //                    y: newY
+            //                }
+            //                
+            //            }
             var newX,newY;
             if(pos.x < - imageSize.width * scaleRange[scaleChoice]){
                 newX = -imageSize.width * scaleRange[scaleChoice];

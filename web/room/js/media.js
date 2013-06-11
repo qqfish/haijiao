@@ -250,11 +250,11 @@ function Media(parentId, text, userList){
     
     function removeMedia(remoteUser) {
         console.log("remove user:" + remoteUser);
+        mediaList[remoteUser].userButton.remove();
         if(mediaList[remoteUser].video) {
             mediaList[remoteUser].video.hide();
             mediaList[remoteUser].video.remove();
-            mediaList[remoteUser].container.remove();
-            mediaList[remoteUser].userButton.remove();
+            mediaList[remoteUser].container.remove();  
         }
         if(mediaList[remoteUser].pc) {
             mediaList[remoteUser].pc.close();
@@ -305,9 +305,9 @@ function Media(parentId, text, userList){
         parentDiv.append(current.container);
         
         //set ability to be drag
-//        current.container.draggable({containment: [
-//                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
-//        ],scroll:false});
+        //        current.container.draggable({containment: [
+        //                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
+        //        ],scroll:false});
         current.userButton.click();     
     }
     
@@ -329,9 +329,12 @@ function Media(parentId, text, userList){
         dragPlace.x2 = x2;
         dragPlace.y2 = y2;
         
-        $(".container").draggable({containment: [
-                dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
-        ],scroll:false});
+        $(".container").draggable({
+            containment: [
+            dragPlace.x1,dragPlace.y1,dragPlace.x2,dragPlace.y2
+            ],
+            scroll:false
+        });
     }
 
     function toggleVideoMute() {

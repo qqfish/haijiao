@@ -169,7 +169,8 @@ public class RoomFile extends DataFile {
         for (int i = 0; i < pages.size(); i++) {
             if (pages.get(i).getTmpUrl() != null) {
                 PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
-                page.getContents().getStream().clear();
+                if(page.getContents() != null && page.getContents().getStream() != null)
+                    page.getContents().getStream().clear();
                 byte[] decodedBytes = Base64.decode(pages.get(i).getTmpUrl().split("^data:image/(png|jpg);base64,")[1]);
                 BufferedImage imag = ImageIO.read(new ByteArrayInputStream(decodedBytes));
                 ImageIO.write(imag, "PNG", new File("/Users/fish/test.png"));
@@ -180,9 +181,7 @@ public class RoomFile extends DataFile {
             }
         }
         downloadUrl = config.tmpRoomFile + "/" + this.room.getId() + "/" + config.downloadDir;
-        System.out.println(downloadUrl);
         File dir = new File(downloadUrl);
-        System.out.println("hello");
         if (!dir.exists()) {
             dir.mkdirs();
         }

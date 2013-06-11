@@ -76,6 +76,7 @@ public class FcMessageInbound extends MessageInbound {
 
         sendtoUser(gson.toJson(room.getResponseChangePage()));
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
+        
 
         userService.setStatus(user.getEmail(), User.Status.onlineAndBusy);
 
@@ -206,8 +207,12 @@ public class FcMessageInbound extends MessageInbound {
                 }
                 break;
             case Request.DownloadPdf:
+                RequestDownloadPdf rdp = gson.fromJson(str, RequestDownloadPdf.class);
+                room.changePage(null, -1, rdp.getTmpUrl());
                 String downloadUrl = room.prepareDownloadFile();
-                System.out.println(downloadUrl);
+                ResponseDownloadPDF downloadResult = new ResponseDownloadPDF();
+                downloadResult.setPath(downloadUrl);
+                sendtoUser(gson.toJson(downloadResult));
                 break;
 
         }

@@ -110,8 +110,8 @@
                                     <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="文件列表"><i class="icon-folder-open icon-white"></i></a>
                                     <ul class="dropdown-menu" id="roomFile">
                                         <li class="divider"></li>
-                                        <li><a tabindex="-1" id="uploadFile" href="#">上传文件</a></li>
-                                        <!--<li><a tabindex="-1" href="#" onclick="file.downloadFile()">下载文件</a></li>-->
+                                        <li><a tabindex="-1" id="uploadFile">上传文件</a></li>
+                                        <li><a tabindex="-1" onclick="file.downloadFile()">下载文件</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -197,7 +197,7 @@
                     <div style="width:240px;float: left">
                         <div id="sideVideoArea" style="height:380px;width:240px;overflow-y: visible;"></div>
                         <div style="float: bottom;">
-                            <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:228px;height: 250px;white-space:normal; overflow-y: auto; "></div>
+                            <div class="span2 input-xlarge uneditable-input" id="charShowArea" style="width:228px;height: 250px;white-space:normal; overflow-y: auto;cursor: default; "></div>
                             <p style="margin: 0px;"/>
                             <div class="input-append">
                                 <input class="span2" id="chatInput" type="text">
@@ -215,6 +215,11 @@
                     <session>Loading...</session>
                 </div>
             </div>
+            
+            <s:form action="downloadPDF.action" id="downlaodForm" style="display: none;">
+                <s:textfield name="path" id="downloadPath"></s:textfield>
+                <s:submit id="downlaodButton"></s:submit>
+            </s:form>
             <div id="desktop" style="position: absolute;overflow: hidden;">
                 <div id="table">
                 </div>
