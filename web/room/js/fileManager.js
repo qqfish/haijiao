@@ -182,7 +182,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
     this.downloadResponse = function(path){
         $("#downloadPath").val(path);
         $("#downlaodForm").submit();
-        console.log($("#downloadPath").val());
+        //console.log($("#downloadPath").val());
     }
     
     this.uploadFile = function(file){

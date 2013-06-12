@@ -29,9 +29,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 @ParentPackage("haijiao")
 @Namespace("/")
-@InterceptorRefs({
-    @InterceptorRef("LoginCheckerStack")
-})
 @Results({
     @Result(name = "success", type = "stream", params = {
         "contentType", "application/octet-stream",
@@ -47,6 +44,7 @@ public class DownloadPDFAction extends RequestSessionAction {
     private String path;
 
     public String execute() throws UnsupportedEncodingException {
+        System.out.println(path);
         downloadFileName = URLEncoder.encode(path.substring(path.lastIndexOf("/")), "UTF-8");
         System.out.println(path);
         return SUCCESS;

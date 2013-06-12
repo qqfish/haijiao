@@ -116,7 +116,7 @@ public class Room {
     }
 
     public boolean choosePage(String uuid, int page) {
-        if (uuid != null && page > 0) {
+        if (uuid != null) {
             RoomFile file = null;
             for (int i = 0; i < roomFile.size(); i++) {
                 if (roomFile.get(i).getUuid().equals(uuid)) {

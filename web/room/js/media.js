@@ -290,11 +290,11 @@ function Media(parentId, text, userList){
         current.userButton.attr("class","");
         if(userEmail == localUserId){
             current.userButton.empty();
-            current.userButton.html("<a tabindex='-1' href='#'>自己</a>");
+            current.userButton.html("<a tabindex='-1'>自己</a>");
             current.video.get(0).muted = true;
         } else {
             current.userButton.empty();
-            current.userButton.html("<a tabindex='-1' href='#'>" + userName + "</a>");
+            current.userButton.html("<a tabindex='-1'>" + userName + "</a>");
         }
         current.userButton.click(function(){
             var u = $(this).attr("user");
@@ -316,9 +316,9 @@ function Media(parentId, text, userList){
         var current = mediaList[user];
         current.userButton = $("<li></li>").attr("user",user).attr("class","disabled");
         if(user == localUserId){
-            current.userButton.html("<a tabindex='-1' href='#'>自己(未连接)</a>");
+            current.userButton.html("<a tabindex='-1'>自己(未连接)</a>");
         } else {
-            current.userButton.html("<a tabindex='-1' href='#'>" + userName + "(未连接)</a>");
+            current.userButton.html("<a tabindex='-1'>" + userName + "(未连接)</a>");
         }
         userListDiv.append(current.userButton);
     }

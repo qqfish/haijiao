@@ -5,6 +5,8 @@
 package com.haijiao.Domain.room;
 
 import com.google.gson.Gson;
+import com.haijiao.Domain.room.webFc.message.response.Info.InfoData;
+import com.haijiao.Domain.room.webFc.message.response.Info.InfoType;
 import com.haijiao.Domain.room.webFc.message.response.ResponseShowTimer;
 import java.util.TimerTask;
 
@@ -31,11 +33,6 @@ public class TimeCounter extends TimerTask {
         if (start) {
             seconds++;
             int tmp = seconds;
-            if(max > 0){
-                tmp = max - seconds;
-                if(tmp < 0)
-                    tmp = 0;
-            }
             String result = "" + tmp % 60;
             tmp = tmp / 60;
             result = tmp % 60 + ":" + result;
@@ -45,6 +42,11 @@ public class TimeCounter extends TimerTask {
             rst.setTime(result);
             Gson gson = new Gson();
             room.broadcast(gson.toJson(rst));
+            if(max > 0 && seconds > max){
+                InfoData info = new InfoData();
+                info.setInfoType(InfoType.PublicTimeUp);
+                room.broadcast(gson.toJson(info));
+            }
         }
     }
 

@@ -89,6 +89,9 @@ function processInfo(infoType, message){
         case InfoType.SomeoneExit:
             pInfo(message + " 退出了房间");
             break;
+        case InfoType.PublicTimeUp:
+            pInfo("试讲时间到了哦！");
+            break;
     }
 }
 

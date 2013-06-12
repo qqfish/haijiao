@@ -24,9 +24,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 @ParentPackage("haijiao")
 @Namespace("/")
-@InterceptorRefs({  
-    @InterceptorRef("LoginCheckerStack")  
-})  
 @Action("enterPublicRoom")
 @Results({
     @Result(name="success",location="/room/index.jsp"),
@@ -38,6 +35,7 @@ public class EnterPublicRoomAction extends RequestSessionAction {
     @Resource
     private IUserService userService;
     private String teaEmail;
+    private String email;
     private int isHolder;
     private User user;
     private String nextPageMessage;
@@ -49,15 +47,15 @@ public class EnterPublicRoomAction extends RequestSessionAction {
         if (teaEmail == null) {
             return "false";
         }
-        String email = (String) this.getOutSession("email");
+        email = (String) this.getOutSession("email");
         if (email == null) {
-            return "false";
+           email = "0@0.0";
         }
         user = userService.getUserByEmail(email);
         if (email.equals(teaEmail)) {
             isHolder = 1;
         }
-        if (!teaEmail.equals((String) this.getOutSession("email"))) {
+        if (!teaEmail.equals(email)) {
             if (teacherService.getRoomOccupied(teaEmail) != null && !teacherService.getRoomOccupied(teaEmail).equals(email)) {
                 nextPageMessage = "房间已被占用，请稍后再试。";
                 return "false";
@@ -105,5 +103,21 @@ public class EnterPublicRoomAction extends RequestSessionAction {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getNextPageMessage() {
+        return nextPageMessage;
+    }
+
+    public void setNextPageMessage(String nextPageMessage) {
+        this.nextPageMessage = nextPageMessage;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

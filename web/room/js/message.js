@@ -44,5 +44,6 @@ var ErrorType = {
 var InfoType = {
     ClazzFinish: 0,
     SomeoneEnter: 1,
-    SomeoneExit: 2
+    SomeoneExit: 2,
+    PublicTimeUp: 3
 }

@@ -51,7 +51,7 @@ public class GetTeacherInfoAction extends RequestSessionAction{
         billList = billService.getBill(email, "teacher");
         
         String stuEmail = (String) this.getOutSession("email");
-        if(stuEmail.equals(email)){
+        if(stuEmail != null && stuEmail.equals(email)){
             return "teacher";
         }
         String userType = (String) this.getOutSession("userType");

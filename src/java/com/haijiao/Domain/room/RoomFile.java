@@ -165,26 +165,29 @@ public class RoomFile extends DataFile {
         if (downloadUrl != null) {
             return downloadUrl;
         }
+        downloadUrl = config.tmpRoomFile + "/" + this.room.getId() + "/" + config.downloadDir;
+        File dir = new File(downloadUrl);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         checkAndOpenFile();
         for (int i = 0; i < pages.size(); i++) {
             if (pages.get(i).getTmpUrl() != null) {
+                System.out.println("page : " + pages.get(i).getTmpUrl() + "\n aaa:"+ i);
                 PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
-                if(page.getContents() != null && page.getContents().getStream() != null)
+                if (page.getContents() != null && page.getContents().getStream() != null) {
                     page.getContents().getStream().clear();
+                }
                 byte[] decodedBytes = Base64.decode(pages.get(i).getTmpUrl().split("^data:image/(png|jpg);base64,")[1]);
                 BufferedImage imag = ImageIO.read(new ByteArrayInputStream(decodedBytes));
-                ImageIO.write(imag, "PNG", new File("/Users/fish/test.png"));
+                //ImageIO.write(imag, "PNG", new File("/Users/fish/test.png"));
                 PDXObjectImage ximage = new PDPixelMap(doc, imag);
                 PDPageContentStream contentStream = new PDPageContentStream(doc, page);
                 contentStream.drawXObject(ximage, 0, 0, page.getMediaBox().getWidth(), page.getMediaBox().getHeight());
                 contentStream.close();
             }
         }
-        downloadUrl = config.tmpRoomFile + "/" + this.room.getId() + "/" + config.downloadDir;
-        File dir = new File(downloadUrl);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
+
 
         File file;
         file = new File(downloadUrl + "/" + name);
