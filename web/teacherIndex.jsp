@@ -176,6 +176,8 @@
                                                                         </s:form>
                                                                     </s:if>
                                                                 </span>
+                                                                <br/>
+                                                                <small>联系电话:<s:property value="student.tel"/></small>
                                                             </small>
                                                         </blockquote>
                                                     </td>
@@ -594,12 +596,12 @@
                                                         <s:property value="#files.name"/>
                                                     </div>
                                                     <div class="pull-right">
-                                                    <s:submit cssClass="btn btn-primary btn-mini" value="下载"/>
-                                                </s:form>
-                                                <s:form action="file">
-                                                    <s:textfield name="dest" value="%{teacher.fileGroups[0].groupName}" style="display:none;" />
-                                                    <s:textfield name="name" value="%{#files.name}" style="display:none;" />
-                                                    <s:submit cssClass="btn btn-danger btn-mini" value="删除" method="deleteFile"/>
+                                                        <s:submit cssClass="btn btn-primary btn-mini" value="下载"/>
+                                                    </s:form>
+                                                    <s:form action="file">
+                                                        <s:textfield name="dest" value="%{teacher.fileGroups[0].groupName}" style="display:none;" />
+                                                        <s:textfield name="name" value="%{#files.name}" style="display:none;" />
+                                                        <s:submit cssClass="btn btn-danger btn-mini" value="删除" method="deleteFile"/>
                                                     </div>
                                                     <br/>
                                                 </s:form>

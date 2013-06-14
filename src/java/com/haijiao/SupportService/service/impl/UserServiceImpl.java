@@ -110,7 +110,10 @@ public class UserServiceImpl implements IUserService {
         java.util.Date datetime = new java.util.Date();
         Date time = new Date(datetime.getTime());
         u.setLastActiveDate(time);
-        u.setLoginNum(u.getLoginNum() + 1);
+        if(u.getLoginNum() == null)
+            u.setLoginNum(1);
+        else
+            u.setLoginNum(u.getLoginNum() + 1);
         userDAO.update(u);
         return true;
     }

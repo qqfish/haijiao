@@ -1,4 +1,4 @@
-jQuery(document).ready(function($) {
+﻿jQuery(document).ready(function($) {
     if ($('#nextPageMessage').val() == "成功添加空闲时间"
             || $('#nextPageMessage').val() == "添加空闲时间失败") {
         $('#schedule_area').addClass("active in");

@@ -114,6 +114,8 @@
                                                                     </s:form>
                                                                 </s:if>
                                                             </span>
+                                                            <br/>
+                                                            <small>联系电话:<s:property value="student.tel"/></small>
                                                         </small>
                                                     </blockquote>
                                                 </td>
