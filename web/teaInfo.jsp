@@ -57,7 +57,7 @@
                             <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
                         </s:if>
                     </s:if>
-                    <s:elseif test="#session.email != null && tea.status == 2">
+                    <s:elseif test="tea.status == 2">
                         <a class="btn btn-success" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
                         <s:if test="#session.userType=='student'">
                             <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
@@ -81,7 +81,7 @@
                     <s:else>
                         <a class="btn btn-success" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
                         <!--<a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>-->
-                        <a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">我要预约</a>
+                        <!--<a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">我要预约</a>-->
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>请先登陆</h3>

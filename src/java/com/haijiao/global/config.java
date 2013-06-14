@@ -31,7 +31,7 @@ public class config {
     static public String fileFolder = "file";
     
     //contact
-    static public String contactFile = "~/contact.csv";
+    static public String contactFile = "contact.csv";
     
     static public String websiteURI = "localhost:8080";
 }

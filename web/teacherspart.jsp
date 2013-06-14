@@ -71,9 +71,9 @@
                                             <a class="btn btn btn-small pull-right" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="email" />">发送私信</a>
                                         </s:elseif>
                                         <s:else>
-                                            <a class="btn btn-small  pull-right" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
+                                            <a class="btn btn-small  pull-right" style="margin-left:5px" data-toggle="modal" data-target="#loginNote">发送私信</a>
                                             <!--<a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>-->
-                                            <div class="modal fade hide" id="publicRoom">
+                                            <div class="modal fade hide" id="loginNote">
                                                 <div class="modal-body">
                                                     <h3>请先登陆</h3>
                                                 </div>
