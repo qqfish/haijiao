@@ -44,6 +44,7 @@ public interface IUserService {
     //文件系统相关操作
     public boolean createGroup(String email, String name);
     public boolean deleteGroup(String email, String name);
+    public boolean deleteFile(String email, String groupName, String fileName);
     public boolean moveFile(String email, String srcName, String destName, String fileName);
     //上传文件
     

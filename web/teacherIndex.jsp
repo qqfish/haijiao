@@ -594,13 +594,14 @@
                                                         <s:property value="#files.name"/>
                                                     </div>
                                                     <div class="pull-right">
-                                                        <s:submit cssClass="btn btn-primary btn-mini" value="下载"/>
-                                                    </s:form>
-                                                    <s:form action="file">
-                                                        <s:submit cssClass="btn btn-danger btn-mini" value="删除"/>
+                                                    <s:submit cssClass="btn btn-primary btn-mini" value="下载"/>
+                                                </s:form>
+                                                <s:form action="file">
+                                                    <s:textfield name="dest" value="%{teacher.fileGroups[0].groupName}" style="display:none;" />
+                                                    <s:textfield name="name" value="%{#files.name}" style="display:none;" />
+                                                    <s:submit cssClass="btn btn-danger btn-mini" value="删除" method="deleteFile"/>
                                                     </div>
                                                     <br/>
-                                                    <small>上传者  上传日期  持续时间  下载次数 文件大小</small>
                                                 </s:form>
                                             </td>
                                         </tr>

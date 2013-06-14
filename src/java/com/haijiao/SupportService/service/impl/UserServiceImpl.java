@@ -232,6 +232,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    public boolean deleteFile(String email, String groupName, String fileName){
+        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
+        if (fg == null) {
+            return false;
+        } else {
+            UserFile ud = userFileDAO.getFile(fg.getId(), fileName);
+            fg.removeFile(ud);
+            userFileGroupDAO.update(fg);
+            return userFileDAO.makeTransient(ud);
+        }
+    }
+    
+    @Override
     public boolean moveFile(String email, String srcName, String destName, String fileName) {
         UserFileGroup src = userFileGroupDAO.getGroupByName(email, srcName);
         if (src == null) {

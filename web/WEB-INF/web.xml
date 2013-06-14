@@ -11,6 +11,9 @@
         <listener-class>com.haijiao.global.timer</listener-class>
     </listener>
     <listener>
+        <listener-class>com.haijiao.global.Converter</listener-class>
+    </listener>
+    <listener>
         <listener-class>com.haijiao.presentation.OnlineUserListener</listener-class>
     </listener>
     <servlet>

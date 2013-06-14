@@ -8,7 +8,6 @@ package com.haijiao.global;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 

@@ -24,7 +24,6 @@ public class OnlineUserListener implements HttpSessionListener{
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         String email = (String) se.getSession().getAttribute("email");
-        System.out.println(email);
         if(email != null){
             IUserService userService = (IUserService) SpringContext.getContext().getBean("userServiceImpl");
             userService.setStatus(email, User.Status.offline);

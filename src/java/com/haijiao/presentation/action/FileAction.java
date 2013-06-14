@@ -6,6 +6,7 @@ package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IUserService;
 import com.haijiao.global.config;
+import com.haijiao.global.Converter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -46,6 +47,7 @@ public class FileAction extends SessionAction {
     private IUserService userService;
     private String src;
     private String dest;
+    private String name;
     private File upload;
     private String uploadFileName;
     private String uploadContentType;
@@ -63,22 +65,28 @@ public class FileAction extends SessionAction {
         return SUCCESS;
     }
 
-    public String delete() {
+    public String deleteGroup() {
         String email = (String) this.getSessionValue("email");
         userService.deleteGroup(email, dest);
+        nextPageMessage = "删除成功";
+        return SUCCESS;
+    }
+    
+    public String deleteFile() {
+        String email = (String) this.getSessionValue("email");
+        userService.deleteFile(email, dest, name);
+        nextPageMessage = "删除成功";
         return SUCCESS;
     }
 
-    @Action(value="upload",interceptorRefs =
+    @Action(value = "upload", interceptorRefs =
             @InterceptorRef(value = "fileUpload", params = {
         "allowedTypes", "application/octet-stream,application/x-zip-compressed",
         "maximumSize", "1025956"
     }))
     public String upload() {
-        FileInputStream in = null;
         try {
             String email = (String) this.getSessionValue("email");
-            in = new FileInputStream(upload);
             if (email == null) {
                 nextPageMessage = "请先登陆";
                 return "error";
@@ -91,21 +99,26 @@ public class FileAction extends SessionAction {
                 folder.delete();
                 folder.mkdirs();
             }
-            for (int i = 0; i < folder.listFiles().length; i++) {
-                folder.listFiles()[i].delete();
-            }
+            boolean ispdf = uploadFileName.endsWith(".pdf");
+            if (!ispdf)
+                uploadFileName = uploadFileName.substring(0, uploadFileName.lastIndexOf(".")) + ".pdf";
             path = path + "/" + uploadFileName;
             File newFile = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
             if (!newFile.exists()) {
                 newFile.createNewFile();
             }
-            FileOutputStream out = new FileOutputStream(newFile);
-            byte[] b = new byte[BUFFER_SIZE];
-            int len = 0;
-            while ((len = in.read(b)) > 0) {
-                out.write(b, 0, len);
+            if (ispdf) {
+                FileInputStream in = new FileInputStream(upload);
+                FileOutputStream out = new FileOutputStream(newFile);
+                byte[] b = new byte[BUFFER_SIZE];
+                int len = 0;
+                while ((len = in.read(b)) > 0) {
+                    out.write(b, 0, len);
+                }
+                out.close();
+            } else {
+                Converter.getDocumentConverter().convert(upload, newFile);
             }
-            out.close();
             userService.uploadFile(email, dest, uploadFileName, path);
             nextPageMessage = "上传成功";
             return SUCCESS;
@@ -113,16 +126,10 @@ public class FileAction extends SessionAction {
             Logger.getLogger(FileAction.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(FileAction.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                in.close();
-            } catch (IOException ex) {
-                Logger.getLogger(FileAction.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return INPUT;
     }
-    
+
     public void setUserService(IUserService userService) {
         this.userService = userService;
     }
@@ -141,6 +148,14 @@ public class FileAction extends SessionAction {
 
     public void setDest(String dest) {
         this.dest = dest;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public File getUpload() {
