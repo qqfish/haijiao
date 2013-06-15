@@ -50,7 +50,7 @@
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
-                    </h4>
+                        </h4>
                     <s:if test="tea.status==1">
                         <a class='btn btn-success' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
                         <s:if test="#session.userType=='student'">
@@ -163,20 +163,19 @@
                                                 <strong>授课方式</strong>
                                             </td>
                                             <td>
-                                                <s:if test="tea.sprtOnline==true && tea.sprtUnderline==true">
-                                                    线上授课 与 线下授课
+                                                <s:if test="tea.sprtOnline==false && tea.sprtTUnderline==false && tea.sprtSUnderline==false">
+                                                    暂未选择授课方式
                                                 </s:if>
-                                                <s:elseif test="tea.sprtOnline==false && tea.sprtUnderline==true">
-                                                    线下授课 
-                                                </s:elseif>
-                                                <s:elseif test="tea.sprtOnline==true && tea.sprtUnderline==false">
-                                                    线上授课
-                                                </s:elseif>
-                                                <s:elseif test="tea.sprtUnderline==false && tea.sprtOnline==false">
-                                                    暂未选择授课方式
-                                                </s:elseif>
                                                 <s:else>
-                                                    暂未选择授课方式
+                                                    <s:if test="tea.sprtOnline">
+                                                        线上授课
+                                                    </s:if>
+                                                    <s:if test="tea.sprtSUnderline">
+                                                        学生上门
+                                                    </s:if>
+                                                    <s:if test="tea.sprtTUnderline">
+                                                        老师上门
+                                                    </s:if>
                                                 </s:else>
                                             </td>
                                         </tr>
@@ -230,18 +229,32 @@
                                 <textarea id="tmp2" style="display:none"><s:property value="tea.underlineArea"/></textarea>
                                 <div class="span6" id="teaArea">
                                     <script>
-                                        $("#teaArea").html($("#tmp2").text());
+        $("#teaArea").html($("#tmp2").text());
                                     </script>
                                 </div>
                             </div>
                             <hr class="span8"/>
                             <div class="span8">
-                                <h5>主页介绍</h5>
+                                <h5>个人简介</h5>
                                 <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
                                 <div class="span6" id="teaintro">
                                     <script>
                                         $("#teaintro").html($("#tmp").text());
                                     </script>
+                                </div>
+                            </div>
+                            <hr class="span8"/>
+                            <div class="span8">
+                                <h5>证书</h5>
+                                <div class="span6" id="teaintro">
+                                    <s:property value="tea.cert"/>
+                                </div>
+                            </div>
+                            <hr class="span8"/>
+                            <div class="span8">
+                                <h5>家教经历</h5>
+                                <div class="span6" id="teaintro">
+                                    <s:property value="tea.experience"/>
                                 </div>
                             </div>
                         </div>
