@@ -215,7 +215,9 @@
                         </s:if>
                         <li id="l2" ><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li id="l4"><a href="#4" data-toggle="tab">修改主页介绍<i class="icon-chevron-right pull-right"></i></a></li>
+                        <s:if test="#session.userType=='student'">
+                            <li id="l4"><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
+                        </s:if>
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
@@ -314,11 +316,16 @@
                                     <dt>授课方式</dt>
                                     <dd style="margin-bottom: 5px; margin-top: 5px;">
                                         <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
-                                        <s:checkbox name="sprtUnderline" value="%{tea.sprtUnderline}" cssStyle="margin-top:-5px"/> 线下授课
+                                        <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
+                                        <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
                                     </dd>
                                     <dt>线下授课区域</dt>
-                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
-                                    <dt>个人经历</dt>
+                                    <dd><s:textarea cssStyle="width:520px;height:50px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
+                                    <dt>个人简介</dt>
+                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="intro" value="%{tea.intro}" autofocus="autofocus"/></dd>
+                                    <dt>获奖证书</dt>
+                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="cert" value="%{tea.cert}" autofocus="autofocus"/></dd>
+                                    <dt>家教经历</dt>
                                     <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>
                                     <dd><s:submit cssClass="btn btn-primary pull-right" value="提交" method="teacherMoreChange"/></dd>
                                 </dl>
@@ -387,12 +394,7 @@
                             <h3>修改主页介绍</h3>
                             <hr/>
                             <s:form action="changeIntro.action">
-                                <s:if test="#session.userType == 'teacher'">
-                                    <s:textarea cssStyle="height:400px" name="intro" value="%{tea.intro}" autofocus="autofocus" cssClass="span7"/><br/>
-                                </s:if>
-                                <s:if test="#session.userType == 'student'">
-                                    <s:textarea cssStyle="height:400px" name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/><br/>
-                                </s:if>
+                                    <s:textarea cssStyle="height:400px" name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/>
                                 <s:submit cssClass="btn btn-primary btn-small pull-right" value="提交"/>
                             </s:form>
                         </div>

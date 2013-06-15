@@ -66,7 +66,10 @@ public class ChangeInfoAction extends SessionAction {
     private String nextPageMessage;
     private String underlineArea;
     private String experience;
-    private Boolean sprtUnderline;
+    private String cert;
+    private String intro;
+    private Boolean sprtSUnderline;
+    private Boolean sprtTUnderline;
     private Boolean sprtOnline;
     
     public ChangeInfoAction() throws ParseException{
@@ -98,7 +101,7 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String teacherMoreChange() {
-        if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, experience, sprtUnderline, sprtOnline)){
+        if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, intro, cert, experience, sprtSUnderline, sprtTUnderline, sprtOnline)){
             nextPageMessage = this.getText("teaMoreChangeSuccess");
             return SUCCESS;
         } else {
@@ -367,12 +370,36 @@ public class ChangeInfoAction extends SessionAction {
         this.experience = experience;
     }
 
-    public Boolean getSprtUnderline() {
-        return sprtUnderline;
+    public String getCert() {
+        return cert;
     }
 
-    public void setSprtUnderline(Boolean sprtUnderline) {
-        this.sprtUnderline = sprtUnderline;
+    public void setCert(String cert) {
+        this.cert = cert;
+    }
+
+    public String getIntro() {
+        return intro;
+    }
+
+    public void setIntro(String intro) {
+        this.intro = intro;
+    }
+
+    public Boolean getSprtSUnderline() {
+        return sprtSUnderline;
+    }
+
+    public void setSprtSUnderline(Boolean sprtSUnderline) {
+        this.sprtSUnderline = sprtSUnderline;
+    }
+
+    public Boolean getSprtTUnderline() {
+        return sprtTUnderline;
+    }
+
+    public void setSprtTUnderline(Boolean sprtTUnderline) {
+        this.sprtTUnderline = sprtTUnderline;
     }
 
     public Boolean getSprtOnline() {

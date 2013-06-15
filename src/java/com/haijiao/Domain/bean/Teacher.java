@@ -35,8 +35,10 @@ public class Teacher extends User{
     private String underlineArea;   //线下授课区域
     private String experience;        //个人经历
     private String address;             //家庭地址
+    private String cert;            //证书
     private Boolean sprtOnline;      //支持线上
-    private Boolean sprtUnderline; //支持线下
+    private Boolean sprtSUnderline;  //支持线下
+    private Boolean sprtTUnderline;     //老师上门
     private String studentin;  //公共房间学生email
     
     
@@ -234,6 +236,14 @@ public class Teacher extends User{
         this.address = address;
     }
 
+    public String getCert() {
+        return cert;
+    }
+
+    public void setCert(String cert) {
+        this.cert = cert;
+    }
+
     public Boolean getSprtOnline() {
         return sprtOnline;
     }
@@ -242,12 +252,20 @@ public class Teacher extends User{
         this.sprtOnline = sprtOnline;
     }
 
-    public Boolean getSprtUnderline() {
-        return sprtUnderline;
+    public Boolean getSprtSUnderline() {
+        return sprtSUnderline;
     }
 
-    public void setSprtUnderline(Boolean sprtUnderline) {
-        this.sprtUnderline = sprtUnderline;
+    public void setSprtSUnderline(Boolean sprtSUnderline) {
+        this.sprtSUnderline = sprtSUnderline;
+    }
+
+    public Boolean getSprtTUnderline() {
+        return sprtTUnderline;
+    }
+
+    public void setSprtTUnderline(Boolean sprtTUnderline) {
+        this.sprtTUnderline = sprtTUnderline;
     }
 
     public void setAudition(Boolean audition) {

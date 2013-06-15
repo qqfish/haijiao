@@ -82,12 +82,18 @@ public class TeacherServiceImpl implements ITeacherService {
     }
     
     @Override
-    public boolean changeMoreInfo(String email, String underlineArea, String experience, Boolean sprtUnderline, Boolean sprtOnline){
+    public boolean changeMoreInfo(String email, String underlineArea, String intro, String experience, String cert, Boolean sprtSUnderline, Boolean sprtTUnderline, Boolean sprtOnline){
         Teacher t = teacherDAO.getTeacherByEmail(email);
         if (underlineArea!=null) {
             t.setUnderlineArea(underlineArea);
-        } if (sprtUnderline!=null) {
-            t.setSprtUnderline(sprtUnderline);
+        } if (intro!=null) {
+            t.setIntro(intro);
+        } if (cert!=null) {
+            t.setCert(cert);
+        } if (sprtSUnderline!=null) {
+            t.setSprtSUnderline(sprtSUnderline);
+        } if(sprtTUnderline != null){
+            t.setSprtTUnderline(sprtTUnderline);
         } if (experience!=null) {
             t.setExperience(experience);
         } if (sprtOnline!=null) {
