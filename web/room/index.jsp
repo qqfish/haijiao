@@ -39,7 +39,7 @@
         <script src="room/js/lib/bootstrap.file-input.js"></script>
         <!--js-->
         <!--<script type="text/javascript" src="../js/superfish.js"></script>-->
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="room/js/lib/bootstrap.js"></script>
 
         <script type="text/javascript">
         </script>
@@ -131,6 +131,7 @@
                             <li>
                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <button class="btn active tooltipButton" id="pointer" type="button" value="0" data-toggle="tooltip" data-placement="bottom" data-original-title="指针"><i class="icon-hand-up"></i></button>
+                                    <button class="btn tooltipButton" id="text" type="button" value="2" data-toggle="tooltip" data-placement="bottom" data-original-title="文字"><i class="icon-font"></i></button>
                                     <button class="btn tooltipButton" id="eraser" type="button" value="2" data-toggle="tooltip" data-placement="bottom" data-original-title="橡皮"><i class="icon-hdd"></i></button>
                                     <button class="btn tooltipButton" id="pen" type="button" value="1" data-toggle="tooltip" data-placement="bottom" data-original-title="画笔"><i class="icon-pencil"></i></button>
                                     <button class="btn dropdown-toggle" data-toggle="dropdown">
@@ -156,6 +157,24 @@
                                                 <button class="btn" onclick="toolkit.changeWidth(15)">15</button>
                                                 <button class="btn" onclick="toolkit.changeWidth(25)">25</button>
                                                 <button class="btn" onclick="toolkit.changeWidth(50)">50</button>
+                                            </div>
+                                            <p>字体颜色:</p>
+                                            <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                <button class="btn" style="color: white;" onclick="toolkit.setTextColor('white')">A</button>
+                                                <button class="btn" style="color: black;" onclick="toolkit.setTextColor('black')">A</button>
+                                                <button class="btn" style="color: red;" onclick="toolkit.setTextColor('red')">A</button>
+                                                <button class="btn" style="color: yellow;" onclick="toolkit.setTextColor('yellow')">A</button>
+                                                <button class="btn" style="color: green;" onclick="toolkit.setTextColor('green')">A</button>
+                                                <button class="btn" style="color: blue;" onclick="toolkit.setTextColor('blue')">A</button>
+                                            </div>
+                                            <p>字体大小:</p>
+                                            <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                <button class="btn" style="font-size: 10px;" onclick="toolkit.setTextSize(10)">A</button>
+                                                <button class="btn" style="font-size: 20px;" onclick="toolkit.setTextSize(20)">A</button>
+                                                <button class="btn" style="font-size: 30px;" onclick="toolkit.setTextSize(30)">A</button>
+                                                <button class="btn" style="font-size: 50px;" onclick="toolkit.setTextSize(50)">A</button>
+                                                <button class="btn" style="font-size: 100px;" onclick="toolkit.setTextSize(100)">A</button>
+                                                <button class="btn" style="font-size: 150px;" onclick="toolkit.setTextSize(150)">A</button>
                                             </div>
                                         </div>
                                     </div>

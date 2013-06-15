@@ -55,6 +55,11 @@ function init(clazzId, teaEmail, email){
     $("#prePage").click(function(){
         file.prePage();
     });
+    
+    $("#text").click(function(){
+        toolkit.changeTool(Tooltype.Text);
+        table.setUndraggable();
+    })
 
     //$("#pen").attr("data-content",$("#colorPanel").html());
     $("#pen").click(function(){

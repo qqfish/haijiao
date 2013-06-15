@@ -80,11 +80,11 @@ connection.connect = (function(host) {
 connection.initialize = function(clazzId, teaEmail, email) {
     console.log(email);
     if (window.location.protocol == 'http:') {
-        //connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
-        connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        //connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     } else {
-        //connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
-        connection.connect('wss://202.120.1.47:8080/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        //connection.connect('wss://202.120.1.47:8080/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     }
 };
 

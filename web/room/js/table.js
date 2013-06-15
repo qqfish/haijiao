@@ -274,6 +274,7 @@ function Table(containerName, tool){
                 if(mousedown) return;
                 
                 mousedown = true;
+                if(toolkit.getTool() == Tooltype.Text) return;
                 var mousePos = stage.getTouchPosition();
                 if(mousePos == null)
                     mousePos = stage.getMousePosition();
@@ -359,16 +360,28 @@ function Table(containerName, tool){
                             //console.log(children[i].hasErase);
                             if(children[i].hasErase == true) 
                                 continue;
-                            var points = children[i].getPoints();
-                            for(var j = 0; j < points.length - 1; j++){
-                                if((p1.x - points[j].x) * (p2.x - points[j + 1].x) <= 0
-                                    && (p1.y-points[j].y) * (p2.y - points[j + 1].y) <= 0){
-                    
-                                    result.idArray[result.idArray.length] = children[i].getId();
-                                    children[i].hasErase = true;
+                            switch(children[i].getClassName()){
+                                case "Text":
+                                    if(p2.x > children[i].getX() && p2.x < children[i].getX() + children[i].getWidth()
+                                        && p2.y > children[i].getY() && p2.y < children[i].getY() + children[i].getHeight()){
+                                        
+                                        result.idArray[result.idArray.length] = children[i].getId();
+                                        children[i].hasErase = true;
+                                    }
                                     break;
-                                }
-                            //console.log(result.idArray.length);
+                                case "Line":
+                                    var points = children[i].getPoints();
+                                    for(var j = 0; j < points.length - 1; j++){
+                                        if((p1.x - points[j].x) * (p2.x - points[j + 1].x) <= 0
+                                            && (p1.y-points[j].y) * (p2.y - points[j + 1].y) <= 0){
+                    
+                                            result.idArray[result.idArray.length] = children[i].getId();
+                                            children[i].hasErase = true;
+                                            break;
+                                        }
+                                    //console.log(result.idArray.length);
+                                    }
+                                    break;
                             }
                         }
                         break;
@@ -404,7 +417,49 @@ function Table(containerName, tool){
                         message.idArray = result.idArray;
                         connection.sendObject(message);
                         break;
-                    
+                    case Tooltype.Text:
+                        console.log("hello");
+                        var mousePos = stage.getTouchPosition();
+                        if(mousePos == null)
+                            mousePos = stage.getMousePosition();
+                        var textInput = $("<textarea></textarea>").css("position","absolute").css("width","100%").css("height","100%");
+                        textInput.css("font-size",toolkit.getTextSize() * scaleRange[scaleChoice]).css("color",toolkit.getTextColor()).css("background","transparent").css("border-style","none");
+                        textInput.css("left",mousePos.x - 5).css("top",mousePos.y - 7).css("line-height",1.2);
+                        textInput.keydown(function(evt){
+                            if(event.ctrlKey && event.keyCode == 13){
+                                var simpleText = new Kinetic.Text({
+                                    x: (mousePos.x - stage.getPosition().x) / scaleRange[scaleChoice],
+                                    y: (mousePos.y - stage.getPosition().y) / scaleRange[scaleChoice],
+                                    fontSize: toolkit.getTextSize(),
+                                    fontFamily: 'Calibri',
+                                    fill: toolkit.getTextColor()
+                                });
+                                simpleText.setText(textInput.val());
+                                textInput.remove();
+                                var message = {};
+                                message.type = Request.DrawShape;
+                                message.json = simpleText.toJSON();
+                                connection.sendObject(message);
+                            }
+                        });
+                        textInput.blur(function(){
+                            var simpleText = new Kinetic.Text({
+                                x: (mousePos.x - stage.getPosition().x) / scaleRange[scaleChoice],
+                                y: (mousePos.y - stage.getPosition().y) / scaleRange[scaleChoice],
+                                fontSize: toolkit.getTextSize(),
+                                fontFamily: 'Calibri',
+                                fill: toolkit.getTextColor()
+                            });
+                            simpleText.setText(textInput.val());
+                            textInput.remove();
+                            var message = {};
+                            message.type = Request.DrawShape;
+                            message.json = simpleText.toJSON();
+                            connection.sendObject(message);
+                        });
+                        $("#table").append(textInput);
+                        textInput.focus();
+                        break;
                 }
                 mousedown = false;
                 result = null;

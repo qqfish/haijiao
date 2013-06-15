@@ -6,7 +6,8 @@ var Tooltype = {
 	Pen: 1,
 	Circle: 2,
 	Line:  3,
-	Eraser: 4
+	Eraser: 4,
+        Text: 5
 }
 
 
@@ -16,6 +17,9 @@ function Toolkit(){
 	var color = "black";
 	var width = 5;
         var alpha = 1;
+        
+        var textSize = 30;
+        var textColor = "black";
 	//tooltype:
 	//hand : move the paper
 	//pen
@@ -53,5 +57,17 @@ function Toolkit(){
         
         this.getAlpha = function(a) {
             return alpha;
+        }
+        this.getTextSize = function(){
+            return textSize;
+        }
+        this.setTextSize = function(a){
+            textSize = a;
+        }
+        this.getTextColor = function(){
+            return textColor;
+        }
+        this.setTextColor = function(a){
+            textColor = a;
         }
 }
