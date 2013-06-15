@@ -1,8 +1,8 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%  
-  String path = request.getContextPath();  
-  String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %> 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,6 +61,13 @@
     </head>
     <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
           onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='email' default='null' />');">
+        <script type="text/javascript">
+            var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F71a6bb265c2824dde5414a59737f563b' type='text/javascript'%3E%3C/script%3E"));
+            $(document).ready(function(){
+                $("a").first().css("display","none");
+            });
+        </script>
         <s:if test="user.loginNum < 3">
             <div class="modal fade" id="beginInfo" style="background:none;border: none;box-shadow:0 0px 0px rgba(0,0,0,0.3);left:80%;">
                 <image src="room/image/info.png" style="display: block;background:none;" />
@@ -189,7 +196,7 @@
                             <li><a class="tooltipButton" id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
                             <li><a class="tooltipButton" id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
                             <li><a class="tooltipButton" data-toggle="modal" data-target="#exitAlert" data-placement="bottom" data-original-title="退出房间"><i class="icon-remove icon-white"></i></a></li>
-                            
+
                         </ul>               
                     </div> 
                 </div>
@@ -215,7 +222,7 @@
                     <session>Loading...</session>
                 </div>
             </div>
-            
+
             <s:form action="downloadPDF.action" id="downlaodForm" style="display: none;">
                 <s:textfield name="path" id="downloadPath"></s:textfield>
                 <s:submit id="downlaodButton"></s:submit>

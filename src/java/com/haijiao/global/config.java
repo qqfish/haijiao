@@ -12,11 +12,11 @@ import org.apache.struts2.ServletActionContext;
  */
 public class config {
     // room config
-    static public String roomFileUrl = "upload/roomFile";
+    static public String roomFileUrl = "room/roomFile";
     static public String pageImageType = "png";
     static public String pageDataUriPrefix = "data:image/png;base64,";
     static public String newDocumentName = "草稿纸.pdf";
-    static public String tmpRoomFile = "upload/tmp";
+    static public String tmpRoomFile = "room/tmp";
     static public String downloadDir = "download";
     
     //File config

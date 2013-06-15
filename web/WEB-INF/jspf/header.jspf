@@ -32,6 +32,13 @@
         }, "json");
     }
 </script>
+<script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F71a6bb265c2824dde5414a59737f563b' type='text/javascript'%3E%3C/script%3E"));
+    $(document).ready(function(){
+        $("a").first().css("display","none");
+    });
+</script>
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/myBootstrap.css">
@@ -47,7 +54,7 @@
                     <li><a href="contact.jsp">意见反馈</a></li>
                     <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">
                         <s:textfield  name="searchContent" cssClass="span3" style="height:13px;margin-top:4px;" placeholder="搜索"></s:textfield>
-                        <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-2px"></i></a>
+                            <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-2px"></i></a>
                     </s:form>
                 </ul>
                 <ul class="nav" style="float: right">
