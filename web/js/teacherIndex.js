@@ -68,8 +68,6 @@
         $("#dealApply_decline_" + id).submit();
     })
 
-    $("#userfile").hide();
-
     $("#closetip").click(function() {
         $("#tippanel").hide();
     })
