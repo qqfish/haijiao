@@ -16,12 +16,27 @@
 
     </head>
     <body>
+        <script>
+            $(document).ready(function() {
+                var h = $(window).height();
+                var w = $(window).width();
+                var c = document.getElementById("maincontainer");
+                c.style.marginTop = h / 2 - 250 + "px";
+                $(window).resize(function() {
+                    var h = $(window).height();
+                    var w = $(window).width();
+                    var c = document.getElementById("maincontainer");
+                    if(h<500){h=500;}
+                    c.style.marginTop = h / 2 - 250 + "px";
+                });
+            });
+        </script>
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
         <div class="bg"><img class="bg_pic" id="bg_pic" src="#"/></div>
-        <div class="container"  style="margin-top:10%;">
+        <div id="maincontainer" class="container">
             <div class="row" style="overflow: hidden">
                 <div class="span8">
                     <img src="images/title.png" alt="">
@@ -99,12 +114,10 @@
                 </div>    
             </div>
         </div>
-        <footer>
-            <div class="copyright">
-                <p class="text-center"><a href="about.jsp">关于海角教育 ABOUT</a> | <a href="contact.jsp">联系我们 CONTACT</a> | <a href="#">免责声明 DISCLAIMER</a> | <a href="#">帮助中心 HELP</a> </p>
-                <p class="text-center">Copyright <span style="font-family: Microsoft Yahei;">©</span> 2013 haijiaoedu.com <a target="_blank" href="#">All Rights Reserved</a>.</p>
-                <p class="text-center">海角教育 <a href="#" target="_blank">版权所有</a> <a href="http://www.miitbeian.gov.cn">沪ICP备12023789-2号</a></p>
-            </div>
-        </footer>
+        <div class="copyright" style="margin-top:20px">
+            <p class="text-center"><a href="about.jsp">关于海角教育 ABOUT</a> | <a href="contact.jsp">联系我们 CONTACT</a> | <a href="#">免责声明 DISCLAIMER</a> | <a href="#">帮助中心 HELP</a> </p>
+            <p class="text-center">Copyright <span style="font-family: Microsoft Yahei;">©</span> 2013 haijiaoedu.com <a target="_blank" href="#">All Rights Reserved</a>.</p>
+            <p class="text-center">海角教育 <a href="#" target="_blank">版权所有</a> <a href="http://www.miitbeian.gov.cn">沪ICP备12023789-2号</a></p>
+        </div>
     </body>
 </html>
