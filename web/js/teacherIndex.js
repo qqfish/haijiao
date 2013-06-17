@@ -1,4 +1,4 @@
-﻿jQuery(document).ready(function($) {
+jQuery(document).ready(function($) {
     if ($('#nextPageMessage').val() == "成功添加空闲时间"
             || $('#nextPageMessage').val() == "添加空闲时间失败") {
         $('#schedule_area').addClass("active in");
@@ -36,43 +36,44 @@
     $(".lessonName").click(function() {
         $("#deal_lesson").val($(this).html());
         $("#add").click();
-    })
+    });
 
     $("[id*='delete_click']").click(function() {
         var id = this.id;
         id = id.substring(13, id.length);
         $('#delete_' + id).click();
-    })
+    });
 
     $("[id*='dealApply_stop_button_']").click(function() {
         var id = this.id;
         id = id.substring(22, id.length);
         $("#dealApply_stop_" + id).submit();
-    })
+    });
 
     $("[id*='dealApply_cancel_button_']").click(function() {
         var id = this.id;
         id = id.substring(24, id.length);
         $("#dealApply_cancel_" + id).submit();
-    })
+    });
 
     $("[id*='dealApply_accept_button_']").click(function() {
         var id = this.id;
         id = id.substring(24, id.length);
         $("#dealApply_accept_" + id).submit();
-    })
+    });
 
     $("[id*='dealApply_decline_button_']").click(function() {
         var id = this.id;
         id = id.substring(25, id.length);
         $("#dealApply_decline_" + id).submit();
-    })
+    });
 
     $("#closetip").click(function() {
         $("#tippanel").hide();
-    })
+    });
     
     $("#showtip").click(function() {
         $("#tippanel").show();
-    })
+    });
+    
 });

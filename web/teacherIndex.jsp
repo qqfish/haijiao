@@ -559,7 +559,7 @@
                                             <s:form action="file">
                                                 <s:textfield name="dest"/>
                                                 <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
-<!--                                                <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>-->
+                                                <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
                                             </s:form>
                                         </div>
                                         <hr/>
@@ -639,9 +639,6 @@
                                             <div class="modal-body">
                                                 <s:form action="file" enctype="multipart/form-data" method="post">
                                                     <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
-                                                    <script>
-                                                        $('#classify').append("<option value='新建分组'>新建分组</option>");
-                                                    </script>
                                                     <s:file name="upload" title="选择文件" id="fileid"/>
                                                 </div>
                                                 <div class="modal-footer">

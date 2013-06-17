@@ -62,6 +62,7 @@ public class FileAction extends SessionAction {
     public String create() {
         String email = (String) this.getSessionValue("email");
         userService.createGroup(email, dest);
+        nextPageMessage = "创建成功";
         return SUCCESS;
     }
 

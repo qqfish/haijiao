@@ -217,10 +217,15 @@ public class UserServiceImpl implements IUserService {
     public boolean createGroup(String email, String name) {
         UserFileGroup fg = userFileGroupDAO.getGroupByName(email, name);
         if (fg == null) {
-            return false;
-        } else {
             fg = new UserFileGroup();
-            return userFileGroupDAO.makePersistent(fg);
+            fg.setGroupName(name);
+            User u = userDAO.getUserByEmail(email);
+            u.getFileGroups().add(fg);
+            userFileGroupDAO.makePersistent(fg);
+            userDAO.update(u);
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -230,6 +235,9 @@ public class UserServiceImpl implements IUserService {
         if (fg == null) {
             return false;
         } else {
+            User u = userDAO.getUserByEmail(email);
+            u.getFileGroups().remove(fg);
+            userDAO.update(u);
             return userFileGroupDAO.makeTransient(fg);
         }
     }

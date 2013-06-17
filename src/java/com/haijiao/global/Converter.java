@@ -24,8 +24,7 @@ public class Converter implements ServletContextListener{
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        //officeManager = new DefaultOfficeManagerConfiguration().setOfficeHome(PARAMETER_OFFICE_HOME).buildOfficeManager();
-        officeManager = new DefaultOfficeManagerConfiguration().buildOfficeManager();
+        officeManager = new DefaultOfficeManagerConfiguration().setOfficeHome(PARAMETER_OFFICE_HOME).buildOfficeManager();
         documentConverter = new OfficeDocumentConverter(officeManager);
         officeManager.start();
     }
