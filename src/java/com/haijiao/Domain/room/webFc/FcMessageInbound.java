@@ -76,18 +76,19 @@ public class FcMessageInbound extends MessageInbound {
 
         sendtoUser(gson.toJson(room.getResponseChangePage()));
         sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
-        
+        sendPin();
 
         userService.setStatus(user.getEmail(), User.Status.onlineAndBusy);
 
         room.getTimer().toggle();
 
         //send to user their user file
-        //sendtoUser(gson.toJson(new ResponseSetUserFile(user)));
+        //sendtoUser(gson.toJson(new ResponseSetUserFile(userService.getUserFile(user.getEmail()))));
     }
 
     @Override
     protected void onClose(int status) {
+        if(room == null) return;
         ResponseVideoChat bye = new ResponseVideoChat();
         bye.setFrom(user.getEmail());
         bye.setFromName(user.getName());
@@ -101,6 +102,7 @@ public class FcMessageInbound extends MessageInbound {
         room.getTimer().pause();
         System.out.println(this.toString() + "closed");
         userService.setStatus(user.getEmail(), User.Status.onlineAndAvailable);
+        room = null;
     }
 
     @Override
@@ -110,6 +112,9 @@ public class FcMessageInbound extends MessageInbound {
 
     @Override
     protected void onTextMessage(CharBuffer cb) throws IOException {
+        if (room == null) {
+            return;
+        }
         String str = cb.toString();
         System.out.println(str);
         if (str == null || str.isEmpty()) {
@@ -125,10 +130,12 @@ public class FcMessageInbound extends MessageInbound {
                 room.broadcastOther(gson.toJson(tmpResult), this);
                 break;
             case Request.DrawShape:
+                room.addPin();
                 RequestDrawShape shape = gson.fromJson(str, RequestDrawShape.class);
                 room.drawShape(shape.getJson());
                 break;
             case Request.EraseShape:
+                room.addPin();
                 RequestEraseShape erase = gson.fromJson(str, RequestEraseShape.class);
                 room.eraseShape(erase.getIdArray());
                 break;
@@ -150,6 +157,7 @@ public class FcMessageInbound extends MessageInbound {
                 room.broadcast(gson.toJson(chatResult));
                 break;
             case Request.ChangePage:
+                room.addPin();
                 RequestChangePage page = gson.fromJson(str, RequestChangePage.class);
                 if (page.getTmpUrl() != null) {
                     room.changePage(page.getFileUuid(), page.getPage(), page.getTmpUrl());
@@ -158,6 +166,7 @@ public class FcMessageInbound extends MessageInbound {
                 }
                 break;
             case Request.ChangeFile:
+                room.addPin();
                 RequestChangeFile file = gson.fromJson(str, RequestChangeFile.class);
                 if (file.getTmpUrl() != null) {
                     room.changePage(file.getUuid(), -1, file.getTmpUrl());
@@ -168,14 +177,10 @@ public class FcMessageInbound extends MessageInbound {
                 break;
             case Request.AddFileFromUser:
                 RequestAddFileFromUser addFile = gson.fromJson(str, RequestAddFileFromUser.class);
-                UserFile userFile = user.getFile(addFile.getGroup(), addFile.getName());
-                if (userFile != null) {
-                    room.loadFile(userFile);
-                } else {
-                    ErrorData error = new ErrorData();
-                    error.setErrorType(ErrorType.AddFileFromUser);
-                    sendtoUser(gson.toJson(error));
-                }
+                room.loadFile(addFile.getName(), addFile.getUrl());
+//                    ErrorData error = new ErrorData();
+//                    error.setErrorType(ErrorType.AddFileFromUser);
+//                    sendtoUser(gson.toJson(error));
                 break;
             case Request.UploadFile:
                 RequestUploadFile upload = gson.fromJson(str, RequestUploadFile.class);
@@ -214,7 +219,14 @@ public class FcMessageInbound extends MessageInbound {
                 downloadResult.setPath(downloadUrl);
                 sendtoUser(gson.toJson(downloadResult));
                 break;
-
+            case Request.CheckPin:
+                RequestCheckPin rcp = gson.fromJson(str, RequestCheckPin.class);
+                if (!room.checkPin(rcp.getPin())) {
+                    sendtoUser(gson.toJson(room.getResponseChangePage()));
+                    sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
+                    sendPin();
+                }
+                break;
         }
 
 
@@ -239,5 +251,29 @@ public class FcMessageInbound extends MessageInbound {
 
     public void setUserService(IUserService userService) {
         this.userService = userService;
+    }
+
+    public void closeIt() {
+        ErrorData close = new ErrorData();
+        close.setErrorType(ErrorType.Closed);
+        sendtoUser(gson.toJson(close));
+        ResponseVideoChat bye = new ResponseVideoChat();
+        bye.setFrom(user.getEmail());
+        bye.setFromName(user.getName());
+        bye.setData("{\"type\":\"bye\"}");
+        room.broadcastOther(gson.toJson(bye), this);
+        InfoData exitInfo = new InfoData();
+        exitInfo.setInfoType(InfoType.SomeoneExit);
+        exitInfo.setMessage(user.getName());
+        room.broadcastOther(gson.toJson(exitInfo), this);
+        room.getTimer().pause();
+        System.out.println(this.toString() + "closed");
+        room = null;
+    }
+
+    public void sendPin() {
+        ResponseSetPin rsp = new ResponseSetPin();
+        rsp.setPin(room.getPin());
+        sendtoUser(gson.toJson(rsp));
     }
 }

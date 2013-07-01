@@ -14,7 +14,8 @@ var Request = {
         UploadFile: 9,
         ToggleTimer: 10,
         StopTimer: 11,
-        DownloadPdf: 12
+        DownloadPdf: 12,
+        CheckPin: 13
 }
 
 var Response = {
@@ -31,6 +32,7 @@ var Response = {
     ShowTimer : 10,
     UserEnter : 11,
     DownloadPDF: 12,
+    SetPin: 13,
     Error: 100,
     Info: 101
 }
@@ -38,7 +40,9 @@ var Response = {
 var ErrorType = {
     AddFileFromUser: 0,
     TimerNoPermission: 1,
-    NoStudentEnter: 2
+    NoStudentEnter: 2,
+    ErrorPdf : 3,
+    Closed : 4
 }
 
 var InfoType = {

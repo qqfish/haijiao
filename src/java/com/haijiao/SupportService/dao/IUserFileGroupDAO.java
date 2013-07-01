@@ -5,6 +5,7 @@
 package com.haijiao.SupportService.dao;
 
 import com.haijiao.Domain.file.UserFileGroup;
+import java.util.List;
 
 /**
  *
@@ -12,4 +13,6 @@ import com.haijiao.Domain.file.UserFileGroup;
  */
 public interface IUserFileGroupDAO extends GenericDAO<UserFileGroup,Integer>{
     UserFileGroup getGroupByName(String email, String name);
+        
+    public List<UserFileGroup> getUserFile(String email);
 }

@@ -6,6 +6,7 @@ package com.haijiao.Domain.room;
 
 import com.haijiao.Domain.file.DataFile;
 import com.haijiao.Domain.file.UserFile;
+import com.haijiao.global.Converter;
 import com.haijiao.global.config;
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.awt.image.BufferedImage;
@@ -51,11 +52,11 @@ public class RoomFile extends DataFile {
 
     }
 
-    public RoomFile(UserFile file, Room room) {
+    public RoomFile(String name, String url, Room room) {
         this.room = room;
-        uuid = UUID.randomUUID().toString();
-        name = file.getName();
-        url = file.getUrl();
+        this.uuid = UUID.randomUUID().toString();
+        this.name = name;
+        this.url = url;
     }
 
     public RoomFile(Room room) {
@@ -65,7 +66,7 @@ public class RoomFile extends DataFile {
         url = null;
     }
 
-    public RoomFile(String name, String data, Room room) {
+    public RoomFile(String name, String data, Room room, String type) {
         try {
             this.room = room;
             uuid = UUID.randomUUID().toString();
@@ -75,14 +76,22 @@ public class RoomFile extends DataFile {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
+            String tmpurl = url + "/" + uuid + "." + type;
             url = url + "/" + uuid + ".pdf";
-            File newFile = new File(url);
+
+            File newFile = new File(tmpurl);
             if (!newFile.exists()) {
                 newFile.createNewFile();
             }
             FileOutputStream fos = new FileOutputStream(newFile);
             fos.write(Base64.decode(data));
             fos.close();
+
+            if (!type.equals("pdf")) {
+                File pdfFile = new File(url);
+                Converter.getDocumentConverter().convert(newFile, pdfFile);
+                newFile.delete();
+            }
         } catch (IOException ex) {
             Logger.getLogger(RoomFile.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -132,7 +141,7 @@ public class RoomFile extends DataFile {
     public void gotoBookmark(List<Integer> indexs) {
     }
 
-    public RoomPage getPage(int i) {
+    public RoomPage getPage(int i) throws IOException {
         checkAndSetPages();
         if (i >= pages.size()) {
             i = pages.size() - 1;
@@ -141,23 +150,18 @@ public class RoomFile extends DataFile {
         RoomPage result = pages.get(i);
         if (result.getOriginUrl() == null) {
             checkAndOpenFile();
-            try {
-                PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
-                BufferedImage image = page.convertToImage();
-                ByteArrayOutputStream os = new ByteArrayOutputStream();
-                ImageIO.write(image, config.pageImageType, os);
-                byte[] bytes = os.toByteArray();
-                String url = config.pageDataUriPrefix + Base64.encode(bytes);
-                result.setOriginUrl(url);
-            } catch (IOException ex) {
-                Logger.getLogger(RoomFile.class
-                        .getName()).log(Level.SEVERE, null, ex);
-            }
+            PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
+            BufferedImage image = page.convertToImage();
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            ImageIO.write(image, config.pageImageType, os);
+            byte[] bytes = os.toByteArray();
+            String url = config.pageDataUriPrefix + Base64.encode(bytes);
+            result.setOriginUrl(url);
         }
         return result;
     }
 
-    public RoomPage getLastPage() {
+    public RoomPage getLastPage() throws IOException {
         return getPage(lastPage);
     }
 
@@ -173,7 +177,7 @@ public class RoomFile extends DataFile {
         checkAndOpenFile();
         for (int i = 0; i < pages.size(); i++) {
             if (pages.get(i).getTmpUrl() != null) {
-                System.out.println("page : " + pages.get(i).getTmpUrl() + "\n aaa:"+ i);
+                System.out.println("page : " + pages.get(i).getTmpUrl() + "\n aaa:" + i);
                 PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
                 if (page.getContents() != null && page.getContents().getStream() != null) {
                     page.getContents().getStream().clear();

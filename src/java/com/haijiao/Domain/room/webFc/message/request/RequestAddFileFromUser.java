@@ -13,6 +13,15 @@ import com.haijiao.Domain.room.webFc.message.Request;
 public class RequestAddFileFromUser extends RequestData{
     String name;
     String group;
+    String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public RequestAddFileFromUser() {
         type = Request.AddFileFromUser;

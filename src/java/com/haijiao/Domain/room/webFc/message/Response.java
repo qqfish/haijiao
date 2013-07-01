@@ -22,6 +22,7 @@ public class Response {
     public static final int ShowTimer = 10;
     public static final int UserEnter = 11;
     public static final int DownloadPDF = 12;
+    public static final int SetPin =13;
     public static final int Error = 100;
     public static final int Info = 101;
 }

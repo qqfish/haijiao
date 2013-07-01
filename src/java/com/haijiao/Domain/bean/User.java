@@ -265,8 +265,14 @@ public class User extends BaseBean{
     
     public String toJson(){
         Gson gson = new Gson();
-        System.out.println(gson.toJson(this));
+        //System.out.println(gson.toJson(this));
         return gson.toJson(this);
+    }
+    
+    public String fileGroupsToJson(){
+        Gson gson = new Gson();
+        System.out.println(gson.toJson(fileGroups));
+        return gson.toJson(fileGroups);
     }
 
     @Override

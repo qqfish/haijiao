@@ -75,6 +75,13 @@ function processError(errorType){
         case ErrorType.NoStudentEnter:
             pError("学生还未进入房间");
             break;
+        case ErrorType.ErrorPdf:
+            console.log("aaaa");
+            pError("错误的PDF格式");
+            break;
+        case ErrorType.Closed:
+            disconnected();
+            break;
     }
 }
 
@@ -99,9 +106,11 @@ function lockTool(){
     $("#pointer").click();
     $("#pen").attr("class","btn tooltipButton disabled").attr("disabled","disabled");
     $("#eraser").attr("class","btn tooltipButton disabled").attr("disabled","disabled");
+    $("#text").attr("class","btn tooltipButton disabled").attr("disabled","disabled");
 }
 
 function unlockTool(){
     $("#pen").attr("class","btn tooltipButton").removeAttr("disabled");
     $("#eraser").attr("class","btn tooltipButton").removeAttr("disabled");
+    $("#text").attr("class","btn tooltipButton").removeAttr("disabled");
 }

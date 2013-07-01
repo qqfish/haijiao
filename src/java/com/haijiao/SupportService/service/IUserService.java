@@ -6,6 +6,7 @@ package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.UserFileGroup;
 import java.util.List;
 
 /**
@@ -55,4 +56,6 @@ public interface IUserService {
     
     public boolean validateCheckcode(int id, String checkCode);
     public void saveResetInfo(int id, String checkCode);
+    
+    public List<UserFileGroup> getUserFile(String email);
 }

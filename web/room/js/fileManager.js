@@ -15,46 +15,46 @@ function Bookmark(uuid){
     this.element = null;
     this.children = new Array();
     
-//    this.scan = function(node){
-//        this.title = node.title;
-//        this.page = node.page;
-//        this.element = $("<li></li>").attr("class","sideBarButton");
-//        var link = $("<span></span>").text(node.title).attr("page",node.page);
-//        if(node.children.length > 0){
-//            var childDiv = $("<ul></ul>").attr("title",node.title);
-//            for(var i = 0; i < node.children.length; i++){
-//                var child = new Bookmark(uuid);
-//                child.scan(node.children[i]);
-//                childDiv.append(child.element);
-//                this.children[this.children.length] = child;
-//            }
-//            var show = $("<IMG></IMG>").attr("src","image/jiantou.png").attr("status","-");
-//            show.rotate(90);
-//            this.element.append(show);
-//            show.click(function(){
-//                if($(this).attr("status") == "+"){
-//                    $(this).rotate({
-//                        animateTo:90
-//                    });
-//                    $(this).attr("status","-");
-//                } else {
-//                    $(this).rotate({
-//                        animateTo:0
-//                    });
-//                    $(this).attr("status","+");
-//                }
-//                childDiv.slideToggle();
-//            });
-//            this.element.append(link);
-//            this.element.append(childDiv);
-//            childDiv.slideToggle();
-//        } else {
-//            this.element.append(link);
-//        }
-//        link.click(function(){
-//            table.sendChangePage(uuid, $(this).attr("page"));
-//        });
-//    }
+    //    this.scan = function(node){
+    //        this.title = node.title;
+    //        this.page = node.page;
+    //        this.element = $("<li></li>").attr("class","sideBarButton");
+    //        var link = $("<span></span>").text(node.title).attr("page",node.page);
+    //        if(node.children.length > 0){
+    //            var childDiv = $("<ul></ul>").attr("title",node.title);
+    //            for(var i = 0; i < node.children.length; i++){
+    //                var child = new Bookmark(uuid);
+    //                child.scan(node.children[i]);
+    //                childDiv.append(child.element);
+    //                this.children[this.children.length] = child;
+    //            }
+    //            var show = $("<IMG></IMG>").attr("src","image/jiantou.png").attr("status","-");
+    //            show.rotate(90);
+    //            this.element.append(show);
+    //            show.click(function(){
+    //                if($(this).attr("status") == "+"){
+    //                    $(this).rotate({
+    //                        animateTo:90
+    //                    });
+    //                    $(this).attr("status","-");
+    //                } else {
+    //                    $(this).rotate({
+    //                        animateTo:0
+    //                    });
+    //                    $(this).attr("status","+");
+    //                }
+    //                childDiv.slideToggle();
+    //            });
+    //            this.element.append(link);
+    //            this.element.append(childDiv);
+    //            childDiv.slideToggle();
+    //        } else {
+    //            this.element.append(link);
+    //        }
+    //        link.click(function(){
+    //            table.sendChangePage(uuid, $(this).attr("page"));
+    //        });
+    //    }
     
     this.scan = function(node){
         this.title = node.title;
@@ -132,33 +132,61 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
         }
     }
     
-    this.setUserFile = function(response){
-        for(var i = 0; i < response.groupList.length; i++){
-            var group = response.groupList[i];
-            var groupLi = $("<li></li>").attr("class","slideBarButton");
-            var groupUl = $("<ul></ul").attr("group",group.groupName);
-            var groupSpan = $("<span></span>").text(group.groupName);
-            groupLi.append(groupSpan);
-            groupSpan.click(function(){
-                groupUl.slideToggle();
-            });
-            groupLi.append(groupUl);
+    this.setUserFile = function(groupList){
+        //        for(var i = 0; i < groupList.length; i++){
+        //            var group = groupList[i];
+        //            var groupLi = $("<li></li>").attr("class","slideBarButton");
+        //            var groupUl = $("<ul></ul").attr("group",group.groupName);
+        //            var groupSpan = $("<span></span>").text(group.groupName);
+        //            groupLi.append(groupSpan);
+        //            groupSpan.click(function(){
+        //                groupUl.slideToggle();
+        //            });
+        //            groupLi.append(groupUl);
+        //            for(var j = 0; j < group.files.length; j++){
+        //                var file = $("<li></li>").text(group.files[j].name).attr("class","sideBarButton").attr("name",group.files[i].name).attr("group",group.groupName);
+        //                file.click(function(){
+        //                    addFileFromUser($(this).attr("group"),$(this).attr("name"));
+        //                });
+        //                groupUl.append(file);
+        //            }
+        //            userFileDiv.append(groupLi);
+        //        }
+        for(var i = 0; i < groupList.length; i++){
+            var group = groupList[i];
+            var submenu = $("<li></li>").attr("class","dropdown-submenu");
+            var groupA = $("<a></a>").attr("tabindex",-1).text(group.groupName);
+            var menu = $("<ul></ul>").attr("class","dropdown-menu");
             for(var j = 0; j < group.files.length; j++){
-                var file = $("<li></li>").text(group.files[j].name).attr("class","sideBarButton").attr("name",group.files[i].name).attr("group",group.groupName);
-                file.click(function(){
-                    addFileFromUser($(this).attr("group"),$(this).attr("name"));
+                var fileA = $("<a></a>").attr("tabindex",-1).text(group.files[j].name).attr("name",group.files[j].name).attr("group",group.groupName).attr("url",group.files[j].url);
+                var fileLi = $("<li></li>");
+                fileA.click(function(){
+                    addFileFromUser($(this).attr("group"),$(this).attr("name"),$(this).attr("url"));
                 });
-                groupUl.append(file);
+                fileLi.append(fileA);
+                menu.append(fileLi);
+                }
+            if(group.files.length == 0){
+                var empty = $("<li></li>");
+                empty.html("<a tabindex='-1'>没有备课文件</a>").attr("class","disabled");
+                menu.append(empty);
             }
-            userFileDiv.append(groupLi);
+            submenu.append(groupA).append(menu);
+            userFileDiv.append(submenu);
+        }
+        if(groupList.length == 0){
+            var empty = $("<li></li>");
+            empty.html("<a tabindex='-1'>没有备课文件</a>").attr("class","disabled");
+            userFileDiv.append(empty);
         }
     }
     
-    function addFileFromUser(group, name){
+    function addFileFromUser(group, name,url){
         var message = {};
         message.type = Request.AddFileFromUser;
         message.group = group;
         message.name = name;
+        message.url = url;
         
         connection.sendObject(message);
     }
@@ -182,7 +210,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
     this.downloadResponse = function(path){
         $("#downloadPath").val(path);
         $("#downlaodForm").submit();
-        //console.log($("#downloadPath").val());
+    //console.log($("#downloadPath").val());
     }
     
     this.uploadFile = function(file){
@@ -191,6 +219,11 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
         var reader = new FileReader();
         var pos = file.name.lastIndexOf(".");
         var type = file.name.substring(pos+1, file.name.length);
+        if(file.size > 10 * 1024 * 1024){
+            pError("最大上传的大小为10MB");
+            return;
+        }
+            
         if(file.type.indexOf('image') != -1){
             type = "image";
             reader.readAsDataURL(blob);
@@ -224,7 +257,8 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 theBar.css("width","100%");
                 $("#closeAlert").show();
             }
-        } else if(type == "pdf"){
+        } else if(type == "pdf" || type == "doc" || type == "docx" || type == "ppt" 
+            || type == "pptx" || type == "xls" || type == "xlsx"){
             reader.readAsDataURL(blob);
             theBar = $("<div></div>").attr("class","bar");
             progressBar = $("<div></div>").attr("class","progress").append(theBar);
@@ -250,7 +284,8 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 var message = {};
                 message.type = Request.UploadFile;
                 message.postfix = type;
-                message.name = file.name;
+                message.name = file.name.substring(0,pos) + ".pdf";
+                console.log(name);
                 message.data = evt.target.result;
                 console.log("befor send");
                 connection.sendObject(message);
@@ -259,7 +294,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 $("#closeAlert").show();
             }
         } else {
-            pError("该格式的文档尚未支持(目前支持图片和pdf)")
+            pError("该格式的文档尚未支持(目前支持图片,pdf,doc,docx,ppt,pptx,xls,xlsx)");
         }
     }
 }

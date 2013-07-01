@@ -2,6 +2,8 @@ var connection = {};
 
 connection.socket = null;
 
+connection.pin = 0;
+
 connection.connect = (function(host) {
     if ('WebSocket' in window) {
         connection.socket = new WebSocket(host);
@@ -9,13 +11,13 @@ connection.connect = (function(host) {
         connection.socket = new MozWebSocket(host);
     } else {
         console.log('Error: WebSocket is not supported by this browser.');
-        pError("该浏览器版本太旧，不支持视频白板功能，请到<a href='http://www.google.cn/intl/zh-CN/chrome/browser/'>这里</a>下载最新版Chrome浏览器",true);
+        pError("该浏览器版本太旧，不支持视频白板功能，请到<a href='http://www.onlinedown.net/soft/7993.htm'>这里</a>下载最新版Chrome浏览器",true);
         return;
     }
 
     connection.socket.onopen = function () {
         console.log('Info: WebSocket connection opened.');
-        setInterval("connection.sendMessage('')",1000 * 10);
+        setInterval("connection.checkPin()",1000 * 5);
     };
 
     connection.socket.onclose = function () {
@@ -31,9 +33,11 @@ connection.connect = (function(host) {
                 table.drawTmpFromJson(socketData.json);
                 break;
             case Response.DrawShape:
+                connection.pin++;
                 table.drawFromJson(socketData.id, socketData.json);
                 break;
             case Response.EraseShape:
+                connection.pin++;
                 table.eraseFromArray(socketData.idArray);
                 break;
             case Response.TextChat:
@@ -43,6 +47,7 @@ connection.connect = (function(host) {
                 media.processSignalingMessage(socketData);
                 break;
             case Response.ChangePage:
+                connection.pin++;
                 table.changePage(socketData);
                 file.setPage(socketData);
                 break;
@@ -52,9 +57,9 @@ connection.connect = (function(host) {
             case Response.AddRoomFile:
                 file.addRoomFile(socketData);
                 break;
-            case Response.SetUserFile:
-                file.setUserFile(socketData);
-                break;
+            //            case Response.SetUserFile:
+            //                file.setUserFile(socketData);
+            //                break;
             case Response.UploadBackground:
                 table.uploadBackground(socketData.dataUrl);
                 break;
@@ -73,6 +78,9 @@ connection.connect = (function(host) {
             case Response.Info:
                 processInfo(socketData.infoType, socketData.message);
                 break;
+            case Response.SetPin:
+                connection.pin = socketData.pin;
+                break;
         }
     };
 });
@@ -81,10 +89,10 @@ connection.initialize = function(clazzId, teaEmail, email) {
     console.log(email);
     if (window.location.protocol == 'http:') {
         connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
-        //connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+    //connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     } else {
         connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
-        //connection.connect('wss://202.120.1.47:8080/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+    //connection.connect('wss://202.120.1.47:8080/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
     }
 };
 
@@ -96,3 +104,10 @@ connection.sendObject = function(message) {
 connection.sendMessage = function(message) {
     connection.socket.send(message);
 };
+
+connection.checkPin = function(){
+    var message = {};
+    message.pin = connection.pin;
+    message.type = Request.CheckPin;
+    connection.sendObject(message);
+}

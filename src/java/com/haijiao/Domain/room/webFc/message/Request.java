@@ -22,4 +22,5 @@ public class Request {
     public static final int ToggleTimer = 10;
     public static final int StopTimer = 11;
     public static final int DownloadPdf = 12;
+    public static final int CheckPin = 13;
 }

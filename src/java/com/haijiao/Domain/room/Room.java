@@ -45,19 +45,25 @@ public class Room {
     private RoomTimer timer;
     private int max;
     private boolean exitBit;
+    private int pin;
 
     public Room(User holder, int price, int max) {
-        gson = new Gson();
-        id = UUID.randomUUID().toString();
-        this.holder = holder;
-        timer = new RoomTimer(this, price);
-        attendance = new ArrayList();
-        attendance.add(holder);
-        roomSocket = new ArrayList();
-        roomFile = new ArrayList();
-        roomFile.add(new RoomFile(this));
-        currentPage = roomFile.get(0).getPage(0);
-        this.max = max;
+        try {
+            gson = new Gson();
+            id = UUID.randomUUID().toString();
+            this.holder = holder;
+            timer = new RoomTimer(this, price);
+            attendance = new ArrayList();
+            attendance.add(holder);
+            roomSocket = new ArrayList();
+            roomFile = new ArrayList();
+            roomFile.add(new RoomFile(this));
+            currentPage = roomFile.get(0).getPage(0);
+            this.max = max;
+            this.pin = 0;
+        } catch (IOException ex) {
+            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void addAttendance(User user) {
@@ -81,24 +87,27 @@ public class Room {
     }
 
     public boolean checkInroomUser(User user) {
-        if (roomSocket.size() >= max) {
-            return false;
+        for (int i = 0; i < roomSocket.size(); i++) {
+            if (user.equals(roomSocket.get(i).getUser())) {
+                roomSocket.get(i).closeIt();
+                roomSocket.remove(roomSocket.get(i));
+            }
         }
-        if (attendance.size() == 1) {
+        if (attendance.size() == 1 && roomSocket.size() < max - 1) {
             return true;
         }
         for (int i = 0; i < attendance.size(); i++) {
-            System.out.println("att: " + attendance.get(i).getEmail());
+            //System.out.println("att: " + attendance.get(i).getEmail());
             if (attendance.get(i).equals(user)) {
-                System.out.println("ok");
+                //System.out.println("ok");
                 return true;
             }
         }
         return false;
     }
 
-    public void loadFile(UserFile file) {
-        RoomFile newFile = new RoomFile(file, this);
+    public void loadFile(String name, String url) {
+        RoomFile newFile = new RoomFile(name, url, this);
         roomFile.add(newFile);
         List<RoomFile> list = new ArrayList();
         list.add(newFile);
@@ -128,10 +137,14 @@ public class Room {
                 return false;
             }
             RoomPage result = null;
-            if (page < 0) {
-                result = file.getLastPage();
-            } else {
-                result = file.getPage(page);
+            try {
+                if (page < 0) {
+                    result = file.getLastPage();
+                } else {
+                    result = file.getPage(page);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             if (result == null) {
@@ -188,13 +201,12 @@ public class Room {
     public void uploadFile(String type, String data, String name) {
         if (type.equals("image")) {
             currentPage.setOriginUrl(data);
-            ResponseUploadBackground message = new ResponseUploadBackground();
-            message.setDataUrl(currentPage.getOriginUrl());
-            broadcast(gson.toJson(message));
-        } else if (type.equals("pdf")) {
+            choosePage(null, 0);
+        } else if (type.equals("pdf") || type.equals("doc") || type.equals("ppt") || type.equals("docx")
+                || type.equals("pptx") || type.equals("xls") || type.equals("xlsx")) {
             int i = data.indexOf(",");
             String rawData = data.substring(i + 1);
-            RoomFile newFile = new RoomFile(name, rawData, this);
+            RoomFile newFile = new RoomFile(name, rawData, this, type);
             roomFile.add(newFile);
             List<RoomFile> list = new ArrayList();
             list.add(newFile);
@@ -211,10 +223,20 @@ public class Room {
             if (attendance.size() < 2) {
                 IRoomService roomService = (IRoomService) SpringContext.getContext().getBean("roomServiceImpl");
                 roomService.removeRoom((Teacher) holder);
-                ITeacherService teacherService = (ITeacherService) SpringContext.getContext().getBean("teacherServiceImpl");
-                teacherService.setRoomOccupied(holder.getEmail(), null);
             }
         }
+    }
+
+    public void addPin() {
+        pin++;
+    }
+
+    public boolean checkPin(int p) {
+        return p == pin;
+    }
+
+    public int getPin() {
+        return pin;
     }
 
     public void broadcast(String message) {
@@ -252,6 +274,10 @@ public class Room {
 
     public void exitRoom(FcMessageInbound socket) {
         roomSocket.remove(socket);
+        if (attendance.size() < 2 && !socket.getUser().equals(holder)) {
+            ITeacherService teacherService = (ITeacherService) SpringContext.getContext().getBean("teacherServiceImpl");
+            teacherService.setRoomOccupied(holder.getEmail(), null);
+        }
         releaseFile();
     }
 

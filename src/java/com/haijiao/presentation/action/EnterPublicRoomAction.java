@@ -56,7 +56,8 @@ public class EnterPublicRoomAction extends RequestSessionAction {
             isHolder = 1;
         }
         if (!teaEmail.equals(email)) {
-            if (teacherService.getRoomOccupied(teaEmail) != null && !teacherService.getRoomOccupied(teaEmail).equals(email)) {
+            if (teacherService.getRoomOccupied(teaEmail) != null 
+                    && !teacherService.getRoomOccupied(teaEmail).equals(email)) {
                 nextPageMessage = "房间已被占用，请稍后再试。";
                 return "false";
             }

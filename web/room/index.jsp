@@ -60,7 +60,7 @@
 
     </head>
     <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
-          onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='email' default='null' />');">
+          onload="init(<s:property value='clazzId' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='email' default='null' />', '<s:property value='user.fileGroupsToJson()' default='null' />');">
         <script type="text/javascript">
             var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
             document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F71a6bb265c2824dde5414a59737f563b' type='text/javascript'%3E%3C/script%3E"));
@@ -98,14 +98,12 @@
                                     <ul class="dropdown-menu" id="bookmark"></ul>
                                 </div>
                             </li>
-                            <!--
-                            <li>
+                            <li style="display: none;">
                                 <div class="btn-group">
                                     <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="用户文件"><i class="icon-th-list icon-white"></i></a>
                                     <ul class="dropdown-menu" id="userFile"></ul>
                                 </div>
                             </li>
-                            -->
                             <li>
                                 <div class="btn-group">
                                     <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="用户列表"><i class="icon-user icon-white"></i></a>
@@ -236,10 +234,10 @@
             </div>
 
             <div class="modal hide" id="alertMessage">
-                <button type="button" class="close" id="closeAlert" data-dismiss="modal" style="display: none;">&times;</button>
                 <div id="alertContext">
                     <session>Loading...</session>
                 </div>
+                <button type="button" class="btn btn-success pull-right" id="closeAlert" data-dismiss="modal">知道了</button>
             </div>
 
             <s:form action="downloadPDF.action" id="downlaodForm" style="display: none;">

@@ -45,12 +45,10 @@ public class WebFcSocketServlet extends WebSocketServlet {
             room = roomService.enterPublicRoom(teaEmail);
             room.getTimer().setMaxTime(15 * 60);
         }
-        System.out.println(room);
         User user = userService.getUserByEmail(email);
         System.out.println(email);
         
         if (room == null || user == null || !room.checkInroomUser(user)) {
-            System.out.println("error");
             return null;
         }
         return new FcMessageInbound(user, room);

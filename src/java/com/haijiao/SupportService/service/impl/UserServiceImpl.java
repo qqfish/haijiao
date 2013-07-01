@@ -338,4 +338,9 @@ public class UserServiceImpl implements IUserService {
         r.setCreateTime(time);
         resetInfoDAO.makePersistent(r);
     }
+
+    @Override
+    public List<UserFileGroup> getUserFile(String email) {
+        return userFileGroupDAO.getUserFile(email);
+    }
 }

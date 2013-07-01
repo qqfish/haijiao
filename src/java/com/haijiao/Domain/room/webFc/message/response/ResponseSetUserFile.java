@@ -15,10 +15,12 @@ import java.util.List;
  */
 public class ResponseSetUserFile extends ResponseData{
     List<UserFileGroup> groupList;
+    
+    
 
-    public ResponseSetUserFile(User user) {
+    public ResponseSetUserFile(List<UserFileGroup> groupList) {
         type = Response.SetUserFile;
-        groupList = user.getFileGroups();
+        this.groupList = groupList;
     }
 
     public List<UserFileGroup> getGroupList() {

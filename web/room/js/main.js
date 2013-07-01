@@ -7,7 +7,7 @@ var toolkit;
 var table;
 var media;
 var timer;
-function init(clazzId, teaEmail, email){
+function init(clazzId, teaEmail, email, fileGroups){
     connection.initialize(clazzId, teaEmail, email);
     timer = new Timer("timerPanel");
     textChat = new TextChat("charShowArea","chatSend","chatInput");
@@ -16,6 +16,7 @@ function init(clazzId, teaEmail, email){
     media = new Media("sideVideoArea", textChat, "users");
     media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
     file = new fileManager("roomFile","bookmark","userFile");
+    file.setUserFile(JSON.parse(fileGroups));
     
     media.userEnter("__localUser","__localUser");
     

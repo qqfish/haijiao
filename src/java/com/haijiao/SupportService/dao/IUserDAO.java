@@ -4,6 +4,8 @@
  */
 package com.haijiao.SupportService.dao;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.UserFileGroup;
+import java.util.List;
 
 public interface IUserDAO extends GenericDAO<User,Integer>{
     //验证是否存在用户名
