@@ -414,6 +414,18 @@
                                 </s:form>
                             </table>
                             <hr/>
+                            <h5>在线试讲</h5>
+                            <div class="btn-group" data-toggle="buttons-radio">
+                            <s:if test="teacher.audition">
+                                <button type="button" class="btn btn-primary active">是</button>
+                                <a href="changeAudition.action" class="btn btn-primary">否</a>
+                            </s:if>
+                            <s:else>
+                                <a href="changeAudition.action" class="btn btn-primary">是</a>
+                                <button type="button" class="btn btn-primary active">否</button>
+                            </s:else>
+                            </div>
+                            <hr/>
                             <h5>线下授课区域<a href="toChangeInfo.action?jump=area" class='btn btn-primary btn-small pull-right'><i class='icon-pencil icon-white'></i>编辑</a></h5>
                             <p><s:property value="teacher.underlineArea"/></p>
                         </div>
@@ -572,7 +584,7 @@
                                                 <s:form action="file" enctype="multipart/form-data" method="post">
                                                     <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
                                                     <script>
-                                                        $('#classify').append("<option value='新建分组'>新建分组</option>");
+        $('#classify').append("<option value='新建分组'>新建分组</option>");
                                                     </script>
                                                     <s:file name="upload" title="选择文件" id="fileid"/>
                                                 </div>

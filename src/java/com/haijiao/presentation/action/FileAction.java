@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
-import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.InterceptorRefs;
@@ -93,7 +92,7 @@ public class FileAction extends SessionAction {
                 return "error";
             }
             String path = config.userHome + File.separator + email + File.separator + config.fileFolder;
-            File folder = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
+            File folder = new File(path);
             if (!folder.exists()) {
                 folder.mkdirs();
             } else if (!folder.isDirectory()) {
@@ -104,7 +103,7 @@ public class FileAction extends SessionAction {
             if (!ispdf)
                 uploadFileName = uploadFileName.substring(0, uploadFileName.lastIndexOf(".")) + ".pdf";
             path = path + "/" + uploadFileName;
-            File newFile = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
+            File newFile = new File(path);
             if (!newFile.exists()) {
                 newFile.createNewFile();
             }

@@ -4,6 +4,23 @@
 <script type="text/javascript">
     var mid = null;
     var rid = null;
+    var bid = null;
+    var title = document.title;
+    function blink(text) {
+        var step = 0;
+        bid = setInterval(function() {
+            step ++ ;
+            if (step == 3) {
+                step = 1;
+            }
+            if (step == 1) {
+                document.title = '【　　　】' + title;
+            }
+            if (step == 2) {
+                document.title = '【' + text + '】' + title;
+            }
+        }, 500);
+    }
     function getMailNum() {
         $.post("getMailNum.action", function(data) {
             if ($('#mailNum').text() != data)
@@ -16,18 +33,20 @@
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
                 $('#publicRoomButton').addClass("btn-warning").text("试讲房间(有人)");
- 
+                blink("房间有人");
             }
-            else if(data.info.reserveNum != null && data.info.reserveNum != 0){
+            else if (data.info.reserveNum != null && data.info.reserveNum != 0) {
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
                 $("#notification").text("有" + data.info.reserveNum + "个新的请求，点击查看").addClass("btn-warning");
+                blink("新请求");
             }
             else {
                 $('#toClass').removeClass("btn-info");
                 $("#notification").text("暂无新的请求").removeClass('btn-warning');
                 $('#publicRoomButton').removeClass('btn-warning').text("试讲房间(无人)");
                 $('#toClass').addClass("btn-inverse");
+                clearInterval(bid);
             }
         }, "json");
     }
@@ -35,8 +54,8 @@
 <script type="text/javascript">
     var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F71a6bb265c2824dde5414a59737f563b' type='text/javascript'%3E%3C/script%3E"));
-    $(document).ready(function(){
-        $("a").first().css("display","none");
+    $(document).ready(function() {
+        $("a").first().css("display", "none");
     });
 </script>
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
@@ -52,16 +71,16 @@
                     <li><a href="#" onclick="$('#searchSubmit').click();">找老师</a></li>
                     <li><a href="about.jsp">关于我们</a></li>
                     <li><a href="contact.jsp">意见反馈</a></li>
-                    <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">
-                        <s:textfield  name="searchContent" cssClass="span3" style="height:13px;margin-top:4px;" placeholder="搜索"></s:textfield>
+                        <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">
+                            <s:textfield  name="searchContent" cssClass="span3" style="height:13px;margin-top:4px;" placeholder="搜索"></s:textfield>
                             <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-2px"></i></a>
-                    </s:form>
+                        </s:form>
                 </ul>
                 <ul class="nav" style="float: right">
                     <s:if test="#session.email!=null">
                         <script>
-                            getMailNum();
-                            mid = setInterval(getMailNum, 60000);
+    getMailNum();
+    mid = setInterval(getMailNum, 60000);
                         </script>
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>
                         <li><a href="#">余额</a></li>
@@ -79,26 +98,26 @@
                                             rid = setInterval(getRoomStatus, 60000);
                                         </script>
                                         <li><a id="publicRoomButton" href="enterPublicRoom.action?teaEmail=<s:property value="#session.email"/>">在线试讲房间</a></li>
-                                        <s:iterator value="#session.todayClazz">
+                                            <s:iterator value="#session.todayClazz">
                                             <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">学生:<s:property value="student.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
-                                        </s:iterator>
+                                            </s:iterator>
                                         <div class="divider"></div>
                                         <li><a href="index.action?page=student" id="notification">暂无新的请求</a></li>
-                                    </s:if>
-                                    <s:else>
-                                        <s:if test="#session.todayClazz.size()==0">
+                                        </s:if>
+                                        <s:else>
+                                            <s:if test="#session.todayClazz.size()==0">
                                             <p>今天没有课程哦</p>
                                         </s:if>
                                         <s:iterator value="#session.todayClazz">
                                             <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">老师:<s:property value="freeTime.teacher.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
-                                        </s:iterator>
-                                    </s:else>
+                                            </s:iterator>
+                                        </s:else>
                                 </ul>
                             </div>
                         </li>
                         <li><a href="logout.action">登出</a></li>
-                    </s:if>
-                    <s:else>
+                        </s:if>
+                        <s:else>
                         <script>
                             if (typeof(mid) == 'undifined')
                                 clearInterval(mid);
@@ -107,7 +126,7 @@
                         </script>
                         <li><a href="index.action">注册</a></li>
                         <li><a href="index.action">登陆</a></li>
-                    </s:else>
+                        </s:else>
                 </ul>
             </div>  
             <s:if test="nextPageMessage!=null">

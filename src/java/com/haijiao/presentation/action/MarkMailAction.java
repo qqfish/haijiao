@@ -12,7 +12,6 @@ import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
-import org.apache.struts2.convention.annotation.Results;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -38,7 +37,7 @@ public class MarkMailAction extends SessionAction {
     }
 
     @Action(results = {
-        @Result(name = "success", type="chain", location = "/getMail")
+        @Result(name = "success", type="chain", location = "getMail")
     })
     public String markAll() {
         String email = (String) this.getSessionValue("email");

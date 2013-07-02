@@ -9,8 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import javax.annotation.Resource;
-import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.InterceptorRefs;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -55,7 +53,7 @@ public class DownloadAction extends SessionAction {
     public InputStream getInputStream() throws Exception {
         String email = (String) this.getSessionValue("email");
         String path = userService.download(email, src, downloadFileName);
-        return new FileInputStream(new File(ServletActionContext.getServletContext().getRealPath("/") + path));   
+        return new FileInputStream(new File(path));   
     }
 
     public void setUserService(IUserService userService) {
