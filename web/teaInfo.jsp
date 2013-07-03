@@ -131,6 +131,101 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="span8 module" style="padding:12px;height:200px">
+                    <div>
+                        <label class="label label-warning">
+                            课程
+                        </label>
+                        <span id="lesson_select">
+                            <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
+                                <span  data-toggle-name="is_private" data-toggle="buttons-radio">
+                                <s:iterator value="tea.lessons" status="st">
+                                    <s:if test="delete==false">
+                                        <button type="button" class="btn btn-mini"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
+                                    </s:if>
+                                </s:iterator>
+                            </span>
+                        </span>
+                    </div>
+                    <div>
+                        <label class="label label-warning">
+                            支持
+                        </label>
+                        <s:if test="tea.sprtOnline==false && tea.sprtTUnderline==false && tea.sprtSUnderline==false">
+                            暂未选择授课方式
+                        </s:if>
+                        <s:else>
+                            <s:if test="tea.sprtOnline">
+                                <label class="label label-info" >线上授课</label>
+                            </s:if>
+                            <s:if test="tea.sprtSUnderline">
+                                <label class="label label-info" >学生上门</label>
+                            </s:if>
+                            <s:if test="tea.sprtTUnderline">
+                                <label class="label label-info" >老师上门</label>
+                            </s:if>
+                        </s:else>   
+                    </div>
+                    <div>
+                        <label class="label label-warning">线下授课区域</label>
+                        <textarea id="tmp2" style="display:none"><s:property value="tea.underlineArea"/></textarea>
+                        <span id="teaArea">
+                            <script>
+        $("#teaArea").html($("#tmp2").text());
+                            </script>
+                        </span>
+                    </div>
+                    <div>
+                        选择上课时间
+                        <s:if test="tea.status==1">
+                            <s:if test="#session.userType=='student'">
+                                <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#choosemodal">点击选择</a>
+                            </s:if>
+                        </s:if>
+                        <s:elseif test="tea.status == 2">
+                            <s:if test="#session.userType=='student'">
+                                <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#choosemodal">点击选择</a>
+                            </s:if>
+                            <div class="modal fade hide" id="publicRoom">
+                                <div class="modal-body">
+                                    <h3>老师正在忙碌，可能无法与您交流，仍要进入房间吗？</h3>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-success" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">确定</a>
+                                    <button class="btn" data-dismiss="modal">取消</button>
+                                </div>
+                            </div>
+                        </s:elseif>
+                        <s:elseif test="#session.email != null">
+                            <s:if test="#session.userType=='student'">
+                                <a class="btn btn-primary btn-small" data-toggle="modal" data-target="#choosemodal">点击选择</a>
+                            </s:if>
+                        </s:elseif>
+                        <s:else>
+                            <div class="modal fade hide" id="publicRoom">
+                                <div class="modal-body">
+                                    <h3>请先登陆</h3>
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-success" href="index.action">登陆</a>
+                                    <button class="btn" data-dismiss="modal">取消</button>
+                                </div>
+                            </div>
+                        </s:else>
+                    </div>
+                    <div id="confirm_panel">
+                        <s:form id="schedule_form" action="bookTeacher.action">
+                            <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
+                            <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
+                            <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
+                            <s:textfield id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
+
+                                <a class="btn btn-primary" id="upload" >提交</a>
+                        </s:form>
+                        <br/>
+                        <p></p>
+                    </div>
+                </div>
                 <div class="span8 module" style="padding:12px;">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
@@ -211,27 +306,6 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                            </div>
-                            <hr class="span8"/>
-                            <div class="span8">
-                                <h5>开设课程</h5>
-                                <div>
-                                    <s:iterator value="tea.lessons" status="st">
-                                        <s:if test="delete==false">
-                                            <label class="label label-info" ><s:property value="name"/></label>
-                                        </s:if>
-                                    </s:iterator>
-                                </div>
-                            </div>
-                            <hr class="span8"/>
-                            <div class="span8">
-                                <h5>线下授课区域</h5>
-                                <textarea id="tmp2" style="display:none"><s:property value="tea.underlineArea"/></textarea>
-                                <div class="span6" id="teaArea">
-                                    <script>
-        $("#teaArea").html($("#tmp2").text());
-                                    </script>
-                                </div>
                             </div>
                             <hr class="span8"/>
                             <div class="span8">
@@ -395,29 +469,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <a class="btn btn-info btn-small pull-right" id="next">下一步</a> 
-                        <p></p>
-                    </div>
-                    <div id="confirm_panel" style="display:none">
-                        <s:form id="schedule_form" action="bookTeacher.action">
-                            <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
-                            <s:textfield id="schedule_lesson" name="lesson" style="display:none;"></s:textfield>
-                            <s:textfield name="teacherEmail" style="display:none;" value="%{tea.email}"></s:textfield>
-                            <s:textfield cssClass="span4" id='schedule_times' name="times" placeholder="请输入上课次数" autofocus="autofocus"></s:textfield>
-                                <div id="lesson_select">
-                                <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                                    <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                                    <s:iterator value="tea.lessons" status="st">
-                                        <s:if test="delete==false">
-                                            <button type="button" class="btn"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
-                                        </s:if>
-                                    </s:iterator>
-                                </div>
-                            </div>
-                            <a class="btn btn-info btn-small pull-right" id="pre">上一步</a>
-                            <a class="btn btn-primary btn-small pull-right" id="upload">提交</a>
-                        </s:form>
-                        <br/>
+                        <a class="btn btn-info btn-small pull-right" id="next">确认</a> 
                         <p></p>
                     </div>
                 </div>

@@ -124,9 +124,9 @@
                             if (typeof(rid) == 'undifined')
                                 clearInterval(rid);
                         </script>
-                        <li><a href="index.action">注册</a></li>
+                        <li><a href="index.action" data-toggle="collapse" data-parent="#accordion2" data-target="#reg-panel">注册</a></li>
                         <li><a href="index.action">登陆</a></li>
-                        </s:else>
+                    </s:else>
                 </ul>
             </div>  
             <s:if test="nextPageMessage!=null">

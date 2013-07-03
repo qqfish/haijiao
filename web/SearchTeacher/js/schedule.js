@@ -89,17 +89,9 @@ $(document).ready(function() {
             console.log(JSON.stringify(result));
             if(min != 0){
                 $("#schedule_json").val(JSON.stringify(result));
-                $('#schedule_panel').hide();
-                $('#confirm_panel').show();
-                $('#modalpanel').height(120);
             } else {
                 $("#schedule_error").text("请选择预约时间");
             }
-        });
-        $('#pre').click(function(){
-            $('#schedule_panel').show();
-            $('#confirm_panel').hide();	
-            $('#modalpanel').height(400);
         });
         
         $('#upload').click(function(){

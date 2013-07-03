@@ -351,10 +351,10 @@
                                                 <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
-                                            <span class="label label-info"><s:property value="name" /></span><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove" ></i></a>  
-                                            </s:form>
-                                        </s:if>
-                                    </s:iterator>
+                                            <span class="label label-info" style="margin-right:5px"><s:property value="name" /><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove icon-white" ></i></a> </span> 
+                                                </s:form>
+                                            </s:if>
+                                        </s:iterator>
                                 <br/><br/>
                                 <hr/>
                                 <h5>课程列表</h5>
@@ -666,9 +666,9 @@
                     </div>
                 </div>         
             </div>
-
-            <!--==============================footer=================================-->
-            <%@ include file="WEB-INF/jspf/footer.jspf"%>
+        </div>
+        <!--==============================footer=================================-->
+        <%@ include file="WEB-INF/jspf/footer.jspf"%>
     </body>
 </html>
 
