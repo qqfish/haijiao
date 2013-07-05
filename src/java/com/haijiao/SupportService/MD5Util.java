@@ -6,6 +6,7 @@
 package com.haijiao.SupportService;
 
 import java.security.MessageDigest;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class MD5Util {
     public final static String MD5(String s) {
@@ -35,5 +36,6 @@ public class MD5Util {
     }
     public static void main(String[] args) {
         System.out.println(MD5Util.MD5("123123"));
+        System.out.println(DigestUtils.md5Hex("123123"));
     }
 }

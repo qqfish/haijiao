@@ -10,6 +10,7 @@
         var step = 0;
         bid = setInterval(function() {
             step ++ ;
+            console.log(step);
             if (step == 3) {
                 step = 1;
             }
@@ -21,10 +22,17 @@
             }
         }, 500);
     }
+    
     function getMailNum() {
         $.post("getMailNum.action", function(data) {
-            if ($('#mailNum').text() != data)
+            if(data != "0"){
+                blink("新信息");
+            }
+            if ($('#mailNum').text() != data){
                 $('#mailNum').text(data);
+                if(data == "0")
+                    clearInterval(bid);
+            }
         }, "text");
     }
     function getRoomStatus() {
