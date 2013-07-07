@@ -10,8 +10,7 @@
         var step = 0;
         bid = setInterval(function() {
             step ++ ;
-            console.log(step);
-            if (step == 3) {
+            if (step >= 3) {
                 step = 1;
             }
             if (step == 1) {
@@ -25,13 +24,12 @@
     
     function getMailNum() {
         $.post("getMailNum.action", function(data) {
-            if(data != "0"){
-                blink("新信息");
-            }
             if ($('#mailNum').text() != data){
                 $('#mailNum').text(data);
                 if(data == "0")
                     clearInterval(bid);
+                else
+                    blink("新信息");
             }
         }, "text");
     }
@@ -54,7 +52,8 @@
                 $("#notification").text("暂无新的请求").removeClass('btn-warning');
                 $('#publicRoomButton').removeClass('btn-warning').text("试讲房间(无人)");
                 $('#toClass').addClass("btn-inverse");
-                clearInterval(bid);
+                if($('#mailNum').text() == "0")
+                    clearInterval(bid);
             }
         }, "json");
     }
