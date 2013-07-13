@@ -4,10 +4,11 @@
  */
 package com.haijiao.SupportService.service.impl;
 
-import com.haijiao.Domain.bean.Clazz;
+//import com.haijiao.Domain.bean.Clazz;
+import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.room.Room;
-import com.haijiao.SupportService.service.IClassService;
+//import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.IRoomService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.global.config;
@@ -122,8 +123,8 @@ public class RoomServiceImpl implements IRoomService {
     }
     private static Map<TeaAndStu, Room> roomTable;
     private static Timer roomTimer;
-    @Resource
-    IClassService classService;
+//    @Resource
+//    IClassService classService;
     @Resource
     ITeacherService teacherService;
 
@@ -134,25 +135,25 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public Room checkAndApplyRoom(int clazzId) {
+    public Room checkAndApplyRoom(Teacher tea, Student stu) {
         if (roomTable == null) {
             initialize();
         }
-        Clazz clazz = classService.getClazzById(clazzId);
-        if (clazz == null) {
-            return null;
-        }
-        if (clazz.getStudent() == null) {
-            return null;
-        }
+//        Clazz clazz = classService.getClazzById(clazzId);
+//        if (clazz == null) {
+//            return null;
+//        }
+//        if (clazz.getStudent() == null) {
+//            return null;
+//        }
 
         TeaAndStu aas = new TeaAndStu();
-        aas.setStuEmail(clazz.getStudent().getEmail());
-        aas.setTeaEmail(clazz.getFreeTime().getTeacher().getEmail());
+        aas.setStuEmail(stu.getEmail());
+        aas.setTeaEmail(tea.getEmail());
         Room result = roomTable.get(aas);
         if (result == null) {
-            result = new Room(clazz.getFreeTime().getTeacher(), clazz.getFreeTime().getTeacher().getWagePerhour(), 2);
-            result.addAttendance(clazz.getStudent());
+            result = new Room(tea, tea.getWagePerhour(), 2);
+            result.addAttendance(stu);
             roomTable.put(aas, result);
         }
         return result;
@@ -182,22 +183,15 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public void removeRoom(int clazzId) {
+    public void removeRoom(Teacher tea, Student stu) {
         if (roomTable == null) {
             initialize();
-        }
-        Clazz clazz = classService.getClazzById(clazzId);
-        if (clazz == null) {
-            return;
-        }
-        if (clazz.getStudent() == null) {
-            return;
         }
 
 
         TeaAndStu aas = new TeaAndStu();
-        aas.setStuEmail(clazz.getStudent().getEmail());
-        aas.setTeaEmail(clazz.getFreeTime().getTeacher().getEmail());
+        aas.setStuEmail(stu.getEmail());
+        aas.setTeaEmail(tea.getEmail());
         Room room = roomTable.get(aas);
         if (room == null) {
             return;
@@ -212,13 +206,13 @@ public class RoomServiceImpl implements IRoomService {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public IClassService getClassService() {
-        return classService;
-    }
-
-    public void setClassService(IClassService classService) {
-        this.classService = classService;
-    }
+//    public IClassService getClassService() {
+//        return classService;
+//    }
+//
+//    public void setClassService(IClassService classService) {
+//        this.classService = classService;
+//    }
 
     private void deleteRoomFile(Room room) {
     }

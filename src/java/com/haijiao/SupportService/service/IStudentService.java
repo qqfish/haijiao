@@ -4,8 +4,8 @@
  */
 package com.haijiao.SupportService.service;
 
-import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.FreeTime;
+//import com.haijiao.Domain.bean.Clazz;
+//import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Student;
 import java.sql.Date;
 import java.util.List;
@@ -22,8 +22,8 @@ public interface IStudentService {
     //充值
     public boolean topUpMoney(String email, int numberOfCoin);
     
-    //获取学生时间表
-    public List<Clazz> getClasses(String email);
-    
-    public List<Clazz> getTodayClasses(String email);
+//    //获取学生时间表
+//    public List<Clazz> getClasses(String email);
+//    
+//    public List<Clazz> getTodayClasses(String email);
 }

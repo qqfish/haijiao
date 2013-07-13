@@ -5,10 +5,10 @@
 
 package com.haijiao.SupportService.service.impl;
 
-import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.FreeTime;
+//import com.haijiao.Domain.bean.Clazz;
+//import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Student;
-import com.haijiao.SupportService.dao.IClazzDAO;
+//import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import java.sql.Date;
@@ -23,8 +23,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentServiceImpl implements IStudentService{
     @Resource
     IStudentDAO studentDAO;
-    @Resource
-    IClazzDAO clazzDAO;
+//    @Resource
+//    IClazzDAO clazzDAO;
 
     public void setStudentDAO(IStudentDAO studentDAO) {
         this.studentDAO = studentDAO;
@@ -35,13 +35,13 @@ public class StudentServiceImpl implements IStudentService{
         return studentDAO.getStudentByEmail(email);
     }
 
-    public IClazzDAO getClazzDAO() {
-        return clazzDAO;
-    }
+//    public IClazzDAO getClazzDAO() {
+//        return clazzDAO;
+//    }
 
-    public void setClazzDAO(IClazzDAO clazzDAO) {
-        this.clazzDAO = clazzDAO;
-    }
+//    public void setClazzDAO(IClazzDAO clazzDAO) {
+//        this.clazzDAO = clazzDAO;
+//    }
     
     @Override
     public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType) {
@@ -80,16 +80,16 @@ public class StudentServiceImpl implements IStudentService{
         return true;
     }
 
-    @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
-    public List<Clazz> getClasses(String email) {
-        return clazzDAO.getStudentClazz(email);
-    }
-
-    @Override
-    @Transactional(propagation=Propagation.SUPPORTS)
-    public List<Clazz> getTodayClasses(String email) {
-        return clazzDAO.getStudentTodayClazz(email);
-    }
+//    @Override
+//    @Transactional(propagation=Propagation.SUPPORTS)
+//    public List<Clazz> getClasses(String email) {
+//        return clazzDAO.getStudentClazz(email);
+//    }
+//
+//    @Override
+//    @Transactional(propagation=Propagation.SUPPORTS)
+//    public List<Clazz> getTodayClasses(String email) {
+//        return clazzDAO.getStudentTodayClazz(email);
+//    }
 
 }

@@ -27,8 +27,8 @@ public class Student extends User{
     private String tel;        //学生或家长的联系方式
     private String telType; //="student" or "parent"
     
-    @OneToMany(mappedBy="student")
-    private List<Clazz> schedule;      //学生的时间表
+//    @OneToMany(mappedBy="student")
+//    private List<Clazz> schedule;      //学生的时间表
     
     @OneToMany(mappedBy = "student")
     @Fetch(value = FetchMode.SUBSELECT)
@@ -78,14 +78,14 @@ public class Student extends User{
     public void setTelType(String telType) {
         this.telType = telType;
     }
-
-    public List<Clazz> getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(List<Clazz> schedule) {
-        this.schedule = schedule;
-    }
+//
+//    public List<Clazz> getSchedule() {
+//        return schedule;
+//    }
+//
+//    public void setSchedule(List<Clazz> schedule) {
+//        this.schedule = schedule;
+//    }
 
     public List<Teacher> getTeacherList() {
         return teacherList;
@@ -103,13 +103,13 @@ public class Student extends User{
         this.billList = billList;
     }
     
-    public int getRemainCoin(){
-        int current = coin;
-        for(int i = 0; i < schedule.size(); i++){
-            current -= schedule.get(0).getRemain() * schedule.get(i).getFreeTime().getTeacher().getWagePerhour();
-            if(current < 0)
-                return current;
-        }
-        return current;
-    }
+//    public int getRemainCoin(){
+//        int current = coin;
+//        for(int i = 0; i < schedule.size(); i++){
+//            current -= schedule.get(0).getRemain() * schedule.get(i).getFreeTime().getTeacher().getWagePerhour();
+//            if(current < 0)
+//                return current;
+//        }
+//        return current;
+//    }
 }

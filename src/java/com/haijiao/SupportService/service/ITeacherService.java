@@ -4,8 +4,8 @@
  */
 package com.haijiao.SupportService.service;
 
-import com.haijiao.Domain.bean.Clazz;
-import com.haijiao.Domain.bean.FreeTime;
+//import com.haijiao.Domain.bean.Clazz;
+//import com.haijiao.Domain.bean.FreeTime;
 import com.haijiao.Domain.bean.Teacher;
 import java.sql.Date;
 import java.util.List;
@@ -37,12 +37,12 @@ public interface ITeacherService {
     
     public String getRoomOccupied(String email);
     
-    //获取老师的课程
-    public List<Clazz> getClasses(String email);
-    //获取老师当天课程
-    public List<Clazz> getTodayClasses(String email);
-    //获取老师时间表
-    public List<FreeTime> getSchedule(String email);
+//    //获取老师的课程
+//    public List<Clazz> getClasses(String email);
+//    //获取老师当天课程
+//    public List<Clazz> getTodayClasses(String email);
+//    //获取老师时间表
+//    public List<FreeTime> getSchedule(String email);
     //修改时间表
     //public boolean changeSchedule(String email, Schedule s);
 }

@@ -11,7 +11,7 @@ import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
-import com.haijiao.presentation.bean.infoSchedule.InfoScheduleBean;
+//import com.haijiao.presentation.bean.infoSchedule.InfoScheduleBean;
 import java.util.List;
 import javax.annotation.Resource;
 import org.apache.struts2.convention.annotation.Action;
@@ -35,8 +35,8 @@ public class GetTeacherInfoAction extends RequestSessionAction{
     @Resource
     private IStudentService studentService;
     private Teacher tea;
-    private InfoScheduleBean scheduleBean;
-    private InfoScheduleBean studentScheduleBean;
+//    private InfoScheduleBean scheduleBean;
+//    private InfoScheduleBean studentScheduleBean;
     private List<Bill> billList;
     @Resource
     private IBillService billService;
@@ -47,7 +47,7 @@ public class GetTeacherInfoAction extends RequestSessionAction{
         tea = teacherService.getTeacherByEmail(email);
         if(!email.equals(this.getOutSession("email")))
             teacherService.increseObNum(email);
-        scheduleBean = new InfoScheduleBean(tea);
+//        scheduleBean = new InfoScheduleBean(tea);
         billList = billService.getBill(email, "teacher");
         
         String stuEmail = (String) this.getOutSession("email");
@@ -57,7 +57,7 @@ public class GetTeacherInfoAction extends RequestSessionAction{
         String userType = (String) this.getOutSession("userType");
         if(stuEmail != null && userType.equals("student")){
             Student stu = studentService.getStudentByEmail(stuEmail);
-            studentScheduleBean = new InfoScheduleBean(stu.getSchedule());
+//            studentScheduleBean = new InfoScheduleBean(stu.getSchedule());
         }
         return SUCCESS;
     }
@@ -78,13 +78,13 @@ public class GetTeacherInfoAction extends RequestSessionAction{
         this.tea = tea;
     }
 
-    public InfoScheduleBean getScheduleBean() {
-        return scheduleBean;
-    }
-
-    public void setScheduleBean(InfoScheduleBean scheduleBean) {
-        this.scheduleBean = scheduleBean;
-    }
+//    public InfoScheduleBean getScheduleBean() {
+//        return scheduleBean;
+//    }
+//
+//    public void setScheduleBean(InfoScheduleBean scheduleBean) {
+//        this.scheduleBean = scheduleBean;
+//    }
 
     public List<Bill> getBillList() {
         return billList;
@@ -109,13 +109,13 @@ public class GetTeacherInfoAction extends RequestSessionAction{
     public void setStudentService(IStudentService studentService) {
         this.studentService = studentService;
     }
-
-    public InfoScheduleBean getStudentScheduleBean() {
-        return studentScheduleBean;
-    }
-
-    public void setStudentScheduleBean(InfoScheduleBean studentScheduleBean) {
-        this.studentScheduleBean = studentScheduleBean;
-    }
-    
+//
+//    public InfoScheduleBean getStudentScheduleBean() {
+//        return studentScheduleBean;
+//    }
+//
+//    public void setStudentScheduleBean(InfoScheduleBean studentScheduleBean) {
+//        this.studentScheduleBean = studentScheduleBean;
+//    }
+//    
 }

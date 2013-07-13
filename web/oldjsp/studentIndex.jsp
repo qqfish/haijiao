@@ -61,10 +61,135 @@
                 </div>
                 <div class="span8 module" style="padding:12px">
                     <ul class="nav nav-pills">
-                        <li id="l3" class="active"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                        <li id="l1" class="active"><a href="#student_area" data-toggle="tab">老师列表</a></li>
+                        <li id="l2" ><a href="#schedule_area" data-toggle="tab" >课程表</a></li>
+                        <li id="l3" ><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                         <li id="l4" ><a href="#comment_area" data-toggle="tab" >评论</a></li>
                     </ul>
                     <div class="tab-content">
+                        <div class="tab-pane fade active in" id='student_area'>
+                            <table class="table table-hover table-striped">
+                                <tbody>
+                                    <s:if test="classList.size()<=0">
+                                    <div style="margin-top:30%;margin-bottom: 30%;margin-left:20%">
+                                        你还没有选老师哦！<br/>
+                                        赶快寻找一位老师，开始你的学习之旅吧！
+                                        <a class="btn btn-primary" href="#" onclick="$('#searchSubmit').click();">找老师</a>
+                                    </div>
+                                </s:if>
+                                <s:else>
+                                    <s:iterator value="classList" id="list">
+                                        <s:if test="status>=2">
+                                            <tr>
+                                                <td>
+                                                    <blockquote>
+                                                        <h4><s:a action="getTeacherInfo.action">
+                                                                <s:param name="teacherEmail" value="%{freeTime.teacher.email}"/>
+                                                                <s:property value="freeTime.teacher.name"/></s:a>
+                                                            <s:if test="freeTime.teacher.status==0"><label class="label">离线</label></s:if>
+                                                            <s:elseif test="freeTime.teacher.status==1"><label class="label label-success">在线</label></s:elseif>
+                                                                <label class="label label-info pull-right">
+                                                                <s:if test="status==2">
+                                                                    等待审批
+                                                                </s:if>
+                                                                <s:if test="status==3">
+                                                                    已确认
+                                                                </s:if>
+                                                            </label>
+                                                        </h4>
+                                                        <small>
+                                                            <span>
+                                                                <s:property value="freeTime.strWeekday()"/>
+                                                                <s:property value="freeTime.strSliceIndex()"/>
+                                                            </span>
+                                                            <span style="margin-left: 10px">剩余<s:property value="remain"/>次课程</span>
+                                                            <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
+                                                            <span style="margin-left: 10px"class="pull-right">
+                                                                <s:if test="status==3">
+                                                                    <s:form id="dealApply_stop_%{id}" action="dealApply.action">
+                                                                        <s:textfield style="display:none;" name="button" value="studentStop"></s:textfield>
+                                                                        <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                        <s:textfield style="display:none;" name="toEmail" value="%{freeTime.teacher.email}"></s:textfield>
+                                                                        <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">暂停</button>
+                                                                    </s:form>
+                                                                </s:if>
+                                                            </span>
+                                                            <br/>
+                                                            <small>联系电话:<s:property value="student.tel"/></small>
+                                                        </small>
+                                                    </blockquote>
+                                                </td>
+                                            </tr>
+                                        </s:if>
+                                    </s:iterator>
+                                </s:else>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id='schedule_area'>
+                            <table class="static_schedule_table" width="100%" border="0" style="z-index: 1;text-align: center;table-layout: fixed;">
+                                <tbody>
+                                    <tr>
+                                        <th ></th>
+                                        <th>Mon.</th>
+                                        <th>Tue.</th>
+                                        <th>Wed.</th>
+                                        <th>Thu.</th>
+                                        <th>Fri.</th>
+                                        <th>Sat.</th>
+                                        <th>Sun.</th>
+                                    </tr>
+                                    <tr class="class_1">
+                                        <th rowspan="2">8: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_2">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_3">
+                                        <th rowspan="2">10: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_4">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_5">
+                                        <th rowspan="2">12: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_6">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_7">
+                                        <th rowspan="2">14：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_8">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_9">
+                                        <th rowspan="2">16：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_10">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_11">
+                                        <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_12">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_13">
+                                        <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_14">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_15">
+                                        <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_16">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-hover table-striped">
                                 <s:if test="billList.size()<=0">

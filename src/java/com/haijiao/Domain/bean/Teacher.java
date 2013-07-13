@@ -61,8 +61,8 @@ public class Teacher extends User{
     @Column(columnDefinition="bool default false")
     private Boolean audition;       //该老师是否接受试听
     
-    @OneToMany(mappedBy = "teacher")
-    private List<FreeTime> schedule;//记录老师的时间表
+//    @OneToMany(mappedBy = "teacher")
+//    private List<FreeTime> schedule;//记录老师的时间表
     
     @OneToMany(mappedBy = "teacher")
     protected List<Bill> billList;  //账单列表
@@ -280,13 +280,13 @@ public class Teacher extends User{
         this.studentin = studentin;
     }
 
-    public List<FreeTime> getSchedule() {
-        return schedule;
-    }
-
-    public void setSchedule(List<FreeTime> schedule) {
-        this.schedule = schedule;
-    }
+//    public List<FreeTime> getSchedule() {
+//        return schedule;
+//    }
+//
+//    public void setSchedule(List<FreeTime> schedule) {
+//        this.schedule = schedule;
+//    }
 
     public int getWagePerhour() {
         return wagePerhour;
@@ -313,12 +313,12 @@ public class Teacher extends User{
         return null;
     }
 
-    public FreeTime getFreeTime(int day, int index) {
-        for(int i = 0; i < schedule.size(); i++){
-            if(schedule.get(i).getWeekday() == day && schedule.get(i).getSliceIndex() == index){
-                return schedule.get(i);
-            }
-        }
-        return null;
-    }
+//    public FreeTime getFreeTime(int day, int index) {
+//        for(int i = 0; i < schedule.size(); i++){
+//            if(schedule.get(i).getWeekday() == day && schedule.get(i).getSliceIndex() == index){
+//                return schedule.get(i);
+//            }
+//        }
+//        return null;
+//    }
 }

@@ -17,9 +17,9 @@
     <bean id="GetStudentInfoAction" class="com.haijiao.presentation.action.GetStudentInfoAction" scope="prototype">
         <property name="studentService" ref="studentServiceImpl" />
     </bean>
-    <bean id="roomTimer" class="com.haijiao.Domain.room.RoomTimer" scope="prototype">
+<!--    <bean id="roomTimer" class="com.haijiao.Domain.room.RoomTimer" scope="prototype">
         <property name="billService" ref="billServiceImpl" />
-    </bean>
+    </bean>-->
 
     <bean id="springContext" class="com.haijiao.SupportService.SpringContext"></bean>
     <!-- persist -->

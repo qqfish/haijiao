@@ -87,11 +87,246 @@
                     <div class="span8 module" style="padding:12px;">
                         <ul class="nav nav-pills">
                             <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                            <li id="l2"><a href="#schedule_area" data-toggle="tab" >设定时间</a></li>
+                            <li id="l1"><a href="#student_area" data-toggle="tab">处理预约</a></li>
                             <li id="l6"><a href="#file_area" data-toggle="tab" >电子备课</a></li>
                             <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
                         </ul>
                         <div class="tab-content">
+                            <div class="tab-pane fade" id='student_area'>
+                                <table class="table table-hover table-striped">
+                                    <tbody>
+                                    <s:if test="classList.size()<=0">
+                                        还没有学生选你哦~！
+                                    </s:if>
+                                    <s:else>
+                                        <s:iterator value="classList" id="list">
+                                            <s:if test="status>=2"> 
+                                                <tr>
+                                                    <td>
+                                                        <blockquote>
+                                                            <h4><s:property value="student.name"/>
+                                                                <s:if test="student.status==0"><label class="label">离线</label></s:if>
+                                                                <s:elseif test="student.status==1"><label class="label label-success">在线</label></s:elseif>
+                                                                    <label class="label label-info pull-right">
+                                                                    <s:if test="status==2">
+                                                                        等待审批
+                                                                    </s:if>
+                                                                    <s:if test="status==3">
+                                                                        已确认
+                                                                    </s:if>
+                                                                </label>
+                                                            </h4>
+                                                            <small>
+                                                                <span>
+                                                                    <s:property value="freeTime.strWeekday()"/>
+                                                                    <s:property value="freeTime.strSliceIndex()"/>
+                                                                </span>
+                                                                <span style="margin-left: 10px">剩余<s:property value="remain"/>次课程</span>
+                                                                <span style="margin-left: 10px">下次上课在<s:property value="remainWeek()"/></span>
+                                                                <span style="margin-left: 10px"class="pull-right">
+                                                                    <s:if test="status==3">
+                                                                        <s:form id="dealApply_stop_%{id}" action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="stop"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
+                                                                            <button type="button" id="dealApply_stop_button_<s:property value="id"/>" class="btn btn-info btn-mini">顺延一周</button>
+                                                                            <button type="button" id="dealApply_cancel_button_<s:property value="id"/>" class="btn btn-info btn-mini">取消一周</button>
+                                                                            <a class="btn btn-info btn-mini" href="getMail.action?toEmail=<s:property value="student.email" />">私信</a>
+                                                                        </s:form>
+                                                                        <s:form id="dealApply_cancel_%{id}" action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="cancel"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
+                                                                        </s:form>
+                                                                    </s:if>
+                                                                    <s:if test="status==2">
+                                                                        <button type="button" id="dealApply_accept_button_<s:property value="id"/>" class="btn btn-info btn-mini">接受</button>
+                                                                        <button type="button" id="dealApply_decline_button_<s:property value="id"/>" class="btn btn-info btn-mini">拒绝</button>
+                                                                        <button class="btn btn-info btn-mini" href="mail.jsp?id=<s:property value="student.email" />">私信</button>
+                                                                        <s:form id="dealApply_accept_%{id}" action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="accept"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
+                                                                        </s:form>
+                                                                        <s:form id="dealApply_decline_%{id}" action="dealApply.action">
+                                                                            <s:textfield style="display:none;" name="button" value="decline"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="classId" value="%{id}"></s:textfield>
+                                                                            <s:textfield style="display:none;" name="toEmail" value="%{student.email}"></s:textfield>
+                                                                        </s:form>
+                                                                    </s:if>
+                                                                </span>
+                                                                <br/>
+                                                                <small>联系电话:<s:property value="student.tel"/></small>
+                                                            </small>
+                                                        </blockquote>
+                                                    </td>
+                                                </tr>
+                                            </s:if>
+                                        </s:iterator>
+                                    </s:else>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id='schedule_area'>
+                            <table class="static_schedule_table" width="100%" border="0" style="z-index: 1;text-align: center;table-layout: fixed;">
+                                <tbody>
+                                    <tr>
+                                        <th ></th>
+                                        <th>Mon.</th>
+                                        <th>Tue.</th>
+                                        <th>Wed.</th>
+                                        <th>Thu.</th>
+                                        <th>Fri.</th>
+                                        <th>Sat.</th>
+                                        <th>Sun.</th>
+                                    </tr>
+                                    <tr class="class_1">
+                                        <th rowspan="2">8: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_2">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_3">
+                                        <th rowspan="2">10: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_4">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_5">
+                                        <th rowspan="2">12: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_6">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_7">
+                                        <th rowspan="2">14：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_8">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_9">
+                                        <th rowspan="2">16：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_10">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_11">
+                                        <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_12">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_13">
+                                        <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_14">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_15">
+                                        <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                    <tr class="class_16">
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a class="btn btn-primary pull-right" data-toggle="modal" data-target="#choosemodal">修改空闲时间</a><br/>
+                            <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
+                                <div class="modal-header" style="height: 50px">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>请选择课程时间</h3>
+                                    <p id="chooseError" style="color:red;"></p>
+                                </div>
+                                <div class="modal-body" style="height: 400px">
+                                    <div class="schedule_panel" id="schedule_panel">
+                                        <div style="font-size: 9px">
+                                            &nbsp;&nbsp;
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #CCF;height: 15px; width: 15px;"></div>已经添加的空闲时间&nbsp;
+                                            </div>
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #CCC;height: 15px; width: 15px;"></div>未分配时间&nbsp;
+                                            </div>
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #FC9;height: 15px; width: 15px;"></div>新添加空闲时间&nbsp;
+                                            </div>
+                                            <div style="float:left;">
+                                                <div  style="float:left;background: #FAA;height: 15px; width: 15px;"></div>删除空闲时间&nbsp;
+                                            </div>
+                                        </div>
+                                        <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
+                                            <tbody>
+                                                <tr>
+                                                    <th ></th>
+                                                    <th>Mon.</th>
+                                                    <th>Tue.</th>
+                                                    <th>Wed.</th>
+                                                    <th>Thu.</th>
+                                                    <th>Fri.</th>
+                                                    <th>Sat.</th>
+                                                    <th>Sun.</th>
+                                                </tr>
+                                                <tr class="class_1">
+                                                    <th rowspan="2">8: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_2">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_3">
+                                                    <th rowspan="2">10: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_4">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_5">
+                                                    <th rowspan="2">12: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_6">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_7">
+                                                    <th rowspan="2">14：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_8">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_9">
+                                                    <th rowspan="2">16：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_10">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_11">
+                                                    <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_12">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_13">
+                                                    <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_14">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_15">
+                                                    <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                                <tr class="class_16">
+                                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <s:form id="schedule_form" action="addFreeTime.action">
+                                            <s:textfield id="schedule_json" name="json" style="display:none;"></s:textfield>
+                                                <a class="btn btn-primary pull-right" id="upload" >完成</a>
+                                        </s:form>
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="tab-pane fade  active in" id='lesson_area'>
                             <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
                                <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>

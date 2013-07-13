@@ -5,7 +5,7 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Bill;
-import com.haijiao.Domain.bean.Clazz;
+//import com.haijiao.Domain.bean.Clazz;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
@@ -13,7 +13,7 @@ import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
-import com.haijiao.presentation.bean.schedule.ScheduleBean;
+//import com.haijiao.presentation.bean.schedule.ScheduleBean;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Controller;
     @Result(name="student",location="/studentIndex.jsp")
 })
 public class IndexAction extends RequestSessionAction {
-    private ScheduleBean scheduleBean;
+//    private ScheduleBean scheduleBean;
     @Resource
     private IUserService userService;
     @Resource
@@ -45,7 +45,7 @@ public class IndexAction extends RequestSessionAction {
     private Teacher teacher;
     private Student student;
     private List<Bill> billList;
-    private List<Clazz> classList;
+//    private List<Clazz> classList;
     private String nextPageMessage;
     
     
@@ -65,11 +65,11 @@ public class IndexAction extends RequestSessionAction {
                         this.putIn("name", theUser.getName());
                         this.putIn("userType", userType);
                         this.putIn("email",email);
-                        if(userType.equals("teacher")){
-                            this.putIn("todayClazz", teacherService.getTodayClasses(email));
-                        } else {
-                            this.putIn("todayClazz", studentService.getTodayClasses(email));
-                        }
+//                        if(userType.equals("teacher")){
+//                            this.putIn("todayClazz", teacherService.getTodayClasses(email));
+//                        } else {
+//                            this.putIn("todayClazz", studentService.getTodayClasses(email));
+//                        }
                     }
                 }
             }
@@ -81,16 +81,16 @@ public class IndexAction extends RequestSessionAction {
             User user = userService.getUserByEmail(email);
             if(user.getUserType().equals("teacher")){
                 teacher = (Teacher) user;
-                scheduleBean = new ScheduleBean(teacher);
+//                scheduleBean = new ScheduleBean(teacher);
                 billList = billService.getBill(email, "teacher");
-                classList = teacherService.getClasses(email);
+//                classList = teacherService.getClasses(email);
                 return "teacher";
             } else {
                 student = (Student) user;              
                 student = studentService.getStudentByEmail(email);
                 billList = billService.getBill(email, "student");
-                classList = studentService.getClasses(email);
-                scheduleBean = new ScheduleBean(classList);
+//                classList = studentService.getClasses(email);
+//                scheduleBean = new ScheduleBean(classList);
                 return "student";
             }
         } else {
@@ -98,13 +98,13 @@ public class IndexAction extends RequestSessionAction {
         }
     }
 
-    public ScheduleBean getScheduleBean() {
-        return scheduleBean;
-    }
-
-    public void setScheduleBean(ScheduleBean scheduleBean) {
-        this.scheduleBean = scheduleBean;
-    }
+//    public ScheduleBean getScheduleBean() {
+//        return scheduleBean;
+//    }
+//
+//    public void setScheduleBean(ScheduleBean scheduleBean) {
+//        this.scheduleBean = scheduleBean;
+//    }
 
     public IUserService getUserService() {
         return userService;
@@ -161,14 +161,14 @@ public class IndexAction extends RequestSessionAction {
     public void setBillList(List<Bill> billList) {
         this.billList = billList;
     }
-
-    public List<Clazz> getClassList() {
-        return classList;
-    }
-
-    public void setClassList(List<Clazz> classList) {
-        this.classList = classList;
-    }
+//
+//    public List<Clazz> getClassList() {
+//        return classList;
+//    }
+//
+//    public void setClassList(List<Clazz> classList) {
+//        this.classList = classList;
+//    }
 
     public String getNextPageMessage() {
         return nextPageMessage;

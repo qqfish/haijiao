@@ -24,7 +24,7 @@
     <property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
     <property name="hibernate.connection.autocommit">false</property>
     <mapping class="com.haijiao.Domain.bean.BaseBean"/>
-    <mapping class="com.haijiao.Domain.bean.Clazz"/>
+    <!--<mapping class="com.haijiao.Domain.bean.Clazz"/>-->
     <mapping class="com.haijiao.Domain.bean.Comment"/>
     <mapping class="com.haijiao.Domain.bean.Student"/>
     <mapping class="com.haijiao.Domain.bean.Teacher"/>
@@ -35,7 +35,7 @@
     <mapping class="com.haijiao.Domain.bean.Label"/>
     <mapping class="com.haijiao.Domain.bean.Bill"/>
     <mapping class="com.haijiao.Domain.bean.Mail"/>
-    <mapping class="com.haijiao.Domain.bean.FreeTime"/>
+<!--    <mapping class="com.haijiao.Domain.bean.FreeTime"/>-->
     <mapping class="com.haijiao.Domain.bean.ResetInfo"/>
   </session-factory>
 </hibernate-configuration>

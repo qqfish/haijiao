@@ -67,11 +67,11 @@ public class SessionCheckInterceptor implements Interceptor {
                         session.put("name", theUser.getName());
                         session.put("userType", userType);
                         session.put("email",email);
-                        if(userType.equals("teacher")){
-                            session.put("todayClazz", teacherService.getTodayClasses(email));
-                        } else {
-                            session.put("todayClazz", studentService.getTodayClasses(email));
-                        }
+//                        if(userType.equals("teacher")){
+//                            session.put("todayClazz", teacherService.getTodayClasses(email));
+//                        } else {
+//                            session.put("todayClazz", studentService.getTodayClasses(email));
+//                        }
                         String resultCode = invocation.invoke();
                         return resultCode;
                     }

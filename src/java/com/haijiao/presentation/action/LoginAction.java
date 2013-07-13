@@ -55,11 +55,11 @@ public class LoginAction extends SessionAction {
             this.sessionPutIn("name", theUser.getName());
             this.sessionPutIn("userType", userType);
             this.sessionPutIn("email",email);
-            if(userType.equals("teacher")){
-                this.sessionPutIn("todayClazz", teacherService.getTodayClasses(email));
-            } else {
-                this.sessionPutIn("todayClazz", studentService.getTodayClasses(email));
-            }
+//            if(userType.equals("teacher")){
+//                this.sessionPutIn("todayClazz", teacherService.getTodayClasses(email));
+//            } else {
+//                this.sessionPutIn("todayClazz", studentService.getTodayClasses(email));
+//            }
             return SUCCESS;
         }
         

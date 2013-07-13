@@ -348,6 +348,87 @@
                     </div>
                 </div>
             </div>  
+            <div class="modal fade hide" id="choosemodal" style="height: auto;width:650px;margin-top:100px;">
+                <div class="modal-header" style="height: 50px">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h3>请选择课程时间</h3>
+                    <p id="schedule_error" style="color: red;"></p>
+                </div>
+                <div id="modalpanel" class="modal-body" style="height:400px">
+                    <div class="schedule_panel" id="schedule_panel" >
+                        <div style="font-size: 9px">
+                            &nbsp;&nbsp;
+                            <img src="images/colorCCF.png" height="15px" width="15px">&nbsp;老师忙碌时段&nbsp;
+                            <img src="images/colorCCC.png" height="15px" width="15px">&nbsp;老师空闲时段&nbsp;
+                            <img src="images/colorFC9.png" height="15px" width="15px">&nbsp;您已选中时段&nbsp;
+                        </div>
+                        <table class="schedule_table" style="margin-left:10px" width="100%" border="0" style="z-index: 1">
+                            <tbody>
+                                <tr>
+                                    <th ></th>
+                                    <th>Mon.</th>
+                                    <th>Tue.</th>
+                                    <th>Wed.</th>
+                                    <th>Thu.</th>
+                                    <th>Fri.</th>
+                                    <th>Sat.</th>
+                                    <th>Sun.</th>
+                                </tr>
+                                <tr class="class_1">
+                                    <th rowspan="2">8: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_2">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_3">
+                                    <th rowspan="2">10: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_4">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_5">
+                                    <th rowspan="2">12: 00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_6">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_7">
+                                    <th rowspan="2">14：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_8">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_9">
+                                    <th rowspan="2">16：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_10">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_11">
+                                    <th rowspan="2">18：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_12">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_13">
+                                    <th rowspan="2">20：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_14">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_15">
+                                    <th rowspan="2">22：00</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                                <tr class="class_16">
+                                    <td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a class="btn btn-info btn-small pull-right" id="next">确认</a> 
+                        <p></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!--==============================footer=================================-->

@@ -54,7 +54,7 @@ public class RegisterThenAction extends SessionAction {
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", theTeacher.getName());
             this.sessionPutIn("userType", "teacher");
-            this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
+//            this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
             nextPageMessage = "注册信息提交失败！";
@@ -67,7 +67,7 @@ public class RegisterThenAction extends SessionAction {
             Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", s.getName());
             this.sessionPutIn("userType", "student");
-            this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
+//            this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
             nextPageMessage = "注册信息提交失败！";

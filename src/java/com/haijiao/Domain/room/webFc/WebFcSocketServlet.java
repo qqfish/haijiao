@@ -40,7 +40,7 @@ public class WebFcSocketServlet extends WebSocketServlet {
         userService = (IUserService) SpringContext.getContext().getBean("userServiceImpl");
         Room room = null;
         if(!clazzIdStr.equals("null"))
-            room = roomService.checkAndApplyRoom(Integer.parseInt(clazzIdStr));
+            ;//room = roomService.checkAndApplyRoom(Integer.parseInt(clazzIdStr));
         else if(!teaEmail.equals("null")){
             room = roomService.enterPublicRoom(teaEmail);
             room.getTimer().setMaxTime(15 * 60);
