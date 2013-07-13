@@ -20,6 +20,7 @@
         <script type="text/javascript" src="js/studentIndex.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
+        <link rel="stylesheet" href="css/taobao_transaction.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -66,7 +67,79 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade" id='bill_area'>
-                            <table class="table table-hover table-striped">
+                       
+                                <div class="btn-group" style="float:right">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                      订单选择
+                                      <span class="caret"></span>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a tabindex="-1" href="#">所有订单</a></li>
+                                        <li><a tabindex="-1" href="#">已完成</a></li>
+                                        <li><a tabindex="-1" href="#">未完成</a></li>
+                                     </ul>
+                              </div>
+                       
+                            <table class="order-table" >
+                                <thead>
+                                    <tr>
+                                            <th class="s-point">订单号</th>
+                                            <th class="s-title">老师</th>
+                                            <th class="s-point">课程</th>				
+                                            <th class="s-price">单价(元)</th>
+                                            <th class="s-amount">数量</th>
+                                            <th class="s-agio">状态</th>
+                                            <th class="s-total">小计(元)</th>
+                                            <th class="s-del"></th>
+                                    </tr>
+                                </thead>
+				
+    	
+                                <tbody data-shopid="306145669" class="J_Order">												 			   
+                                    <tr data-istmall="true"	data-cartid="30915876037"
+                                    data-itemid="18456312071" data-skuid ="43372868338" 	class="J_ItemBody uncod xcard selected "
+                                          data-isTmallInternationalItem="false"
+                                    >		
+                                        <td class="s-chk"  >5</td>
+                                        <td class="s-title">
+                                                     肖双九
+                                            <div class="props">
+                                                 <span>电话:12580 <br>地址：软件学院</span>
+                                            </div>
+                                            <div class="extra-props clearfix">
+                                            </div>
+                                        </td>
+                                        <td class="s-point"><em tabindex="0">HCI</em></td>		
+                                        <td class="s-price  ">
+                                                <em class="s-old-price">91.80</em>
+                                                <em class="J_Price" tabindex="0">45.90</em>
+                                                <em class="s-change-price-text">省45.90</em>
+                                        </td>
+                                        <td class="s-amount ">
+                                            <input type="text" value="1" class="text text-amount" data-max="7049" data-stock="7049" data-now="1" autocomplete="off"/>
+                                        </td>
+                                        <td class="s-agio">      
+                                            <span><img class="J_Aigo" src="http://img03.taobaocdn.com/tps/i3/T1bJqwXdBXXXXXXXXX-47-12.png" data-popstr="省45.90元:今日特价" /></span>
+                                        </td>
+                                        <td class="s-total"><em tabindex="0">45.90</em></td>
+                                         <td class="s-del">
+                                             <a  title="移至收藏夹"  class="fav J_MakePoint" data-point-name="tbcart.1.11" href="#">确认</a>
+                                             <br>
+                                             <a href="javascript:;" data-point-name="tbcart.1.17" class="J_Del J_MakePoint">申诉</a>
+                                        </td>
+                                  </tr>
+                               </tbody>
+                               
+                            </table>
+                            
+                            <div>
+                                <div class="btn-toolbar" style="float:right">
+                                    <div class="btn-group"><button class="btn">上一页</button> </div>
+                                    <div class="btn-group"><button class="btn">下一页</button> </div>
+                                </div>                                                  
+                            </div>
+
+<!--                                
                                 <s:if test="billList.size()<=0">
                                     <tbody>
                                         暂无交易记录哦~！
@@ -75,12 +148,11 @@
                                 <s:else>
                                     <thead>
                                         <tr>
-                                            <th>姓名</th>
+                                           <th>姓名</th>
                                             <th>课程</th>
                                             <th>金额</th>
                                             <th>时间</th>
                                             <th>信息</th>
-                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>        
@@ -138,7 +210,10 @@
                                     </tbody>
                                 </s:else>
                             </table>
+-->
+
                         </div>
+
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
