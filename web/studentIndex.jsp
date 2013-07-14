@@ -190,19 +190,19 @@
                                                     <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
                                                     </div>
                                                     <script type="text/javascript">
-        $(".commentA").click(function() {
-            var id = $(this).attr("id");
-            $("#rate_" + id).bind('rated', function(event, value) {
-                $('#score_' + id).val(value);
-            });
-            $("#rate_" + id).bind('over', function(event, value) {
-                $(this).attr('title', value);
-            });
-            $("#cmtsmt").click(function(event) {
-                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                    event.preventDefault();
-            });
-        })
+                                                        $(".commentA").click(function() {
+                                                            var id = $(this).attr("id");
+                                                            $("#rate_" + id).bind('rated', function(event, value) {
+                                                                $('#score_' + id).val(value);
+                                                            });
+                                                            $("#rate_" + id).bind('over', function(event, value) {
+                                                                $(this).attr('title', value);
+                                                            });
+                                                            $("#cmtsmt").click(function(event) {
+                                                                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                    event.preventDefault();
+                                                            });
+                                                        })
                                                     </script>
                                             </s:form>
                                         </div>

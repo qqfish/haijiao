@@ -32,15 +32,15 @@ public class WebFcSocketServlet extends WebSocketServlet {
     @Override
     protected StreamInbound createWebSocketInbound(String string, HttpServletRequest hsr) {
         /*get the user and room throught hsr*/
-        String clazzIdStr = hsr.getParameter("clazzId");
+        String stuEmail = hsr.getParameter("stuEmail");
         String email = hsr.getParameter("email");
         String teaEmail = hsr.getParameter("teaEmail");
 
         roomService = (IRoomService) SpringContext.getContext().getBean("roomServiceImpl");
         userService = (IUserService) SpringContext.getContext().getBean("userServiceImpl");
         Room room = null;
-        if(!clazzIdStr.equals("null"))
-            ;//room = roomService.checkAndApplyRoom(Integer.parseInt(clazzIdStr));
+        if(!stuEmail.equals("null") && !teaEmail.equals("null"))
+            room = roomService.checkAndApplyRoom(teaEmail,stuEmail);
         else if(!teaEmail.equals("null")){
             room = roomService.enterPublicRoom(teaEmail);
             room.getTimer().setMaxTime(15 * 60);
