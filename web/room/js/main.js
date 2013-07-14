@@ -7,8 +7,8 @@ var toolkit;
 var table;
 var media;
 var timer;
-function init(clazzId, teaEmail, email, fileGroups){
-    connection.initialize(clazzId, teaEmail, email);
+function init(stuEmail, teaEmail, email, fileGroups){
+    connection.initialize(stuEmail, teaEmail, email);
     timer = new Timer("timerPanel");
     textChat = new TextChat("charShowArea","chatSend","chatInput");
     toolkit = new Toolkit();

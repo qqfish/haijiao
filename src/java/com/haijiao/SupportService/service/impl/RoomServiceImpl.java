@@ -10,6 +10,7 @@ import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.room.Room;
 //import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.IRoomService;
+import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.global.config;
 import java.io.File;
@@ -127,6 +128,8 @@ public class RoomServiceImpl implements IRoomService {
 //    IClassService classService;
     @Resource
     ITeacherService teacherService;
+    @Resource
+    IStudentService studentService;
 
     private void initialize() {
         roomTable = new Hashtable();
@@ -135,7 +138,7 @@ public class RoomServiceImpl implements IRoomService {
     }
 
     @Override
-    public Room checkAndApplyRoom(Teacher tea, Student stu) {
+    public Room checkAndApplyRoom(String teaEmail, String stuEmail) {
         if (roomTable == null) {
             initialize();
         }
@@ -147,6 +150,8 @@ public class RoomServiceImpl implements IRoomService {
 //            return null;
 //        }
 
+        Teacher tea = teacherService.getTeacherByEmail(teaEmail);
+        Student stu = studentService.getStudentByEmail(stuEmail);
         TeaAndStu aas = new TeaAndStu();
         aas.setStuEmail(stu.getEmail());
         aas.setTeaEmail(tea.getEmail());
@@ -228,4 +233,21 @@ public class RoomServiceImpl implements IRoomService {
             dir.delete();
         }
     }
+
+    public ITeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
+    }
+
+    public IStudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
+    }
+    
 }

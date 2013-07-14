@@ -34,21 +34,22 @@ import org.springframework.stereotype.Controller;
 public class EnterRoomAction extends RequestSessionAction{
     @Resource
     private IUserService userService;
-    int clazzId;
-    int isHolder;
+    private String teaEmail;
+    private String stuEmail;
+    private String email;
+    private int isHolder;
     private User user;
     
     @Override
     public String execute(){
-        clazzId = -1;
-        clazzId = Integer.parseInt((String)this.getOutRequest("clazzId"));
         isHolder = 0;
+        teaEmail = (String) this.getOutRequest("teaEmail");
+        stuEmail = (String) this.getOutRequest("stuEmail");
+        if(teaEmail == null || stuEmail == null)
+            return "false";
         String userType = (String) this.getOutSession("userType");
         if( userType!=null && userType.equals("teacher")){
             isHolder = 1;
-        }
-        if(clazzId < 0){
-            return "false";
         }
         String email = (String) this.getOutSession("email");
         if(email == null){
@@ -58,14 +59,47 @@ public class EnterRoomAction extends RequestSessionAction{
         return SUCCESS;
     }
 
-    public int getClazzId() {
-        return clazzId;
+    public IUserService getUserService() {
+        return userService;
     }
 
-    public void setClazzId(int clazzId) {
-        this.clazzId = clazzId;
+    public void setUserService(IUserService userService) {
+        this.userService = userService;
     }
 
+    public String getTeaEmail() {
+        return teaEmail;
+    }
+
+    public void setTeaEmail(String teaEmail) {
+        this.teaEmail = teaEmail;
+    }
+
+    public String getStuEmail() {
+        return stuEmail;
+    }
+
+    public void setStuEmail(String stuEmail) {
+        this.stuEmail = stuEmail;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     public int getIsHolder() {
         return isHolder;
     }

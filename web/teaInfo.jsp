@@ -53,15 +53,9 @@
                     </h4>
                     <s:if test="tea.status==1">
                         <a class='btn btn-success' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
-                        <s:if test="#session.userType=='student'">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                        </s:if>
                     </s:if>
                     <s:elseif test="tea.status == 2">
                         <a class="btn btn-success" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
-                        <s:if test="#session.userType=='student'">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                        </s:if>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>老师正在忙碌，可能无法与您交流，仍要进入房间吗？</h3>
@@ -74,14 +68,9 @@
                     </s:elseif>
                     <s:elseif test="#session.email != null">
                         <a class="btn btn-primary" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
-                        <s:if test="#session.userType=='student'">
-                            <a class="btn btn-primary" data-toggle="modal" data-target="#choosemodal">我要预约</a>
-                        </s:if>
                     </s:elseif>
                     <s:else>
-                        <a class="btn btn-success" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
-                        <!--<a class="btn btn-primary btn-mini" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>-->
-                        <!--<a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">我要预约</a>-->
+                        <a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>请先登陆</h3>
@@ -105,18 +94,6 @@
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
-                                <td>预约数</td>
-                                <td><s:property value="tea.reserveNum"/></td>
-                            </tr>
-                            <tr>
-                                <td>完成数</td>
-                                <td><s:property value="tea.classNum"/></td>
-                            </tr>
-                            <tr>
-                                <td>评分</td>
-                                <td><s:property value="tea.score"/></td>
-                            </tr>
-                            <tr>
                                 <td>浏览数</td>
                                 <td><s:property value="tea.obNum"/></td>
                             </tr>
@@ -132,37 +109,45 @@
                     </table>
                 </div>
                 <div class="span8 module" style="padding:12px;">
-                    <dl class="dl-horizontal" >
-                        <dt>课程</dt>
-                        <dd id="lesson_select">
-                            <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                            <span  data-toggle-name="is_private" data-toggle="buttons-radio">
-                                <s:iterator value="tea.lessons" status="st">
-                                    <s:if test="delete==false">
-                                        <button type="button" class="btn btn-mini"  class="label label-info" data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
-                                    </s:if>
-                                </s:iterator>
+                    <dl class="dl-horizontal">
+                        <dt>预约数</dt>
+                        <dd><s:property value="tea.reserveNum"/></dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <dt>完成数</dt>
+                        <dd><s:property value="tea.classNum"/>
+                            <span class="offset2">
+                                评分
                             </span>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt>支持</dt>
+                        <dt>价格</dt>
+                        <dd>123.00</dd>
+                    </dl>
+                    <hr/>
+                    <dl class="dl-horizontal">
+                        <dt>上课方式</dt>
                         <s:if test="tea.sprtOnline==false && tea.sprtTUnderline==false && tea.sprtSUnderline==false">
                             <dd>暂未选择授课方式</dd>
                         </s:if>
                         <s:else>
-                            <s:if test="tea.sprtOnline">
-                                <dd class="label label-info" >线上授课</dd>
-                            </s:if>
-                            <s:if test="tea.sprtSUnderline">
-                                <dd class="label label-info" >学生上门</dd>
-                            </s:if>
-                            <s:if test="tea.sprtTUnderline">
-                                <dd class="label label-info" >老师上门</dd>
-                            </s:if>
+                            <dd>
+                                <span  data-toggle-name="is_private" data-toggle="buttons-radio">
+                                    <s:if test="tea.sprtOnline">
+                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').hide();">线上授课</button>
+                                    </s:if>
+                                    <s:if test="tea.sprtSUnderline">
+                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();">学生上门</button>
+                                    </s:if>
+                                    <s:if test="tea.sprtTUnderline">
+                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();">老师上门</button>
+                                    </s:if>
+                                </span>
+                            </dd>
                         </s:else>  
                     </dl>  
-                    <dl class="dl-horizontal">
+                    <dl class="dl-horizontal" id="offlineArea" style="display:none;">
                         <dt>线下授课区域</dt>
                         <textarea id="tmp2" style="display:none"><s:property value="tea.underlineArea"/></textarea>
                         <dd id="teaArea">
@@ -171,14 +156,27 @@
                             </script>
                         </dd>
                     </dl>
-                    <dl class="dl-horizontal">
-                        <dt>选择上课时间</dt>
-                        <dd>
-                            <input type="text" placeholder="Type something…">
+                    <dl class="dl-horizontal" >
+                        <dt>课程</dt>
+                        <dd id="lesson_select">
+                            <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
+                            <span  data-toggle-name="is_private" data-toggle="buttons-radio">
+                                <s:iterator value="tea.lessons" status="st">
+                                    <s:if test="delete==false">
+                                        <button type="button" class="btn btn-mini"   data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
+                                    </s:if>
+                                </s:iterator>
+                            </span>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <button class="btn span2 btn-danger">立即预定</button>
+                        <dt>课时数</dt>
+                        <dd>
+                            <input type="number" class="span1" min="1" max="8" value="1">
+                        </dd>
+                    </dl>
+                    <dl class="dl-horizontal">
+                        <button class="btn offset2 span2 btn-danger">立即预定</button>
                     </dl>
                 </div>
                 <div class="span8 module" style="padding:12px;">
@@ -206,27 +204,6 @@
                                             </td>
                                             <td>
                                                 <s:property value="tea.birthday"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>授课方式</strong>
-                                            </td>
-                                            <td>
-                                                <s:if test="tea.sprtOnline==false && tea.sprtTUnderline==false && tea.sprtSUnderline==false">
-                                                    暂未选择授课方式
-                                                </s:if>
-                                                <s:else>
-                                                    <s:if test="tea.sprtOnline">
-                                                        线上授课
-                                                    </s:if>
-                                                    <s:if test="tea.sprtSUnderline">
-                                                        学生上门
-                                                    </s:if>
-                                                    <s:if test="tea.sprtTUnderline">
-                                                        老师上门
-                                                    </s:if>
-                                                </s:else>
                                             </td>
                                         </tr>
                                     </tbody>
