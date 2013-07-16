@@ -29,7 +29,7 @@ public interface ITeacherService {
     
     public boolean increseObNum(String email);
     
-    public boolean addLesson(String email, String lessonName);
+    public boolean addLesson(String email, String lessonName, int price);
     
     public boolean deleteLesson(String email, String lessonName);
     

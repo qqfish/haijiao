@@ -32,9 +32,10 @@ public class DealLessonAction extends SessionAction {
     private ITeacherService teacherService;
     private String nextPageMessage;
     private String lessonName;
+    private int price;
     
     public String addLesson(){
-        teacherService.addLesson((String)this.getSessionValue("email"), lessonName);
+        teacherService.addLesson((String)this.getSessionValue("email"), lessonName, price);
         nextPageMessage = "成功添加课程";
         return SUCCESS;
     }
@@ -68,4 +69,13 @@ public class DealLessonAction extends SessionAction {
     public void setLessonName(String lessonName) {
         this.lessonName = lessonName;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    
 }

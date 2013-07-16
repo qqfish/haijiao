@@ -35,7 +35,7 @@ jQuery(document).ready(function($) {
 
     $(".lessonName").click(function() {
         $("#deal_lesson").val($(this).html());
-        $("#add").click();
+        $("#addLessonModal").modal();
     });
 
     $("[id*='delete_click']").click(function() {

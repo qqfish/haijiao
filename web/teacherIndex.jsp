@@ -14,8 +14,6 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="TeacherIndex/js/addSchedule.js"></script>
-        <script type="text/javascript" src="TeacherIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
@@ -113,67 +111,80 @@
                                                 <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
                                                 <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
                                             </div>
-                                            <span class="label label-info" style="margin-right:5px"><s:property value="name" /><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove icon-white" ></i></a> </span> 
+                                            <span class="label label-info" style="margin:5px;"><s:property value="name" /><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove icon-white" ></i></a>
+                                                <br/><s:property value="price"/>.00元 
+                                            </span> 
                                         </s:form>
                                     </s:if>
                                 </s:iterator>
                                 <br/><br/>
                                 <hr/>
                                 <h5>课程列表</h5>
-                                <s:form action="dealLesson.action">
-                                    <span style="display:none;"><s:textfield cssClass="span2" id="deal_lesson" name="lessonName"/></span>
-                                    <ul class="nav nav-pills">
-                                        <li id="l1" class="active"><a href="#p_school" data-toggle="tab">小学</a></li>
-                                        <li id="l2"><a href="#j_school" data-toggle="tab" >初中</a></li>
-                                        <li id="l3"><a href="#s_school" data-toggle="tab" >高中</a></li>
-                                        <li id="l4"><a href="#eng" data-toggle="tab" >英语</a></li>
-                                    </ul>
-                                    <div class="tab-content">
-                                        <div class="tab-pane fade active in" id='p_school'>
-                                            <label class="label label-info lessonName">小学语文</label>
-                                            <label class="label label-info lessonName">小学数学</label>
-                                            <label class="label label-info lessonName">小学英语</label>
-                                            <label class="label label-info lessonName">小学奥数</label>
-                                        </div>
-                                        <div class="tab-pane fade" id='j_school'>
-                                            <label class="label label-info lessonName">初一初二语文</label>
-                                            <label class="label label-info lessonName">初一初二数学</label>
-                                            <label class="label label-info lessonName">初一初二英语</label>
-                                            <label class="label label-info lessonName">初三语文</label>
-                                            <label class="label label-info lessonName">初三数学</label>
-                                            <label class="label label-info lessonName">初三英语</label>
-                                            <label class="label label-info lessonName">初中物理</label>
-                                            <label class="label label-info lessonName">初中化学</label>
-                                            <label class="label label-info lessonName">初中历史</label>
-                                            <label class="label label-info lessonName">初中地理</label>
-                                        </div>
-                                        <div class="tab-pane fade" id='s_school'>
-                                            <label class="label label-info lessonName">高一高二语文</label>
-                                            <label class="label label-info lessonName">高一高二数学</label>
-                                            <label class="label label-info lessonName">高一高二英语</label>
-                                            <label class="label label-info lessonName">高三语文</label>
-                                            <label class="label label-info lessonName">高三数学</label>
-                                            <label class="label label-info lessonName">高三英语</label>
-                                            <label class="label label-info lessonName">高中物理</label>
-                                            <label class="label label-info lessonName">高中化学</label>
-                                            <label class="label label-info lessonName">高中政治</label>
-                                            <label class="label label-info lessonName">高中历史</label>
-                                            <label class="label label-info lessonName">高中生物</label>
-                                            <label class="label label-info lessonName">高中地理</label>
-                                            <label class="label label-info lessonName">高考报考咨询</label>
-                                        </div>
-                                        <div class="tab-pane fade" id='eng'>
-                                            <label class="label label-info lessonName">大学四级</label>
-                                            <label class="label label-info lessonName">大学六级</label>
-                                            <label class="label label-info lessonName">托福</label>
-                                            <label class="label label-info lessonName">GRE</label>
-                                            <label class="label label-info lessonName">雅思</label>
-                                            <label class="label label-info lessonName">口语</label>
-                                        </div>
+
+                                <ul class="nav nav-pills">
+                                    <li id="l1" class="active"><a href="#p_school" data-toggle="tab">小学</a></li>
+                                    <li id="l2"><a href="#j_school" data-toggle="tab" >初中</a></li>
+                                    <li id="l3"><a href="#s_school" data-toggle="tab" >高中</a></li>
+                                    <li id="l4"><a href="#eng" data-toggle="tab" >英语</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id='p_school'>
+                                        <label class="label label-info lessonName">小学语文</label>
+                                        <label class="label label-info lessonName">小学数学</label>
+                                        <label class="label label-info lessonName">小学英语</label>
+                                        <label class="label label-info lessonName">小学奥数</label>
                                     </div>
-                                    <div style="display: none;"><s:submit id="add" cssClass="btn" value="add" method="addLesson"/></div>
-                                    <div id="lesson_tip" style="font-size:9px; color: red; display: none;"></div>
-                                </s:form>
+                                    <div class="tab-pane fade" id='j_school'>
+                                        <label class="label label-info lessonName">初一初二语文</label>
+                                        <label class="label label-info lessonName">初一初二数学</label>
+                                        <label class="label label-info lessonName">初一初二英语</label>
+                                        <label class="label label-info lessonName">初三语文</label>
+                                        <label class="label label-info lessonName">初三数学</label>
+                                        <label class="label label-info lessonName">初三英语</label>
+                                        <label class="label label-info lessonName">初中物理</label>
+                                        <label class="label label-info lessonName">初中化学</label>
+                                        <label class="label label-info lessonName">初中历史</label>
+                                        <label class="label label-info lessonName">初中地理</label>
+                                    </div>
+                                    <div class="tab-pane fade" id='s_school'>
+                                        <label class="label label-info lessonName">高一高二语文</label>
+                                        <label class="label label-info lessonName">高一高二数学</label>
+                                        <label class="label label-info lessonName">高一高二英语</label>
+                                        <label class="label label-info lessonName">高三语文</label>
+                                        <label class="label label-info lessonName">高三数学</label>
+                                        <label class="label label-info lessonName">高三英语</label>
+                                        <label class="label label-info lessonName">高中物理</label>
+                                        <label class="label label-info lessonName">高中化学</label>
+                                        <label class="label label-info lessonName">高中政治</label>
+                                        <label class="label label-info lessonName">高中历史</label>
+                                        <label class="label label-info lessonName">高中生物</label>
+                                        <label class="label label-info lessonName">高中地理</label>
+                                        <label class="label label-info lessonName">高考报考咨询</label>
+                                    </div>
+                                    <div class="tab-pane fade" id='eng'>
+                                        <label class="label label-info lessonName">大学四级</label>
+                                        <label class="label label-info lessonName">大学六级</label>
+                                        <label class="label label-info lessonName">托福</label>
+                                        <label class="label label-info lessonName">GRE</label>
+                                        <label class="label label-info lessonName">雅思</label>
+                                        <label class="label label-info lessonName">口语</label>
+                                    </div>
+                                </div>
+                                <div class="modal hide fade" id="addLessonModal">
+                                    <div class="modal-body">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <s:form action="dealLesson.action">
+                                            <span style="display:none;"><s:textfield cssClass="span2" id="deal_lesson" name="lessonName"/></span>
+                                            <div class="input-append">
+                                                <s:textfield placeholder="课程价格" name="price" onchange="checkPositiveNumber($(this));"/>
+                                                <span class="add-on">.00</span>
+                                                <s:submit id="add" cssClass="btn" value="add" method="addLesson" cssStyle="margin-left:5px;"/>
+                                            </div>
+                                            <div id="lesson_tip" style="font-size:9px; color: red; display: none;"></div>
+                                        </s:form>
+                                    </div>
+
+                                </div>
                             </table>
                             <hr/>
                             <h5>在线试讲</h5>
