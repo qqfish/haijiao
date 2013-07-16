@@ -277,6 +277,14 @@ public class Teacher extends User{
         this.audition = audition;
     }
 
+    public Boolean getReserve() {
+        return reserve;
+    }
+
+    public void setReserve(Boolean reserve) {
+        this.reserve = reserve;
+    }
+
     public String getStudentin() {
         return studentin;
     }

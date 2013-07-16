@@ -91,11 +91,11 @@
                             </tr>
                             <tr>
                                 <td>登录次数</td>
-                                <td></td>
+                                <td><s:property value="tea.loginNum"/></td>
                             </tr>
                             <tr>
                                 <td>最近在线时间</td>
-                                <td></td>
+                                <td><s:property value="tea.lastActiveDate"/></td>
                             </tr>
                         </tbody>
                     </table>
@@ -111,11 +111,12 @@
                             <span class="offset2">
                                 评分
                             </span>
+                            <div class="rateit" data-rateit-value="<s:property value="tea.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
                         <dt class="muted" style="width:90px;">价格</dt>
-                        <dd class="lead text-error" style="margin-left:110px;" id="perPrice">123.00</dd>
+                        <dd class="lead text-error" style="margin-left:110px;" id="perPrice">无</dd>
                     </dl>
                     <hr/>
                     <dl class="dl-horizontal">
@@ -167,7 +168,7 @@
                     <dl class="dl-horizontal">
                         <dt class="muted" style="width:90px;">课时数</dt>
                         <dd style="margin-left:110px;">
-                            <input type="number" class="span1" min="1" max="8" value="1" onchange="checkInput($(this),1,8);reserve.setNum($(this).val());">
+                            <input type="number" class="span1" min="1" max="8" step="1" value="1" onchange="checkInput($(this),1,8);reserve.setNum($(this).val());">
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
@@ -184,34 +185,36 @@
                             <h4>预订确认</h4>
                         </div>
                         <div class="modal-body">
-                            <s:form>
+                        <s:form action="bookTeacher">
                                 <dl>
                                     <dt class="muted">上课方式</dt>
-                                    <dd id="reserveShowType" style="margin-left:100px">线上</dd>
+                                    <dd id="reserveShowType" style="margin-left:100px"></dd>
                                 </dl>
                                 <dl>
                                     <dt class="muted">课程</dt>
-                                    <dd id="reserveShowLesson" style="margin-left:100px">线上</dd>
+                                    <dd id="reserveShowLesson" style="margin-left:100px"></dd>
                                 </dl>
                                 <dl>
                                     <dt class="muted">课时数</dt>
-                                    <dd id="reserveShowNum" style="margin-left:100px">线上</dd>
+                                    <dd id="reserveShowNum" style="margin-left:100px"></dd>
                                 </dl>
                                 <dl>
                                     <dt class="muted">总计</dt>
-                                    <dd id="reserveTotal" class="lead text-error" style="margin-left:100px">100.00</dd>
+                                    <dd id="reserveTotal" class="lead text-error" style="margin-left:100px"></dd>
                                 </dl>
                                 <dl>
                                     <dt class="muted">备注</dt>
                                     <s:textarea name="message" placeholder="(可选时间、留言等)" cssStyle="width:500px;"/>
+                                    <s:textfield name="teacherEmail" cssStyle="display:none;" value="%{tea.email}"/>
                                     <s:textfield id="reserveType" name="type" cssStyle="display:none;"/>
-                                    <s:textfield id="reserveLesson" name="lesson" cssStyle="display:none;"/>
-                                    <s:textfield id="reserveNum" name="num" cssStyle="display:none;"/>
+                                    <s:textfield id="reserveLesson" name="lessonName" cssStyle="display:none;"/>
+                                    <s:textfield id="reserveNum" name="duration" cssStyle="display:none;"/>
                                 </dl>
-                            </s:form>
+                            
                         </div>
                         <div class="modal-footer">
-                            <a class="btn btn-success">提交</a>
+                            <s:submit cssClass="btn btn-success" value="提交"/>
+                            </s:form>
                             <button class="btn" data-dismiss="modal">取消</button>
                         </div>
                     </div>
