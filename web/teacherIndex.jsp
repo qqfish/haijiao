@@ -78,32 +78,32 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="span8 module" style="padding:12px;">
-                    <ul class="nav nav-pills">
-                        <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                        <li id="l6"><a href="#file_area" data-toggle="tab" >个人文件</a></li>
-                        <li id="l6"><a href="#publicfile_area" data-toggle="tab" >公共文件</a></li>
-                        <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
-                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane fade  active in" id='lesson_area'>
-                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
-                               <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
-                               <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
-                               <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
-                               <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
-                               "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
-                            <br/>
-                            <script>
-                                $("#showtip").popover();
-                            </script>
-                            <h4>老师您好，您目前开设课程的情况如下：</h4>
-                            <table>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span8 module" style="padding:12px;">
+                        <ul class="nav nav-pills">
+                            <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab" >个人文件</a></li>
+                            <li id="l6"><a href="#publicfile_area" data-toggle="tab" >公共文件</a></li>
+                            <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane fade  active in" id='lesson_area'>
+                                <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
+                                   <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
+                                   <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
+                                   <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
+                                   <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
+                                   "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
+                                <br/>
+                                <script>
+                                    $("#showtip").popover();
+                                </script>
+                                <h4>老师您好，您目前开设课程的情况如下：</h4>
+                                <table>
                                 <s:iterator value="teacher.lessons" id="ls">
                                     <s:if test="delete==false">
                                         <s:form action="dealLesson.action">
@@ -212,65 +212,97 @@
                                 <s:else>
                                     <thead>
                                         <tr>
-                                            <th>姓名</th>
+                                            <th>订单号</th>
+                                            <th>下单时间</th>
+                                            <th>学生</th>
                                             <th>课程</th>
-                                            <th>金额</th>
-                                            <th>时间</th>
-                                            <th>信息</th>
+                                            <th>单价(元)</th>
+                                            <th>小时数</th>
+                                            <th>总计(元)</th>
+                                            <th>状态</th>
+                                            <th>备注</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>        
                                         <s:iterator value="billList" id="billList">
                                             <tr>
+                                                <td><s:property value="id"/></td>
+                                                <td><s:property value="createTime"/></td>
                                                 <td><s:property value="student.name" /></td>
                                                 <td><s:property value="lesson.name" /></td>
-                                                <td><s:property value="getRealMoney('teacher')" /></td>
-                                                <td><s:property value="createdateToString()" /></td>
-                                                <td><s:property value="message" /></td>
-                                                <td>
-                                                    <s:if test="ttos==null">
-                                                        <a id="<s:property value="id" />" href="#comment_<s:property value="id" />" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
-                                                    </s:if>
-                                                    <s:else>
-                                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
-                                                    </s:else>
-                                                </td>
-                                            </tr>
-                                        <div id="comment_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h3 id="myModalLabel">评论</h3>
+                                                <td><s:property value="lesson.price" /></td>
+                                                <td><s:property value="duration" /></td>
+                                                <td><s:property value="money" /></td>
+                                                <s:if test="status == 0">
+                                                    <td>等待教师处理</td>
+                                                </s:if>
+                                                <s:elseif test="status == 1">
+                                                    <td>教师拒绝请求</td>
+                                                </s:elseif>
+                                                <s:elseif test="status == 2">
+                                                    <td>等待学生支付</td>
+                                                </s:elseif>
+                                                <s:elseif test="status == 3">
+                                                    <td>上课中</td>
+                                                </s:elseif>
+                                                <s:elseif test="status == 4">
+                                                    <td>教师确认完成</td>
+                                                </s:elseif>
+                                                <s:if test="status == 0">
+                                                    <td>
+                                                        <s:form action="dealWithReservation">
+                                                            <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
+                                                            <s:submit value="接受" method="accept" cssClass="btn btn-info btn-mini"/>
+                                                            <s:submit value="拒绝" method="deny" cssClass="btn btn-info btn-mini"/>
+                                                        </s:form>
+                                                    </td>
+                                                </s:if>
+                                                <s:elseif test="status >= 4">
+                                                    <td>
+                                                        <s:if test="ttos==null">
+                                                            <a id="<s:property value="id" />" href="#comment_<s:property value="id" />" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                        </s:if>
+                                                        <s:else>
+                                                            <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                                        </s:else>
+                                                    </td>
+                                                </tr>
+                                            <div id="comment_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h3 id="myModalLabel">评论</h3>
+                                                </div>
+                                                <s:form action="makeCommentReply.action">
+                                                    <div class="modal-body">
+                                                        <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                        内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                            <br/>
+                                                            评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                        <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                        <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
+                                                        </div>
+                                                        <script type="text/javascript">
+                                                            $(".commentA").click(function() {
+                                                                var id = $(this).attr("id");
+                                                                $("#rate_" + id).bind('rated', function(event, value) {
+                                                                    $('#score_' + id).val(value);
+                                                                });
+                                                                $("#rate_" + id).bind('over', function(event, value) {
+                                                                    $(this).attr('title', value);
+                                                                });
+                                                                $("#cmtsmt").click(function(event) {
+                                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                        event.preventDefault();
+                                                                });
+                                                            });
+                                                        </script>
+                                                </s:form>
                                             </div>
-                                            <s:form action="makeCommentReply.action">
-                                                <div class="modal-body">
-                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                                    内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                    <br/>
-                                                    评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                                    <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                    <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                                </div>
-                                                <script type="text/javascript">
-                                                    $(".commentA").click(function() {
-                                                        var id = $(this).attr("id");
-                                                        $("#rate_" + id).bind('rated', function(event, value) {
-                                                            $('#score_' + id).val(value);
-                                                        });
-                                                        $("#rate_" + id).bind('over', function(event, value) {
-                                                            $(this).attr('title', value);
-                                                        });
-                                                        $("#cmtsmt").click(function(event) {
-                                                            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                                event.preventDefault();
-                                                        });
-                                                    });
-                                                </script>
-                                            </s:form>
-                                        </div>
+                                        </s:elseif>
                                     </s:iterator>
                                     </tbody>
                                 </s:else>
@@ -313,11 +345,11 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                    </div>
+                                                                        </div>
                                                                 </s:form>
                                                             </div>
                                                         </s:if>
@@ -351,7 +383,7 @@
                                         <s:form action="file" enctype="multipart/form-data" method="post">
                                             <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
                                             <script>
-                                                $('#classify').append("<option value='新建分组'>新建分组</option>");
+                                                            $('#classify').append("<option value='新建分组'>新建分组</option>");
                                             </script>
                                             <s:file name="upload" title="选择文件" id="fileid"/>
                                         </div>

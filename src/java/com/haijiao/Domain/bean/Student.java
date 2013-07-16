@@ -24,7 +24,7 @@ import org.hibernate.annotations.FetchMode;
 public class Student extends User{
     private String grade;   //学生当前的年级
     private String school;  //学生就读学校
-    private String tel;        //学生或家长的联系方式
+    private String tel;     //学生或家长的联系方式
     private String telType; //="student" or "parent"
     
 //    @OneToMany(mappedBy="student")
