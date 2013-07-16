@@ -19,20 +19,16 @@ public class RoomTimer {
 
     private Timer timer;
     private TimeCounter counter;
-    private int price;
     private Room room;
-    private IBillService billService;
 
     public RoomTimer(){
     }
     
-    public RoomTimer(Room room, int price) {
+    public RoomTimer(Room room) {
         timer = new Timer();
         counter = new TimeCounter(room);
         timer.schedule(counter, 1000, 1000);
         this.room = room;
-        this.price = price;
-        billService = (IBillService) SpringContext.getContext().getBean("billServiceImpl");
     }
 
     public boolean start() {
@@ -65,8 +61,6 @@ public class RoomTimer {
         }
         System.out.println(att.get(1).getEmail());
         System.out.println(room.getHolder().getEmail());
-        System.out.println(billService);
-        System.out.println(billService.produceBill(att.get(1).getEmail(), room.getHolder().getEmail(), price * counter.getSeconds() / 60 / 60 * price, "课程资费"));
         //timer.cancel();
     }
 
@@ -74,13 +68,6 @@ public class RoomTimer {
         return counter.getSeconds();
     }
 
-    public IBillService getBillService() {
-        return billService;
-    }
-
-    public void setBillService(IBillService billService) {
-        this.billService = billService;
-    }
     public void setMaxTime(int max){
         counter.setMax(max);
     }

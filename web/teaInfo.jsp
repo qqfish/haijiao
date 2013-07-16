@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
+        <script type="text/javascript" src="js/reserve.js"></script>
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
         <!--[if lt IE 8]>
@@ -36,11 +37,11 @@
         <![endif]-->
 
     </head>
-    <body onload="schedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null' />, <s:property value='studentScheduleBean.toJson()' default='null' />);"
-          <!--==============================header=================================-->
-          <%@ include file="WEB-INF/jspf/header.jspf"%>
-          <!--==============================content=================================-->
-          <div class="container wrapper">
+    <body>
+        <!--==============================header=================================-->
+        <%@ include file="WEB-INF/jspf/header.jspf"%>
+        <!--==============================content=================================-->
+        <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
@@ -70,16 +71,7 @@
                         <a class="btn btn-primary" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                     </s:elseif>
                     <s:else>
-                        <a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#publicRoom">发送私信</a>
-                        <div class="modal fade hide" id="publicRoom">
-                            <div class="modal-body">
-                                <h3>请先登陆</h3>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-success" href="index.action">登陆</a>
-                                <button class="btn" data-dismiss="modal">取消</button>
-                            </div>
-                        </div>
+                        <a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#loginInfo">发送私信</a>
                     </s:else>
                     <hr/>
                     <div style="margin-left: 10px">
@@ -110,74 +102,119 @@
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <dl class="dl-horizontal">
-                        <dt>预约数</dt>
-                        <dd><s:property value="tea.reserveNum"/></dd>
+                        <dt class="muted" style="width:90px;">预约数</dt>
+                        <dd style="margin-left:110px;"><s:property value="tea.reserveNum"/></dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt>完成数</dt>
-                        <dd><s:property value="tea.classNum"/>
+                        <dt class="muted" style="width:90px;">完成数</dt>
+                        <dd style="margin-left:110px;"><s:property value="tea.classNum"/>
                             <span class="offset2">
                                 评分
                             </span>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt>价格</dt>
-                        <dd>123.00</dd>
+                        <dt class="muted" style="width:90px;">价格</dt>
+                        <dd class="lead text-error" style="margin-left:110px;" id="perPrice">123.00</dd>
                     </dl>
                     <hr/>
                     <dl class="dl-horizontal">
-                        <dt>上课方式</dt>
+                        <dt class="muted" style="width:90px;">上课方式</dt>
                         <s:if test="tea.sprtOnline==false && tea.sprtTUnderline==false && tea.sprtSUnderline==false">
-                            <dd>暂未选择授课方式</dd>
+                            <dd style="margin-left:110px;">暂未选择授课方式</dd>
                         </s:if>
                         <s:else>
-                            <dd>
+                            <dd style="margin-left:110px;">
                                 <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <s:if test="tea.sprtOnline">
-                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').hide();">线上授课</button>
+                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').hide();reserve.setType('线上授课');">线上授课</button>
                                     </s:if>
                                     <s:if test="tea.sprtSUnderline">
-                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();">学生上门</button>
+                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();reserve.setType('学生上门');">学生上门</button>
                                     </s:if>
                                     <s:if test="tea.sprtTUnderline">
-                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();">老师上门</button>
+                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();reserve.setType('老师上门');">老师上门</button>
                                     </s:if>
                                 </span>
                             </dd>
                         </s:else>  
                     </dl>  
                     <dl class="dl-horizontal" id="offlineArea" style="display:none;">
-                        <dt>线下授课区域</dt>
+                        <dt class="muted" style="width:90px;">线下授课区域</dt>
                         <textarea id="tmp2" style="display:none"><s:property value="tea.underlineArea"/></textarea>
-                        <dd id="teaArea">
+                        <dd id="teaArea" style="margin-left:110px;">
                             <script>
                                 $("#teaArea").html($("#tmp2").text());
                             </script>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal" >
-                        <dt>课程</dt>
-                        <dd id="lesson_select">
+                        <dt class="muted" style="width:90px;">课程</dt>
+                        <dd id="lesson_select" style="margin-left:110px;">
                             <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
                             <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                 <s:iterator value="tea.lessons" status="st">
                                     <s:if test="delete==false">
-                                        <button type="button" class="btn btn-mini"   data-toggle="tooltip" data-placement="bottom" onclick="$('#schedule_lesson').val($(this).text())"><s:property value="name"/></button>
+                                        <button type="button" class="btn btn-mini"   data-toggle="tooltip" data-placement="bottom" onclick="reserve.setLesson('<s:property value="name"/>');"><s:property value="name"/></button>
+                                        <script>
+                                            reserve.addPrice('<s:property value="name"/>', <s:property value="price"/>);
+                                        </script>
                                     </s:if>
                                 </s:iterator>
                             </span>
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt>课时数</dt>
-                        <dd>
-                            <input type="number" class="span1" min="1" max="8" value="1">
+                        <dt class="muted" style="width:90px;">课时数</dt>
+                        <dd style="margin-left:110px;">
+                            <input type="number" class="span1" min="1" max="8" value="1" onchange="checkInput($(this),1,8);reserve.setNum($(this).val());">
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <button class="btn offset2 span2 btn-danger">立即预定</button>
+                        <s:if test="#session.userType=='student'">
+                            <button id="reserveButton" class="btn offset1 span2 btn-danger disabled" disabled="true" data-toggle="modal" data-target="#reserveModal">立即预定</button>
+                        </s:if>
+                        <s:else>
+                            <button class="btn offset1 span2 btn-danger" data-toggle="modal" data-target="#loginInfo">立即预定</button>
+                        </s:else>
                     </dl>
+
+                    <div class="modal fade hide" id="reserveModal">
+                        <div class="modal-header">
+                            <h4>预订确认</h4>
+                        </div>
+                        <div class="modal-body">
+                            <s:form>
+                                <dl>
+                                    <dt class="muted">上课方式</dt>
+                                    <dd id="reserveShowType" style="margin-left:100px">线上</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="muted">课程</dt>
+                                    <dd id="reserveShowLesson" style="margin-left:100px">线上</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="muted">课时数</dt>
+                                    <dd id="reserveShowNum" style="margin-left:100px">线上</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="muted">总计</dt>
+                                    <dd id="reserveTotal" class="lead text-error" style="margin-left:100px">100.00</dd>
+                                </dl>
+                                <dl>
+                                    <dt class="muted">备注</dt>
+                                    <s:textarea name="message" placeholder="(可选时间、留言等)" cssStyle="width:500px;"/>
+                                    <s:textfield id="reserveType" name="type" cssStyle="display:none;"/>
+                                    <s:textfield id="reserveLesson" name="lesson" cssStyle="display:none;"/>
+                                    <s:textfield id="reserveNum" name="num" cssStyle="display:none;"/>
+                                </dl>
+                            </s:form>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-success">提交</a>
+                            <button class="btn" data-dismiss="modal">取消</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <ul class="nav nav-pills">
@@ -321,6 +358,15 @@
                                     </tbody>
                                 </s:else>
                             </table>
+                        </div>
+                        <div class="modal fade hide" id="loginInfo">
+                            <div class="modal-body">
+                                <h3>请先登陆</h3>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-success" href="index.action">登陆</a>
+                                <button class="btn" data-dismiss="modal">取消</button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -47,12 +47,12 @@ public class Room {
     private boolean exitBit;
     private int pin;
 
-    public Room(User holder, int price, int max) {
+    public Room(User holder, int max) {
         try {
             gson = new Gson();
             id = UUID.randomUUID().toString();
             this.holder = holder;
-            timer = new RoomTimer(this, price);
+            timer = new RoomTimer(this);
             attendance = new ArrayList();
             attendance.add(holder);
             roomSocket = new ArrayList();

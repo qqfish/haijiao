@@ -4,6 +4,7 @@
  */
 package com.haijiao.Domain.bean;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,6 +16,8 @@ import javax.persistence.Table;
 @Table
 public class Lesson extends BaseBean{
     private String name;
+    @Column(columnDefinition="int default 0")
+    private int price;
 
     public Lesson() {
     }
@@ -25,6 +28,14 @@ public class Lesson extends BaseBean{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
     
 }
