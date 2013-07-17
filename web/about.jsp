@@ -42,15 +42,25 @@
               <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
                 <![endif]-->
 
+        <script type="text/javascript">
+                    function control_size() {
+                        while(document.getElementById("_parent_div").offsetHeight*0.95 >document.getElementById("_need_div").offsetHeight) {
+                             obj = document.createElement("br");
+                         
+                            document.getElementById("_addp").appendChild(obj);
+                        }
+                    }
+                </script>
     </head>
-    <body>
+    <body onload="control_size()">
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
-        <div class="container wrapper">
-            <div class="container-fluid">
-                <div class="span11 module" style="padding:12px;">
+        <div class="container wrapper" id="_parent_div">
+            <div class="container-fluid" >
+                
+                <div class="span11 module" style="padding:12px;"  id="_need_div">
                     <div class="span10">
                         <h1>关于我们</h1>
                         <hr/>
@@ -63,9 +73,11 @@
                         </p>
                         <div class="row"><img class="span6 offset2" src="images/bkg.jpg"></div>
                         <br/>
-                        <div class="row">
+                        <div class="row" id="_addp">
                             <p class="text-info text-center"><strong>自从互联网诞生之日起，它就注定要改变人们的生活方式；</strong></p>
                             <p class="text-info text-center"><strong>自从海角教育诞生之日起，我们就立志要让它改变人们在互联网上的学习方式！</strong></p>
+                           
+                            
                         </div>
 
                     </div>
