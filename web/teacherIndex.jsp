@@ -393,6 +393,7 @@
                                                             $('#classify').append("<option value='新建分组'>新建分组</option>");
                                             </script>
                                             <s:file name="upload" title="选择文件" id="fileid"/>
+										</s:form>
                                         </div>
                                     </div>
                                     <div id="publicfile" class="tab-pane">
