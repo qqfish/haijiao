@@ -6,10 +6,12 @@ package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Bill;
 import com.haijiao.Domain.bean.Comment;
+import com.haijiao.Domain.bean.Lesson;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.dao.IBillDAO;
 import com.haijiao.SupportService.dao.ICommentDAO;
+import com.haijiao.SupportService.dao.ILessonDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.service.IBillService;
@@ -30,6 +32,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class BillServiceImpl implements IBillService{
     @Resource
     IBillDAO billDAO;
+    @Resource
+    ILessonDAO lessonDAO;
     @Resource
     IStudentDAO studentDAO;
     @Resource
@@ -66,18 +70,22 @@ public class BillServiceImpl implements IBillService{
     }
 
     @Override
-    public boolean produceBill(String studentEmail, String teacherEmail, int money, String message) {
+    public boolean produceBill(String studentEmail, String teacherEmail, int hour, String lessonName, String message) {
         Student s = studentDAO.getStudentByEmail(studentEmail);
         Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
+        Lesson l = lessonDAO.getLessonByName(teacherEmail, lessonName);
         Bill bill = new Bill();
         java.util.Date datetime = new java.util.Date();
         Date time = new Date(datetime.getTime());
         bill.setCreateTime(time);
         bill.setDelete(false);
         bill.setMessage(message);
-        bill.setMoney(money);
+        bill.setDuration(hour);
+        bill.setLesson(l);
+        bill.setMoney(l.getPrice() * hour);
         bill.setStudent(s);
         bill.setTeacher(t);
+        bill.setStatus(Bill.Status.pending);
         boolean bbill = billDAO.makePersistent(bill);
         return bbill;
     }
@@ -142,6 +150,14 @@ public class BillServiceImpl implements IBillService{
                 return false;
             }
         }
+    }
+
+    @Override
+    public boolean changeBillStatus(int billId, int status) {
+        Bill b = billDAO.findById(billId);
+        b.setStatus(status);
+        billDAO.update(b);
+        return true;
     }
     
 }

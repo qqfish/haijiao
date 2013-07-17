@@ -1,10 +1,18 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package old;
+
 /**
  *
- * @author Jerry Zou
+ * @author hp
  */
-
-package com.haijiao.Domain.bean;
-
+import com.haijiao.Domain.bean.BaseBean;
+import com.haijiao.Domain.bean.Comment;
+import com.haijiao.Domain.bean.Lesson;
+import com.haijiao.Domain.bean.Student;
+import com.haijiao.Domain.bean.Teacher;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,21 +20,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity    
-@Table(name="bill")
+//@Entity    
+//@Table(name="bill")
 public class Bill extends BaseBean{
-    
-    public class Status {
-        static public final int pending = 0;
-        static public final int notAccept = 1;
-        static public final int accept = 2;
-        static public final int paid = 3;
-        static public final int teacherFinish = 4;
-        static public final int studentFinish = 5;
-        static public final int teacherCommented = 6;
-        static public final int studentCommented = 7;
-    }
-    
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "tid")
     private Teacher teacher;
@@ -35,9 +31,7 @@ public class Bill extends BaseBean{
     @JoinColumn(name = "sid")
     private Student student;
     
-    private int duration;   //课程时长
-    private int status;     //账单状态
-    private int money;      //总价
+    private int money;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "lid")
     private Lesson lesson;
@@ -51,23 +45,15 @@ public class Bill extends BaseBean{
     @JoinColumn(name = "tcommentid", unique = true)
     private Comment ttos; //老师对学生的评论
     
-//    public int getRealMoney(String userType){
-//        if (userType.equals("teacher")) {
-//            return money;
-//        } else {
-//            return -money;
-//        }
-//    }
+    public int getRealMoney(String userType){
+        if (userType.equals("teacher")) {
+            return money;
+        } else {
+            return -money;
+        }
+    }
 
     public Bill() {
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public int getMoney() {
@@ -76,14 +62,6 @@ public class Bill extends BaseBean{
 
     public void setMoney(int money) {
         this.money = money;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
     }
 
     public String getMessage() {

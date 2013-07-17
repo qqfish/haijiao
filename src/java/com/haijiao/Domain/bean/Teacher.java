@@ -36,8 +36,11 @@ public class Teacher extends User{
     private String experience;        //个人经历
     private String address;             //家庭地址
     private String cert;            //证书
+    @Column(columnDefinition="bool default false")
     private Boolean sprtOnline;      //支持线上
+    @Column(columnDefinition="bool default false")
     private Boolean sprtSUnderline;  //支持线下
+    @Column(columnDefinition="bool default false")
     private Boolean sprtTUnderline;     //老师上门
     private String studentin;  //公共房间学生email
     
@@ -60,6 +63,8 @@ public class Teacher extends User{
     
     @Column(columnDefinition="bool default false")
     private Boolean audition;       //该老师是否接受试听
+    @Column(columnDefinition="bool default false")
+    private Boolean reserve;        //该老师是否接受预定
     
 //    @OneToMany(mappedBy = "teacher")
 //    private List<FreeTime> schedule;//记录老师的时间表
@@ -67,8 +72,8 @@ public class Teacher extends User{
     @OneToMany(mappedBy = "teacher")
     protected List<Bill> billList;  //账单列表
     
-    @Column(columnDefinition="int default 0")
-    private int wagePerhour;        //老师每小时的辅导费
+//    @Column(columnDefinition="int default 0")
+//    private int wagePerhour;        //老师每小时的辅导费
     
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
@@ -272,6 +277,14 @@ public class Teacher extends User{
         this.audition = audition;
     }
 
+    public Boolean getReserve() {
+        return reserve;
+    }
+
+    public void setReserve(Boolean reserve) {
+        this.reserve = reserve;
+    }
+
     public String getStudentin() {
         return studentin;
     }
@@ -288,13 +301,13 @@ public class Teacher extends User{
 //        this.schedule = schedule;
 //    }
 
-    public int getWagePerhour() {
-        return wagePerhour;
-    }
-
-    public void setWagePerhour(Integer wagePerhour) {
-        this.wagePerhour = wagePerhour;
-    }
+//    public int getWagePerhour() {
+//        return wagePerhour;
+//    }
+//
+//    public void setWagePerhour(Integer wagePerhour) {
+//        this.wagePerhour = wagePerhour;
+//    }
 
     public List<Bill> getBillList() {
         return billList;

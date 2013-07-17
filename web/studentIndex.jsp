@@ -14,7 +14,6 @@
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
-        <script type="text/javascript" src="StudentIndex/js/viewSchedule.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/studentIndex.js"></script>
@@ -99,7 +98,7 @@
                                     <tr data-istmall="true"	data-cartid="30915876037"
                                     data-itemid="18456312071" data-skuid ="43372868338" 	class="J_ItemBody uncod xcard selected "
                                           data-isTmallInternationalItem="false"
-                                    >		
+                                    >
                                         <td class="s-chk"  >5</td>
                                         <td class="s-title">
                                                      肖双九

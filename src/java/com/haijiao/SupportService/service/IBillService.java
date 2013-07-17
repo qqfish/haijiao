@@ -17,9 +17,11 @@ public interface IBillService {
     //获取本用户的账单
     public List<Bill> getBill(String email, String userType);
     //生成账单（其实是两张账单，学生有一张，老师有一张）并对账户余额进行相应操作
-    public boolean produceBill(String studentEmail, String teacherEmail, int money, String message);
+    public boolean produceBill(String studentEmail, String teacherEmail, int hour, String lessonName, String message);
     //评论账单（即评论本次课程）
     public boolean commentBill(int billId, String content, int score, String userType);
     //回复评论
     public boolean replyComment(int billId, String reply, String userType);
+    //修改订单状态
+    public boolean changeBillStatus(int billId, int status);
 }
