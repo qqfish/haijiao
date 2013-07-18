@@ -18,11 +18,10 @@
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         
-        <link rel="StyleSheet" href="css/dtree.css" type="text/css" />
-	<script type="text/javascript" src="js/dtree.js"></script>
-        
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
+        <link rel="stylesheet" href="css/kuaipanDir.css" type="text/css">
+
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
                 <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -393,7 +392,7 @@
                                                             $('#classify').append("<option value='新建分组'>新建分组</option>");
                                             </script>
                                             <s:file name="upload" title="选择文件" id="fileid"/>
-										</s:form>
+                                        </s:form>
                                         </div>
                                     </div>
                                     <div id="publicfile" class="tab-pane">
@@ -418,29 +417,67 @@
                                                 <a class="btn" data-dismiss="modal">取消</a>
                                             </div>
                                         </div>
-                                        <div class="dtree">
-                                            <p><a href="javascript: d.openAll();">open all</a> | <a href="javascript: d.closeAll();">close all</a></p>
+                                        
+                                        
+                                        <div class="dn" style="display: block;">                                          
 
-                                            <script type="text/javascript">
-                                                    d = new dTree('d');
+                                            <!-- 文件显示区域 -->
+                                            <div class="dirContent">
+                                                    <!-- 列表视图 -->
+                                                    <div class="list-view" id="file-list" style="height: 431px;">
+                                                            <!--[if lt ie 8]><div style="+zoom:1;"><![endif]-->
+                                                            <table class="file_list_table">
+                                                                    <thead style="">
+                                                                            <tr>
+                                                                                    <td class="w46">
+                                                                                            <span class="dib-inline checkbox"></span>
+                                                                                    </td>
+                                                                                    <td class="name">文件名</td>
+                                                                                    <td style="width: 20%;"></td>
+                                                                                    <td style="width: 10%;">大小</td>
+                                                                                    <td class="w150">修改日期</td>
+                                                                            </tr>
+                                                                    </thead>
 
-                                                    d.add(0,-1,'My example tree');
-                                                    d.add(1,0,'Node 1','example01.html');
-                                                    d.add(2,0,'Node 2','example01.html');
-                                                    d.add(3,1,'Node 1.1','example01.html');
-                                                    d.add(4,0,'Node 3','example01.html');
-                                                    d.add(5,3,'Node 1.1.1','example01.html');
-                                                    d.add(6,5,'Node 1.1.1.1','example01.html');
-                                                    d.add(7,0,'Node 4','example01.html');
-                                                    d.add(8,1,'Node 1.2','example01.html');
-                                                    d.add(9,0,'My Pictures','example01.html','Pictures I\'ve taken over the years','','','img/imgfolder.gif');
-                                                    d.add(10,9,'The trip to Iceland','example01.html','Pictures of Gullfoss and Geysir');
-                                                    d.add(11,9,'Mom\'s birthday','example01.html');
-                                                    d.add(12,0,'Recycle Bin','example01.html','','','img/trash.gif');
+                                                                    <!-- 显示数据 -->
+                                                                    <tbody class="list-data-container">
+                                                                        <tr id="80305236916305944_0" data-file-id="80305236916305944" class="list-view-hover">   
+                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>   
+                                                                            <td class="file-name pdf-icon">       
+                                                                                <a href="javascript:;" class="name" title="moive">moive</a>       
+                                                                                <input type="text" value="moive" class="rename-file-input">   
+                                                                            </td>   
+                                                                            <td></td>   
+                                                                            <td></td>    <td>2013-06-16 11:59:22</td></tr>
+                                                                        <tr id="80305236916305928_0" data-file-id="80305236916305928" class="">   
+                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>   
+                                                                            <td class="file-name ppt-icon">        <a href="javascript:;" class="name" title="homework">homework</a>      
+                                                                                <input type="text" value="homework" class="rename-file-input">   
+                                                                            </td>   
+                                                                            <td> </td>   
+                                                                            <td></td>    <td>2013-05-23 09:08:34</td></tr>
+                                                                        <tr id="80305236916305925_0" data-file-id="80305236916305925" class="">   
+                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>    
+                                                                            <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="document">document</a>    
+                                                                                <input type="text" value="document" class="rename-file-input">  
+                                                                            </td>    
+                                                                            <td></td>   
+                                                                            <td></td>    <td>2013-05-16 13:27:03</td></tr>
+                                                                        <tr id="80305236916305922_0" data-file-id="80305236916305922" class="">   
+                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>   
+                                                                            <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="code">code</a>   
+                                                                                <input type="text" value="code" class="rename-file-input">  
+                                                                            </td>   
+                                                                            <td></td> 
+                                                                            <td></td>    <td>2013-05-16 09:25:12</td></tr>
+                                                                    </tbody>
+                                                            </table>
+                                                            <!--[if lt ie 8]></div><![endif]-->
+                                                            
+                                                    </div>
+                                            </div>
+                                       </div>
 
-                                                    document.write(d);
-                                            </script>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
