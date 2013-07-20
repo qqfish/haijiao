@@ -25,7 +25,7 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action(value="getClasses")
 @Results({@Result(name="success",type="json")})
-public class getClassesAction extends SessionAction{
+public class GetClassesAction extends SessionAction{
     @Resource
     private IBillService billService;
     List<String> name;
