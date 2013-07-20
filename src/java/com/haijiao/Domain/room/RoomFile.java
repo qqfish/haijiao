@@ -141,7 +141,7 @@ public class RoomFile extends DataFile {
     public void gotoBookmark(List<Integer> indexs) {
     }
 
-    public RoomPage getPage(int i) throws IOException {
+    public RoomPage getPage(int i){
         checkAndSetPages();
         if (i >= pages.size()) {
             i = pages.size() - 1;
@@ -149,19 +149,24 @@ public class RoomFile extends DataFile {
         lastPage = i;
         RoomPage result = pages.get(i);
         if (result.getOriginUrl() == null) {
-            checkAndOpenFile();
-            PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
-            BufferedImage image = page.convertToImage();
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            ImageIO.write(image, config.pageImageType, os);
-            byte[] bytes = os.toByteArray();
-            String url = config.pageDataUriPrefix + Base64.encode(bytes);
-            result.setOriginUrl(url);
+            try {
+                checkAndOpenFile();
+                PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
+                BufferedImage image = page.convertToImage();
+                ByteArrayOutputStream os = new ByteArrayOutputStream();
+                ImageIO.write(image, config.pageImageType, os);
+                byte[] bytes = os.toByteArray();
+                String url = config.pageDataUriPrefix + Base64.encode(bytes);
+                result.setOriginUrl(url);
+            } catch (IOException ex) {
+                Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+                result.setOriginUrl(RoomPage.ERROR);
+            }
         }
         return result;
     }
 
-    public RoomPage getLastPage() throws IOException {
+    public RoomPage getLastPage() {
         return getPage(lastPage);
     }
 

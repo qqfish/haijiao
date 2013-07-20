@@ -88,7 +88,9 @@ public class FcMessageInbound extends MessageInbound {
 
     @Override
     protected void onClose(int status) {
-        if(room == null) return;
+        if (room == null) {
+            return;
+        }
         ResponseVideoChat bye = new ResponseVideoChat();
         bye.setFrom(user.getEmail());
         bye.setFromName(user.getName());
@@ -121,6 +123,7 @@ public class FcMessageInbound extends MessageInbound {
             return;
         }
         RequestData textData = gson.fromJson(str, RequestData.class);
+        boolean success;
         //System.out.println(textData.getType());
         //System.out.println(idRoom + " " + username);
         switch (textData.getType()) {
@@ -169,11 +172,17 @@ public class FcMessageInbound extends MessageInbound {
                 room.addPin();
                 RequestChangeFile file = gson.fromJson(str, RequestChangeFile.class);
                 if (file.getTmpUrl() != null) {
-                    room.changePage(file.getUuid(), -1, file.getTmpUrl());
+                    success = room.changePage(file.getUuid(), -1, file.getTmpUrl());
                 } else {
-                    room.choosePage(file.getUuid(), -1);
+                    success = room.choosePage(file.getUuid(), -1);
                 }
-                sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
+                if (success) {
+                    room.broadcast(gson.toJson(room.getResponseChangeBookmark()));
+                } else {
+                    ErrorData error = new ErrorData();
+                    error.setErrorType(ErrorType.ErrorPdf);
+                    sendtoUser(gson.toJson(error));
+                }
                 break;
             case Request.AddFileFromUser:
                 RequestAddFileFromUser addFile = gson.fromJson(str, RequestAddFileFromUser.class);

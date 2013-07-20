@@ -48,22 +48,18 @@ public class Room {
     private int pin;
 
     public Room(User holder, int max) {
-        try {
-            gson = new Gson();
-            id = UUID.randomUUID().toString();
-            this.holder = holder;
-            timer = new RoomTimer(this);
-            attendance = new ArrayList();
-            attendance.add(holder);
-            roomSocket = new ArrayList();
-            roomFile = new ArrayList();
-            roomFile.add(new RoomFile(this));
-            currentPage = roomFile.get(0).getPage(0);
-            this.max = max;
-            this.pin = 0;
-        } catch (IOException ex) {
-            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        gson = new Gson();
+        id = UUID.randomUUID().toString();
+        this.holder = holder;
+        timer = new RoomTimer(this);
+        attendance = new ArrayList();
+        attendance.add(holder);
+        roomSocket = new ArrayList();
+        roomFile = new ArrayList();
+        roomFile.add(new RoomFile(this));
+        currentPage = roomFile.get(0).getPage(0);
+        this.max = max;
+        this.pin = 0;
     }
 
     public void addAttendance(User user) {
@@ -115,13 +111,8 @@ public class Room {
     }
 
     public boolean changePage(String uuid, int page, String tmpUri) {
-        try {
-            currentPage.saveTmp(tmpUri);
-            return choosePage(uuid, page);
-        } catch (IOException ex) {
-            Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
+        currentPage.saveTmp(tmpUri);
+        return choosePage(uuid, page);
     }
 
     public boolean choosePage(String uuid, int page) {
@@ -137,17 +128,15 @@ public class Room {
                 return false;
             }
             RoomPage result = null;
-            try {
-                if (page < 0) {
-                    result = file.getLastPage();
-                } else {
-                    result = file.getPage(page);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(Room.class.getName()).log(Level.SEVERE, null, ex);
+            if (page < 0) {
+                result = file.getLastPage();
+            } else {
+                result = file.getPage(page);
             }
 
             if (result == null) {
+                return false;
+            } else if (result.getOriginUrl().equals(RoomPage.ERROR)) {
                 return false;
             }
             currentPage = result;

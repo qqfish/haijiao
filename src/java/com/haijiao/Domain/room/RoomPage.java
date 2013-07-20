@@ -24,6 +24,7 @@ import java.util.UUID;
  * @author fish
  */
 public class RoomPage {
+    static final String ERROR = "error";
 
     private RoomFile file;
     private String originUrl;       //data url
@@ -67,7 +68,7 @@ public class RoomPage {
         return tmpUrl;
     }
 
-    public void saveTmp(String dataUri) throws IOException {
+    public void saveTmp(String dataUri){
         file.pageUpdate();
         tmpUrl = dataUri;
     }

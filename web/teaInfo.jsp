@@ -208,7 +208,7 @@
                                     <s:textfield name="teacherEmail" cssStyle="display:none;" value="%{tea.email}"/>
                                     <s:textfield id="reserveType" name="type" cssStyle="display:none;"/>
                                     <s:textfield id="reserveLesson" name="lessonName" cssStyle="display:none;"/>
-                                    <s:textfield id="reserveNum" name="duration" cssStyle="display:none;"/>
+                                    <s:textfield id="reserveNum" name="duration" value="1" cssStyle="display:none;"/>
                                 </dl>
                             
                         </div>

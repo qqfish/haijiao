@@ -188,11 +188,11 @@ public class TeacherServiceImpl implements ITeacherService {
             l.setName(lessonName);
             l.setPrice(price);
             lessonDAO.makePersistent(l);
+            List ll = t.getLessons();
+            ll.add(l);
+            t.setLessons(ll);
+            teacherDAO.update(t);
         }
-        List ll = t.getLessons();
-        ll.add(l);
-        t.setLessons(ll);
-        teacherDAO.update(t);
         return true;
     }
 

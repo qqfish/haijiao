@@ -85,7 +85,7 @@ connection.connect = (function(host) {
     };
 });
 
-connection.initialize = function(clazzId, teaEmail, email) {
+connection.initialize = function(stuEmail, teaEmail, email) {
     console.log(email);
     if (window.location.protocol == 'http:') {
         connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
