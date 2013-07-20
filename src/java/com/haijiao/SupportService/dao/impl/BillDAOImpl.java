@@ -25,6 +25,12 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill,Integer> implements IB
     }
 
     @Override
+    public List<Bill> getUnfinishedBillByEmail(String email, String userType) {
+        String hql = "from Bill b where b." + userType + ".email = '" + email + "' and b.status = '" + Bill.Status.paid + "'";
+        return findByQuery(hql);
+    }
+
+    @Override
     public int getBillNum(String email, String userType) {
        String hql = "select count(b) from Bill b where b."+userType+".email = '" + email + "'";
        return getNumber(hql).intValue();

@@ -66,6 +66,8 @@ public class Teacher extends User{
     @Column(columnDefinition="bool default false")
     private Boolean reserve;        //该老师是否接受预定
     
+    private Integer balance;        //余额
+    
 //    @OneToMany(mappedBy = "teacher")
 //    private List<FreeTime> schedule;//记录老师的时间表
     
@@ -291,6 +293,14 @@ public class Teacher extends User{
 
     public void setStudentin(String studentin) {
         this.studentin = studentin;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
     }
 
 //    public List<FreeTime> getSchedule() {

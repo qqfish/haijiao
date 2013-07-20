@@ -38,7 +38,7 @@
                 <![endif]-->
 
     </head>
-    <body onload="viewSchedule.drawSchedule(<s:property value='scheduleBean.toJson()' default='null'/>);">
+    <body>
 
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>

@@ -68,6 +68,11 @@ public class BillServiceImpl implements IBillService{
     public List<Bill> getBill(String email, String userType) {
         return billDAO.getBillByEmail(email, userType);
     }
+    
+    @Override
+    public List<Bill> getUnfinishedBill(String email, String userType){
+        return billDAO.getUnfinishedBillByEmail(email, userType);
+    }
 
     @Override
     public boolean produceBill(String studentEmail, String teacherEmail, int hour, String lessonName, String message) {

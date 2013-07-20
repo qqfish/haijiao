@@ -16,6 +16,7 @@ import org.artofsolving.jodconverter.office.OfficeManager;
  */
 public class Converter implements ServletContextListener{
 
+    //public static final String PARAMETER_OFFICE_HOME = "C:\\Program Files\\OpenOffice.org";
     public static final String PARAMETER_OFFICE_HOME = "D:\\Program Files (x86)\\openoffice.org 3";
     //public static final String PARAMETER_OFFICE_HOME = "/usr/lib/libreoffice";
     private OfficeManager officeManager;
@@ -24,8 +25,14 @@ public class Converter implements ServletContextListener{
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
+<<<<<<< HEAD
         //officeManager = new DefaultOfficeManagerConfiguration().setOfficeHome(PARAMETER_OFFICE_HOME).buildOfficeManager();
         officeManager = new DefaultOfficeManagerConfiguration().buildOfficeManager();
+=======
+        officeManager = new DefaultOfficeManagerConfiguration().setOfficeHome(PARAMETER_OFFICE_HOME).buildOfficeManager();
+        //officeManager = new DefaultOfficeManagerConfiguration().buildOfficeManager();
+
+>>>>>>> dcb9c63af5fc104fc0f47dfd2425f344533e49c0
         documentConverter = new OfficeDocumentConverter(officeManager);
         officeManager.start();
     }

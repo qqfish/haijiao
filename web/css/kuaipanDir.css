@@ -1,0 +1,41 @@
+.dn{display:none}
+.list-view{overflow-y:auto;overflow-x:hidden;height:2000px}
+.list-view table{border:0}
+.list-view .selected-file-number{margin:0 5px;color:#228fd2;font-weight:bold}
+.list-view-hover{background-color:#fafafa}
+.list-view-selected{background-color:#dff4ff}.list-view-heightlight{background-color:#fcfdd8}
+.list-view td,.list-view th{border-bottom:1px solid #cdd1d3;padding:0;height:40px}
+.list-view .empty-folder td,.list-view .loading-data td{border-bottom:0;text-align:center;padding-top:40px}
+.list-view{overflow-y:auto;overflow-x:hidden;height:2000px}.list-view table{border:0}
+.list-view .empty-folder,.list-view .loading-data{background-color:#fff}
+.list-view .loading-data td{font-size:14px;padding-top:5px}
+.list-view .checkbox{width:18px;height:18px;background:url(../images/checkbox.png) no-repeat 0 4px;_background-image:url(../images/checkbox-png8.png);margin-left:15px}
+.list-view .file-name{padding-left:38px;background-image:url(../images/file-icon-small.png);background-repeat:no-repeat}
+.list-view .file-name a:hover{text-decoration:underline}.list-view .file-name .rename-file-input,
+.list-view .file-name .error,.list-view .file-name .waitting{display:none}
+.list-view .rename-status a{display:none}.list-view .error-status .error{display:inline-block;color:red}
+.list-view .checkbox.selected,.list-view-selected .checkbox{background-position:0 -15px}
+.list-view .file-name a{color:#444}.list-view .rename-status .rename-file-input{display:inline-block}
+.list-view .waitting-status .waitting{display:inline-block;width:16px;height:16px;background:url(../images/operate-loading.gif) no-repeat 0 0}
+.list-view .folder-icon{background-position:0 -564px}.list-view .team-folder-icon{background-position:0 -602px}
+.list-view .pdf-icon{background-position:0 5px}.list-view .doc-icon{background-position:0 -33px}
+.list-view .ppt-icon{background-position:0 -108px}.list-view .xls-icon{background-position:0 -71px}
+.list-view .wps-icon{background-position:0 -146px}.list-view .et-icon{background-position:0 -185px}
+.list-view .pps-icon{background-position:0 -222px}.list-view .zip-icon{background-position:0 -260px}
+.list-view .rar-icon{background-position:0 -298px}.list-view .txt-icon{background-position:0 -336px}
+.list-view .dll-icon{background-position:0 -374px}.list-view .image-icon{background-position:0 -412px}
+.list-view .video-icon{background-position:0 -451px}.list-view .music-icon{background-position:0 -489px}
+.list-view .unknown-icon{background-position:0 -527px}
+.list-view-hover .inline-operatebar{font-size:0;line-height:1}.list-view-hover .inline-operatebar li{margin:0 2px}
+.list-view-hover .inline-operatebar .operate{display:block;width:27px;height:25px;background-image:url(../images/inline-operatebar-icon.png);_background-image:url(../images/inline-operatebar-icon-png8.png);background-repeat:no-repeat}
+.list-view-hover .inline-operatebar .download{background-position:0 -450px}
+.list-view-hover .inline-operatebar .share{background-position:0 -375px}
+.list-view-hover .inline-operatebar .share:hover{background-position:0 -400px}.list-view-hover .inline-operatebar .download:hover{background-position:0 -475px}
+.list-view-hover .inline-operatebar .outlink:hover{background-position:0 -550px}.list-view-hover .inline-operatebar .view-online{background-position:0 -225px}
+.list-view-hover .inline-operatebar .more{background-position:0 -300px}.list-view-hover .inline-operatebar .more:hover{background-position:0 -325px}
+.list-view-hover .inline-operatebar .outlink{background-position:0 -525px}
+.list-view-hover .inline-operatebar .view-online:hover{background-position:0 -249px}
+.list-view-hover .inline-operatebar-more{position:absolute;top:25px;left:-20px;border:1px solid #dfe0e0}
+article {display:block;padding:0}
+.file_list_table{border-collapse:collapse;width:100%;border:0 none;border-spacing:0}
+
