@@ -26,6 +26,7 @@ public class Bill extends BaseBean{
         static public final int teacherCommented = 6;
         static public final int studentCommented = 7;
     }
+    static public final int CommitDay = 15;  //学生最大确认天数
     
     @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "tid")
@@ -38,6 +39,7 @@ public class Bill extends BaseBean{
     private int duration;   //课程时长
     private int status;     //账单状态
     private int money;      //总价
+    private int day;        //确认剩余天数
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "lid")
     private Lesson lesson;
@@ -132,5 +134,13 @@ public class Bill extends BaseBean{
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
     }
 }

@@ -71,7 +71,7 @@ public class BillServiceImpl implements IBillService{
     
     @Override
     public List<Bill> getUnfinishedBill(String email, String userType){
-        return billDAO.getUnfinishedBillByEmail(email, userType);
+        return billDAO.getBillByEmailStatus(email, userType, Bill.Status.paid);
     }
 
     @Override
@@ -161,8 +161,35 @@ public class BillServiceImpl implements IBillService{
     public boolean changeBillStatus(int billId, int status) {
         Bill b = billDAO.findById(billId);
         b.setStatus(status);
+        if(status == Bill.Status.teacherFinish){
+            b.setDay(Bill.CommitDay);
+        }
         billDAO.update(b);
         return true;
+    }
+
+    @Override
+    public void oneDayPass() {
+        List<Bill> bList = billDAO.getBillByStatus(Bill.Status.teacherFinish);
+        for(int i = 0; i < bList.size(); i++){
+            int day = bList.get(i).getDay();
+            if(day <= 1){
+                billFinish(bList.get(i));
+            } else {
+                bList.get(i).setDay(day - 1);
+                billDAO.update(bList.get(i));
+            }
+        }
+    }
+    
+    public void billFinish(Bill b){
+        b.setStatus(Bill.Status.studentFinish);
+        Teacher tea = b.getTeacher();
+        int coin = tea.getCoin();
+        tea.setCoin(coin + b.getMoney());
+        teacherDAO.update(tea);
+        billDAO.update(b);
+        //可生成内部账单
     }
     
 }

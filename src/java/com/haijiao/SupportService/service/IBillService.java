@@ -26,4 +26,7 @@ public interface IBillService {
     public boolean replyComment(int billId, String reply, String userType);
     //修改订单状态
     public boolean changeBillStatus(int billId, int status);
+    
+    //每日任务--减去确认天数
+    public void oneDayPass();
 }

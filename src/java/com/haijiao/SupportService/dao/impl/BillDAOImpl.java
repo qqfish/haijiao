@@ -14,26 +14,30 @@ import org.springframework.stereotype.Repository;
  *
  * @author hp
  */
-
 @Repository
-public class BillDAOImpl extends GenericHibernateDAO<Bill,Integer> implements IBillDAO{
+public class BillDAOImpl extends GenericHibernateDAO<Bill, Integer> implements IBillDAO {
 
     @Override
     public List<Bill> getBillByEmail(String email, String userType) {
-        String hql = "from Bill b where b."+userType+".email = '" + email + "'";
+        String hql = "from Bill b where b." + userType + ".email = '" + email + "'";
         return findByQuery(hql);
     }
 
     @Override
-    public List<Bill> getUnfinishedBillByEmail(String email, String userType) {
-        String hql = "from Bill b where b." + userType + ".email = '" + email + "' and b.status = '" + Bill.Status.paid + "'";
+    public List<Bill> getBillByEmailStatus(String email, String userType, int status) {
+        String hql = "from Bill b where b." + userType + ".email = '" + email + "' and b.status = '" + status + "'";
         return findByQuery(hql);
     }
 
     @Override
     public int getBillNum(String email, String userType) {
-       String hql = "select count(b) from Bill b where b."+userType+".email = '" + email + "'";
-       return getNumber(hql).intValue();
+        String hql = "select count(b) from Bill b where b." + userType + ".email = '" + email + "'";
+        return getNumber(hql).intValue();
     }
-    
+
+    @Override
+    public List<Bill> getBillByStatus(int status) {
+        String hql = "from Bill b where b.status = '" + status + "'";
+        return findByQuery(hql);
+    }
 }

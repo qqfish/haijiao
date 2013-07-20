@@ -13,6 +13,7 @@ import java.util.List;
  */
 public interface IBillDAO extends GenericDAO<Bill,Integer>{
     public List<Bill> getBillByEmail(String email, String userType);
-    public List<Bill> getUnfinishedBillByEmail(String email, String userType);
+    public List<Bill> getBillByEmailStatus(String email, String userType, int status);
+    public List<Bill> getBillByStatus(int status);
     public int getBillNum(String email, String userType);
 }
