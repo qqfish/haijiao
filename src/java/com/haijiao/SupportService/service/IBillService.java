@@ -16,6 +16,8 @@ public interface IBillService {
     public Bill getBillById(int id);
     //获取本用户的账单
     public List<Bill> getBill(String email, String userType);
+    //获取上课中的账单
+    public List<Bill> getUnfinishedBill(String email, String userType);
     //生成账单（其实是两张账单，学生有一张，老师有一张）并对账户余额进行相应操作
     public boolean produceBill(String studentEmail, String teacherEmail, int hour, String lessonName, String message);
     //评论账单（即评论本次课程）

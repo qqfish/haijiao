@@ -10,7 +10,7 @@
     function blink(text) {
         var step = 0;
         bid = setInterval(function() {
-            step ++ ;
+            step++;
             if (step >= 3) {
                 step = 1;
             }
@@ -22,18 +22,34 @@
             }
         }, 500);
     }
-    
+
     function getMailNum() {
         $.post("getMailNum.action", function(data) {
-            if ($('#mailNum').text() != data){
+            if ($('#mailNum').text() != data) {
                 $('#mailNum').text(data);
-                if(data == "0")
+                if (data == "0")
                     clearInterval(bid);
                 else
                     blink("新信息");
             }
         }, "text");
     }
+
+    function getClasses() {
+        $.post("getClasses.action", function(data) {
+            var info = eval('(' + data + ')');
+            if (info.classNum != 0) {
+                $('#toClass').removeClass("btn-inverse");
+                $('#toClass').addClass("btn-info");
+                for(var i =0;i < data.classNum;i ++)
+                    $('#classes').append("<li><a>" + info.name[i] + "\t" + info.lesson[i] + "</a></li>");
+            }
+            else {
+                $('#classes').append("<li>暂无课程</li>");
+            }
+        }, "text");
+    }
+
     function getRoomStatus() {
         $.post("getTeacherStatus.action", function(data) {
             if (data.info.status != null) {
@@ -53,7 +69,7 @@
                 $("#notification").text("暂无新的请求").removeClass('btn-warning');
                 $('#publicRoomButton').removeClass('btn-warning').text("试讲房间(无人)");
                 $('#toClass').addClass("btn-inverse");
-                if($('#mailNum').text() == "0")
+                if ($('#mailNum').text() == "0")
                     clearInterval(bid);
             }
         }, "json");
@@ -89,6 +105,7 @@
                         <script>
     getMailNum();
     mid = setInterval(getMailNum, 60000);
+    getClasses();
                         </script>
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>
                         <li><a href="#">余额</a></li>
@@ -100,15 +117,14 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" style="border-radius: 0px;">
-                                    <s:if test="#session.userType=='teacher'">  
+                                    <div id="classes"></div>
+                                    <div class="divider"></div>
+                                    <s:if test="#session.userType=='teacher'">
                                         <script>
                                             getRoomStatus();
                                             rid = setInterval(getRoomStatus, 60000);
                                         </script>
                                         <li><a id="publicRoomButton" href="enterPublicRoom.action?teaEmail=<s:property value="#session.email"/>">在线试讲房间</a></li>
-                                            <s:iterator value="#session.todayClazz">
-                                            <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">学生:<s:property value="student.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
-                                            </s:iterator>
                                         <div class="divider"></div>
                                         <li><a href="index.action?page=student" id="notification">暂无新的请求</a></li>
                                         </s:if>
@@ -134,7 +150,7 @@
                         </script>
                         <li><a href="index.action" data-toggle="collapse" data-parent="#accordion2" data-target="#reg-panel">注册</a></li>
                         <li><a href="index.action">登陆</a></li>
-                    </s:else>
+                        </s:else>
                 </ul>
             </div>  
             <s:if test="nextPageMessage!=null">
