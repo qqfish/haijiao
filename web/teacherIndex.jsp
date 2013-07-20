@@ -17,7 +17,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
-        
+
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
         <link rel="stylesheet" href="css/kuaipanDir.css" type="text/css">
@@ -89,8 +89,8 @@
                         <ul class="nav nav-pills">
                             <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
 
-                            <li id="l6"><a href="#file_area" data-toggle="tab" >个人文件</a></li>
-                            <li id="l6"><a href="#publicfile_area" data-toggle="tab" >公共文件</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab" onclick="getFileList(true);">个人文件</a></li>
+                            <li id="17"><a href="#publicfile_area" data-toggle="tab">公共文件</a></li>
                             <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
                         </ul>
@@ -368,126 +368,130 @@
                             </table>
                         </div>
                         <div class="tab-pane fade" id='file_area'>
-                            <div id="userfile" class="tab-pane">
-                                <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
-                                <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-primary">上传</button>
-                                <div id="newgroup" style="display:none;">
-                                    <hr/>
-                                    <s:form action="file">
-                                        <s:textfield name="dest"/>
-                                        <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
-                                        <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
+                            <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
+                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-primary">上传</button>
+                            <div id="newgroup" style="display:none;">
+                                <hr/>
+                                <s:form action="file">
+                                    <s:textfield name="dest"/>
+                                    <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
+                                    <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
+                                </s:form>
+                            </div>
+                            <hr/>
+                            <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>上传文件</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <s:form action="file" enctype="multipart/form-data" method="post">
+                                        <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
+                                        <script>
+                                                            $('#classify').append("<option value='新建分组'>新建分组</option>");
+                                        </script>
+                                        <s:file name="upload" title="选择文件" id="fileid"/>
                                     </s:form>
                                 </div>
-                                <hr/>
-                                <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
-                                    <div class="modal-header">
-                                        <a class="close" data-dismiss="modal">×</a>
-                                        <h3>上传文件</h3>
-                                    </div>
-                                    <div class="modal-body">
-                                        <s:form action="file" enctype="multipart/form-data" method="post">
-                                            <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
-                                            <script>
-                                                            $('#classify').append("<option value='新建分组'>新建分组</option>");
-                                            </script>
-                                            <s:file name="upload" title="选择文件" id="fileid"/>
-                                        </s:form>
-                                        </div>
-                                    </div>
-                                    <div id="publicfile" class="tab-pane">
-                                        <div style="display:inline;">
-                                            <input type="text" class="span2">
-                                            <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
-                                            <a data-toggle="modal" data-target="#uploadmodal" style="margin-top:-10px;" class="btn btn-primary">上传</a>
-                                        </div>
-                                        <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
-                                            <div class="modal-header">
-                                                <a class="close" data-dismiss="modal">×</a>
-                                                <h3>上传文件</h3>
-                                            </div>
-                                            <div class="modal-body">
-                                                <s:form action="file" enctype="multipart/form-data" method="post">
-                                                    <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
-                                                    <s:file name="upload" title="选择文件" id="fileid"/>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <s:submit cssClass="btn btn-primary" method="upload" value="上传" />
-                                                </s:form>
-                                                <a class="btn" data-dismiss="modal">取消</a>
-                                            </div>
-                                        </div>
-                                        
-                                        
-                                        <div class="dn" style="display: block;">                                          
+                            </div>
 
-                                            <!-- 文件显示区域 -->
-                                            <div class="dirContent">
-                                                    <!-- 列表视图 -->
-                                                    <div class="list-view" id="file-list" style="height: 431px;">
-                                                            <!--[if lt ie 8]><div style="+zoom:1;"><![endif]-->
-                                                            <table class="file_list_table">
-                                                                    <thead style="">
-                                                                            <tr>
-                                                                                    <td class="w46">
-                                                                                            <span class="dib-inline checkbox"></span>
-                                                                                    </td>
-                                                                                    <td class="name">文件名</td>
-                                                                                    <td style="width: 20%;"></td>
-                                                                                    <td style="width: 10%;">大小</td>
-                                                                                    <td class="w150">修改日期</td>
-                                                                            </tr>
-                                                                    </thead>
+                            <div id="filelist">
+                            </div>
+                        </div>
+                        <div id="publicfile_area" class="tab-pane fade">
+                            <div style="display:inline;">
+                                <input type="text" class="span2">
+                                <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
+                                <a data-toggle="modal" data-target="#uploadmodal" style="margin-top:-10px;" class="btn btn-primary">上传</a>
+                            </div>
+                            <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>上传文件</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <s:form action="file" enctype="multipart/form-data" method="post">
+                                        <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
+                                        <s:file name="upload" title="选择文件" id="fileid"/>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <s:submit cssClass="btn btn-primary" method="upload" value="上传" />
+                                    </s:form>
+                                    <a class="btn" data-dismiss="modal">取消</a>
+                                </div>
+                            </div>
 
-                                                                    <!-- 显示数据 -->
-                                                                    <tbody class="list-data-container">
-                                                                        <tr id="80305236916305944_0" data-file-id="80305236916305944" class="list-view-hover">   
-                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>   
-                                                                            <td class="file-name pdf-icon">       
-                                                                                <a href="javascript:;" class="name" title="moive">moive</a>       
-                                                                                <input type="text" value="moive" class="rename-file-input">   
-                                                                            </td>   
-                                                                            <td></td>   
-                                                                            <td></td>    <td>2013-06-16 11:59:22</td></tr>
-                                                                        <tr id="80305236916305928_0" data-file-id="80305236916305928" class="">   
-                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>   
-                                                                            <td class="file-name ppt-icon">        <a href="javascript:;" class="name" title="homework">homework</a>      
-                                                                                <input type="text" value="homework" class="rename-file-input">   
-                                                                            </td>   
-                                                                            <td> </td>   
-                                                                            <td></td>    <td>2013-05-23 09:08:34</td></tr>
-                                                                        <tr id="80305236916305925_0" data-file-id="80305236916305925" class="">   
-                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>    
-                                                                            <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="document">document</a>    
-                                                                                <input type="text" value="document" class="rename-file-input">  
-                                                                            </td>    
-                                                                            <td></td>   
-                                                                            <td></td>    <td>2013-05-16 13:27:03</td></tr>
-                                                                        <tr id="80305236916305922_0" data-file-id="80305236916305922" class="">   
-                                                                            <td>        <span class="dib-inline checkbox"></span>    </td>   
-                                                                            <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="code">code</a>   
-                                                                                <input type="text" value="code" class="rename-file-input">  
-                                                                            </td>   
-                                                                            <td></td> 
-                                                                            <td></td>    <td>2013-05-16 09:25:12</td></tr>
-                                                                    </tbody>
-                                                            </table>
-                                                            <!--[if lt ie 8]></div><![endif]-->
-                                                            
-                                                    </div>
-                                            </div>
-                                       </div>
+
+                            <div class="dn" style="display: block;">                                          
+
+                                <!-- 文件显示区域 -->
+                                <div class="dirContent">
+                                    <!-- 列表视图 -->
+                                    <div class="list-view" id="file-list" style="height: 431px;">
+                                        <!--[if lt ie 8]><div style="+zoom:1;"><![endif]-->
+                                        <table class="file_list_table">
+                                            <thead>
+                                                <tr>
+                                                    <td class="name">文件名</td>
+                                                    <td style="width: 20%;"></td>
+                                                    <td style="width: 10%;">大小</td>
+                                                    <td class="w150 ">修改日期</td>
+                                                </tr>
+                                            </thead>
+
+                                            <!-- 显示数据 -->
+                                            <tbody class="list-data-container">
+                                                <s:iterator value="teacher.fileGroups">
+                                                    <tr>
+                                                        <td class="file-name folder-icon">
+                                                            <a href="javascript:;" class="name"><s:property value="groupName"/></a>
+                                                        </td>
+                                                    </tr>
+                                                </s:iterator>
+                                                <tr id="80305236916305944_0" data-file-id="80305236916305944" class="list-view-hover">
+                                                    <td class="file-name pdf-icon">       
+                                                        <a href="javascript:;" class="name" title="moive">moive</a>       
+                                                        <input type="text" value="moive" class="rename-file-input">   
+                                                    </td>   
+                                                    <td></td>   
+                                                    <td></td>    <td>2013-06-16 11:59:22</td></tr>
+                                                <tr id="80305236916305928_0" data-file-id="80305236916305928" class="">   
+                                                    <td>        <span class="dib-inline checkbox"></span>    </td>   
+                                                    <td class="file-name ppt-icon">        <a href="javascript:;" class="name" title="homework">homework</a>      
+                                                        <input type="text" value="homework" class="rename-file-input">   
+                                                    </td>   
+                                                    <td> </td>   
+                                                    <td></td>    <td>2013-05-23 09:08:34</td></tr>
+                                                <tr id="80305236916305925_0" data-file-id="80305236916305925" class="">   
+                                                    <td>        <span class="dib-inline checkbox"></span>    </td>    
+                                                    <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="document">document</a>    
+                                                        <input type="text" value="document" class="rename-file-input">  
+                                                    </td>    
+                                                    <td></td>   
+                                                    <td></td>    <td>2013-05-16 13:27:03</td></tr>
+                                                <tr id="80305236916305922_0" data-file-id="80305236916305922" class="">   
+                                                    <td>        <span class="dib-inline checkbox"></span>    </td>   
+                                                    <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="code">code</a>   
+                                                        <input type="text" value="code" class="rename-file-input">  
+                                                    </td>   
+                                                    <td></td> 
+                                                    <td></td>    <td>2013-05-16 09:25:12</td></tr>
+                                            </tbody>
+                                        </table>
+                                        <!--[if lt ie 8]></div><![endif]-->
 
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                </div>         
-            </div>
+                </div>
+            </div>         
         </div>
-        <!--==============================footer=================================-->
-        <%@ include file="WEB-INF/jspf/footer.jspf"%>
-    </body>
+    </div>
+    <!--==============================footer=================================-->
+    <%@ include file="WEB-INF/jspf/footer.jspf"%>
+</body>
 </html>
 

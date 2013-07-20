@@ -29,8 +29,8 @@ public class UserFileGroupDAOImpl extends GenericHibernateDAO<UserFileGroup, Int
             return ufg.get(0);
     }
     
-        @Override
-    public List<UserFileGroup> getUserFile(String email) {
+    @Override
+    public List<UserFileGroup> getUserFileGroup(String email) {
         String hql = "select fg from User u left join u.fileGroups fg where u.email ='" + email + "'";
         return findByQuery(hql);
     }

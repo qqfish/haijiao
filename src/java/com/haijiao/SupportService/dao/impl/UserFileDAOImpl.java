@@ -29,4 +29,10 @@ public class UserFileDAOImpl extends GenericHibernateDAO<UserFile, Integer> impl
             return luf.get(0);
     }
     
+    @Override
+    public List<UserFile> getUserFile(String email, String fileName) {
+        String hql = "select f from User u left join u.fileGroups fg left join fg.files f where u.email ='"
+                + email + "' and f.name = '" + fileName + "'";
+        return findByQuery(hql);
+    }
 }
