@@ -29,7 +29,7 @@
                     <s:iterator value="pb.list">
                         <tr>
                             <td>
-                                <i class="icon-folder-close"></i><a onclick="getFileList(false);"><s:property value="groupName"/></a>
+                                <i class="icon-folder-close"></i><a onclick="getFileList(false, $(this).html());"><s:property value="groupName"/></a>
                             </td>
                         </tr>
                     </s:iterator>
@@ -38,7 +38,7 @@
         </s:if>
         <s:else>
             <ul class="breadcrumb">
-                <li><a onclick="getFileList(true);">我的文件</a><span class="divider">/</li>
+                <li><a onclick="getFileList(true, null);">我的文件</a><span class="divider">/</li>
                 <li class="active"><s:property value="groupName"/></li>
             </ul>
             <table class="table table-hover">

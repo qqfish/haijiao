@@ -89,7 +89,7 @@
                         <ul class="nav nav-pills">
                             <li id="l3"  class="active"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
 
-                            <li id="l6"><a href="#file_area" data-toggle="tab" onclick="getFileList(true);">个人文件</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab" onclick="getFileList(true, null)">个人文件</a></li>
                             <li id="17"><a href="#publicfile_area" data-toggle="tab">公共文件</a></li>
                             <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>

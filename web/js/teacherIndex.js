@@ -1,6 +1,9 @@
-function getFileList(isDir) {
-    $.post("getFilelist.action", {isDir: isDir}, function(data) {
-        $('filelist').html(data);
+function getFileList(isDir, groupName) {
+    $.post("getFilelist.action", {
+        isDir: isDir,
+        groupName : groupName
+    }, function(data) {
+        $('#filelist').html(data);
     });
 }
 
@@ -82,5 +85,5 @@ jQuery(document).ready(function($) {
     $("#showtip").click(function() {
         $("#tippanel").show();
     });
-
+    
 });

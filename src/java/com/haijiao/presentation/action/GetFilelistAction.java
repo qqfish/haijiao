@@ -44,7 +44,8 @@ public class GetFilelistAction extends SessionAction{
         }
         else{
             List<UserFile> uf = userService.getUserFile(email, groupName);
-            pb = new PageBean(uf, uf.size(), 1, uf.size());
+            if(!uf.isEmpty())
+                pb = new PageBean(uf, uf.size(), 1, uf.size());
         }
         return SUCCESS;
     }
