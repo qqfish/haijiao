@@ -60,7 +60,7 @@
 
     </head>
     <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
-          onload="init(<s:property value='stuEmail' default='null' />, '<s:property value='teaEmail' default='null' />', '<s:property value='email' default='null' />', '<s:property value='user.fileGroupsToJson()' default='null' />');">
+          onload="init('<s:property value='stuEmail' default='null' />', '<s:property value='teaEmail' default='null' />', '<s:property value='email' default='null' />', '<s:property value='user.fileGroupsToJson()' default='null' />');">
         <script type="text/javascript">
             var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
             document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F71a6bb265c2824dde5414a59737f563b' type='text/javascript'%3E%3C/script%3E"));

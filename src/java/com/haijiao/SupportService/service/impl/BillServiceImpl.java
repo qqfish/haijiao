@@ -92,6 +92,8 @@ public class BillServiceImpl implements IBillService{
         bill.setTeacher(t);
         bill.setStatus(Bill.Status.pending);
         boolean bbill = billDAO.makePersistent(bill);
+        t.setNewReserveNum(t.getNewReserveNum() + 1);
+        teacherDAO.update(t);
         return bbill;
     }
 
@@ -163,6 +165,22 @@ public class BillServiceImpl implements IBillService{
         b.setStatus(status);
         if(status == Bill.Status.teacherFinish){
             b.setDay(Bill.CommitDay);
+        }
+        if(status == Bill.Status.accept || status == Bill.Status.teacherFinish){
+            Student stu = b.getStudent();
+            stu.setUndealBill(stu.getUndealBill() + 1);
+            studentDAO.update(stu);
+        } else if (status == Bill.Status.paid || status == Bill.Status.studentFinish){
+            Student stu = b.getStudent();
+            stu.setUndealBill(stu.getUndealBill() - 1);
+            studentDAO.update(stu);
+            if(status == Bill.Status.studentFinish)
+                billFinish(b);
+        }
+        if (status == Bill.Status.accept || status == Bill.Status.notAccept){
+            Teacher tea = b.getTeacher();
+            tea.setNewReserveNum(tea.getNewReserveNum() - 1);
+            teacherDAO.update(tea);
         }
         billDAO.update(b);
         return true;

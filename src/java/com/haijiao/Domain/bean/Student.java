@@ -2,12 +2,12 @@
  *
  * @author fish
  */
-
 package com.haijiao.Domain.bean;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -18,28 +18,29 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-@Entity    
-@Table(name="student")
+@Entity
+@Table(name = "student")
 @PrimaryKeyJoinColumn
-public class Student extends User{
+public class Student extends User {
+
     private String grade;   //学生当前的年级
     private String school;  //学生就读学校
     private String tel;     //学生或家长的联系方式
     private String telType; //="student" or "parent"
-    
+    @Column(columnDefinition = "int default 0")
+    private int undealBill;
 //    @OneToMany(mappedBy="student")
 //    private List<Clazz> schedule;      //学生的时间表
-    
     @OneToMany(mappedBy = "student")
     @Fetch(value = FetchMode.SUBSELECT)
     protected List<Bill> billList;  //账单列表
-    
     @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(
             name = "favorite",
-            joinColumns = @JoinColumn(name="sid"),
-            inverseJoinColumns = @JoinColumn(name="tid")
-    )
+    joinColumns =
+    @JoinColumn(name = "sid"),
+    inverseJoinColumns =
+    @JoinColumn(name = "tid"))
     private List<Teacher> teacherList;   //收藏老师的列表
 
     public Student() {
@@ -102,7 +103,6 @@ public class Student extends User{
     public void setBillList(List<Bill> billList) {
         this.billList = billList;
     }
-    
 //    public int getRemainCoin(){
 //        int current = coin;
 //        for(int i = 0; i < schedule.size(); i++){
@@ -112,4 +112,12 @@ public class Student extends User{
 //        }
 //        return current;
 //    }
+
+    public int getUndealBill() {
+        return undealBill;
+    }
+
+    public void setUndealBill(int undealBill) {
+        this.undealBill = undealBill;
+    }
 }

@@ -51,7 +51,7 @@ public class EnterRoomAction extends RequestSessionAction{
         if( userType!=null && userType.equals("teacher")){
             isHolder = 1;
         }
-        String email = (String) this.getOutSession("email");
+        email = (String) this.getOutSession("email");
         if(email == null){
             return "false";
         }

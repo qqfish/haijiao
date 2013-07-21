@@ -30,6 +30,8 @@ public class GetClassesAction extends SessionAction{
     private IBillService billService;
     List<String> name;
     List<String> lesson;
+    List<String> teaEmail;
+    List<String> stuEmail;
     int classNum;
     
     @Override
@@ -40,9 +42,13 @@ public class GetClassesAction extends SessionAction{
         classNum = bills.size();
         name = new ArrayList();
         lesson = new ArrayList();
+        teaEmail = new ArrayList();
+        stuEmail = new ArrayList();
         for(int i =0;i < classNum; i ++){
             name.add(bills.get(i).getStudent().getName());
             lesson.add(bills.get(i).getLesson().getName());
+            teaEmail.add(bills.get(i).getTeacher().getEmail());
+            stuEmail.add(bills.get(i).getStudent().getEmail());
         }
         return SUCCESS;
     }
@@ -73,6 +79,22 @@ public class GetClassesAction extends SessionAction{
 
     public void setClassNum(int classNum) {
         this.classNum = classNum;
+    }
+
+    public List<String> getTeaEmail() {
+        return teaEmail;
+    }
+
+    public void setTeaEmail(List<String> teaEmail) {
+        this.teaEmail = teaEmail;
+    }
+
+    public List<String> getStuEmail() {
+        return stuEmail;
+    }
+
+    public void setStuEmail(List<String> stuEmail) {
+        this.stuEmail = stuEmail;
     }
     
 }

@@ -48,7 +48,7 @@ public class Teacher extends User{
     @Column(columnDefinition="int default 0")
     private Integer reserveNum;     //预约次数
     @Column(columnDefinition="int default 0")
-    private Integer newReserveNum;     //预约次数
+    private Integer newReserveNum;     //新预约次数
     
     private String tel;         //老师的手机
     private String videoUrl;    //老师的介绍视频地址
