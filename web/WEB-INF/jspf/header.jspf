@@ -128,12 +128,6 @@
                                         <li><a href="index.action?page=student" id="notification">暂无新的请求</a></li>
                                     </s:if>
                                     <s:else>
-                                        <s:if test="#session.todayClazz.size()==0">
-                                            <p>今天没有课程哦</p>
-                                        </s:if>
-                                        <s:iterator value="#session.todayClazz">
-                                            <li><a href="enterRoom.action?clazzId=<s:property value='id'/>">老师:<s:property value="freeTime.teacher.name"/>   第<s:property value="freeTime.sliceIndex+1"/>节课</a></li>
-                                        </s:iterator>
                                     </s:else>
                                 </ul>
                             </div>

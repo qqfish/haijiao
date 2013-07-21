@@ -36,7 +36,7 @@
         <!--<link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400,400italic' rel='stylesheet' type='text/css'>-->
         <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css" media="screen">
-        <script src="room/js/lib/bootstrap.file-input.js"></script>
+        <script src="js/bootstrap.file-input.js"></script>
         <!--js-->
         <!--<script type="text/javascript" src="../js/superfish.js"></script>-->
         <script type="text/javascript" src="room/js/lib/bootstrap.js"></script>

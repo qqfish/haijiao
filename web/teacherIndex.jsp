@@ -17,6 +17,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
 
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
@@ -385,12 +386,12 @@
                                     <h3>上传文件</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <s:form action="file" enctype="multipart/form-data" method="post">
+                                    <s:form action="file" id="fileUpload" enctype="multipart/form-data" method="post">
                                         <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
                                         <script>
                                                             $('#classify').append("<option value='新建分组'>新建分组</option>");
                                         </script>
-                                        <s:file name="upload" title="选择文件" id="fileid"/>
+                                        <s:file name="upload" title="上传" id="fileid" onchange="$('#fileUpload').submit();"/>
                                     </s:form>
                                 </div>
                             </div>

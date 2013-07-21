@@ -109,7 +109,7 @@
                         <br/>
                         <button type="button" class="btn btn-small btn-danger disabled">身份</button>
                         <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" name="studyStatus" list="{'----职业----','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
-                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" name="studyStatus" list="{'----大学----','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
+                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" name="school" list="{'----大学----','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
                         <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
