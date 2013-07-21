@@ -386,7 +386,7 @@
                                     <h3>上传文件</h3>
                                 </div>
                                 <div class="modal-body">
-                                    <s:form action="file" id="fileUpload" enctype="multipart/form-data" method="post">
+                                    <s:form action="file!upload.action" id="fileUpload" enctype="multipart/form-data" method="post">
                                         <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
                                         <script>
                                                             $('#classify').append("<option value='新建分组'>新建分组</option>");
