@@ -6,6 +6,7 @@
 package com.haijiao.Domain.bean;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,6 +40,7 @@ public class Bill extends BaseBean{
     private int duration;   //课程时长
     private int status;     //账单状态
     private int money;      //总价
+    @Column(columnDefinition="int default 0")
     private int day;        //确认剩余天数
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "lid")

@@ -29,7 +29,7 @@
                     <s:iterator value="pb.list">
                         <tr>
                             <td>
-                                <i class="icon-folder-close"></i><a href="javascript:;" onclick="getFileList(false, $(this).html());"><s:property value="groupName"/></a>
+                                <i class="icon-folder-close"></i><a onclick="getFileList(false, $(this).html());"><s:property value="groupName"/></a>
                             </td>
                         </tr>
                     </s:iterator>
@@ -38,7 +38,7 @@
         </s:if>
         <s:else>
             <ul class="breadcrumb">
-                <li><a href="javascript:;" onclick="getFileList(true, null);">我的文件</a><span class="divider">/</li>
+                <li><a onclick="getFileList(true, null);">我的文件</a><span class="divider">/</li>
                 <li class="active"><s:property value="groupName"/></li>
             </ul>
             <table class="table table-hover">
@@ -53,25 +53,9 @@
                     <s:iterator value="pb.list">
                         <tr>
                             <td>
-                                <i class="icon-file"></i><s:property value="name"/>
+                                <i class="icon-file"></i><a href="javascript:;"><s:property value="name"/></a>
                             </td>
-                            <td class="btn-toolbar">
-                                <div class="btn-group">
-                                    
-                                    <a class="btn btn-mini" href="javascript:;" data-toggle="tooltip" title="移动"><i class="icon-move"></i></a>
-                                    <s:url id="removeurl" action="file" method="deleteFile">
-                                        <s:param name="name" value="%{name}" />
-                                        <s:param name="dest" value="%{groupName}" />
-                                    </s:url>
-                                    <s:a cssClass="btn btn-mini" href="%{removeurl}" data-toggle="tooltip" title="删除"><i class="icon-remove"></i></s:a>
-                                    <s:url id="downloadurl" action="download">
-                                        <s:param name="downloadFileName" value="%{name}" />
-                                        <s:param name="src" value="%{groupName}" />
-                                    </s:url>
-                                    <s:a cssClass="btn btn-mini" href="%{downloadurl}" data-toggle="tooltip" title="下载"><i class="icon-download-alt"></i></s:a>
-                                    </div>
-                                </td>
-                            </tr>
+                        </tr>
                     </s:iterator>
                 </tbody>
             </table>

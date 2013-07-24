@@ -47,10 +47,12 @@ public class IndexAction extends RequestSessionAction {
     private List<Bill> billList;
 //    private List<Clazz> classList;
     private String nextPageMessage;
+    private String register;
     
     
     @Override
     public String execute() throws Exception {
+        register = (String) this.getOutRequest("register");
         String email = (String)this.getOutSession("email");
         if(email==null){
             Cookie[] cookies = ServletActionContext.getRequest().getCookies();
@@ -176,5 +178,13 @@ public class IndexAction extends RequestSessionAction {
 
     public void setNextPageMessage(String nextPageMessage) {
         this.nextPageMessage = nextPageMessage;
+    }
+
+    public String getRegister() {
+        return register;
+    }
+
+    public void setRegister(String register) {
+        this.register = register;
     }
 }

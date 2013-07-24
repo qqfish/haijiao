@@ -54,7 +54,7 @@
                                     <div id="login_tip" class="validateTip"></div>
                                     <s:textfield name="email" placeholder="请输入邮箱" style="margin: 20px 0px 0px 4px;"></s:textfield>
                                     <s:password name="password" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
-                                        <label class="checkbox pull-right" style='margin-right:10px'>
+                                    <label class="checkbox pull-right" style='margin-right:10px'>
                                         <s:checkbox name="autologin" fieldValue="on" cssStyle="width:30px"/>十天内自动登录
                                     </label>
                                     <s:submit cssClass="btn btn-success " style="margin-top:20px;margin-left:3px;width:220px" value="登录"></s:submit>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="accordion-group">
                             <div class="accordion-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">
+                                <a class="accordion-toggle" id="reg-button" data-toggle="collapse" data-parent="#accordion2" href="#reg-panel">
                                     <img src="images/reg-text.png" alt="">
                                 </a>
                             </div>
@@ -72,31 +72,36 @@
                                 <div id="getErrorMessage" style="display:none;"><s:property value="errorMessage" /></div>
                                 <s:form action="register.action">
                                     <s:textfield name="email"  onchange="validate_email(this,email_tip);" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 4px;" ></s:textfield>
-                                        <div id="email_tip" class="validateTip"></div>
+                                    <div id="email_tip" class="validateTip"></div>
                                     <s:password name="password1"  onchange="validate_passwordlength(this,password_tip1);" placeholder="请输入密码"  style="margin: 20px 0px 0px 4px;"></s:password>
-                                        <div id="password_tip1" class="validateTip"></div>
+                                    <div id="password_tip1" class="validateTip"></div>
                                     <s:password name="password2" onchange="validate_passwordequal(password1,this,password_tip2);" placeholder="请重复密码"  style="margin: 20px 0px 0px 4px;"></s:password>
-                                        <div id="password_tip2" class="validateTip"></div>
-                                        <a id="reg-btn" data-toggle="modal" data-target="#choosemodal" class="btn btn-success" style="width:195px;margin-top:20px;margin-left: 3px">注册</a>
-                                        <div class="modal fade hide" id="choosemodal" style="margin-top:9%">
-                                            <div class="modal-header" >
-                                                <a class="close" data-dismiss="modal">×</a>
-                                                <h3>选择您的身份</h3>
-                                            </div>       
-                                            <div class="modal-body">
-                                                <div style="width:50%;float:left">
-                                                    <a href="#" id="teacherbutton" onclick="$('#teachersubmit').click();"><img src="images/imteacher.png"/></a>
+                                    <div id="password_tip2" class="validateTip"></div>
+                                    <a id="reg-btn" data-toggle="modal" data-target="#choosemodal" class="btn btn-success" style="width:195px;margin-top:20px;margin-left: 3px">注册</a>
+                                    <div class="modal fade hide" id="choosemodal" style="margin-top:9%">
+                                        <div class="modal-header" >
+                                            <a class="close" data-dismiss="modal">×</a>
+                                            <h3>选择您的身份</h3>
+                                        </div>       
+                                        <div class="modal-body">
+                                            <div style="width:50%;float:left">
+                                                <a href="#" id="teacherbutton" onclick="$('#teachersubmit').click();"><img src="images/imteacher.png"/></a>
                                                     <s:submit value="老师" id="teachersubmit" cssStyle="display:none;" method="teacher"></s:submit>     
-                                                </div>     
-                                                <div style="width:50%;float:left">
-                                                    <a href="#" id="studentbutton" onclick="$('#studentsubmit').click();"><img src="images/imstudent.png"/></a>
+                                            </div>     
+                                            <div style="width:50%;float:left">
+                                                <a href="#" id="studentbutton" onclick="$('#studentsubmit').click();"><img src="images/imstudent.png"/></a>
                                                     <s:submit value="学生" id="studentsubmit" cssStyle="display:none;" method="student"></s:submit>
-                                                </div> 
-                                            </div>        
-                                        </div>
+                                            </div> 
+                                        </div>        
+                                    </div>
                                 </s:form>
                             </div>
                         </div>
+                        <s:if test="register==1">
+                            <script>
+                                $("#reg-button").click();
+                            </script>
+                        </s:if>
                     </div>
                 </div>
             </div>
