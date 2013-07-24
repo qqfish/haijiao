@@ -20,7 +20,7 @@ import org.springframework.stereotype.Controller;
 @ParentPackage("struts-default")
 @Namespace("/")
 @Results({
-    @Result(name="success",location="/index.jsp")
+    @Result(name="success",type="redirect",location="index.action")
 })
 public class LogoutAction extends SessionAction {
     @Resource

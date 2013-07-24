@@ -19,7 +19,7 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("resetChangePassword")
 @Results({
-    @Result(name="success",type="chain",location="index"),
+    @Result(name="success",type="redirect",location="index.action"),
     @Result(name="input",location="/resetPassword.jsp")
 })
 public class ResetChangePasswordAction extends SessionAction {
@@ -29,15 +29,14 @@ public class ResetChangePasswordAction extends SessionAction {
     private String newpwd;
     private String newpwd2;
     private String oldpwd;
-    private String nextPageMessage;
     
     public String changePasswordById(){
         if ( !newpwd.equals(newpwd2) ) {
-            nextPageMessage = "两次输入的密码不一致";
+            this.sessionPutIn("nextPageMessage", "两次输入的密码不一致");
             return "input";
         }
         userService.changePasswordById( id, newpwd );
-        nextPageMessage = "修改密码成功";
+        this.sessionPutIn("nextPageMessage", "修改密码成功");
         return SUCCESS;
     }
 
@@ -79,13 +78,5 @@ public class ResetChangePasswordAction extends SessionAction {
 
     public void setOldpwd(String oldpwd) {
         this.oldpwd = oldpwd;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 }

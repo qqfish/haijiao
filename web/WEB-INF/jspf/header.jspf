@@ -115,7 +115,7 @@
                     <li><a href="contact.jsp">意见反馈</a></li>
                     <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">
                         <s:textfield  name="searchContent" cssClass="span3" style="height:13px;margin-top:4px;" placeholder="搜索"></s:textfield>
-                        <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-2px"></i></a>
+                            <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-2px"></i></a>
                     </s:form>
                 </ul>
                 <ul class="nav" style="float: right">
@@ -164,19 +164,20 @@
                             if (typeof(rid) == 'undifined')
                                 clearInterval(rid);
                         </script>
-                        <li><a href="index.action?register=1">注册</a></li>
+                        <li><a href="index.action?tab=register">注册</a></li>
                         <li><a href="index.action">登陆</a></li>
                     </s:else>
                 </ul>
             </div>  
-            <s:if test="nextPageMessage!=null">
+            <s:if test="#session.nextPageMessage!=null">
                 <div id="nextPageMessageDiv" class="alert span5" style="z-index: 4;width:200px;position:absolute;top:0px;left:35%;">
                     <button id="nextPageMessageClose" type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong><s:property value="nextPageMessage" default="Warning!!"/><strong> 
+                    <strong><s:property value="#session.nextPageMessage" default="Warning!!"/><strong> 
                             <script>
                                 setTimeout("$('#nextPageMessageDiv').fadeOut()", 3000);
                             </script>
                             </div>
+                            <s:set name="nextPageMessage" value="" scope="session"></s:set>
                         </s:if>
                         </div>
                         </div>

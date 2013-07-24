@@ -27,8 +27,8 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("sendMail")
 @Results({
-    @Result(name="input",type="chain",location="getMail"),
-    @Result(name="success",type="chain",location="getMail")
+    @Result(name="input",type="redirect",location="getMail.action"),
+    @Result(name="success",type="redirect",location="getMail.action")
 })
 public class SendMailAction extends SessionAction{
     private String name;
@@ -36,7 +36,6 @@ public class SendMailAction extends SessionAction{
     private IMailService mailService;
     private String email;
     private String content;
-    private String nextPageMessage;
 
     public String getName() {
         return name;
@@ -69,27 +68,19 @@ public class SendMailAction extends SessionAction{
     public void setContent(String content) {
         this.content = content;
     }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
-    }
     
     @Override
     public String execute(){
         if(name.isEmpty()){
-            nextPageMessage = "发送失败，收件人不能为空";
+            this.sessionPutIn("nextPageMessage", "发送失败，收件人不能为空");
             return INPUT;
         }
         if(content.isEmpty()){
-            nextPageMessage = "发送失败，消息内容不能为空";
+            this.sessionPutIn("nextPageMessage", "发送失败，消息内容不能为空");
             return INPUT;
         }
         mailService.sendMail((String)this.getSessionValue("email"), name, content);
-        nextPageMessage = "发送成功";
+        this.sessionPutIn("nextPageMessage", "发送成功");
         return SUCCESS;
     }
 }

@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
 @Action("registerThen")
 @Results({
     @Result(name="input",location="/register.jsp"),
-    @Result(name="success",type="chain",location="index")
+    @Result(name="success",type="redirect",location="index.action")
 })
 public class RegisterThenAction extends SessionAction {
     @Resource
@@ -47,7 +47,6 @@ public class RegisterThenAction extends SessionAction {
     private String city;
     private String district;
     private String net;
-    private String nextPageMessage;
     
     public String teacherRegister(){
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major,studyStatus, null, province, city, district, net)){
@@ -57,7 +56,7 @@ public class RegisterThenAction extends SessionAction {
 //            this.sessionPutIn("todayClazz", teacherService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
-            nextPageMessage = "注册信息提交失败！";
+            this.sessionPutIn("nextPageMessage", "注册信息提交失败！");
             return "input";
         }
     }
@@ -70,7 +69,7 @@ public class RegisterThenAction extends SessionAction {
 //            this.sessionPutIn("todayClazz", studentService.getTodayClasses((String)this.getSessionValue("email")));
             return SUCCESS;
         } else {
-            nextPageMessage = "注册信息提交失败！";
+            this.sessionPutIn("nextPageMessage", "注册信息提交失败！");
             return "input";
         }
     }
@@ -161,14 +160,6 @@ public class RegisterThenAction extends SessionAction {
 
     public void setNet(String net) {
         this.net = net;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
     public String getMajor() {

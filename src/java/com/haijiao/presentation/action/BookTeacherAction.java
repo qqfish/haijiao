@@ -29,7 +29,7 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("bookTeacher")
 @Results({
-    @Result(name="success",type="chain",location="index")
+    @Result(name="success",type="redirect",location="getTeacherInfo.action?teacherEmail=${teacherEmail}")
 })
 public class BookTeacherAction extends SessionAction{
     @Resource
@@ -41,12 +41,11 @@ public class BookTeacherAction extends SessionAction{
     private String lessonName;
     private String type;
     private String message;
-    private String nextPageMessage;
     
     @Override
     public String execute() {
         billService.produceBill((String) this.getSessionValue("email"), teacherEmail, duration, lessonName, type.concat(message));
-        nextPageMessage = "预约已成功。\n在老师确认预约以后，你会接到通知。\n";
+        this.sessionPutIn("nextPageMessage", "预约已成功。\n在老师确认预约以后，你会接到通知。\n");
         return SUCCESS;
     }
 
@@ -96,14 +95,5 @@ public class BookTeacherAction extends SessionAction{
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
-    }
-    
+    } 
 }

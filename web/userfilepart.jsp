@@ -44,11 +44,13 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>
+                        <th width="300px">
                             文件名
                         </th>
                         <th>
                             上传日期
+                        </th>
+                        <th>
                         </th>
                     </tr>
                 </thead>
@@ -58,7 +60,7 @@
                             <td>
                                 <i class="icon-file"></i><s:property value="name"/>
                             </td>
-                            <td><s:property value="createtime"/></td>
+                            <td><s:property value="createdateToString()"/></td>
                             <td class="btn-toolbar">
                                 <div class="btn-group">
                                     <div class="dropdown">
@@ -73,20 +75,20 @@
                                                 <li><s:a href="%{moveurl}"><s:property value=""/></s:a></li>
                                             </s:iterator>
                                         </ul>
+                                        <s:url id="removeurl" action="file" method="deleteFile">
+                                            <s:param name="name" value="%{name}" />
+                                            <s:param name="dest" value="%{groupName}" />
+                                        </s:url>
+                                        <s:a cssClass="btn btn-mini" href="%{removeurl}" data-toggle="tooltip" title="删除"><i class="icon-remove"></i></s:a>
+                                        <s:url id="downloadurl" action="download">
+                                            <s:param name="downloadFileName" value="%{name}" />
+                                            <s:param name="src" value="%{groupName}" />
+                                        </s:url>
+                                        <s:a cssClass="btn btn-mini" href="%{downloadurl}" data-toggle="tooltip" title="下载"><i class="icon-download-alt"></i></s:a>
                                     </div>
-                                    <s:url id="removeurl" action="file" method="deleteFile">
-                                        <s:param name="name" value="%{name}" />
-                                        <s:param name="dest" value="%{groupName}" />
-                                    </s:url>
-                                    <s:a cssClass="btn btn-mini" href="%{removeurl}" data-toggle="tooltip" title="删除"><i class="icon-remove"></i></s:a>
-                                    <s:url id="downloadurl" action="download">
-                                        <s:param name="downloadFileName" value="%{name}" />
-                                        <s:param name="src" value="%{groupName}" />
-                                    </s:url>
-                                    <s:a cssClass="btn btn-mini" href="%{downloadurl}" data-toggle="tooltip" title="下载"><i class="icon-download-alt"></i></s:a>
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                     </s:iterator>
                 </tbody>
             </table>

@@ -44,7 +44,7 @@ public class RequestSessionAction extends ActionSupport implements ServletReques
         return this.session.get(key);
     }
     
-    public void putIn(String key, Object name) {
+    public void sessionPutIn(String key, Object name) {
         this.session.put(key, name);
     }
     

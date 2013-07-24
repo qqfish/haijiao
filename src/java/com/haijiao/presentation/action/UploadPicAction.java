@@ -48,16 +48,15 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("uploadPic")
 @Results({
-    @Result(name="input",type="chain",location="toChangeInfo"),
-    @Result(name="error",type="chain",location="index"),
-    @Result(name="success",type="chain",location="toChangeInfo")
+    @Result(name="input",type="redirect",location="toChangeInfo.action"),
+    @Result(name="error",type="redirect",location="index.action"),
+    @Result(name="success",type="redirect",location="toChangeInfo.action")
 })
 public class UploadPicAction extends SessionAction{
     private static final int BUFFER_SIZE = 16 * 1024;
     private File upload;
     private String uploadFileName;
     private String uploadContentType;
-    private String nextPageMessage;
     @Resource
     private IUserService userService;
     private Integer x;
@@ -72,7 +71,7 @@ public class UploadPicAction extends SessionAction{
             FileInputStream in = new FileInputStream(upload);
             String email = (String) this.getSessionValue("email");
             if(email == null){
-                nextPageMessage="请先登陆";
+                this.sessionPutIn("nextPageMessage", "请先登陆");
                 return "error";
             }
             String path = config.userHome + "/" + email + "/" + config.imageFolder;
@@ -100,16 +99,16 @@ public class UploadPicAction extends SessionAction{
             out.close();
             cut(ServletActionContext.getServletContext().getRealPath("/") +path,"jpg");
             userService.setPicUrl(email, path);
-            nextPageMessage = "上传完成";
+            this.sessionPutIn("nextPageMessage", "上传完成");
             return SUCCESS;
         }
         catch(FileNotFoundException ex){
             Logger.getLogger(UploadPicAction.class.getName()).log(Level.SEVERE, null, ex);
-            nextPageMessage = "没有找到对应文件";
+            this.sessionPutIn("nextPageMessage", "没有找到对应文件");
             return INPUT;
         } catch (IOException ex) {
             Logger.getLogger(UploadPicAction.class.getName()).log(Level.SEVERE, null, ex);
-            nextPageMessage = "上传出错";
+            this.sessionPutIn("nextPageMessage", "上传出错");
             return INPUT;
         }
     }
@@ -209,14 +208,6 @@ public class UploadPicAction extends SessionAction{
 
     public void setUserService(IUserService userService) {
         this.userService = userService;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
     public Integer getX() {

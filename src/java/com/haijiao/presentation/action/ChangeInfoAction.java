@@ -31,8 +31,8 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("changeInfo")
 @Results({
-    @Result(name="input",location="/register.jsp"),
-    @Result(name="success",type="chain",location="toChangeInfo")
+    @Result(name="input",type="redirect",location="index.action"),
+    @Result(name="success",type="redirect",location="toChangeInfo.action")
 })
 public class ChangeInfoAction extends SessionAction {
     @Resource
@@ -63,7 +63,6 @@ public class ChangeInfoAction extends SessionAction {
     private SimpleDateFormat sdf2;
     private Date date;
     private String lessonName;
-    private String nextPageMessage;
     private String underlineArea;
     private String experience;
     private String cert;
@@ -92,20 +91,20 @@ public class ChangeInfoAction extends SessionAction {
     public String teacherChange() throws ParseException{
         parseDate();
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, city, district, net)){
-            nextPageMessage = this.getText("teaChangeSuccess");
+            this.sessionPutIn("nextPageMessage", this.getText("teaChangeSuccess"));
             return SUCCESS;
         } else {
-            nextPageMessage = this.getText("teaChangeFailure");
+            this.sessionPutIn("nextPageMessage", this.getText("teaChangeFailure"));
             return "input";
         }
     }
     
     public String teacherMoreChange() {
         if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, intro, cert, experience, sprtSUnderline, sprtTUnderline, sprtOnline)){
-            nextPageMessage = this.getText("teaMoreChangeSuccess");
+            this.sessionPutIn("nextPageMessage", this.getText("teaMoreChangeSuccess"));
             return SUCCESS;
         } else {
-            nextPageMessage = this.getText("teaMoreChangeFailure");
+            this.sessionPutIn("nextPageMessage", this.getText("teaMoreChangeFailure"));
             return "input";
         }
     }
@@ -113,10 +112,10 @@ public class ChangeInfoAction extends SessionAction {
     public String studentChange() throws ParseException{
         parseDate();
         if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, date, grade, school, tel, telType)){
-            nextPageMessage = this.getText("teaChangeSuccess");
+            this.sessionPutIn("nextPageMessage", this.getText("teaChangeSuccess"));
             return SUCCESS;
         } else {
-            nextPageMessage = this.getText("stuChangeFailure");
+            this.sessionPutIn("nextPageMessage", this.getText("stuChangeFailure"));
             return "input";
         }
     }
@@ -124,25 +123,25 @@ public class ChangeInfoAction extends SessionAction {
     public String changePassword(){
         User u = userService.getUserByEmail((String)this.getSessionValue("email"));
         if ( !(MD5Util.MD5(oldpwd)).equals(u.getPassword())) {
-            nextPageMessage = this.getText("passwordWrong");
+            this.sessionPutIn("nextPageMessage", this.getText("passwordWrong"));
             return "input";
         } 
         if ( !newpwd.equals(newpwd2) ) {
-            nextPageMessage = this.getText("passwordNotEqual");
+            this.sessionPutIn("nextPageMessage", this.getText("passwordNotEqual"));
             return "input";
         }
         userService.changePassword( u.getEmail(), newpwd );
-        nextPageMessage = this.getText("changePasswordSuccess");
+        this.sessionPutIn("nextPageMessage", this.getText("changePasswordSuccess"));
         return SUCCESS;
     }
     
     public String changePasswordById(){
         if ( !newpwd.equals(newpwd2) ) {
-            nextPageMessage = this.getText("passwordNotEqual");
+            this.sessionPutIn("nextPageMessage", this.getText("passwordNotEqual"));
             return "input";
         }
         userService.changePasswordById( id, newpwd );
-        nextPageMessage = this.getText("changePasswordSuccess");
+        this.sessionPutIn("nextPageMessage", this.getText("changePasswordSuccess"));
         return SUCCESS;
     }
 
@@ -312,14 +311,6 @@ public class ChangeInfoAction extends SessionAction {
 
     public void setLessonName(String lessonName) {
         this.lessonName = lessonName;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
     public String getMajor() {

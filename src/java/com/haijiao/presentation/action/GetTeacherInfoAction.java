@@ -27,7 +27,7 @@ import org.springframework.stereotype.Controller;
 @Action("getTeacherInfo")
 @Results({
     @Result(name="success",location="/teaInfo.jsp"),
-    @Result(name="teacher",type="chain",location="index")
+    @Result(name="teacher",type="redirect",location="index.action")
 })
 public class GetTeacherInfoAction extends RequestSessionAction{
     @Resource

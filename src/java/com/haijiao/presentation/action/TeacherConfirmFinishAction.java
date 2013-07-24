@@ -29,12 +29,11 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("teacherConfirmFinish")
 @Results({
-    @Result(name="success",type="chain",location="index")
+    @Result(name="success",type="redirect",location="index.action?tab=bill")
 })
 public class TeacherConfirmFinishAction extends SessionAction{
     @Resource
     private IBillService billService;
-    String nextPageMessage;
     int billId;
     
     @Override
@@ -45,14 +44,6 @@ public class TeacherConfirmFinishAction extends SessionAction{
 
     public void setBillService(IBillService billService) {
         this.billService = billService;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
     public int getBillId() {

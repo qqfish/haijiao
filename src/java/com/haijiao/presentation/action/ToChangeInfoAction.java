@@ -36,7 +36,6 @@ public class ToChangeInfoAction extends RequestSessionAction {
     private IStudentService studentService;
     private Teacher tea;
     private Student stu;
-    private String nextPageMessage;
     
     @Override
     public String execute() {
@@ -48,7 +47,7 @@ public class ToChangeInfoAction extends RequestSessionAction {
             //return "failure";
         }
         if ("area".equals((String)this.getOutRequest("jump"))) {
-            nextPageMessage = "您可以在下方输入框输入您的线下授课区域";
+            this.sessionPutIn("nextPageMessage", "您可以在下方输入框输入您的线下授课区域");
         }
         return SUCCESS;
     }
@@ -83,13 +82,5 @@ public class ToChangeInfoAction extends RequestSessionAction {
 
     public void setStu(Student stu) {
         this.stu = stu;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 }

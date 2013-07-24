@@ -27,7 +27,7 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("makeCommentReply")
 @Results({
-    @Result(name="success",type="chain",location="index")
+    @Result(name="success",type="redirect",location="index.action?tab=comment")
 })
 public class MakeCommentReplyAction extends SessionAction{
     @Resource
@@ -35,14 +35,13 @@ public class MakeCommentReplyAction extends SessionAction{
     private String content;
     private Integer score;
     private Integer id;
-    private String nextPageMessage;
     
     public String comment(){
         String userType = (String)this.getSessionValue("userType");
         if(billService.commentBill(id, content, score, userType)==false){
-            nextPageMessage = "你已经评论过了哦！";
+            this.sessionPutIn("nextPageMessage", "你已经评论过了哦！");
         } else {
-            nextPageMessage = "评论成功！";
+            this.sessionPutIn("nextPageMessage", "评论成功！");
         }
         return SUCCESS;
     }
@@ -50,9 +49,9 @@ public class MakeCommentReplyAction extends SessionAction{
     public String reply(){
         String userType = (String)this.getSessionValue("userType");
         if (billService.replyComment(id, content, userType)==false){
-            nextPageMessage = "你已经回复过了哦！";
+            this.sessionPutIn("nextPageMessage", "你已经回复过了哦！");
         } else {
-            nextPageMessage = "回复成功！";
+            this.sessionPutIn("nextPageMessage", "回复成功！");
         }
         return SUCCESS;
     }
@@ -83,14 +82,6 @@ public class MakeCommentReplyAction extends SessionAction{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
 }

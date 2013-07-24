@@ -27,7 +27,7 @@ import org.springframework.stereotype.Controller;
 })
 @Action("markMail")
 @Results({
-    @Result(name="success",type="chain",location="getMail")
+    @Result(name="success",type="redirect",location="getMail.action")
 })
 public class MarkMailAction extends SessionAction {
     @Resource

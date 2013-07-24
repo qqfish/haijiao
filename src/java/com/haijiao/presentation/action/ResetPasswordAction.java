@@ -24,23 +24,22 @@ import org.springframework.stereotype.Controller;
 @Results({
     @Result(name="success",location="/resetPassword.jsp")
 })
-public class ResetPasswordAction extends RequestAction{
+public class ResetPasswordAction extends RequestSessionAction{
     @Resource
     private IUserService userService;
     private String id;
     private String checkcode;
-    private String nextPageMessage;
     
     @Override
     public String execute(){
-        id = (String) this.getRequestValue("id");
-        checkcode = (String) this.getRequestValue("checkCode");
+        id = (String) this.getOutRequest("id");
+        checkcode = (String) this.getOutRequest("checkCode");
         checkcode = checkcode.replace(" ", "+");
         if(userService.validateCheckcode(Integer.parseInt(id), checkcode)){
             return SUCCESS;
         }
         else{
-            nextPageMessage = "无效的地址";
+            this.sessionPutIn("nextPageMessage", "无效的地址");
             return INPUT;
         }
     }
@@ -64,13 +63,4 @@ public class ResetPasswordAction extends RequestAction{
     public void setCheckcode(String checkcode) {
         this.checkcode = checkcode;
     }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
-    }
-    
 }

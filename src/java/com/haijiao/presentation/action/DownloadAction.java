@@ -33,7 +33,7 @@ import org.springframework.stereotype.Controller;
                 "inputName","inputStream",
                 "contentDisposition","attachment;filename=\"${downloadFileName}\"",
                 "bufferSize","4096"}),
-    @Result(name="input", type="chain",location="index")
+    @Result(name="input", type="redirect",location="index.action?tab=file")
 })
 public class DownloadAction extends SessionAction {
     @Resource

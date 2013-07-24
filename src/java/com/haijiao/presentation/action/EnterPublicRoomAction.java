@@ -27,7 +27,7 @@ import org.springframework.stereotype.Controller;
 @Action("enterPublicRoom")
 @Results({
     @Result(name="success",location="/room/index.jsp"),
-    @Result(name="false",type="chain",location="index")
+    @Result(name="false",type="redirect",location="index.action")
 })
 public class EnterPublicRoomAction extends RequestSessionAction {
     @Resource
@@ -38,7 +38,6 @@ public class EnterPublicRoomAction extends RequestSessionAction {
     private String email;
     private int isHolder;
     private User user;
-    private String nextPageMessage;
 
     @Override
     public String execute() {
@@ -58,7 +57,7 @@ public class EnterPublicRoomAction extends RequestSessionAction {
         if (!teaEmail.equals(email)) {
             if (teacherService.getRoomOccupied(teaEmail) != null 
                     && !teacherService.getRoomOccupied(teaEmail).equals(email)) {
-                nextPageMessage = "房间已被占用，请稍后再试。";
+                this.sessionPutIn("nextPageMessage", "房间已被占用，请稍后再试。");
                 return "false";
             }
             teacherService.setRoomOccupied(teaEmail, email);
@@ -104,14 +103,6 @@ public class EnterPublicRoomAction extends RequestSessionAction {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
     public String getEmail() {

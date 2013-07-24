@@ -24,25 +24,24 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("dealLesson")
 @Results({
-    @Result(name="input",location="/teacherIndex.jsp"),
-    @Result(name="success",type="chain",location="index")
+    @Result(name="input",type="redirect",location="index.action"),
+    @Result(name="success",type="redirect",location="index.action")
 })
 public class DealLessonAction extends SessionAction {
     @Resource
     private ITeacherService teacherService;
-    private String nextPageMessage;
     private String lessonName;
     private int price;
     
     public String addLesson(){
         teacherService.addLesson((String)this.getSessionValue("email"), lessonName, price);
-        nextPageMessage = "成功添加课程";
+        this.sessionPutIn("nextPageMessage","成功添加课程");
         return SUCCESS;
     }
     
     public String deleteLesson(){
         teacherService.deleteLesson((String)this.getSessionValue("email"), lessonName);
-        nextPageMessage = "成功删除课程";
+        this.sessionPutIn("nextPageMessage","成功删除课程");
         return SUCCESS;
     }
 
@@ -52,14 +51,6 @@ public class DealLessonAction extends SessionAction {
 
     public void setTeacherService(ITeacherService teacherService) {
         this.teacherService = teacherService;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
     public String getLessonName() {

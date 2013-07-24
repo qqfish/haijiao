@@ -28,12 +28,13 @@ import org.springframework.stereotype.Controller;
 @ParentPackage("struts-default")
 @Namespace("/")
 @Results({
-    @Result(name="success",location="/index.jsp"),
-    @Result(name="teacher",location="/teacherIndex.jsp"),
-    @Result(name="student",location="/studentIndex.jsp")
+    @Result(name = "success", location = "/index.jsp"),
+    @Result(name = "teacher", location = "/teacherIndex.jsp"),
+    @Result(name = "student", location = "/studentIndex.jsp")
 })
 public class IndexAction extends RequestSessionAction {
 //    private ScheduleBean scheduleBean;
+
     @Resource
     private IUserService userService;
     @Resource
@@ -46,27 +47,29 @@ public class IndexAction extends RequestSessionAction {
     private Student student;
     private List<Bill> billList;
 //    private List<Clazz> classList;
-    private String nextPageMessage;
-    private String register;
-    
-    
+    private String tab;
+
     @Override
     public String execute() throws Exception {
-        register = (String) this.getOutRequest("register");
-        String email = (String)this.getOutSession("email");
-        if(email==null){
+        tab = (String) this.getOutRequest("tab");
+        String email = (String) this.getOutSession("email");
+        if (email == null) {
             Cookie[] cookies = ServletActionContext.getRequest().getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
-                    if(cookie.getName().equals("user")) {
+                    if (cookie.getName().equals("user")) {
                         email = cookie.getValue();
                         User theUser = userService.getUserByEmail(email);
-                        String userType = theUser.getUserType();
-                        userService.setStatus(email, User.Status.onlineAndAvailable);
-                        userService.setActiveDate(email);
-                        this.putIn("name", theUser.getName());
-                        this.putIn("userType", userType);
-                        this.putIn("email",email);
+                        if (theUser != null) {
+                            String userType = theUser.getUserType();
+                            userService.setStatus(email, User.Status.onlineAndAvailable);
+                            userService.setActiveDate(email);
+                            this.sessionPutIn("name", theUser.getName());
+                            this.sessionPutIn("userType", userType);
+                            this.sessionPutIn("email", email);
+                        } else {
+                            email = null;
+                        }
 //                        if(userType.equals("teacher")){
 //                            this.putIn("todayClazz", teacherService.getTodayClasses(email));
 //                        } else {
@@ -76,19 +79,19 @@ public class IndexAction extends RequestSessionAction {
                 }
             }
         }
-        if(email!=null){
-            if ("student".equals((String)this.getOutRequest("page"))) {
-                nextPageMessage = "您可以在下面的页面中接受或拒绝学生的课程预约";
+        if (email != null) {
+            if ("student".equals((String) this.getOutRequest("page"))) {
+                this.sessionPutIn("nextPageMessage", "您可以在下面的页面中接受或拒绝学生的课程预约");
             }
             User user = userService.getUserByEmail(email);
-            if(user.getUserType().equals("teacher")){
+            if (user.getUserType().equals("teacher")) {
                 teacher = (Teacher) user;
 //                scheduleBean = new ScheduleBean(teacher);
                 billList = billService.getBill(email, "teacher");
 //                classList = teacherService.getClasses(email);
                 return "teacher";
             } else {
-                student = (Student) user;              
+                student = (Student) user;
                 student = studentService.getStudentByEmail(email);
                 billList = billService.getBill(email, "student");
 //                classList = studentService.getClasses(email);
@@ -107,7 +110,6 @@ public class IndexAction extends RequestSessionAction {
 //    public void setScheduleBean(ScheduleBean scheduleBean) {
 //        this.scheduleBean = scheduleBean;
 //    }
-
     public IUserService getUserService() {
         return userService;
     }
@@ -172,19 +174,11 @@ public class IndexAction extends RequestSessionAction {
 //        this.classList = classList;
 //    }
 
-    public String getNextPageMessage() {
-        return nextPageMessage;
+    public String getTab() {
+        return tab;
     }
 
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
-    }
-
-    public String getRegister() {
-        return register;
-    }
-
-    public void setRegister(String register) {
-        this.register = register;
+    public void setTab(String tab) {
+        this.tab = tab;
     }
 }

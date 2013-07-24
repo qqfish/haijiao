@@ -97,7 +97,7 @@
                                 </s:form>
                             </div>
                         </div>
-                        <s:if test="register==1">
+                        <s:if test="tab=='register'">
                             <script>
                                 $("#reg-button").click();
                             </script>

@@ -29,7 +29,7 @@ import org.springframework.stereotype.Controller;
 @Action("changeIntro")
 @Results({
     @Result(name="input",location="/changeInfo.jsp"),
-    @Result(name="success",type="chain",location="toChangeInfo")
+    @Result(name="success",type="redirect",location="toChangeInfo.action")
 })
 public class ChangeIntroAction extends SessionAction {
     @Resource
@@ -39,7 +39,6 @@ public class ChangeIntroAction extends SessionAction {
     @Resource
     private IStudentService studentService;
     private String intro;
-    private String nextPageMessage;
     
     @Override
     public String execute(){
@@ -51,10 +50,10 @@ public class ChangeIntroAction extends SessionAction {
                 Student theStudent = studentService.getStudentByEmail((String)this.getSessionValue("email"));
                 this.sessionPutIn("student", theStudent);
             }
-            nextPageMessage = "修改详细介绍成功！";
+            this.sessionPutIn("nextPageMessage","修改详细介绍成功！");
             return SUCCESS;
         } else {
-            nextPageMessage = "修改详细介绍失败！";
+            this.sessionPutIn("nextPageMessage", "修改详细介绍失败！");
             return "input";
         }
     }
@@ -81,13 +80,5 @@ public class ChangeIntroAction extends SessionAction {
 
     public void setIntro(String intro) {
         this.intro = intro;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 }

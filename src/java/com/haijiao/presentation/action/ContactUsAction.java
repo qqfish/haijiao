@@ -23,7 +23,7 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("contactUs")
 @Results({
-    @Result(name="success",type="chain",location="index")
+    @Result(name="success",type="redirect",location="index.action")
 })
 public class ContactUsAction extends RequestSessionAction {
 
@@ -31,7 +31,6 @@ public class ContactUsAction extends RequestSessionAction {
     private String email;
     private String subject;
     private String context;
-    private String nextPageMessage;
 
     @Override
     public String execute() throws Exception {
@@ -42,7 +41,7 @@ public class ContactUsAction extends RequestSessionAction {
         FileWriter writer = new FileWriter(file,true);
         writer.write(name + "," + email + "," + subject + "," + context + "\n");
         writer.close();
-        nextPageMessage = "感谢您的宝贵意见";
+        this.sessionPutIn("nextPageMessage", "感谢您的宝贵意见");
         return SUCCESS;
     }
 
@@ -76,13 +75,5 @@ public class ContactUsAction extends RequestSessionAction {
 
     public void setContext(String context) {
         this.context = context;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 }

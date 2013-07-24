@@ -21,8 +21,8 @@ import org.springframework.stereotype.Controller;
 @ParentPackage("struts-default")
 @Namespace("/")
 @Results({
-    @Result(name="input",location="/index.jsp"),
-    @Result(name="success",type="chain",location="index")
+    @Result(name="input",type="redirect",location="index.action"),
+    @Result(name="success",type="redirect",location="index.action")
 })
 public class LoginAction extends SessionAction {
     @Resource

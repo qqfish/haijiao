@@ -29,37 +29,28 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("dealWithReservation")
 @Results({
-    @Result(name="input",location="/teacherIndex.jsp"),
-    @Result(name="success",type="chain",location="index")
+    @Result(name="input",type="redirect",location="index.action?tab=bill"),
+    @Result(name="success",type="redirect",location="index.action?tab=bill")
 })
 public class DealWithReservationAction extends SessionAction{
     @Resource
     private IBillService billService;
-    String nextPageMessage;
     int billId;
 
     public String accept(){
         billService.changeBillStatus(billId, Bill.Status.accept);
-        nextPageMessage = "已确认预约。\n您的学生马上就会接到通知。\n";
+        this.sessionPutIn("nextPageMessage", "已确认预约。\n您的学生马上就会接到通知。\n");
         return SUCCESS;
     }
     
     public String deny(){
         billService.changeBillStatus(billId, Bill.Status.notAccept);
-        nextPageMessage = "已拒绝预约。\n您的学生马上就会接到通知。\n";
+        this.sessionPutIn("nextPageMessage","已拒绝预约。\n您的学生马上就会接到通知。\n");
         return SUCCESS;
     }
     
     public void setBillService(IBillService billService) {
         this.billService = billService;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 
     public int getBillId() {

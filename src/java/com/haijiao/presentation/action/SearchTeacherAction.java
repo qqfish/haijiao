@@ -47,27 +47,27 @@ public class SearchTeacherAction extends RequestSessionAction {
     }
     
     public String normal() throws Exception{
-        this.putIn("extOrder", null);
+        this.sessionPutIn("extOrder", null);
         return execute();
     }
     
     public String score() throws Exception{
-        this.putIn("extOrder", "score");
+        this.sessionPutIn("extOrder", "score");
         return execute();
     }
     
     public String hot() throws Exception{
-        this.putIn("extOrder", "reserveNum");
+        this.sessionPutIn("extOrder", "reserveNum");
         return execute();
     }
     
     public String price() throws Exception{
-        this.putIn("extOrder", "wagePerhour");
+        this.sessionPutIn("extOrder", "wagePerhour");
         return execute();
     }
     
     public String time() throws Exception{
-        this.putIn("extOrder", "lastActiveDate");
+        this.sessionPutIn("extOrder", "lastActiveDate");
         return execute();
     }
 
@@ -105,9 +105,9 @@ public class SearchTeacherAction extends RequestSessionAction {
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
         if (!teacherlist.isEmpty()) {
-            this.putIn("message", this.getText("searchSuccess"));
+            this.sessionPutIn("message", this.getText("searchSuccess"));
         } else {
-            this.putIn("message", this.getText("searchNull"));
+            this.sessionPutIn("message", this.getText("searchNull"));
 
         }
         return returnValue;

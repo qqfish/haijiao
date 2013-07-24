@@ -23,7 +23,7 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("changeAudition")
 @Results({
-    @Result(name="success",type="chain",location="index")
+    @Result(name="success",type="redirect",location="index.action")
 })
 public class ChangeAuditionAction extends SessionAction{
     @Resource

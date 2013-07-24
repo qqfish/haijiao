@@ -32,20 +32,19 @@ import sun.misc.BASE64Encoder;
 @Namespace("/")
 @Action("forgetPassword")
 @Results({
-    @Result(name="success",type="chain",location="index"),
+    @Result(name="success",type="redirect",location="index.action"),
     @Result(name="input",location="/forgetPassword.jsp")
 })
-public class ForgetPasswordAction extends RequestAction{
+public class ForgetPasswordAction extends RequestSessionAction{
     @Resource
     private IUserService userService;
     private String email;
-    private String nextPageMessage;
     
     @Override
     public String execute(){
         User u = userService.getUserByEmail(email);
         if(u == null){
-            nextPageMessage = "未注册的用户,请检查邮箱是否填写正确";
+            this.sessionPutIn("nextPageMessage", "未注册的用户,请检查邮箱是否填写正确");
             return INPUT;
         }
         u.getPassword();
@@ -60,7 +59,7 @@ public class ForgetPasswordAction extends RequestAction{
                     "/haijiao/resetPassword.action?id=" + u.getId() + "&checkCode=" + checkCode;
             userService.saveResetInfo(u.getId(), checkCode);
             sm.send(email, "忘记密码", content);
-            nextPageMessage = "已发送至邮箱，请查收";
+            this.sessionPutIn("nextPageMessage", "已发送至邮箱，请查收");
             return SUCCESS;
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(ForgetPasswordAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,13 +80,4 @@ public class ForgetPasswordAction extends RequestAction{
     public void setEmail(String email) {
         this.email = email;
     }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
-    }
-    
 }

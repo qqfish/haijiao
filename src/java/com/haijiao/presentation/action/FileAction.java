@@ -35,9 +35,9 @@ import org.springframework.stereotype.Controller;
     @InterceptorRef("LoginCheckerStack")
 })
 @Results({
-    @Result(name = "input", type = "chain", location = "index"),
-    @Result(name = "error", type = "chain", location = "index"),
-    @Result(name = "success", type = "chain", location = "index")
+    @Result(name = "input", type="redirect",location="index.action?tab=file"),
+    @Result(name = "error", type="redirect",location="index.action?tab=file"),
+    @Result(name = "success", type="redirect",location="index.action?tab=file")
 })
 public class FileAction extends SessionAction {
 
@@ -50,7 +50,6 @@ public class FileAction extends SessionAction {
     private File upload;
     private String uploadFileName;
     private String uploadContentType;
-    private String nextPageMessage;
 
     public String move() {
         String email = (String) this.getSessionValue("email");
@@ -61,21 +60,21 @@ public class FileAction extends SessionAction {
     public String create() {
         String email = (String) this.getSessionValue("email");
         userService.createGroup(email, dest);
-        nextPageMessage = "创建成功";
+        this.sessionPutIn("nextPageMessage", "创建成功");
         return SUCCESS;
     }
 
     public String deleteGroup() {
         String email = (String) this.getSessionValue("email");
         userService.deleteGroup(email, dest);
-        nextPageMessage = "删除成功";
+        this.sessionPutIn("nextPageMessage", "删除成功");
         return SUCCESS;
     }
     
     public String deleteFile() {
         String email = (String) this.getSessionValue("email");
         userService.deleteFile(email, dest, name);
-        nextPageMessage = "删除成功";
+        this.sessionPutIn("nextPageMessage", "删除成功");
         return SUCCESS;
     }
 
@@ -88,7 +87,7 @@ public class FileAction extends SessionAction {
         try {
             String email = (String) this.getSessionValue("email");
             if (email == null) {
-                nextPageMessage = "请先登陆";
+                this.sessionPutIn("nextPageMessage", "请先登陆");
                 return "error";
             }
             String path = config.userHome + File.separator + email + File.separator + config.fileFolder;
@@ -120,7 +119,7 @@ public class FileAction extends SessionAction {
                 Converter.getDocumentConverter().convert(upload, newFile);
             }
             userService.uploadFile(email, dest, uploadFileName, path);
-            nextPageMessage = "上传成功";
+            this.sessionPutIn("nextPageMessage", "上传成功");
             return SUCCESS;
         } catch (FileNotFoundException ex) {
             Logger.getLogger(FileAction.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,13 +179,5 @@ public class FileAction extends SessionAction {
 
     public void setUploadContentType(String uploadContentType) {
         this.uploadContentType = uploadContentType;
-    }
-
-    public String getNextPageMessage() {
-        return nextPageMessage;
-    }
-
-    public void setNextPageMessage(String nextPageMessage) {
-        this.nextPageMessage = nextPageMessage;
     }
 }
