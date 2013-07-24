@@ -120,7 +120,6 @@ public class FileAction extends SessionAction {
                 Converter.getDocumentConverter().convert(upload, newFile);
             }
             userService.uploadFile(email, dest, uploadFileName, path);
-            System.out.printf("in");
             nextPageMessage = "上传成功";
             return SUCCESS;
         } catch (FileNotFoundException ex) {
