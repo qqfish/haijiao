@@ -73,7 +73,9 @@
                                         <s:select id="selDistrict" name="district" list="{ }"></s:select>
                                 </dd>
                                 <dt>学校信息</dt>
-                                <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" /></dd>
+                                <dd><s:select cssClass="span4" name="school" list="{'复旦大学','上海交通大学','同济大学','华东理工大学','东华大学','华东师范大学','上海外国语大学','上海财经大学','上海海关学院','上海大学','上海理工大学',
+                                  '上海海事大学','上海工程技术大学','上海海洋大学','上海中医药大学','上海师范大学','华东政法大学','上海政法学院','上海建桥学院','上海第二工业大学','上海应用技术学院','上海电力学院','上海电机学院','上海对外贸易学院','上海金融学院','上海立信会计学院',
+                                  '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}"/></dd>
                                 <dt>所学专业</dt>
                                 <dd><s:textfield cssClass="span4" type="text" name="major" placeholder="请输入您就读的专业" /></dd>
                                 <dt style='margin-top:5px'>网络环境</dt>

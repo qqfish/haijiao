@@ -37,6 +37,7 @@ public class SearchTeacherAction extends RequestSessionAction {
     private String lessonGet;
     private String netGet;
     private String role;
+    private String school;
     private String province;
     private String city;
     private String district;
@@ -100,8 +101,8 @@ public class SearchTeacherAction extends RequestSessionAction {
             returnValue = "dynamic";
         }
         int pageSize = 20;
-        List<Teacher> teacherlist = userService.searchTeacherPage(strList, lessonGet, netGet, sex, role, province, city, district, status, (cp - 1) * pageSize, pageSize, extOrder, desc);
-        int num = userService.getTeacherNum(strList, lessonGet, netGet, sex, role, province, city, district, status, extOrder, desc);
+        List<Teacher> teacherlist = userService.searchTeacherPage(strList, lessonGet, netGet, sex, role, school, province, city, district, status, (cp - 1) * pageSize, pageSize, extOrder, desc);
+        int num = userService.getTeacherNum(strList, lessonGet, netGet, sex, role, school, province, city, district, status, extOrder, desc);
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
         if (!teacherlist.isEmpty()) {
@@ -179,6 +180,14 @@ public class SearchTeacherAction extends RequestSessionAction {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public String getProvince() {
