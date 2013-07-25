@@ -211,6 +211,113 @@
                             </table>
 -->
 
+                        <table class="table table-hover table-striped">
+                                <s:if test="billList.size()<=0">
+                                    <tbody>
+                                        暂无交易记录哦~！
+                                    </tbody>
+                                </s:if>
+                                <s:else>
+                                    <thead>
+                                        <tr>
+                                            <th>订单号</th>
+                                            <th>下单时间</th>
+                                            <th>学生</th>
+                                            <th>课程</th>
+                                            <th>单价(元)</th>
+                                            <th>小时数</th>
+                                            <th>总计(元)</th>
+                                            <th>状态</th>
+                                            <th>备注</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>        
+                                        <s:iterator value="billList" id="billList">
+                                            <tr>
+                                                <td><s:property value="id"/></td>
+                                                <td><s:property value="createTime"/></td>
+                                                <td><s:property value="student.name" /></td>
+                                                <td><s:property value="lesson.name" /></td>
+
+                                                <td><s:property value="lesson.price" /></td>
+                                                <td><s:property value="duration" /></td>
+                                                <td><s:property value="money" /></td>
+                                                <s:if test="status == 0">
+                                                    <td>等待教师处理</td>
+                                                </s:if>
+                                                <s:elseif test="status == 1">
+                                                    <td>教师拒绝请求</td>
+                                                </s:elseif>
+                                                <s:elseif test="status == 2">
+                                                    <td>等待学生支付</td>
+                                                </s:elseif>
+                                                <s:elseif test="status == 3">
+                                                    <td>上课中</td>
+                                                </s:elseif>
+                                                <s:elseif test="status == 4">
+                                                    <td>教师确认完成</td>
+                                                </s:elseif>
+                                                <s:if test="status == 2">
+                                                    <td>
+                                                        <s:form action="createBill">
+                                                            <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
+                                                            <s:submit value="支付" method="accept" cssClass="btn btn-info btn-mini"/>
+                                                            <s:submit value="拒绝" method="deny" cssClass="btn btn-info btn-mini"/>
+                                                        </s:form>
+                                                    </td>
+                                                </s:if>
+                                                <s:elseif test="status >= 4">
+                                                    <td>
+                                                        <s:if test="ttos==null">
+                                                            <a id="<s:property value="id" />" href="#comment_<s:property value="id" />" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                        </s:if>
+                                                        <s:else>
+                                                            <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                                        </s:else>
+                                                    </td>
+                                                </tr>
+                                            <div id="comment_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h3 id="myModalLabel">评论</h3>
+                                                </div>
+                                                <s:form action="makeCommentReply.action">
+                                                    <div class="modal-body">
+                                                        <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                                        内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                                            <br/>
+                                                            评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                        <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                        <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
+                                                        </div>
+                                                        <script type="text/javascript">
+                                                            $(".commentA").click(function() {
+                                                                var id = $(this).attr("id");
+                                                                $("#rate_" + id).bind('rated', function(event, value) {
+                                                                    $('#score_' + id).val(value);
+                                                                });
+                                                                $("#rate_" + id).bind('over', function(event, value) {
+                                                                    $(this).attr('title', value);
+                                                                });
+                                                                $("#cmtsmt").click(function(event) {
+                                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                        event.preventDefault();
+                                                                });
+                                                            });
+                                                        </script>
+                                                </s:form>
+                                            </div>
+                                        </s:elseif>
+                                    </s:iterator>
+                                    </tbody>
+                                </s:else>
+                            </table>
+
+
                         </div>
 
                         <div class="tab-pane fade" id='comment_area'>
