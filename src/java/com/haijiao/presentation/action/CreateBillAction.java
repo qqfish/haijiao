@@ -4,14 +4,8 @@
  */
 package com.haijiao.presentation.action;
 
-import com.alipay.config.AlipayConfig;
-import com.alipay.util.AlipaySubmit;
 import com.haijiao.Domain.bean.Bill;
 import com.haijiao.SupportService.service.IBillService;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -42,7 +36,7 @@ public class CreateBillAction extends SessionAction {
     public String accept() {
         Bill bill = billService.getBillById(billId);
         money = bill.getMoney();
-        message = bill.getMessage();
+        message = bill.getTeacher().getName() + "老师" + bill.getLesson().getName() + "课" + bill.getDuration() + "小时";
         return SUCCESS;
     }
 

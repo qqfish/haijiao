@@ -119,8 +119,11 @@
                                             <s:elseif test="status == 2">
                                                 <td><br /><label class="label label-important" style="font-size:9px;">等待支付</label></td>
                                                 <td>
-                                                    <br /><a class="btn btn-mini btn-success">支付</a>
-                                                    <br /><a class="btn btn-mini btn-link">取消</a>
+                                                    <s:form action="createBill">
+                                                        <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
+                                                        <s:submit value="支付" method="accept" cssClass="btn btn-mini btn-success"/>
+                                                        <s:submit value="取消" method="deny" cssClass="btn btn-mini btn-link"/>
+                                                    </s:form>
                                                 </td>
                                             </s:elseif>
                                             <s:elseif test="status == 3">

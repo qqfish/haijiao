@@ -63,32 +63,20 @@
                             <td><s:property value="createdateToString()"/></td>
                             <td class="btn-toolbar">
                                 <div class="btn-group">
-                                    <div class="dropdown">
-                                        <a class="btn btn-mini" href="javascript:;" data-toggle="modal" data-target="#movefileModal"><i class="icon-retweet"></i>移动</a>
-<!--                                        <ul class="dropdown-menu">
-                                            <s:iterator value="">
-                                                <s:url id="moveurl" action="file" method="move">
-                                                    <s:param name="src" value="%{groupName}"/>
-                                                    <s:param name="dest" value=""/>
-                                                    <s:param name="uploadFileName" value="%{name}"/>
-                                                </s:url>
-                                                <li><s:a href="%{moveurl}"><s:property value=""/></s:a></li>
-                                            </s:iterator>
-                                        </ul>-->
-                                        <s:url id="removeurl" action="file" method="deleteFile">
-                                            <s:param name="name" value="%{name}" />
-                                            <s:param name="dest" value="%{groupName}" />
-                                        </s:url>
-                                        <s:a cssClass="btn btn-mini" href="%{removeurl}" data-toggle="tooltip" title="删除"><i class="icon-remove"></i>删除</s:a>
-                                        <s:url id="downloadurl" action="download">
-                                            <s:param name="downloadFileName" value="%{name}" />
-                                            <s:param name="src" value="%{groupName}" />
-                                        </s:url>
-                                        <s:a cssClass="btn btn-mini" href="%{downloadurl}" data-toggle="tooltip" title="下载"><i class="icon-download-alt"></i>下载</s:a>
+                                    <a class="btn btn-mini" href="javascript:;" data-toggle="modal" data-target="#movefileModal"><i class="icon-retweet"></i>移动</a>
+                                    <s:url id="removeurl" action="file" method="deleteFile">
+                                        <s:param name="name" value="%{name}" />
+                                        <s:param name="dest" value="%{groupName}" />
+                                    </s:url>
+                                    <s:a cssClass="btn btn-mini" href="%{removeurl}" data-toggle="tooltip" title="删除"><i class="icon-remove"></i>删除</s:a>
+                                    <s:url id="downloadurl" action="download">
+                                        <s:param name="downloadFileName" value="%{name}" />
+                                        <s:param name="src" value="%{groupName}" />
+                                    </s:url>
+                                    <s:a cssClass="btn btn-mini" href="%{downloadurl}" data-toggle="tooltip" title="下载"><i class="icon-download-alt"></i>下载</s:a>
                                     </div>
-                                </div>
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
                     </s:iterator>
                 </tbody>
             </table>
