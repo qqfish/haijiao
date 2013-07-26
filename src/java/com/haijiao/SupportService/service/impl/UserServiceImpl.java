@@ -203,14 +203,14 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) {
-        return teacherDAO.searchTeacherPage(strList, lesson, net, sex, role, province, city, district, status, first, pagesize, extOrder, desc);
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String net, String sex, String role, String school, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) {
+        return teacherDAO.searchTeacherPage(strList, lesson, net, sex, role, school, province, city, district, status, first, pagesize, extOrder, desc);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public int getTeacherNum(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc) {
-        return teacherDAO.getTeacherNum(strList, lesson, net, sex, role, province, city, district, status, extOrder, desc);
+    public int getTeacherNum(List<String> strList, String lesson, String net, String sex, String role, String school, String province, String city, String district, String status, String extOrder, int desc) {
+        return teacherDAO.getTeacherNum(strList, lesson, net, sex, role, school, province, city, district, status, extOrder, desc);
     }
 
     @Override

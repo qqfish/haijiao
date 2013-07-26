@@ -19,6 +19,7 @@ jQuery(document).ready(function($) {
         var net = $('#net').children('.active').text();
         var sex = $('#sex').children('.active').text();
         var role = $('#studyStatus').find('option:selected').text();
+        var school = $('#school').find('option:selected').text();
         var province = $('#selProvince').find('option:selected').val();
         var city = $('#selCity').find('option:selected').val();
         var district = $('#selDistrict').find('option:selected').val();
@@ -28,18 +29,20 @@ jQuery(document).ready(function($) {
             net = "";
         if (sex == "不限")
             sex = "";
-        if (role == "不限")
+        if (role == "----职业----")
             role = "";
-        if (province.substr(7, province.length) == "不限") {
+        if (school == "----大学----")
+            school = "";
+        if (province.substr(7, province.length) == "---省份---") {
             province = "";
             city = "";
             district = "";
         }
-        if (city.substr(7, province.length) == "不限") {
+        if (city.substr(7, province.length) == "---城市---") {
             city = "";
             district = "";
         }
-        if (district.substr(7, province.length) == "不限")
+        if (district.substr(7, province.length) == "---县/区---")
             district = "";
         $.post(url, {currentPage: pagenum,
             searchContent: $('#search_searchContent').val(),
@@ -47,6 +50,7 @@ jQuery(document).ready(function($) {
             netGet: net,
             sex: sex,
             role: role,
+            school: school,
             province: province,
             city: city,
             district: district,
@@ -144,6 +148,10 @@ jQuery(document).ready(function($) {
         gotopage(1, null);
     });
 
+    $('#school').change(function() {
+       gotopage(1, null); 
+    });
+    
     $('#selDistrict').change(function() {
         gotopage(1, null);
     });

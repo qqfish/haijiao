@@ -54,7 +54,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String net, String sex, String role, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String net, String sex, String role, String school, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
         String hql = "select distinct t from Teacher t left join t.lessons l";       
         String where = " where ";
         String or = " or ";
@@ -76,6 +76,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
             where += "t.sex ='" + sex + "' and ";
         if(role != null && !role.equals(""))
             where += "t.studyStatus = '" + role + "' and ";
+        if(school != null && !school.equals(""))
+            where += "t.school = '" + school + "' and ";
         if(province != null && !province.equals(""))
             where += "t.province = '" + province + "' and ";
         if(city != null && !city.equals(""))
@@ -101,7 +103,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public int getTeacherNum(List<String> strList,  String lesson, String net, String sex, String role, String province, String city, String district, String status, String extOrder, int desc){
+    public int getTeacherNum(List<String> strList,  String lesson, String net, String sex, String role, String school, String province, String city, String district, String status, String extOrder, int desc){
         String hql = "select count(distinct t) from Teacher t left join t.lessons l";
         String where = " where ";
         String or = " or ";
@@ -123,6 +125,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
             where += "t.sex ='" + sex + "' and ";
         if(role != null && !role.equals(""))
             where += "t.studyStatus = '" + role + "' and ";
+        if(school != null && !school.equals(""))
+            where += "t.school = '" + school + "' and ";
         if(province != null && !province.equals(""))
             where += "t.province = '" + province + "' and ";
         if(city != null && !city.equals(""))

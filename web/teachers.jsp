@@ -11,7 +11,7 @@
         <script type="text/javascript">
             window.onload = function() {
                 $ling.chinaArea.init("selProvince", "selCity", "selDistrict");
-            }
+            };
         </script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
@@ -108,8 +108,10 @@
                         </div> 
                         <br/>
                         <button type="button" class="btn btn-small btn-danger disabled">身份</button>
-                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" name="studyStatus" list="{'----职业----','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
-                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" name="school" list="{'----大学----','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
+                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" id="studyStatus" name="studyStatus" list="{'----职业----','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
+                        <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" id="school" name="school" list="{'----大学----','复旦大学','上海交通大学','同济大学','华东理工大学','东华大学','华东师范大学','上海外国语大学','上海财经大学','上海海关学院','上海大学','上海理工大学',
+                                  '上海海事大学','上海工程技术大学','上海海洋大学','上海中医药大学','上海师范大学','华东政法大学','上海政法学院','上海建桥学院','上海第二工业大学','上海应用技术学院','上海电力学院','上海电机学院','上海对外贸易学院','上海金融学院','上海立信会计学院',
+                                  '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}" value="%{tea.school}"></s:select>
                         <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
@@ -167,6 +169,8 @@
                                                     <s:property value="school"/> | <s:property value="major"/>
                                                     <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                                     <br/>
+                                                    身份：<s:if test="role == null">无</s:if><s:else><s:property value="role"/></s:else>
+                                                    <br/>
                                                     <s:if test="lessons.size()==0">
                                                         开设课程：该老师还没有开课。
                                                     </s:if>
@@ -212,7 +216,6 @@
                                                         </div>
                                                     </s:else>
                                                     线下授课区域：<s:property value="underlineArea" default="这个老师还没设置线下授课区域！"/><br/>
-                                                    个人经历：<s:property value="experience" default="这个老师很懒，还没写好个人经历！"/><br/>
                                                 </small>
                                             </div>
                                         </li>
