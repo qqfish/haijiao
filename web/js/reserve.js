@@ -16,7 +16,7 @@ reserve.addPrice = function(lesson, price){
         reserve.max = price;
     if(reserve.min < 0 || reserve.min > price)
         reserve.min = price;
-    $("#perPrice").text(reserve.min + ".00 - " + reserve.max + ".00");
+    $("#perPrice").text("￥" + reserve.min + ".00 - ￥" + reserve.max + ".00");
 }
 
 reserve.setType = function(type){
@@ -32,9 +32,9 @@ reserve.setType = function(type){
 reserve.setLesson = function(lesson){
     $("#reserveLesson").val(lesson);
     $("#reserveShowLesson").text(lesson);
-    $("#perPrice").text(reserve.priceList[lesson] + ".00");
+    $("#perPrice").text("￥" + reserve.priceList[lesson] + ".00");
     reserve.price = reserve.priceList[lesson];
-    $("#reserveTotal").text((reserve.num * reserve.priceList[lesson]) + ".00");
+    $("#reserveTotal").text("￥" + (reserve.num * reserve.price) + ".00");
     if(reserve.type){
         $("#reserveButton").removeClass("disabled");
         $("#reserveButton")[0].disabled = false;
@@ -46,7 +46,7 @@ reserve.setNum = function(num){
     $("#reserveShowNum").text(num);
     reserve.num = num;
     if(reserve.price)
-        $("reserveTotal").text((num * reserve.priceList[lesson]) + ".00");
+        $("#reserveTotal").text("￥" + (num * reserve.price) + ".00");
 }
 
 function checkInput(obj, min, max){

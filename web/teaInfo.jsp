@@ -41,6 +41,7 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
+        <link rel="stylesheet" href="css/teaInfo.css" type="text/css">
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
@@ -100,7 +101,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="span8 module" style="padding:12px;">
+                <div class="span8 module" style="padding:12px;font-size: 12px;">
+                    <dl class="dl-horizontal">
+                        <dt class="muted" style="width:90px;">价格</dt>
+                        <dd class="lead text-error" style="margin-left:110px;" id="perPrice">无</dd>
+                    </dl>
                     <dl class="dl-horizontal">
                         <dt class="muted" style="width:90px;">预约数</dt>
                         <dd style="margin-left:110px;"><s:property value="tea.reserveNum"/></dd>
@@ -114,10 +119,6 @@
                             <div class="rateit" data-rateit-value="<s:property value="tea.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                         </dd>
                     </dl>
-                    <dl class="dl-horizontal">
-                        <dt class="muted" style="width:90px;">价格</dt>
-                        <dd class="lead text-error" style="margin-left:110px;" id="perPrice">无</dd>
-                    </dl>
                     <hr/>
                     <dl class="dl-horizontal">
                         <dt class="muted" style="width:90px;">上课方式</dt>
@@ -128,13 +129,13 @@
                             <dd style="margin-left:110px;">
                                 <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <s:if test="tea.sprtOnline">
-                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').hide();reserve.setType('线上授课');">线上授课</button>
+                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').hide();reserve.setType('线上授课');">线上授课</button>
                                     </s:if>
                                     <s:if test="tea.sprtSUnderline">
-                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();reserve.setType('学生上门');">学生上门</button>
+                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').show();reserve.setType('学生上门');">学生上门</button>
                                     </s:if>
                                     <s:if test="tea.sprtTUnderline">
-                                        <button type="button" class="btn btn-mini" onclick="$('#offlineArea').show();reserve.setType('老师上门');">老师上门</button>
+                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').show();reserve.setType('老师上门');">老师上门</button>
                                     </s:if>
                                 </span>
                             </dd>
@@ -156,7 +157,7 @@
                             <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                 <s:iterator value="tea.lessons" status="st">
                                     <s:if test="delete==false">
-                                        <button type="button" class="btn btn-mini"   data-toggle="tooltip" data-placement="bottom" onclick="reserve.setLesson('<s:property value="name"/>');"><s:property value="name"/></button>
+                                        <button type="button" class="btn btn-mini btn-choice"   data-toggle="tooltip" data-placement="bottom" onclick="reserve.setLesson('<s:property value="name"/>');"><s:property value="name"/></button>
                                         <script>
                                             reserve.addPrice('<s:property value="name"/>', <s:property value="price"/>);
                                         </script>
@@ -196,7 +197,7 @@
                                 </dl>
                                 <dl>
                                     <dt class="muted">课时数</dt>
-                                    <dd id="reserveShowNum" style="margin-left:100px"></dd>
+                                    <dd id="reserveShowNum" style="margin-left:100px">1</dd>
                                 </dl>
                                 <dl>
                                     <dt class="muted">总计</dt>

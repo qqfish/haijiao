@@ -22,6 +22,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
         <link rel="stylesheet" href="css/kuaipanDir.css" type="text/css">
+        <link rel="stylesheet" href="css/indexFile.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -232,7 +233,7 @@
                                                 <td><br /><s:property value="id"/></td>
                                                 <td><strong><s:property value="student.name" /></strong><br />
                                                     <span class="muted" style="font-size:9px;">电话:<s:property value="student.tel" default="无"/><br />
-                                                        备注:<s:property value="ps" default="无" /></span>
+                                                        备注:<s:property value="message" default="无" /></span>
 
                                                 </td>
                                                 <td><strong><s:property value="lesson.name" /></strong><br />
@@ -245,47 +246,41 @@
                                                         <s:form action="dealWithReservation">
                                                             <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
                                                             <br /><s:submit value="接受" method="accept" cssClass="btn btn-info btn-mini"/>
-                                                            <br /><a class="btn btn-mini btn-link">备注</a>
-                                                            <s:submit value="拒绝" method="deny" cssClass="btn btn-link btn-mini"/>
+                                                            <br /><s:submit value="拒绝" method="deny" cssClass="btn btn-link btn-mini"/>
                                                         </s:form>
                                                     </td>
                                                 </s:if>
                                                 <s:elseif test="status == 1">
                                                     <td><br /><label class="label" style="font-size:9px;">拒绝请求</label></td>
                                                     <td>
-                                                        <br /><a class="btn btn-mini btn-link">备注</a>
-                                                        <a class="btn btn-mini btn-link">举报</a>
+                                                        <br /><a class="btn btn-mini btn-link">举报</a>
                                                     </td>
-                                                    </s:elseif>
-                                                    <s:elseif test="status == 2">
+                                                </s:elseif>
+                                                <s:elseif test="status == 2">
                                                     <td><br /><label class="label label-warning" style="font-size:9px;">等待支付</label></td>
                                                     <td>
-                                                        <br /><a class="btn btn-mini btn-link">备注</a>
-                                                        <a class="btn btn-mini btn-link">举报</a>
+                                                        <br /><a class="btn btn-mini btn-link">举报</a>
                                                     </td>
-                                                    </s:elseif>
-                                                    <s:elseif test="status == 3">
+                                                </s:elseif>
+                                                <s:elseif test="status == 3">
                                                     <td><br /><label class="label label-info" style="font-size:9px;">正在上课</label></td>
                                                     <td>
                                                         <br /><a class="btn btn-mini btn-success">完成</a>
-                                                        <br /><a class="btn btn-mini btn-link">备注</a>
-                                                        <a class="btn btn-mini btn-link">举报</a>
+                                                        <br /><a class="btn btn-mini btn-link">举报</a>
                                                     </td>
-                                                    </s:elseif>
-                                                    <s:elseif test="status == 4">
+                                                </s:elseif>
+                                                <s:elseif test="status == 4">
                                                     <td><br /><label class="label label-info" style="font-size:9px;">完成授课</label></td>
                                                     <td>
-                                                        <br /><a class="btn btn-mini btn-link">备注</a>
-                                                        <a class="btn btn-mini btn-link">举报</a>
+                                                        <br /><a class="btn btn-mini btn-link">举报</a>
                                                     </td>
-                                                    </s:elseif>
-                                                    <s:elseif test="status == 5">
+                                                </s:elseif>
+                                                <s:elseif test="status == 5">
                                                     <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                                                     <td>
-                                                        <br /><a class="btn btn-mini btn-link">备注</a>
-                                                        <a class="btn btn-mini btn-link">举报</a>
+                                                        <br /><a class="btn btn-mini btn-link">举报</a>
                                                     </td>
-                                                    </s:elseif>
+                                                </s:elseif>
 
                                                 <s:if test="status >= 4">
                                                     <td>
@@ -336,6 +331,17 @@
                                     </div>
                                 </s:else>
                             </table>
+                            <div class="pagination pagination-mini pull-right">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
@@ -389,6 +395,17 @@
                                     </s:else>
                                 </tbody>
                             </table>
+                            <div class="pagination pagination-mini pull-right">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id='file_area'>
                             <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
@@ -425,86 +442,51 @@
                             <div style="display:inline;">
                                 <input type="text" class="span2">
                                 <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
-                                <a data-toggle="modal" data-target="#uploadmodal" style="margin-top:-10px;" class="btn btn-primary">上传</a>
-                            </div>
-                            <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
-                                <div class="modal-header">
-                                    <a class="close" data-dismiss="modal">×</a>
-                                    <h3>上传文件</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <s:form action="file" enctype="multipart/form-data" method="post">
-                                        <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
-                                        <s:file name="upload" title="选择文件" id="fileid"/>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <s:submit cssClass="btn btn-primary" method="upload" value="上传" />
-                                    </s:form>
-                                    <a class="btn" data-dismiss="modal">取消</a>
-                                </div>
                             </div>
 
-
-                            <div class="dn" style="display: block;">                                          
-
-                                <!-- 文件显示区域 -->
-                                <div class="dirContent">
-                                    <!-- 列表视图 -->
-                                    <div class="list-view" id="file-list" style="height: 431px;">
-                                        <!--[if lt ie 8]><div style="+zoom:1;"><![endif]-->
-                                        <table class="file_list_table">
-                                            <thead>
-                                                <tr>
-                                                    <td class="name">文件名</td>
-                                                    <td style="width: 20%;"></td>
-                                                    <td style="width: 10%;">大小</td>
-                                                    <td class="w150 ">修改日期</td>
-                                                </tr>
-                                            </thead>
-
-                                            <!-- 显示数据 -->
-                                            <tbody class="list-data-container">
-                                                <s:iterator value="teacher.fileGroups">
-                                                    <tr>
-                                                        <td class="file-name folder-icon">
-                                                            <a href="javascript:;" class="name"><s:property value="groupName"/></a>
-                                                        </td>
-                                                    </tr>
-                                                </s:iterator>
-                                                <tr id="80305236916305944_0" data-file-id="80305236916305944" class="list-view-hover">
-                                                    <td class="file-name pdf-icon">       
-                                                        <a href="javascript:;" class="name" title="moive">moive</a>       
-                                                        <input type="text" value="moive" class="rename-file-input">   
-                                                    </td>   
-                                                    <td></td>   
-                                                    <td></td>    <td>2013-06-16 11:59:22</td></tr>
-                                                <tr id="80305236916305928_0" data-file-id="80305236916305928" class="">   
-                                                    <td>        <span class="dib-inline checkbox"></span>    </td>   
-                                                    <td class="file-name ppt-icon">        <a href="javascript:;" class="name" title="homework">homework</a>      
-                                                        <input type="text" value="homework" class="rename-file-input">   
-                                                    </td>   
-                                                    <td> </td>   
-                                                    <td></td>    <td>2013-05-23 09:08:34</td></tr>
-                                                <tr id="80305236916305925_0" data-file-id="80305236916305925" class="">   
-                                                    <td>        <span class="dib-inline checkbox"></span>    </td>    
-                                                    <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="document">document</a>    
-                                                        <input type="text" value="document" class="rename-file-input">  
-                                                    </td>    
-                                                    <td></td>   
-                                                    <td></td>    <td>2013-05-16 13:27:03</td></tr>
-                                                <tr id="80305236916305922_0" data-file-id="80305236916305922" class="">   
-                                                    <td>        <span class="dib-inline checkbox"></span>    </td>   
-                                                    <td class="file-name folder-icon">        <a href="javascript:;" class="name" title="code">code</a>   
-                                                        <input type="text" value="code" class="rename-file-input">  
-                                                    </td>   
-                                                    <td></td> 
-                                                    <td></td>    <td>2013-05-16 09:25:12</td></tr>
-                                            </tbody>
-                                        </table>
-                                        <!--[if lt ie 8]></div><![endif]-->
-
-                                    </div>
-                                </div>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="300px">
+                                            文件名
+                                        </th>
+                                        <th>
+                                            上传日期
+                                        </th>
+                                        <th>
+                                            上传用户
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i class="file-folder"></i>我是pdf.pdf
+                                        </td>
+                                        <td>2013-1-1</td>
+                                        <td>张三</td>
+                                        <td class="btn-toolbar">
+                                            <div class="btn-group">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-mini" data-toggle="tooltip" title="收藏"><i class="icon-tag"></i></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="pagination pagination-mini pull-right">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
                             </div>
 
                         </div>

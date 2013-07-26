@@ -19,7 +19,6 @@
         <script type="text/javascript" src="js/studentIndex.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
-        <link rel="stylesheet" href="css/taobao_transaction.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -66,150 +65,182 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade" id='bill_area'>
-                       
-                                <div class="btn-group" style="float:right">
-                                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                      订单选择
-                                      <span class="caret"></span>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a tabindex="-1" href="#">所有订单</a></li>
-                                        <li><a tabindex="-1" href="#">已完成</a></li>
-                                        <li><a tabindex="-1" href="#">未完成</a></li>
-                                     </ul>
-                              </div>
-                       
-                            <table class="order-table" >
-                                <thead>
-                                    <tr>
-                                            <th class="s-point">订单号</th>
-                                            <th class="s-title">老师</th>
-                                            <th class="s-point">课程</th>				
-                                            <th class="s-price">单价(元)</th>
-                                            <th class="s-amount">数量</th>
-                                            <th class="s-agio">状态</th>
-                                            <th class="s-total">小计(元)</th>
-                                            <th class="s-del"></th>
-                                    </tr>
-                                </thead>
 
-    	
-                                <tbody data-shopid="306145669" class="J_Order">												 			   
-                                    <tr data-istmall="true"	data-cartid="30915876037"
-                                    data-itemid="18456312071" data-skuid ="43372868338" 	class="J_ItemBody uncod xcard selected "
-                                          data-isTmallInternationalItem="false"
-                                    >
-                                        <td class="s-chk"  >5</td>
-                                        <td class="s-title">
-                                                     肖双九
-                                            <div class="props">
-                                                 <span>电话:12580 <br>地址：软件学院</span>
-                                            </div>
-                                            <div class="extra-props clearfix">
-                                            </div>
-                                        </td>
-                                        <td class="s-point"><em tabindex="0">HCI</em></td>		
-                                        <td class="s-price  ">
-                                                <em class="s-old-price">91.80</em>
-                                                <em class="J_Price" tabindex="0">45.90</em>
-                                                <em class="s-change-price-text">省45.90</em>
-                                        </td>
-                                        <td class="s-amount ">
-                                            <input type="text" value="1" class="text text-amount" data-max="7049" data-stock="7049" data-now="1" autocomplete="off"/>
-                                        </td>
-                                        <td class="s-agio">      
-                                            <span><img class="J_Aigo" src="http://img03.taobaocdn.com/tps/i3/T1bJqwXdBXXXXXXXXX-47-12.png" data-popstr="省45.90元:今日特价" /></span>
-                                        </td>
-                                        <td class="s-total"><em tabindex="0">45.90</em></td>
-                                         <td class="s-del">
-                                             <a  title="移至收藏夹"  class="fav J_MakePoint" data-point-name="tbcart.1.11" href="#">确认</a>
-                                             <br>
-                                             <a href="javascript:;" data-point-name="tbcart.1.17" class="J_Del J_MakePoint">申诉</a>
-                                        </td>
-                                  </tr>
-                               </tbody>
-                               
-                            </table>
-                            
-                            <div>
-                                <div class="btn-toolbar" style="float:right">
-                                    <div class="btn-group"><button class="btn">上一页</button> </div>
-                                    <div class="btn-group"><button class="btn">下一页</button> </div>
-                                </div>                                                  
+                            <div class="btn-group" style="float:right">
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                    订单选择
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a tabindex="-1" href="#">所有订单</a></li>
+                                    <li><a tabindex="-1" href="#">已完成</a></li>
+                                    <li><a tabindex="-1" href="#">未完成</a></li>
+                                </ul>
                             </div>
 
-<!--                                
-                                <s:if test="billList.size()<=0">
-                                    <tbody>
-                                        暂无交易记录哦~！
-                                    </tbody>
-                                </s:if>
-                                <s:else>
-                                    <thead>
+                            <table class="table table-striped table-hover" >
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th class="span2">老师</th>
+                                        <th>课程</th>
+                                        <th>总计(元)</th>
+                                        <th>状态</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>        
+                                    <s:iterator value="billList" id="billList">
                                         <tr>
-                                           <th>姓名</th>
-                                            <th>课程</th>
-                                            <th>金额</th>
-                                            <th>时间</th>
-                                            <th>信息</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>        
-                                        <s:iterator value="billList" id="billList">
-                                            <tr>
-                                                <td><s:property value="teacher.name" /></td>
-                                                <td><s:property value="lesson.name" /></td>
-                                                <td><s:property value="getRealMoney('student')" /></td>
-                                                <td><s:property value="createdateToString()" /></td>
-                                                <td><s:property value="message" /></td>
+                                            <td><br /><s:property value="id"/></td>
+                                            <td><strong><s:property value="teacher.name" /></strong><br />
+                                                <span class="muted" style="font-size:9px;">电话:<s:property value="teacher.tel" default="无"/><br />
+                                                    备注:<s:property value="ps" default="无" /></span>
+
+                                            </td>
+                                            <td><strong><s:property value="lesson.name" /></strong><br />
+                                                <s:property value="duration" />课时
+                                            </td>
+                                            <td><strong class="text-error" style="font-size:14px;"><br /><s:property value="money" />.00</strong></td>
+
+                                            <s:if test="status == 0">
+                                                <td><br /><label class="label label-warning" style="font-size:9px;">等待确认</label></td>
                                                 <td>
-                                                    <s:if test="stot==null">
-                                                        <a id="<s:property value="id" />" href="#comment_<s:property value="id" />" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                        <br /><a class="btn btn-link btn-mini">取消</a>
+                                                </td>
+                                            </s:if>
+                                            <s:elseif test="status == 1">
+                                                <td><br /><label class="label" style="font-size:9px;">拒绝请求</label></td>
+                                                <td>
+                                                    <br /><a class="btn btn-mini btn-link">举报</a>
+                                                </td>
+                                            </s:elseif>
+                                            <s:elseif test="status == 2">
+                                                <td><br /><label class="label label-important" style="font-size:9px;">等待支付</label></td>
+                                                <td>
+                                                    <br /><a class="btn btn-mini btn-success">支付</a>
+                                                    <br /><a class="btn btn-mini btn-link">取消</a>
+                                                </td>
+                                            </s:elseif>
+                                            <s:elseif test="status == 3">
+                                                <td><br /><label class="label label-info" style="font-size:9px;">正在上课</label></td>
+                                                <td>
+                                                    <br /><a class="btn btn-mini btn-link">举报</a>
+                                                </td>
+                                            </s:elseif>
+                                            <s:elseif test="status == 4">
+                                                <td><br /><label class="label label-important" style="font-size:9px;">完成授课</label></td>
+                                                <td>
+                                                    <br /><a class="btn btn-mini btn-success">完成</a>
+                                                    <br /><a class="btn btn-mini btn-link">举报</a>
+                                                </td>
+                                            </s:elseif>
+                                            <s:elseif test="status == 5">
+                                                <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
+                                                <td>
+                                                    <br /><a class="btn btn-mini btn-link">举报</a>
+                                                </td>
+                                            </s:elseif>
+
+                                            <s:if test="status >= 4">
+                                                <td>
+                                                    <s:if test="ttos==null">
+                                                        <a id="<s:property value="id" />" onclick="$('#comment_id').val($(this).attr('id'))" href="#comment_modal" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
                                                     </s:if>
                                                     <s:else>
                                                         <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
                                                     </s:else>
                                                 </td>
-                                            </tr>
-                                        <div id="comment_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h3 id="myModalLabel">评论</h3>
-                                            </div>
-                                            <s:form action="makeCommentReply.action">
-                                                <div class="modal-body">
-                                                    <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                                    <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                        <br/>
-                                                        评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                                    <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                    <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
-                                                    </div>
-                                                    <script type="text/javascript">
-                                                        $(".commentA").click(function() {
-                                                            var id = $(this).attr("id");
-                                                            $("#rate_" + id).bind('rated', function(event, value) {
-                                                                $('#score_' + id).val(value);
-                                                            });
-                                                            $("#rate_" + id).bind('over', function(event, value) {
-                                                                $(this).attr('title', value);
-                                                            });
-                                                            $("#cmtsmt").click(function(event) {
-                                                                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                                    event.preventDefault();
-                                                            });
-                                                        })
-                                                    </script>
-                                            </s:form>
-                                        </div>
+                                            </s:if>
+                                        </tr>
                                     </s:iterator>
-                                    </tbody>
-                                </s:else>
+                                </tbody>
                             </table>
--->
+
+                            <div class="pagination pagination-mini pull-right">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>
+
+                            <!--                                
+                            <s:if test="billList.size()<=0">
+                                <tbody>
+                                    暂无交易记录哦~！
+                                </tbody>
+                            </s:if>
+                            <s:else>
+                                <thead>
+                                    <tr>
+                                       <th>姓名</th>
+                                        <th>课程</th>
+                                        <th>金额</th>
+                                        <th>时间</th>
+                                        <th>信息</th>
+                                    </tr>
+                                </thead>
+                                <tbody>        
+                                <s:iterator value="billList" id="billList">
+                                    <tr>
+                                        <td><s:property value="teacher.name" /></td>
+                                        <td><s:property value="lesson.name" /></td>
+                                        <td><s:property value="getRealMoney('student')" /></td>
+                                        <td><s:property value="createdateToString()" /></td>
+                                        <td><s:property value="message" /></td>
+                                        <td>
+                                    <s:if test="stot==null">
+                                        <a id="<s:property value="id" />" href="#comment_<s:property value="id" />" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                    </s:if>
+                                    <s:else>
+                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                    </s:else>
+                                </td>
+                            </tr>
+                        <div id="comment_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                <h3 id="myModalLabel">评论</h3>
+                            </div>
+                                    <s:form action="makeCommentReply.action">
+                                        <div class="modal-body">
+                                        <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
+                                        <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                            <br/>
+                                            评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                        <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                        <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(".commentA").click(function() {
+                                                var id = $(this).attr("id");
+                                                $("#rate_" + id).bind('rated', function(event, value) {
+                                                    $('#score_' + id).val(value);
+                                                });
+                                                $("#rate_" + id).bind('over', function(event, value) {
+                                                    $(this).attr('title', value);
+                                                });
+                                                $("#cmtsmt").click(function(event) {
+                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                        event.preventDefault();
+                                                });
+                                            })
+                                        </script>
+                                    </s:form>
+                                </div>
+                                </s:iterator>
+                                </tbody>
+                            </s:else>
+                        </table>
+                            -->
 
                         </div>
 
@@ -249,11 +280,11 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                        </div>
+                                                                    </div>
                                                                 </s:form>
                                                             </div>
                                                         </s:if>

@@ -1,0 +1,18 @@
+/* 
+    Document   : indexFile
+    Created on : Jul 25, 2013, 9:47:24 PM
+    Author     : fish
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.file-folder {
+    background: url(../images/file-icon-small.png) no-repeat;
+    background-position: 0px -571px;
+    width: 27px;
+    height: 32px;
+    display: inline-block;
+    margin-top: 1px;
+    line-height: 14px;
+    vertical-align: text-top;
+}
