@@ -13,7 +13,6 @@
         <title>Teachers</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-        <script type="text/javascript" src="js/teachers.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/studentIndex.js"></script>
@@ -60,7 +59,9 @@
                 </div>
                 <div class="span8 module" style="padding:12px">
                     <ul class="nav nav-pills">
-                        <li id="l3" class="active"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                        <li id="l3"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                        <li id="l5"><a href="#file_area" data-toggle="tab" >个人文件</a></li>
+                        <li id="l6" ><a href="#publicfile_area" data-toggle="tab">公共文件</a></li>
                         <li id="l4" ><a href="#comment_area" data-toggle="tab" >评论</a></li>
                     </ul>
                     <div class="tab-content">
@@ -90,7 +91,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>        
-                                    <s:iterator value="billList" id="billList">
+                                    <s:iterator value="student.billList" id="billList">
                                         <tr>
                                             <td><br /><s:property value="id"/></td>
                                             <td><strong><s:property value="teacher.name" /></strong><br />
@@ -106,7 +107,7 @@
                                             <s:if test="status == 0">
                                                 <td><br /><label class="label label-warning" style="font-size:9px;">等待确认</label></td>
                                                 <td>
-                                                        <br /><a class="btn btn-link btn-mini">取消</a>
+                                                    <br /><a class="btn btn-link btn-mini">取消</a>
                                                 </td>
                                             </s:if>
                                             <s:elseif test="status == 1">
@@ -135,26 +136,55 @@
                                                     <br /><a class="btn btn-mini btn-link">举报</a>
                                                 </td>
                                             </s:elseif>
-                                            <s:elseif test="status == 5">
+                                            <s:elseif test="status >= 5">
                                                 <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                                                 <td>
-                                                    <br /><a class="btn btn-mini btn-link">举报</a>
-                                                </td>
-                                            </s:elseif>
-
-                                            <s:if test="status >= 4">
-                                                <td>
                                                     <s:if test="ttos==null">
-                                                        <a id="<s:property value="id" />" onclick="$('#comment_id').val($(this).attr('id'))" href="#comment_modal" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                        <br /><a id="<s:property value="id" />" onclick="$('#comment_id').val($(this).attr('id'))" href="#comment_modal" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
                                                     </s:if>
                                                     <s:else>
-                                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                                        <br /><a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
                                                     </s:else>
                                                 </td>
-                                            </s:if>
+                                            </s:elseif>
                                         </tr>
                                     </s:iterator>
                                 </tbody>
+
+                                <div id="comment_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3 id="myModalLabel">评论</h3>
+                                    </div>
+                                    <s:form action="makeCommentReply.action">
+                                        <div class="modal-body">
+                                            <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
+                                            内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                            <br/>
+                                            评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                            <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                            <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(".commentA").click(function() {
+                                                var id = $(this).attr("id");
+                                                $("#comment_rate" ).bind('rated', function(event, value) {
+                                                    $('#comment_score').val(value);
+                                                });
+                                                $("#comment_rate").bind('over', function(event, value) {
+                                                    $(this).attr('title', value);
+                                                });
+                                                $("#cmtsmt").click(function(event) {
+                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                        event.preventDefault();
+                                                });
+                                            });
+                                        </script>
+                                    </s:form>
+                                </div>
                             </table>
 
                             <div class="pagination pagination-mini pull-right">
@@ -168,95 +198,19 @@
                                     <li><a href="#">Next</a></li>
                                 </ul>
                             </div>
-
-                            <!--                                
-                            <s:if test="billList.size()<=0">
-                                <tbody>
-                                    暂无交易记录哦~！
-                                </tbody>
-                            </s:if>
-                            <s:else>
-                                <thead>
-                                    <tr>
-                                       <th>姓名</th>
-                                        <th>课程</th>
-                                        <th>金额</th>
-                                        <th>时间</th>
-                                        <th>信息</th>
-                                    </tr>
-                                </thead>
-                                <tbody>        
-                                <s:iterator value="billList" id="billList">
-                                    <tr>
-                                        <td><s:property value="teacher.name" /></td>
-                                        <td><s:property value="lesson.name" /></td>
-                                        <td><s:property value="getRealMoney('student')" /></td>
-                                        <td><s:property value="createdateToString()" /></td>
-                                        <td><s:property value="message" /></td>
-                                        <td>
-                                    <s:if test="stot==null">
-                                        <a id="<s:property value="id" />" href="#comment_<s:property value="id" />" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
-                                    </s:if>
-                                    <s:else>
-                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
-                                    </s:else>
-                                </td>
-                            </tr>
-                        <div id="comment_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                <h3 id="myModalLabel">评论</h3>
-                            </div>
-                                    <s:form action="makeCommentReply.action">
-                                        <div class="modal-body">
-                                        <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                        <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                            <br/>
-                                            评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                        <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                        <s:submit cssClass="btn btn-primary" method="comment" value="提交" ></s:submit>
-                                        </div>
-                                        <script type="text/javascript">
-                                            $(".commentA").click(function() {
-                                                var id = $(this).attr("id");
-                                                $("#rate_" + id).bind('rated', function(event, value) {
-                                                    $('#score_' + id).val(value);
-                                                });
-                                                $("#rate_" + id).bind('over', function(event, value) {
-                                                    $(this).attr('title', value);
-                                                });
-                                                $("#cmtsmt").click(function(event) {
-                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                        event.preventDefault();
-                                                });
-                                            })
-                                        </script>
-                                    </s:form>
-                                </div>
-                                </s:iterator>
-                                </tbody>
-                            </s:else>
-                        </table>
-                            -->
-
                         </div>
-
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-
-                                    <s:if test="billList.size()<=0">
+                                    <s:if test="student.billList.size()<=0">
                                         还没有评论哦~！
                                     </s:if>
                                     <s:else>
-                                        <s:iterator value="billList" id="billList">
-                                            <tr>
-                                                <td>
-                                                    <blockquote>
-                                                        <s:if test="ttos != null">
+                                        <s:iterator value="student.billList" id="billList">
+                                            <s:if test="ttos != null">
+                                                <tr>
+                                                    <td>
+                                                        <blockquote>                                                        
                                                             <h4><s:property value="teacher.name" /><label class="label label-important pull-right">评分:<s:property value="ttos.score" /></label></h4>
                                                             <small>
                                                                 <span><s:property value="ttos.content" /></span>
@@ -286,15 +240,156 @@
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
                                                                     </div>
                                                                 </s:form>
-                                                            </div>
-                                                        </s:if>
-                                                    </blockquote>
-                                                </td>
-                                            </tr>
+                                                            </div>                                                      
+                                                        </blockquote>
+                                                    </td>
+                                                </tr>
+                                            </s:if>
                                         </s:iterator>
                                     </s:else>
                                 </tbody>
                             </table>
+                        </div>
+                        <div class="tab-pane fade" id='file_area'>
+                            <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
+                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-primary">上传</button>
+                            <div id="newgroup" style="display:none;">
+                                <hr/>
+                                <s:form action="file">
+                                    <s:textfield name="dest"/>
+                                    <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
+                                    <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
+                                </s:form>
+                            </div>
+                            <hr/>
+                            <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
+                                <div class="modal-header">
+                                    <a class="close" data-dismiss="modal">×</a>
+                                    <h3>上传文件</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <s:form action="file!upload.action" id="fileUpload" enctype="multipart/form-data" method="post">
+                                        <s:select cssClass="span2" id="classify" name="dest" list="student.fileGroups" listValue="groupName" listKey="groupName"/>
+                                        <script>
+                                            $('#classify').append("<option value='新建分组'>新建分组</option>");
+                                        </script>
+                                        <s:file name="upload" title="上传" id="fileid" onchange="$('#fileUpload').submit();"/>
+                                    </s:form>
+                                </div>
+                            </div>
+
+                            <div id="filelist">
+                            </div>
+                            <div class="modal hide fade" id="movefileModal">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <s:form action="" cssStyle="margin:0px;">
+                                        <dl class="dl-horizontal">
+                                            <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
+                                            <dd>
+                                                <div class="input-append">
+                                                    <s:select cssClass="span2" id="classify" name="dest" list="student.fileGroups" listValue="groupName" listKey="groupName"/>
+                                                    <s:submit id="add" cssClass="btn" value="add" method="addLesson" cssStyle="margin-left:5px;"/>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </s:form>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="publicfile_area" class="tab-pane fade">
+                            <div style="display:inline;">
+                                <input type="text" class="span2">
+                                <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
+                            </div>
+
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th width="300px">
+                                            文件名
+                                        </th>
+                                        <th>
+                                            上传日期
+                                        </th>
+                                        <th>
+                                            上传用户
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <i class="icon-file"></i>我是pdf.pdf
+                                        </td>
+                                        <td>2013-1-1</td>
+                                        <td>张三</td>
+                                        <td class="btn-toolbar">
+                                            <div class="btn-group">
+                                                <div class="dropdown">
+                                                    <a class="btn btn-mini" data-toggle="modal" data-target="#publicfileModal"><i class="icon-tag"></i>收藏</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="modal hide fade" id="publicfileModal">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <s:form action="" cssStyle="margin:0px;">
+                                        <dl class="dl-horizontal">
+                                            <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
+                                            <dd>
+                                                <div class="input-append">
+                                                    <s:select cssClass="span2" id="classify" name="dest" list="student.fileGroups" listValue="groupName" listKey="groupName"/>
+                                                    <s:submit id="add" cssClass="btn" value="add" method="addLesson" cssStyle="margin-left:5px;"/>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </s:form>
+                                </div>
+                            </div>
+                            <div class="pagination pagination-mini pull-right">
+                                <ul>
+                                    <li><a href="#">Prev</a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">Next</a></li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div>
+                            <s:if test="tab=='publicfile'">
+                                <script>
+                                    $("#publicfile_area").addClass("active in");
+                                    $("#l6").addClass("active")
+                                </script>
+                            </s:if>
+                            <s:elseif test="tab=='file'">
+                                <script>
+                                    $("#file_area").addClass("active in");
+                                    $("#l5").addClass("active")
+                                </script>
+                            </s:elseif>
+                            <s:elseif test="tab=='comment'">
+                                <script>
+                                    $("#comment_area").addClass("active in");
+                                    $("#l4").addClass("active")
+                                </script>
+                            </s:elseif>
+                            <s:else>
+                                <script>
+                                    $("#bill_area").addClass("active in");
+                                    $("#l3").addClass("active")
+                                </script>
+                            </s:else>
                         </div>
                     </div>
                 </div>

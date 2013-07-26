@@ -186,7 +186,7 @@
                             <h4>预订确认</h4>
                         </div>
                         <div class="modal-body">
-                        <s:form action="bookTeacher">
+                            <s:form action="bookTeacher">
                                 <dl>
                                     <dt class="muted">上课方式</dt>
                                     <dd id="reserveShowType" style="margin-left:100px"></dd>
@@ -211,10 +211,10 @@
                                     <s:textfield id="reserveLesson" name="lessonName" cssStyle="display:none;"/>
                                     <s:textfield id="reserveNum" name="duration" value="1" cssStyle="display:none;"/>
                                 </dl>
-                            
-                        </div>
-                        <div class="modal-footer">
-                            <s:submit cssClass="btn btn-success" value="提交"/>
+
+                            </div>
+                            <div class="modal-footer">
+                                <s:submit cssClass="btn btn-success" value="提交"/>
                             </s:form>
                             <button class="btn" data-dismiss="modal">取消</button>
                         </div>
@@ -314,10 +314,11 @@
                                     </s:if>
                                     <s:else>
                                         <s:iterator value="billList" id="billList">
-                                            <tr>
-                                                <td>
-                                                    <blockquote>
-                                                        <s:if test="stot != null">
+                                            <s:if test="stot != null">
+                                                <tr>
+                                                    <td>
+                                                        <blockquote>
+
                                                             <h4><s:property value="student.name" /><div class="rateit pull-right" data-rateit-value="<s:property value="stot.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                                                 <small>
                                                                     <span><s:property value="stot.content" /></span>
@@ -326,10 +327,10 @@
                                                                         <span>老师的回复：<s:property value="stot.reply" /></span>
                                                                     </s:if>
                                                                 </small>
-                                                            </s:if>
-                                                    </blockquote>
-                                                </td>
-                                            </tr>
+                                                        </blockquote>
+                                                    </td>
+                                                </tr>
+                                            </s:if>
                                         </s:iterator>
                                     </s:else>
 
@@ -348,16 +349,20 @@
                                         <tr>
                                             <th>时间</th>
                                             <th>学生姓名</th>
+                                            <th>状态</th>
                                             <th>金额</th>
                                         </tr>
                                     </thead>
                                     <tbody>        
                                         <s:iterator value="billList" id="billList">
-                                            <tr>
-                                                <td><s:property value="createdateToString()" /></td>
-                                                <td><s:property value="student.name" /></td>
-                                                <td><s:property value="getRealMoney('teacher')" /></td>
-                                            </tr>
+                                            <s:if test="status == 5">
+                                                <tr>
+                                                    <td><s:property value="createdateToString()" /></td>
+                                                    <td><s:property value="student.name" /></td>
+                                                    <td><label class="label label-success" style="font-size:9px;">确认完成</label></td>
+                                                    <td><strong class="text-error" style="font-size:14px;"><s:property value="money" />.00</strong></td>
+                                                </tr>
+                                            </s:if>
                                         </s:iterator>
                                     </tbody>
                                 </s:else>

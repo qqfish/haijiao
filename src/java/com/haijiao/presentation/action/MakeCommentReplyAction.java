@@ -38,6 +38,7 @@ public class MakeCommentReplyAction extends SessionAction{
     
     public String comment(){
         String userType = (String)this.getSessionValue("userType");
+        System.out.println(billService.toString() + score + userType);
         if(billService.commentBill(id, content, score, userType)==false){
             this.sessionPutIn("nextPageMessage", "你已经评论过了哦！");
         } else {
@@ -58,6 +59,10 @@ public class MakeCommentReplyAction extends SessionAction{
 
     public void setBillService(IBillService billService) {
         this.billService = billService;
+    }
+
+    public IBillService getBillService() {
+        return billService;
     }
     
     public String getContent() {

@@ -45,8 +45,6 @@ public class IndexAction extends RequestSessionAction {
     private IBillService billService;
     private Teacher teacher;
     private Student student;
-    private List<Bill> billList;
-//    private List<Clazz> classList;
     private String tab;
 
     @Override
@@ -86,16 +84,9 @@ public class IndexAction extends RequestSessionAction {
             User user = userService.getUserByEmail(email);
             if (user.getUserType().equals("teacher")) {
                 teacher = (Teacher) user;
-//                scheduleBean = new ScheduleBean(teacher);
-                billList = billService.getBill(email, "teacher");
-//                classList = teacherService.getClasses(email);
                 return "teacher";
             } else {
                 student = (Student) user;
-                student = studentService.getStudentByEmail(email);
-                billList = billService.getBill(email, "student");
-//                classList = studentService.getClasses(email);
-//                scheduleBean = new ScheduleBean(classList);
                 return "student";
             }
         } else {
@@ -158,13 +149,13 @@ public class IndexAction extends RequestSessionAction {
         this.billService = billService;
     }
 
-    public List<Bill> getBillList() {
-        return billList;
-    }
-
-    public void setBillList(List<Bill> billList) {
-        this.billList = billList;
-    }
+//    public List<Bill> getBillList() {
+//        return billList;
+//    }
+//
+//    public void setBillList(List<Bill> billList) {
+//        this.billList = billList;
+//    }
 //
 //    public List<Clazz> getClassList() {
 //        return classList;

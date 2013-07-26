@@ -83,34 +83,34 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="span8 module" style="padding:12px;">
-                    <ul class="nav nav-pills">
-                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="span8 module" style="padding:12px;">
+                        <ul class="nav nav-pills">
+                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
 
-                        <li id="l6"><a href="#file_area" data-toggle="tab" onclick="getFileList(true, null)">个人文件</a></li>
-                        <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共文件</a></li>
-                        <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
-                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
-                    </ul>
-                    <div class="tab-content">
+                            <li id="l6"><a href="#file_area" data-toggle="tab" onclick="getFileList(true, null)">个人文件</a></li>
+                            <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共文件</a></li>
+                            <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
+                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                        </ul>
+                        <div class="tab-content">
 
-                        <div class="tab-pane fade" id='lesson_area'>
-                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
-                               <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
-                               <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
-                               <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
-                               <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
-                               "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
-                            <br/>
-                            <script>
-                                $("#showtip").popover();
-                            </script>
-                            <h4>老师您好，您目前开设课程的情况如下：</h4>
-                            <table>
+                            <div class="tab-pane fade" id='lesson_area'>
+                                <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
+                                   <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
+                                   <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
+                                   <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
+                                   <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
+                                   "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
+                                <br/>
+                                <script>
+                                    $("#showtip").popover();
+                                </script>
+                                <h4>老师您好，您目前开设课程的情况如下：</h4>
+                                <table>
                                 <s:iterator value="teacher.lessons" id="ls">
                                     <s:if test="delete==false">
                                         <s:form action="dealLesson.action">
@@ -211,7 +211,7 @@
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <table class="table table-striped" style="font-size:12px;">
-                                <s:if test="billList.size()<=0">
+                                <s:if test="teacher.billList.size()<=0">
                                     <tbody>
                                         暂无交易记录哦~！
                                     </tbody>
@@ -228,7 +228,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>        
-                                        <s:iterator value="billList" id="billList">
+                                        <s:iterator value="teacher.billList" id="billList">
                                             <tr>
                                                 <td><br /><s:property value="id"/></td>
                                                 <td><strong><s:property value="student.name" /></strong><br />
@@ -275,23 +275,17 @@
                                                         <br /><a class="btn btn-mini btn-link">举报</a>
                                                     </td>
                                                 </s:elseif>
-                                                <s:elseif test="status == 5">
+                                                <s:elseif test="status >= 5">
                                                     <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                                                     <td>
-                                                        <br /><a class="btn btn-mini btn-link">举报</a>
-                                                    </td>
-                                                </s:elseif>
-
-                                                <s:if test="status >= 4">
-                                                    <td>
                                                         <s:if test="ttos==null">
-                                                            <a id="<s:property value="id" />" onclick="$('#comment_id').val($(this).attr('id'))" href="#comment_modal" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
+                                                            <br /><a id="<s:property value="id" />" onclick="$('#comment_id').val($(this).attr('id'))" href="#comment_modal" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
                                                         </s:if>
                                                         <s:else>
-                                                            <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
+                                                            <br /><a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
                                                         </s:else>
                                                     </td>
-                                                </s:if>
+                                                </s:elseif>
                                             </tr>
                                         </s:iterator>
                                     </tbody>
@@ -304,29 +298,29 @@
                                             <div class="modal-body">
                                                 <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                                 内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                <br/>
-                                                评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                                <s:textfield id="score" name="score" cssStyle="display:none;"></s:textfield>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                    <br/>
+                                                    评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                <s:textfield id="comment_score" name="score" cssStyle="display:none;"></s:textfield>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                 <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                            </div>
-                                            <script type="text/javascript">
-                                                $(".commentA").click(function() {
-                                                    var id = $(this).attr("id");
-                                                    $("#rate_" + id).bind('rated', function(event, value) {
-                                                        $('#score_' + id).val(value);
+                                                </div>
+                                                <script type="text/javascript">
+                                                    $(".commentA").click(function() {
+                                                        var id = $(this).attr("id");
+                                                        $("#comment_rate" ).bind('rated', function(event, value) {
+                                                            $('#comment_score').val(value);
+                                                        });
+                                                        $("#comment_rate").bind('over', function(event, value) {
+                                                            $(this).attr('title', value);
+                                                        });
+                                                        $("#cmtsmt").click(function(event) {
+                                                            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                event.preventDefault();
+                                                        });
                                                     });
-                                                    $("#rate_" + id).bind('over', function(event, value) {
-                                                        $(this).attr('title', value);
-                                                    });
-                                                    $("#cmtsmt").click(function(event) {
-                                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                            event.preventDefault();
-                                                    });
-                                                });
-                                            </script>
+                                                </script>
                                         </s:form>
                                     </div>
                                 </s:else>
@@ -346,15 +340,15 @@
                         <div class="tab-pane fade" id='comment_area'>
                             <table class="table table-hover table-striped">
                                 <tbody>
-                                    <s:if test="billList.size()<=0">
+                                    <s:if test="teacher.billList.size()<=0">
                                         还没有评论哦~！
                                     </s:if>
                                     <s:else>
-                                        <s:iterator value="billList" id="billList">
-                                            <tr>
-                                                <td>
-                                                    <blockquote>
-                                                        <s:if test="stot != null">
+                                        <s:iterator value="teacher.billList" id="billList">
+                                            <s:if test="stot != null">
+                                                <tr>
+                                                    <td>
+                                                        <blockquote>
                                                             <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
                                                             <small>
                                                                 <span><s:property value="stot.content" /></span>
@@ -380,17 +374,17 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                    </div>
+                                                                        </div>
                                                                 </s:form>
                                                             </div>
-                                                        </s:if>
-                                                    </blockquote>
-                                                </td>
-                                            </tr>
+                                                        </blockquote>
+                                                    </td>
+                                                </tr>
+                                            </s:if>
                                         </s:iterator>
                                     </s:else>
                                 </tbody>
@@ -437,6 +431,22 @@
 
                             <div id="filelist">
                             </div>
+                            <div class="modal hide fade" id="movefileModal">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <s:form action="" cssStyle="margin:0px;">
+                                        <dl class="dl-horizontal">
+                                            <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
+                                            <dd>
+                                                <div class="input-append">
+                                                    <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
+                                                    <s:submit id="add" cssClass="btn" value="add" method="addLesson" cssStyle="margin-left:5px;"/>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </s:form>
+                                </div>
+                            </div>
                         </div>
                         <div id="publicfile_area" class="tab-pane fade">
                             <div style="display:inline;">
@@ -463,20 +473,36 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <i class="file-folder"></i>我是pdf.pdf
+                                            <i class="icon-file"></i>我是pdf.pdf
                                         </td>
                                         <td>2013-1-1</td>
                                         <td>张三</td>
                                         <td class="btn-toolbar">
                                             <div class="btn-group">
                                                 <div class="dropdown">
-                                                    <a class="btn btn-mini" data-toggle="tooltip" title="收藏"><i class="icon-tag"></i></a>
+                                                    <a class="btn btn-mini" data-toggle="modal" data-target="#publicfileModal"><i class="icon-tag"></i>收藏</a>
                                                 </div>
                                             </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
+                            <div class="modal hide fade" id="publicfileModal">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <s:form action="" cssStyle="margin:0px;">
+                                        <dl class="dl-horizontal">
+                                            <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
+                                            <dd>
+                                                <div class="input-append">
+                                                    <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
+                                                    <s:submit id="add" cssClass="btn" value="add" method="addLesson" cssStyle="margin-left:5px;"/>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </s:form>
+                                </div>
+                            </div>
                             <div class="pagination pagination-mini pull-right">
                                 <ul>
                                     <li><a href="#">Prev</a></li>
