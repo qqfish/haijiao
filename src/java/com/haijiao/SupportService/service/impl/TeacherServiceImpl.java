@@ -6,10 +6,12 @@ package com.haijiao.SupportService.service.impl;
 
 //import com.haijiao.Domain.bean.Clazz;
 //import com.haijiao.Domain.bean.FreeTime;
+import com.haijiao.Domain.Manager.MoneyRequest;
 import com.haijiao.Domain.bean.Lesson;
 import com.haijiao.Domain.bean.Teacher;
 //import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.dao.ILessonDAO;
+import com.haijiao.SupportService.dao.IMoneyRequestDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.service.ITeacherService;
 import java.sql.Date;
@@ -29,6 +31,8 @@ public class TeacherServiceImpl implements ITeacherService {
 //    IClazzDAO classDAO;
     @Resource
     ILessonDAO lessonDAO;
+    @Resource
+    IMoneyRequestDAO moneyRequestDAO;
 
     public void setTeacherDAO(ITeacherDAO teacherDAO) {
         this.teacherDAO = teacherDAO;
@@ -204,6 +208,42 @@ public class TeacherServiceImpl implements ITeacherService {
             l.setDelete(true);
             lessonDAO.update(l);
         }
+        return true;
+    }
+
+    @Override
+    public boolean changeReserve(String email) {
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        boolean reserve = t.getReserve();
+        t.setReserve(!reserve);
+        teacherDAO.update(t);
+        return true;
+    }
+
+    @Override
+    public boolean requestMoney(String email, String bankcard, String bankname) {
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        MoneyRequest mr = new MoneyRequest();
+        mr.setTeacher(t);
+        mr.setBankcard(bankcard);
+        mr.setBankname(bankname);
+        mr.setMoney(t.getCoin());
+        moneyRequestDAO.makePersistent(mr);
+        return true;
+    }
+
+    @Override
+    public boolean requestMoneyAndUpdate(String email, String bankcard, String bankname) {
+        Teacher t = teacherDAO.getTeacherByEmail(email);
+        MoneyRequest mr = new MoneyRequest();
+        mr.setTeacher(t);
+        mr.setBankcard(bankcard);
+        mr.setBankname(bankname);
+        mr.setMoney(t.getCoin());
+        t.setBankcard(bankcard);
+        t.setBankname(bankname);
+        moneyRequestDAO.makePersistent(mr);
+        teacherDAO.update(t);
         return true;
     }
 }

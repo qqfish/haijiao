@@ -98,7 +98,7 @@
                                     <ul class="dropdown-menu" id="bookmark"></ul>
                                 </div>
                             </li>
-                            <li style="display: none;">
+                            <li>
                                 <div class="btn-group">
                                     <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="用户文件"><i class="icon-th-list icon-white"></i></a>
                                     <ul class="dropdown-menu" id="userFile"></ul>

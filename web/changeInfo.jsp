@@ -177,9 +177,6 @@
                 });
             });
         </script>
-
-
-
         <!--[if lt IE 8]>
       <div style=' clear: both; text-align:center; position: relative;'>
         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
@@ -209,20 +206,20 @@
                     <h3>修改信息</h3>
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
-                        <li id="l1" class="active"><a href="#1" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l1" class="active"><a href="#basicInfo" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
                         <s:if test="#session.userType=='teacher'">
-                            <li id="l5"><a href="#5" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
+                            <li id="l5"><a href="#detailInfo" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
                         </s:if>
-                        <li id="l2" ><a href="#2" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
-                        <li id="l3" ><a href="#3" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l2" ><a href="#modifyPassword" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
+                        <li id="l3" ><a href="#headpic" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
                         <s:if test="#session.userType=='student'">
-                            <li id="l4"><a href="#4" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>
+                            <li id="l4"><a href="#personIntro" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
+                        </s:if>                  
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id='1'>
+                        <div class="tab-pane fade active in" id='basicInfo'>
                             <s:form action="changeInfo.action">
                                 <s:if test="#session.userType == 'teacher'">
                                     <h3>老师您好，修改你的详细信息吧^ ^</h3>
@@ -244,12 +241,12 @@
                                         <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" readOnly="readOnly" placeholder="请输入您的生日" value="%{tea.birthday}"/></dd>
                                         <dt>所在地</dt>
                                         <dd>
-                                                <s:select id="selProvince" cssClass="span2" name="province" list="{ }" value="%{tea.province}"></s:select>
-                                                <s:select id="selCity" cssClass="span2" name="city" list="{ }" value="%{tea.city}"></s:select>
-                                                <s:select id="selDistrict" cssClass="span2" name="district" list="{ }" value="%{tea.district}"></s:select>
-                                                <input type="hidden" id="txtProvince" value="<s:property value="tea.province"/>"/>
-                                                <input type="hidden" id="txtCity" value="<s:property value="tea.city"/>"/>
-                                                <input type="hidden" id="txtDistrict" value="<s:property value="tea.district"/>"/>
+                                            <s:select id="selProvince" cssClass="span2" name="province" list="{ }" value="%{tea.province}"></s:select>
+                                            <s:select id="selCity" cssClass="span2" name="city" list="{ }" value="%{tea.city}"></s:select>
+                                            <s:select id="selDistrict" cssClass="span2" name="district" list="{ }" value="%{tea.district}"></s:select>
+                                            <input type="hidden" id="txtProvince" value="<s:property value="tea.province"/>"/>
+                                            <input type="hidden" id="txtCity" value="<s:property value="tea.city"/>"/>
+                                            <input type="hidden" id="txtDistrict" value="<s:property value="tea.district"/>"/>
                                         </dd>
                                         <dt>目前身份</dt>
                                         <dd><s:select cssClass="span2" name="studyStatus" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select></dd>
@@ -308,7 +305,7 @@
                                 </s:if>
                             </s:form>
                         </div>
-                        <div class="tab-pane fade"  id='5'>
+                        <div class="tab-pane fade"  id='detailInfo'>
                             <s:form action="changeInfo.action">
                                 <h3>修改详细资料</h3>
                                 <hr/>
@@ -331,7 +328,7 @@
                                 </dl>
                             </s:form>
                         </div>
-                        <div class="tab-pane fade"  id='2'>
+                        <div class="tab-pane fade"  id='modifyPassword'>
                             <s:form action="changeInfo.action">
                                 <h3>修改密码</h3>
                                 <hr/>
@@ -349,7 +346,7 @@
                                 </dl>
                             </s:form>
                         </div>
-                        <div class="tab-pane fade"  id='3'>
+                        <div class="tab-pane fade"  id='headpic'>
                             <h3>修改头像</h3>
                             <hr/>
                             <p style="font-size: 9px;">请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。<br/>
@@ -390,11 +387,11 @@
                             </s:form>
                             <div class="progress"><div class="bar"></div></div>
                         </div>
-                        <div class="tab-pane fade"  id='4'>
+                        <div class="tab-pane fade"  id='personIntro'>
                             <h3>修改主页介绍</h3>
                             <hr/>
                             <s:form action="changeIntro.action">
-                                    <s:textarea cssStyle="height:400px" name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/>
+                                <s:textarea cssStyle="height:400px" name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/>
                                 <s:submit cssClass="btn btn-primary btn-small pull-right" value="提交"/>
                             </s:form>
                         </div>

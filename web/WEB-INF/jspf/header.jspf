@@ -46,7 +46,7 @@
                 }
             }
             else {
-                $('#classes').append("<li>  暂无课程</li>");
+                $('#classes').prepend("<li><a>暂无课程</a></li>");
             }
         }, "text");
     }
@@ -59,7 +59,7 @@
                 $('#publicRoomButton').addClass("btn-warning").text("试讲房间(有人)");
                 blink("房间有人");
             }
-            else if (data.info.reserveNum != null && data.info.reserveNum >= 0) {
+            else if (data.info.reserveNum != null && data.info.reserveNum > 0) {
                 $('#toClass').removeClass("btn-inverse");
                 $('#toClass').addClass("btn-info");
                 $("#notification").text("有" + data.info.reserveNum + "个新的请求，点击查看").addClass("btn-warning");

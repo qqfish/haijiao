@@ -27,6 +27,8 @@ public interface ITeacherService {
     //设置试听
     public boolean changeAudition(String email);
     
+    public boolean changeReserve(String email);
+    
     public boolean increseObNum(String email);
     
     public boolean addLesson(String email, String lessonName, int price);
@@ -36,6 +38,10 @@ public interface ITeacherService {
     public boolean setRoomOccupied(String email, String stuEmail);
     
     public String getRoomOccupied(String email);
+    //临时银行卡号
+    public boolean requestMoney(String email, String bankcard, String bankname);
+    //保存银行卡号
+    public boolean requestMoneyAndUpdate(String email, String bankcard, String bankname);
     
 //    //获取老师的课程
 //    public List<Clazz> getClasses(String email);

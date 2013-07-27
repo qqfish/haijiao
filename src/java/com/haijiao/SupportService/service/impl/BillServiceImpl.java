@@ -7,14 +7,17 @@ package com.haijiao.SupportService.service.impl;
 import com.haijiao.Domain.bean.Bill;
 import com.haijiao.Domain.bean.Comment;
 import com.haijiao.Domain.bean.Lesson;
+import com.haijiao.Domain.bean.Payment;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.dao.IBillDAO;
 import com.haijiao.SupportService.dao.ICommentDAO;
 import com.haijiao.SupportService.dao.ILessonDAO;
+import com.haijiao.SupportService.dao.IPaymentDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.service.IBillService;
+import com.haijiao.global.TeacherLevel;
 import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -40,6 +43,8 @@ public class BillServiceImpl implements IBillService{
     ITeacherDAO teacherDAO;
     @Resource
     ICommentDAO commentDAO;
+    @Resource
+    IPaymentDAO paymentDAO;
 
     public void setBillDAO(IBillDAO billDAO) {
         this.billDAO = billDAO;
@@ -93,6 +98,7 @@ public class BillServiceImpl implements IBillService{
         bill.setStatus(Bill.Status.pending);
         boolean bbill = billDAO.makePersistent(bill);
         t.setNewReserveNum(t.getNewReserveNum() + 1);
+        t.setReserveNum(t.getReserveNum() + 1);
         teacherDAO.update(t);
         return bbill;
     }
@@ -204,7 +210,17 @@ public class BillServiceImpl implements IBillService{
         b.setStatus(Bill.Status.studentFinish);
         Teacher tea = b.getTeacher();
         int coin = tea.getCoin();
-        tea.setCoin(coin + b.getMoney());
+        
+        tea.setClassNum(tea.getClassNum() + 1);
+        Payment stuPay = new Payment(b);
+        Payment charge = new Payment();
+        charge.setMoney((int)(-stuPay.getMoney() * TeacherLevel.getPercentage(tea.getLevel())));
+        charge.setType(Payment.Type.charge);
+        tea.addPayment(stuPay);
+        tea.addPayment(charge);
+        tea.setCoin(coin + stuPay.getMoney() + charge.getMoney());
+        paymentDAO.makePersistent(stuPay);
+        paymentDAO.makePersistent(charge);
         teacherDAO.update(tea);
         billDAO.update(b);
         //可生成内部账单

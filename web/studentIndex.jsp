@@ -119,10 +119,10 @@
                                             <s:elseif test="status == 2">
                                                 <td><br /><label class="label label-important" style="font-size:9px;">等待支付</label></td>
                                                 <td>
-                                                    <s:form action="createBill">
+                                                    <s:form action="createBill" cssStyle="margin:0px; padding:0px;">
                                                         <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
-                                                        <s:submit value="支付" method="accept" cssClass="btn btn-mini btn-success"/>
-                                                        <s:submit value="取消" method="deny" cssClass="btn btn-mini btn-link"/>
+                                                        <br /><s:submit value="支付" method="accept" cssClass="btn btn-mini btn-success"/>
+                                                        <br /><s:submit value="取消" method="deny" cssClass="btn btn-mini btn-link"/>
                                                     </s:form>
                                                 </td>
                                             </s:elseif>
@@ -135,14 +135,17 @@
                                             <s:elseif test="status == 4">
                                                 <td><br /><label class="label label-important" style="font-size:9px;">完成授课</label></td>
                                                 <td>
-                                                    <br /><a class="btn btn-mini btn-success">完成</a>
+                                                    <s:form action="dealWithReservation" cssStyle="margin:0px; padding:0px;">
+                                                        <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
+                                                        <br /><s:submit value="完成" method="studentFinish" cssClass="btn btn-mini btn-success"/>
+                                                    </s:form>
                                                     <br /><a class="btn btn-mini btn-link">举报</a>
                                                 </td>
                                             </s:elseif>
                                             <s:elseif test="status >= 5">
                                                 <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                                                 <td>
-                                                    <s:if test="ttos==null">
+                                                    <s:if test="stot==null">
                                                         <br /><a id="<s:property value="id" />" onclick="$('#comment_id').val($(this).attr('id'))" href="#comment_modal" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
                                                     </s:if>
                                                     <s:else>
@@ -163,29 +166,29 @@
                                         <div class="modal-body">
                                             <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                             内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                            <br/>
-                                            评分<div id="rate_<s:property value="id" />" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                            <s:textfield id="score_%{id}" name="score" cssStyle="display:none;"></s:textfield>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                <br/>
+                                                评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                            <s:textfield id="comment_score" name="score" cssStyle="display:none;"></s:textfield>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                             <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                        </div>
-                                        <script type="text/javascript">
-                                            $(".commentA").click(function() {
-                                                var id = $(this).attr("id");
-                                                $("#comment_rate" ).bind('rated', function(event, value) {
-                                                    $('#comment_score').val(value);
+                                            </div>
+                                            <script type="text/javascript">
+                                                $(".commentA").click(function() {
+                                                    var id = $(this).attr("id");
+                                                    $("#comment_rate" ).bind('rated', function(event, value) {
+                                                        $('#comment_score').val(value);
+                                                    });
+                                                    $("#comment_rate").bind('over', function(event, value) {
+                                                        $(this).attr('title', value);
+                                                    });
+                                                    $("#cmtsmt").click(function(event) {
+                                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                            event.preventDefault();
+                                                    });
                                                 });
-                                                $("#comment_rate").bind('over', function(event, value) {
-                                                    $(this).attr('title', value);
-                                                });
-                                                $("#cmtsmt").click(function(event) {
-                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                        event.preventDefault();
-                                                });
-                                            });
-                                        </script>
+                                            </script>
                                     </s:form>
                                 </div>
                             </table>
@@ -237,11 +240,11 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                    </div>
+                                                                        </div>
                                                                 </s:form>
                                                             </div>                                                      
                                                         </blockquote>
@@ -286,13 +289,15 @@
                             <div class="modal hide fade" id="movefileModal">
                                 <div class="modal-body">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <s:form action="" cssStyle="margin:0px;">
+                                    <s:form action="file" cssStyle="margin:0px;">
                                         <dl class="dl-horizontal">
                                             <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
                                             <dd>
                                                 <div class="input-append">
-                                                    <s:select cssClass="span2" id="classify" name="dest" list="student.fileGroups" listValue="groupName" listKey="groupName"/>
-                                                    <s:submit id="add" cssClass="btn" value="add" method="addLesson" cssStyle="margin-left:5px;"/>
+                                                    <s:select cssClass="span2" name="dest" list="student.fileGroups" listValue="groupName" listKey="groupName"/>
+                                                    <s:textfield cssStyle="display: none;" id="movefileSrc" name="src" />                                                    
+                                                    <s:textfield cssStyle="display: none;" id="movefileName" name="uploadFileName" />
+                                                    <s:submit cssClass="btn" value="移动" method="move" cssStyle="margin-left:5px;"/>
                                                 </div>
                                             </dd>
                                         </dl>

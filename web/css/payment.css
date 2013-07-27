@@ -1,0 +1,24 @@
+/* 
+    Document   : changInfo
+    Created on : Jul 27, 2013, 4:03:55 PM
+    Author     : fish
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.money-header {
+    background: -webkit-gradient(linear,left top,left bottom,from(#e0e0e0),to(#f0f0f0));
+    background: -moz-linear-gradient(top,#e0e0e0,#e0#f0f0f0e0e0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#e0e0e0',endColorstr='#f0f0f0');
+    background: -o-linear-gradient(top,#e0e0e0,#f0f0f0);
+    background: linear-gradient(top,#e0e0e0,#f0f0f0);
+}
+
+.title-border {
+    border: 1px solid #fff;
+    height: 14px;
+    line-height: 16px;
+    overflow: hidden;
+    padding: 9px 10px 10px;
+    padding: 9px 10px\0;
+}

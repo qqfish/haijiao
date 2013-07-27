@@ -52,7 +52,7 @@
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
-                    </h4>
+                        </h4>
                     <s:if test="tea.status==1">
                         <a class='btn btn-success' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
                     </s:if>
@@ -154,7 +154,7 @@
                         <dt class="muted" style="width:90px;">课程</dt>
                         <dd id="lesson_select" style="margin-left:110px;">
                             <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                            <span  data-toggle-name="is_private" data-toggle="buttons-radio">
+                                <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                 <s:iterator value="tea.lessons" status="st">
                                     <s:if test="delete==false">
                                         <button type="button" class="btn btn-mini btn-choice"   data-toggle="tooltip" data-placement="bottom" onclick="reserve.setLesson('<s:property value="name"/>');"><s:property value="name"/></button>
@@ -174,7 +174,12 @@
                     </dl>
                     <dl class="dl-horizontal">
                         <s:if test="#session.userType=='student'">
-                            <button id="reserveButton" class="btn offset1 span2 btn-danger disabled" disabled="true" data-toggle="modal" data-target="#reserveModal">立即预定</button>
+                            <s:if test="tea.reserve">
+                                <button id="reserveButton" class="btn offset1 span2 btn-danger disabled" disabled="true" data-toggle="modal" data-target="#reserveModal">立即预定</button>
+                            </s:if>
+                            <s:else>
+                                <button class="btn offset1 span2 disabled" disabled="true" data-toggle="modal" data-target="#reserveModal">预约已满</button>
+                            </s:else>
                         </s:if>
                         <s:else>
                             <button class="btn offset1 span2 btn-danger" data-toggle="modal" data-target="#loginInfo">立即预定</button>

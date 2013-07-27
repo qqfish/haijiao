@@ -129,6 +129,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 table.sendChangeFile($(this).attr("uuid"));
             });
             roomFileList[roomFileList.size] = file;
+            pInfo(file.fileName + "已加入文件列表")
         }
     }
     

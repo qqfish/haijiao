@@ -70,17 +70,27 @@ public class Teacher extends User{
 //    private List<FreeTime> schedule;//记录老师的时间表
     
     @OneToMany(mappedBy = "teacher")
-    protected List<Bill> billList;  //账单列表
+    protected List<Bill> billList;  //预约列表
     
 //    @Column(columnDefinition="int default 0")
 //    private int wagePerhour;        //老师每小时的辅导费
+    
+    @OneToMany
+    @JoinColumn(name="tid")
+    protected List<Payment> paymentList;    //账单列表
+    
+    private String bankcard;
+    private String bankname;
+    
+    @Column(columnDefinition="int default 0")
+    protected int level;            //老师的等级，用来获取分成比例
     
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
         this.labels = new ArrayList<Label>();
         this.billList = new ArrayList<Bill>();
     }
-    
+
     public String getDirectProvince() {
         return province.substring(7);
     }
@@ -334,4 +344,40 @@ public class Teacher extends User{
 //        }
 //        return null;
 //    }
+
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+    
+    public void addPayment(Payment p) {
+        paymentList.add(p);
+    }
+
+    public String getBankcard() {
+        return bankcard;
+    }
+
+    public void setBankcard(String bankcard) {
+        this.bankcard = bankcard;
+    }
+
+    public String getBankname() {
+        return bankname;
+    }
+
+    public void setBankname(String bankname) {
+        this.bankname = bankname;
+    }
 }

@@ -21,18 +21,32 @@ import org.springframework.stereotype.Controller;
 @Controller
 @ParentPackage("struts-default")
 @Namespace("/")
-@Action("changeAudition")
+@Action("setTeacherStatus")
 @Results({
     @Result(name="success",type="redirect",location="index.action")
 })
-public class ChangeAuditionAction extends SessionAction{
+public class SetTeacherStatus extends SessionAction{
     @Resource
     ITeacherService teacherService;
     
-    @Override
-    public String execute() {
+    public String audition() {
         String email = (String) this.getSessionValue("email");
         teacherService.changeAudition(email);
+        System.out.println("fff");
         return SUCCESS;
+    }
+    
+    public String reserve() {
+        String email = (String) this.getSessionValue("email");
+        teacherService.changeReserve(email);
+        return SUCCESS;
+    }
+
+    public ITeacherService getTeacherService() {
+        return teacherService;
+    }
+
+    public void setTeacherService(ITeacherService teacherService) {
+        this.teacherService = teacherService;
     }
 }

@@ -63,7 +63,7 @@
                             <td><s:property value="createdateToString()"/></td>
                             <td class="btn-toolbar">
                                 <div class="btn-group">
-                                    <a class="btn btn-mini" href="javascript:;" data-toggle="modal" data-target="#movefileModal"><i class="icon-retweet"></i>移动</a>
+                                    <a class="btn btn-mini" href="javascript:;" data-toggle="modal" data-target="#movefileModal" onclick="$('#movefileName').val('<s:property value="name" />');$('#movefileSrc').val('<s:property value="groupName" />');"><i class="icon-retweet"></i>移动</a>
                                     <s:url id="removeurl" action="file" method="deleteFile">
                                         <s:param name="name" value="%{name}" />
                                         <s:param name="dest" value="%{groupName}" />

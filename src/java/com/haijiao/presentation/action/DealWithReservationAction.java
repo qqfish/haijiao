@@ -49,6 +49,18 @@ public class DealWithReservationAction extends SessionAction{
         return SUCCESS;
     }
     
+    public String teacherFinish(){
+        billService.changeBillStatus(billId, Bill.Status.teacherFinish);
+        this.sessionPutIn("nextPageMessage","已完成授课\n");
+        return SUCCESS;
+    }
+    
+    public String studentFinish(){
+        billService.changeBillStatus(billId, Bill.Status.studentFinish);
+        this.sessionPutIn("nextPageMessage","已确认授课完成\n");
+        return SUCCESS;
+    }
+    
     public void setBillService(IBillService billService) {
         this.billService = billService;
     }
