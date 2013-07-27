@@ -18,6 +18,7 @@
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
+    
 
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
@@ -39,6 +40,35 @@
                  <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400italic' rel='stylesheet' type='text/css'>
                <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
                 <![endif]-->
+        
+        <script type="text/javascript">
+                        function hide_profile() {
+                            document.getElementById("personal_profile").className = "modal fade hide";
+                        }
+                        function show_profile() {
+                            document.getElementById("personal_profile").className = "modal";
+                        }
+                        var flag = 1;
+                        function edit_share_info() {
+                            document.getElementById("share_info").readOnly = false;
+                            document.getElementById("share_info").readonly = false;
+                        }
+                        function save_share_info() {
+                            document.getElementById("share_info").setAttribute("readOnly","true");
+                            document.getElementById("share_info").readonly = true;
+                            document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" + 
+                                    "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                                    document.getElementById("share_info").value;
+                        }
+                        function share_iframe_load() {
+                            if(flag) {
+                                flag = 0;
+                                document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" + 
+                                    "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                                    document.getElementById("share_info").value;
+                            }
+                        }
+                    </script>
     </head>
     <body>
 
@@ -87,15 +117,52 @@
                             </tbody>
                         </table>
                     </div>
+                                
+                    
                     <div class="span8 module" style="padding:12px;">
                         <ul class="nav nav-pills">
                             <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-
                             <li id="l6"><a href="#file_area" data-toggle="tab" onclick="getFileList(true, null)">个人文件</a></li>
                             <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共文件</a></li>
                             <li id="l4"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                            
+                            <!--  add a button for previewing Profile -->
+                            <li style="float:right;margin-right: 20px"> <button class="btn" onclick="show_profile()">分享个人主页</button></li>
                         </ul>
+                        
+                        <!--   personal proflie   -->
+                        <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
+                             <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" onclick="hide_profile()">&times;</button>
+                                  <h3>主页预览</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
+    姓名：xx
+    学校：上海交通大学
+    专业：会计学
+    线下授课区域：上海
+    在线试讲页面：http://haijiaoedu.com/用户名
+                                    </textarea>
+
+                                    <p><button class="btn" onclick ="edit_share_info()">编辑</button><button class="btn" onclick ="save_share_info()">保存</button>&nbsp;【分享主页信息】                                                        
+                            <iframe id="share_iframe" onload="share_iframe_load()"allowtransparency="true" frameborder="0" scrolling="no"
+                                src="http://service.weibo.com/staticjs/weiboshare.html?url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1" width="72" height="33">
+                            </iframe>
+                                </div>
+                                <div style="margin-left: 20px">
+                                    <p style="color:#999999">推广建议：链接可以转发以下网址获取更多的预约</p>
+                                    <p style="color:#999999">1.&nbsp;58同城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;赶集网</p>
+                                    <p style="color:#999999">3.&nbsp;百姓网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;高校bbs</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn" style="margin-left:30px" onclick="hide_profile()">关闭</button>
+                                </div>
+                             </div>
+                        </div>
+                        
                         <div class="tab-content">
 
                             <div class="tab-pane fade" id='lesson_area'>
