@@ -9,3 +9,9 @@ function checkPositiveNumber(obj){
     if(isNaN(val) || val < 0)
         obj.val(0);
 }
+
+function checkNatureNumber(obj){
+    var val = obj.val();
+    if(isNaN(val) || val <= 0)
+        obj.val(1);
+}

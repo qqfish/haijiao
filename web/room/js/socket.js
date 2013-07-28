@@ -11,7 +11,7 @@ connection.connect = (function(host) {
         connection.socket = new MozWebSocket(host);
     } else {
         console.log('Error: WebSocket is not supported by this browser.');
-        pError("该浏览器版本太旧，不支持视频白板功能，请到<a href='http://www.onlinedown.net/soft/7993.htm'>这里</a>下载最新版Chrome浏览器",true);
+        pError("该浏览器版本太旧，不支持视频白板功能，请到<a href='http://www.onlinedown.net/softdown/7993_2.htm'>这里</a>下载最新版Chrome浏览器",true);
         return;
     }
 
@@ -88,11 +88,11 @@ connection.connect = (function(host) {
 connection.initialize = function(stuEmail, teaEmail, email) {
     console.log(email);
     if (window.location.protocol == 'http:') {
-        connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
-    //connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?clazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        //connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
+    connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
     } else {
-        connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
-    //connection.connect('wss://202.120.1.47:8080/WebFcSocketServletclazzId='+clazzId+'&teaEmail=' + teaEmail + '&email='+email);
+        //connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
+    connection.connect('wss://202.120.1.47:8080/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
     }
 };
 

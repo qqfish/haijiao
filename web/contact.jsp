@@ -86,9 +86,15 @@
                         <h4>其他联系方式</h4>
                         <p>
                         <ul class="checklist">
-                            <li>电话:xxxxxxxx</li>
-                            <li>地址:xxxxxxxx</li>
-                            <li>邮箱:<a href="mailto:qqfishyx@gmail.com">qqfishyx@gmail.com</a></li>
+                            <li>
+                                业务咨询:
+                                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=104903906&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:104903906:52" alt="点击这里给我发消息" title="点击这里给我发消息"/></a>
+                            </li>
+                            <li>
+                                意见反馈:
+                                <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=108588613&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:108588613:52" alt="在线客服" title="在线客服"/></a>
+                            </li>
+                            <li>邮箱:<a href="mailto:haijiaoedu@163.com">haijiaoedu@163.com</a></li>
                         </ul>
                         </p>
                         <hr/>

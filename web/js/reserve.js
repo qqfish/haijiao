@@ -24,8 +24,7 @@ reserve.setType = function(type){
     $("#reserveShowType").text(type);
     reserve.type = type;
     if(reserve.price >= 0){
-        $("#reserveButton").removeClass("disabled");
-        $("#reserveButton")[0].disabled = false;
+        $("#reserveButton").attr("data-target","#reserveModal");
     }
 }
 
@@ -36,8 +35,7 @@ reserve.setLesson = function(lesson){
     reserve.price = reserve.priceList[lesson];
     $("#reserveTotal").text("￥" + (reserve.num * reserve.price) + ".00");
     if(reserve.type){
-        $("#reserveButton").removeClass("disabled");
-        $("#reserveButton")[0].disabled = false;
+        $("#reserveButton").attr("data-target","#reserveModal");
     }
 }
 

@@ -59,9 +59,9 @@
                 </div>
                 <div class="span8 module" style="padding:12px">
                     <ul class="nav nav-pills">
-                        <li id="l3"><a href="#bill_area" data-toggle="tab" >交易记录</a></li>
-                        <li id="l5"><a href="#file_area" data-toggle="tab" >个人文件</a></li>
-                        <li id="l6" ><a href="#publicfile_area" data-toggle="tab">公共文件</a></li>
+                        <li id="l3"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
+                        <li id="l5"><a href="#file_area" data-toggle="tab" >我的课件</a></li>
+                        <li id="l6" ><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
                         <li id="l4" ><a href="#comment_area" data-toggle="tab" >评论</a></li>
                     </ul>
                     <div class="tab-content">

@@ -52,12 +52,14 @@
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
-                        </h4>
+                    </h4>
                     <s:if test="tea.status==1">
-                        <a class='btn btn-success' href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
+                        <a class='btn btn-success' style="margin-left:20px" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
+                        <a class="btn btn-primary" style="margin-left:10px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                     </s:if>
                     <s:elseif test="tea.status == 2">
-                        <a class="btn btn-success" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-success" style="margin-left:20px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
+                        <a class="btn btn-primary" style="margin-left:10px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                         <div class="modal fade hide" id="publicRoom">
                             <div class="modal-body">
                                 <h3>老师正在忙碌，可能无法与您交流，仍要进入房间吗？</h3>
@@ -69,21 +71,31 @@
                         </div>
                     </s:elseif>
                     <s:elseif test="#session.email != null">
-                        <a class="btn btn-primary" style="margin-left:5px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
+                        <a class='btn btn-success disabled' style="margin-left:20px" diabled>在线试讲</a>
+                        <a class="btn btn-primary" style="margin-left:10px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                     </s:elseif>
                     <s:else>
-                        <a class="btn btn-primary" style="margin-left:5px" data-toggle="modal" data-target="#loginInfo">发送私信</a>
+                        <a class='btn btn-success' style="margin-left:20px" data-toggle="modal" data-target="#loginInfo">在线试讲</a>
+                        <a class="btn btn-primary" style="margin-left:10px" data-toggle="modal" data-target="#loginInfo">发送私信</a>
                     </s:else>
-                    <hr/>
+                    <hr style="margin-top:20px;"/>
                     <div style="margin-left: 10px">
-                        <small>
+                        <small><i class="icon-home"></i>
                             <s:property value="tea.getDirectProvince()"/> - 
                             <s:property value="tea.getDirectCity()"/> - 
-                            <s:property value="tea.getDirectDistrict()"/><br/><br/>
+                            <s:property value="tea.getDirectDistrict()"/>
                         </small>
-                        <p><s:property value="tea.email" /></p>
-                        <p><s:property value="tea.createTime" /> 加入</p>
+                        <br />
+                        <small><i class="icon-envelope"></i>
+                            <s:property value="tea.email" /></small>
+                        <br />
+                        <small><i class="icon-signal"></i>
+                            18801902576</small>
+                        <br />
+                        <small><i class="icon-time"></i>
+                            <s:property value="tea.createTime" />加入</small>
                     </div>
+                    <hr />
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>
@@ -122,7 +134,7 @@
                     <hr/>
                     <dl class="dl-horizontal">
                         <dt class="muted" style="width:90px;">上课方式</dt>
-                        <s:if test="tea.sprtOnline==false && tea.sprtTUnderline==false && tea.sprtSUnderline==false">
+                        <s:if test="!tea.sprtOnline && !tea.sprtTUnderline && !tea.sprtSUnderline">
                             <dd style="margin-left:110px;">暂未选择授课方式</dd>
                         </s:if>
                         <s:else>
@@ -154,7 +166,7 @@
                         <dt class="muted" style="width:90px;">课程</dt>
                         <dd id="lesson_select" style="margin-left:110px;">
                             <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                                <span  data-toggle-name="is_private" data-toggle="buttons-radio">
+                            <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                 <s:iterator value="tea.lessons" status="st">
                                     <s:if test="delete==false">
                                         <button type="button" class="btn btn-mini btn-choice"   data-toggle="tooltip" data-placement="bottom" onclick="reserve.setLesson('<s:property value="name"/>');"><s:property value="name"/></button>
@@ -175,7 +187,7 @@
                     <dl class="dl-horizontal">
                         <s:if test="#session.userType=='student'">
                             <s:if test="tea.reserve">
-                                <button id="reserveButton" class="btn offset1 span2 btn-danger disabled" disabled="true" data-toggle="modal" data-target="#reserveModal">立即预定</button>
+                                <button id="reserveButton" class="btn offset1 span2 btn-danger" data-toggle="modal" data-target="#reserveWarning">立即预定</button>
                             </s:if>
                             <s:else>
                                 <button class="btn offset1 span2 disabled" disabled="true" data-toggle="modal" data-target="#reserveModal">预约已满</button>
@@ -224,11 +236,19 @@
                             <button class="btn" data-dismiss="modal">取消</button>
                         </div>
                     </div>
+                    <div class="modal fade hide" id="reserveWarning">
+                        <div class="modal-body">
+                            <h4>请选择<strong>上课方式</strong>和<strong>课程</strong></h4>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-success" data-dismiss="modal">确认</button>
+                        </div>
+                    </div>
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <ul class="nav nav-pills">
                         <li class="active"><a href="#info_area" data-toggle="tab">基本信息</a></li>
-                        <li><a href="#comment_area" data-toggle="tab">评论</a></li>
+                        <li><a href="#comment_area" data-toggle="tab">用户评论</a></li>
                         <li><a href="#bill_area" data-toggle="tab">交易记录</a>
                     </ul>
                     <div class="tab-content">

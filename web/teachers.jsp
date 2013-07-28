@@ -44,6 +44,7 @@
                 <div class="span11 module">
                     <div id="collapseOne" style="padding: 16px;">
                         <button type="button" class="btn btn-small btn-danger disabled">年级</button>
+                        <small class="pull-right"><i class="icon-exclamation-sign"></i>建议选择同网用户</small>
                         <div id="grade" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button id="allGrade" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button id="pschool" type="button" value="1" class="btn btn-small" data-toggle="button">小学</button>

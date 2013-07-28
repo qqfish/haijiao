@@ -143,14 +143,14 @@
                                         </script>
                                         <li><a id="publicRoomButton" href="enterPublicRoom.action?teaEmail=<s:property value="#session.email"/>">在线试讲房间</a></li>
                                         <div class="divider"></div>
-                                        <li><a href="index.action?page=student" id="notification">暂无新的请求</a></li>
+                                        <li><a href="index.action?tab=bill" id="notification">暂无新的请求</a></li>
                                     </s:if>
                                     <s:else>
                                         <script>
                                             getStudentStatus();
                                             rid = setInterval(getStudentStatus, 60000);
                                         </script>
-                                        <li><a href="index.action" id="notification">暂无待处理账单</a></li>
+                                        <li><a href="index.action?tab=bill" id="notification">暂无待处理账单</a></li>
                                     </s:else>
                                 </ul>
                             </div>
@@ -174,7 +174,7 @@
                     <button id="nextPageMessageClose" type="button" class="close" data-dismiss="alert">&times;</button>
                     <strong><s:property value="#session.nextPageMessage" default="Warning!!"/><strong> 
                             <script>
-                                setTimeout("$('#nextPageMessageDiv').fadeOut()", 3000);
+                                setTimeout("$('#nextPageMessageDiv').fadeOut()", 6000);
                             </script>
                             </div>
                             <s:set name="nextPageMessage" value="" scope="session"></s:set>

@@ -29,7 +29,7 @@ import org.springframework.stereotype.Controller;
 })  
 @Action("bookTeacher")
 @Results({
-    @Result(name="success",type="redirect",location="getTeacherInfo.action?teacherEmail=${teacherEmail}")
+    @Result(name="success",type="redirect",location="index.action?tab=bill")
 })
 public class BookTeacherAction extends SessionAction{
     @Resource
