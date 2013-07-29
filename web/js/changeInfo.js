@@ -73,6 +73,8 @@ function testSubmit(){
         return;
     } else if(name.length > 8 ){
         return;
+    } else if($('#phoneNum').val().length != 11){
+        return;
     } else {
         $("#form_submit").click();
     }

@@ -7,6 +7,15 @@ function getFileList(isDir, groupName) {
     });
 }
 
+function getPublicFilelist(currentPage, name){
+    $.post("getPublicFilelist", {
+        currentPage: currentPage,
+        name: name
+    }, function(date) {
+       $("#publicfile_area").html(data); 
+    });
+}
+
 jQuery(document).ready(function($) {
 
     $(".lessonName").click(function() {
@@ -52,4 +61,6 @@ jQuery(document).ready(function($) {
         $("#tippanel").show();
     });
     
+    getFileList(true, null);
+    getPublicFilelist(1);
 });

@@ -22,7 +22,7 @@ public class config {
     //File config
     static public String fileRoot = "e:\\file";
     static public String defaultGroupName = "no group";
-    
+    static public String fileHome = "upload/public";
     
     //User file
     static public String userHome = "upload/user";

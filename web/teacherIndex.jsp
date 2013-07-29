@@ -18,7 +18,7 @@
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
-
+    
 
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
@@ -41,7 +41,7 @@
                  <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400italic' rel='stylesheet' type='text/css'>
                <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
                 <![endif]-->
-
+        
         <script type="text/javascript">
             var flag = 1;
             function edit_share_info() {
@@ -185,7 +185,7 @@
                 <div class="span8 module" style="padding:12px;">
                     <ul class="nav nav-pills">
                         <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                        <li id="l6"><a href="#file_area" data-toggle="tab" onclick="getFileList(true, null)">我的课件</a></li>
+                        <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
                         <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
                         <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
                         <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
@@ -257,7 +257,7 @@
                                 </s:iterator>
                                 <br/><br/>
                                 <hr/>
-                                <h5>课程列表</h5>
+                                <h5>可开设课程列表</h5>
 
                                 <ul class="nav nav-pills">
                                     <li id="l1" class="active"><a href="#p_school" data-toggle="tab">小学</a></li>
@@ -602,71 +602,7 @@
                             </div>
                         </div>
                         <div id="publicfile_area" class="tab-pane fade">
-                            <div style="display:inline;">
-                                <input type="text" class="span2">
-                                <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
-                            </div>
-
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th width="300px">
-                                            文件名
-                                        </th>
-                                        <th>
-                                            上传日期
-                                        </th>
-                                        <th>
-                                            上传用户
-                                        </th>
-                                        <th>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <i class="icon-file"></i>我是pdf.pdf
-                                        </td>
-                                        <td>2013-1-1</td>
-                                        <td>张三</td>
-                                        <td class="btn-toolbar">
-                                            <div class="btn-group">
-                                                <div class="dropdown">
-                                                    <a class="btn btn-mini" data-toggle="modal" data-target="#publicfileModal"><i class="icon-tag"></i>收藏</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="modal hide fade" id="publicfileModal">
-                                <div class="modal-body">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <s:form action="" cssStyle="margin:0px;">
-                                        <dl class="dl-horizontal">
-                                            <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
-                                            <dd>
-                                                <div class="input-append">
-                                                    <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
-                                                    <s:submit id="add" cssClass="btn" value="add" method="addLesson" cssStyle="margin-left:5px;"/>
-                                                </div>
-                                            </dd>
-                                        </dl>
-                                    </s:form>
-                                </div>
-                            </div>
-                            <div class="pagination pagination-mini pull-right">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
-                            </div>
+                            
 
                         </div>
                         <div class="tab-pane fade" id="payment_area">

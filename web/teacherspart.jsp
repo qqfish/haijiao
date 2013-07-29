@@ -94,7 +94,7 @@
                 </ul>
             </div>
             <div class="pagination pagination-right">
-                <ul>        
+                <ul>      
                     <s:if test="pb.currentPage == 1">
                         <li class="disabled"><a href="javascript:;">Prev</a></li>
                         </s:if>

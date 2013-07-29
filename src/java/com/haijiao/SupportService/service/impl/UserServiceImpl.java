@@ -8,10 +8,12 @@ import com.haijiao.Domain.bean.ResetInfo;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.PublicFile;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
 import com.haijiao.SupportService.MD5Util;
 import com.haijiao.SupportService.dao.ICommentDAO;
+import com.haijiao.SupportService.dao.IPublicFileDAO;
 import com.haijiao.SupportService.dao.IResetInfoDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
@@ -19,8 +21,16 @@ import com.haijiao.SupportService.dao.IUserDAO;
 import com.haijiao.SupportService.dao.IUserFileDAO;
 import com.haijiao.SupportService.dao.IUserFileGroupDAO;
 import com.haijiao.SupportService.service.IUserService;
+import com.haijiao.global.config;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -44,6 +54,8 @@ public class UserServiceImpl implements IUserService {
     IUserFileDAO userFileDAO;
     @Resource
     IUserFileGroupDAO userFileGroupDAO;
+    @Resource
+    IPublicFileDAO publicFileDAO;
 
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -110,10 +122,11 @@ public class UserServiceImpl implements IUserService {
         java.util.Date datetime = new java.util.Date();
         Date time = new Date(datetime.getTime());
         u.setLastActiveDate(time);
-        if(u.getLoginNum() == null)
+        if (u.getLoginNum() == null) {
             u.setLoginNum(1);
-        else
+        } else {
             u.setLoginNum(u.getLoginNum() + 1);
+        }
         userDAO.update(u);
         return true;
     }
@@ -243,18 +256,23 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean deleteFile(String email, String groupName, String fileName){
+    public boolean deleteFile(String email, String groupName, String fileName) {
         UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
         if (fg == null) {
             return false;
         } else {
             UserFile ud = userFileDAO.getFile(fg.getId(), fileName);
+            if(ud.getOwned()){
+                File file = new File(ud.getUrl());
+                if(file.exists())
+                    file.delete();
+            }
             fg.removeFile(ud);
             userFileGroupDAO.update(fg);
             return userFileDAO.makeTransient(ud);
         }
     }
-    
+
     @Override
     public boolean moveFile(String email, String srcName, String destName, String fileName) {
         UserFileGroup src = userFileGroupDAO.getGroupByName(email, srcName);
@@ -278,6 +296,7 @@ public class UserServiceImpl implements IUserService {
         UserFile uf = new UserFile();
         uf.setName(name);
         uf.setUrl(fileuri);
+        uf.setOwned(true);
         UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
         if (fg == null) {
             return false;
@@ -291,11 +310,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public String download(String email, String groupName, String fileName) {
         UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
-        if(fg == null)
+        if (fg == null) {
             return null;
+        }
         UserFile uf = userFileDAO.getFile(fg.getId(), fileName);
-        if(uf == null)
+        if (uf == null) {
             return null;
+        }
         return uf.getUrl();
     }
 
@@ -338,6 +359,23 @@ public class UserServiceImpl implements IUserService {
         r.setCreateTime(time);
         resetInfoDAO.makePersistent(r);
     }
+
+    @Override
+    public boolean addFileFromPublic(String email, String groupName, int publicFileId){
+        PublicFile pf = publicFileDAO.findById(publicFileId);
+        UserFile uf = new UserFile();
+        uf.setName(pf.getName());
+        uf.setUrl(pf.getUrl());
+        uf.setOwned(false);
+        UserFileGroup fg = userFileGroupDAO.getGroupByName(email, groupName);
+        if (fg == null) {
+            return false;
+        }
+        fg.addFile(uf);
+        userFileDAO.makePersistent(uf);
+        userFileGroupDAO.update(fg);
+        return true;
+    }
     
     @Override
     public List<UserFileGroup> getUserFileGroup(String email) {
@@ -348,4 +386,60 @@ public class UserServiceImpl implements IUserService {
     public List<UserFile> getUserFile(String email, String groupName) {
         return userFileDAO.getUserFile(email, groupName);
     }
+
+    @Override
+    public int getUserFileNum(String email, String groupName){
+        return userFileDAO.getUserFileNum(email, groupName);
+    }
+    
+    @Override
+    public boolean publishFile(int userFileId, String name, String author, String publisher, String type) {
+        try {
+            UserFile uf = userFileDAO.findById(userFileId);
+            FileInputStream in = new FileInputStream(uf.getUrl());
+            String url = "/" + config.fileHome + File.separator + userFileId + ".pdf";
+            System.out.println(url);
+            File file = new File(url);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileOutputStream out = new FileOutputStream(file);
+            int c;
+            byte buffer[] = new byte[1024];
+            while ((c = in.read(buffer)) != -1) {
+                for (int i = 0; i < c; i++) {
+                    out.write(buffer[i]);
+                }
+            }
+            in.close();
+            out.close();
+            PublicFile pf = new PublicFile();
+            pf.setName(uf.getName());
+            pf.setAuthor(author);
+            pf.setFullname(name);
+            pf.setPublisher(publisher);
+            pf.setType(type);
+            pf.setUrl(url);
+            pf.setPass(false);
+            publicFileDAO.makePersistent(pf);
+            return true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        } catch (IOException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+
+    @Override
+    public List<PublicFile> getPublicFilelist(String name, int first, int pageSize) {
+        return publicFileDAO.getPublicFiles(name, first, pageSize);
+    }
+
+    @Override
+    public int getPubliFileNum(String name) {
+        return publicFileDAO.getPublicFileNum(name);
+    }
+    
 }

@@ -83,3 +83,19 @@ function validate_passwordequal(field, field2, tip)
         return true;
     }
 }
+
+function validate_phoneNum(field, tip)
+{
+    with (field) {
+        var phone = value;
+        if (phone.length != 11) {
+            $(tip).text("* 手机长度不正确！");
+            $(tip).fadeIn(1,null);
+            return false;
+        }
+        else {
+            $(tip).fadeOut(1,null);
+            return true;
+        }
+    }
+}

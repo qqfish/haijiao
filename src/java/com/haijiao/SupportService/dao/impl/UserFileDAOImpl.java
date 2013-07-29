@@ -35,4 +35,11 @@ public class UserFileDAOImpl extends GenericHibernateDAO<UserFile, Integer> impl
                 + email + "' and fg.groupName = '" + groupName + "'";
         return findByQuery(hql);
     }
+
+    @Override
+    public int getUserFileNum(String email, String groupName) {
+        String hql = "select count(distinct f) from User u left join u.fileGroups fg left join fg.files f where u.email ='"
+                + email + "' and fg.groupName = '" + groupName + "'";
+        return getNumber(hql).intValue();
+    }
 }

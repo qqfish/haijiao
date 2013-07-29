@@ -14,4 +14,5 @@ import java.util.List;
 public interface IUserFileDAO extends GenericDAO<UserFile,Integer>{
     UserFile getFile(int groupId, String fileName);
     public List<UserFile> getUserFile(String email, String groupName);
+    public int getUserFileNum(String email, String groupName);
 }

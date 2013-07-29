@@ -35,9 +35,9 @@ import org.springframework.stereotype.Controller;
     @InterceptorRef("LoginCheckerStack")
 })
 @Results({
-    @Result(name = "input", type="redirect",location="index.action?tab=file"),
-    @Result(name = "error", type="redirect",location="index.action?tab=file"),
-    @Result(name = "success", type="redirect",location="index.action?tab=file")
+    @Result(name = "input", type = "redirect", location = "index.action?tab=file"),
+    @Result(name = "error", type = "redirect", location = "index.action?tab=file"),
+    @Result(name = "success", type = "redirect", location = "index.action?tab=file")
 })
 public class FileAction extends SessionAction {
 
@@ -70,7 +70,7 @@ public class FileAction extends SessionAction {
         this.sessionPutIn("nextPageMessage", "删除成功");
         return SUCCESS;
     }
-    
+
     public String deleteFile() {
         String email = (String) this.getSessionValue("email");
         userService.deleteFile(email, dest, name);
@@ -99,13 +99,21 @@ public class FileAction extends SessionAction {
                 folder.mkdirs();
             }
             boolean ispdf = uploadFileName.endsWith(".pdf");
-            if (!ispdf)
+            if (!ispdf) {
                 uploadFileName = uploadFileName.substring(0, uploadFileName.lastIndexOf(".")) + ".pdf";
-            path = path + "/" + uploadFileName;
-            File newFile = new File(path);
-            if (!newFile.exists()) {
-                newFile.createNewFile();
             }
+            String tmppath = path + File.separator + uploadFileName;
+            File newFile = new File(tmppath);
+            for (int i =0;;i ++) {
+                if (!newFile.exists()) {
+                    newFile.createNewFile();
+                    break;
+                } else {
+                    tmppath = path + File.separator + String.valueOf(i) + uploadFileName;
+                    newFile = new File(tmppath);
+                }
+            }
+            path = tmppath;
             if (ispdf) {
                 FileInputStream in = new FileInputStream(upload);
                 FileOutputStream out = new FileOutputStream(newFile);
