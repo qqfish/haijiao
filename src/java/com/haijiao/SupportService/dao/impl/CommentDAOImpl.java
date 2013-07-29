@@ -15,9 +15,9 @@ import org.springframework.stereotype.Repository;
 public class CommentDAOImpl extends GenericHibernateDAO<Comment,Integer> implements ICommentDAO {
 
     @Override
-    public List<Comment> getComment(String email) {
+    public List<Comment> getComment(String email, int first, int pageSize) {
         String hql = "select distinct c from Comment c left join c.commentee u where u.email='" + email + "'";
-        return findByQuery(hql);
+        return findPageByQuery(hql,first,pageSize);
     }
     
     @Override

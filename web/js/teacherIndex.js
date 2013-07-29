@@ -16,6 +16,12 @@ function getPublicFilelist(currentPage, name){
     });
 }
 
+function getBillList(currentPage){
+    $.post("getBillList.action", {currentPage: currentPage}, function(data){
+       $("#bill_area").html(data); 
+    });
+}
+
 jQuery(document).ready(function($) {
 
     $(".lessonName").click(function() {
@@ -63,4 +69,5 @@ jQuery(document).ready(function($) {
     
     getFileList(true, null);
     getPublicFilelist(1);
+    getBillList(1);
 });
