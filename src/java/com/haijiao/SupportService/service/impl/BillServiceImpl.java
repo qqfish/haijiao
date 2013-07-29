@@ -75,10 +75,20 @@ public class BillServiceImpl implements IBillService{
     }
     
     @Override
+    public List<Bill> getBillList(String email, String userType, int first, int pageSize){
+        return billDAO.getBillList(email, userType, first, pageSize);
+    }
+    
+    @Override
     public List<Bill> getUnfinishedBill(String email, String userType){
         return billDAO.getBillByEmailStatus(email, userType, Bill.Status.paid);
     }
 
+    @Override
+    public int getBillNum(String email, String userType){
+        return billDAO.getBillNum(email, userType);
+    }
+    
     @Override
     public boolean produceBill(String studentEmail, String teacherEmail, int hour, String lessonName, String message) {
         Student s = studentDAO.getStudentByEmail(studentEmail);
@@ -192,6 +202,16 @@ public class BillServiceImpl implements IBillService{
         return true;
     }
 
+    @Override
+    public List<Comment> getCommentList(String email, int first, int pageSize){
+        return commentDAO.getComment(email,first,pageSize);
+    }
+    
+    @Override
+    public int getCommentNum(String email){
+        return commentDAO.getCommentNum(email);
+    }
+    
     @Override
     public void oneDayPass() {
         List<Bill> bList = billDAO.getBillByStatus(Bill.Status.teacherFinish);

@@ -2,7 +2,6 @@
  *
  * @author Jerry Zou
  */
-
 package com.haijiao.SupportService.service.impl;
 
 //import com.haijiao.Domain.bean.Clazz;
@@ -12,7 +11,6 @@ import com.haijiao.Domain.bean.Student;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import java.sql.Date;
-import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -20,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class StudentServiceImpl implements IStudentService{
+public class StudentServiceImpl implements IStudentService {
+
     @Resource
     IStudentDAO studentDAO;
 //    @Resource
@@ -38,33 +37,31 @@ public class StudentServiceImpl implements IStudentService{
 //    public IClazzDAO getClazzDAO() {
 //        return clazzDAO;
 //    }
-
 //    public void setClazzDAO(IClazzDAO clazzDAO) {
 //        this.clazzDAO = clazzDAO;
 //    }
-    
     @Override
     public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType) {
         Student s = studentDAO.getStudentByEmail(email);
-        if(birthday != null){
+        if (birthday != null) {
             s.setBirthday(birthday);
         }
-        if(grade != null){
+        if (grade != null) {
             s.setGrade(grade);
         }
-        if(name != null){
+        if (name != null) {
             s.setName(name);
         }
-        if(school != null){
+        if (school != null) {
             s.setSchool(school);
         }
-        if(sex != null){
+        if (sex != null) {
             s.setSex(sex);
         }
-        if(tel != null){
+        if (tel != null) {
             s.setTel(tel);
         }
-        if(telType != null){
+        if (telType != null) {
             s.setTelType(telType);
         }
         studentDAO.update(s);
@@ -91,5 +88,4 @@ public class StudentServiceImpl implements IStudentService{
 //    public List<Clazz> getTodayClasses(String email) {
 //        return clazzDAO.getStudentTodayClazz(email);
 //    }
-
 }
