@@ -45,6 +45,7 @@ public class IndexAction extends RequestSessionAction {
     private IBillService billService;
     private Teacher teacher;
     private Student student;
+    private User user;
     private String tab;
 
     @Override
@@ -81,7 +82,7 @@ public class IndexAction extends RequestSessionAction {
             if ("student".equals((String) this.getOutRequest("page"))) {
                 this.sessionPutIn("nextPageMessage", "您可以在下面的页面中接受或拒绝学生的课程预约");
             }
-            User user = userService.getUserByEmail(email);
+            user = userService.getUserByEmail(email);
             if (user.getUserType().equals("teacher")) {
                 teacher = (Teacher) user;
                 return "teacher";
@@ -171,5 +172,13 @@ public class IndexAction extends RequestSessionAction {
 
     public void setTab(String tab) {
         this.tab = tab;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -27,7 +27,7 @@ import org.springframework.stereotype.Controller;
 })
 @Action("publishFile")
 @Results({
-    @Result(name="success",type="redirect",location="index.action")
+    @Result(name="success",type="redirect",location="index.action?tab=file")
 })
 public class PublishFileAction extends SessionAction{
     @Resource
@@ -41,6 +41,7 @@ public class PublishFileAction extends SessionAction{
     @Override
     public String execute(){
         userService.publishFile(fileId, name, author, publisher, type);
+        this.sessionPutIn("nextPageMessage", "成功生成发布请求，请等待管理员审核");
         return SUCCESS;
     }
 

@@ -25,16 +25,20 @@ public class PublicFileDAOImpl extends GenericHibernateDAO<PublicFile, Integer> 
     @Override
     public List<PublicFile> getPublicFiles(String name, int first, int pageSize) {
         String hql;
-        if(name == null || name.equals(""))
-            hql = "from PublicFile";
+        if(name == null)
+            hql = "from PublicFile where pass = true";
         else
-            hql = "from PublicFile where name = '" + name + "' and pass = true";
+            hql = "from PublicFile where name like '%" + name + "%' and pass = true";
         return findPageByQuery(hql, first, pageSize);
     }
 
     @Override
     public int getPublicFileNum(String name) {
-        String hql = "select count(distinct pf) from PublicFile pf where pf.name = '" + name + "' and pass = true";
+        String hql;
+        if(name == null)
+            hql = "select count(distinct pf) from PublicFile pf where pf.pass = true";
+        else
+            hql = "select count(distinct pf) from PublicFile pf where pf.name like '%" + name + "%' and pf.pass = true";
         return getNumber(hql).intValue();
     }
     

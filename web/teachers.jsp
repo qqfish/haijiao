@@ -90,7 +90,7 @@
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-small btn-danger disabled">方式</button>
-                        <div id="net" class="btn-group" data-toggle="buttons-checkbox">
+                        <div id="sprt" class="btn-group" data-toggle="buttons-checkbox">
                             <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">网络授课</button>
                             <button type="button" value="2" class="btn btn-small" data-toggle="button">老师上门</button>
@@ -162,7 +162,7 @@
                                                 <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                 <s:else><label class="label label-warning">忙碌</label></s:else>
                                                 <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:property value="lastActiveDate" default="null"/></small>
-                                                <s:if test="wagePerhour==0">
+                                                <s:if test="lessons.size()==0">
                                                     <label class="label pull-right">暂时没有定价</label>
                                                 </s:if>
                                                 <s:else>

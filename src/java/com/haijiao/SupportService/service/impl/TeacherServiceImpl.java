@@ -214,17 +214,13 @@ public class TeacherServiceImpl implements ITeacherService {
             List ll = t.getLessons();
             ll.remove(l);
             if (t.getWagePerhour() == l.getPrice()) {
-                if (t.getLessons().isEmpty()) {
-                    t.setWagePerhour(0);
-                } else {
-                    int min = Integer.MAX_VALUE;
-                    for (int i = 0; i < t.getLessons().size(); i++) {
-                        if (t.getLessons().get(i).getPrice() < min) {
-                            min = t.getLessons().get(i).getPrice();
-                        }
+                int min = Integer.MAX_VALUE;
+                for (int i = 0; i < t.getLessons().size(); i++) {
+                    if (t.getLessons().get(i).getPrice() < min) {
+                        min = t.getLessons().get(i).getPrice();
                     }
-                    t.setWagePerhour(min);
                 }
+                t.setWagePerhour(min);
             }
             teacherDAO.update(t);
             lessonDAO.makeTransient(l);

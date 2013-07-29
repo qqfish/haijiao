@@ -116,7 +116,7 @@
                         <div class="controls">
                             <s:hidden id="shareSrc" name="fileId" />
                             <s:submit cssClass="btn btn-success" value="发布"></s:submit>
-                            <button type="submit" class="btn" data-dismiss="modal">取消</button>
+                            <button class="btn" data-dismiss="modal">取消</button>
                         </div>
                     </div>
                 </s:form>

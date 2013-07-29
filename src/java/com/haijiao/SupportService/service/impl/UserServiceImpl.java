@@ -397,8 +397,12 @@ public class UserServiceImpl implements IUserService {
         try {
             UserFile uf = userFileDAO.findById(userFileId);
             FileInputStream in = new FileInputStream(uf.getUrl());
-            String url = "/" + config.fileHome + File.separator + userFileId + ".pdf";
+            String url =  config.fileHome + File.separator + userFileId + ".pdf";
             System.out.println(url);
+            File dir = new File(config.fileHome);
+            if(!dir.exists()){
+                dir.mkdirs();
+            }
             File file = new File(url);
             if (!file.exists()) {
                 file.createNewFile();

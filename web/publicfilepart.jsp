@@ -45,25 +45,7 @@
                         <td class="btn-toolbar">
                             <div class="btn-group">
                                 <div class="dropdown">
-                                    <a class="btn btn-mini" data-toggle="modal" data-target="#publicfileModal"><i class="icon-tag"></i>收藏</a>
-                                </div>
-                            </div>
-
-                            <div class="modal hide fade" id="publicfileModal">
-                                <div class="modal-body">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <s:form action="addFileFromPublic" cssStyle="margin:0px;">
-                                        <dl class="dl-horizontal">
-                                            <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
-                                            <dd>
-                                                <div class="input-append">
-                                                    <s:select cssClass="span2" id="classify" name="groupName" list="user.fileGroups" listValue="groupName" listKey="groupName"/>
-                                                    <s:hidden name="publicFileId" value="id"/>
-                                                    <s:submit id="add" cssClass="btn" value="add" cssStyle="margin-left:5px;"/>
-                                                </div>
-                                            </dd>
-                                        </dl>
-                                    </s:form>
+                                    <a class="btn btn-mini" data-toggle="modal" data-target="#publicfileModal" onclick="$('#publicFileModalId').val(<s:property value="id" />)"><i class="icon-tag"></i>收藏</a>
                                 </div>
                             </div>
                         </td>
@@ -72,6 +54,7 @@
             </tbody>
         </table>
         <div class="pagination pagination-mini pull-right">
+            <script>console.log(<s:property value="pb.totalPage" />)</script>
             <ul>
                 <s:if test="pb.currentPage == 1">
                     <li class="disabled"><a href="javascript:;">Prev</a></li>

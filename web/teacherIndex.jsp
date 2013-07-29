@@ -18,7 +18,7 @@
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
-    
+
 
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
@@ -41,7 +41,7 @@
                  <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400italic' rel='stylesheet' type='text/css'>
                <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
                 <![endif]-->
-        
+
         <script type="text/javascript">
             var flag = 1;
             function edit_share_info() {
@@ -176,72 +176,72 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-
-                <div class="span8 module" style="padding:12px;">
-                    <ul class="nav nav-pills">
-                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                        <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
-                        <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
-                        <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
-                        <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
-                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
-
-                        <!--  add a button for previewing Profile -->
-                        <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
-                    </ul>
-
-                    <!--   personal proflie   -->
-                    <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3>主页预览</h3>
-                            </div>
-                            <div class="modal-body">
-                                <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
-    姓名：xx
-    学校：上海交通大学
-    专业：会计学
-    线下授课区域：上海
-    在线试讲页面：http://haijiaoedu.com/用户名
-                                </textarea>
-
-                                <p><button class="btn" onclick ="edit_share_info()">编辑</button><button class="btn" onclick ="save_share_info()">保存</button>&nbsp;【分享主页信息】                                                        
-                                    <iframe id="share_iframe" onload="share_iframe_load()"allowtransparency="true" frameborder="0" scrolling="no"
-                                            src="http://service.weibo.com/staticjs/weiboshare.html?url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1" width="72" height="33">
-                                    </iframe>
-                            </div>
-                            <div style="margin-left: 20px">
-                                <p style="color:#999999">推广建议：链接可以转发以下网址获取更多的预约</p>
-                                <p style="color:#999999">1.&nbsp;58同城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;赶集网</p>
-                                <p style="color:#999999">3.&nbsp;百姓网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;高校bbs</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn" style="margin-left:30px" data-dismiss="modal">关闭</button>
-                            </div>
-                        </div>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
-                    <div class="tab-content">
 
-                        <div class="tab-pane fade" id='lesson_area'>
-                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
-                               <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
-                               <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
-                               <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
-                               <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
-                               "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
-                            <br/>
-                            <script>
-                                $("#showtip").popover();
-                            </script>
-                            <h4>老师您好，您目前开设课程的情况如下：</h4>
-                            <table>
+                    <div class="span8 module" style="padding:12px;">
+                        <ul class="nav nav-pills">
+                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
+                            <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
+                            <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
+                            <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
+                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+
+                            <!--  add a button for previewing Profile -->
+                            <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
+                        </ul>
+
+                        <!--   personal proflie   -->
+                        <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>主页预览</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
+    姓名：<s:property value="teacher.name" /> 
+    学校：<s:property value="teacher.school" />
+    专业：<s:property value="teacher.major" />
+    线下授课区域：<s:property value="teacher.underlineArea" default="暂无"/>
+    在线试讲页面：http://haijiaoedu.com/getTeacherInfo.action?teacherEmail=<s:property value="teacher.email" />
+                                    </textarea>
+
+                                    <p><button class="btn" onclick ="edit_share_info()">编辑</button><button class="btn" onclick ="save_share_info()">保存</button>&nbsp;【分享主页信息】                                                        
+                                        <iframe id="share_iframe" onload="share_iframe_load()"allowtransparency="true" frameborder="0" scrolling="no"
+                                                src="http://service.weibo.com/staticjs/weiboshare.html?url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1" width="72" height="33">
+                                        </iframe>
+                                </div>
+                                <div style="margin-left: 20px">
+                                    <p style="color:#999999">推广建议：链接可以转发以下网址获取更多的预约</p>
+                                    <p style="color:#999999">1.&nbsp;58同城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;赶集网</p>
+                                    <p style="color:#999999">3.&nbsp;百姓网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;高校bbs</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn" style="margin-left:30px" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-content">
+
+                            <div class="tab-pane fade" id='lesson_area'>
+                                <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
+                                   <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
+                                   <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
+                                   <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
+                                   <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
+                                   "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
+                                <br/>
+                                <script>
+                                    $("#showtip").popover();
+                                </script>
+                                <h4>老师您好，您目前开设课程的情况如下：</h4>
+                                <table>
                                 <s:iterator value="teacher.lessons" id="ls">
                                     <s:if test="delete==false">
                                         <s:form action="dealLesson.action">
@@ -334,7 +334,7 @@
                                     </s:if>
                                     <s:else>
                                         <s:a action="setTeacherStatus" method="audition" cssClass="btn btn-primary">是</s:a>
-                                        <button type="button" class="btn btn-primary active">否</button>
+                                            <button type="button" class="btn btn-primary active">否</button>
                                     </s:else>
                                 </div>
                             </div>
@@ -347,7 +347,7 @@
                                     </s:if>
                                     <s:else>
                                         <s:a action="setTeacherStatus" method="reserve" cssClass="btn btn-primary">是</s:a>
-                                        <button type="button" class="btn btn-primary active">否</button>
+                                            <button type="button" class="btn btn-primary active">否</button>
                                     </s:else>
                                 </div>
                             </div>
@@ -449,29 +449,29 @@
                                             <div class="modal-body">
                                                 <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                                 内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                <br/>
-                                                评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                                    <br/>
+                                                    评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
                                                 <s:textfield id="comment_score" name="score" cssStyle="display:none;"></s:textfield>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                 <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                            </div>
-                                            <script type="text/javascript">
-                                                $(".commentA").click(function() {
-                                                    var id = $(this).attr("id");
-                                                    $("#comment_rate" ).bind('rated', function(event, value) {
-                                                        $('#comment_score').val(value);
+                                                </div>
+                                                <script type="text/javascript">
+                                                    $(".commentA").click(function() {
+                                                        var id = $(this).attr("id");
+                                                        $("#comment_rate" ).bind('rated', function(event, value) {
+                                                            $('#comment_score').val(value);
+                                                        });
+                                                        $("#comment_rate").bind('over', function(event, value) {
+                                                            $(this).attr('title', value);
+                                                        });
+                                                        $("#cmtsmt").click(function(event) {
+                                                            if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                                event.preventDefault();
+                                                        });
                                                     });
-                                                    $("#comment_rate").bind('over', function(event, value) {
-                                                        $(this).attr('title', value);
-                                                    });
-                                                    $("#cmtsmt").click(function(event) {
-                                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                            event.preventDefault();
-                                                    });
-                                                });
-                                            </script>
+                                                </script>
                                         </s:form>
                                     </div>
                                 </s:else>
@@ -525,11 +525,11 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                    </div>
+                                                                        </div>
                                                                 </s:form>
                                                             </div>
                                                         </blockquote>
@@ -602,8 +602,24 @@
                             </div>
                         </div>
                         <div id="publicfile_area" class="tab-pane fade">
-                            
-
+                            <div id="publicFileList"></div>
+                            <div class="modal hide fade" id="publicfileModal">
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <s:form action="addFileFromPublic" cssStyle="margin:0px;">
+                                        <dl class="dl-horizontal">
+                                            <dt style="font-size: 18px; margin-top: 4px;">文件组:</dt>
+                                            <dd>
+                                                <div class="input-append">
+                                                    <s:select cssClass="span2" id="classify" name="groupName" list="user.fileGroups" listValue="groupName" listKey="groupName"/>
+                                                    <s:hidden name="publicFileId" id="publicFileModalId"/>
+                                                    <s:submit cssClass="btn" value="添加" cssStyle="margin-left:5px;"/>
+                                                </div>
+                                            </dd>
+                                        </dl>
+                                    </s:form>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="payment_area">
                             <div class="money-header title-border">
@@ -627,8 +643,8 @@
                                                 <s:if test="type==0">学生付款</s:if>
                                                 <s:elseif test="type==1">手续费</s:elseif>
                                                 <s:elseif test="type==3">提现</s:elseif>
-                                            </td>
-                                            <td><s:property value="username" /></td>
+                                                </td>
+                                                <td><s:property value="username" /></td>
                                             <s:if test="money>0">
                                                 <td style="color:#53a000;">+<s:property value="money" /></td>
                                             </s:if>

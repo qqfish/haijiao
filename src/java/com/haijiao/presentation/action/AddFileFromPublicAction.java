@@ -22,18 +22,19 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("addFileFromPublic")
 @Results({
-    @Result(name = "success", type = "redirect", location = "index.action")
+    @Result(name = "success", type = "redirect", location = "index.action?tab=publicfile")
 })
 public class AddFileFromPublicAction extends SessionAction{
     @Resource
     IUserService userService;
     private String groupName;
-    int publicFileId;
+    private String publicFileId;
     
     @Override
     public String execute(){ 
         String email = (String) this.getSessionValue("email");
-        userService.addFileFromPublic(email, groupName, publicFileId);
+        userService.addFileFromPublic(email, groupName, Integer.parseInt(publicFileId));
+        this.sessionPutIn("nextPageMessage", "成功收藏公共课件到个人课件");
         return SUCCESS;
     }
 
@@ -49,11 +50,11 @@ public class AddFileFromPublicAction extends SessionAction{
         this.groupName = groupName;
     }
 
-    public int getPublicFileId() {
+    public String getPublicFileId() {
         return publicFileId;
     }
 
-    public void setPublicFileId(int publicFileId) {
+    public void setPublicFileId(String publicFileId) {
         this.publicFileId = publicFileId;
     }
     

@@ -8,11 +8,11 @@ function getFileList(isDir, groupName) {
 }
 
 function getPublicFilelist(currentPage, name){
-    $.post("getPublicFilelist", {
+    $.post("getPublicFilelist.action", {
         currentPage: currentPage,
         name: name
-    }, function(date) {
-       $("#publicfile_area").html(data); 
+    }, function(data) {
+       $("#publicFileList").html(data); 
     });
 }
 

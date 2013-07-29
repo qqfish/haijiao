@@ -72,7 +72,7 @@ public class Teacher extends User{
     @OneToMany(mappedBy = "teacher")
     protected List<Bill> billList;  //预约列表
     
-    @Column(columnDefinition="int default 0")
+    @Column(columnDefinition="int default " + Integer.MAX_VALUE)
     private int wagePerhour;        //老师最小每小时的辅导费
     
     @OneToMany
