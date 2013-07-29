@@ -31,7 +31,12 @@
                                     <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                     <s:else><label class="label label-warning">忙碌</label></s:else>
                                     <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:property value="lastActiveDate" default="null"/></small>
-                                    <label class="label pull-right"><s:property value="wagePerhour"/>元/时</label>
+                                    <s:if test="wagePerhour==0">
+                                        <label class="label pull-right">暂时没有定价</label>
+                                    </s:if>
+                                    <s:else>
+                                        <label class="label pull-right"><s:property value="wagePerhour"/>元/时</label>
+                                    </s:else>
                                     <span class="pull-right">&nbsp;</span>
                                     <label class="label label-info pull-right"><s:property value="reserveNum"/>人预约</label>
                                     <br/>
@@ -40,7 +45,7 @@
                                         <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                         <br/>
                                         身份：<s:if test="role == null">无</s:if><s:else><s:property value="role"/></s:else>
-                                        <br/>
+                                            <br/>
                                         <s:if test="lessons.size()==0">
                                             开设课程：该老师还没有开课。
                                         </s:if>
@@ -97,8 +102,8 @@
                 <ul>        
                     <s:if test="pb.currentPage == 1">
                         <li class="disabled"><a href="javascript:;">Prev</a></li>
-                        </s:if>
-                        <s:else>
+                    </s:if>
+                    <s:else>
                         <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage -1});">
                                 Prev</s:a></li>
                         </s:else>
@@ -107,8 +112,8 @@
                                 <s:iterator value="new int[pb.currentPage +1]" status="i">
                                     <s:if test="pb.currentPage == #i.index+1">
                                     <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                    </s:if>
-                                    <s:else>
+                                </s:if>
+                                <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                             <s:property value="#i.index+1"/>
                                         </s:a></li>
@@ -119,8 +124,8 @@
                             <li><s:a href="javascript:;" onclick="gotopage(1);">1</s:a></li>
                             <li><s:a href="javascript:;" onclick="gotopage(2);">2</s:a></li>
                             <li class="disabled"><s:a href="javascript:;">...</s:a></li>
-                                <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
-                                    <s:if test="#i.index == 1">
+                            <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
+                                <s:if test="#i.index == 1">
                                     <li class="disabled"><s:a href="javascript:;">
                                             <s:property value="pb.currentPage"/>
                                         </s:a></li>
@@ -158,8 +163,8 @@
                             <s:iterator value="new int[pb.totalPage]" status="i">
                                 <s:if test="pb.currentPage == #i.index+1">
                                 <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                </s:if>
-                                <s:else>
+                            </s:if>
+                            <s:else>
                                 <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                         <s:property value="#i.index+1"/>
                                     </s:a></li>
@@ -168,8 +173,8 @@
                         </s:else>
                         <s:if test="pb.currentPage == pb.totalPage || pb.totalPage == 0">
                         <li class="disabled"><a href="javascript:;">Next</a></li>
-                        </s:if>
-                        <s:else>
+                    </s:if>
+                    <s:else>
                         <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage +1});">
                                 Next
                             </s:a></li>

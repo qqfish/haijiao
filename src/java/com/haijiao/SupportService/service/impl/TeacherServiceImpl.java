@@ -195,8 +195,12 @@ public class TeacherServiceImpl implements ITeacherService {
             List ll = t.getLessons();
             ll.add(l);
             t.setLessons(ll);
-            teacherDAO.update(t);
+
         }
+        if (t.getWagePerhour() > price || t.getWagePerhour() <= 0) {
+            t.setWagePerhour(price);
+        }
+        teacherDAO.update(t);
         return true;
     }
 
@@ -207,6 +211,23 @@ public class TeacherServiceImpl implements ITeacherService {
         if (l != null) {
             l.setDelete(true);
             lessonDAO.update(l);
+            List ll = t.getLessons();
+            ll.remove(l);
+            if (t.getWagePerhour() == l.getPrice()) {
+                if (t.getLessons().isEmpty()) {
+                    t.setWagePerhour(0);
+                } else {
+                    int min = Integer.MAX_VALUE;
+                    for (int i = 0; i < t.getLessons().size(); i++) {
+                        if (t.getLessons().get(i).getPrice() < min) {
+                            min = t.getLessons().get(i).getPrice();
+                        }
+                    }
+                    t.setWagePerhour(min);
+                }
+            }
+            teacherDAO.update(t);
+            lessonDAO.makeTransient(l);
         }
         return true;
     }

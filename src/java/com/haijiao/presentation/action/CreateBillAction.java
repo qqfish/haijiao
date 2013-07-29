@@ -36,7 +36,7 @@ public class CreateBillAction extends SessionAction {
     public String accept() {
         Bill bill = billService.getBillById(billId);
         money = bill.getMoney();
-        message = bill.getTeacher().getName() + "老师" + bill.getLesson().getName() + "课" + bill.getDuration() + "小时";
+        message = bill.getTeacher().getName() + "老师" + bill.getLesson() + "课" + bill.getDuration() + "小时";
         return SUCCESS;
     }
 

@@ -113,43 +113,43 @@
                         <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" id="school" name="school" list="{'----大学----','复旦大学','上海交通大学','同济大学','华东理工大学','东华大学','华东师范大学','上海外国语大学','上海财经大学','上海海关学院','上海大学','上海理工大学',
                                   '上海海事大学','上海工程技术大学','上海海洋大学','上海中医药大学','上海师范大学','华东政法大学','上海政法学院','上海建桥学院','上海第二工业大学','上海应用技术学院','上海电力学院','上海电机学院','上海对外贸易学院','上海金融学院','上海立信会计学院',
                                   '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}" value="%{tea.school}"></s:select>
-                        <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
-                            <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
-                            <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
-                        </div>
-                        <br/>
-                        <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
-                        <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
+                            <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                                <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
+                                <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
+                            </div>
+                            <br/>
+                            <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
+                            <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{}" value="%{tea.province}"></s:select>
                             <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="city" list="{}" value="%{tea.city}"></s:select>
                             <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="district" list="{}" value="%{tea.district}"></s:select>
+                            </div>
+                            <br/>
                         </div>
-                        <br/>
                     </div>
-                </div>
-                <div  id="resultPanel" class="span11 module">
-                    <div style="margin:0px 12px;">
-                        <h3>
-                            老师列表
-                            <small>
-                                <div class="btn-toolbar pull-right">
-                                    <div id="sort" class="btn-group" data-toggle="buttons-radio">
-                                        <button class="btn btn-small btn-inverse" id="normal_button">默认<i class="icon-arrow-down icon-white"></i></button>
-                                        <button class="btn btn-small btn-inverse" id="score_button">评分<i class="icon-arrow-down"></i></button>
-                                        <button class="btn btn-small btn-inverse" id="price_button">价格<i class="icon-arrow-down"></i></button>
-                                        <button class="btn btn-small btn-inverse" id="hot_button">人气<i class="icon-arrow-down"></i></button>
-                                        <button class="btn btn-small btn-inverse" id="time_button">最后活跃时间<i class="icon-arrow-down"></i></button>
+                    <div  id="resultPanel" class="span11 module">
+                        <div style="margin:0px 12px;">
+                            <h3>
+                                老师列表
+                                <small>
+                                    <div class="btn-toolbar pull-right">
+                                        <div id="sort" class="btn-group" data-toggle="buttons-radio">
+                                            <button class="btn btn-small btn-inverse" id="normal_button">默认<i class="icon-arrow-down icon-white"></i></button>
+                                            <button class="btn btn-small btn-inverse" id="score_button">评分<i class="icon-arrow-down"></i></button>
+                                            <button class="btn btn-small btn-inverse" id="price_button">价格<i class="icon-arrow-down"></i></button>
+                                            <button class="btn btn-small btn-inverse" id="hot_button">人气<i class="icon-arrow-down"></i></button>
+                                            <button class="btn btn-small btn-inverse" id="time_button">最后活跃时间<i class="icon-arrow-down"></i></button>
+                                        </div>
+                                        <button class="btn btn-small btn-danger" id="online_button">仅显示在线</button>
                                     </div>
-                                    <button class="btn btn-small btn-danger" id="online_button">仅显示在线</button>
-                                </div>
-                            </small>
-                        </h3>
-                    </div>
-                    <hr style="margin:12px 12px 0px 12px;"/>
-                    <div id="resultdetail">
-                        <div class="row-fluid" style="margin-top: 10px; margin-left: 10px;">
-                            <ul class="thumbnails">
+                                </small>
+                            </h3>
+                        </div>
+                        <hr style="margin:12px 12px 0px 12px;"/>
+                        <div id="resultdetail">
+                            <div class="row-fluid" style="margin-top: 10px; margin-left: 10px;">
+                                <ul class="thumbnails">
                                 <s:iterator value="pb.list" id="list">
                                     <div id="resultBar">
                                         <li class="span11">
@@ -162,8 +162,12 @@
                                                 <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                 <s:else><label class="label label-warning">忙碌</label></s:else>
                                                 <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:property value="lastActiveDate" default="null"/></small>
-                                                <label class="label pull-right"><s:property value="wagePerhour"/>元/时</label>
-                                                <span class="pull-right">&nbsp;</span>
+                                                <s:if test="wagePerhour==0">
+                                                    <label class="label pull-right">暂时没有定价</label>
+                                                </s:if>
+                                                <s:else>
+                                                    <label class="label pull-right"><s:property value="wagePerhour"/>元/时</label>
+                                                </s:else>                                                <span class="pull-right">&nbsp;</span>
                                                 <label class="label label-info pull-right"><s:property value="reserveNum"/>人预约</label>
                                                 <br/>
                                                 <small style="color:black;" >
@@ -171,7 +175,7 @@
                                                     <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                                     <br/>
                                                     身份：<s:if test="role == null">无</s:if><s:else><s:property value="role"/></s:else>
-                                                    <br/>
+                                                        <br/>
                                                     <s:if test="lessons.size()==0">
                                                         开设课程：该老师还没有开课。
                                                     </s:if>

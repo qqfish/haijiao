@@ -91,7 +91,7 @@ public class BillServiceImpl implements IBillService{
         bill.setDelete(false);
         bill.setMessage(message);
         bill.setDuration(hour);
-        bill.setLesson(l);
+        bill.setLesson(l.getName());
         bill.setMoney(l.getPrice() * hour);
         bill.setStudent(s);
         bill.setTeacher(t);

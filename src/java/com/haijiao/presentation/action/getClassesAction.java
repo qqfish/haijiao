@@ -46,7 +46,7 @@ public class GetClassesAction extends SessionAction{
         stuEmail = new ArrayList();
         for(int i =0;i < classNum; i ++){
             name.add(bills.get(i).getStudent().getName());
-            lesson.add(bills.get(i).getLesson().getName());
+            lesson.add(bills.get(i).getLesson());
             teaEmail.add(bills.get(i).getTeacher().getEmail());
             stuEmail.add(bills.get(i).getStudent().getEmail());
         }

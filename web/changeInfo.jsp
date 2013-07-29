@@ -320,10 +320,10 @@
                                     <dd><s:textarea cssStyle="width:520px;height:50px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
                                     <dt>个人简介</dt>
                                     <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="intro" value="%{tea.intro}" autofocus="autofocus"/></dd>
-                                    <dt>获奖证书</dt>
+<!--                                    <dt>获奖证书</dt>
                                     <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="cert" value="%{tea.cert}" autofocus="autofocus"/></dd>
                                     <dt>家教经历</dt>
-                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>
+                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>-->
                                     <dd><s:submit cssClass="btn btn-primary pull-right" value="提交" method="teacherMoreChange"/></dd>
                                 </dl>
                             </s:form>

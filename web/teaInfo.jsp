@@ -79,38 +79,73 @@
                         <a class="btn btn-primary" style="margin-left:10px" data-toggle="modal" data-target="#loginInfo">发送私信</a>
                     </s:else>
                     <hr style="margin-top:20px;"/>
-                    <div style="margin-left: 10px">
-                        <small><i class="icon-home"></i>
-                            <s:property value="tea.getDirectProvince()"/> - 
-                            <s:property value="tea.getDirectCity()"/> - 
-                            <s:property value="tea.getDirectDistrict()"/>
-                        </small>
-                        <br />
-                        <small><i class="icon-envelope"></i>
-                            <s:property value="tea.email" /></small>
-                        <br />
-                        <small><i class="icon-signal"></i>
-                            18801902576</small>
-                        <br />
-                        <small><i class="icon-time"></i>
-                            <s:property value="tea.createTime" />加入</small>
+                    <div style="margin-left: 10px;">
+                        <p style="line-height:20px;">
+                            <small><i class="icon-flag"></i>
+                                <s:property value="tea.major"/>-<s:property value="tea.school"/>
+                            </small>
+                            <br />
+                            <small><i class="icon-home"></i>
+                                <s:property value="tea.getDirectProvince()"/> - 
+                                <s:property value="tea.getDirectCity()"/> - 
+                                <s:property value="tea.getDirectDistrict()"/>
+                            </small>
+                            <br />
+                            <small><i class="icon-user"></i>
+                                <s:property value="tea.sex" default="性别保密"/>
+                            </small>
+                            <br />
+                            <small><i class="icon-calendar"></i>
+                                <s:property value="tea.birthday" default="未知"/>出生
+                            </small>
+                            <br />
+                            <small><i class="icon-envelope"></i>
+                                <s:property value="tea.email" /></small>
+                            <br />
+                            <small><i class="icon-signal"></i>
+                                18801902576</small>
+                            <br />
+                            <small><i class="icon-time"></i>
+                                <s:property value="tea.createTime" />加入</small>
+                        </p>
                     </div>
                     <hr />
-                    <table class="table table-hover table-striped">
-                        <tbody>
+                    <!--                    <table class="table table-hover table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>浏览数</td>
+                                                    <td><s:property value="tea.obNum"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>登录次数</td>
+                                                    <td><s:property value="tea.loginNum"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>最近在线时间</td>
+                                                    <td><s:property value="tea.lastActiveDate"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>-->
+                    <table class="table">
+                        <thead>
                             <tr>
-                                <td>浏览数</td>
-                                <td><s:property value="tea.obNum"/></td>
+                                <th style="text-align:center;">
+                                    <strong style="font-size:20px; color:#222;"><s:property value="tea.obNum"/></strong>
+                                    <br />
+                                    <small class="muted">浏览数</small>
+                                </th>
+                                <th style="text-align:center;">
+                                    <strong style="font-size:20px;color:#222;"><s:property value="tea.reserveNum" /></strong>
+                                    <br />
+                                    <small class="muted">预约数</small>
+                                </th>
+                                <th style="text-align:center;">
+                                    <strong style="font-size:20px;color:#222;"><s:property value="tea.classNum"/></strong>
+                                    <br />
+                                    <small class="muted">完成数</small>
+                                </th>
                             </tr>
-                            <tr>
-                                <td>登录次数</td>
-                                <td><s:property value="tea.loginNum"/></td>
-                            </tr>
-                            <tr>
-                                <td>最近在线时间</td>
-                                <td><s:property value="tea.lastActiveDate"/></td>
-                            </tr>
-                        </tbody>
+                        </thead>
                     </table>
                 </div>
                 <div class="span8 module" style="padding:12px;font-size: 12px;">
@@ -119,16 +154,16 @@
                         <dd class="lead text-error" style="margin-left:110px;" id="perPrice">无</dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="muted" style="width:90px;">预约数</dt>
-                        <dd style="margin-left:110px;"><s:property value="tea.reserveNum"/></dd>
+                        <dt class="muted" style="width:90px;">评分</dt>
+                        <dd style="margin-left:110px;">
+                            <div class="rateit" data-rateit-value="<s:property value="tea.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                            | 1条评价
+                        </dd>
                     </dl>
                     <dl class="dl-horizontal">
-                        <dt class="muted" style="width:90px;">完成数</dt>
-                        <dd style="margin-left:110px;"><s:property value="tea.classNum"/>
-                            <span class="offset2">
-                                评分
-                            </span>
-                            <div class="rateit" data-rateit-value="<s:property value="tea.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                        <dt class="muted" style="width:90px;">老师身份</dt>
+                        <dd style="margin-left:110px;">
+                            <s:property value="tea.studyStatus"/>
                         </dd>
                     </dl>
                     <hr/>
@@ -253,81 +288,11 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane row fade active in" id='info_area'>
-                            <div class="span4">
-                                <table class="table table-hover table-striped ">
-                                    <tbody>
-                                        <tr>
-                                            <td class="span2">
-                                                <strong>性别</strong>
-                                            </td>
-                                            <td>
-                                                <s:property value="tea.sex"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>生日</strong>
-                                            </td>
-                                            <td>
-                                                <s:property value="tea.birthday"/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="span4">
-                                <table class="table table-hover table-striped ">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <strong>大学</strong>
-                                            </td>
-                                            <td>
-                                                <s:property value="tea.school"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <strong>专业</strong>
-                                            </td>
-                                            <td>
-                                                <s:property value="tea.major"/>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="span2">
-                                                <strong>目前身份</strong>
-                                            </td>
-                                            <td>
-                                                <s:property value="tea.studyStatus"/>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <hr class="span8"/>
-                            <div class="span8">
-                                <h5>个人简介</h5>
-                                <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
-                                <div class="span6" id="teaintro">
-                                    <script>
-                                        $("#teaintro").html($("#tmp").text());
-                                    </script>
-                                </div>
-                            </div>
-                            <hr class="span8"/>
-                            <div class="span8">
-                                <h5>证书</h5>
-                                <div class="span6" id="teaintro">
-                                    <s:property value="tea.cert"/>
-                                </div>
-                            </div>
-                            <hr class="span8"/>
-                            <div class="span8">
-                                <h5>家教经历</h5>
-                                <div class="span6" id="teaintro">
-                                    <s:property value="tea.experience"/>
-                                </div>
+                            <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
+                            <div class="span6" id="teaintro">
+                                <script>
+                                    $("#teaintro").html($("#tmp").text());
+                                </script>
                             </div>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>
@@ -393,21 +358,22 @@
                                 </s:else>
                             </table>
                         </div>
-                        <div class="modal fade hide" id="loginInfo">
-                            <div class="modal-body">
-                                <h3>请先登陆</h3>
-                            </div>
-                            <div class="modal-footer">
-                                <a class="btn btn-success" href="index.action">登陆</a>
-                                <button class="btn" data-dismiss="modal">取消</button>
-                            </div>
+                    </div>
+                    <div class="modal fade hide" id="loginInfo">
+                        <div class="modal-body">
+                            <h3>请先登陆学生账户</h3>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-success" href="index.action">确认</a>
+                            <button class="btn" data-dismiss="modal">取消</button>
                         </div>
                     </div>
                 </div>
-            </div>  
-        </div>
+            </div>
+        </div>  
+    </div>
 
-        <!--==============================footer=================================-->
-        <%@ include file="WEB-INF/jspf/footer.jspf"%>
-    </body>
+    <!--==============================footer=================================-->
+    <%@ include file="WEB-INF/jspf/footer.jspf"%>
+</body>
 </html>

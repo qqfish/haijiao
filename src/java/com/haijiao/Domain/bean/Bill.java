@@ -42,9 +42,8 @@ public class Bill extends BaseBean{
     private int money;      //总价
     @Column(columnDefinition="int default 0")
     private int day;        //确认剩余天数
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "lid")
-    private Lesson lesson;
+
+    private String lesson;  //课程的名称
     private String message; //账单说明
     
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
@@ -114,11 +113,11 @@ public class Bill extends BaseBean{
         this.ttos = ttos;
     }
 
-    public Lesson getLesson() {
+    public String getLesson() {
         return lesson;
     }
 
-    public void setLesson(Lesson lesson) {
+    public void setLesson(String lesson) {
         this.lesson = lesson;
     }
 

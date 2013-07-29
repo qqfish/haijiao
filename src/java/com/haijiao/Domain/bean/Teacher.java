@@ -72,8 +72,8 @@ public class Teacher extends User{
     @OneToMany(mappedBy = "teacher")
     protected List<Bill> billList;  //预约列表
     
-//    @Column(columnDefinition="int default 0")
-//    private int wagePerhour;        //老师每小时的辅导费
+    @Column(columnDefinition="int default 0")
+    private int wagePerhour;        //老师最小每小时的辅导费
     
     @OneToMany
     @JoinColumn(name="tid")
@@ -311,13 +311,13 @@ public class Teacher extends User{
 //        this.schedule = schedule;
 //    }
 
-//    public int getWagePerhour() {
-//        return wagePerhour;
-//    }
-//
-//    public void setWagePerhour(Integer wagePerhour) {
-//        this.wagePerhour = wagePerhour;
-//    }
+    public int getWagePerhour() {
+        return wagePerhour;
+    }
+
+    public void setWagePerhour(Integer wagePerhour) {
+        this.wagePerhour = wagePerhour;
+    }
 
     public List<Bill> getBillList() {
         return billList;
