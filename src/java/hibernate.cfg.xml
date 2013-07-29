@@ -18,7 +18,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/haijiao?useUnicode=true&amp;characterEncoding=utf-8</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">12345678</property>
+    <property name="hibernate.connection.password">zy102428</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.ast.ASTQueryTranslatorFactory</property>
@@ -31,6 +31,7 @@
     <mapping class="com.haijiao.Domain.bean.User"/>
     <mapping class="com.haijiao.Domain.file.UserFileGroup"/>
     <mapping class="com.haijiao.Domain.file.UserFile"/>
+    <mapping class="com.haijiao.Domain.file.PublicFile"/>
     <mapping class="com.haijiao.Domain.bean.Lesson"/>
     <mapping class="com.haijiao.Domain.bean.Label"/>
     <mapping class="com.haijiao.Domain.bean.Bill"/>

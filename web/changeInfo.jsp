@@ -37,7 +37,7 @@
                 $("#selCity").click();
                 $("#selDistrict").val($("#txtDistrict").val());
             }
-            
+
             var editor;
             KindEditor.ready(function(K) {
                 editor = K.create('textarea[name="intro"]', {
@@ -169,7 +169,7 @@
                             clearInterval(wait);
                     }, 100);
                 });
-                
+
                 jcrop_api = $.Jcrop("#preimg", {
                     onChange: showPreview,
                     onSelect: showPreview,
@@ -207,63 +207,99 @@
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
                         <li id="l1" class="active"><a href="#basicInfo" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        <s:if test="#session.userType=='teacher'">
+                                <s:if test="#session.userType=='teacher'">
                             <li id="l5"><a href="#detailInfo" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>
+                                </s:if>
                         <li id="l2" ><a href="#modifyPassword" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#headpic" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                        <s:if test="#session.userType=='student'">
+                                <s:if test="#session.userType=='student'">
                             <li id="l4"><a href="#personIntro" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>                  
+                                </s:if>                  
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id='basicInfo'>
-                            <s:form action="changeInfo.action">
+                            <s:form action="changeInfo.action" cssClass="form-horizontal">
                                 <s:if test="#session.userType == 'teacher'">
                                     <h3>老师您好，修改你的详细信息吧^ ^</h3>
                                     <hr/>
-                                    <dl>
-                                        <dt>姓名</dt>
-                                        <dd><s:textfield id="TAName" cssClass="span4" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip2, 8);" type="text" name="name" placeholder="请输入您的大名" value="%{tea.name}" autofocus="autofocus" /></dd>
-                                        <dd id="name_tip" class="validateTip" style="text-align: left;"></dd>
-                                        <dd id="name_tip2" class="validateTip" style="text-align: left;"></dd>
-                                        <dt>性别</dt>
-                                        <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></dd>
-                                        <dd>
+                                    <div class="control-group">
+                                        <label class="control-label" for="TAName"><strong>姓名*</strong></label>
+                                        <div class="controls">
+                                            <s:textfield id="TAName" cssClass="span2" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip, 8);" type="text" name="name" placeholder="请输入您的大名" value="%{tea.name}" autofocus="autofocus" />
+                                            <span id="name_tip" class="validateTip" style="text-align: left;"></span>
+                                            <span id="name_tip2" class="validateTip" style="text-align: left;"></span>
+                                            <br/>
+                                            <small class="text-warning">请填写真实姓名，须与提现银行卡开户名一致</small>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="phoneNum"><strong>手机*</strong></label>
+                                        <div class="controls">
+                                            <s:textfield id="phoneNum" cssClass="span2" onchange="validate_phoneNum(this,phone_tip);" type="text" name="tel" placeholder="请输入您的手机号" value="%{tea.tel}"/>
+                                            <span id="phone_tip" class="validateTip" style="text-align: left;"></span>
+                                            <br/>
+                                            <small class="text-warning">请填写有效手机号，以便学生与您取得联系</small>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="gender"><strong>性别</strong></label>
+                                        <div class="controls" id="gender">
+                                            <div style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></div>
                                             <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                                 <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">男</button>
                                                 <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">女</button>
                                             </div>
-                                        </dd>
-                                        <dt>生日</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" readOnly="readOnly" placeholder="请输入您的生日" value="%{tea.birthday}"/></dd>
-                                        <dt>所在地</dt>
-                                        <dd>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="datepicker"><strong>生日</strong></label>
+                                        <div class="controls">
+                                            <s:textfield cssClass="span2" type="text" id="datepicker" name="birthday" readOnly="readOnly" placeholder="请输入您的生日" value="%{tea.birthday}"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="place"><strong>所在地</strong></label>
+                                        <div class="controls" id="place">
                                             <s:select id="selProvince" cssClass="span2" name="province" list="{ }" value="%{tea.province}"></s:select>
                                             <s:select id="selCity" cssClass="span2" name="city" list="{ }" value="%{tea.city}"></s:select>
                                             <s:select id="selDistrict" cssClass="span2" name="district" list="{ }" value="%{tea.district}"></s:select>
                                             <input type="hidden" id="txtProvince" value="<s:property value="tea.province"/>"/>
                                             <input type="hidden" id="txtCity" value="<s:property value="tea.city"/>"/>
                                             <input type="hidden" id="txtDistrict" value="<s:property value="tea.district"/>"/>
-                                        </dd>
-                                        <dt>目前身份</dt>
-                                        <dd><s:select cssClass="span2" name="studyStatus" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select></dd>
-                                        <dt>大学</dt>
-                                        <dd><s:textfield cssClass="span2" type="text" name="school" placeholder="请输入您就读的大学" value="%{tea.school}"/></dd>
-                                        <dt>专业</dt>
-                                        <dd><s:textfield cssClass="span2" type="text" name="major" placeholder="请输入您就读的专业" value="%{tea.major}"/></dd>
-                                        <dt>网络环境</dt>
-                                        <dd><s:select cssClass="span2" name="net" list="{'电信', '联通(网通)', '教育网', '移动(铁通)', '有线通', '其他'}" value="%{tea.net}"/></dd>
-                                        <dt>手机</dt>
-                                        <dd><s:textfield cssClass="span2" type="text" name="tel" placeholder="请输入您的手机号" value="%{tea.tel}"/></dd>                                
-                                        <br/>
-                                        <dd>
-                                            <input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testSubmit();"/>
-                                            <s:submit id="form_submit" cssClass="btn btn-primary" style="width:300px; display:none;" value="提交" method="teacherChange"/>
-                                        </dd>
-                                    </dl>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="currentRole"><strong>目前身份</strong></label>
+                                        <div class="controls">
+                                            <s:select id="currentRole" cssClass="span2" name="studyStatus" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="college"><strong>大学</strong></label>
+                                            <div class="controls">
+                                            <s:textfield id="college" cssClass="span2" type="text" name="school" placeholder="请输入您就读的大学" value="%{tea.school}"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="major"><strong>专业</strong></label>
+                                        <div class="controls">
+                                            <s:textfield id="major" cssClass="span2" type="text" name="major" placeholder="请输入您就读的专业" value="%{tea.major}"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="network"><strong>网络环境</strong></label>
+                                        <div class="controls">
+                                            <s:select id="network" cssClass="span2" name="net" list="{'电信', '联通(网通)', '教育网', '移动(铁通)', '有线通', '其他'}" value="%{tea.net}"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <input class="btn btn-primary" type="button" value="提交" onclick="testSubmit();"/>
+                                            <s:submit id="form_submit" cssClass="btn btn-primary" style="display:none;" value="提交" method="teacherChange"/>
+                                        </div>
+                                    </div>
                                 </s:if>
                                 <s:if test="#session.userType == 'student'">
                                     <h3>同学您好，修改你的详细信息吧^ ^</h3>

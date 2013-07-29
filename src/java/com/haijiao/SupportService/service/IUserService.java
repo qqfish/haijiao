@@ -6,6 +6,7 @@ package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.bean.User;
+import com.haijiao.Domain.file.PublicFile;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
 import java.util.List;
@@ -58,6 +59,13 @@ public interface IUserService {
     public boolean validateCheckcode(int id, String checkCode);
     public void saveResetInfo(int id, String checkCode);
     
+    public boolean addFileFromPublic(String email, String groupName, int publicFileId);
+    
     public List<UserFileGroup> getUserFileGroup(String email);
     public List<UserFile> getUserFile(String email, String groupName);
+    public int getUserFileNum(String email, String groupName);
+    
+    public boolean publishFile(int userFileId, String name, String author, String publisher, String type);
+    public List<PublicFile> getPublicFilelist(String name, int first, int pageSize);
+    public int getPubliFileNum(String name);
 }

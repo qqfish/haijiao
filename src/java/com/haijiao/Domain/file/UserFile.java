@@ -18,6 +18,7 @@ import javax.persistence.Table;
 public class UserFile extends BaseBean{
     String name;
     String url;
+    Boolean owned;
 
     public UserFile() {
     }
@@ -41,6 +42,14 @@ public class UserFile extends BaseBean{
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Boolean getOwned() {
+        return owned;
+    }
+
+    public void setOwned(Boolean owned) {
+        this.owned = owned;
     }
     
 }

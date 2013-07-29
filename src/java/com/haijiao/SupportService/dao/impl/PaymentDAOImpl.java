@@ -8,7 +8,6 @@ import com.haijiao.Domain.bean.Mail;
 import com.haijiao.Domain.bean.Payment;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IPaymentDAO;
-import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**

@@ -74,7 +74,7 @@
                                         <s:param name="src" value="%{groupName}" />
                                     </s:url>
                                     <s:a cssClass="btn btn-mini" href="%{downloadurl}" data-toggle="tooltip" title="下载"><i class="icon-download-alt"></i>下载</s:a>
-                                    <a class="btn btn-mini" data-target="#shareModal" data-toggle="modal" onclick="$('#shareFilename').val('<s:property value="name" />');$('#shareSrc').val('<s:property value="groupName" />');"><i class="icon-share-alt"></i>发布</a>
+                                    <a class="btn btn-mini" data-target="#shareModal" data-toggle="modal" onclick="$('#shareSrc').val('<s:property value="id" />');"><i class="icon-share-alt"></i>发布</a>
                                     </div>
                                 </td>
                             </tr>
@@ -85,7 +85,7 @@
                 <div class="modal-header">
                     <h4>发布到公共课件<small class="text-warning">(*发布的课件必须通过审核)</small></h4>
                 </div>
-                <s:form cssClass="form-horizontal" action="file">
+                <s:form cssClass="form-horizontal" action="publishFile">
                     <div class="modal-body">
                         <div class="control-group">
                             <label class="control-label">书名全称</label>
@@ -114,9 +114,8 @@
                     </div>
                     <div class="modal-footer">
                         <div class="controls">
-                            <s:textfield id="shareFilename" name="name" cssStyle="display:none" />
-                            <s:textfield id="shareSrc" name="src" cssStyle="display:none" />
-                            <s:submit method="share" cssClass="btn btn-success" value="发布"></s:submit>
+                            <s:hidden id="shareSrc" name="fileId" />
+                            <s:submit cssClass="btn btn-success" value="发布"></s:submit>
                             <button type="submit" class="btn" data-dismiss="modal">取消</button>
                         </div>
                     </div>
