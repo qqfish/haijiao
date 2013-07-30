@@ -16,6 +16,7 @@ import com.haijiao.SupportService.dao.ILessonDAO;
 import com.haijiao.SupportService.dao.IPaymentDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import com.haijiao.SupportService.dao.ITeacherDAO;
+import com.haijiao.SupportService.dao.IUserDAO;
 import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.global.TeacherLevel;
 import java.sql.Date;
@@ -35,6 +36,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class BillServiceImpl implements IBillService{
     @Resource
     IBillDAO billDAO;
+    @Resource
+    IUserDAO userDAO;
     @Resource
     ILessonDAO lessonDAO;
     @Resource
@@ -203,13 +206,13 @@ public class BillServiceImpl implements IBillService{
     }
 
     @Override
-    public List<Comment> getCommentList(String email, int first, int pageSize){
-        return commentDAO.getComment(email,first,pageSize);
+    public List<Bill> getCommentBillList(String email, String userType, int first, int pageSize){
+        return billDAO.getCommentBillList(email,userType,first,pageSize);
     }
     
     @Override
     public int getCommentNum(String email){
-        return commentDAO.getCommentNum(email);
+        return userDAO.getUserByEmail(email).getScoreNum();
     }
     
     @Override

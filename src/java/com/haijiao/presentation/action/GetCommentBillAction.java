@@ -5,7 +5,7 @@
  */
 package com.haijiao.presentation.action;
 
-import com.haijiao.Domain.bean.Comment;
+import com.haijiao.Domain.bean.Bill;
 import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.global.PageBean;
 import java.util.List;
@@ -24,11 +24,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 @ParentPackage("struts-default")
 @Namespace("/")
-@Action("getComment")
+@Action("getCommentBill")
 @Results({
-    @Result(name = "success", location = "/billpart.jsp")
+    @Result(name = "success", location = "/commentpart.jsp")
 })
-public class GetCommentAction extends SessionAction {
+public class GetCommentBillAction extends SessionAction {
 
     @Resource
     IBillService billService;
@@ -38,9 +38,10 @@ public class GetCommentAction extends SessionAction {
     @Override
     public String execute() {
         String email = (String) this.getSessionValue("email");
+        String userType = (String) this.getSessionValue("userType");
         int cp = Integer.parseInt(currentPage);
         int pageSize = 20;
-        List<Comment> lc = billService.getCommentList(email, cp, pageSize);
+        List<Bill> lc = billService.getCommentBillList(email, userType, (cp -1) * pageSize, pageSize);
         int num = billService.getCommentNum(email);
         pb = new PageBean(lc, num, cp, pageSize);
         return SUCCESS;

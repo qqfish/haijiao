@@ -23,11 +23,11 @@
                         <tr>
                             <td>
                                 <blockquote>
-                                    <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="score" /></label></h4>
+                                    <h4><s:property value="student.name" /><label class="label label-important pull-right">评分:<s:property value="stot.score" /></label></h4>
                                     <small>
-                                        <span><s:property value="content" /></span>
+                                        <span><s:property value="stot.content" /></span>
                                         <span class="pull-right">
-                                            <s:if test="reply == null">
+                                            <s:if test="stot.reply == null">
                                                 <a href="#reply_<s:property value="id" />" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
                                             </s:if>
                                             <s:else>
@@ -35,8 +35,8 @@
                                             </s:else>
                                         </span>
                                         <br/><br/>
-                                        <s:if test="reply != null">
-                                            <span>您的回复：<s:property value="reply" /></span>
+                                        <s:if test="stot.reply != null">
+                                            <span>您的回复：<s:property value="stot.reply" /></span>
                                         </s:if>
                                     </small>
                                     <div id="reply_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -64,13 +64,87 @@
         </table>
         <div class="pagination pagination-mini pull-right">
             <ul>
-                <li><a href="#">Prev</a></li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">Next</a></li>
+                <s:if test="pb.totalPage ==0"></s:if>
+                <s:elseif test="pb.currentPage == 1">
+                    <li class="disabled"><a href="javascript:;">Prev</a></li>
+                    </s:elseif>
+                    <s:else>
+                    <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.currentPage -1});">
+                            Prev</s:a></li>
+                    </s:else>
+                    <s:if test="pb.totalPage > 7">
+                        <s:if test="pb.currentPage < 5">
+                            <s:iterator value="new int[pb.currentPage +1]" status="i">
+                                <s:if test="pb.currentPage == #i.index+1">
+                                <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
+                                </s:if>
+                                <s:else>
+                                <li><s:a href="javascript:;" onclick="getCommentBillList(%{#i.index +1});">
+                                        <s:property value="#i.index+1"/>
+                                    </s:a></li>
+                                </s:else>
+                            </s:iterator>
+                        </s:if>
+                        <s:elseif test="pb.currentPage > totalPage - 5">
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(1);">1</s:a></li>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(2);">2</s:a></li>
+                        <li class="disabled"><s:a href="javascript:;">...</s:a></li>
+                            <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
+                                <s:if test="#i.index == 1">
+                                <li class="disabled"><s:a href="javascript:;">
+                                        <s:property value="pb.currentPage"/>
+                                    </s:a></li>
+                                </s:if>
+                                <s:else>
+                                <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.currentPage + #i.index - 1});">
+                                        <s:property value="pb.currentPage + #i.index -1"/>
+                                    </s:a></li>
+                                </s:else>
+                            </s:iterator>
+                        </s:elseif>
+                        <s:else>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(1);">1</s:a></li>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(2);">2</s:a></li>
+                        <li class="disabled"><s:a href="javascript:;">...</s:a></li>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.currentPage - 1});">
+                                <s:property value="pb.currentPage -1"/>
+                            </s:a></li>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.currentPage});">
+                                <s:property value="pb.currentPage"/>
+                            </s:a></li>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.currentPage + 1});">
+                                <s:property value="pb.currentPage +1"/>
+                            </s:a></li>
+                        <li><s:a href="javascript:;">...</s:a></li>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.totalPage - 1});">
+                                <s:property value="pb.totalPage -1"/>
+                            </s:a></li>
+                        <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.totalpage});">
+                                <s:property value="pb.totalPage"/>
+                            </s:a></li>
+                        </s:else>
+                    </s:if>
+                    <s:else>
+                        <s:iterator value="new int[pb.totalPage]" status="i">
+                            <s:if test="pb.currentPage == #i.index+1">
+                            <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
+                            </s:if>
+                            <s:else>
+                            <li><s:a href="javascript:;" onclick="getCommentBillList(%{#i.index +1});">
+                                    <s:property value="#i.index+1"/>
+                                </s:a></li>
+                            </s:else>
+                        </s:iterator>
+                    </s:else>
+                    <s:if test="pb.currentPage == pb.totalPage">
+                    <li class="disabled"><a href="javascript:;">Next</a></li>
+                    </s:if>
+                <s:elseif test="pb.totalPage == 0"></s:elseif>
+                    <s:else>
+                    <li><s:a href="javascript:;" onclick="getCommentBillList(%{pb.currentPage +1});">
+                            Next
+                        </s:a></li>
+                    </s:else>
             </ul>
         </div>
     </body>

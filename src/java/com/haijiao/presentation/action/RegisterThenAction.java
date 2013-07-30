@@ -47,9 +47,11 @@ public class RegisterThenAction extends SessionAction {
     private String city;
     private String district;
     private String net;
+    private String tel;
+    private String telType;
     
     public String teacherRegister(){
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major,studyStatus, null, province, city, district, net)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major,studyStatus, tel, province, city, district, net)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", theTeacher.getName());
             this.sessionPutIn("userType", "teacher");
@@ -62,7 +64,7 @@ public class RegisterThenAction extends SessionAction {
     }
     
     public String studentRegister(){
-        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, null, grade, school, null, null)){
+        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, null, grade, school, tel, telType)){
             Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", s.getName());
             this.sessionPutIn("userType", "student");
@@ -185,4 +187,21 @@ public class RegisterThenAction extends SessionAction {
     public void setDistrict(String district) {
         this.district = district;
     }
+
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
+    }
+
+    public String getTelType() {
+        return telType;
+    }
+
+    public void setTelType(String telType) {
+        this.telType = telType;
+    }
+    
 }

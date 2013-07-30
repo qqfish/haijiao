@@ -95,5 +95,6 @@ public class GetClassesAction extends SessionAction{
 
     public void setStuEmail(List<String> stuEmail) {
         this.stuEmail = stuEmail;
-    } 
+    }
+    
 }

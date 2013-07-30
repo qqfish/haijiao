@@ -18,7 +18,7 @@ public interface ITeacherService {
     
     //修改基本资料
     public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String major,
-                String tel, String studyStatus, String province, String city, String district, String net);
+                String studyStatus, String tel, String province, String city, String district, String net);
     
     public boolean changeMoreInfo(String email, String underlineArea, String intro, String cert, String experience, Boolean sprtSUnderline, Boolean sprtTUnderline, Boolean sprtOnline);
     //获取报酬
