@@ -142,6 +142,10 @@
                                                     <br /><a class="btn btn-mini btn-link">举报</a>
                                                 </td>
                                             </s:elseif>
+                                            <s:elseif test="status == 8">
+                                                <td><br /><label class="label" style="font-size:9px;">学生取消</label></td>
+                                                <td></td>
+                                            </s:elseif>
                                             <s:elseif test="status >= 5">
                                                 <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                                                 <td>
@@ -168,7 +172,7 @@
                                             内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
                                                 <br/>
                                                 评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                            <s:textfield id="comment_score" name="score" cssStyle="display:none;"></s:textfield>
+                                            <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
                                             </div>
                                             <div class="modal-footer">
                                                 <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>

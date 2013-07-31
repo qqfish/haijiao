@@ -90,6 +90,7 @@ public class ChangeInfoAction extends SessionAction {
     
     public String teacherChange() throws ParseException{
         parseDate();
+        System.out.println("studyStatus: " + studyStatus);
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, city, district, net)){
             this.sessionPutIn("nextPageMessage", this.getText("teaChangeSuccess"));
             return SUCCESS;

@@ -186,7 +186,7 @@ public class BillServiceImpl implements IBillService{
             Student stu = b.getStudent();
             stu.setUndealBill(stu.getUndealBill() + 1);
             studentDAO.update(stu);
-        } else if (status == Bill.Status.paid || status == Bill.Status.studentFinish){
+        } else if (status == Bill.Status.studentCancel || status == Bill.Status.paid || status == Bill.Status.studentFinish){
             Student stu = b.getStudent();
             stu.setUndealBill(stu.getUndealBill() - 1);
             studentDAO.update(stu);

@@ -18,7 +18,7 @@ function getPublicFilelist(currentPage, name){
 
 function getBillList(currentPage){
     $.post("getBillList.action", {currentPage: currentPage}, function(data){
-       $("#bill_area").html(data); 
+       $("#billlist").html(data); 
     });
 }
 

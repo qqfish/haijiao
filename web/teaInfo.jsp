@@ -54,7 +54,12 @@
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
                     </h4>
                     <s:if test="tea.status==1">
-                        <a class='btn btn-success' style="margin-left:20px" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
+                        <s:if test="audition">
+                            <a class='btn btn-success' style="margin-left:20px" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
+                        </s:if>
+                        <s:else>
+                            <a class='btn btn-success disabled' style="margin-left:20px" disabled>暂停试讲</a>
+                        </s:else>
                         <a class="btn btn-primary" style="margin-left:10px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                     </s:if>
                     <s:elseif test="tea.status == 2">
@@ -71,7 +76,7 @@
                         </div>
                     </s:elseif>
                     <s:elseif test="#session.email != null">
-                        <a class='btn btn-success disabled' style="margin-left:20px" diabled>在线试讲</a>
+                        <a class='btn btn-success disabled' style="margin-left:20px" diabled>暂停试讲</a>
                         <a class="btn btn-primary" style="margin-left:10px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                     </s:elseif>
                     <s:else>
@@ -238,22 +243,25 @@
                             <h4>预订确认</h4>
                         </div>
                         <div class="modal-body">
-                            <s:form action="bookTeacher">
-                                <dl>
+                            <div class="alert">
+                                <i class="icon-info-sign"></i>下订单前请先与老师商定授课时间，如果是网络授课，建议先与老师在线试讲！
+                            </div>
+                        <s:form action="bookTeacher">
+                                <dl class="dl-horizontal">
                                     <dt class="muted">上课方式</dt>
-                                    <dd id="reserveShowType" style="margin-left:100px"></dd>
+                                    <dd id="reserveShowType" style="margin-left: 200px;"></dd>
                                 </dl>
-                                <dl>
+                                <dl class="dl-horizontal">
                                     <dt class="muted">课程</dt>
-                                    <dd id="reserveShowLesson" style="margin-left:100px"></dd>
+                                    <dd id="reserveShowLesson" style="margin-left: 200px;"></dd>
                                 </dl>
-                                <dl>
+                                <dl class="dl-horizontal">
                                     <dt class="muted">课时数</dt>
-                                    <dd id="reserveShowNum" style="margin-left:100px">1</dd>
+                                    <dd id="reserveShowNum" style="margin-left: 200px;">1</dd>
                                 </dl>
-                                <dl>
+                                <dl class="dl-horizontal">
                                     <dt class="muted">总计</dt>
-                                    <dd id="reserveTotal" class="lead text-error" style="margin-left:100px"></dd>
+                                    <dd id="reserveTotal" class="lead text-error" style="margin-left: 200px;"></dd>
                                 </dl>
                                 <dl>
                                     <dt class="muted">备注</dt>
@@ -339,6 +347,7 @@
                                         <tr>
                                             <th>时间</th>
                                             <th>学生姓名</th>
+                                            <th>课程</th>
                                             <th>状态</th>
                                             <th>金额</th>
                                         </tr>
@@ -349,6 +358,7 @@
                                                 <tr>
                                                     <td><s:property value="createdateToString()" /></td>
                                                     <td><s:property value="student.name" /></td>
+                                                    <td><s:property value="lesson"/>-<s:property value="duration" />课时</td>
                                                     <td><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                                                     <td><strong class="text-error" style="font-size:14px;"><s:property value="money" />.00</strong></td>
                                                 </tr>

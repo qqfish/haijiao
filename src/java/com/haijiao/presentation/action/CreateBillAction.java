@@ -23,7 +23,8 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("createBill")
 @Results({
-    @Result(name = "success", location = "/confirmPay.jsp")
+    @Result(name = "success", location = "/confirmPay.jsp"),
+    @Result(name = "input", type = "redirect", location = "index.action?")
 })
 public class CreateBillAction extends SessionAction {
 
@@ -38,6 +39,12 @@ public class CreateBillAction extends SessionAction {
         money = bill.getMoney();
         message = bill.getTeacher().getName() + "老师-" + bill.getLesson() + "课-" + bill.getDuration() + "小时";
         return SUCCESS;
+    }
+        
+    public String deny(){
+        billService.changeBillStatus(billId, Bill.Status.studentCancel);
+        this.sessionPutIn("nextPageMessage","已拒绝预约。\n您的老师马上就会接到通知。\n");
+        return INPUT;
     }
 
     public void setBillService(IBillService billService) {

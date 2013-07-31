@@ -209,39 +209,39 @@
     专业：<s:property value="teacher.major" />
     线下授课区域：<s:property value="teacher.underlineArea" default="暂无"/>
     在线试讲页面：http://haijiaoedu.com/getTeacherInfo.action?teacherEmail=<s:property value="teacher.email" />
-                                    </textarea>
+                                </textarea>
 
-                                    <p><button class="btn" onclick ="edit_share_info()">编辑</button><button class="btn" onclick ="save_share_info()">保存</button>&nbsp;【分享主页信息】                                                        
-                                        <iframe id="share_iframe" onload="share_iframe_load()"allowtransparency="true" frameborder="0" scrolling="no"
-                                                src="http://service.weibo.com/staticjs/weiboshare.html?url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1" width="72" height="33">
-                                        </iframe>
-                                </div>
-                                <div style="margin-left: 20px">
-                                    <p style="color:#999999">推广建议：链接可以转发以下网址获取更多的预约</p>
-                                    <p style="color:#999999">1.&nbsp;58同城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;赶集网</p>
-                                    <p style="color:#999999">3.&nbsp;百姓网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;高校bbs</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn" style="margin-left:30px" data-dismiss="modal">关闭</button>
-                                </div>
+                                <p><button class="btn" onclick ="edit_share_info()">编辑</button><button class="btn" onclick ="save_share_info()">保存</button>&nbsp;【分享主页信息】                                                        
+                                    <iframe id="share_iframe" onload="share_iframe_load()"allowtransparency="true" frameborder="0" scrolling="no"
+                                            src="http://service.weibo.com/staticjs/weiboshare.html?url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1" width="72" height="33">
+                                    </iframe>
+                            </div>
+                            <div style="margin-left: 20px">
+                                <p style="color:#999999">推广建议：链接可以转发以下网址获取更多的预约</p>
+                                <p style="color:#999999">1.&nbsp;58同城&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.&nbsp;赶集网</p>
+                                <p style="color:#999999">3.&nbsp;百姓网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4.&nbsp;高校bbs</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" style="margin-left:30px" data-dismiss="modal">关闭</button>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="tab-content">
+                    <div class="tab-content">
 
-                            <div class="tab-pane fade" id='lesson_area'>
-                                <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
-                                   <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
-                                   <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
-                                   <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
-                                   <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
-                                   "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
-                                <br/>
-                                <script>
-                                    $("#showtip").popover();
-                                </script>
-                                <h4>老师您好，您目前开设课程的情况如下：</h4>
-                                <table>
+                        <div class="tab-pane fade" id='lesson_area'>
+                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
+                               <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
+                               <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
+                               <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
+                               <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
+                               "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
+                            <br/>
+                            <script>
+                                $("#showtip").popover();
+                            </script>
+                            <h4>老师您好，您目前开设课程的情况如下：</h4>
+                            <table>
                                 <s:iterator value="teacher.lessons" id="ls">
                                     <s:if test="delete==false">
                                         <s:form action="dealLesson.action">
@@ -358,10 +358,44 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
-                            
+                            <div id="billlist"></div>
+                            <div id="comment_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel">评论</h3>
+                                </div>
+                                <s:form action="makeCommentReply.action">
+                                    <div class="modal-body">
+                                        <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
+                                        内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                            <br/>
+                                            评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                        <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                        <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(".commentA").click(function() {
+                                                var id = $(this).attr("id");
+                                                $("#comment_rate").bind('rated', function(event, value) {
+                                                    $('#comment_score').val(value);
+                                                });
+                                                $("#comment_rate").bind('over', function(event, value) {
+                                                    $(this).attr('title', value);
+                                                });
+                                                $("#cmtsmt").click(function(event) {
+                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                        event.preventDefault();
+                                                });
+                                            });
+                                        </script>
+                                </s:form>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>
-                            
+
                         </div>
                         <div class="tab-pane fade" id='file_area'>
                             <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>

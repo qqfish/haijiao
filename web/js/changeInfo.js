@@ -72,8 +72,12 @@ function testSubmit(){
         $("#name_tip").fadeIn(1,null);
         return;
     } else if(name.length > 8 ){
+        $("#name_tip").text("* 姓名长度不能超过8个字哦！");
+        $("#name_tip").fadeIn(1,null);
         return;
     } else if($('#phoneNum').val().length != 11){
+        $("#phone_tip").text("* 请确认号码填写正确！");
+        $("#phone_tip").fadeIn(1,null);
         return;
     } else {
         $("#form_submit").click();

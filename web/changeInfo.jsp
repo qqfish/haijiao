@@ -273,7 +273,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="currentRole"><strong>目前身份</strong></label>
                                         <div class="controls">
-                                            <s:select id="currentRole" cssClass="span2" name="studyStatus" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select>
+                                            <s:select id="currentRole" cssClass="span2" name="studyStatus" value="%{tea.studyStatus}" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select>
                                             </div>
                                         </div>
                                         <div class="control-group">

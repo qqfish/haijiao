@@ -26,6 +26,7 @@ public class Bill extends BaseBean{
         static public final int studentFinish = 5;
         static public final int teacherCommented = 6;
         static public final int studentCommented = 7;
+        static public final int studentCancel = 8;
     }
     static public final int CommitDay = 15;  //学生最大确认天数
     

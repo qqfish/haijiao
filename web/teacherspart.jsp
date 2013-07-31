@@ -59,8 +59,12 @@
                                         </s:else>
                                         <br/>
                                         <s:if test="status==1">
-                                            <a class='btn btn-success btn-small  pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='email' default='null' />">在线试讲</a>
-
+                                            <s:if test="audition">
+                                                <a class='btn btn-success btn-small  pull-right' href="enterPublicRoom.action?teaEmail=<s:property value='email' default='null' />">在线试讲</a>
+                                            </s:if>
+                                            <s:else>
+                                                <a class='btn btn-success btn-small  pull-right disabled' disabled>暂停试讲</a>
+                                            </s:else>
                                         </s:if>
                                         <s:elseif test="status==2">
                                             <a class="btn btn-success btn-small pull-right" style="margin-left:10px" data-toggle="modal" data-target="#publicRoom">在线试讲</a>
