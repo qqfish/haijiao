@@ -13,11 +13,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div style="display:inline;">
-            <input id="keyword" type="text" class="span2">
-            <button class="btn btn-primary" style="margin-top:-10px;" onclick="getPublicFilelist(1, $('#keyword').value());">搜索</button>
-        </div>
-
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -58,7 +53,7 @@
                 <s:if test="pb.totalPage ==0"></s:if>
                 <s:elseif test="pb.currentPage == 1">
                     <li class="disabled"><a href="javascript:;">Prev</a></li>
-                </s:elseif>
+                    </s:elseif>
                     <s:else>
                     <li><s:a href="javascript:;" onclick="getPublicFilelist(%{pb.currentPage -1});">
                             Prev</s:a></li>

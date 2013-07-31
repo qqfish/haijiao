@@ -49,18 +49,18 @@
                 document.getElementById("share_info").readonly = false;
             }
             function save_share_info() {
-                document.getElementById("share_info").setAttribute("readOnly","true");
+                document.getElementById("share_info").setAttribute("readOnly", "true");
                 document.getElementById("share_info").readonly = true;
-                document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" + 
-                    "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
-                    document.getElementById("share_info").value;
-            }
-            function share_iframe_load() {
-                if(flag) {
-                    flag = 0;
-                    document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" + 
+                document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
                         "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
                         document.getElementById("share_info").value;
+            }
+            function share_iframe_load() {
+                if (flag) {
+                    flag = 0;
+                    document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
+                            "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                            document.getElementById("share_info").value;
                 }
             }
         </script>
@@ -102,12 +102,14 @@
                             <label class="span1">银行卡号</label>
                             <s:if test="teacher.bankname!=null&&teacher.bankcard!=null">
                                 <label class="radio offset1">
-                                    <input type="radio" name="option1" onclick="$('#moneyRequestbc').val('<s:property value="teacher.bankcard" />');$('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
+                                    <input type="radio" name="option1" onclick="$('#moneyRequestbc').val('<s:property value="teacher.bankcard" />');
+                                            $('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
                                     <span class="span2"><s:property value="teacher.bankname" /></span>
                                     <span><s:property value="teacher.bankcard" /></span>
                                 </label>
                                 <label class="radio offset1">
-                                    <input type="radio" name="option1" value="option2" onclick="$('#moneyRequestbc').val($('#newBankcard').val());$('#moneyRequestbank').val($('#newBankname').val());">
+                                    <input type="radio" name="option1" value="option2" onclick="$('#moneyRequestbc').val($('#newBankcard').val());
+                                            $('#moneyRequestbank').val($('#newBankname').val());">
                                     <select id="newBankname" class="span2">
                                         <option>中国工商银行</option>
                                         <option>中国银行</option>
@@ -121,7 +123,7 @@
                             </s:if>
                             <s:else>
                                 <script>
-                                    $(document).ready(function(){
+                                    $(document).ready(function() {
                                         $('#moneyRequestbank').val("中国工商银行");
                                     });
                                 </script>
@@ -442,6 +444,10 @@
                             </div>
                         </div>
                         <div id="publicfile_area" class="tab-pane fade">
+                            <div style="display:inline;">
+                                <input id="keyword" type="text" class="span2"/>
+                                <button class="btn btn-primary" style="margin-top:-10px;" onclick="getPublicFilelist(1, $('#keyword').val());">搜索</button>
+                            </div>
                             <div id="publicFileList"></div>
                             <div class="modal hide fade" id="publicfileModal">
                                 <div class="modal-body">
