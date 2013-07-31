@@ -31,7 +31,7 @@ public class UserFileGroupDAOImpl extends GenericHibernateDAO<UserFileGroup, Int
     
     @Override
     public List<UserFileGroup> getUserFileGroup(String email) {
-        String hql = "select fg from User u left join u.fileGroups fg where u.email ='" + email + "'";
+        String hql = "select fg from User u right join u.fileGroups fg where u.email ='" + email + "'";
         return findByQuery(hql);
     }
     

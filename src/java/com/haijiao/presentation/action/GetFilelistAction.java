@@ -40,7 +40,8 @@ public class GetFilelistAction extends SessionAction{
         String email = (String) this.getSessionValue("email");
         if(isDir){
             List<UserFileGroup> ufg = userService.getUserFileGroup(email);
-            pb = new PageBean(ufg, ufg.size(), 1, ufg.size());
+            if(!ufg.isEmpty())
+                pb = new PageBean(ufg, ufg.size(), 1, ufg.size());
         }
         else{
             List<UserFile> uf = userService.getUserFile(email, groupName);

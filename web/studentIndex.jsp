@@ -66,199 +66,44 @@
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade" id='bill_area'>
-
-                            <div class="btn-group" style="float:right">
-                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                    订单选择
-                                    <span class="caret"></span>
-                                </a>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a tabindex="-1" href="#">所有订单</a></li>
-                                    <li><a tabindex="-1" href="#">已完成</a></li>
-                                    <li><a tabindex="-1" href="#">未完成</a></li>
-                                </ul>
-                            </div>
-
-                            <table class="table table-striped table-hover" >
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th class="span2">老师</th>
-                                        <th>课程</th>
-                                        <th>总计(元)</th>
-                                        <th>状态</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>        
-                                    <s:iterator value="student.billList" id="billList">
-                                        <tr>
-                                            <td><br /><s:property value="id"/></td>
-                                            <td><strong><s:property value="teacher.name" /></strong><br />
-                                                <span class="muted" style="font-size:9px;">电话:<s:property value="teacher.tel" default="无"/><br />
-                                                    备注:<s:property value="ps" default="无" /></span>
-
-                                            </td>
-                                            <td><strong><s:property value="lesson.name" /></strong><br />
-                                                <s:property value="duration" />课时
-                                            </td>
-                                            <td><strong class="text-error" style="font-size:14px;"><br /><s:property value="money" />.00</strong></td>
-
-                                            <s:if test="status == 0">
-                                                <td><br /><label class="label label-warning" style="font-size:9px;">等待确认</label></td>
-                                                <td>
-                                                    <br /><a class="btn btn-link btn-mini">取消</a>
-                                                </td>
-                                            </s:if>
-                                            <s:elseif test="status == 1">
-                                                <td><br /><label class="label" style="font-size:9px;">拒绝请求</label></td>
-                                                <td>
-                                                    <br /><a class="btn btn-mini btn-link">举报</a>
-                                                </td>
-                                            </s:elseif>
-                                            <s:elseif test="status == 2">
-                                                <td><br /><label class="label label-important" style="font-size:9px;">等待支付</label></td>
-                                                <td>
-                                                    <s:form action="createBill" cssStyle="margin:0px; padding:0px;">
-                                                        <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
-                                                        <br /><s:submit value="支付" method="accept" cssClass="btn btn-mini btn-success"/>
-                                                        <br /><s:submit value="取消" method="deny" cssClass="btn btn-mini btn-link"/>
-                                                    </s:form>
-                                                </td>
-                                            </s:elseif>
-                                            <s:elseif test="status == 3">
-                                                <td><br /><label class="label label-info" style="font-size:9px;">正在上课</label></td>
-                                                <td>
-                                                    <br /><a class="btn btn-mini btn-link">举报</a>
-                                                </td>
-                                            </s:elseif>
-                                            <s:elseif test="status == 4">
-                                                <td><br /><label class="label label-important" style="font-size:9px;">完成授课</label></td>
-                                                <td>
-                                                    <s:form action="dealWithReservation" cssStyle="margin:0px; padding:0px;">
-                                                        <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
-                                                        <br /><s:submit value="完成" method="studentFinish" cssClass="btn btn-mini btn-success"/>
-                                                    </s:form>
-                                                    <br /><a class="btn btn-mini btn-link">举报</a>
-                                                </td>
-                                            </s:elseif>
-                                            <s:elseif test="status == 8">
-                                                <td><br /><label class="label" style="font-size:9px;">学生取消</label></td>
-                                                <td></td>
-                                            </s:elseif>
-                                            <s:elseif test="status >= 5">
-                                                <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
-                                                <td>
-                                                    <s:if test="stot==null">
-                                                        <br /><a id="<s:property value="id" />" onclick="$('#comment_id').val($(this).attr('id'))" href="#comment_modal" type="button" class="commentA btn btn-info btn-mini" data-toggle="modal">评论</a>
-                                                    </s:if>
-                                                    <s:else>
-                                                        <br /><a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">评论</a>
-                                                    </s:else>
-                                                </td>
-                                            </s:elseif>
-                                        </tr>
-                                    </s:iterator>
-                                </tbody>
-
-                                <div id="comment_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3 id="myModalLabel">评论</h3>
-                                    </div>
-                                    <s:form action="makeCommentReply.action">
-                                        <div class="modal-body">
-                                            <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
-                                            内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                <br/>
-                                                评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
-                                            <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                            <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                            </div>
-                                            <script type="text/javascript">
-                                                $(".commentA").click(function() {
-                                                    var id = $(this).attr("id");
-                                                    $("#comment_rate" ).bind('rated', function(event, value) {
-                                                        $('#comment_score').val(value);
-                                                    });
-                                                    $("#comment_rate").bind('over', function(event, value) {
-                                                        $(this).attr('title', value);
-                                                    });
-                                                    $("#cmtsmt").click(function(event) {
-                                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                            event.preventDefault();
-                                                    });
-                                                });
-                                            </script>
-                                    </s:form>
+                            <div id="billlist"></div>
+                            <div id="comment_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3 id="myModalLabel">评论</h3>
                                 </div>
-                            </table>
-
-                            <div class="pagination pagination-mini pull-right">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
+                                <s:form action="makeCommentReply.action">
+                                    <div class="modal-body">
+                                        <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
+                                        内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                            <br/>
+                                            评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                        <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                        <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(".commentA").click(function() {
+                                                var id = $(this).attr("id");
+                                                $("#comment_rate").bind('rated', function(event, value) {
+                                                    $('#comment_score').val(value);
+                                                });
+                                                $("#comment_rate").bind('over', function(event, value) {
+                                                    $(this).attr('title', value);
+                                                });
+                                                $("#cmtsmt").click(function(event) {
+                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                        event.preventDefault();
+                                                });
+                                            });
+                                        </script>
+                                </s:form>
                             </div>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>
-                            <table class="table table-hover table-striped">
-                                <tbody>
-                                    <s:if test="student.billList.size()<=0">
-                                        还没有评论哦~！
-                                    </s:if>
-                                    <s:else>
-                                        <s:iterator value="student.billList" id="billList">
-                                            <s:if test="ttos != null">
-                                                <tr>
-                                                    <td>
-                                                        <blockquote>                                                        
-                                                            <h4><s:property value="teacher.name" /><label class="label label-important pull-right">评分:<s:property value="ttos.score" /></label></h4>
-                                                            <small>
-                                                                <span><s:property value="ttos.content" /></span>
-                                                                <span class="pull-right">
-                                                                    <s:if test="ttos.reply==null">
-                                                                        <a href="#reply_<s:property value="id" />" type="button" class="btn btn-info btn-mini" data-toggle="modal">回复</a>
-                                                                    </s:if>
-                                                                    <s:else>
-                                                                        <a type="button" class="btn btn-info btn-mini disabled" data-toggle="modal">回复</a>
-                                                                    </s:else>
-                                                                </span>
-                                                                <br/><br/>
-                                                                <span>您的回复：<s:property value="ttos.reply" /></span>
-                                                            </small>
-                                                            <div id="reply_<s:property value="id" />" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                                <div class="modal-header">
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                                    <h3 id="myModalLabel">回复</h3>
-                                                                </div>
-                                                                <s:form action="makeCommentReply.action">
-                                                                    <div class="modal-body">
-                                                                        <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
-                                                                        <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
-                                                                        <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                        </div>
-                                                                </s:form>
-                                                            </div>                                                      
-                                                        </blockquote>
-                                                    </td>
-                                                </tr>
-                                            </s:if>
-                                        </s:iterator>
-                                    </s:else>
-                                </tbody>
-                            </table>
+
                         </div>
                         <div class="tab-pane fade" id='file_area'>
                             <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
@@ -310,44 +155,7 @@
                             </div>
                         </div>
                         <div id="publicfile_area" class="tab-pane fade">
-                            <div style="display:inline;">
-                                <input type="text" class="span2">
-                                <button class="btn btn-primary" style="margin-top:-10px;">搜索</button>
-                            </div>
-
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th width="300px">
-                                            文件名
-                                        </th>
-                                        <th>
-                                            上传日期
-                                        </th>
-                                        <th>
-                                            上传用户
-                                        </th>
-                                        <th>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <i class="icon-file"></i>我是pdf.pdf
-                                        </td>
-                                        <td>2013-1-1</td>
-                                        <td>张三</td>
-                                        <td class="btn-toolbar">
-                                            <div class="btn-group">
-                                                <div class="dropdown">
-                                                    <a class="btn btn-mini" data-toggle="modal" data-target="#publicfileModal"><i class="icon-tag"></i>收藏</a>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div id="publicFileList"></div>
                             <div class="modal hide fade" id="publicfileModal">
                                 <div class="modal-body">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -364,18 +172,6 @@
                                     </s:form>
                                 </div>
                             </div>
-                            <div class="pagination pagination-mini pull-right">
-                                <ul>
-                                    <li><a href="#">Prev</a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">Next</a></li>
-                                </ul>
-                            </div>
-
                         </div>
                         <div>
                             <s:if test="tab=='publicfile'">
