@@ -102,10 +102,11 @@
         </table>
         <div class="pagination pagination-mini pull-right">
             <ul>      
-                <s:if test="pb.currentPage == 1">
+                <s:if test="pb.totalPage ==0"></s:if>
+                <s:elseif test="pb.currentPage == 1">
                     <li class="disabled"><a href="javascript:;">Prev</a></li>
-                </s:if>
-                <s:else>
+                    </s:elseif>
+                    <s:else>
                     <li><s:a href="javascript:;" onclick="getBillList(%{pb.currentPage -1});">
                             Prev</s:a></li>
                     </s:else>
@@ -126,8 +127,8 @@
                         <li><s:a href="javascript:;" onclick="getBillList(1);">1</s:a></li>
                         <li><s:a href="javascript:;" onclick="getBillList(2);">2</s:a></li>
                         <li class="disabled"><s:a href="javascript:;">...</s:a></li>
-                        <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
-                            <s:if test="#i.index == 1">
+                            <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
+                                <s:if test="#i.index == 1">
                                 <li class="disabled"><s:a href="javascript:;">
                                         <s:property value="pb.currentPage"/>
                                     </s:a></li>
@@ -165,18 +166,19 @@
                         <s:iterator value="new int[pb.totalPage]" status="i">
                             <s:if test="pb.currentPage == #i.index+1">
                             <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                        </s:if>
-                        <s:else>
+                            </s:if>
+                            <s:else>
                             <li><s:a href="javascript:;" onclick="getBillList(%{#i.index +1});">
                                     <s:property value="#i.index+1"/>
                                 </s:a></li>
                             </s:else>
                         </s:iterator>
                     </s:else>
-                    <s:if test="pb.currentPage == pb.totalPage || pb.totalPage == 0">
+                    <s:if test="pb.currentPage == pb.totalPage">
                     <li class="disabled"><a href="javascript:;">Next</a></li>
-                </s:if>
-                <s:else>
+                    </s:if>
+                    <s:elseif test="pb.totalPage == 0"></s:elseif>
+                    <s:else>
                     <li><s:a href="javascript:;" onclick="getBillList(%{pb.currentPage +1});">
                             Next
                         </s:a></li>

@@ -44,7 +44,7 @@
                 <div class="span11 module">
                     <div id="collapseOne" style="padding: 16px;">
                         <button type="button" class="btn btn-small btn-danger disabled">年级</button>
-                        <small class="pull-right"><i class="icon-exclamation-sign"></i>建议选择同网用户</small>
+                        <small class="pull-right"><i class="icon-exclamation-sign"></i>网络授课建议选同网用户</small>
                         <div id="grade" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <button id="allGrade" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button id="pschool" type="button" value="1" class="btn btn-small" data-toggle="button">小学</button>
@@ -235,10 +235,11 @@
                         </div>
                         <div class="pagination pagination-right">
                             <ul>        
-                                <s:if test="pb.currentPage == 1">
+                                <s:if test="pb.totalPage ==0"></s:if>
+                                <s:elseif test="pb.currentPage == 1">
                                     <li class="disabled"><a href="javascript:;">Prev</a></li>
-                                </s:if>
-                                <s:else>
+                                    </s:elseif>
+                                    <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage -1});">
                                             Prev</s:a></li>
                                     </s:else>
@@ -306,10 +307,11 @@
                                             </s:else>
                                         </s:iterator>
                                     </s:else>
-                                    <s:if test="pb.currentPage == pb.totalPage || pb.totalPage == 0">
+                                    <s:if test="pb.currentPage == pb.totalPage">
                                     <li class="disabled"><a href="javascript:;">Next</a></li>
-                                </s:if>
-                                <s:else>
+                                    </s:if>
+                                    <s:elseif test="pb.totalPage == 0"></s:elseif>
+                                    <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage +1});">
                                             Next
                                         </s:a></li>

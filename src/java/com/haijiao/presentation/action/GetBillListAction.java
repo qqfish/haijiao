@@ -43,7 +43,7 @@ public class GetBillListAction extends SessionAction {
         String userType = (String) this.getSessionValue("userType");
         int cp = Integer.parseInt(currentPage);
         int pageSize = 20;
-        List<Bill> lb = billService.getBillList(email, userType, cp, pageSize);
+        List<Bill> lb = billService.getBillList(email, userType, (cp -1) * pageSize, pageSize);
         int num = billService.getBillNum(email, userType);
         pb = new PageBean(lb, num, cp, pageSize);
         return SUCCESS;

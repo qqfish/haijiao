@@ -22,6 +22,12 @@ function getBillList(currentPage){
     });
 }
 
+function getCommentBillList(currentPage){
+    $.post("getCommentBill.action", {currentPage: currentPage}, function(data){
+       $("#comment_area").html(data); 
+    });
+}
+
 jQuery(document).ready(function($) {
 
     $(".lessonName").click(function() {
@@ -70,4 +76,5 @@ jQuery(document).ready(function($) {
     getFileList(true, null);
     getPublicFilelist(1);
     getBillList(1);
+    getCommentBillList(1);
 });

@@ -54,11 +54,11 @@
             </tbody>
         </table>
         <div class="pagination pagination-mini pull-right">
-            <script>console.log(<s:property value="pb.totalPage" />)</script>
             <ul>
-                <s:if test="pb.currentPage == 1">
+                <s:if test="pb.totalPage ==0"></s:if>
+                <s:elseif test="pb.currentPage == 1">
                     <li class="disabled"><a href="javascript:;">Prev</a></li>
-                    </s:if>
+                </s:elseif>
                     <s:else>
                     <li><s:a href="javascript:;" onclick="getPublicFilelist(%{pb.currentPage -1});">
                             Prev</s:a></li>
@@ -127,9 +127,10 @@
                             </s:else>
                         </s:iterator>
                     </s:else>
-                    <s:if test="pb.currentPage == pb.totalPage || pb.totalPage == 0">
+                    <s:if test="pb.currentPage == pb.totalPage">
                     <li class="disabled"><a href="javascript:;">Next</a></li>
                     </s:if>
+                    <s:elseif test="pb.totalPage == 0"></s:elseif>
                     <s:else>
                     <li><s:a href="javascript:;" onclick="getPublicFilelist(%{pb.currentPage +1});">
                             Next

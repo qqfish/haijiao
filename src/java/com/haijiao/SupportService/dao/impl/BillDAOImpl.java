@@ -25,7 +25,18 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, Integer> implements I
 
     @Override
     public List<Bill> getBillList(String email, String userType, int first, int pageSize){
+        String hql = "from Bill b where b." + userType + ".email = '" + email + "' order by id desc";
+        return findPageByQuery(hql,first,pageSize);
+    }
+    
+    @Override
+    public List<Bill> getCommentBillList(String email, String userType, int first, int pageSize){
         String hql = "from Bill b where b." + userType + ".email = '" + email + "'";
+        if(userType.equals("teacher"))
+            hql += " and stot is not null";
+        else
+            hql += " and ttos is not null";
+        hql += " order by id desc";
         return findPageByQuery(hql,first,pageSize);
     }
     

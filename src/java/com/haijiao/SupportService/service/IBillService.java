@@ -5,7 +5,6 @@
 package com.haijiao.SupportService.service;
 
 import com.haijiao.Domain.bean.Bill;
-import com.haijiao.Domain.bean.Comment;
 import java.util.List;
 
 /**
@@ -31,7 +30,7 @@ public interface IBillService {
     //修改订单状态
     public boolean changeBillStatus(int billId, int status);
     //获取本用户的评论
-    public List<Comment> getCommentList(String email, int first, int pageSize);
+    public List<Bill> getCommentBillList(String email, String userType, int first, int pageSize);
     //获取评论数
     public int getCommentNum(String email);
     //每日任务--减去确认天数
