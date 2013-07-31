@@ -7,8 +7,6 @@ package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Bill;
 import com.haijiao.SupportService.service.IBillService;
-import com.haijiao.SupportService.service.IStudentService;
-import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.global.PageBean;
 import java.util.List;
 import javax.annotation.Resource;
@@ -28,7 +26,8 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("getBillList")
 @Results({
-    @Result(name = "success", location = "/billpart.jsp")
+    @Result(name = "teacher", location = "/teacherbillpart.jsp"),
+    @Result(name = "student", location = "/studentbillpart.jsp")
 })
 public class GetBillListAction extends SessionAction {
 
@@ -46,7 +45,10 @@ public class GetBillListAction extends SessionAction {
         List<Bill> lb = billService.getBillList(email, userType, (cp -1) * pageSize, pageSize);
         int num = billService.getBillNum(email, userType);
         pb = new PageBean(lb, num, cp, pageSize);
-        return SUCCESS;
+        if(userType.equals("teacher"))
+            return "teacher";
+        else
+            return "student";
     }
 
     public void setBillService(IBillService billService) {

@@ -26,7 +26,8 @@ import org.springframework.stereotype.Controller;
 @Namespace("/")
 @Action("getCommentBill")
 @Results({
-    @Result(name = "success", location = "/commentpart.jsp")
+    @Result(name = "teacher", location = "/teachercommentpart.jsp"),
+    @Result(name = "student", location = "/studentcommentpart.jsp")
 })
 public class GetCommentBillAction extends SessionAction {
 
@@ -44,7 +45,10 @@ public class GetCommentBillAction extends SessionAction {
         List<Bill> lc = billService.getCommentBillList(email, userType, (cp -1) * pageSize, pageSize);
         int num = billService.getCommentNum(email);
         pb = new PageBean(lc, num, cp, pageSize);
-        return SUCCESS;
+        if(userType.equals("teacher"))
+            return "teacher";
+        else
+            return "student";
     }
 
     public void setBillService(IBillService billService) {

@@ -43,7 +43,7 @@
                                     <span class="muted" style="font-size:9px;">电话:<s:property value="student.tel" default="无"/><br />
                                     备注:<s:property value="message" default="无" /></span>
                             </td>
-                            <td><strong><s:property value="lesson" /></strong><br />
+                            <td><strong><s:property value="lesson.name" /></strong><br />
                                 <s:property value="duration" />课时
                             </td>
                             <td><strong class="text-error" style="font-size:14px;"><br /><s:property value="money" />.00</strong></td>
@@ -88,10 +88,6 @@
                                     <br /><a class="btn btn-mini btn-link">举报</a>
                                 </td>
                             </s:elseif>
-                            <s:elseif test="status == 8">
-                                <td><br /><label class="label" style="font-size:9px;">学生取消</label></td>
-                                <td></td>
-                            </s:elseif>
                             <s:elseif test="status >= 5">
                                 <td><br /><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                                 <td>
@@ -106,6 +102,40 @@
                         </tr>
                     </s:iterator>
                 </tbody>
+                <div id="comment_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="myModalLabel">评论</h3>
+                    </div>
+                    <s:form action="makeCommentReply.action">
+                        <div class="modal-body">
+                            <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
+                            内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
+                                <br/>
+                                评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                            <s:textfield id="comment_score" name="score" cssStyle="display:none;"></s:textfield>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                            <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
+                            </div>
+                            <script type="text/javascript">
+                                $(".commentA").click(function() {
+                                    var id = $(this).attr("id");
+                                    $("#comment_rate").bind('rated', function(event, value) {
+                                        $('#comment_score').val(value);
+                                    });
+                                    $("#comment_rate").bind('over', function(event, value) {
+                                        $(this).attr('title', value);
+                                    });
+                                    $("#cmtsmt").click(function(event) {
+                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                            event.preventDefault();
+                                    });
+                                });
+                            </script>
+                    </s:form>
+                </div>
             </s:else>
         </table>
         <div class="pagination pagination-mini pull-right">
@@ -123,8 +153,8 @@
                             <s:iterator value="new int[pb.currentPage +1]" status="i">
                                 <s:if test="pb.currentPage == #i.index+1">
                                 <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                            </s:if>
-                            <s:else>
+                                </s:if>
+                                <s:else>
                                 <li><s:a href="javascript:;" onclick="getBillList(%{#i.index +1});">
                                         <s:property value="#i.index+1"/>
                                     </s:a></li>
