@@ -28,7 +28,7 @@ import org.springframework.stereotype.Controller;
 @Action("registerThen")
 @Results({
     @Result(name="input",location="/register.jsp"),
-    @Result(name="success",type="redirect",location="index.action")
+    @Result(name="success",type="redirect",location="toChangeInfo.action?tab=detail")
 })
 public class RegisterThenAction extends SessionAction {
     @Resource

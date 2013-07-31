@@ -34,8 +34,13 @@
                     <s:iterator value="pb.list" id="billList">
                         <tr>
                             <td><br /><s:property value="id"/></td>
-                            <td><strong><s:property value="student.name" /></strong><br />
-                                <span class="muted" style="font-size:9px;">电话:<s:property value="student.tel" default="无"/><br />
+                            <td><strong>
+                                    <a href="getMail.action?toEmail=<s:property value="student.email" />"><s:property value="student.name" /></a>
+                                    <s:if test="student.status==0"><label class="label">离线</label></s:if>
+                                    <s:elseif test="student.status==1"><label class="label label-success">在线</label></s:elseif>
+                                    <s:else><label class="label label-warning">忙碌</label></s:else>
+                                    </strong><br />
+                                    <span class="muted" style="font-size:9px;">电话:<s:property value="student.tel" default="无"/><br />
                                     备注:<s:property value="message" default="无" /></span>
                             </td>
                             <td><strong><s:property value="lesson" /></strong><br />
@@ -65,7 +70,10 @@
                                 </td>
                             </s:elseif>
                             <s:elseif test="status == 3">
-                                <td><br /><label class="label label-info" style="font-size:9px;">正在上课</label></td>
+                                <td>
+                                    <br /><label class="label label-info" style="font-size:9px;">正在上课</label>
+                                    <br /><a class="btn btn-link btn-mini" href="enterRoom.action?teaEmail=<s:property value="teacher.email" />&stuEmail=<s:property value="student.email" />">去上课</a>
+                                </td>
                                 <td>
                                     <s:form action="dealWithReservation" cssStyle="margin:0px; padding:0px;">
                                         <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
@@ -105,8 +113,8 @@
                 <s:if test="pb.totalPage ==0"></s:if>
                 <s:elseif test="pb.currentPage == 1">
                     <li class="disabled"><a href="javascript:;">Prev</a></li>
-                    </s:elseif>
-                    <s:else>
+                </s:elseif>
+                <s:else>
                     <li><s:a href="javascript:;" onclick="getBillList(%{pb.currentPage -1});">
                             Prev</s:a></li>
                     </s:else>
@@ -127,8 +135,8 @@
                         <li><s:a href="javascript:;" onclick="getBillList(1);">1</s:a></li>
                         <li><s:a href="javascript:;" onclick="getBillList(2);">2</s:a></li>
                         <li class="disabled"><s:a href="javascript:;">...</s:a></li>
-                            <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
-                                <s:if test="#i.index == 1">
+                        <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
+                            <s:if test="#i.index == 1">
                                 <li class="disabled"><s:a href="javascript:;">
                                         <s:property value="pb.currentPage"/>
                                     </s:a></li>
@@ -166,8 +174,8 @@
                         <s:iterator value="new int[pb.totalPage]" status="i">
                             <s:if test="pb.currentPage == #i.index+1">
                             <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                            </s:if>
-                            <s:else>
+                        </s:if>
+                        <s:else>
                             <li><s:a href="javascript:;" onclick="getBillList(%{#i.index +1});">
                                     <s:property value="#i.index+1"/>
                                 </s:a></li>
@@ -176,9 +184,9 @@
                     </s:else>
                     <s:if test="pb.currentPage == pb.totalPage">
                     <li class="disabled"><a href="javascript:;">Next</a></li>
-                    </s:if>
-                    <s:elseif test="pb.totalPage == 0"></s:elseif>
-                    <s:else>
+                </s:if>
+                <s:elseif test="pb.totalPage == 0"></s:elseif>
+                <s:else>
                     <li><s:a href="javascript:;" onclick="getBillList(%{pb.currentPage +1});">
                             Next
                         </s:a></li>

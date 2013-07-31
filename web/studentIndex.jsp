@@ -94,9 +94,13 @@
                                     <s:iterator value="student.billList" id="billList">
                                         <tr>
                                             <td><br /><s:property value="id"/></td>
-                                            <td><strong><s:property value="teacher.name" /></strong><br />
+                                            <td><strong><a href="getTeacherInfo.action?teacherEmail=<s:property value="teacher.email" />"><s:property value="teacher.name" /></a>
+                                                    <s:if test="teacher.status==0"><label class="label">离线</label></s:if>
+                                                    <s:elseif test="teacher.status==1"><label class="label label-success">在线</label></s:elseif>
+                                                    <s:else><label class="label label-warning">忙碌</label></s:else>
+                                                </strong><br />
                                                 <span class="muted" style="font-size:9px;">电话:<s:property value="teacher.tel" default="无"/><br />
-                                                    备注:<s:property value="ps" default="无" /></span>
+                                                    备注:<s:property value="message" default="无" /></span>
 
                                             </td>
                                             <td><strong><s:property value="lesson.name" /></strong><br />
@@ -127,7 +131,10 @@
                                                 </td>
                                             </s:elseif>
                                             <s:elseif test="status == 3">
-                                                <td><br /><label class="label label-info" style="font-size:9px;">正在上课</label></td>
+                                                <td>
+                                                    <br /><label class="label label-info" style="font-size:9px;">正在上课</label>
+                                                    <br /><a class="btn btn-link btn-mini" href="enterRoom.action?teaEmail=<s:property value="teacher.email" />&stuEmail=<s:property value="student.email" />">去上课</a>
+                                                </td>
                                                 <td>
                                                     <br /><a class="btn btn-mini btn-link">举报</a>
                                                 </td>
@@ -170,29 +177,29 @@
                                         <div class="modal-body">
                                             <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                             内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                <br/>
-                                                评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                            <br/>
+                                            评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
                                             <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                             <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                            </div>
-                                            <script type="text/javascript">
-                                                $(".commentA").click(function() {
-                                                    var id = $(this).attr("id");
-                                                    $("#comment_rate" ).bind('rated', function(event, value) {
-                                                        $('#comment_score').val(value);
-                                                    });
-                                                    $("#comment_rate").bind('over', function(event, value) {
-                                                        $(this).attr('title', value);
-                                                    });
-                                                    $("#cmtsmt").click(function(event) {
-                                                        if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                            event.preventDefault();
-                                                    });
+                                        </div>
+                                        <script type="text/javascript">
+                                            $(".commentA").click(function() {
+                                                var id = $(this).attr("id");
+                                                $("#comment_rate" ).bind('rated', function(event, value) {
+                                                    $('#comment_score').val(value);
                                                 });
-                                            </script>
+                                                $("#comment_rate").bind('over', function(event, value) {
+                                                    $(this).attr('title', value);
+                                                });
+                                                $("#cmtsmt").click(function(event) {
+                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                        event.preventDefault();
+                                                });
+                                            });
+                                        </script>
                                     </s:form>
                                 </div>
                             </table>
@@ -244,11 +251,11 @@
                                                                     <div class="modal-body">
                                                                         <s:textfield name="id" value="%{id}" cssStyle="display:none;"></s:textfield>
                                                                         <s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                                                         <s:submit cssClass="btn btn-primary" method="reply" value="提交"></s:submit>
-                                                                        </div>
+                                                                    </div>
                                                                 </s:form>
                                                             </div>                                                      
                                                         </blockquote>

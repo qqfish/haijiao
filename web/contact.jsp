@@ -83,7 +83,7 @@
 
                         <div class="rule"></div>
 
-                        <h4>其他联系方式</h4>
+                        <h4>在线客服</h4>
                         <p>
                         <ul class="checklist">
                             <li>

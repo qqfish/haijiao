@@ -206,20 +206,20 @@
                     <h3>修改信息</h3>
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
-                        <li id="l1" class="active"><a href="#basicInfo" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
-                                <s:if test="#session.userType=='teacher'">
+                        <li id="l1"><a href="#basicInfo" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
+                        <s:if test="#session.userType=='teacher'">
                             <li id="l5"><a href="#detailInfo" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
-                                </s:if>
+                        </s:if>
                         <li id="l2" ><a href="#modifyPassword" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#headpic" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                                <s:if test="#session.userType=='student'">
+                        <s:if test="#session.userType=='student'">
                             <li id="l4"><a href="#personIntro" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
-                                </s:if>                  
+                        </s:if>                  
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id='basicInfo'>
+                        <div class="tab-pane fade" id='basicInfo'>
                             <s:form action="changeInfo.action" cssClass="form-horizontal">
                                 <s:if test="#session.userType == 'teacher'">
                                     <h3>老师您好，修改你的详细信息吧^ ^</h3>
@@ -356,10 +356,10 @@
                                     <dd><s:textarea cssStyle="width:520px;height:50px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
                                     <dt>个人简介</dt>
                                     <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="intro" value="%{tea.intro}" autofocus="autofocus"/></dd>
-<!--                                    <dt>获奖证书</dt>
-                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="cert" value="%{tea.cert}" autofocus="autofocus"/></dd>
-                                    <dt>家教经历</dt>
-                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>-->
+                                    <!--                                    <dt>获奖证书</dt>
+                                                                        <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="cert" value="%{tea.cert}" autofocus="autofocus"/></dd>
+                                                                        <dt>家教经历</dt>
+                                                                        <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="experience" value="%{tea.experience}" autofocus="autofocus"/></dd>-->
                                     <dd><s:submit cssClass="btn btn-primary pull-right" value="提交" method="teacherMoreChange"/></dd>
                                 </dl>
                             </s:form>
@@ -430,6 +430,38 @@
                                 <s:textarea cssStyle="height:400px" name="intro" value="%{stu.intro}" autofocus="autofocus" cssClass="span7"/>
                                 <s:submit cssClass="btn btn-primary btn-small pull-right" value="提交"/>
                             </s:form>
+                        </div>
+                        <div>
+                            <s:if test="tab=='detail' && #session.userType=='teacher'">
+                                <script>
+                                    $("#detailInfo").addClass("active in");
+                                    $("#l5").addClass("active");
+                                </script>
+                            </s:if>
+                            <s:elseif test="tab=='password'">
+                                <script>
+                                    $("#modifyPassword").addClass("active in");
+                                    $("#l2").addClass("active")
+                                </script>
+                            </s:elseif>
+                            <s:elseif test="tab=='head'">
+                                <script>
+                                    $("#headpic").addClass("active in");
+                                    $("#l3").addClass("active")
+                                </script>
+                            </s:elseif>
+                            <s:elseif test="tab=='person' && #session.userType=='student'">
+                                <script>
+                                    $("#personIntro").addClass("active in");
+                                    $("#l4").addClass("active")
+                                </script>
+                            </s:elseif>
+                            <s:else>
+                                <script>
+                                    $("#basicInfo").addClass("active in");
+                                    $("#l1").addClass("active")
+                                </script>
+                            </s:else>
                         </div>
                     </div>
                 </div>

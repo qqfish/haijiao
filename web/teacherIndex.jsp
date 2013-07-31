@@ -351,11 +351,6 @@
                                     </s:else>
                                 </div>
                             </div>
-                            <div class="span7">
-                                <hr/>
-                                <h5>线下授课区域<a href="toChangeInfo.action?jump=area" class='btn btn-primary btn-small pull-right'><i class='icon-pencil icon-white'></i>编辑</a></h5>
-                                <p><s:property value="teacher.underlineArea"/></p>
-                            </div>
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <div id="billlist"></div>
@@ -481,7 +476,7 @@
                                             <td><s:property value="createdateToString()"/></td>
                                             <td>
                                                 <s:if test="billId >= 0">
-                                                    订单号:<s:property value="billId" />
+                                                    流水号:<s:property value="billId" />
                                                 </s:if>
                                             </td>
                                             <td>

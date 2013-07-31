@@ -37,8 +37,11 @@ public class ToChangeInfoAction extends RequestSessionAction {
     private Teacher tea;
     private Student stu;
     
+    private String tab;
+    
     @Override
     public String execute() {
+        tab = (String) this.getOutRequest("tab");
         if ("teacher".equals((String)this.getOutSession("userType"))){
             tea = teacherService.getTeacherByEmail((String)this.getOutSession("email"));
         } else if ("student".equals((String)this.getOutSession("userType"))) {
@@ -82,5 +85,13 @@ public class ToChangeInfoAction extends RequestSessionAction {
 
     public void setStu(Student stu) {
         this.stu = stu;
+    }
+
+    public String getTab() {
+        return tab;
+    }
+
+    public void setTab(String tab) {
+        this.tab = tab;
     }
 }
