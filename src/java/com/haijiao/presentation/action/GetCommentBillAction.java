@@ -27,7 +27,8 @@ import org.springframework.stereotype.Controller;
 @Action("getCommentBill")
 @Results({
     @Result(name = "teacher", location = "/teachercommentpart.jsp"),
-    @Result(name = "student", location = "/studentcommentpart.jsp")
+    @Result(name = "student", location = "/studentcommentpart.jsp"),
+    @Result(name = "info", location = "/infocommentpart.jsp")
 })
 public class GetCommentBillAction extends SessionAction {
 
@@ -35,20 +36,31 @@ public class GetCommentBillAction extends SessionAction {
     IBillService billService;
     private String currentPage;
     private PageBean pb;
+    private boolean isIndex;
+    private String email;
 
     @Override
     public String execute() {
-        String email = (String) this.getSessionValue("email");
-        String userType = (String) this.getSessionValue("userType");
+        String userType;
+        if (isIndex) {
+            email = (String) this.getSessionValue("email");
+            userType = (String) this.getSessionValue("userType");
+        } else {
+            userType = "teacher";
+        }
         int cp = Integer.parseInt(currentPage);
         int pageSize = 20;
-        List<Bill> lc = billService.getCommentBillList(email, userType, (cp -1) * pageSize, pageSize);
+        List<Bill> lc = billService.getCommentBillList(email, userType, (cp - 1) * pageSize, pageSize);
         int num = billService.getCommentNum(email);
         pb = new PageBean(lc, num, cp, pageSize);
-        if(userType.equals("teacher"))
+        if (!isIndex) {
+            return "info";
+        }
+        if (userType.equals("teacher")) {
             return "teacher";
-        else
+        } else {
             return "student";
+        }
     }
 
     public void setBillService(IBillService billService) {
@@ -70,5 +82,21 @@ public class GetCommentBillAction extends SessionAction {
     public void setPb(PageBean pb) {
         this.pb = pb;
     }
-    
+
+    public boolean isIsIndex() {
+        return isIndex;
+    }
+
+    public void setIsIndex(boolean isIndex) {
+        this.isIndex = isIndex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

@@ -90,7 +90,7 @@
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-small btn-danger disabled">方式</button>
-                        <div id="sprt" class="btn-group" data-toggle="buttons-checkbox">
+                        <div id="sprt" class="btn-group" data-toggle="buttons-radio">
                             <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">网络授课</button>
                             <button type="button" value="2" class="btn btn-small" data-toggle="button">老师上门</button>

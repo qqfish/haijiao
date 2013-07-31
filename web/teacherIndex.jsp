@@ -475,32 +475,7 @@
                                     <strong style="color:#53a000"><s:property value="teacher.coin" /></strong>
                                 </span>
                             </div>
-                            <table class="table table-striped">
-                                <tbody>
-                                    <s:iterator value="teacher.paymentList">
-                                        <tr>
-                                            <td><s:property value="createdateToString()"/></td>
-                                            <td>
-                                                <s:if test="billId >= 0">
-                                                    流水号:<s:property value="billId" />
-                                                </s:if>
-                                            </td>
-                                            <td>
-                                                <s:if test="type==0">学生付款</s:if>
-                                                <s:elseif test="type==1">手续费</s:elseif>
-                                                <s:elseif test="type==3">提现</s:elseif>
-                                                </td>
-                                                <td><s:property value="username" /></td>
-                                            <s:if test="money>0">
-                                                <td style="color:#53a000;">+<s:property value="money" /></td>
-                                            </s:if>
-                                            <s:else>
-                                                <td style="color:#c00;"><s:property value="money" /></td>
-                                            </s:else>
-                                        </tr>
-                                    </s:iterator>
-                                </tbody>
-                            </table>
+                            <div id="paymentlist"></div>
                         </div>
                         <div>
                             <s:if test="tab=='bill'">

@@ -39,7 +39,7 @@ public class Teacher extends User{
     @Column(columnDefinition="bool default false")
     private Boolean sprtOnline;      //支持线上
     @Column(columnDefinition="bool default false")
-    private Boolean sprtSUnderline;  //支持线下
+    private Boolean sprtSUnderline;  //学生上门
     @Column(columnDefinition="bool default false")
     private Boolean sprtTUnderline;     //老师上门
     private String studentin;  //公共房间学生email
