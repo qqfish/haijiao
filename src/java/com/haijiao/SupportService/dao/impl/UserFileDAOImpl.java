@@ -20,7 +20,7 @@ public class UserFileDAOImpl extends GenericHibernateDAO<UserFile, Integer> impl
     
     @Override
     public UserFile getFile(int groupId, String fileName){
-        String hql = "select distinct uf from UserFileGroup ufg left join ufg.files uf where ufg.id = '"
+        String hql = "select distinct uf from UserFileGroup ufg right join ufg.files uf where ufg.id = '"
                 + groupId + "' and uf.name = '" + fileName + "'";
         List<UserFile> luf = findByQuery(hql);
         if(luf.isEmpty())
@@ -31,14 +31,14 @@ public class UserFileDAOImpl extends GenericHibernateDAO<UserFile, Integer> impl
     
     @Override
     public List<UserFile> getUserFile(String email, String groupName) {
-        String hql = "select f from User u left join u.fileGroups fg left join fg.files f where u.email ='"
+        String hql = "select f from User u right join u.fileGroups fg right join fg.files f where u.email ='"
                 + email + "' and fg.groupName = '" + groupName + "'";
         return findByQuery(hql);
     }
 
     @Override
     public int getUserFileNum(String email, String groupName) {
-        String hql = "select count(distinct f) from User u left join u.fileGroups fg left join fg.files f where u.email ='"
+        String hql = "select count(distinct f) from User u right join u.fileGroups fg right join fg.files f where u.email ='"
                 + email + "' and fg.groupName = '" + groupName + "'";
         return getNumber(hql).intValue();
     }

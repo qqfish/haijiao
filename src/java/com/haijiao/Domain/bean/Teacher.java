@@ -1,8 +1,8 @@
 /**
  * Teacher.java
+ *
  * @author fish
  */
-
 package com.haijiao.Domain.bean;
 
 import java.util.ArrayList;
@@ -15,10 +15,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@org.hibernate.annotations.Entity(dynamicUpdate=true,dynamicInsert=true)
-@Table(name="teacher")
+@org.hibernate.annotations.Entity(dynamicUpdate = true, dynamicInsert = true)
+@Table(name = "teacher")
 @PrimaryKeyJoinColumn
-public class Teacher extends User{
+public class Teacher extends User {
+
     private String school;      //就读大学
     private String major;       //就读专业
     private String studyStatus;  //教师身份
@@ -26,65 +27,63 @@ public class Teacher extends User{
     private String city;            //市级
     private String district;       //县级
     private String net;         //网络环境
-    
-    @Column(columnDefinition="int default 0")
+
+    @Column(columnDefinition = "int default 0")
     private Integer classNum;       //成功完成课程的次数    
-    @Column(columnDefinition="int default 0")
+    @Column(columnDefinition = "int default 0")
     private Integer obNum;          //浏览数
-    
+
     private String underlineArea;   //线下授课区域
     private String experience;        //个人经历
     private String address;             //家庭地址
     private String cert;            //证书
-    @Column(columnDefinition="bool default true")
+    @Column(columnDefinition = "bool default true")
     private Boolean sprtOnline;      //支持线上
-    @Column(columnDefinition="bool default true")
-    private Boolean sprtSUnderline;  //支持线下
-    @Column(columnDefinition="bool default true")
-    private Boolean sprtTUnderline;     //老师上门
+    @Column(columnDefinition = "bool default true")
+    private Boolean sprtSUnderline;  //学生上门
+    @Column(columnDefinition = "bool default true")
+    private Boolean sprtTUnderline;  //老师上门
     private String studentin;  //公共房间学生email
-    
-    
-    @Column(columnDefinition="int default 0")
+
+    @Column(columnDefinition = "int default 0")
     private Integer reserveNum;     //预约次数
-    @Column(columnDefinition="int default 0")
+    @Column(columnDefinition = "int default 0")
     private Integer newReserveNum;     //新预约次数
-    
+
     private String tel;         //老师的手机
     private String videoUrl;    //老师的介绍视频地址
-    
+
     @OneToMany
     @JoinColumn(name = "lid")
     private List<Label> labels; //老师的标签 
-    
+
     @OneToMany
-    @JoinColumn(name="tid")
+    @JoinColumn(name = "tid")
     private List<Lesson> lessons;   //该老师开设课程
-    
-    @Column(columnDefinition="bool default false")
+
+    @Column(columnDefinition = "bool default false")
     private Boolean audition;       //该老师是否接受试听
-    @Column(columnDefinition="bool default false")
+    @Column(columnDefinition = "bool default false")
     private Boolean reserve;        //该老师是否接受预定
-    
+
 //    @OneToMany(mappedBy = "teacher")
 //    private List<FreeTime> schedule;//记录老师的时间表
-    
     @OneToMany(mappedBy = "teacher")
     protected List<Bill> billList;  //预约列表
-    
-    @Column(columnDefinition="int default " + Integer.MAX_VALUE)
+
+    @Column(columnDefinition = "int default " + Integer.MAX_VALUE)
     private int wagePerhour;        //老师最小每小时的辅导费
-    
+
     @OneToMany
-    @JoinColumn(name="tid")
+    @JoinColumn(name = "tid")
     protected List<Payment> paymentList;    //账单列表
-    
+
     private String bankcard;
     private String bankname;
-    
-    @Column(columnDefinition="int default 0")
+
+    @Column(columnDefinition = "int default 0")
     protected int level;            //老师的等级，用来获取分成比例
-    
+
     public Teacher() {
         this.lessons = new ArrayList<Lesson>();
         this.labels = new ArrayList<Label>();
@@ -94,11 +93,11 @@ public class Teacher extends User{
     public String getDirectProvince() {
         return province.substring(7);
     }
-    
+
     public String getDirectCity() {
         return city.substring(7);
     }
-    
+
     public String getDirectDistrict() {
         return district.substring(7);
     }
@@ -310,7 +309,6 @@ public class Teacher extends User{
 //    public void setSchedule(List<FreeTime> schedule) {
 //        this.schedule = schedule;
 //    }
-
     public int getWagePerhour() {
         return wagePerhour;
     }
@@ -326,10 +324,10 @@ public class Teacher extends User{
     public void setBillList(List<Bill> billList) {
         this.billList = billList;
     }
-    
-    public Lesson getLessonByName(String lesson){
-        for(int i = 0; i < lessons.size(); i++){
-            if(lessons.get(i).getName().equals(lesson)){
+
+    public Lesson getLessonByName(String lesson) {
+        for (int i = 0; i < lessons.size(); i++) {
+            if (lessons.get(i).getName().equals(lesson)) {
                 return lessons.get(i);
             }
         }
@@ -344,7 +342,6 @@ public class Teacher extends User{
 //        }
 //        return null;
 //    }
-
     public List<Payment> getPaymentList() {
         return paymentList;
     }
@@ -360,7 +357,7 @@ public class Teacher extends User{
     public void setLevel(int level) {
         this.level = level;
     }
-    
+
     public void addPayment(Payment p) {
         paymentList.add(p);
     }
