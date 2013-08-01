@@ -19,7 +19,7 @@
                     还没有评论哦~！
                 </s:if>
                 <s:else>
-                    <s:iterator value="pb.list.size()" id="billList">
+                    <s:iterator value="pb.list" id="billList">
                         <tr>
                             <td>
                                 <blockquote>

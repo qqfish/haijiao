@@ -59,11 +59,17 @@
                                 <br/>
                                 <dt style='margin-top:5px'>手机</dt>
                                 <dd><s:textfield id="phoneNum" cssClass="span4" onchange="validate_phoneNum(this,phone_tip);" name="tel" placeholder="请输入您的手机号"/></dd>
-                                <span id="phone_tip" class="validateTip" style="text-align: left;"></span>
                                 <dd><small class="text-warning">请填写有效手机号，以便学生与您取得联系</small></dd>
+                                <dd><span id="phone_tip" class="validateTip"></span></dd>
                                 <br/>
                                 <dt style='margin-top:5px'>网络环境</dt>
-                                <dd><s:select cssClass="span4" name="net" list="{'电信', '联通(网通)', '教育网', '移动(铁通)', '有线通', '其他'}"/></dd>
+                                <dd>
+                                    <s:select cssClass="span4" name="net" list="{'电信', '联通(网通)', '教育网', '移动(铁通)', '有线通', '其他'}"/>
+                                </dd>
+                                <dd>
+                                    <small class="text-warning">同样网络下视频效果更佳，请选择常用网络环境</small>
+                                </dd>
+
                                 <dt style='margin-top:5px'>性别</dt>
                                 <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex"/></dd>
                                 <dd>

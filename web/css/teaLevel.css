@@ -1,0 +1,15 @@
+/* 
+    Document   : teacherLevel
+    Created on : Aug 1, 2013, 1:36:53 PM
+    Author     : fish
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.icon-diomand{
+    background: url(../images/d_blue.gif) no-repeat;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    vertical-align: text-top;
+}

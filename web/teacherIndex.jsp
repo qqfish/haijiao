@@ -521,6 +521,12 @@
                                     $("#l5").addClass("active")
                                 </script>
                             </s:elseif>
+                                <s:elseif test="tab=='payment'">
+                                <script>
+                                    $("#payment_area").addClass("active in");
+                                    $("#l8").addClass("active")
+                                </script>
+                            </s:elseif>
                             <s:else>
                                 <script>
                                     $("#lesson_area").addClass("active in");

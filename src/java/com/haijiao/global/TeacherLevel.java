@@ -9,7 +9,7 @@ package com.haijiao.global;
  * @author fish
  */
 public class TeacherLevel {
-    private static Double levelmap[] = {0.1,0.08,0.07,0.06};
+    private static Double levelmap[] = {0.08,0.05};
     
     public static double getPercentage(int level){
         if(level >= levelmap.length || level < 0)

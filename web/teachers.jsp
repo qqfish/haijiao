@@ -39,6 +39,7 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
+        <link rel="stylesheet" href="css/teaLevel.css" type="text/css">
         <div class="wrapper container">
             <div class="span11">
                 <div class="span11 module">
@@ -90,7 +91,7 @@
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-small btn-danger disabled">方式</button>
-                        <div id="sprt" class="btn-group" data-toggle="buttons-checkbox">
+                        <div id="sprt" class="btn-group" data-toggle="buttons-radio">
                             <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">网络授课</button>
                             <button type="button" value="2" class="btn btn-small" data-toggle="button">老师上门</button>
@@ -158,6 +159,12 @@
                                                 <a href="getTeacherInfo.action?teacherEmail=<s:property value="email"/>" style="text-decoration: none;">
                                                     <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
                                                 </a>
+                                                <s:if test="level==1">
+                                                    <i class="icon-diomand"></i>
+                                                </s:if>
+                                                <s:else>
+                                                    <i class="icon-"></i>
+                                                </s:else>
                                                 <s:if test="status==0"><label class="label">离线</label></s:if>
                                                 <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                 <s:else><label class="label label-warning">忙碌</label></s:else>
@@ -238,8 +245,8 @@
                                 <s:if test="pb.totalPage ==0"></s:if>
                                 <s:elseif test="pb.currentPage == 1">
                                     <li class="disabled"><a href="javascript:;">Prev</a></li>
-                                    </s:elseif>
-                                    <s:else>
+                                </s:elseif>
+                                <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage -1});">
                                             Prev</s:a></li>
                                     </s:else>
@@ -309,9 +316,9 @@
                                     </s:else>
                                     <s:if test="pb.currentPage == pb.totalPage">
                                     <li class="disabled"><a href="javascript:;">Next</a></li>
-                                    </s:if>
-                                    <s:elseif test="pb.totalPage == 0"></s:elseif>
-                                    <s:else>
+                                </s:if>
+                                <s:elseif test="pb.totalPage == 0"></s:elseif>
+                                <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage +1});">
                                             Next
                                         </s:a></li>

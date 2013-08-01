@@ -274,12 +274,14 @@
                                         <label class="control-label" for="currentRole"><strong>目前身份</strong></label>
                                         <div class="controls">
                                             <s:select id="currentRole" cssClass="span2" name="studyStatus" value="%{tea.studyStatus}" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select>
-                                            </div>
                                         </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="college"><strong>大学</strong></label>
-                                            <div class="controls">
-                                            <s:textfield id="college" cssClass="span2" type="text" name="school" placeholder="请输入您就读的大学" value="%{tea.school}"/>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="college"><strong>大学</strong></label>
+                                        <div class="controls">
+                                            <s:select cssClass="span4" name="school" value="%{tea.school}" list="{'复旦大学','上海交通大学','同济大学','华东理工大学','东华大学','华东师范大学','上海外国语大学','上海财经大学','上海海关学院','上海大学','上海理工大学',
+                                                      '上海海事大学','上海工程技术大学','上海海洋大学','上海中医药大学','上海师范大学','华东政法大学','上海政法学院','上海建桥学院','上海第二工业大学','上海应用技术学院','上海电力学院','上海电机学院','上海对外贸易学院','上海金融学院','上海立信会计学院',
+                                                      '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}"/>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -292,6 +294,7 @@
                                         <label class="control-label" for="network"><strong>网络环境</strong></label>
                                         <div class="controls">
                                             <s:select id="network" cssClass="span2" name="net" list="{'电信', '联通(网通)', '教育网', '移动(铁通)', '有线通', '其他'}" value="%{tea.net}"/>
+                                            <br /><small class="text-warning">同样网络下视频效果更佳，请选择常用网络环境</small>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -450,7 +453,7 @@
                                     $("#l3").addClass("active")
                                 </script>
                             </s:elseif>
-                            <s:elseif test="tab=='person' && #session.userType=='student'">
+                            <s:elseif test="#session.userType=='student'">
                                 <script>
                                     $("#personIntro").addClass("active in");
                                     $("#l4").addClass("active")

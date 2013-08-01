@@ -36,11 +36,11 @@ public class Teacher extends User{
     private String experience;        //个人经历
     private String address;             //家庭地址
     private String cert;            //证书
-    @Column(columnDefinition="bool default false")
+    @Column(columnDefinition="bool default true")
     private Boolean sprtOnline;      //支持线上
-    @Column(columnDefinition="bool default false")
+    @Column(columnDefinition="bool default true")
     private Boolean sprtSUnderline;  //支持线下
-    @Column(columnDefinition="bool default false")
+    @Column(columnDefinition="bool default true")
     private Boolean sprtTUnderline;     //老师上门
     private String studentin;  //公共房间学生email
     

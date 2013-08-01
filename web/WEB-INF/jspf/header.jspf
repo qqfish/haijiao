@@ -126,7 +126,7 @@
                             getClasses();
                         </script>
                         <li><a href="index.action"><s:property value="#session.name" /></a></li>
-                        <li><a href="#">余额</a></li>
+                        <li><a href="index.action?tab=payment">余额</a></li>
                         <li><a href="getMail.action">收件箱 <span id="mailNum" class="badge badge-important">0</span></a></li>
                         <li>
                             <div class="btn-group">

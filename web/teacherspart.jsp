@@ -27,6 +27,12 @@
                                     <a href="getTeacherInfo.action?teacherEmail=<s:property value="email"/>" style="text-decoration: none;">
                                         <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
                                     </a>
+                                    <s:if test="level==1">
+                                        <i class="icon-diomand"></i>
+                                    </s:if>
+                                    <s:else>
+                                        <i class="icon-"></i>
+                                    </s:else>
                                     <s:if test="status==0"><label class="label">离线</label></s:if>
                                     <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                     <s:else><label class="label label-warning">忙碌</label></s:else>
@@ -107,8 +113,8 @@
                     <s:if test="pb.totalPage ==0"></s:if>
                     <s:elseif test="pb.currentPage == 1">
                         <li class="disabled"><a href="javascript:;">Prev</a></li>
-                        </s:elseif>
-                        <s:else>
+                    </s:elseif>
+                    <s:else>
                         <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage -1});">
                                 Prev</s:a></li>
                         </s:else>
@@ -117,8 +123,8 @@
                                 <s:iterator value="new int[pb.currentPage +1]" status="i">
                                     <s:if test="pb.currentPage == #i.index+1">
                                     <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                    </s:if>
-                                    <s:else>
+                                </s:if>
+                                <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                             <s:property value="#i.index+1"/>
                                         </s:a></li>
@@ -129,8 +135,8 @@
                             <li><s:a href="javascript:;" onclick="gotopage(1);">1</s:a></li>
                             <li><s:a href="javascript:;" onclick="gotopage(2);">2</s:a></li>
                             <li class="disabled"><s:a href="javascript:;">...</s:a></li>
-                                <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
-                                    <s:if test="#i.index == 1">
+                            <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
+                                <s:if test="#i.index == 1">
                                     <li class="disabled"><s:a href="javascript:;">
                                             <s:property value="pb.currentPage"/>
                                         </s:a></li>
@@ -168,8 +174,8 @@
                             <s:iterator value="new int[pb.totalPage]" status="i">
                                 <s:if test="pb.currentPage == #i.index+1">
                                 <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                </s:if>
-                                <s:else>
+                            </s:if>
+                            <s:else>
                                 <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                         <s:property value="#i.index+1"/>
                                     </s:a></li>
@@ -178,9 +184,9 @@
                         </s:else>
                         <s:if test="pb.currentPage == pb.totalPage">
                         <li class="disabled"><a href="javascript:;">Next</a></li>
-                        </s:if>
-                        <s:elseif test="pb.totalPage == 0"></s:elseif>
-                        <s:else>
+                    </s:if>
+                    <s:elseif test="pb.totalPage == 0"></s:elseif>
+                    <s:else>
                         <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage +1});">
                                 Next
                             </s:a></li>

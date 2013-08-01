@@ -42,6 +42,7 @@
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
         <link rel="stylesheet" href="css/teaInfo.css" type="text/css">
+        <link rel="stylesheet" href="css/teaLevel.css" type="text/css">
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
@@ -49,6 +50,9 @@
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
                     <h4 style="margin-left:5px"><s:property value="tea.name"/>
+                        <s:if test="level==1">
+                            <i class="icon-diomand"></i>
+                        </s:if>
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
@@ -246,7 +250,7 @@
                             <div class="alert">
                                 <i class="icon-info-sign"></i>下订单前请先与老师商定授课时间，如果是网络授课，建议先与老师在线试讲！
                             </div>
-                        <s:form action="bookTeacher">
+                            <s:form action="bookTeacher">
                                 <dl class="dl-horizontal">
                                     <dt class="muted">上课方式</dt>
                                     <dd id="reserveShowType" style="margin-left: 200px;"></dd>
