@@ -13,4 +13,6 @@ import java.util.List;
  * @author fish
  */
 public interface IPaymentDAO extends GenericDAO<Payment,Integer>{
+    public List<Payment> getPaymentList(String email, int first, int pageSize);
+    public int getPaymentNum(String email);
 }

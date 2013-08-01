@@ -15,12 +15,11 @@
     <body>
         <table class="table table-hover table-striped">
             <tbody>
-            <s:if test="student.billList.size()<=0">
+            <s:if test="pb.list.size()<=0">
                 还没有评论哦~！
             </s:if>
             <s:else>
                 <s:iterator value="pb.list" id="billList">
-                    <s:if test="ttos != null">
                         <tr>
                             <td>
                                 <blockquote>                                                        
@@ -57,7 +56,6 @@
                                 </blockquote>
                             </td>
                         </tr>
-                    </s:if>
                 </s:iterator>
             </s:else>
         </tbody>

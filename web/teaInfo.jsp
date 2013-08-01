@@ -19,6 +19,7 @@
         <script type="text/javascript" src="SearchTeacher/js/schedule.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/reserve.js"></script>
+        <script type="text/javascript" src="js/teacherInfo.js"></script>
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
         <!--[if lt IE 8]>
@@ -35,7 +36,6 @@
             <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400italic' rel='stylesheet' type='text/css'>
             <link href='http://fonts.googleapis.com/css?family=PT+Serif+Caption:400' rel='stylesheet' type='text/css'>
         <![endif]-->
-
     </head>
     <body>
         <!--==============================header=================================-->
@@ -56,7 +56,7 @@
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
-                    </h4>
+                        </h4>
                     <s:if test="tea.status==1">
                         <s:if test="audition">
                             <a class='btn btn-success' style="margin-left:20px" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
@@ -185,13 +185,16 @@
                             <dd style="margin-left:110px;">
                                 <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                     <s:if test="tea.sprtOnline">
-                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').hide();reserve.setType('线上授课');">线上授课</button>
+                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').hide();
+                                                reserve.setType('线上授课');">线上授课</button>
                                     </s:if>
                                     <s:if test="tea.sprtSUnderline">
-                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').show();reserve.setType('学生上门');">学生上门</button>
+                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').show();
+                                                reserve.setType('学生上门');">学生上门</button>
                                     </s:if>
                                     <s:if test="tea.sprtTUnderline">
-                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').show();reserve.setType('老师上门');">老师上门</button>
+                                        <button type="button" class="btn btn-mini btn-choice" onclick="$('#offlineArea').show();
+                                                reserve.setType('老师上门');">老师上门</button>
                                     </s:if>
                                 </span>
                             </dd>
@@ -210,7 +213,7 @@
                         <dt class="muted" style="width:90px;">课程</dt>
                         <dd id="lesson_select" style="margin-left:110px;">
                             <s:if test="tea.lessons.size()==0"><p>这个老师暂时还没有开课哦</p></s:if>
-                            <span  data-toggle-name="is_private" data-toggle="buttons-radio">
+                                <span  data-toggle-name="is_private" data-toggle="buttons-radio">
                                 <s:iterator value="tea.lessons" status="st">
                                     <s:if test="delete==false">
                                         <button type="button" class="btn btn-mini btn-choice"   data-toggle="tooltip" data-placement="bottom" onclick="reserve.setLesson('<s:property value="name"/>');"><s:property value="name"/></button>
@@ -225,7 +228,8 @@
                     <dl class="dl-horizontal">
                         <dt class="muted" style="width:90px;">课时数</dt>
                         <dd style="margin-left:110px;">
-                            <input type="number" class="span1" min="1" max="8" step="1" value="1" onchange="checkInput($(this),1,8);reserve.setNum($(this).val());">
+                            <input type="number" class="span1" min="1" max="8" step="1" value="1" onchange="checkInput($(this), 1, 8);
+                                    reserve.setNum($(this).val());">
                         </dd>
                     </dl>
                     <dl class="dl-horizontal">
@@ -308,69 +312,10 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id='comment_area'>
-                            <table class="table table-hover table-striped">
-                                <tbody>
 
-                                    <s:if test="billList.size()<=0">
-                                        还没有评论哦~！
-                                    </s:if>
-                                    <s:else>
-                                        <s:iterator value="billList" id="billList">
-                                            <s:if test="stot != null">
-                                                <tr>
-                                                    <td>
-                                                        <blockquote>
-
-                                                            <h4><s:property value="student.name" /><div class="rateit pull-right" data-rateit-value="<s:property value="stot.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                                                                <small>
-                                                                    <span><s:property value="stot.content" /></span>
-                                                                    <br/><br/>
-                                                                    <s:if test="stot.reply != null">
-                                                                        <span>老师的回复：<s:property value="stot.reply" /></span>
-                                                                    </s:if>
-                                                                </small>
-                                                        </blockquote>
-                                                    </td>
-                                                </tr>
-                                            </s:if>
-                                        </s:iterator>
-                                    </s:else>
-
-                                </tbody>
-                            </table>
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
-                            <table class="table table-hover table-striped">
-                                <s:if test="billList.size()<=0">
-                                    <tbody>
-                                        暂无交易记录哦~！
-                                    </tbody>
-                                </s:if>
-                                <s:else>
-                                    <thead>
-                                        <tr>
-                                            <th>时间</th>
-                                            <th>学生姓名</th>
-                                            <th>课程</th>
-                                            <th>状态</th>
-                                            <th>金额</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>        
-                                        <s:iterator value="billList" id="billList">
-                                            <s:if test="status == 5">
-                                                <tr>
-                                                    <td><s:property value="createdateToString()" /></td>
-                                                    <td><s:property value="student.name" /></td>
-                                                    <td><s:property value="lesson"/>-<s:property value="duration" />课时</td>
-                                                    <td><label class="label label-success" style="font-size:9px;">确认完成</label></td>
-                                                    <td><strong class="text-error" style="font-size:14px;"><s:property value="money" />.00</strong></td>
-                                                </tr>
-                                            </s:if>
-                                        </s:iterator>
-                                    </tbody>
-                                </s:else>
-                            </table>
+
                         </div>
                     </div>
                     <div class="modal fade hide" id="loginInfo">

@@ -155,6 +155,10 @@
                             </div>
                         </div>
                         <div id="publicfile_area" class="tab-pane fade">
+                            <div style="display:inline;">
+                                <input id="keyword" type="text" class="span2"/>
+                                <button class="btn btn-primary" style="margin-top:-10px;" onclick="getPublicFilelist(1, $('#keyword').val());">搜索</button>
+                            </div>
                             <div id="publicFileList"></div>
                             <div class="modal hide fade" id="publicfileModal">
                                 <div class="modal-body">

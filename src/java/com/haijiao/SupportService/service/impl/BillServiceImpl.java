@@ -78,8 +78,8 @@ public class BillServiceImpl implements IBillService{
     }
     
     @Override
-    public List<Bill> getBillList(String email, String userType, int first, int pageSize){
-        return billDAO.getBillList(email, userType, first, pageSize);
+    public List<Bill> getBillList(String email, String userType, int status, int first, int pageSize){
+        return billDAO.getBillList(email, userType, status, first, pageSize);
     }
     
     @Override
@@ -88,8 +88,8 @@ public class BillServiceImpl implements IBillService{
     }
 
     @Override
-    public int getBillNum(String email, String userType){
-        return billDAO.getBillNum(email, userType);
+    public int getBillNum(String email, String userType, int status){
+        return billDAO.getBillNum(email, userType, status);
     }
     
     @Override
@@ -213,6 +213,16 @@ public class BillServiceImpl implements IBillService{
     @Override
     public int getCommentNum(String email){
         return userDAO.getUserByEmail(email).getScoreNum();
+    }
+    
+    @Override
+    public List<Payment> getPaymentList(String email, int first, int pageSize){
+        return paymentDAO.getPaymentList(email,first,pageSize);
+    }
+    
+    @Override
+    public int getPaymentNum(String email){
+        return paymentDAO.getPaymentNum(email);
     }
     
     @Override

@@ -17,14 +17,27 @@ function getPublicFilelist(currentPage, name){
 }
 
 function getBillList(currentPage){
-    $.post("getBillList.action", {currentPage: currentPage}, function(data){
+    $.post("getBillList.action", {
+        currentPage: currentPage,
+        isIndex: true,
+        status: -1
+    }, function(data){
        $("#billlist").html(data); 
     });
 }
 
 function getCommentBillList(currentPage){
-    $.post("getCommentBill.action", {currentPage: currentPage}, function(data){
+    $.post("getCommentBill.action", {
+        currentPage: currentPage,
+        isIndex: true
+    }, function(data){
        $("#comment_area").html(data); 
+    });
+}
+
+function getPaymentList(currentPage){
+    $.post("getPaymentList.action", {currentPage: currentPage}, function(data){
+       $("#paymentlist").html(data); 
     });
 }
 
@@ -77,4 +90,5 @@ jQuery(document).ready(function($) {
     getPublicFilelist(1);
     getBillList(1);
     getCommentBillList(1);
+    getPaymentList(1);
 });
