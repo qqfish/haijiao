@@ -25,7 +25,7 @@ public class BaseBean {
     
     @Column(name="createtime")
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    private Date createTime;
+    private Date createTime = new Date();
 
     public Integer getId() {
         return id;
@@ -52,7 +52,7 @@ public class BaseBean {
     }
     
     public String createdateToString(){
-        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat df=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String strDate=df.format(createTime);
         return strDate;
     }
