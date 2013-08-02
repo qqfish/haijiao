@@ -52,7 +52,7 @@
                 </div>
                 <div class="span8 module" style="padding:12px;">
                     <div class="tab-content">
-                        <div class="tab-pane fade"  id='1'>
+                        <div class="tab-pane fade active in"  id='1'>
                             <s:form action="resetChangePassword.action">
                                 <h3>修改密码</h3>
                                 <hr/>
@@ -77,20 +77,4 @@
     <!--==============================footer=================================-->
     <%@ include file="WEB-INF/jspf/footer.jspf"%>
 </body>
-</html>
-
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <s:form action="changeInfo.action">
-            
-            <s:textfield name=""/>
-            <s:textfield name=""/>
-            <s:submit 
-        </s:form>
-    </body>
 </html>

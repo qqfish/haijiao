@@ -80,8 +80,6 @@ function testSubmit(){
         return;
     } else if(phoneNum == null || phoneNum==""){
         $("#phone_tip").text("* 这是必填项哦！");
-                console.log('hello1');
-
         $("#phone_tip").fadeIn(1,null);
         return;
     } else if(phoneNum.length != 11){

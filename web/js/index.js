@@ -36,7 +36,6 @@ jQuery(document).ready(function($){
                 $('#reg-panel').addClass("active in");
             }
             else if ($('#getErrorMessage').text()=="loginFail") {
-                console.log("aaaa");
                 $('#login_tip').text('* 用户名或密码错误！');
                 $('#login_tip').fadeIn();
                 

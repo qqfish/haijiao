@@ -7,7 +7,7 @@ package com.haijiao.Domain.bean;
 import com.google.gson.Gson;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Basic;
@@ -20,6 +20,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @org.hibernate.annotations.Entity(dynamicUpdate=true,dynamicInsert=true)
@@ -48,7 +50,9 @@ public class User extends BaseBean{
     protected String intro;     //用户的个人简介，显示在个人主页上
     protected String picUrl;    //用户头像的URL
     protected String sex;       //性别
+    @Temporal(TemporalType.DATE)
     protected Date birthday;    //生日
+    @Temporal(TemporalType.TIMESTAMP)
     protected Date lastActiveDate;//最近活跃时间
     protected int status;       //可选项为Status
     

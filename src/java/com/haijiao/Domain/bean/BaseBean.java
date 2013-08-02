@@ -2,7 +2,6 @@
  *
  * @author Jerry Zou
  */
-
 package com.haijiao.Domain.bean;
 
 import java.util.Date;
@@ -13,18 +12,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public class BaseBean {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    
-    @Column(name="del") 
+
+    @Column(name = "del")
     private boolean delete;
     
     @Column(name="createtime")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime = new Date();
 
     public Integer getId() {
@@ -56,4 +57,5 @@ public class BaseBean {
         String strDate=df.format(createTime);
         return strDate;
     }
+
 }
