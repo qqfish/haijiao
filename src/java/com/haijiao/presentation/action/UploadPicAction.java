@@ -85,7 +85,7 @@ public class UploadPicAction extends SessionAction{
             for(int i = 0; i < folder.listFiles().length; i++){
                 folder.listFiles()[i].delete();
             }
-            path = path + "/" + uploadFileName;
+            path = path + "/head.jpg";
             File imageFile = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
             if(!imageFile.exists()){
                 imageFile.createNewFile();

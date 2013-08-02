@@ -33,7 +33,6 @@ public class RegisterAction extends SessionAction{
     private ITeacherService teacherService;
     @Resource
     private IStudentService studentService;
-    private String errorMessage;
     
     @Override
     public String execute(){
@@ -51,7 +50,7 @@ public class RegisterAction extends SessionAction{
             userService.setStatus(email, User.Status.onlineAndAvailable);
             return SUCCESS;
         } else {
-            errorMessage = "userExist";
+            this.sessionPutIn("errorMessage", "userExist");
             return INPUT;
         }
     }
@@ -69,27 +68,27 @@ public class RegisterAction extends SessionAction{
     @Override
     public void validate() {
         if(email==null || email.trim().length()==0){
-            errorMessage = "emailNull";
+            this.sessionPutIn("errorMessage", "emailNull");
             this.addActionError(null);
         }
         else if(password1==null || password1.trim().length()==0){
-            errorMessage = "passwordNull";
+            this.sessionPutIn("errorMessage", "passwordNull");
             this.addActionError(null);
         }
         else if(password1.trim().length()<6){
-            errorMessage = "passwordShort";
+            this.sessionPutIn("errorMessage", "passwordShort");
             this.addActionError(null);
         }
         else if(password2==null || password2.trim().length()==0){
-            errorMessage = "passwordNull";
+            this.sessionPutIn("errorMessage", "passwordNull");
             this.addActionError(null);
         }
         else if(password2==null || password2.trim().length()<6){
-            errorMessage = "passwordShort";
+            this.sessionPutIn("errorMessage", "passwordShort");
             this.addActionError(null);
         }
         else if(!password1.trim().equals(password2.trim())){
-            errorMessage = "passwordNotEqual";
+            this.sessionPutIn("errorMessage", "passwordNotEqual");
             this.addActionError(null);
         }
     }
@@ -148,13 +147,5 @@ public class RegisterAction extends SessionAction{
 
     public void setStudentService(IStudentService studentService) {
         this.studentService = studentService;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
     }
 }

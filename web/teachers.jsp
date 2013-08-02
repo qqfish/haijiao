@@ -132,7 +132,7 @@
                     <div  id="resultPanel" class="span11 module">
                         <div style="margin:0px 12px;">
                             <h3>
-                                老师列表
+                                老师列表 <small class="text-warning">(<i class="icon-diomand"></i>为金牌签约老师)</small>
                                 <small>
                                     <div class="btn-toolbar pull-right">
                                         <div id="sort" class="btn-group" data-toggle="buttons-radio">

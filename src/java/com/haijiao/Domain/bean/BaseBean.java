@@ -5,13 +5,14 @@
 
 package com.haijiao.Domain.bean;
 
-import java.sql.Date;
+import java.util.Date;
 import java.text.SimpleDateFormat;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
 
 @MappedSuperclass
 public class BaseBean {
@@ -23,6 +24,7 @@ public class BaseBean {
     private boolean delete;
     
     @Column(name="createtime")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date createTime;
 
     public Integer getId() {

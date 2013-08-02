@@ -13,3 +13,11 @@
     display: inline-block;
     vertical-align: text-top;
 }
+
+.icon-gold{
+    background: url(../images/d_gold.png) no-repeat;
+    width: 150px;
+    height: 180px;
+    display: block;
+    vertical-align: text-top;
+}

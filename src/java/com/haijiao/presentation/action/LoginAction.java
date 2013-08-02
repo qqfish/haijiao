@@ -34,13 +34,12 @@ public class LoginAction extends SessionAction {
     private String email;
     private String password;
     private String autologin;
-    private String errorMessage;
     
     @Override
     public String execute() throws Exception {
         String userType = userService.confirmLogin(email, password);
         if(userType == null){
-            errorMessage = "loginFail";
+            this.sessionPutIn("errorMessage", "loginFail");
             return INPUT;
         } else {
             if(autologin.equals("on")){
@@ -68,11 +67,11 @@ public class LoginAction extends SessionAction {
     @Override
     public void validate(){
         if(email.isEmpty() || email.trim().length()==0){
-            errorMessage = "LemailNull";
+            this.sessionPutIn("errorMessage", "LemailNull");
             this.addActionError(null);
         }
         else if(password.isEmpty() || password.trim().length()==0){
-            errorMessage = "LpasswordNull";
+            this.sessionPutIn("errorMessage", "LpasswordNull");
             this.addActionError(null);
         }
     }
@@ -123,13 +122,5 @@ public class LoginAction extends SessionAction {
 
     public void setStudentService(IStudentService studentService) {
         this.studentService = studentService;
-    }
-
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
     }
 }

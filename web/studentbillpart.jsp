@@ -13,7 +13,8 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div class="btn-group" style="float:right">
+        <image src="images/billNav.jpg"/>
+<!--        <div class="btn-group" style="float:right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                 订单选择
                 <span class="caret"></span>
@@ -23,7 +24,7 @@
                 <li><a tabindex="-1" href="#">已完成</a></li>
                 <li><a tabindex="-1" href="#">未完成</a></li>
             </ul>
-        </div>
+        </div>-->
 
         <table class="table table-striped table-hover" >
             <thead>

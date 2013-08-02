@@ -69,7 +69,8 @@
                                 </a>
                             </div>
                             <div id="reg-panel" class="accordion-body collapse">
-                                <div id="getErrorMessage" style="display:none;"><s:property value="errorMessage" /></div>
+                                <div id="getErrorMessage" style="display:none;"><s:property value="#session.errorMessage" /></div>
+                                <s:set name="errorMessage" value="" scope="session"></s:set>
                                 <s:form action="register.action">
                                     <s:textfield name="email"  onchange="validate_email(this,email_tip);" placeholder="请输入邮箱" autofocus="autofocus" style="margin: 20px 0px 0px 4px;" ></s:textfield>
                                     <div id="email_tip" class="validateTip"></div>

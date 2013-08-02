@@ -274,11 +274,11 @@
                                         <label class="control-label" for="currentRole"><strong>目前身份</strong></label>
                                         <div class="controls">
                                             <s:select id="currentRole" cssClass="span2" name="studyStatus" value="%{tea.studyStatus}" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label class="control-label" for="college"><strong>大学</strong></label>
-                                        <div class="controls">
+                                        <div class="control-group">
+                                            <label class="control-label" for="college"><strong>大学</strong></label>
+                                            <div class="controls">
                                             <s:select cssClass="span4" name="school" value="%{tea.school}" list="{'复旦大学','上海交通大学','同济大学','华东理工大学','东华大学','华东师范大学','上海外国语大学','上海财经大学','上海海关学院','上海大学','上海理工大学',
                                                       '上海海事大学','上海工程技术大学','上海海洋大学','上海中医药大学','上海师范大学','华东政法大学','上海政法学院','上海建桥学院','上海第二工业大学','上海应用技术学院','上海电力学院','上海电机学院','上海对外贸易学院','上海金融学院','上海立信会计学院',
                                                       '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}"/>
@@ -304,7 +304,7 @@
                                         </div>
                                     </div>
                                 </s:if>
-                                <s:if test="#session.userType == 'student'">
+                                <s:elseif test="#session.userType == 'student'">
                                     <h3>同学您好，修改你的详细信息吧^ ^</h3>
                                     <hr/>
                                     <dl>
@@ -327,7 +327,7 @@
                                         <dt>年级</dt>
                                         <dd><s:select cssClass="span4" headerValue="请选择你的年级" name="grade" list="{'小学', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}" value="%{stu.grade}"/></dd>
                                         <dt>手机</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="tel" placeholder="请输入您的手机号" value="%{stu.tel}"/></dd>                                
+                                        <dd><s:textfield cssClass="span4" type="text" id="phoneNum" name="tel" placeholder="请输入您的手机号" value="%{stu.tel}"/></dd>                                
                                         <dd style="display: none;"><s:radio list="{'student', 'parent'}" name="telType" value="%{stu.telType}"/></dd>
                                         <dd>
                                             <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
@@ -335,13 +335,14 @@
                                                 <button id="parentButton" type="button" value="1" class="btn" data-toggle="button">爸妈的手机</button>
                                             </div>
                                         </dd>
+                                        <span id="phone_tip" class="validateTip" style="text-align: left;"></span>
                                         <br/>
                                         <dd>
                                             <input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testSubmit();"/>
                                             <s:submit id="form_submit" cssClass="btn btn-primary" style="width:300px; display:none;" value="提交" method="studentChange"/>
                                         </dd>
                                     </dl>
-                                </s:if>
+                                </s:elseif>
                             </s:form>
                         </div>
                         <div class="tab-pane fade"  id='detailInfo'>
@@ -349,13 +350,13 @@
                                 <h3>修改详细资料</h3>
                                 <hr/>
                                 <dl>
-                                    <dt>授课方式</dt>
+                                    <dt>授课方式<small class="text-warning">*请务必选择一种授课方式，否则学生无法预约</small></dt>
                                     <dd style="margin-bottom: 5px; margin-top: 5px;">
                                         <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
                                         <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
                                         <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
                                     </dd>
-                                    <dt>线下授课区域</dt>
+                                    <dt>线下授课区域<small class="text-warning">*选择“老师上门”和“学生上门”请填写该项</small></dt>
                                     <dd><s:textarea cssStyle="width:520px;height:50px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
                                     <dt>个人简介</dt>
                                     <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="intro" value="%{tea.intro}" autofocus="autofocus"/></dd>
@@ -453,7 +454,7 @@
                                     $("#l3").addClass("active")
                                 </script>
                             </s:elseif>
-                            <s:elseif test="#session.userType=='student'">
+                            <s:elseif test="tab=='person' && #session.userType=='student'">
                                 <script>
                                     $("#personIntro").addClass("active in");
                                     $("#l4").addClass("active")

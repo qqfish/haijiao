@@ -178,6 +178,8 @@ public class UserServiceImpl implements IUserService {
             s.setLastActiveDate(time);
             s.setPicUrl("images/figure-default.png"); //temp
             s.setLoginNum(0);
+            s.setScoreNum(0);
+            s.setScore(0);
             UserFileGroup fg = new UserFileGroup();
             fg.setGroupName("默认分组");
             s.addPersistFileGroup(fg);
@@ -198,6 +200,7 @@ public class UserServiceImpl implements IUserService {
             t.setObNum(0);
             t.setLoginNum(0);
             t.setPicUrl("images/page2-img1.jpg"); //temp
+            t.setIntro("<p><br /></p><div style='text-align:center;'><strong><span style='background-color:#FFE500;'><span style='font-size:24px;'>郑重申明：欢迎使用在线试讲功能</span></span></strong> </div><ul><li><strong>自我描述</strong> </li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下自我描述。</strong><br /><ul><li><strong>获奖经历</strong> </li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下获奖经历。</strong><br /><ul><li><strong>家教经历</strong> </li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下家教经历。</strong> <p><br /></p>");
             UserFileGroup fg = new UserFileGroup();
             fg.setGroupName("默认分组");
             t.addPersistFileGroup(fg);

@@ -52,15 +52,15 @@
                 document.getElementById("share_info").setAttribute("readOnly", "true");
                 document.getElementById("share_info").readonly = true;
                 document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
-                        "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
-                        document.getElementById("share_info").value;
+                    "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                    document.getElementById("share_info").value;
             }
             function share_iframe_load() {
                 if (flag) {
                     flag = 0;
                     document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
-                            "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
-                            document.getElementById("share_info").value;
+                        "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                        document.getElementById("share_info").value;
                 }
             }
         </script>
@@ -103,13 +103,13 @@
                             <s:if test="teacher.bankname!=null&&teacher.bankcard!=null">
                                 <label class="radio offset1">
                                     <input type="radio" name="option1" onclick="$('#moneyRequestbc').val('<s:property value="teacher.bankcard" />');
-                                            $('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
+                                        $('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
                                     <span class="span2"><s:property value="teacher.bankname" /></span>
                                     <span><s:property value="teacher.bankcard" /></span>
                                 </label>
                                 <label class="radio offset1">
                                     <input type="radio" name="option1" value="option2" onclick="$('#moneyRequestbc').val($('#newBankcard').val());
-                                            $('#moneyRequestbank').val($('#newBankname').val());">
+                                        $('#moneyRequestbank').val($('#newBankname').val());">
                                     <select id="newBankname" class="span2">
                                         <option>中国工商银行</option>
                                         <option>中国银行</option>
@@ -178,34 +178,34 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
 
-                    <div class="span8 module" style="padding:12px;">
-                        <ul class="nav nav-pills">
-                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                            <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
-                            <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
-                            <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
-                            <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
-                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                <div class="span8 module" style="padding:12px;">
+                    <ul class="nav nav-pills">
+                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                        <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
+                        <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
+                        <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
+                        <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
+                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
 
-                            <!--  add a button for previewing Profile -->
-                            <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
-                        </ul>
+                        <!--  add a button for previewing Profile -->
+                        <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
+                    </ul>
 
-                        <!--   personal proflie   -->
-                        <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h3>主页预览</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
+                    <!--   personal proflie   -->
+                    <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3>主页预览</h3>
+                            </div>
+                            <div class="modal-body">
+                                <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
     姓名：<s:property value="teacher.name" /> 
     学校：<s:property value="teacher.school" />
     专业：<s:property value="teacher.major" />
@@ -470,10 +470,49 @@
                         <div class="tab-pane fade" id="payment_area">
                             <div class="money-header title-border">
                                 <strong>账单记录</strong>
-                                <small class="text-warning">您目前为普通用户，您的手续费为10%,详细请见(<a class="btn btn-link btn-mini">*</a>)</small>
+                                <small class="text-warning">您目前为
+                                    <s:if test="teacher.level==1">
+                                        金牌签约老师，您的手续费为5%
+                                    </s:if>
+                                    <s:else>
+                                        普通老师，您的手续费为8%
+                                    </s:else>
+                                    ,详细请见(<a class="btn btn-link btn-mini" data-toggle="modal" data-target="#paymentTipsModal">*</a>)</small>
                                 <span class="pull-right mute">余额:
                                     <strong style="color:#53a000"><s:property value="teacher.coin" /></strong>
                                 </span>
+                                <div class="modal fade hide" id="paymentTipsModal">
+                                    <div class="modal-header">
+                                        <h4>扣款比例</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>教师级别</th>
+                                                    <th>申请条件</th>
+                                                    <th>手续费比例</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>普通教师</td>
+                                                    <td>默认等级</td>
+                                                    <td>8%</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>金牌签约老师</td>
+                                                    <td>营业额超过4万，评价4星及以上</td>
+                                                    <td>5%</td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="modal-footer"><button class="btn btn-primary" data-dismiss="modal">知道了</button></div>
+                                </div>
                             </div>
                             <div id="paymentlist"></div>
                         </div>
@@ -502,7 +541,7 @@
                                     $("#l5").addClass("active")
                                 </script>
                             </s:elseif>
-                                <s:elseif test="tab=='payment'">
+                            <s:elseif test="tab=='payment'">
                                 <script>
                                     $("#payment_area").addClass("active in");
                                     $("#l8").addClass("active")
