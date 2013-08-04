@@ -207,14 +207,14 @@
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
                         <li id="l1"><a href="#basicInfo" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        <s:if test="#session.userType=='teacher'">
+                                <s:if test="#session.userType=='teacher'">
                             <li id="l5"><a href="#detailInfo" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>
+                                </s:if>
                         <li id="l2" ><a href="#modifyPassword" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#headpic" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                        <s:if test="#session.userType=='student'">
+                                <s:if test="#session.userType=='student'">
                             <li id="l4"><a href="#personIntro" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>                  
+                                </s:if>                  
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
@@ -307,41 +307,64 @@
                                 <s:elseif test="#session.userType == 'student'">
                                     <h3>同学您好，修改你的详细信息吧^ ^</h3>
                                     <hr/>
-                                    <dl>
-                                        <dt>姓名</dt>
-                                        <dd><s:textfield id="TAName" cssClass="span4" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip2, 8);" type="text" name="name" placeholder="请输入您的大名" value="%{stu.name}" autofocus="autofocus" /></dd>
-                                        <dd id="name_tip" class="validateTip" style="text-align: left;"></dd>
-                                        <dd id="name_tip2" class="validateTip" style="text-align: left;"></dd>
-                                        <dt>性别</dt>
-                                        <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{stu.sex}"/></dd>
-                                        <dd>
-                                            <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                                                <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">男</button>
-                                                <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">女</button>
-                                            </div>
-                                        </dd>
-                                        <dt>生日</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{stu.birthday}"/></dd>
-                                        <dt>学校</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" name="school" placeholder="请输入您就读的学校" value="%{stu.school}"/></dd>
-                                        <dt>年级</dt>
-                                        <dd><s:select cssClass="span4" headerValue="请选择你的年级" name="grade" list="{'小学', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}" value="%{stu.grade}"/></dd>
-                                        <dt>手机</dt>
-                                        <dd><s:textfield cssClass="span4" type="text" id="phoneNum" name="tel" placeholder="请输入您的手机号" value="%{stu.tel}"/></dd>                                
-                                        <dd style="display: none;"><s:radio list="{'student', 'parent'}" name="telType" value="%{stu.telType}"/></dd>
-                                        <dd>
-                                            <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                                                <button id="meButton" type="button" value="0" class="btn" data-toggle="button">我的手机</button>
-                                                <button id="parentButton" type="button" value="1" class="btn" data-toggle="button">爸妈的手机</button>
-                                            </div>
-                                        </dd>
-                                        <span id="phone_tip" class="validateTip" style="text-align: left;"></span>
-                                        <br/>
-                                        <dd>
+                                    <div class="control-group">
+                                        <label class="control-label" for="TAName"><strong>姓名</strong></label>
+                                        <div class="controls">
+                                            <s:textfield id="TAName" cssClass="span4" onchange="validate_required(this,name_tip); validate_lengthLimit(this, name_tip2, 8);" type="text" name="name" placeholder="请输入您的大名" value="%{stu.name}" autofocus="autofocus" />
+                                            <dd id="name_tip" class="validateTip" style="text-align: left;"></dd>
+                                            <dd id="name_tip2" class="validateTip" style="text-align: left;"></dd>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for=""><strong>性别</strong></label>
+                                        <div class="controls">
+                                            <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{stu.sex}"/></dd>
+                                            <dd>
+                                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                    <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">男</button>
+                                                    <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">女</button>
+                                                </div>
+                                            </dd>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for=""><strong>生日</strong></label>
+                                        <div class="controls">
+                                            <dd><s:textfield cssClass="span4" type="text" id="datepicker" name="birthday" placeholder="请输入您的生日" value="%{stu.birthday}"/></dd>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="school"><strong>学校</strong></label>
+                                        <div class="controls">
+                                            <dd><s:textfield cssClass="span4" id="school" type="text" name="school" placeholder="请输入您就读的学校" value="%{stu.school}"/></dd>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="grade"><strong>年级</strong></label>
+                                        <div class="controls">
+                                            <dd><s:select cssClass="span4" id="grade" headerValue="请选择你的年级" name="grade" list="{'小学', '六年级', '初一', '初二', '初三', '高一', '高二', '高三'}" value="%{stu.grade}"/></dd>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="phoneNum"><strong>手机</strong></label>
+                                        <div class="controls">
+                                            <dd><s:textfield cssClass="span4" type="text" id="phoneNum" name="tel" placeholder="请输入您的手机号" value="%{stu.tel}"/></dd>  
+                                            <dd style="display: none;"><s:radio list="{'student', 'parent'}" name="telType" value="%{stu.telType}"/></dd>
+                                            <dd>
+                                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                    <button id="meButton" type="button" value="0" class="btn" data-toggle="button">我的手机</button>
+                                                    <button id="parentButton" type="button" value="1" class="btn" data-toggle="button">家长的手机</button>
+                                                </div>
+                                            </dd>
+                                            <span id="phone_tip" class="validateTip" style="text-align: left;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
                                             <input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testSubmit();"/>
                                             <s:submit id="form_submit" cssClass="btn btn-primary" style="width:300px; display:none;" value="提交" method="studentChange"/>
-                                        </dd>
-                                    </dl>
+                                        </div>
+                                    </div>
                                 </s:elseif>
                             </s:form>
                         </div>
@@ -369,21 +392,35 @@
                             </s:form>
                         </div>
                         <div class="tab-pane fade"  id='modifyPassword'>
-                            <s:form action="changeInfo.action">
+                            <s:form action="changeInfo.action" cssClass="form-horizontal">
                                 <h3>修改密码</h3>
                                 <hr/>
-                                <dl>
-                                    <dt>旧密码</dt>
-                                    <dd><s:password cssClass="span4" type="text" name="oldpwd" placeholder="请输入旧密码" autofocus="autofocus"/></dd>
-                                    <dt>新密码</dt>
-                                    <dd><s:password cssClass="span4" onchange="validate_passwordlength(this,password_tip1);" type="text" name="newpwd" placeholder="请输入新密码" autofocus="autofocus"/></dd>
-                                    <dd id="password_tip1" class="validateTip" style="text-align: left;"></dd>
-                                    <dt>确认密码</dt>
-                                    <dd><s:password cssClass="span4" onchange="validate_passwordequal(newpwd,this,password_tip2);" type="text" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus"/></dd>
-                                    <dd id="password_tip2" class="validateTip" style="text-align: left;"></dd>
-                                    <br/>
-                                    <dd><s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="changePassword"/></dd>
-                                </dl>
+                                <div class="control-group">
+                                    <label class="control-label" for="oldpwd"><strong>旧密码</strong></label>
+                                    <div class="controls">
+                                        <s:password cssClass="span4" type="text" id="oldpwd" name="oldpwd" placeholder="请输入旧密码" autofocus="autofocus"/>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="newpwd"><strong>新密码</strong></label>
+                                    <div class="controls">
+                                        <s:password cssClass="span4" onchange="validate_passwordlength(this,password_tip1);" type="text" id="newpwd" name="newpwd" placeholder="请输入新密码" autofocus="autofocus"/>
+                                        <dd id="password_tip1" class="validateTip" style="text-align: left;"></dd>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="newpwd2"><strong>确认密码</strong></label>
+                                    <div class="controls">
+                                        <s:password cssClass="span4" onchange="validate_passwordequal(newpwd,this,password_tip2);" type="text" id="newpwd2" name="newpwd2" placeholder="请再输入一次新密码" autofocus="autofocus"/>
+                                        <dd id="password_tip2" class="validateTip" style="text-align: left;"></dd>
+                                    </div>
+                                </div>
+                                <br/>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <s:submit cssClass="btn btn-primary" style="width:300px;" value="提交" method="changePassword"/>
+                                    </div>
+                                </div>
                             </s:form>
                         </div>
                         <div class="tab-pane fade"  id='headpic'>
@@ -438,8 +475,8 @@
                         <div>
                             <s:if test="tab=='detail' && #session.userType=='teacher'">
                                 <script>
-                                    $("#detailInfo").addClass("active in");
-                                    $("#l5").addClass("active");
+            $("#detailInfo").addClass("active in");
+            $("#l5").addClass("active");
                                 </script>
                             </s:if>
                             <s:elseif test="tab=='password'">
