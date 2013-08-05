@@ -20,10 +20,10 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendMail {
     protected Session session = null;
-    private String from = "zy3861@163.com";
+    private String from = "haijiaoedu@163.com";
     private String host = "smtp.163.com";
-    private String username = "zy3861";
-    private String password = "zy102428ZXCVBNM";
+    private String username = "haijiaoedu";
+    private String password = "haijiao";
 
     public SendMail() {
         Properties props = new Properties();

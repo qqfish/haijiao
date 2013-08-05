@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @MappedSuperclass
 public class BaseBean {
@@ -60,4 +61,5 @@ public class BaseBean {
         String strDate = df.format(createTime);
         return strDate;
     }
+
 }

@@ -19,7 +19,6 @@ import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.global.TeacherLevel;
-import java.sql.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -98,9 +97,6 @@ public class BillServiceImpl implements IBillService{
         Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
         Lesson l = lessonDAO.getLessonByName(teacherEmail, lessonName);
         Bill bill = new Bill();
-        java.util.Date datetime = new java.util.Date();
-        Date time = new Date(datetime.getTime());
-        bill.setCreateTime(time);
         bill.setDelete(false);
         bill.setMessage(message);
         bill.setDuration(hour);

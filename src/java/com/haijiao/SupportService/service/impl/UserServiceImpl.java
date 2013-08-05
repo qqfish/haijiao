@@ -27,7 +27,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -119,9 +119,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public boolean setActiveDate(String email) {
         User u = userDAO.getUserByEmail(email);
-        java.util.Date datetime = new java.util.Date();
-        Date time = new Date(datetime.getTime());
-        u.setLastActiveDate(time);
+        u.setLastActiveDate(new Date());
         if (u.getLoginNum() == null) {
             u.setLoginNum(1);
         } else {
@@ -172,10 +170,7 @@ public class UserServiceImpl implements IUserService {
             password = MD5Util.MD5(password);
             s.setPassword(password);
             s.setUserType(userType);
-            java.util.Date datetime = new java.util.Date();
-            Date time = new Date(datetime.getTime());
-            s.setCreateTime(time);
-            s.setLastActiveDate(time);
+            s.setLastActiveDate(new Date());
             s.setPicUrl("images/figure-default.png"); //temp
             s.setLoginNum(0);
             s.setScoreNum(0);
@@ -191,10 +186,7 @@ public class UserServiceImpl implements IUserService {
             password = MD5Util.MD5(password);
             t.setPassword(password);
             t.setUserType(userType);
-            java.util.Date datetime = new java.util.Date();
-            Date time = new Date(datetime.getTime());
-            t.setCreateTime(time);
-            t.setLastActiveDate(time);
+            t.setLastActiveDate(new Date());
             t.setAudition(true);
             t.setClassNum(0);
             t.setObNum(0);
@@ -334,7 +326,7 @@ public class UserServiceImpl implements IUserService {
     public boolean validateCheckcode(int id, String checkcode) {
         List<ResetInfo> lr = resetInfoDAO.getResetInfoByUser(id);
         if (lr.size() == 1 && lr.get(0).getCheckcode().equals(checkcode)) {
-            long between = new java.util.Date().getTime() - lr.get(0).getCreateTime().getTime() - 78360534;
+            long between = new Date().getTime() - lr.get(0).getCreateTime().getTime();
             if ((between / (60 * 60 * 1000)) < 1) {
                 return true;
             } else {
@@ -357,9 +349,6 @@ public class UserServiceImpl implements IUserService {
         ResetInfo r = new ResetInfo();
         r.setUserid(id);
         r.setCheckcode(checkCode);
-        java.util.Date datetime = new java.util.Date();
-        Date time = new Date(datetime.getTime());
-        r.setCreateTime(time);
         resetInfoDAO.makePersistent(r);
     }
 
