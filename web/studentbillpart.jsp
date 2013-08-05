@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <image src="images/billNav.jpg"/>
+        <image src="images/billNav.png"/>
 <!--        <div class="btn-group" style="float:right">
             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
                 订单选择

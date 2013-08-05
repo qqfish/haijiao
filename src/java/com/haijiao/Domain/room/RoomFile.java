@@ -40,7 +40,7 @@ public class RoomFile extends DataFile {
     private Room room;
     private PDDocument doc;
     private RootBookmark bookmarks;
-    private int lastPage;
+    private int lastPage = 0;
     private String downloadUrl;
 
     public RoomFile(DataFile file, Room room) {
@@ -99,7 +99,7 @@ public class RoomFile extends DataFile {
 
     }
 
-    private void checkAndOpenFile() {
+    private boolean checkAndOpenFile() {
         if (doc == null) {
             try {
                 if (url == null) {
@@ -110,6 +110,10 @@ public class RoomFile extends DataFile {
                     }
                 } else {
                     doc = PDDocument.load(url);
+                }
+                if (doc.getNumberOfPages() == 0) {
+                    doc.close();
+                    return false;
                 }
                 if (bookmarks == null) {
                     bookmarks = new RootBookmark(doc);
@@ -123,14 +127,17 @@ public class RoomFile extends DataFile {
                 }
             } catch (IOException ex) {
                 Logger.getLogger(RoomFile.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
             }
         }
+        return true;
     }
 
-    private void checkAndSetPages() {
+    private boolean checkAndSetPages() {
         if (pages == null) {
-            checkAndOpenFile();
+            return checkAndOpenFile();
         }
+        return true;
     }
 
     public boolean addBookmark(String indexName, int page) {
@@ -141,16 +148,22 @@ public class RoomFile extends DataFile {
     public void gotoBookmark(List<Integer> indexs) {
     }
 
-    public RoomPage getPage(int i){
-        checkAndSetPages();
+    public RoomPage getPage(int i) {
+        if (!checkAndSetPages()) {
+            return null;
+        }
         if (i >= pages.size()) {
             i = pages.size() - 1;
+        } else if (i < 0) {
+            i = 0;
         }
         lastPage = i;
         RoomPage result = pages.get(i);
         if (result.getOriginUrl() == null) {
             try {
-                checkAndOpenFile();
+                if (!checkAndOpenFile()) {
+                    return null;
+                }
                 PDPage page = (PDPage) doc.getDocumentCatalog().getAllPages().get(i);
                 BufferedImage image = page.convertToImage();
                 ByteArrayOutputStream os = new ByteArrayOutputStream();

@@ -25,7 +25,7 @@
                                 <div class="thumbnail">
                                     <img class="pull-left" style="margin: 0px 10px 0px 0px;width: 110px;" src="<s:property value="picUrl"/>" width="110px"/>
                                     <a href="getTeacherInfo.action?teacherEmail=<s:property value="email"/>" style="text-decoration: none;">
-                                        <b style="font-size: 20px;"><s:property value="name"/>&nbsp;</b>
+                                        <b style="font-size: 20px;"><s:property value="getSecretName()"/>&nbsp;</b>
                                     </a>
                                     <s:if test="level==1">
                                         <i class="icon-diomand"></i>

@@ -377,4 +377,8 @@ public class Teacher extends User {
     public void setBankname(String bankname) {
         this.bankname = bankname;
     }
+    public String getSecretName() {
+        String result = name.substring(0, 1) + "老师";
+        return result;
+    }
 }

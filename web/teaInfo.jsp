@@ -49,7 +49,7 @@
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
-                    <h4 style="margin-left:5px"><s:property value="tea.name"/>
+                    <h4 style="margin-left:5px"><s:property value="tea.getSecretName()"/>
                         <s:if test="level==1">
                             <i class="icon-diomand"></i>
                         </s:if>

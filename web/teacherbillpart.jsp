@@ -13,6 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <image src="images/billNav.png"/>
         <table class="table table-striped" style="font-size:12px;">
             <s:if test="pb.list.size()<=0">
                 <tbody>
