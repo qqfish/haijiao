@@ -35,7 +35,7 @@
                         <td>
                             <i class="icon-file"></i><s:property value="name"/>
                         </td>
-                        <td><s:property value="createtime"/></td>
+                        <td><s:date name="createTime" format="yyyy-MM-dd hh:mm:ss"/></td>
                         <td><s:property value="owner"/></td>
                         <td class="btn-toolbar">
                             <div class="btn-group">

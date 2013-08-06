@@ -115,7 +115,7 @@
                                 18801902576</small>
                             <br />
                             <small><i class="icon-time"></i>
-                                <s:property value="tea.createTime" />加入</small>
+                                <s:date name="tea.createTime" format="yyyy-MM-dd"/>加入</small>
                         </p>
                     </div>
                     <hr />

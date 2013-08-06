@@ -168,7 +168,7 @@
                                                 <s:if test="status==0"><label class="label">离线</label></s:if>
                                                 <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
                                                 <s:else><label class="label label-warning">忙碌</label></s:else>
-                                                <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:property value="lastActiveDate" default="null"/></small>
+                                                <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:date name="lastActiveDate" nice="true"/></small>
                                                 <s:if test="lessons.size()==0">
                                                     <label class="label pull-right">暂时没有定价</label>
                                                 </s:if>

@@ -100,7 +100,7 @@
                             <s:property value="tea.getDirectDistrict()"/><br/><br/>
                         </small>
                         <p><s:property value="tea.email" /></p>
-                        <p><s:property value="tea.createTime" /> 加入</p>
+                        <p><s:date name="tea.createTime" format="yyyy-MM-dd"/> 加入</p>
                     </div>
                     <table class="table table-hover table-striped">
                         <tbody>
