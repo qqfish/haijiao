@@ -6,6 +6,12 @@ jQuery(document).ready(function($){
     $('#femaleButton').click(function(){
         $('#registerThen_sex女').click();
     });
+    $("#meButton").click(function(){
+        $('#registerThen_telTypestudent').click();
+    });
+    $("#parentButton").click(function(){
+        $('#registerThen_telTypeparent').click();
+    });
 });
 
 function testSubmit(){

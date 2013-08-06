@@ -72,7 +72,7 @@ public class RegisterThenAction extends SessionAction {
             return SUCCESS;
         } else {
             this.sessionPutIn("nextPageMessage", "注册信息提交失败！");
-            return "input";
+            return INPUT;
         }
     }
 

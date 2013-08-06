@@ -69,7 +69,7 @@
                                 <dd>
                                     <small class="text-warning">同样网络下视频效果更佳，请选择常用网络环境</small>
                                 </dd>
-
+                                <br/>
                                 <dt style='margin-top:5px'>性别</dt>
                                 <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex"/></dd>
                                 <dd>
@@ -113,8 +113,8 @@
                                 <dt style='margin-top:5px'>手机</dt>
                                 <dd><s:textfield id="phoneNum" cssClass="span4" onchange="validate_phoneNum(this,phone_tip);" name="tel" placeholder="请输入您的手机号"/></dd>
                                 <span id="phone_tip" class="validateTip" style="text-align: left;"></span>
-                                <br/>
                                 <dd><small class="text-warning">请填写有效手机号，以便老师与您取得联系</small></dd>
+                                <br/>
                                 <dd style="display: none;"><s:radio list="{'student', 'parent'}" name="telType"/></dd>
                                 <dd>
                                     <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
@@ -122,6 +122,7 @@
                                         <button id="parentButton" type="button" value="1" class="btn" data-toggle="button">爸妈的手机</button>
                                     </div>
                                 </dd>
+                                <br/>
                                 <dt style='margin-top:5px'>性别</dt>
                                 <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex"/></dd>
                                 <dd>

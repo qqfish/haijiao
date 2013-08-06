@@ -350,6 +350,7 @@
                                         <div class="controls">
                                             <dd><s:textfield cssClass="span4" type="text" id="phoneNum" name="tel" placeholder="请输入您的手机号" value="%{stu.tel}"/></dd>  
                                             <dd style="display: none;"><s:radio list="{'student', 'parent'}" name="telType" value="%{stu.telType}"/></dd>
+                                            <br/>
                                             <dd>
                                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                                     <button id="meButton" type="button" value="0" class="btn" data-toggle="button">我的手机</button>

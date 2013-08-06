@@ -49,16 +49,16 @@ public class StudentServiceImpl implements IStudentService {
         if (grade != null) {
             s.setGrade(grade);
         }
-        if (name != null) {
+        if (name != null && !name.equals("")) {
             s.setName(name);
         }
-        if (school != null) {
+        if (school != null && !school.equals("")) {
             s.setSchool(school);
         }
         if (sex != null) {
             s.setSex(sex);
         }
-        if (tel != null) {
+        if (tel != null && !tel.equals("")) {
             s.setTel(tel);
         }
         if (telType != null) {
