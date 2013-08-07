@@ -160,6 +160,7 @@
                 <p><s:property value="teacher.email"/></p>
                 <p><s:property value="teacher.createdateToString()"/> 加入</p>
             </div>-->
+                    <hr/>
                     <table class="table table-hover table-striped">
                         <tbody>
                             <tr>

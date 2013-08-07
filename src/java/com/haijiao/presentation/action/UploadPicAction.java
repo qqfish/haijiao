@@ -74,7 +74,7 @@ public class UploadPicAction extends SessionAction{
                 this.sessionPutIn("nextPageMessage", "请先登陆");
                 return "error";
             }
-            String path = config.userHome + "/" + email + "/" + config.imageFolder;
+            String path = config.imageFolder + "/" + email;
             File folder = new File(ServletActionContext.getServletContext().getRealPath("/") + path);
             if(!folder.exists()){
                 folder.mkdirs();
