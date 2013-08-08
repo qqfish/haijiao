@@ -53,14 +53,13 @@ public class EnterPublicRoomAction extends RequestSessionAction {
         user = userService.getUserByEmail(email);
         if (email.equals(teaEmail)) {
             isHolder = 1;
-        }
-        if (!teaEmail.equals(email)) {
-            if (teacherService.getRoomOccupied(teaEmail) != null 
-                    && !teacherService.getRoomOccupied(teaEmail).equals(email)) {
+        } else {
+            String occupied = teacherService.getRoomOccupied(teaEmail);
+            if (occupied != null 
+                    && !occupied.equals(email)) {
                 this.sessionPutIn("nextPageMessage", "房间已被占用，请稍后再试。");
                 return "false";
             }
-            teacherService.setRoomOccupied(teaEmail, email);
         }
         return SUCCESS;
     }

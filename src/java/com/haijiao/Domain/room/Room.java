@@ -89,7 +89,7 @@ public class Room {
                 roomSocket.remove(roomSocket.get(i));
             }
         }
-        if (attendance.size() == 1 && roomSocket.size() < max - 1) {
+        if (attendance.size() == 1 && roomSocket.size() < max) {
             return true;
         }
         for (int i = 0; i < attendance.size(); i++) {

@@ -71,13 +71,13 @@ function init(stuEmail, teaEmail, email, fileGroups){
     $("#pointer").click(function(){
         toolkit.changeTool(Tooltype.Hand);
         table.setDraggable();
-        //$("#pen").popover('hide');
+    //$("#pen").popover('hide');
     //table.removeMouse();
     });
     $("#eraser").click(function(){
         toolkit.changeTool(Tooltype.Eraser);
         table.setUndraggable();
-        //$("#pen").popover('hide');
+    //$("#pen").popover('hide');
     //table.removeMouse();
     });
     
@@ -160,7 +160,7 @@ function init(stuEmail, teaEmail, email, fileGroups){
         },'fast');
         //media.setDragPlace(0, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
         
-//        $("#desktop").unbind("click");
+        //        $("#desktop").unbind("click");
         $("#ctlbar").attr("src","images/ctlbar1.png");
         sideShow = false;
     }
@@ -178,13 +178,19 @@ function init(stuEmail, teaEmail, email, fileGroups){
                 marginLeft: "0px"
             }, 'fast'); //以1000毫秒让“文章主体部分”的宽度收缩回705px
         
-//            $("#desktop").click(function(){
-//                sideReturn();
-//            });
+            //            $("#desktop").click(function(){
+            //                sideReturn();
+            //            });
             $("#ctlbar").attr("src","images/ctlbar2.png");
-//            media.setDragPlace(250, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
+            //            media.setDragPlace(250, 52, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
             sideShow = true;
         }
        
     });
 }
+
+function autoRefresh(seconds){
+    $("#emptyImg").attr("src","empty.action?t=" + new Date().getTime());    //防止缓存
+    setTimeout("autoRefresh(" + seconds + ")", seconds);     
+}
+autoRefresh(1000 * 10);   //调用方法启动定时刷新

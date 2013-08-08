@@ -13,7 +13,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <image src="images/billNav.png"/>
+        <ol class="bill_nav">
+            <li><span class="first">1. 老师确认</span></li>
+            <li><span>2. 学生付款</span></li>
+            <li><span>3. 双方上课</span></li>
+            <li><span>4. 上课完毕</span></li>
+            <li class="last"><span>5. 学生确认放款</span></li>
+        </ol>
         <table class="table table-striped" style="font-size:12px;">
             <s:if test="pb.list.size()<=0">
                 <tbody>

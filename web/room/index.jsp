@@ -61,6 +61,7 @@
     </head>
     <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
           onload="init('<s:property value='stuEmail' default='null' />', '<s:property value='teaEmail' default='null' />', '<s:property value='email' default='null' />', '<s:property value='user.fileGroupsToJson()' default='null' />');">
+        <img id="emptyImg" src="" style="display: none;"/>
         <script type="text/javascript">
             var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
             document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F71a6bb265c2824dde5414a59737f563b' type='text/javascript'%3E%3C/script%3E"));
@@ -69,8 +70,11 @@
             });
         </script>
         <s:if test="user.loginNum < 3">
-            <div class="modal fade" id="beginInfo" style="background:none;border: none;box-shadow:0 0px 0px rgba(0,0,0,0.3);left:80%;">
-                <image src="room/image/info.png" style="display: block;background:none;" />
+            <div class="modal fade" id="beginInfo">
+                    <image src="room/image/help.png"  />
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal">知道了</button>
+                </div>
             </div>
             <script>
                 $("#beginInfo").modal();

@@ -89,10 +89,10 @@ connection.initialize = function(stuEmail, teaEmail, email) {
     console.log(email);
     if (window.location.protocol == 'http:') {
         connection.connect('ws://' + window.location.host + '/haijiao/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
-    //connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
+//    connection.connect('ws://202.120.1.47:8080/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
     } else {
         connection.connect('wss://' + window.location.host + '/haijiao/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
-    //connection.connect('wss://202.120.1.47:8080/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
+//    connection.connect('wss://202.120.1.47:8080/WebFcSocketServlet?stuEmail='+stuEmail+'&teaEmail=' + teaEmail + '&email='+email);
     }
 };
 

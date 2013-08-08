@@ -159,7 +159,7 @@
                 </div>
                 <div class="span8 module" style="padding:12px;font-size: 12px;">
                     <s:if test="tea.level==1">
-                        <div class="pull-right"><i class="icon-gold"></i></div>
+                        <div class="pull-right"><img src="images/d_gold.png" width="100px" height="120px"/></div>
                     </s:if>
                     <div class="span5">
                         <dl class="dl-horizontal">
