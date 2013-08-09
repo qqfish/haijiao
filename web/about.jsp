@@ -43,14 +43,14 @@
                 <![endif]-->
 
         <script type="text/javascript">
-                    function control_size() {
-                        while(document.getElementById("_parent_div").offsetHeight*0.95 >document.getElementById("_need_div").offsetHeight) {
-                             obj = document.createElement("br");
+            function control_size() {
+                while(document.getElementById("_parent_div").offsetHeight*0.95 >document.getElementById("_need_div").offsetHeight) {
+                    obj = document.createElement("br");
                          
-                            document.getElementById("_addp").appendChild(obj);
-                        }
-                    }
-                </script>
+                    document.getElementById("_addp").appendChild(obj);
+                }
+            }
+        </script>
     </head>
     <body onload="control_size()">
 
@@ -59,8 +59,9 @@
         <!--==============================content=================================-->
         <div class="container wrapper" id="_parent_div">
             <div class="container-fluid" >
-                
+
                 <div class="span11 module" style="padding:12px;"  id="_need_div">
+
                     <div class="span10">
                         <h1>关于我们</h1>
                         <hr/>
@@ -71,13 +72,18 @@
                         <p style="text-indent: 8mm;line-height:20px">
                             海角教育核心团队均来位于上海市西南角的中国著名学府——上海交通大学，团队希望通过互联网技术将优质的教学资源服务辐射到天涯海角，利用视频通讯技术和双向互动白板技术开创“在线互动教学”新模式，力争成为中国互联网教育领域最佳体验的代表，成为在线学习的第一选择。
                         </p>
-                        <div class="row"><img class="span6 offset2" src="images/bkg.jpg"></div>
+<!--                        <div class="row"><img class="span6 offset2" src="images/bkg.jpg"></div>-->
+                        <div class="row">
+                            <video class="span6 offset2"id="video" controls="controls" preload="auto" x-webkit-airplay="true" class="playing" poster="http://p1.v.iask.com/264/84/111823592_2.jpg">
+                                <source id="video-hlv" src="http://v.iask.com/v_play_ipad.php?vid=111824104" type="video/mp4">
+                            </video>
+                        </div>
                         <br/>
                         <div class="row" id="_addp">
                             <p class="text-info text-center"><strong>自从互联网诞生之日起，它就注定要改变人们的生活方式；</strong></p>
                             <p class="text-info text-center"><strong>自从海角教育诞生之日起，我们就立志要让它改变人们在互联网上的学习方式！</strong></p>
-                           
-                            
+
+
                         </div>
 
                     </div>

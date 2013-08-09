@@ -70,7 +70,10 @@
             });
         </script>
         <s:if test="user.loginNum < 3">
-            <div class="modal fade" id="beginInfo">
+            <div class="modal fade" id="beginInfo" style="width:700px;">
+                <div class="modal-header">
+                    <h3>视频开启步骤</h3>
+                </div>
                     <image src="room/image/help.png"  />
                 <div class="modal-footer">
                     <button class="btn btn-primary" data-dismiss="modal">知道了</button>

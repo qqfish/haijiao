@@ -91,7 +91,7 @@
                     <div style="margin-left: 10px;">
                         <p style="line-height:20px;">
                             <small><i class="icon-flag"></i>
-                                <s:property value="tea.major"/>-<s:property value="tea.school"/>
+                                <s:property value="tea.school"/>-<s:property value="tea.major"/>
                             </small>
                             <br />
                             <small><i class="icon-home"></i>
