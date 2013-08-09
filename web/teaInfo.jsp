@@ -84,7 +84,7 @@
                         <a class="btn btn-primary" style="margin-left:10px" href="getMail.action?toEmail=<s:property value="tea.email" />">发送私信</a>
                     </s:elseif>
                     <s:else>
-                        <a class='btn btn-success' style="margin-left:20px" data-toggle="modal" data-target="#loginInfo">在线试讲</a>
+                        <a class='btn btn-success disabled' style="margin-left:20px" diabled>暂停试讲</a>
                         <a class="btn btn-primary" style="margin-left:10px" data-toggle="modal" data-target="#loginInfo">发送私信</a>
                     </s:else>
                     <hr style="margin-top:20px;"/>
@@ -160,7 +160,7 @@
                 <div class="span8 module" style="padding:12px;font-size: 12px;">
                     <s:if test="tea.level==1">
                         <div class="pull-right"><img src="images/d_gold.png" width="100px" height="120px"/></div>
-                    </s:if>
+                        </s:if>
                     <div class="span5">
                         <dl class="dl-horizontal">
                             <dt class="muted" style="width:90px;">价格</dt>

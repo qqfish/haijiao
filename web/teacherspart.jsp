@@ -50,7 +50,7 @@
                                         <s:property value="school"/> | <s:property value="major"/>
                                         <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                                         <br/>
-                                        身份：<s:if test="role == null">无</s:if><s:else><s:property value="role"/></s:else>
+                                        身份：<s:if test="studyStatus == null">无</s:if><s:else><s:property value="studyStatus"/></s:else>
                                             <br/>
                                         <s:if test="lessons.size()==0">
                                             开设课程：该老师还没有开课。
