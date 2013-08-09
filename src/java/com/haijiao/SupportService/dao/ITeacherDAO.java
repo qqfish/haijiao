@@ -10,6 +10,6 @@ public interface ITeacherDAO extends GenericDAO<Teacher,Integer> {
     public Teacher getTeacherByEmail(String email);
      //搜索老师（名字，年级，科目、网络状况）
     public List<Teacher> searchTeacher(List<String> strList, List<String> strList2);
-    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String way, String net, String sex, String role, String school, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc);
-    public int getTeacherNum(List<String> strList, String lesson, String way, String net, String sex, String role, String school, String province, String city, String district, String status, String extOrder, int desc);
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String origin, String way, String net, String sex, String role, String school, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc);
+    public int getTeacherNum(List<String> strList, String lesson, String origin, String way, String net, String sex, String role, String school, String province, String city, String district, String status, String extOrder, int desc);
 }

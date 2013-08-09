@@ -35,6 +35,7 @@ public class SearchTeacherAction extends RequestSessionAction {
     private PageBean pb;
     private Integer desc;
     private String lessonGet;
+    private String origin;
     private String way;
     private String netGet;
     private String role;
@@ -65,6 +66,7 @@ public class SearchTeacherAction extends RequestSessionAction {
     
     public String price() throws Exception{
         this.sessionPutIn("extOrder", "wagePerhour");
+        desc = -1;
         return execute();
     }
     
@@ -102,8 +104,8 @@ public class SearchTeacherAction extends RequestSessionAction {
             returnValue = "dynamic";
         }
         int pageSize = 20;
-        List<Teacher> teacherlist = userService.searchTeacherPage(strList, lessonGet, way, netGet, sex, role, school, province, city, district, status, (cp - 1) * pageSize, pageSize, extOrder, desc);
-        int num = userService.getTeacherNum(strList, lessonGet, way, netGet, sex, role, school, province, city, district, status, extOrder, desc);
+        List<Teacher> teacherlist = userService.searchTeacherPage(strList, lessonGet, origin, way, netGet, sex, role, school, province, city, district, status, (cp - 1) * pageSize, pageSize, extOrder, desc);
+        int num = userService.getTeacherNum(strList, lessonGet, origin, way, netGet, sex, role, school, province, city, district, status, extOrder, desc);
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
         if (!teacherlist.isEmpty()) {
@@ -165,6 +167,14 @@ public class SearchTeacherAction extends RequestSessionAction {
 
     public void setLessonGet(String lessonGet) {
         this.lessonGet = lessonGet;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public String getWay() {

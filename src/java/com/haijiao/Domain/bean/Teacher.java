@@ -27,6 +27,7 @@ public class Teacher extends User {
     private String city;            //市级
     private String district;       //县级
     private String net;         //网络环境
+    private String origin;      //生源地
 
     @Column(columnDefinition = "int default 0")
     private Integer classNum;       //成功完成课程的次数    
@@ -208,6 +209,14 @@ public class Teacher extends User {
 
     public List<Label> getLabels() {
         return labels;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public void setLabels(List<Label> labels) {

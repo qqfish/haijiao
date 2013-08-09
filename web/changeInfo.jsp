@@ -382,6 +382,8 @@
                                     </dd>
                                     <dt>线下授课区域<small class="text-warning">*选择“老师上门”和“学生上门”请填写该项</small></dt>
                                     <dd><s:textarea cssStyle="width:520px;height:50px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
+                                    <dt>高考命题地区<small class="text-warning">*开高中课的老师请填写该项</small></dt>
+                                    <dd><s:select name="origin" list="{'----命题地----','新课标全国卷','大纲全国卷','北京市','上海市','湖北省','江西省','湖南省','陕西省','山东省','广东省','海南省','江苏省','天津市','辽宁省','浙江省','福建省','安徽省','四川省','重庆市'}" value="%{tea.origin}"/></dd>
                                     <dt>个人简介</dt>
                                     <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="intro" value="%{tea.intro}" autofocus="autofocus"/></dd>
                                     <!--                                    <dt>获奖证书</dt>

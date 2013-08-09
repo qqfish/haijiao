@@ -54,7 +54,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String way, String net, String sex, String role, String school, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
+    public List<Teacher> searchTeacherPage(List<String> strList, String lesson, String origin, String way, String net, String sex, String role, String school, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc) { //desc->降序
         String hql = "select distinct t from Teacher t left join t.lessons l";       
         String where = " where ";
         String or = " or ";
@@ -70,6 +70,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         }
         if(lesson != null && !lesson.equals(""))
             where += "l.name like '%" + lesson + "%' and ";
+        if(origin != null && !origin.equals(""))
+            where += "t.origin = '" + origin + "' and ";
         if(way != null && !way.equals("")){
             if(way.equals("网络授课"))
                 where += "t.sprtOnline = true and ";
@@ -111,7 +113,7 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
     }
 
     @Override
-    public int getTeacherNum(List<String> strList,  String lesson, String way, String net, String sex, String role, String school, String province, String city, String district, String status, String extOrder, int desc){
+    public int getTeacherNum(List<String> strList,  String lesson, String origin, String way, String net, String sex, String role, String school, String province, String city, String district, String status, String extOrder, int desc){
         String hql = "select count(distinct t) from Teacher t left join t.lessons l";
         String where = " where ";
         String or = " or ";
@@ -127,6 +129,8 @@ public class TeacherDAOImpl extends GenericHibernateDAO<Teacher, Integer> implem
         }
         if(lesson != null && !lesson.equals(""))
             where += "l.name like '%" + lesson + "%' and ";
+        if(origin != null && !origin.equals(""))
+            where += "t.origin = '" + origin + "' and ";
         if(way != null && !way.equals("")){
             if(way.equals("网络授课"))
                 where += "t.sprtOnline = true and ";
