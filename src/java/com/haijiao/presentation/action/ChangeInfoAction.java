@@ -91,7 +91,7 @@ public class ChangeInfoAction extends SessionAction {
     
     public String teacherChange() throws ParseException{
         parseDate();
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, city, district, net)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, city, district, net, origin)){
             this.sessionPutIn("nextPageMessage", this.getText("teaChangeSuccess"));
             return SUCCESS;
         } else {
@@ -101,9 +101,7 @@ public class ChangeInfoAction extends SessionAction {
     }
     
     public String teacherMoreChange() {
-        if(origin.equals("----命题地----"))
-            origin = null;
-        if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, intro, cert, experience, sprtSUnderline, sprtTUnderline, sprtOnline,origin)){
+        if(teacherService.changeMoreInfo((String)this.getSessionValue("email"), underlineArea, intro, cert, experience, sprtSUnderline, sprtTUnderline, sprtOnline)){
             this.sessionPutIn("nextPageMessage", this.getText("teaMoreChangeSuccess"));
             return SUCCESS;
         } else {

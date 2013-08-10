@@ -93,6 +93,9 @@
                             <li>
                                 意见反馈:
                                 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=108588613&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:108588613:52" alt="在线客服" title="在线客服"/></a>
+                            </li>
+                            <li>
+                                纠纷投诉:
                                 <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=283945994&site=qq&menu=yes"><img border="0" src="http://wpa.qq.com/pa?p=2:283945994:52" alt="在线客服" title="在线客服"/></a>
                             </li>
                             <li>邮箱:<a href="mailto:haijiaoedu@163.com">haijiaoedu@163.com</a></li>

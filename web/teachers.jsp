@@ -53,7 +53,6 @@
                             <button id="hschool" type="button" value="8" class="btn btn-small" data-toggle="button">高中</button>
                             <button id="english" type="button" value="8" class="btn btn-small" data-toggle="button">英语</button>
                         </div>
-                            <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;display:none;" id="origin" name="origin" list="{'----命题地----','新课标全国卷','大纲全国卷','北京市','上海市','湖北省','江西省','湖南省','陕西省','山东省','广东省','海南省','江苏省','天津市','辽宁省','浙江省','福建省','安徽省','四川省','重庆市'}" value="%{tea.origin}"/>
                         <br/>
                         <div id="lesson" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio" style="border:1px; border-color: #CCC; border-style: solid;  padding: 5px 10px 5px 10px; margin-top: 7px; margin-left: 50px; border-radius:9px; display: none;">
                             <button id="allLesson" type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>

@@ -48,10 +48,11 @@ public class RegisterThenAction extends SessionAction {
     private String district;
     private String net;
     private String tel;
+    private String origin;
     private String telType;
     
     public String teacherRegister(){
-        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major,studyStatus, tel, province, city, district, net)){
+        if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, null, school, major,studyStatus, tel, province, city, district, net, origin)){
             Teacher theTeacher = teacherService.getTeacherByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", theTeacher.getName());
             this.sessionPutIn("userType", "teacher");
@@ -194,6 +195,14 @@ public class RegisterThenAction extends SessionAction {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public String getTelType() {

@@ -16,7 +16,6 @@ jQuery(document).ready(function($) {
         else
             status = "";
         var lesson = $('#lesson').children('.active').text();
-        var origin = $('#origin').find('option:selected').val();
         var way = $('#sprt').children('.active').text();
         var net = $('#net').children('.active').text();
         var sex = $('#sex').children('.active').text();
@@ -27,8 +26,6 @@ jQuery(document).ready(function($) {
         var district = $('#selDistrict').find('option:selected').val();
         if (lesson == "不限")
             lesson = "";
-        if (origin == "----命题地----")
-            origin = "";
         if (way == "不限")
             way = "";
         if (net == "不限")
@@ -53,7 +50,6 @@ jQuery(document).ready(function($) {
         $.post(url, {currentPage: pagenum,
             searchContent: $('#search_searchContent').val(),
             lessonGet: lesson,
-            origin: origin,
             way: way,
             netGet: net,
             sex: sex,
@@ -105,7 +101,7 @@ jQuery(document).ready(function($) {
         $(this).addClass("active");
         gotopage(1, null);
     });
-    
+
     $('#sprt').children().click(function() {
         $('#sprt').children().removeClass("active");
         $(this).addClass("active");
@@ -122,35 +118,26 @@ jQuery(document).ready(function($) {
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".pschool").fadeIn(1, null);
-            $("#origin option").eq(0).attr('selected', 'true');
-            $("#origin").fadeOut(1,null);
         } else if ($(this).html() == "初中") {
             $(".pschool").fadeOut(1, null);
             $(".hschool").fadeOut(1, null);
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".mschool").fadeIn(1, null);
-            $("#origin option").eq(0).attr('selected', 'true');
-            $("#origin").fadeOut(1,null);
         } else if ($(this).html() == "高中") {
             $(".pschool").fadeOut(1, null);
             $(".mschool").fadeOut(1, null);
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".hschool").fadeIn(1, null);
-            $("#origin").fadeIn(1,null);
         } else if ($(this).html() == "英语") {
             $(".pschool").fadeOut(1, null);
             $(".mschool").fadeOut(1, null);
             $(".hschool").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".english").fadeIn(1, null);
-            $("#origin option").eq(0).attr('selected', 'true');
-            $("#origin").fadeOut(1,null);
         } else {
             $("#lesson").fadeOut(1, null);
-            $("#origin option").eq(0).attr('selected', 'true');
-            $("#origin").fadeOut(1,null);
         }
         gotopage(1, null);
     });
@@ -172,19 +159,16 @@ jQuery(document).ready(function($) {
     });
 
     $('#school').change(function() {
-       gotopage(1, null); 
+        gotopage(1, null);
     });
-    
+
     $('#selDistrict').change(function() {
         gotopage(1, null);
     });
-    
-    $('#origin').change(function() {
-        gotopage(1, null);
-    });
-    
+
     $('#sort').children().click(function() {
         $('#sort').children().children('i').removeClass("icon-white");
         $(this).children('i').addClass("icon-white");
     });
+
 });

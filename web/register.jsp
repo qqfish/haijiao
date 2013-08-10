@@ -93,6 +93,8 @@
                                           '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}"/></dd>
                                 <dt>所学专业</dt>
                                 <dd><s:textfield cssClass="span4" type="text" name="major" placeholder="请输入您就读的专业" /></dd>
+                                <dt>高中毕业地</dt>
+                                <dd><s:textfield cssClass="span4" type="text" name="origin" placeholder="请输入您高中毕业地（生源地）" /></dd>
                                 <br/>
                                 <br/>
                                 <dd>

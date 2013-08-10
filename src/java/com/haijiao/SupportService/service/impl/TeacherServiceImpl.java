@@ -53,7 +53,7 @@ public class TeacherServiceImpl implements ITeacherService {
 
     @Override
     public boolean changeInfo(String email, String name, String sex, Date birthday, String school, String major,
-            String studyStatus, String tel, String province, String city, String district, String net) {
+            String studyStatus, String tel, String province, String city, String district, String net, String origin) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         if (birthday != null) {
             t.setBirthday(birthday);
@@ -82,18 +82,21 @@ public class TeacherServiceImpl implements ITeacherService {
         if (net != null) {
             t.setNet(net);
         }
-        if (major != null) {
+        if (major != null && !major.equals("")) {
             t.setMajor(major);
         }
         if (studyStatus != null) {
             t.setStudyStatus(studyStatus);
+        }
+        if (origin != null && !origin.equals("")) {
+            t.setOrigin(origin);
         }
         teacherDAO.update(t);
         return true;
     }
 
     @Override
-    public boolean changeMoreInfo(String email, String underlineArea, String intro, String experience, String cert, Boolean sprtSUnderline, Boolean sprtTUnderline, Boolean sprtOnline, String origin) {
+    public boolean changeMoreInfo(String email, String underlineArea, String intro, String experience, String cert, Boolean sprtSUnderline, Boolean sprtTUnderline, Boolean sprtOnline) {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         if (underlineArea != null) {
             t.setUnderlineArea(underlineArea);
@@ -115,9 +118,6 @@ public class TeacherServiceImpl implements ITeacherService {
         }
         if (sprtOnline != null) {
             t.setSprtOnline(sprtOnline);
-        }
-        if (origin != null) {
-            t.setOrigin(origin);
         }
         teacherDAO.update(t);
         return true;
