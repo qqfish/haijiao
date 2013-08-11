@@ -6,6 +6,7 @@
     $(document).ready(function() {
         var w = $(window).width();
         var c = document.getElementById("nav-bar-inner");
+        c.style.width = 0.8 * w + "px";
         $(window).resize(function() {
             var w = $(window).width();
             var c = document.getElementById("nav-bar-inner");

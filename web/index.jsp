@@ -58,7 +58,7 @@
                 <div class="span8 index-page-text" style="margin-top:7%">
                     <h3>欢迎来到海角教育！</h3>
                     <br/>
-                    <p style="font-size: 20px">海角教育专注<a href="about.jsp">1V1在线教育</a>，无论您身处天涯海角，通过互联网即可获得全国最优秀的教育资源。</p>
+                    <p style="font-size: 20px">海角教育专注<a href="about.jsp">1V1在线教育</a>，无论您身处天涯海角，<br/>通过互联网即可获得全国最优秀的教育资源。</p>
                 </div>
                 <div class="span3 pull-right" style="width:230px;height:375px;margin-top:5%">
                     <div class="accordion" id="accordion2">
