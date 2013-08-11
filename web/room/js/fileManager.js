@@ -94,6 +94,8 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
     
     var userFileDiv = $("#" + dUserFile);
     
+    var currentUploaded = null;
+    
     this.setPage = function(response){
         currentUuid = response.uuid;
         pageNum = response.page;
@@ -123,13 +125,19 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             var r = response.fileList[i];
             file.fileName = r.fileName;
             file.uuid = r.uuid;
-            file.element = $("<li></li>").html("<a tabindex='-10'>" + file.fileName + "</a>").attr("uuid",file.uuid);
-            roomFileDiv.prepend(file.element);
+            if(currentUploaded != null && file.fileName == currentUploaded.attr("name")) {
+                currentUploaded.removeClass("disabled").html("<a tabindex='-10'>" + file.fileName + "</a>").attr("uuid",file.uuid);
+                file.element = currentUploaded;
+                currentUploaded = null;
+            } else {
+                file.element = $("<li></li>").html("<a tabindex='-10'>" + file.fileName + "</a>").attr("uuid",file.uuid);
+                roomFileDiv.prepend(file.element);
+            }
             file.element.click(function(){
                 table.sendChangeFile($(this).attr("uuid"));
             });
             roomFileList[roomFileList.size] = file;
-            pInfo(file.fileName + "已加入文件列表")
+            pInfo(file.fileName + "上传完成并加入文件列表")
         }
     }
     
@@ -166,7 +174,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 });
                 fileLi.append(fileA);
                 menu.append(fileLi);
-                }
+            }
             if(group.files.length == 0){
                 var empty = $("<li></li>");
                 empty.html("<a tabindex='-1'>没有备课文件</a>").attr("class","disabled");
@@ -224,6 +232,10 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
             pError("最大上传的大小为10MB");
             return;
         }
+        if(currentUploaded != null){
+            pError("请等待上传完成后再上传下一个文件");
+            return;
+        }
             
         if(file.type.indexOf('image') != -1){
             type = "image";
@@ -261,18 +273,19 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
         } else if(type == "pdf" || type == "doc" || type == "docx" || type == "ppt" 
             || type == "pptx" || type == "xls" || type == "xlsx"){
             reader.readAsDataURL(blob);
-            theBar = $("<div></div>").attr("class","bar");
-            progressBar = $("<div></div>").attr("class","progress").append(theBar);
-            progressWord = $("<h3></h3>").text("上传中");
-            $('#alertContext').empty().append(progressWord).append(progressBar);
-            theBar.css("width","0");
+            //theBar = $("<div></div>").attr("class","bar");
+            //progressBar = $("<div></div>").attr("class","progress").append(theBar);
+            progressWord = $("<h3></h3>").text("开始上传" + file.name + "(上传完成后在文件列表中打开)");
+            $('#alertContext').empty().append(progressWord);//.append(progressBar);
+            //theBar.css("width","0");
             lockType("info");
             lock();
+            $("#closeAlert").show();
             reader.onprogress = function updateProgress(evt){
                 if (evt.lengthComputable){
                     var percentLoaded = Math.round((evt.loaded / evt.total) * 100);
                     if (percentLoaded < 100) {
-                        theBar.css("width",percentLoaded+"%");
+                    //theBar.css("width",percentLoaded+"%");
                     }
                 }
             }
@@ -281,18 +294,17 @@ function fileManager(dRoomFile, dBookmark, dUserFile){
                 lockType("error");
                 $("#closeAlert").show();
             }
-            reader.onload = function loaded(evt) {
+            reader.onloadend = function loaded(evt) {
                 var message = {};
                 message.type = Request.UploadFile;
                 message.postfix = type;
                 message.name = file.name.substring(0,pos) + ".pdf";
-                console.log(name);
                 message.data = evt.target.result;
-                console.log("befor send");
                 connection.sendObject(message);
-                progressWord.text("上传成功(由文件列表中打开上传文件)");
-                theBar.css("width","100%");
-                $("#closeAlert").show();
+                currentUploaded = $("<li></li>").html("<a tabindex='-10'>" + message.name + "(上传中...)</a>").attr("name",message.name).addClass("disabled");
+                roomFileDiv.prepend(currentUploaded);
+            //progressWord.text("上传中(由文件列表中打开上传文件)");
+            //theBar.css("width","100%");
             }
         } else {
             pError("该格式的文档尚未支持(目前支持图片,pdf,doc,docx,ppt,pptx,xls,xlsx)");

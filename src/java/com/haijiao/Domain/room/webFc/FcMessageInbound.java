@@ -160,7 +160,7 @@ public class FcMessageInbound extends MessageInbound {
                 room.broadcast(gson.toJson(chatResult));
                 break;
             case Request.ChangePage:
-                room.addPin();
+                //room.addPin();
                 RequestChangePage page = gson.fromJson(str, RequestChangePage.class);
                 if (page.getTmpUrl() != null) {
                     room.changePage(page.getFileUuid(), page.getPage(), page.getTmpUrl());
@@ -169,7 +169,7 @@ public class FcMessageInbound extends MessageInbound {
                 }
                 break;
             case Request.ChangeFile:
-                room.addPin();
+                //room.addPin();
                 RequestChangeFile file = gson.fromJson(str, RequestChangeFile.class);
                 if (file.getTmpUrl() != null) {
                     success = room.changePage(file.getUuid(), -1, file.getTmpUrl());
@@ -182,6 +182,8 @@ public class FcMessageInbound extends MessageInbound {
                     ErrorData error = new ErrorData();
                     error.setErrorType(ErrorType.ErrorPdf);
                     sendtoUser(gson.toJson(error));
+                    sendtoUser(gson.toJson(room.getResponseChangePage()));
+                    sendtoUser(gson.toJson(room.getResponseChangeBookmark()));
                 }
                 break;
             case Request.AddFileFromUser:

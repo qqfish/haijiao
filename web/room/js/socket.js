@@ -47,7 +47,7 @@ connection.connect = (function(host) {
                 media.processSignalingMessage(socketData);
                 break;
             case Response.ChangePage:
-                connection.pin++;
+                //connection.pin++;
                 table.changePage(socketData);
                 file.setPage(socketData);
                 break;

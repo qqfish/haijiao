@@ -76,8 +76,8 @@ function processError(errorType){
             pError("学生还未进入房间");
             break;
         case ErrorType.ErrorPdf:
-            console.log("aaaa");
-            pError("错误的PDF格式");
+            //console.log("aaaa");
+            pInfo("错误的PDF格式");
             break;
         case ErrorType.Closed:
             disconnected();

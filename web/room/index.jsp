@@ -89,7 +89,7 @@
         <!--==============================content=================================-->
         <div id="content"> 
             <div id="infoMessage" class="alert span5" style="display: none;z-index: 4;width:200px;position:absolute;top:0px;left:35%;">
-                <button id="infoMessageClose" type="button" class="close" data-dismiss="alert">&times;</button>
+                <button id="infoMessageClose" type="button" class="close" onclick="$('#infoMessage').fadeOut();">&times;</button>
                 <p id="infoMessageContext"></p>
             </div>
             <a id="showAlert" data-toggle="modal" data-target="#alertMessage" class="btn btn-danger btn-large" style="display: none;"/>
