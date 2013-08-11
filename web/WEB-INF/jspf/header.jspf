@@ -128,7 +128,7 @@
                     <li><a href="about.jsp">关于我们</a></li>
                     <li><a href="contact.jsp">意见反馈</a></li>
                         <s:form id="search" cssClass="navbar-search pull-left" action="searchTeacher.action" method="get">
-                            <s:textfield  name="searchContent" cssClass="span3" style="height:13px;margin-top:4px;" placeholder="搜索"></s:textfield>
+                            <s:textfield  name="searchContent" cssClass="span3" style="height:13px;margin-top:4px;" placeholder="老师名字\高中母校\大学名称"></s:textfield>
                             <a id="searchSubmit" href="javascript:;" onclick="$('#search').submit();"><i class="icon-search icon-white" style="margin-top:-2px"></i></a>
                         </s:form>
                 </ul>
