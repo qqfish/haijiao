@@ -74,7 +74,7 @@
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
-                    <img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/>
+                    <a href="toChangeInfo.action?tab=head"><img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/></a>
                     <h4 style="margin-left: 10px;"><s:property value="teacher.name"/></h4>
                     <s:if test="teacher.coin>500">
                         <a class='btn btn-primary btn-small' style="margin-left: 15px;" data-toggle="modal" href="#moneyRequestModal"><i class="icon-user icon-white"></i>余额提现</a>
