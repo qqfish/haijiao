@@ -52,15 +52,15 @@
                 document.getElementById("share_info").setAttribute("readOnly", "true");
                 document.getElementById("share_info").readonly = true;
                 document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
-                    "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
-                    document.getElementById("share_info").value;
+                        "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                        document.getElementById("share_info").value;
             }
             function share_iframe_load() {
                 if (flag) {
                     flag = 0;
                     document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
-                        "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
-                        document.getElementById("share_info").value;
+                            "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                            document.getElementById("share_info").value;
                 }
             }
         </script>
@@ -103,13 +103,13 @@
                             <s:if test="teacher.bankname!=null&&teacher.bankcard!=null">
                                 <label class="radio offset1">
                                     <input type="radio" name="option1" onclick="$('#moneyRequestbc').val('<s:property value="teacher.bankcard" />');
-                                        $('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
+                                            $('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
                                     <span class="span2"><s:property value="teacher.bankname" /></span>
                                     <span><s:property value="teacher.bankcard" /></span>
                                 </label>
                                 <label class="radio offset1">
                                     <input type="radio" name="option1" value="option2" onclick="$('#moneyRequestbc').val($('#newBankcard').val());
-                                        $('#moneyRequestbank').val($('#newBankname').val());">
+                                            $('#moneyRequestbank').val($('#newBankname').val());">
                                     <select id="newBankname" class="span2">
                                         <option>中国工商银行</option>
                                         <option>中国银行</option>
@@ -179,34 +179,34 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
 
-                <div class="span8 module" style="padding:12px;">
-                    <ul class="nav nav-pills">
-                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                        <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
-                        <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
-                        <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
-                        <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
-                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                    <div class="span8 module" style="padding:12px;">
+                        <ul class="nav nav-pills">
+                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
+                            <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
+                            <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
+                            <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
+                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
 
-                        <!--  add a button for previewing Profile -->
-                        <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
-                    </ul>
+                            <!--  add a button for previewing Profile -->
+                            <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
+                        </ul>
 
-                    <!--   personal proflie   -->
-                    <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3>主页预览</h3>
-                            </div>
-                            <div class="modal-body">
-                                <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
+                        <!--   personal proflie   -->
+                        <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>主页预览</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
     姓名：<s:property value="teacher.name" /> 
     学校：<s:property value="teacher.school" />
     专业：<s:property value="teacher.major" />
@@ -448,6 +448,59 @@
                             <div style="display:inline;">
                                 <input id="keyword" type="text" class="span2"/>
                                 <button class="btn btn-primary" style="margin-top:-10px;" onclick="getPublicFilelist(1, $('#keyword').val());">搜索</button>
+                            </div>
+                            <small class="text-warning">温馨提醒* 可从百度文库下载或截图保存供教学使用</small>
+                            <div class="accordion" id="accordion">
+                                <div class="accordion-group">
+                                    <div class="accordion-heading">
+                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse">
+                                            百度文库资料<i class="icon-chevron-down"></i>
+                                        </a>
+                                    </div>
+                                    <div id="collapse" class="accordion-body collapse in">
+                                        <table class="table">
+                                            <tr><td>小学：</td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/8_s0_g0_v0" target="_blank">语文</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/8_s1_g0_v0" target="_blank">数学</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/8_s2_g4_v0" target="_blank">英语</a></td>
+                                                <td></td><td></td><td></td><td></td><td></td><td></td>
+                                            </tr>
+                                            <tr><td>初中：</td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s0_g0_v0" target="_blank">语文</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s1_g0_v0" target="_blank">数学</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s2_g0_v0" target="_blank">英语</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s3_g2_v0" target="_blank">物理</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s4_g4_v0" target="_blank">化学</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s5_g0_v0" target="_blank">历史</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s6_g0_v0" target="_blank">生物</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/9_s7_g0_v0" target="_blank">地理</a></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr><td>高中：</td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s0_g0_v0" target="_blank">语文</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s1_g0_v0" target="_blank">数学</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s2_g5_v0" target="_blank">英语</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s3_g0_v0" target="_blank">物理</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s4_g0_v0" target="_blank">化学</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s5_g0_v0" target="_blank">历史</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s6_g0_v0" target="_blank">生物</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/subject/31_s7_g0_v0" target="_blank">地理</a></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr><td>外语学习：</td>
+                                                <td><a href="http://wenku.baidu.com/portal/browse/exam/TOEFL" target="_blank">托福</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/ielts" target="_blank">雅思</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/gre" target="_blank">GRE</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/gmat" target="_blank">GMAT</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/cet4" target="_blank">四级</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/cet6" target="_blank">六级</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/zhicheng" target="_blank">职称英语</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/bec" target="_blank">BEC</a></td>
+                                                <td><a href="http://wenku.baidu.com/portal/topic/toeic" target="_blank">托业</a></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div id="publicFileList"></div>
                             <div class="modal hide fade" id="publicfileModal">
