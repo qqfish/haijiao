@@ -15,7 +15,7 @@ function init(stuEmail, teaEmail, email, fileGroups){
     table = new Table("table",toolkit);
     media = new Media("sideVideoArea", textChat, "users");
     media.setDragPlace(0, 42, $(window).width()-media.getWidth(), $(window).height()-media.getHeight());
-    file = new fileManager("roomFile","bookmark","userFile");
+    file = new fileManager("roomFile","bookmark","userFile",stuEmail,teaEmail);
     file.setUserFile(JSON.parse(fileGroups));
     
     media.userEnter("__localUser","__localUser");

@@ -82,7 +82,9 @@ function Bookmark(uuid) {
 }
 
 
-function fileManager(dRoomFile, dBookmark, dUserFile) {
+function fileManager(dRoomFile, dBookmark, dUserFile, stuE, teaE) {
+    var stuEmail = stuE;
+    var teaEmail = teaE;
     var currentUuid = null;
     var pageNum = 0;
 
@@ -294,22 +296,20 @@ function fileManager(dRoomFile, dBookmark, dUserFile) {
                 lockType("error");
                 $("#closeAlert").show();
             }
-            reader.onloadend = function loaded(evt) {
+            reader.onload = function loaded(evt) {
                 var message = {};
                 message.type = Request.UploadFile;
                 message.postfix = type;
                 message.name = file.name.substring(0, pos) + ".pdf";
                 message.data = evt.target.result;
-                connection.sendObject(message);
+//                connection.sendObject(message);
                 currentUploaded = $("<li></li>").html("<a tabindex='-10'>" + message.name + "(上传中...)</a>").attr("name", message.name).addClass("disabled");
                 roomFileDiv.prepend(currentUploaded);
-                //progressWord.text("上传中(由文件列表中打开上传文件)");
-                //theBar.css("width","100%");
-            }
-            reader.onload = function load(evt) {
-                $.post("roomUpload.action", {data: evt.target.result}, function(data) {
+                $.post("roomUpload.action", {postfix: message.postfix, name: message.name, data: message.data, stuEmail: stuEmail, teaEmail: teaEmail}, function(data) {
                     console.log(data);
                 });
+                //progressWord.text("上传中(由文件列表中打开上传文件)");
+                //theBar.css("width","100%");
             }
         } else {
             pError("该格式的文档尚未支持(目前支持图片,pdf,doc,docx,ppt,pptx,xls,xlsx)");
