@@ -274,7 +274,7 @@ function fileManager(dRoomFile, dBookmark, dUserFile, stuE, teaE) {
             }
         } else if (type == "pdf" || type == "doc" || type == "docx" || type == "ppt"
                 || type == "pptx" || type == "xls" || type == "xlsx") {
-            reader.readAsBinaryString(blob);
+            reader.readAsDataURL(blob);
             //theBar = $("<div></div>").attr("class","bar");
             //progressBar = $("<div></div>").attr("class","progress").append(theBar);
             progressWord = $("<h3></h3>").text("开始上传" + file.name + "(上传完成后在文件列表中打开)");
