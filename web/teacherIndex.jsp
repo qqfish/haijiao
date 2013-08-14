@@ -18,13 +18,14 @@
         <script type="text/javascript" src="js/teacherIndex.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
-
+        <script type="text/javascript" src="js/fileUpload.js"></script>
 
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
         <link rel="stylesheet" href="css/kuaipanDir.css" type="text/css">
         <link rel="stylesheet" href="css/indexFile.css" type="text/css">
         <link rel="stylesheet" href="css/payment.css" type="text/css">
+        <link rel="stylesheet" href="css/validate.css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -417,7 +418,8 @@
                                     <s:form action="file!upload.action" id="fileUpload" enctype="multipart/form-data" method="post">
                                         <div class="control-group">
                                             <s:select cssClass="span2" id="classify" name="dest" list="teacher.fileGroups" listValue="groupName" listKey="groupName"/>
-                                            <s:file name="upload" title="上传" id="fileid" onchange="$('#fileUpload').submit();"/>
+                                            <s:file name="upload" title="上传" id="fileid" onchange="testUpload(this.id);"/>
+                                            <div id="upload_tip" class="validateTip"></div>
                                         </div>
                                     </s:form>
                                 </div>

@@ -16,6 +16,7 @@
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
         <script type="text/javascript" src="js/studentIndex.js"></script>
+        <script type="text/javascript" src="js/fileUpload.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
 
@@ -128,7 +129,8 @@
                                         <script>
                                             $('#classify').append("<option value='新建分组'>新建分组</option>");
                                         </script>
-                                        <s:file name="upload" title="上传" id="fileid" onchange="$('#fileUpload').submit();"/>
+                                        <s:file name="upload" title="上传" id="fileid" onchange="testUpload(this.id);"/>
+                                        <div id="upload_tip" class="validateTip"></div>
                                     </s:form>
                                 </div>
                             </div>

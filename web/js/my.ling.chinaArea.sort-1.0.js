@@ -15441,6 +15441,7 @@ jQuery(document).ready(function($) {
         else
             status = "";
         var lesson = $('#lesson').children('.active').text();
+        var way = $('#sprt').children('.active').text();
         var net = $('#net').children('.active').text();
         var sex = $('#sex').children('.active').text();
         var role = $('#studyStatus').find('option:selected').text();
@@ -15450,6 +15451,8 @@ jQuery(document).ready(function($) {
         var district = $('#selDistrict').find('option:selected').val();
         if (lesson == "不限")
             lesson = "";
+        if (way == "不限")
+            way = "";
         if (net == "不限")
             net = "";
         if (sex == "不限")
@@ -15472,6 +15475,7 @@ jQuery(document).ready(function($) {
         $.post(url, {currentPage: pagenum,
             searchContent: $('#search_searchContent').val(),
             lessonGet: lesson,
+            way: way,
             netGet: net,
             sex: sex,
             role: role,
