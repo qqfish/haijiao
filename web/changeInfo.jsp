@@ -293,7 +293,7 @@
                                     <div class="control-group">
                                         <label class="control-label" for="major"><strong>生源地</strong></label>
                                         <div class="controls">
-                                            <s:textfield id="origin" cssClass="span2" type="text" name="major" placeholder="请输入您高中毕业地（生源地）" value="%{tea.origin}"/>
+                                            <s:textfield id="origin" cssClass="span2" type="text" name="origin" placeholder="请输入您高中毕业地（生源地）" value="%{tea.origin}"/>
                                         </div>
                                     </div>
                                     <div class="control-group">

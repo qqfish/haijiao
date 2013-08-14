@@ -32,7 +32,7 @@ import org.springframework.stereotype.Controller;
 @Action("changeInfo")
 @Results({
     @Result(name="input",type="redirect",location="index.action"),
-    @Result(name="success",type="redirect",location="toChangeInfo.action")
+    @Result(name="success",type="redirect",location="index.action")
 })
 public class ChangeInfoAction extends SessionAction {
     @Resource
@@ -91,6 +91,7 @@ public class ChangeInfoAction extends SessionAction {
     
     public String teacherChange() throws ParseException{
         parseDate();
+        System.out.println(origin);
         if(teacherService.changeInfo((String)this.getSessionValue("email"), name, sex, date , school, major, studyStatus, tel, province, city, district, net, origin)){
             this.sessionPutIn("nextPageMessage", this.getText("teaChangeSuccess"));
             return SUCCESS;

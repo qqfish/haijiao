@@ -62,9 +62,9 @@ public class Teacher extends User {
     @JoinColumn(name = "tid")
     private List<Lesson> lessons;   //该老师开设课程
 
-    @Column(columnDefinition = "bool default false")
+    @Column(columnDefinition = "bool default true")
     private Boolean audition;       //该老师是否接受试听
-    @Column(columnDefinition = "bool default false")
+    @Column(columnDefinition = "bool default true")
     private Boolean reserve;        //该老师是否接受预定
 
 //    @OneToMany(mappedBy = "teacher")

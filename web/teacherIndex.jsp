@@ -53,15 +53,15 @@
                 document.getElementById("share_info").setAttribute("readOnly", "true");
                 document.getElementById("share_info").readonly = true;
                 document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
-                        "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
-                        document.getElementById("share_info").value;
+                    "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                    document.getElementById("share_info").value;
             }
             function share_iframe_load() {
                 if (flag) {
                     flag = 0;
                     document.getElementById("share_iframe").src = "http://service.weibo.com/staticjs/weiboshare.html?" +
-                            "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
-                            document.getElementById("share_info").value;
+                        "url=http://haijiaoedu.com&amp;appkey=&amp;type=3&amp;language=zh_cn&amp;dpc=1&title=海角教育--" +
+                        document.getElementById("share_info").value;
                 }
             }
         </script>
@@ -77,15 +77,9 @@
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <a href="toChangeInfo.action?tab=head"><img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/></a>
                     <h4 style="margin-left: 10px;"><s:property value="teacher.name"/></h4>
-                    <s:if test="teacher.coin>500">
+                    <s:if test="teacher.coin>=0">
                         <a class='btn btn-primary btn-small' style="margin-left: 15px;" data-toggle="modal" href="#moneyRequestModal"><i class="icon-user icon-white"></i>余额提现</a>
                     </s:if>
-                    <s:else>
-                        <a class='btn btn-primary btn-small disabled' id="moneyRequestButton" style="margin-left: 15px;" data-toggle="popover" data-trigger="hover" disabled data-content="高于500元才能提现" data-placement="bottom"><i class="icon-user icon-white"></i>余额提现</a>
-                        <script>
-                            $("#moneyRequestButton").popover();
-                        </script>
-                    </s:else>
                     <div class="modal fade hide" id="moneyRequestModal">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -104,13 +98,13 @@
                             <s:if test="teacher.bankname!=null&&teacher.bankcard!=null">
                                 <label class="radio offset1">
                                     <input type="radio" name="option1" onclick="$('#moneyRequestbc').val('<s:property value="teacher.bankcard" />');
-                                            $('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
+                                        $('#moneyRequestbank').val('<s:property value="teacher.bankname" />');" checked>
                                     <span class="span2"><s:property value="teacher.bankname" /></span>
                                     <span><s:property value="teacher.bankcard" /></span>
                                 </label>
                                 <label class="radio offset1">
                                     <input type="radio" name="option1" value="option2" onclick="$('#moneyRequestbc').val($('#newBankcard').val());
-                                            $('#moneyRequestbank').val($('#newBankname').val());">
+                                        $('#moneyRequestbank').val($('#newBankname').val());">
                                     <select id="newBankname" class="span2">
                                         <option>中国工商银行</option>
                                         <option>中国银行</option>
@@ -143,8 +137,13 @@
                             <s:form action="moneyRequest" cssStyle="padding:0px; margin:0px">
                                 <s:textfield id="moneyRequestbank" name="bankname" value="%{teacher.bankname}" cssStyle="display:none;"/>
                                 <s:textfield id="moneyRequestbc" name="bankcard" value="%{teacher.bankcard}" cssStyle="display:none;" />
-                                <s:submit method="temp" cssClass="btn btn-success" value="确认"></s:submit>
-                                <s:submit method="save" cssClass="btn" value="确认并设为默认"></s:submit>
+                                <s:if test="teacher.coin > 100">
+                                    <s:submit method="temp" cssClass="btn btn-success" value="确认"></s:submit>
+                                    <s:submit method="save" cssClass="btn" value="确认并设为默认"></s:submit>
+                                </s:if>
+                                <s:else>
+                                    <button class="btn disabled" disabled>余额大于100元能提现</button>
+                                </s:else>
                             </s:form>
                         </div>
                     </div>
@@ -162,8 +161,38 @@
                 <p><s:property value="teacher.createdateToString()"/> 加入</p>
             </div>-->
                     <hr/>
-                    <table class="table table-hover table-striped">
+                    <table class="table table-hover table-striped" style="margin-top: 5px;">
                         <tbody>
+                            <tr>
+                                <td>接受试讲</td>
+                                <td>
+                                    <div class="btn-group" data-toggle="buttons-radio">
+                                        <s:if test="teacher.audition">
+                                            <button type="button" class="btn btn-mini btn-success active">是</button>
+                                            <s:a action="setTeacherStatus" method="audition" cssClass="btn btn-mini btn-success">否</s:a>
+                                        </s:if>
+                                        <s:else>
+                                            <s:a action="setTeacherStatus" method="audition" cssClass="btn btn-mini btn-success">是</s:a>
+                                            <button type="button" class="btn btn-mini btn-success active">否</button>
+                                        </s:else>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>接受预约</td>
+                                <td>
+                                    <div class="btn-group" data-toggle="buttons-radio">
+                                        <s:if test="teacher.reserve">
+                                            <button type="button" class="btn btn-mini btn-success active">是</button>
+                                            <s:a action="setTeacherStatus" method="reserve" cssClass="btn btn-mini btn-success">否</s:a>
+                                        </s:if>
+                                        <s:else>
+                                            <s:a action="setTeacherStatus" method="reserve" cssClass="btn btn-mini btn-success">是</s:a>
+                                            <button type="button" class="btn btn-mini btn-success active">否</button>
+                                        </s:else>
+                                    </div>
+                                </td>
+                            </tr>
                             <tr>
                                 <td>浏览数</td>
                                 <td><s:property value="teacher.obNum"/></td>
@@ -180,34 +209,34 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
 
-                    <div class="span8 module" style="padding:12px;">
-                        <ul class="nav nav-pills">
-                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                            <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
-                            <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
-                            <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
-                            <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
-                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                <div class="span8 module" style="padding:12px;">
+                    <ul class="nav nav-pills">
+                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                        <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
+                        <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
+                        <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
+                        <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
+                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
 
-                            <!--  add a button for previewing Profile -->
-                            <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
-                        </ul>
+                        <!--  add a button for previewing Profile -->
+                        <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
+                    </ul>
 
-                        <!--   personal proflie   -->
-                        <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h3>主页预览</h3>
-                                </div>
-                                <div class="modal-body">
-                                    <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
+                    <!--   personal proflie   -->
+                    <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h3>主页预览</h3>
+                            </div>
+                            <div class="modal-body">
+                                <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
     姓名：<s:property value="teacher.name" /> 
     学校：<s:property value="teacher.school" />
     专业：<s:property value="teacher.major" />
@@ -244,25 +273,8 @@
                             <script>
                                 $("#showtip").popover();
                             </script>
-                            <h4>老师您好，您目前开设课程的情况如下：</h4>
+                            <h4>老师您好，可开课程如下：<small class="text-warning">(*点击小标签开设课程)</small></h4>
                             <table>
-                                <s:iterator value="teacher.lessons" id="ls">
-                                    <s:if test="delete==false">
-                                        <s:form action="dealLesson.action">
-                                            <div style="display:none;">
-                                                <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
-                                                <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
-                                            </div>
-                                            <span class="label label-info" style="margin:5px;"><s:property value="name" /><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove icon-white" ></i></a>
-                                                <br/><s:property value="price"/>.00元/45分钟
-                                            </span> 
-                                        </s:form>
-                                    </s:if>
-                                </s:iterator>
-                                <br/><br/>
-                                <hr/>
-                                <h5>可开设课程列表</h5>
-
                                 <ul class="nav nav-pills">
                                     <li id="l1" class="active"><a href="#p_school" data-toggle="tab">小学</a></li>
                                     <li id="l2"><a href="#j_school" data-toggle="tab" >初中</a></li>
@@ -327,34 +339,26 @@
                                     </div>
 
                                 </div>
+                                <br/><br/>
+                                <hr/>
+                                <h5>已开设课程</h5>
+                                <s:iterator value="teacher.lessons" id="ls">
+                                    <s:if test="delete==false">
+                                        <s:form action="dealLesson.action">
+                                            <div style="display:none;">
+                                                <s:textfield cssClass="span2" value="%{name}" type="text" name="lessonName"/>
+                                                <s:submit cssClass="btn" id="delete_%{name}" value="delete" method="deleteLesson"/>
+                                            </div>
+                                            <span class="label label-info" style="margin:5px;"><s:property value="name" /><a href="#" id="delete_click_<s:property value="name" />"><i class="icon-remove icon-white" ></i></a>
+                                                <br/><s:property value="price"/>.00元/45分钟
+                                            </span> 
+                                        </s:form>
+                                    </s:if>
+                                </s:iterator>
+
                             </table>
                             <hr/>
-                            <div class="span3">
-                                <h5>在线试讲</h5>
-                                <div class="btn-group" data-toggle="buttons-radio">
-                                    <s:if test="teacher.audition">
-                                        <button type="button" class="btn btn-primary active">是</button>
-                                        <s:a action="setTeacherStatus" method="audition" cssClass="btn btn-primary">否</s:a>
-                                    </s:if>
-                                    <s:else>
-                                        <s:a action="setTeacherStatus" method="audition" cssClass="btn btn-primary">是</s:a>
-                                            <button type="button" class="btn btn-primary active">否</button>
-                                    </s:else>
-                                </div>
-                            </div>
-                            <div class="span3">
-                                <h5>接受预约</h5>
-                                <div class="btn-group" data-toggle="buttons-radio">
-                                    <s:if test="teacher.reserve">
-                                        <button type="button" class="btn btn-primary active">是</button>
-                                        <s:a action="setTeacherStatus" method="reserve" cssClass="btn btn-primary">否</s:a>
-                                    </s:if>
-                                    <s:else>
-                                        <s:a action="setTeacherStatus" method="reserve" cssClass="btn btn-primary">是</s:a>
-                                            <button type="button" class="btn btn-primary active">否</button>
-                                    </s:else>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="tab-pane fade" id='bill_area'>
                             <div id="billlist"></div>
@@ -367,29 +371,29 @@
                                     <div class="modal-body">
                                         <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                         内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                            <br/>
-                                            评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                        <br/>
+                                        评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
                                         <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                         <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                        </div>
-                                        <script type="text/javascript">
-                                            $(".commentA").click(function() {
-                                                var id = $(this).attr("id");
-                                                $("#comment_rate").bind('rated', function(event, value) {
-                                                    $('#comment_score').val(value);
-                                                });
-                                                $("#comment_rate").bind('over', function(event, value) {
-                                                    $(this).attr('title', value);
-                                                });
-                                                $("#cmtsmt").click(function(event) {
-                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                        event.preventDefault();
-                                                });
+                                    </div>
+                                    <script type="text/javascript">
+                                        $(".commentA").click(function() {
+                                            var id = $(this).attr("id");
+                                            $("#comment_rate").bind('rated', function(event, value) {
+                                                $('#comment_score').val(value);
                                             });
-                                        </script>
+                                            $("#comment_rate").bind('over', function(event, value) {
+                                                $(this).attr('title', value);
+                                            });
+                                            $("#cmtsmt").click(function(event) {
+                                                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
+                                                    event.preventDefault();
+                                            });
+                                        });
+                                    </script>
                                 </s:form>
                             </div>
                         </div>
@@ -397,8 +401,6 @@
 
                         </div>
                         <div class="tab-pane fade" id='file_area'>
-                            <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
-                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-primary">上传</button>
                             <div id="newgroup" style="display:none;">
                                 <hr/>
                                 <s:form action="file">
@@ -407,7 +409,6 @@
                                     <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
                                 </s:form>
                             </div>
-                            <hr/>
                             <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">
                                 <div class="modal-header">
                                     <a class="close" data-dismiss="modal">×</a>

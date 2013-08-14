@@ -67,13 +67,13 @@
                             <s:elseif test="status == 1">
                                 <td><br /><label class="label" style="font-size:9px;">拒绝请求</label></td>
                                 <td>
-                                    <br /><a class="btn btn-mini btn-link">举报</a>
+                                    <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                                 </td>
                             </s:elseif>
                             <s:elseif test="status == 2">
                                 <td><br /><label class="label label-warning" style="font-size:9px;">等待支付</label></td>
                                 <td>
-                                    <br /><a class="btn btn-mini btn-link">举报</a>
+                                    <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                                 </td>
                             </s:elseif>
                             <s:elseif test="status == 3">
@@ -85,14 +85,14 @@
                                     <s:form action="dealWithReservation" cssStyle="margin:0px; padding:0px;">
                                         <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
                                         <br /><s:submit value="完成" method="teacherFinish" cssClass="btn btn-mini btn-success"/>
-                                        <br /><a class="btn btn-mini btn-link">举报</a>
+                                        <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                                     </s:form>
                                 </td>
                             </s:elseif>
                             <s:elseif test="status == 4">
                                 <td><br /><label class="label label-info" style="font-size:9px;">完成授课</label></td>
                                 <td>
-                                    <br /><a class="btn btn-mini btn-link">举报</a>
+                                    <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                                 </td>
                             </s:elseif>
                             <s:elseif test="status >= 5">

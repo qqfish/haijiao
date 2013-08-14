@@ -16,6 +16,8 @@
         <s:if test="isDir">
             <ul class="breadcrumb">
                 <li class="active">我的文件</li>
+                <button class="btn btn-mini btn-primary pull-right" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
+                <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-mini btn-primary pull-right" style="margin-right:10px;">上传</button>
             </ul>
             <table class="table table-hover">
                 <thead>
@@ -40,6 +42,8 @@
             <ul class="breadcrumb">
                 <li><a href="javascript:;" onclick="getFileList(true, null);">我的文件</a><span class="divider">/</li>
                 <li class="active"><s:property value="groupName"/></li>
+                <button class="btn btn-mini btn-primary pull-right" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
+                <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-mini btn-primary pull-right" style="margin-right:10px;">上传</button>
             </ul>
             <table class="table table-hover">
                 <thead>
@@ -75,9 +79,9 @@
                                     </s:url>
                                     <s:a cssClass="btn btn-mini" href="%{downloadurl}" data-toggle="tooltip" title="下载"><i class="icon-download-alt"></i>下载</s:a>
                                     <a class="btn btn-mini" data-target="#shareModal" data-toggle="modal" onclick="$('#shareSrc').val('<s:property value="id" />');"><i class="icon-share-alt"></i>发布</a>
-                                    </div>
-                                </td>
-                            </tr>
+                                </div>
+                            </td>
+                        </tr>
                     </s:iterator>
                 </tbody>
             </table>
@@ -116,9 +120,9 @@
                         <div class="controls">
                             <s:hidden id="shareSrc" name="fileId" />
                             <s:submit cssClass="btn btn-success" value="发布"></s:submit>
-                            <button class="btn" data-dismiss="modal">取消</button>
+                                <button class="btn" data-dismiss="modal">取消</button>
+                            </div>
                         </div>
-                    </div>
                 </s:form>
             </div>
         </s:else>

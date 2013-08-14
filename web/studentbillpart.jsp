@@ -65,13 +65,16 @@
                         <s:if test="status == 0">
                             <td><br /><label class="label label-warning" style="font-size:9px;">等待确认</label></td>
                             <td>
-                                <br /><a class="btn btn-link btn-mini">取消</a>
+                                <s:form action="createBill" cssStyle="margin:0px; padding:0px;">
+                                    <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
+                                    <br /><s:submit value="取消" method="deny" cssClass="btn btn-mini btn-link"/>
+                                </s:form>
                             </td>
                         </s:if>
                         <s:elseif test="status == 1">
                             <td><br /><label class="label" style="font-size:9px;">拒绝请求</label></td>
                             <td>
-                                <br /><a class="btn btn-mini btn-link">举报</a>
+                                <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                             </td>
                         </s:elseif>
                         <s:elseif test="status == 2">
@@ -90,7 +93,7 @@
                                 <br /><a class="btn btn-link btn-mini" href="enterRoom.action?teaEmail=<s:property value="teacher.email" />&stuEmail=<s:property value="student.email" />">去上课</a>
                             </td>
                             <td>
-                                <br /><a class="btn btn-mini btn-link">举报</a>
+                                <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                             </td>
                         </s:elseif>
                         <s:elseif test="status == 4">
@@ -100,7 +103,7 @@
                                     <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>
                                     <br /><s:submit value="完成" method="studentFinish" cssClass="btn btn-mini btn-success"/>
                                 </s:form>
-                                <br /><a class="btn btn-mini btn-link">举报</a>
+                                <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                             </td>
                         </s:elseif>
                         <s:elseif test="status == 8">

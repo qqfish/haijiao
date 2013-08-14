@@ -100,6 +100,11 @@
                                 <s:property value="tea.getDirectDistrict()"/>
                             </small>
                             <br />
+                            <small>
+                                <i class="icon-book"></i>
+                                <s:property value="tea.origin" default="无毕业高中" />
+                            </small>
+                            <br />
                             <small><i class="icon-user"></i>
                                 <s:property value="tea.sex" default="性别保密"/>
                             </small>
@@ -242,11 +247,16 @@
                                     <button id="reserveButton" class="btn offset1 span2 btn-danger" data-toggle="modal" data-target="#reserveWarning">立即预定</button>
                                 </s:if>
                                 <s:else>
-                                    <button class="btn offset1 span2 disabled" disabled="true" data-toggle="modal" data-target="#reserveModal">预约已满</button>
+                                    <button class="btn offset1 span2 disabled" disabled>预约已满</button>
                                 </s:else>
                             </s:if>
                             <s:else>
-                                <button class="btn offset1 span2 btn-danger" data-toggle="modal" data-target="#loginInfo">立即预定</button>
+                                <s:if test="tea.reserve">
+                                    <button class="btn offset1 span2 btn-danger" data-toggle="modal" data-target="#loginInfo">立即预定</button>
+                                </s:if>
+                                <s:else>
+                                    <button class="btn offset1 span2 disabled" disabled>预约已满</button>
+                                </s:else>
                             </s:else>
                         </dl>
                     </div>

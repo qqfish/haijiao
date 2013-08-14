@@ -268,7 +268,8 @@ function fileManager(dRoomFile, dBookmark, dUserFile, stuE, teaE) {
                     table.uploadImage(this);
                 };
                 imgObj.src = evt.target.result;
-                progressWord.text("上传成功(移动图片位置，双击图片确认)")
+                progressWord.text("");
+                progressWord.html("上传成功(移动图片位置，<span class='text-error'>双击</span>图片确认)")
                 theBar.css("width", "100%");
                 $("#closeAlert").show();
             }

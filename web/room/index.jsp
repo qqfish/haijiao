@@ -59,7 +59,7 @@
         <![endif]-->
 
     </head>
-    <body unselectable="on" style="-moz-user-select:none;-webkit-user-select:none;" onselectstart="return false;"
+    <body unselectable="off" style="-moz-user-select:text;-webkit-user-select:text;"
           onload="init('<s:property value='stuEmail' default='null' />', '<s:property value='teaEmail' default='null' />', '<s:property value='email' default='null' />', '<s:property value='user.fileGroupsToJson()' default='null' />');">
         <img id="emptyImg" src="" style="display: none;"/>
         <script type="text/javascript">

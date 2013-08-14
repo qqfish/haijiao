@@ -107,8 +107,8 @@
 
                         </div>
                         <div class="tab-pane fade" id='file_area'>
-                            <button class="btn btn-primary" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
-                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-primary">上传</button>
+                            <button class="btn btn-mini btn-primary pull-right" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
+                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-mini btn-primary pull-right" style="margin-right: 10px;">上传</button>
                             <div id="newgroup" style="display:none;">
                                 <hr/>
                                 <s:form action="file">
