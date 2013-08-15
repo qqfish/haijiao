@@ -38,6 +38,7 @@ public class SendMail {
     public void send(String email, String subject, String text){
         try {
             Message msg = new MimeMessage(session);
+            msg.setHeader("Content-Type", "text/plain; charset=UTF-8");
             msg.setFrom(new InternetAddress(from));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
             msg.setSubject(subject);

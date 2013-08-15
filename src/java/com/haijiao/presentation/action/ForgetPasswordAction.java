@@ -58,7 +58,7 @@ public class ForgetPasswordAction extends RequestSessionAction{
             String content = "请点击以下链接设置新密码：http://" +config.websiteURI +
                     "/haijiao/resetPassword.action?id=" + u.getId() + "&checkCode=" + checkCode;
             userService.saveResetInfo(u.getId(), checkCode);
-            sm.send(email, "忘记密码", content);
+            sm.send(email, "=?UTF-8?B?"+base64en.encode("忘记密码".getBytes())+"?=", content);
             this.sessionPutIn("nextPageMessage", "已发送至邮箱，请查收");
             return SUCCESS;
         } catch (NoSuchAlgorithmException ex) {
