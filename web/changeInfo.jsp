@@ -18,6 +18,8 @@
         <link rel="stylesheet" href="css/validate.css"/>
         <link rel="stylesheet" href="css/jquery.Jcrop.min.css"/>
         <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/jquery.autocomplete.css">
+
         <!--js-->
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
@@ -28,6 +30,8 @@
         <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
         <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
         <script type="text/javascript" src="js/ling.chinaArea.sort-1.0.js"></script>
+        <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
+        <script type="text/javascript" src="js/schoolSelect.js"></script>
         <script>
             window.onload = function() {
                 $ling.chinaArea.init("selProvince", "selCity", "selDistrict");
@@ -207,14 +211,14 @@
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
                         <li id="l1"><a href="#basicInfo" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
-                                <s:if test="#session.userType=='teacher'">
+                        <s:if test="#session.userType=='teacher'">
                             <li id="l5"><a href="#detailInfo" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
-                                </s:if>
+                        </s:if>
                         <li id="l2" ><a href="#modifyPassword" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#headpic" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                                <s:if test="#session.userType=='student'">
+                        <s:if test="#session.userType=='student'">
                             <li id="l4"><a href="#personIntro" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
-                                </s:if>                  
+                        </s:if>                  
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
@@ -279,9 +283,7 @@
                                         <div class="control-group">
                                             <label class="control-label" for="college"><strong>大学</strong></label>
                                             <div class="controls">
-                                            <s:select cssClass="span4" name="school" value="%{tea.school}" list="{'复旦大学','上海交通大学','同济大学','华东理工大学','东华大学','华东师范大学','上海外国语大学','上海财经大学','上海海关学院','上海大学','上海理工大学',
-                                                      '上海海事大学','上海工程技术大学','上海海洋大学','上海中医药大学','上海师范大学','华东政法大学','上海政法学院','上海建桥学院','上海第二工业大学','上海应用技术学院','上海电力学院','上海电机学院','上海对外贸易学院','上海金融学院','上海立信会计学院',
-                                                      '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}"/>
+                                                <s:textfield id="schoolSelect" cssClass="span4" name="school" value="%{tea.school}" placeholder="请输入您就读的大学"/>
                                         </div>
                                     </div>
                                     <div class="control-group">

@@ -388,27 +388,44 @@ function Media(parentId, text, userList){
     // Ctrl-D: toggle audio mute; Ctrl-E: toggle video mute.
     // On Mac, Command key is instead of Ctrl.
     // Return false to screen out original Chrome shortcuts.
-    document.onkeydown = function() {
-        if (navigator.appVersion.indexOf("Mac") != -1) {
-            if (event.metaKey && event.keyCode === 68) {
-                toggleAudioMute();
-                return false;
-            }
-            if (event.metaKey && event.keyCode === 69) {
-                toggleVideoMute();
-                return false;
-            }
+//    document.onkeydown = function() {
+//        if (navigator.appVersion.indexOf("Mac") != -1) {
+//            if (event.metaKey && event.keyCode === 68) {
+//                toggleAudioMute();
+//                return false;
+//            }
+//            if (event.metaKey && event.keyCode === 69) {
+//                toggleVideoMute();
+//                return false;
+//            }
+//        } else {
+//            if (event.ctrlKey && event.keyCode === 68) {
+//                toggleAudioMute();
+//                return false;
+//            }
+//            if (event.ctrlKey && event.keyCode === 69) {
+//                toggleVideoMute();
+//                return false;
+//            }
+//        }
+//    }
+    $("#videoButton").click(function(){
+        toggleVideoMute();
+        if(isVideoMuted){
+            $(this).text("视频关闭");
         } else {
-            if (event.ctrlKey && event.keyCode === 68) {
-                toggleAudioMute();
-                return false;
-            }
-            if (event.ctrlKey && event.keyCode === 69) {
-                toggleVideoMute();
-                return false;
-            }
+            $(this).text("视频开启");
         }
-    }
+    });
+    
+    $("#audioButton").click(function(){
+        toggleAudioMute();
+        if(isAudioMuted){
+            $(this).text("音频关闭");
+        } else {
+            $(this).text("音频开启");
+        }
+    });
 
     // Set Opus as the default audio codec if it's present.
     function preferOpus(sdp) {

@@ -114,7 +114,11 @@
                             <li>
                                 <div class="btn-group">
                                     <a class="btn btn-link dropdown-toggle tooltipButton" data-toggle="dropdown" data-placement="bottom" data-original-title="用户列表"><i class="icon-user icon-white"></i></a>
-                                    <ul class="dropdown-menu" id="users"></ul>
+                                    <ul class="dropdown-menu" id="users">
+                                        <li><a tabindex="-1" id="videoButton">视频开启</a></li>
+                                        <li><a tabindex="-1" id="audioButton">音频开启</a></li>
+                                        <li class="divider"></li>
+                                    </ul>
                                 </div>
                             </li>
                             <li>
@@ -220,8 +224,8 @@
                             <li><a class="tooltipButton" id="scaleUp" data-toggle="tooltip" data-placement="bottom" data-original-title="放大"><i class="icon-zoom-in icon-white"></i></a></li>
                             <li><a class="tooltipButton" id="scaleDown" data-toggle="tooltip" data-placement="bottom" data-original-title="缩小"><i class="icon-zoom-out icon-white"></i></a></li>
                             <li><a class="tooltipButton" data-toggle="modal" data-target="#exitAlert" data-placement="bottom" data-original-title="退出房间"><i class="icon-remove icon-white"></i></a></li>
-
-                        </ul>               
+                            <li><a class="tooltipButton" href="contact.jsp" target="_blank" data-toggle="tooltip" data-placement="bottom" data-original-title="帮助反馈"><i class="icon-question-sign icon-white"></i></a></li>
+                        </ul>
                     </div> 
                 </div>
                 <div class="well span3" id ="side" style="width:270px;margin:0px;float:bottom;padding:0;">
