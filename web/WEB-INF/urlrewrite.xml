@@ -20,8 +20,8 @@
             url /rewrite-status only /test/status/ both in thier location bar and in hyperlinks
             in your pages.
         </note>
-        <from>/rewrite-status</from>
-        <to>/test/status/</to>
+        <from>getTeacherInfo.action\?teacherEmail=(.*)$</from>
+        <to>$1</to>
     </outbound-rule>
 
 
