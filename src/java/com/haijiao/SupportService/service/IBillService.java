@@ -38,6 +38,8 @@ public interface IBillService {
     public List<Payment> getPaymentList(String email, int first, int pageSize);
     //获取账单明细数
     public int getPaymentNum(String email);
+    //修改备注
+    public boolean changeRemark(int id, String remark);
     //每日任务--减去确认天数
     public void oneDayPass();
 }

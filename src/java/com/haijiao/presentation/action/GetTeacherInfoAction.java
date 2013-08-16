@@ -27,7 +27,8 @@ import org.springframework.stereotype.Controller;
 @Action("getTeacherInfo")
 @Results({
     @Result(name="success",location="/teaInfo.jsp"),
-    @Result(name="teacher",type="redirect",location="index.action")
+    @Result(name="teacher",type="redirect",location="index.action"),
+    @Result(name="input",type="redirect",location="index.action")
 })
 public class GetTeacherInfoAction extends RequestSessionAction{
     @Resource
@@ -43,8 +44,13 @@ public class GetTeacherInfoAction extends RequestSessionAction{
 
     @Override
     public String execute(){
-        String email = (String)this.getOutRequest("teacherEmail");
-        tea = teacherService.getTeacherByEmail(email);
+        int id = Integer.parseInt((String) this.getOutRequest("teacherId"));
+        tea = teacherService.getTeacherById(id);
+        if(tea == null){
+            this.sessionPutIn("nextPageMessage","错误的id");
+            return INPUT;
+        }
+        String email = tea.getEmail();
         if(!email.equals(this.getOutSession("email")))
             teacherService.increseObNum(email);
 //        scheduleBean = new InfoScheduleBean(tea);

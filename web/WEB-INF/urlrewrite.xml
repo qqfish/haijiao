@@ -6,8 +6,8 @@
             The rule means that requests to /test/status/ will be redirected to /rewrite-status
             the url will be rewritten.
         </note>
-        <from>(\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)$</from>
-        <to type="forward">/getTeacherInfo.action?teacherEmail=$1</to>
+        <from>(\d+)$</from>
+        <to type="forward">/getTeacherInfo.action?teacherId=$1</to>
     </rule>
 
 
@@ -20,7 +20,7 @@
             url /rewrite-status only /test/status/ both in thier location bar and in hyperlinks
             in your pages.
         </note>
-        <from>getTeacherInfo.action\?teacherEmail=(.*)$</from>
+        <from>getTeacherInfo.action\?teacherId=(\d+)$</from>
         <to>$1</to>
     </outbound-rule>
 

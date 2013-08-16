@@ -46,6 +46,11 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
+    public Teacher getTeacherById(int id){
+        return teacherDAO.findById(id);
+    }
+    
+    @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public Teacher getTeacherByEmail(String email) {
         return teacherDAO.getTeacherByEmail(email);
