@@ -83,9 +83,8 @@
                                             <tr>
                                                 <td>
                                                     <blockquote>
-                                                        <h4><s:a action="getTeacherInfo.action">
-                                                                <s:param name="teacherEmail" value="%{freeTime.teacher.email}"/>
-                                                                <s:property value="freeTime.teacher.name"/></s:a>
+                                                        <h4><a href="/${freeTime.teacher.email}">
+                                                                <s:property value="freeTime.teacher.name"/></a>
                                                             <s:if test="freeTime.teacher.status==0"><label class="label">离线</label></s:if>
                                                             <s:elseif test="freeTime.teacher.status==1"><label class="label label-success">在线</label></s:elseif>
                                                                 <label class="label label-info pull-right">

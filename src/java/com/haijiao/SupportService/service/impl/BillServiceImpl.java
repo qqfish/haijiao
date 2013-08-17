@@ -222,6 +222,14 @@ public class BillServiceImpl implements IBillService{
     }
     
     @Override
+    public boolean changeRemark(int id, String remark){
+        Bill b = billDAO.findById(id);
+        b.setMessage(remark);
+        billDAO.update(b);
+        return true;
+    }
+    
+    @Override
     public void oneDayPass() {
         List<Bill> bList = billDAO.getBillByStatus(Bill.Status.teacherFinish);
         for(int i = 0; i < bList.size(); i++){

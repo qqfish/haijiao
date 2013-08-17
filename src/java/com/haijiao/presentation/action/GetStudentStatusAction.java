@@ -5,9 +5,7 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.Domain.bean.Student;
-import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.service.IStudentService;
-import com.haijiao.SupportService.service.ITeacherService;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;

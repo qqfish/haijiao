@@ -23,7 +23,7 @@
                         <li class="span11">
                             <div class="thumbnail">
                                 <img class="pull-left" width="110px" style="margin: 0px 10px 0px 0px;width: 110px;" src="<s:property value="picUrl"/>"/>
-                                <a href="getTeacherInfo.action?teacherEmail=<s:property value="email"/>" style="text-decoration: none;">
+                                <a href="${id}" style="text-decoration: none;">
                                     <b style="font-size: 20px;"><s:property value="getSecretName()"/>&nbsp;</b>
                                 </a>
                                 <s:if test="level==1">

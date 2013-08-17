@@ -160,10 +160,10 @@
                 <p><s:property value="teacher.email"/></p>
                 <p><s:property value="teacher.createdateToString()"/> 加入</p>
             </div>-->
-                    <hr/>
+                    <p></p>
                     <table class="table table-hover table-striped" style="margin-top: 5px;">
                         <tbody>
-                            <tr>
+                            <tr rel="tooltip" data-original-title="在线试讲可自由授课">
                                 <td>接受试讲</td>
                                 <td>
                                     <div class="btn-group" data-toggle="buttons-radio">
@@ -178,7 +178,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr rel="tooltip" data-original-title="课时排满可关闭预约">
                                 <td>接受预约</td>
                                 <td>
                                     <div class="btn-group" data-toggle="buttons-radio">
@@ -241,7 +241,7 @@
     学校：<s:property value="teacher.school" />
     专业：<s:property value="teacher.major" />
     线下授课区域：<s:property value="teacher.underlineArea" default="暂无"/>
-    在线试讲页面：http://haijiaoedu.com/getTeacherInfo.action?teacherEmail=<s:property value="teacher.email" />
+    在线试讲页面：http://haijiaoedu.com/<s:property value="teacher.id" />
                                 </textarea>
 
                                 <p><button class="btn" onclick ="edit_share_info()">编辑</button><button class="btn" onclick ="save_share_info()">保存</button>&nbsp;【分享主页信息】                                                        
@@ -372,28 +372,13 @@
                                         <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                         内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
                                         <br/>
-                                        评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                        评分<div id="comment_rate" class="rateit" data-rateit-step="1"></div>
                                         <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                         <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                     </div>
-                                    <script type="text/javascript">
-                                        $(".commentA").click(function() {
-                                            var id = $(this).attr("id");
-                                            $("#comment_rate").bind('rated', function(event, value) {
-                                                $('#comment_score').val(value);
-                                            });
-                                            $("#comment_rate").bind('over', function(event, value) {
-                                                $(this).attr('title', value);
-                                            });
-                                            $("#cmtsmt").click(function(event) {
-                                                if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                    event.preventDefault();
-                                            });
-                                        });
-                                    </script>
                                 </s:form>
                             </div>
                         </div>
@@ -534,13 +519,13 @@
                                     <s:else>
                                         普通老师，您的手续费为8%
                                     </s:else>
-                                    ,详细请见(<a class="btn btn-link btn-mini" data-toggle="modal" data-target="#paymentTipsModal">*</a>)</small>
+                                    ,详细请<a class="btn btn-link btn-mini" data-toggle="modal" data-target="#paymentTipsModal">点击这里</a></small>
                                 <span class="pull-right mute">余额:
                                     <strong style="color:#53a000"><s:property value="teacher.coin" /></strong>
                                 </span>
                                 <div class="modal fade hide" id="paymentTipsModal">
                                     <div class="modal-header">
-                                        <h4>扣款比例</h4>
+                                        <h4>扣款比例&nbsp;<small class="text-warning">*手续费仅针对在线支付</small></h4>
                                     </div>
                                     <div class="modal-body">
                                         <table class="table">

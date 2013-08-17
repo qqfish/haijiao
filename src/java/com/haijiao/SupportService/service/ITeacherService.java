@@ -14,6 +14,7 @@ import java.sql.Date;
  * @author Jerry
  */
 public interface ITeacherService {
+    public Teacher getTeacherById(int id);
     public Teacher getTeacherByEmail(String email);
     
     //修改基本资料

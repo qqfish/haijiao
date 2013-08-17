@@ -49,7 +49,7 @@
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
-                    <h4 style="margin-left:5px"><s:property value="tea.getSecretName()"/>
+                    <h4 style="margin-left:5px"><s:property value="tea.getSecretName()" default=" "/>
                         <s:if test="level==1">
                             <i class="icon-diomand"></i>
                         </s:if>
@@ -91,7 +91,7 @@
                     <div style="margin-left: 10px;">
                         <p style="line-height:20px;">
                             <small><i class="icon-flag"></i>
-                                <s:property value="tea.school"/>-<s:property value="tea.major"/>
+                            <s:property value="tea.school" default="未知学校"/>-<s:property value="tea.major" default="未知专业"/>
                             </small>
                             <br />
                             <small><i class="icon-home"></i>
@@ -117,7 +117,7 @@
                                 <s:property value="tea.email" /></small>
                             <br />
                             <small><i class="icon-signal"></i>
-                                <s:property value="tea.tel" /></small>
+                                <s:property value="tea.tel" default="未填写"/></small>
                             <br />
                             <small><i class="icon-time"></i>
                                 <s:date name="tea.createTime" format="yyyy-MM-dd"/>加入</small>

@@ -85,21 +85,6 @@
                                             <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                         <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
                                         </div>
-                                        <script type="text/javascript">
-                                            $(".commentA").click(function() {
-                                                var id = $(this).attr("id");
-                                                $("#comment_rate").bind('rated', function(event, value) {
-                                                    $('#comment_score').val(value);
-                                                });
-                                                $("#comment_rate").bind('over', function(event, value) {
-                                                    $(this).attr('title', value);
-                                                });
-                                                $("#cmtsmt").click(function(event) {
-                                                    if (/^\s*$/.test($('score').val()) || /^\s*$/.test($("#content").val()))
-                                                        event.preventDefault();
-                                                });
-                                            });
-                                        </script>
                                 </s:form>
                             </div>
                         </div>
