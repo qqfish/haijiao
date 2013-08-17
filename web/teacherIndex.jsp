@@ -160,10 +160,10 @@
                 <p><s:property value="teacher.email"/></p>
                 <p><s:property value="teacher.createdateToString()"/> 加入</p>
             </div>-->
-                    <hr/>
+                    <p></p>
                     <table class="table table-hover table-striped" style="margin-top: 5px;">
                         <tbody>
-                            <tr>
+                            <tr rel="tooltip" data-original-title="在线试讲可自由授课">
                                 <td>接受试讲</td>
                                 <td>
                                     <div class="btn-group" data-toggle="buttons-radio">
@@ -178,7 +178,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr rel="tooltip" data-original-title="课时排满可关闭预约">
                                 <td>接受预约</td>
                                 <td>
                                     <div class="btn-group" data-toggle="buttons-radio">
@@ -519,13 +519,13 @@
                                     <s:else>
                                         普通老师，您的手续费为8%
                                     </s:else>
-                                    ,详细请见(<a class="btn btn-link btn-mini" data-toggle="modal" data-target="#paymentTipsModal">*</a>)</small>
+                                    ,详细请<a class="btn btn-link btn-mini" data-toggle="modal" data-target="#paymentTipsModal">点击这里</a></small>
                                 <span class="pull-right mute">余额:
                                     <strong style="color:#53a000"><s:property value="teacher.coin" /></strong>
                                 </span>
                                 <div class="modal fade hide" id="paymentTipsModal">
                                     <div class="modal-header">
-                                        <h4>扣款比例</h4>
+                                        <h4>扣款比例&nbsp;<small class="text-warning">*手续费仅针对在线支付</small></h4>
                                     </div>
                                     <div class="modal-body">
                                         <table class="table">
