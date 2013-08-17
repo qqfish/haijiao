@@ -117,7 +117,7 @@
                                 <s:property value="tea.email" /></small>
                             <br />
                             <small><i class="icon-signal"></i>
-                                18801902576</small>
+                                <s:property value="tea.tel" /></small>
                             <br />
                             <small><i class="icon-time"></i>
                                 <s:date name="tea.createTime" format="yyyy-MM-dd"/>加入</small>
