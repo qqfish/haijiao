@@ -51,17 +51,18 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id='newMsg'>
-                            <h3>新信息<small><a href="markMail!markAll.action" id="markAll" class="btn btn-mini pull-right" type="button">标记所有为已读</a></small></h3>
-                            <hr/>
                             <s:if test="unreadMailList.size == 0">
+                                <h3>新信息<small><a id="markAll" class="btn btn-mini pull-right disabled" type="button">标记所有为已读</a></small></h3>
+                                <hr/>
                                 暂无未读消息哦~！
                             </s:if>
                             <s:else>
+                                <h3>新信息<small><a href="markMail!markAll.action" id="markAll" class="btn btn-mini pull-right" type="button">标记所有为已读</a></small></h3>
+                                <hr/>
                                 <s:iterator value="unreadMailList">
                                     <div class="well">
-                                        <h5><s:property value="from.name"/></h5>
+                                        <h5><s:property value="from.name"/><span class="muted pull-right"><s:date name="createTime" format="yyyy-MM-dd hh:mm:ss"/></span></h5>
                                         <p><s:property value="message"/></p>
-                                        <p><s:date name="createTime" format="yyyy-MM-dd hh:mm:ss"/></p>
                                         <a href="removeSingleMail.action?id=<s:property value="id" />" class="btn btn-danger btn-mini pull-right" style="margin-top:-10px">删除</a>
                                         <span class="pull-right">&nbsp;&nbsp;</span>
                                         <a href="javascript:;" onclick="mark(<s:property value="id" />);" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px" data-loading-text="loading">标记已读</a>
@@ -72,17 +73,18 @@
                             </s:else>
                         </div>
                         <div class="tab-pane fade" id='allMsg'>
-                            <h3>所有信息<small><a href="removeMail!removeAll.action" id="removeAll" class="btn btn-danger btn-mini pull-right" type="button">删除所有</a></small></h3>
-                            <hr/>
                             <s:if test="allMailList.size == 0">
+                                <h3>所有信息<small><a id="removeAll" class="btn btn-danger btn-mini pull-right disabled" type="button">删除所有</a></small></h3>
+                                <hr/>
                                 暂无消息哦~！
                             </s:if>
                             <s:else>
+                                <h3>所有信息<small><a href="removeMail!removeAll.action" id="removeAll" class="btn btn-danger btn-mini pull-right" type="button">删除所有</a></small></h3>
+                                <hr/>
                                 <s:iterator value="allMailList">
                                     <div class="well">
-                                        <h5><s:property value="from.name"/></h5>
+                                        <h5><s:property value="from.name"/><span class="muted pull-right"><s:date name="createTime" format="yyyy-MM-dd hh:mm:ss"/></span></h5>
                                         <p><s:property value="message"/></p>
-                                        <p><s:date name="createTime" format="yyyy-MM-dd hh:mm:ss"/></p>
                                         <a href="removeSingleMail.action?id=<s:property value="id" />" class="btn btn-danger btn-mini pull-right" style="margin-top:-10px">删除</a>
                                         <span class="pull-right">&nbsp;&nbsp;</span>
                                         <a href="getMail.action?toEmail=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px;margin-right:5px">回复</a>
@@ -98,7 +100,7 @@
         <%@ include file="WEB-INF/jspf/footer.jspf"%>
         <s:if test="toEmail==null">
             <script>
-                                            $("#newMsgButton").click();
+                $("#newMsgButton").click();
             </script>
         </s:if>
     </body>
