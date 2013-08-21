@@ -211,14 +211,14 @@
                     <hr/>
                     <ul class="nav nav-list bs-docs-sidenav">
                         <li id="l1"><a href="#basicInfo" data-toggle="tab">修改基本资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        <s:if test="#session.userType=='teacher'">
+                                <s:if test="#session.userType=='teacher'">
                             <li id="l5"><a href="#detailInfo" data-toggle="tab">修改详细资料<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>
+                                </s:if>
                         <li id="l2" ><a href="#modifyPassword" data-toggle="tab">修改密码<i class="icon-chevron-right pull-right"></i></a></li>
                         <li id="l3" ><a href="#headpic" data-toggle="tab">修改头像<i class="icon-chevron-right pull-right"></i></a></li>
-                        <s:if test="#session.userType=='student'">
+                                <s:if test="#session.userType=='student'">
                             <li id="l4"><a href="#personIntro" data-toggle="tab">修改个人介绍<i class="icon-chevron-right pull-right"></i></a></li>
-                        </s:if>                  
+                                </s:if>                  
                     </ul>
                 </div>
                 <div class="span8 module" style="padding:12px;">
@@ -280,12 +280,17 @@
                                             <s:select id="currentRole" cssClass="span2" name="studyStatus" value="%{tea.studyStatus}" list="{'在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}"></s:select>
                                             </div>
                                         </div>
+                                    <s:if test="@com.haijiao.global.config@domain == 0">
                                         <div class="control-group">
                                             <label class="control-label" for="college"><strong>大学</strong></label>
                                             <div class="controls">
                                                 <s:textfield id="schoolSelect" cssClass="span4" name="school" value="%{tea.school}" placeholder="请输入您就读的大学"/>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </s:if>
+                                    <s:elseif test="@com.haijiao.global.config@domain == 1">
+                                        <s:textfield id="schoolSelect" cssStyle="display:none;" name="school" value="上海交通大学"/>
+                                    </s:elseif>
                                     <div class="control-group">
                                         <label class="control-label" for="major"><strong>专业</strong></label>
                                         <div class="controls">

@@ -90,8 +90,13 @@
                                     <s:select id="selCity" name="city" list="{ }"></s:select>
                                     <s:select id="selDistrict" name="district" list="{ }"></s:select>
                                 </dd>
+                                <s:if test="@com.haijiao.global.config@domain == 0">
                                 <dt>学校信息</dt>
                                 <dd><s:textfield id="schoolSelect" cssClass="span4" name="school" placeholder="请输入您就读的大学" /></dd>
+                                </s:if>
+                                <s:elseif test="@com.haijiao.global.config@domain == 1">
+                                    <s:textfield id="schoolSelect" cssStyle="display:none;" name="school" value="上海交通大学"/>
+                                </s:elseif>
                                 <dt>所学专业</dt>
                                 <dd><s:textfield cssClass="span4" type="text" name="major" placeholder="请输入您就读的专业" /></dd>
                                 <dt>高中毕业地</dt>

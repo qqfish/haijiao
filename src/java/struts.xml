@@ -8,6 +8,7 @@
     <constant name="struts.custom.i18n.resources" value="globalMessages"/>
     <constant name="struts.objectFactory" value="spring"/>
     <constant name="struts.ui.theme" value="simple" />
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
    
     <bean type="org.apache.struts2.dispatcher.multipart.MultiPartRequest" name="requestParser"
         class="com.haijiao.presentation.bean.upload.OurMultiPartRequest" scope="default" optional="true" />
