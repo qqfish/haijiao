@@ -4,7 +4,12 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>海角教育</title>
+        <s:if test="@com.haijiao.global.config@domain == 0">
+            <title>海角教育</title>
+        </s:if>
+        <s:elseif test="@com.haijiao.global.config@domain == 1">
+            <title>上海交通大学家教部</title>
+        </s:elseif>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/validate.css" />
@@ -21,11 +26,11 @@
                 font-family: Microsoft YaHei;
                 vertical-align: middle;
             }
-            
+
             .index-page-text a{
                 color:#33ffff
             }
-            
+
             .index-page-text a:hover{
                 color:#ffffff
             }
@@ -52,13 +57,29 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
-        <div class="bg"><img class="bg_pic" id="bg_pic" src="#"/></div>
+        <s:if test="@com.haijiao.global.config@domain == 0">
+            <div class="bg"><img class="bg_pic" id="bg_pic" src="#">
+            </div>
+        </s:if>
+        <s:elseif test="@com.haijiao.global.config@domain == 1">
+            <div class="bg"><img class="bg_pic" id="sjtubg_pic" src="#">
+            </div>
+        </s:elseif>
         <div id="maincontainer" class="container">
             <div class="row" style="overflow: hidden;">
                 <div class="span8 index-page-text" style="margin-top:7%">
-                    <h3>欢迎来到海角教育！</h3>
-                    <br/>
-                    <p style="font-size: 20px">海角教育专注<a href="about.jsp">1V1在线教育</a>，无论您身处天涯海角，<br/>通过互联网即可获得全国最优秀的教育资源。</p>
+                    <s:if test="@com.haijiao.global.config@domain == 0">
+                        <h3>欢迎来到海角教育！</h3>
+                        <br/>
+                        <p style="font-size: 20px">海角教育专注<a href="about.jsp">1V1在线教育</a>，无论您身处天涯海角，<br/>通过互联网即可获得全国最优秀的教育资源。
+                        </p>
+                    </s:if>
+                    <s:elseif test="@com.haijiao.global.config@domain == 1">
+                        <h3>欢迎来到上海交通大学家教部！</h3>
+                        <br/>
+                        <p style="font-size: 20px">上海交通大学家教部是在校学生事务中心指导下的家教服务机构，<br />教员都是上海交大优秀在校学生担任，并在国内高校首先实现在线教学功能。
+                        </p>
+                    </s:elseif>
                 </div>
                 <div class="span3 pull-right" style="width:230px;height:375px;margin-top:5%">
                     <div class="accordion" id="accordion2">

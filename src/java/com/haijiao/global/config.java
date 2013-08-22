@@ -37,4 +37,5 @@ public class config {
     
     //0:haijiaoedu.com 1:
     static public int domain = 0;
+    
 }

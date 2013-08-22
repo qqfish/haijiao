@@ -52,5 +52,7 @@ jQuery(document).ready(function($){
         
         $('#bg_pic').attr("src",function(){return"images/bkg/bkg"+Math.floor(Math.random()*5+1)+".jpg"});
         $('#bg_pic').animate({opacity:"1"},1000);
+        $('#sjtubg_pic').attr("src",function(){return"images/bkg/bkg_sjtu.jpg"});
+        $('#sjtubg_pic').animate({opacity:"1"},1000);
         
 });
