@@ -391,7 +391,7 @@
                                     <dt>线下授课区域<small class="text-warning">*选择“老师上门”和“学生上门”请填写该项</small></dt>
                                     <dd><s:textarea cssStyle="width:520px;height:50px;" cssClass="span5" name="underlineArea" value="%{tea.underlineArea}" autofocus="autofocus"/></dd>
                                     <dt>个人简介</dt>
-                                    <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="intro" value="%{tea.intro}" autofocus="autofocus"/></dd>
+                                    <dd><s:textarea cssStyle="width:520px;height:550px;" cssClass="span5" name="intro" value="%{tea.intro}" autofocus="autofocus"/></dd>
                                     <!--                                    <dt>获奖证书</dt>
                                                                         <dd><s:textarea cssStyle="width:520px;height:150px;" cssClass="span5" name="cert" value="%{tea.cert}" autofocus="autofocus"/></dd>
                                                                         <dt>家教经历</dt>

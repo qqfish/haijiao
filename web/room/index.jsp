@@ -97,7 +97,7 @@
                 <div  class="navbar-inner">
                     <div style="width:880px;margin-left:auto;margin-right:auto">
                         <ul class="nav" style="width: 1080px;">
-                            <a class="brand" href="index.action">Haijiao<span style="color: #008db8;">EDU</span></a>
+                            <a class="brand" href="index.action" target="_blank">Haijiao<span style="color: #008db8;">EDU</span></a>
                             <li><div class="well-mini"><span id="timerPanel">00:00:00</span></div></li>
                             <li>
                                 <div class="btn-group">

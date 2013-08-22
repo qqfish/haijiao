@@ -78,7 +78,10 @@
                             </td>
                         </s:elseif>
                         <s:elseif test="status == 2">
-                            <td><br /><label class="label label-important" style="font-size:9px;">等待支付</label></td>
+                            <td>
+                                <br /><label class="label label-important" style="font-size:9px;">等待支付</label>
+                                <br /><small class="text-warning">*部分网银仅支持IE</small>
+                            </td>
                             <td>
                                 <s:form action="createBill" cssStyle="margin:0px; padding:0px;">
                                     <s:textfield name="billId" value="%{id}" cssStyle="display:none;"/>

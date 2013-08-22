@@ -49,14 +49,15 @@
                     <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
-                    <h4 style="margin-left:5px"><s:property value="tea.getSecretName()" default=" "/>
-                        <s:if test="level==1">
+                    <h4 style="margin-left:5px"><s:property value="tea.getSecretName()" default="-"/>
+                        <s:if test="tea.level==1">
                             <i class="icon-diomand"></i>
                         </s:if>
                         <s:if test="tea.status==0"><label class="label pull-right">离线</label></s:if>
                         <s:elseif test="tea.status==1"><label class="label label-success pull-right">在线</label></s:elseif>
                         <s:else><label class="label label-warning pull-right">忙碌</label></s:else></small>
                     </h4>
+                        <!--<a>http://www.haijiaoedu.com/<s:property value="tea.id"/></a>-->
                     <s:if test="tea.status==1">
                         <s:if test="tea.audition">
                             <a class='btn btn-success' style="margin-left:20px" href="enterPublicRoom.action?teaEmail=<s:property value='tea.email' default='null' />">在线试讲</a>
@@ -319,7 +320,7 @@
                     <div class="tab-content">
                         <div class="tab-pane row fade active in" id='info_area'>
                             <textarea id="tmp" style="display:none"><s:property value="tea.intro"/></textarea>
-                            <div class="span6" id="teaintro">
+                            <div class="span8" id="teaintro">
                                 <script>
                                     $("#teaintro").html($("#tmp").text());
                                 </script>

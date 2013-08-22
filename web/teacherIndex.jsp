@@ -64,6 +64,9 @@
                         document.getElementById("share_info").value;
                 }
             }
+            $(document).ready(function(){
+                $(".tooltip").tooltip();
+            });
         </script>
     </head>
     <body>
@@ -71,12 +74,18 @@
         <!--==============================header=================================-->
         <%@ include file="WEB-INF/jspf/header.jspf"%>
         <!--==============================content=================================-->
+        <link rel="stylesheet" href="css/teaLevel.css" type="text/css">
         <input type="hidden" id="nextPageMessage" value="<s:property value="nextPageMessage" />"/>
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
                     <a href="toChangeInfo.action?tab=head"><img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/></a>
-                    <h4 style="margin-left: 10px;"><s:property value="teacher.name"/></h4>
+                    <h4 style="margin-left: 10px;">
+                        <s:property value="teacher.name"/>
+                        <s:if test="teacher.level==1">
+                            <i class="icon-diomand"></i>
+                        </s:if>
+                    </h4>
                     <s:if test="teacher.coin>=0">
                         <a class='btn btn-primary btn-small' style="margin-left: 15px;" data-toggle="modal" href="#moneyRequestModal"><i class="icon-user icon-white"></i>余额提现</a>
                     </s:if>
@@ -173,7 +182,7 @@
                                         </s:if>
                                         <s:else>
                                             <s:a action="setTeacherStatus" method="audition" cssClass="btn btn-mini btn-success">是</s:a>
-                                            <button type="button" class="btn btn-mini btn-success active">否</button>
+                                                <button type="button" class="btn btn-mini btn-success active">否</button>
                                         </s:else>
                                     </div>
                                 </td>
@@ -188,7 +197,7 @@
                                         </s:if>
                                         <s:else>
                                             <s:a action="setTeacherStatus" method="reserve" cssClass="btn btn-mini btn-success">是</s:a>
-                                            <button type="button" class="btn btn-mini btn-success active">否</button>
+                                                <button type="button" class="btn btn-mini btn-success active">否</button>
                                         </s:else>
                                     </div>
                                 </td>
@@ -209,34 +218,34 @@
                                 <td>评分</td>
                                 <td><s:if test="teacher.score == 0">无评分</s:if>
                                     <s:else><s:property value="teacher.score"/></s:else></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
 
-                <div class="span8 module" style="padding:12px;">
-                    <ul class="nav nav-pills">
-                        <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
-                        <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
-                        <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
-                        <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
-                        <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
-                        <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                    <div class="span8 module" style="padding:12px;">
+                        <ul class="nav nav-pills">
+                            <li id="l3"><a href="#lesson_area" data-toggle="tab" >开设课程</a></li>
+                            <li id="l6"><a href="#file_area" data-toggle="tab">我的课件</a></li>
+                            <li id="l7"><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
+                            <li id="l4"><a href="#bill_area" data-toggle="tab" >订单处理</a></li>
+                            <li id="l8"><a href="#payment_area" data-toggle="tab" >账单明细</a></li>
+                            <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
 
-                        <!--  add a button for previewing Profile -->
-                        <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
-                    </ul>
+                            <!--  add a button for previewing Profile -->
+                            <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
+                        </ul>
 
-                    <!--   personal proflie   -->
-                    <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h3>主页预览</h3>
-                            </div>
-                            <div class="modal-body">
-                                <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
+                        <!--   personal proflie   -->
+                        <div id="personal_profile" class="modal fade hide" style="margin-top: 80px">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h3>主页预览</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <textarea id="share_info" style="width:95%" rows="6" readonly="readonly">
     姓名：<s:property value="teacher.name" /> 
     学校：<s:property value="teacher.school" />
     专业：<s:property value="teacher.major" />
@@ -263,12 +272,11 @@
                     <div class="tab-content">
 
                         <div class="tab-pane fade" id='lesson_area'>
-                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-original-title="开设课程步骤" data-content="
-                               <small><strong>第一步：①开设课程</strong><br/>提示：点击“课程列表”进行开课（点击“小叉”可取消）。</small><br/>
-                               <small><strong>第二步：②设定时间</strong><br/>提示：设定空闲时间以接受学生预约（可以取消空闲时间）。</small><br/>
-                               <small><strong>第三步：③处理预约</strong><br/>提示：查看处理学生预约订单（24小时必须确认预约订单）。</small><br/>
-                               <small><strong>第四步：④电子备课</strong><br/>提示：有预约请提前备课（支持pdf、doc、ppt、jpg格式）。</small><br/>
-                               "><i class="icon-question-sign"></i><small>如何开设课程</small></a>
+                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom" data-original-title="开设课程步骤" data-content="
+                               <small><strong>①自我推介：将老师个人主页地址发给学生或社交网络获取关注；</small><br/>
+                               <small><strong>②在线试讲：开启在线试讲功能，学生试讲后能提升预约成功率；</small><br/>
+                               <small><strong>③积极检索：高校BBS兼职板块、58同城等网站有需求可以对接；</small><br/>
+                               "><i class="icon-question-sign"></i><small>如何获取预约</small></a>
                             <br/>
                             <script>
                                 $("#showtip").popover();
@@ -371,14 +379,14 @@
                                     <div class="modal-body">
                                         <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                         内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                        <br/>
-                                        评分<div id="comment_rate" class="rateit" data-rateit-step="1"></div>
+                                            <br/>
+                                            评分<div id="comment_rate" class="rateit" data-rateit-step="1"></div>
                                         <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                         <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                    </div>
+                                        </div>
                                 </s:form>
                             </div>
                         </div>

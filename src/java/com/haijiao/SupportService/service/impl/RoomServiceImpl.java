@@ -5,9 +5,11 @@
 package com.haijiao.SupportService.service.impl;
 
 //import com.haijiao.Domain.bean.Clazz;
+import com.haijiao.Domain.Manager.RoomLog;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.Domain.room.Room;
+import com.haijiao.SupportService.dao.IRoomLogDAO;
 //import com.haijiao.SupportService.service.IClassService;
 import com.haijiao.SupportService.service.IRoomService;
 import com.haijiao.SupportService.service.IStudentService;
@@ -22,13 +24,26 @@ import java.util.TimerTask;
 import java.util.TreeMap;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author fish
  */
 @Service
+@Transactional
 public class RoomServiceImpl implements IRoomService {
+
+    private static Map<TeaAndStu, Room> roomTable;
+    private static Timer roomTimer;
+//    @Resource
+//    IClassService classService;
+    @Resource
+    ITeacherService teacherService;
+    @Resource
+    IStudentService studentService;
+    @Resource
+    IRoomLogDAO roomLogDAO;
 
     class TeaAndStu {
 
@@ -88,6 +103,13 @@ public class RoomServiceImpl implements IRoomService {
         }
         File dir = new File(config.tmpRoomFile + "/" + room.getId());
         deleteDir(dir);
+        System.out.println("rerrrrr");
+        //room log
+        RoomLog log = new RoomLog();
+        log.setTeacher(teacher);
+        log.setLasttime(room.getTimer().getSeconds());
+        roomLogDAO.makePersistent(log);
+        
         roomTable.remove(aas);
     }
 
@@ -122,14 +144,6 @@ public class RoomServiceImpl implements IRoomService {
             }
         }
     }
-    private static Map<TeaAndStu, Room> roomTable;
-    private static Timer roomTimer;
-//    @Resource
-//    IClassService classService;
-    @Resource
-    ITeacherService teacherService;
-    @Resource
-    IStudentService studentService;
 
     private void initialize() {
         roomTable = new Hashtable();
@@ -193,7 +207,6 @@ public class RoomServiceImpl implements IRoomService {
             initialize();
         }
 
-
         TeaAndStu aas = new TeaAndStu();
         aas.setStuEmail(stu.getEmail());
         aas.setTeaEmail(tea.getEmail());
@@ -203,6 +216,14 @@ public class RoomServiceImpl implements IRoomService {
         }
         File dir = new File(config.tmpRoomFile + "/" + room.getId());
         deleteDir(dir);
+        
+        //room log
+        RoomLog log = new RoomLog();
+        log.setTeacher(tea);
+        log.setStudent(stu);
+        log.setLasttime(room.getTimer().getSeconds());
+        roomLogDAO.makePersistent(log);
+        
         roomTable.remove(aas);
     }
 
@@ -218,9 +239,6 @@ public class RoomServiceImpl implements IRoomService {
 //    public void setClassService(IClassService classService) {
 //        this.classService = classService;
 //    }
-
-    private void deleteRoomFile(Room room) {
-    }
 
     private void deleteDir(File dir) {
         if (dir.exists()) {
@@ -249,5 +267,12 @@ public class RoomServiceImpl implements IRoomService {
     public void setStudentService(IStudentService studentService) {
         this.studentService = studentService;
     }
-    
+
+    public IRoomLogDAO getRoomLogDAO() {
+        return roomLogDAO;
+    }
+
+    public void setRoomLogDAO(IRoomLogDAO roomLogDAO) {
+        this.roomLogDAO = roomLogDAO;
+    }
 }

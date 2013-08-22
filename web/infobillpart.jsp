@@ -23,7 +23,7 @@
                 <thead>
                     <tr>
                         <th>时间</th>
-                        <th>学生姓名</th>
+                        <!--<th>学生姓名</th>-->
                         <th>课程</th>
                         <th>状态</th>
                         <th>金额</th>
@@ -33,7 +33,7 @@
                     <s:iterator value="pb.list" id="billList">
                         <tr>
                             <td><s:property value="createdateToString()" /></td>
-                            <td><s:property value="student.name" /></td>
+<!--                            <td><s:property value="student.name" /></td>-->
                             <td><s:property value="lesson"/>-<s:property value="duration" />课时</td>
                             <td><label class="label label-success" style="font-size:9px;">确认完成</label></td>
                             <td><strong class="text-error" style="font-size:14px;"><s:property value="money" />.00</strong></td>

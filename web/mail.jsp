@@ -52,7 +52,7 @@
                         </div>
                         <div class="tab-pane fade" id='newMsg'>
                             <s:if test="unreadMailList.size == 0">
-                                <h3>新信息<small><a id="markAll" class="btn btn-mini pull-right disabled" type="button">标记所有为已读</a></small></h3>
+                                <h3>新信息<small><a id="markAll" class="btn btn-warning pull-right disabled" type="button">标记所有为已读</a></small></h3>
                                 <hr/>
                                 暂无未读消息哦~！
                             </s:if>
@@ -65,9 +65,9 @@
                                         <p><s:property value="message"/></p>
                                         <a href="removeSingleMail.action?id=<s:property value="id" />" class="btn btn-danger btn-mini pull-right" style="margin-top:-10px">删除</a>
                                         <span class="pull-right">&nbsp;&nbsp;</span>
-                                        <a href="javascript:;" onclick="mark(<s:property value="id" />);" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px" data-loading-text="loading">标记已读</a>
-                                        <span class="pull-right">&nbsp;&nbsp;</span>
                                         <a href="getMail.action?toEmail=<s:property value="from.email" />" class="btn btn-primary btn-mini pull-right" style="margin-top:-10px">回复</a>
+                                        <span class="pull-right">&nbsp;&nbsp;</span>
+                                        <a href="javascript:;" onclick="mark(<s:property value="id" />);" class="btn btn-warning btn-mini pull-right" style="margin-top:-10px" data-loading-text="loading">标记已读</a>
                                     </div>
                                 </s:iterator>
                             </s:else>

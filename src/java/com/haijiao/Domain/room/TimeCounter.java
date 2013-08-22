@@ -42,7 +42,7 @@ public class TimeCounter extends TimerTask {
             rst.setTime(result);
             Gson gson = new Gson();
             room.broadcast(gson.toJson(rst));
-            if(max > 0 && seconds > max){
+            if(max > 0 && seconds == max){
                 InfoData info = new InfoData();
                 info.setInfoType(InfoType.PublicTimeUp);
                 room.broadcast(gson.toJson(info));

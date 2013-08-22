@@ -1,0 +1,20 @@
+/* 
+    Document   : teachersResult
+    Created on : Aug 18, 2013, 3:05:43 PM
+    Author     : fish
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.resultInfo {
+    color:black;
+}
+
+.resultInfo > p{
+    width: 500px;
+    margin-bottom: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
