@@ -113,17 +113,22 @@
                         <br/>
                         <button type="button" class="btn btn-small btn-danger disabled">身份</button>
                         <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" id="studyStatus" name="studyStatus" list="{'----职业----','在职教师','大专学生','大一学生','大二学生','大三学生','大四学生','在读硕士','在读博士','海归/外教','其他'}" value="%{tea.studyStatus}"></s:select>
+                        <s:if test="@com.haijiao.global.config@domain == 0">
                         <s:select cssClass="span2 choosetext" cssStyle="margin-top:10px;" id="school" name="school" list="{'----大学----','复旦大学','上海交通大学','同济大学','华东理工大学','东华大学','华东师范大学','上海外国语大学','上海财经大学','上海海关学院','上海大学','上海理工大学',
                                   '上海海事大学','上海工程技术大学','上海海洋大学','上海中医药大学','上海师范大学','华东政法大学','上海政法学院','上海建桥学院','上海第二工业大学','上海应用技术学院','上海电力学院','上海电机学院','上海对外贸易学院','上海金融学院','上海立信会计学院',
                                   '上海体育学院','上海音乐学院','上海戏剧学院','上海商学院','上海杉达学院','其他'}" value="%{tea.school}"></s:select>
-                        <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                            <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
-                            <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
-                            <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
-                        </div>
-                        <br/>
-                        <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
-                        <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
+                        </s:if>
+                        <s:elseif test="@com.haijiao.global.config@domain == 1">
+                            <s:select cssStyle="display:none;" id="school" name="school" list="{'上海交通大学'}" value="上海交通大学"></s:select>
+                        </s:elseif>
+                            <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                                <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
+                                <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
+                            </div>
+                            <br/>
+                            <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
+                            <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
                             <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{}" value="%{tea.province}"></s:select>
                             <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="city" list="{}" value="%{tea.city}"></s:select>
                             <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="district" list="{}" value="%{tea.district}"></s:select>
