@@ -64,9 +64,6 @@
                         document.getElementById("share_info").value;
                 }
             }
-            $(document).ready(function(){
-                $(".tooltip").tooltip();
-            });
         </script>
     </head>
     <body>
@@ -79,7 +76,7 @@
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
-                    <a href="toChangeInfo.action?tab=head"><img width="210px" height="210px" src="<s:property value="teacher.picUrl"/>" class="img-polaroid"/></a>
+                    <a href="toChangeInfo.action?tab=head"><img width="210px" height="210px" src="<s:property value="teacher.pic.content"/>" class="img-polaroid"/></a>
                     <h4 style="margin-left: 10px;">
                         <s:property value="teacher.name"/>
                         <s:if test="teacher.level==1">

@@ -4,6 +4,7 @@
  */
 package com.haijiao.SupportService.service.impl;
 
+import com.haijiao.Domain.bean.Picture;
 import com.haijiao.Domain.bean.ResetInfo;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
@@ -13,6 +14,7 @@ import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
 import com.haijiao.SupportService.MD5Util;
 import com.haijiao.SupportService.dao.ICommentDAO;
+import com.haijiao.SupportService.dao.IPictureDAO;
 import com.haijiao.SupportService.dao.IPublicFileDAO;
 import com.haijiao.SupportService.dao.IResetInfoDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
@@ -56,6 +58,8 @@ public class UserServiceImpl implements IUserService {
     IUserFileGroupDAO userFileGroupDAO;
     @Resource
     IPublicFileDAO publicFileDAO;
+    @Resource
+    IPictureDAO pictureDAO;
 
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -164,6 +168,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public boolean register(String account, String password, String userType) {
+        Picture pic = pictureDAO.findById(1);
         if (userType.equals("student")) {
             Student s = new Student();
             s.setEmail(account);
@@ -172,6 +177,7 @@ public class UserServiceImpl implements IUserService {
             s.setUserType(userType);
             s.setLastActiveDate(new Date());
             s.setPicUrl("images/figure-default.png"); //temp
+            s.setPic(pic);
             s.setLoginNum(0);
             s.setScoreNum(0);
             s.setScore(0);
@@ -192,6 +198,7 @@ public class UserServiceImpl implements IUserService {
             t.setObNum(0);
             t.setLoginNum(0);
             t.setPicUrl("images/page2-img1.jpg"); //temp
+            t.setPic(pic);
             t.setIntro("<p><br /></p><div style='text-align:center;'><strong><span style='background-color:#FFE500;'><span style='font-size:24px;'>提醒：欢迎使用免登陆试讲功能</span></span></strong></div><p><br /></p><ul><li><strong><span style='color:#009900;'>空闲时间</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下空闲时间。</strong><ul><li><strong><span style='color:#009900;'>自我描述</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下自我描述。</strong><ul><li><strong><span style='color:#009900;'>获奖经历</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下获奖经历。</strong><ul><li><strong><span style='color:#009900;'>家教经历</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下家教经历。</strong><p><br /></p>");
             UserFileGroup fg = new UserFileGroup();
             fg.setGroupName("默认分组");
@@ -257,10 +264,11 @@ public class UserServiceImpl implements IUserService {
             return false;
         } else {
             UserFile ud = userFileDAO.getFile(fg.getId(), fileName);
-            if(ud.getOwned()){
+            if (ud.getOwned()) {
                 File file = new File(ud.getUrl());
-                if(file.exists())
+                if (file.exists()) {
                     file.delete();
+                }
             }
             fg.removeFile(ud);
             userFileGroupDAO.update(fg);
@@ -318,8 +326,15 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void setPicUrl(String email, String url) {
         User user = userDAO.getUserByEmail(email);
-        user.setPicUrl(url);
+        Picture oldp = user.getPic();
+        Picture p = new Picture();
+        p.setContent(url);
+        pictureDAO.makePersistent(p);
+        user.setPic(p);
         userDAO.update(user);
+        if (oldp != null && oldp.getId() != 1) {
+            pictureDAO.makeTransient(oldp);
+        }
     }
 
     @Override
@@ -353,7 +368,7 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public boolean addFileFromPublic(String email, String groupName, int publicFileId){
+    public boolean addFileFromPublic(String email, String groupName, int publicFileId) {
         PublicFile pf = publicFileDAO.findById(publicFileId);
         UserFile uf = new UserFile();
         uf.setName(pf.getName());
@@ -368,7 +383,7 @@ public class UserServiceImpl implements IUserService {
         userFileGroupDAO.update(fg);
         return true;
     }
-    
+
     @Override
     public List<UserFileGroup> getUserFileGroup(String email) {
         return userFileGroupDAO.getUserFileGroup(email);
@@ -380,19 +395,19 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public int getUserFileNum(String email, String groupName){
+    public int getUserFileNum(String email, String groupName) {
         return userFileDAO.getUserFileNum(email, groupName);
     }
-    
+
     @Override
     public boolean publishFile(int userFileId, String name, String author, String publisher, String type) {
         try {
             UserFile uf = userFileDAO.findById(userFileId);
             FileInputStream in = new FileInputStream(uf.getUrl());
-            String url =  config.fileHome + File.separator + userFileId + ".pdf";
+            String url = config.fileHome + File.separator + userFileId + ".pdf";
             System.out.println(url);
             File dir = new File(config.fileHome);
-            if(!dir.exists()){
+            if (!dir.exists()) {
                 dir.mkdirs();
             }
             File file = new File(url);
@@ -437,5 +452,5 @@ public class UserServiceImpl implements IUserService {
     public int getPubliFileNum(String name) {
         return publicFileDAO.getPublicFileNum(name);
     }
-    
+
 }

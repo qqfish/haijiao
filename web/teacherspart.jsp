@@ -22,7 +22,7 @@
                     <div id="resultBar">
                         <li class="span11">
                             <div class="thumbnail">
-                                <img class="pull-left" width="110px" style="margin: 0px 10px 0px 0px;width: 110px;" src="<s:property value="picUrl"/>"/>
+                                <img class="pull-left" style="margin: 0px 10px 0px 0px;width: 110px;height: 110px;" src="<s:property value="pic.content"/>"/>
                                 <a href="${id}" style="text-decoration: none;">
                                     <b style="font-size: 20px;"><s:property value="getSecretName()"/>&nbsp;</b>
                                 </a>

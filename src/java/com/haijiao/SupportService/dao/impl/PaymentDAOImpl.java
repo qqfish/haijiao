@@ -4,7 +4,6 @@
  */
 package com.haijiao.SupportService.dao.impl;
 
-import com.haijiao.Domain.bean.Mail;
 import com.haijiao.Domain.bean.Payment;
 import com.haijiao.SupportService.dao.GenericHibernateDAO;
 import com.haijiao.SupportService.dao.IPaymentDAO;
