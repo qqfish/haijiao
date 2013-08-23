@@ -36,6 +36,6 @@ public class config {
     static public String websiteURI = "localhost:8080";
     
     //0:haijiaoedu.com 1:
-    static public int domain = 0;
+    static public int domain = 1;
     
 }
