@@ -287,7 +287,8 @@
                                     <li id="l1" class="active"><a href="#p_school" data-toggle="tab">小学</a></li>
                                     <li id="l2"><a href="#j_school" data-toggle="tab" >初中</a></li>
                                     <li id="l3"><a href="#s_school" data-toggle="tab" >高中</a></li>
-                                    <li id="l4"><a href="#eng" data-toggle="tab" >英语</a></li>
+                                    <li id="l4"><a href="#eng" data-toggle="tab" >外语</a></li>
+                                    <li id="l4"><a href="#graduate" data-toggle="tab" >考研</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane fade active in" id='p_school'>
@@ -330,6 +331,12 @@
                                         <label class="label label-info lessonName">GRE</label>
                                         <label class="label label-info lessonName">雅思</label>
                                         <label class="label label-info lessonName">口语</label>
+                                    </div>
+                                    <div class="tab-pame fade" id='graduate'>
+                                        <label class="label label-info lessonName">考研英语</label>
+                                        <label class="label label-info lessonName">考研数学</label>
+                                        <label class="label label-info lessonName">考研政治</label>
+                                        <label class="label label-info lessonName">考研专业课</label>
                                     </div>
                                 </div>
                                 <div class="modal hide fade" id="addLessonModal">

@@ -58,24 +58,35 @@ jQuery(document).ready(function($) {
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".pschool").fadeIn(1, null);
+            $(".graduate").fadeOut(1, null);
         } else if ($(this).html() == "初中") {
             $(".pschool").fadeOut(1, null);
             $(".hschool").fadeOut(1, null);
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".mschool").fadeIn(1, null);
+            $(".graduate").fadeOut(1, null);
         } else if ($(this).html() == "高中") {
             $(".pschool").fadeOut(1, null);
             $(".mschool").fadeOut(1, null);
             $(".english").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".hschool").fadeIn(1, null);
-        } else if ($(this).html() == "英语") {
+            $(".graduate").fadeOut(1, null);
+        } else if ($(this).html() == "外语") {
             $(".pschool").fadeOut(1, null);
             $(".mschool").fadeOut(1, null);
             $(".hschool").fadeOut(1, null);
             $('#lesson').fadeIn(1, null);
             $(".english").fadeIn(1, null);
+            $(".graduate").fadeOut(1, null);
+        } else if ($(this).html() == "考研") {
+            $(".pschool").fadeOut(1, null);
+            $(".mschool").fadeOut(1, null);
+            $(".hschool").fadeOut(1, null);
+            $('#lesson').fadeIn(1, null);
+            $(".english").fadeOut(1, null);
+            $(".graduate").fadeIn(1, null);
         } else {
             $("#lesson").fadeOut(1, null);
         }

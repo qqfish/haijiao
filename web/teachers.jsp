@@ -52,7 +52,8 @@
                             <button id="pschool" type="button" value="1" class="btn btn-small" data-toggle="button">小学</button>
                             <button id="mschool" type="button" value="2" class="btn btn-small" data-toggle="button">初中</button>
                             <button id="hschool" type="button" value="8" class="btn btn-small" data-toggle="button">高中</button>
-                            <button id="english" type="button" value="8" class="btn btn-small" data-toggle="button">英语</button>
+                            <button id="english" type="button" value="8" class="btn btn-small" data-toggle="button">外语</button>
+                            <button id="graduate" type="button" value="8" class="btn btn-small" data-toggle="button">考研</button>
                         </div>
                         <br/>
                         <div id="lesson" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio" style="border:1px; border-color: #CCC; border-style: solid;  padding: 5px 10px 5px 10px; margin-top: 7px; margin-left: 50px; border-radius:9px; display: none;">
@@ -90,6 +91,10 @@
                             <button type="button" value="31" class="btn btn-small english" data-toggle="button" style="display: none;">雅思</button>
                             <button type="button" value="32" class="btn btn-small english" data-toggle="button" style="display: none;">GRE</button>
                             <button type="button" value="33" class="btn btn-small english" data-toggle="button" style="display: none;">口语</button>
+                            <button type="button" value="30" class="btn btn-small graduate" data-toggle="button" style="display: none;">考研英语</button>
+                            <button type="button" value="31" class="btn btn-small graduate" data-toggle="button" style="display: none;">考研数学</button>
+                            <button type="button" value="32" class="btn btn-small graduate" data-toggle="button" style="display: none;">考研政治</button>
+                            <button type="button" value="33" class="btn btn-small graduate" data-toggle="button" style="display: none;">考研专业课</button>
                         </div>
                         <p></p>
                         <button type="button" class="btn btn-small btn-danger disabled">方式</button>
