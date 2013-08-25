@@ -46,7 +46,7 @@
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
-                    <img width="210px" height="210px" src="<s:property value="tea.picUrl"/>" class="img-polaroid"/>
+                    <img width="210px" height="210px" src="<s:property value="tea.pic.content"/>" class="img-polaroid"/>
                     <input id="myemail" type="hidden" value="<s:property value="#session.email"/>" />
                     <input id="teaemail" type="hidden" value="<s:property value="tea.email"/>" />
                     <h4 style="margin-left:5px"><s:property value="tea.getSecretName()" default="-"/>

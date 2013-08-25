@@ -19,6 +19,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,10 +46,13 @@ public class User extends BaseBean{
     protected String password;  //用户密码
     protected int coin;         //该账户中剩下的智慧币
     @Lob
-    @Basic(fetch = FetchType.LAZY) 
+    @Basic(fetch = FetchType.LAZY)
     @Column(name="intro", columnDefinition="TEXT", nullable=true)
     protected String intro;     //用户的个人简介，显示在个人主页上
-    protected String picUrl;    //用户头像的URL
+    
+    @OneToOne
+    protected Picture pic;      //用户头像的datauri
+    
     protected String sex;       //性别
     @Temporal(TemporalType.DATE)
     protected Date birthday;    //生日
@@ -84,12 +88,12 @@ public class User extends BaseBean{
         this.intro = intro;
     }
 
-    public String getPicUrl() {
-        return picUrl;
+    public Picture getPic() {
+        return pic;
     }
 
-    public void setPicUrl(String picUrl) {
-        this.picUrl = picUrl;
+    public void setPic(Picture pic) {
+        this.pic = pic;
     }
 
     public String getName() {
