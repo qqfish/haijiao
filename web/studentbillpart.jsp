@@ -57,7 +57,7 @@
                                 备注:<s:property value="message" default="无" /></span>
 
                         </td>
-                        <td><strong><s:property value="lesson.name" /></strong><br />
+                        <td><strong><s:property value="lesson" /></strong><br />
                             <s:property value="duration" />课时
                         </td>
                         <td><strong class="text-error" style="font-size:14px;"><br /><s:property value="money" />.00</strong></td>

@@ -21,3 +21,16 @@ function testUpload(fileid) {
     }
     $('#fileUpload').submit();
 }
+
+function testAddGroup(){
+    var name = $('#newGroupName').val();
+    if(name == null || name==""){
+        $('#newGroup_tip').text("*请填写分组名");
+        $('#newGroup_tip').fadeIn();
+        return false;
+    }
+    else{
+        $('#newGroup_tip').fadeOut();
+        $('#newGroup').click();
+    }
+}

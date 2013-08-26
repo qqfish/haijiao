@@ -75,12 +75,12 @@
                         </s:form>
                     </div><!-- /.column.main -->
                     <div class="span4">
-                        <h4>感谢您的宝贵意见</h4>
+                        <h4>郑重承诺</h4>
                         <ul class="checklist">
-                            <li>如果我们需要更多的意见我们将联系您</li>
-                            <li>在您的帮助下我们将做得更好</li>
+                            <li>三个工作日完成纠纷处理</li>
+                            <li>十五个工作日完成纠纷退款</li>
                         </ul>
-
+                        <hr/>
                         <div class="rule"></div>
 
                         <h4>在线客服</h4>
@@ -105,7 +105,10 @@
                         </ul>
                         </p>
                         <hr/>
-                        <p>如果你对<b>老师开设的课程</b>存在任何疑问，请直接联系课程老师。</p>
+                        <h4>温馨提醒</h4>
+                        <ul class="checklist">
+                            <li>下订单前请与老师“电话联系”或“在线试讲”，提前体验教学效果，以减少纠纷</li>
+                        </ul>
 
                     </div><!-- /.column.sidebar -->
                 </div>

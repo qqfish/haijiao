@@ -265,6 +265,8 @@ public class BillServiceImpl implements IBillService {
         tea.addPayment(stuPay);
         tea.addPayment(charge);
         tea.setCoin(coin + stuPay.getMoney() + charge.getMoney());
+        int num = tea.getClassNum();
+        tea.setClassNum(num +1);
         paymentDAO.makePersistent(stuPay);
         paymentDAO.makePersistent(charge);
         teacherDAO.update(tea);

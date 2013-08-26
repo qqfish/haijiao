@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
         <link rel="stylesheet" href="css/jquery.autocomplete.css">
+        <link rel="stylesheet" href="css/validate.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -95,14 +96,14 @@
 
                         </div>
                         <div class="tab-pane fade" id='file_area'>
-                            <button class="btn btn-mini btn-primary pull-right" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
-                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-mini btn-primary pull-right" style="margin-right: 10px;">上传</button>
                             <div id="newgroup" style="display:none;">
                                 <hr/>
                                 <s:form action="file">
-                                    <s:textfield name="dest"/>
-                                    <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
+                                    <s:textfield id="newGroupName" name="dest"/>
+                                    <s:submit id="newGroup" cssStyle="display:none;" value="新建" method="create"/>
+                                    <span class="btn btn-primary" onclick="testAddGroup();">新建</span>
                                     <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
+                                    <div id="newGroup_tip" class="validateTip" style="text-align:left;"></div>
                                 </s:form>
                             </div>
                             <hr/>

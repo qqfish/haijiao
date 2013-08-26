@@ -11,6 +11,8 @@
             <title>上海交通大学家教部</title>
         </s:elseif>
         <meta charset="utf-8">
+        <meta name="keywords" content="网络家教 在线家教 网络教育 在线教育 互联网家教"/>
+        <meta name="description" content="海角教育专注1v1在线教育，无论您身处天涯海角，足不出户可以和全国各地的老师进行在线面对面学习，上课前免费试讲，不满意免费换老师"/>
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/validate.css" />
         <link rel="stylesheet" href="css/index.css" />
@@ -71,7 +73,7 @@
                     <s:if test="@com.haijiao.global.config@domain == 0">
                         <h3>欢迎来到海角教育！</h3>
                         <br/>
-                        <p style="font-size: 20px">海角教育专注<a href="about.jsp">1V1在线教育</a>，无论您身处天涯海角，<br/>通过互联网即可获得全国最优秀的教育资源。
+                        <p style="font-size: 20px">海角教育专注<a href="about.jsp">1V1在线互动教育</a>，无论您身处天涯海角，<br/>足不出户可以随时和全国各地的<a href="searchTeacher.action?searchContent=">老师</a>在线面对面学习。
                         </p>
                     </s:if>
                     <s:elseif test="@com.haijiao.global.config@domain == 1">

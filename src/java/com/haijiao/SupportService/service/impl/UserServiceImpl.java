@@ -176,7 +176,6 @@ public class UserServiceImpl implements IUserService {
             s.setPassword(password);
             s.setUserType(userType);
             s.setLastActiveDate(new Date());
-            //s.setPicUrl("images/figure-default.png"); //temp
             s.setPic(pic);
             s.setLoginNum(0);
             s.setScoreNum(0);
@@ -197,7 +196,6 @@ public class UserServiceImpl implements IUserService {
             t.setClassNum(0);
             t.setObNum(0);
             t.setLoginNum(0);
-            //t.setPicUrl("images/page2-img1.jpg"); //temp
             t.setPic(pic);
             t.setIntro("<p><br /></p><div style='text-align:center;'><strong><span style='background-color:#FFE500;'><span style='font-size:24px;'>提醒：欢迎使用免登陆试讲功能</span></span></strong></div><p><br /></p><ul><li><strong><span style='color:#009900;'>空闲时间</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下空闲时间。</strong><ul><li><strong><span style='color:#009900;'>自我描述</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下自我描述。</strong><ul><li><strong><span style='color:#009900;'>获奖经历</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下获奖经历。</strong><ul><li><strong><span style='color:#009900;'>家教经历</span></strong></li></ul><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 这个老师很懒，并没有留下家教经历。</strong><p><br /></p>");
             UserFileGroup fg = new UserFileGroup();
