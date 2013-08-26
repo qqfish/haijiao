@@ -15,10 +15,12 @@
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/jquery.rateit.min.js"></script>
+        <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
         <script type="text/javascript" src="js/studentIndex.js"></script>
         <script type="text/javascript" src="js/fileUpload.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery.autocomplete.css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -64,6 +66,7 @@
                         <li id="l5"><a href="#file_area" data-toggle="tab" >我的课件</a></li>
                         <li id="l6" ><a href="#publicfile_area" data-toggle="tab">公共课件</a></li>
                         <li id="l4" ><a href="#comment_area" data-toggle="tab" >评论</a></li>
+                        <li id="l7"><a href="#require_area" data-toggle="tab">发布需求</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane fade" id='bill_area'>
@@ -77,14 +80,14 @@
                                     <div class="modal-body">
                                         <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                         内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                            <br/>
-                                            评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                        <br/>
+                                        评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
                                         <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                         <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                        </div>
+                                    </div>
                                 </s:form>
                             </div>
                         </div>
@@ -161,6 +164,67 @@
                                             </dd>
                                         </dl>
                                     </s:form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="require_area">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <label class="control-label" for="TAName"><strong>需求描述</strong></label>
+                                    <div class="controls">
+                                        <s:textarea cssClass="span4" type="text" name="name" placeholder="请输入需求的具体要求" value="%{tea.name}" autofocus="autofocus" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="phoneNum"><strong>家庭地址</strong></label>
+                                    <div class="controls">
+                                        <s:textfield id="phoneNum" cssClass="span4" type="text" name="tel" placeholder="请输入您的家庭地址" value="%{tea.tel}"/>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="phoneNum"><strong>授课方式</strong></label>
+                                    <div class="controls">
+                                        <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
+                                        <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
+                                        <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="datepicker"><strong>课程</strong></label>
+                                    <div class="controls">
+                                        <s:textfield id="lessonSelect" cssClass="span4" name="lesson" placeholder="请输入课程名称" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="phoneNum"><strong>课程单价</strong></label>
+                                    <div class="controls">
+                                        <div class="input-append">
+                                            <s:textfield placeholder="课程价格" name="price" value="1" onchange="checkNatureNumber($(this));"/>
+                                            <span class="add-on">.00元/45分钟</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="datepicker"><strong>课时数</strong></label>
+                                    <div class="controls">
+                                           <input type="number" class="span1" min="1" max="20" step="1" value="1">
+                                    </div>
+                                </div>           
+                                <div class="control-group">
+                                    <label class="control-label" for="gender"><strong>是否公开需求</strong></label>
+                                    <div class="controls" id="gender">
+                                        <div style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></div>
+                                        <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                            <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">是</button>
+                                            <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">否</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="controls">
+                                        <button class="btn btn-primary pull-right">确认更改</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

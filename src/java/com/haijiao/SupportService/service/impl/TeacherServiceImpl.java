@@ -46,10 +46,10 @@ public class TeacherServiceImpl implements ITeacherService {
     }
 
     @Override
-    public Teacher getTeacherById(int id){
+    public Teacher getTeacherById(int id) {
         return teacherDAO.findById(id);
     }
-    
+
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public Teacher getTeacherByEmail(String email) {
@@ -192,6 +192,15 @@ public class TeacherServiceImpl implements ITeacherService {
         Teacher t = teacherDAO.getTeacherByEmail(email);
         Lesson l = lessonDAO.getLessonByName(email, lessonName);
         if (l != null) {
+            if( t.getWagePerhour() == l.getPrice()){
+                int min = price;
+                for (int i = 0; i < t.getLessons().size(); i++) {
+                    if (t.getLessons().get(i).getPrice() < min) {
+                        min = t.getLessons().get(i).getPrice();
+                    }
+                }
+                t.setWagePerhour(min);
+            }
             l.setDelete(false);
             l.setPrice(price);
             lessonDAO.update(l);
@@ -203,11 +212,11 @@ public class TeacherServiceImpl implements ITeacherService {
             List ll = t.getLessons();
             ll.add(l);
             t.setLessons(ll);
+            if (t.getWagePerhour() > price || t.getWagePerhour() <= 0) {
+                t.setWagePerhour(price);
+            }
+        }
 
-        }
-        if (t.getWagePerhour() > price || t.getWagePerhour() <= 0) {
-            t.setWagePerhour(price);
-        }
         teacherDAO.update(t);
         return true;
     }
@@ -271,5 +280,4 @@ public class TeacherServiceImpl implements ITeacherService {
         teacherDAO.update(t);
         return true;
     }
-    
 }
