@@ -269,7 +269,7 @@
                     <div class="tab-content">
 
                         <div class="tab-pane fade" id='lesson_area'>
-                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom" data-original-title="开设课程步骤" data-content="
+                            <a id="showtip" class="pull-right" data-html="true" data-toggle="popover" data-trigger="click" data-placement="bottom" data-original-title="我的主页(分享获得预约):<br/><small><a href='localhost:8080/haijiao/<s:property value="teacher.id"/>'>haijiaoedu.com/3333<s:property value='teacher.id'/></a></small>" data-content="
                                <small><strong>①自我推介：将老师个人主页地址发给学生或社交网络获取关注；</small><br/>
                                <small><strong>②在线试讲：开启在线试讲功能，学生试讲后能提升预约成功率；</small><br/>
                                <small><strong>③积极检索：高校BBS兼职板块、58同城等网站有需求可以对接；</small><br/>
@@ -401,9 +401,11 @@
                             <div id="newgroup" style="display:none;">
                                 <hr/>
                                 <s:form action="file">
-                                    <s:textfield name="dest"/>
-                                    <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
+                                    <s:textfield id="newGroupName" name="dest"/>
+                                    <s:submit id="newGroup" cssStyle="display:none;" value="新建" method="create"/>
+                                    <span class="btn btn-primary" onclick="testAddGroup();">新建</span>
                                     <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
+                                    <div id="newGroup_tip" class="validateTip" style="text-align:left;"></div>
                                 </s:form>
                             </div>
                             <div class="modal fade hide" id="uploadmodal" style="margin-top:9%">

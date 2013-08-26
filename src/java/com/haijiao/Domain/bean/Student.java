@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
@@ -42,6 +43,9 @@ public class Student extends User {
     inverseJoinColumns =
     @JoinColumn(name = "tid"))
     private List<Teacher> teacherList;   //收藏老师的列表
+    
+    @OneToOne
+    private Demand demand;   //学生需求列表
 
     public Student() {
         this.billList = new ArrayList<Bill>();
@@ -120,4 +124,13 @@ public class Student extends User {
     public void setUndealBill(int undealBill) {
         this.undealBill = undealBill;
     }
+
+    public Demand getDemand() {
+        return demand;
+    }
+
+    public void setDemand(Demand demand) {
+        this.demand = demand;
+    }
+
 }
