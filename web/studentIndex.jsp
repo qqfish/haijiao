@@ -21,7 +21,6 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
         <link rel="stylesheet" href="css/jquery.autocomplete.css">
-        <link rel="stylesheet" href="css/validate.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -96,14 +95,14 @@
 
                         </div>
                         <div class="tab-pane fade" id='file_area'>
+                            <button class="btn btn-mini btn-primary pull-right" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
+                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-mini btn-primary pull-right" style="margin-right: 10px;">上传</button>
                             <div id="newgroup" style="display:none;">
                                 <hr/>
                                 <s:form action="file">
-                                    <s:textfield id="newGroupName" name="dest"/>
-                                    <s:submit id="newGroup" cssStyle="display:none;" value="新建" method="create"/>
-                                    <span class="btn btn-primary" onclick="testAddGroup();">新建</span>
+                                    <s:textfield name="dest"/>
+                                    <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
                                     <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
-                                    <div id="newGroup_tip" class="validateTip" style="text-align:left;"></div>
                                 </s:form>
                             </div>
                             <hr/>
@@ -170,97 +169,177 @@
                         </div>
 
                         <div class="tab-pane fade" id="require_area">
-                            <div class="form-horizontal">
-                                <div class="control-group">
-                                    <label class="control-label" for="TAName"><strong>需求描述</strong></label>
-                                    <div class="controls">
-                                        <s:textarea cssClass="span4" type="text" name="name" placeholder="请输入需求的具体要求" value="%{tea.name}" autofocus="autofocus" />
-                                    </div>
+                            <div class="pull-right">
+                                <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">更改需求</button>
+                            </div>
+                            <dl class="dl-horizontal" style="margin:0;">
+                                <dt class="lead" style="width:90px;margin:0;">当前需求</dt>
+                                <dd class="muted" style="margin-left:110px;margin-top: 10px;" id=""></dd>
+                            </dl>
+                            <hr />
+                            <dl class="dl-horizontal" style="margin:0;">
+                                <dt class="muted" style="width:90px;">发布时间</dt>
+                                <dd class="" style="margin-left:110px;" id="">2013-3-14 12:00:00</dd>
+                            </dl>
+                            <dl class="dl-horizontal" style="margin:0;">
+                                <dt class="muted" style="width:90px;">价格</dt>
+                                <dd class="" style="margin-left:110px;" id="">100元 / 5课时</dd>
+                            </dl>
+                            <dl class="dl-horizontal" style="margin:0;">
+                                <dt class="muted" style="width:90px;">需求描述</dt>
+                                <dd class="" style="margin-left:110px;" id="">啦啦啦啦啦</dd>
+                            </dl>
+                            <dl class="dl-horizontal" style="margin:0;">
+                                <dt class="muted" style="width:90px;">家教地址</dt>
+                                <dd class="" style="margin-left:110px;" id="">123123123</dd>
+                            </dl>
+                            <dl class="dl-horizontal" style="margin:0;">
+                                <dt class="muted" style="width:90px;">课程</dt>
+                                <dd class="" style="margin-left:110px;" id=""> 
+                                    <small>数学</small>
+                                    <small>语文</small>
+                                    <small>英语</small>
+                                </dd>
+                            </dl>
+                            <dl class="dl-horizontal" style="margin:0;">
+                                <dt class="muted" style="width:90px;">授课方式</dt>
+                                <dd class="" style="margin-left:110px;" id="">
+                                    <span data-toggle-name="is_private" data-toggle="buttons-radio">
+                                        <button type="button" class="btn btn-mini btn-choice">线上授课</button>
+                                        <button type="button" class="btn btn-mini btn-choice">学生上门</button>
+                                        <button type="button" class="btn btn-mini btn-choice">老师上门</button>
+                                    </span>
+                                </dd>
+                            </dl>
+                            <hr />
+                            <h4>抢单老师</h4>
+                            <div class="thumbnail" style="line-height: 15px">
+                                <img class="pull-left" style="margin: 0px 10px 0px 0px;width: 110px;height: 110px;" src="<s:property value="pic.content"/>"/>
+                                <a href="${id}" style="text-decoration: none;">
+                                    <b style="font-size: 20px;"><s:property value="getSecretName()"/>&nbsp;</b>
+                                </a>
+                                <s:if test="level==1">
+                                    <i class="icon-diomand"></i>
+                                </s:if>
+                                <s:else>
+                                    <i class="icon-"></i>
+                                </s:else>
+                                <s:if test="status==0"><label class="label">离线</label></s:if>
+                                <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
+                                <s:else><label class="label label-warning">忙碌</label></s:else>
+                                <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:date name="lastActiveDate" nice="true"/></small>
+                                <label class="label label-info pull-right"><s:property value="reserveNum"/>人预约</label>
+                                <br/>
+                                <div class="resultInfo" >
+                                    <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                    <p><small><s:property value="school" default="暂无大学"/> | <s:property value="major" default="暂无专业"/></small></p>
+                                    <p><small>生源地：上海市XX中学</small></p>
+                                    <p><small>上课方式：线上授课</small></p>
+                                    <a class="btn btn-mini pull-right">接受</a>
+                                    <p><small>身份：<s:if test="studyStatus == null">无</s:if><s:else><s:property value="studyStatus"/></s:else></small></p>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="phoneNum"><strong>家庭地址</strong></label>
-                                    <div class="controls">
-                                        <s:textfield id="phoneNum" cssClass="span4" type="text" name="tel" placeholder="请输入您的家庭地址" value="%{tea.tel}"/>
-                                    </div>
+                            </div>
+                            <div id="requireModal"class="modal fade">
+                                <div class="modal-header">
+                                    <h4>需求修改</h4>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="phoneNum"><strong>授课方式</strong></label>
-                                    <div class="controls">
-                                        <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
-                                        <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
-                                        <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="datepicker"><strong>课程</strong></label>
-                                    <div class="controls">
-                                        <s:textfield id="lessonSelect" cssClass="span4" name="lesson" placeholder="请输入课程名称" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="phoneNum"><strong>课程单价</strong></label>
-                                    <div class="controls">
-                                        <div class="input-append">
-                                            <s:textfield placeholder="课程价格" name="price" value="1" onchange="checkNatureNumber($(this));"/>
-                                            <span class="add-on">.00元/45分钟</span>
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="control-group">
+                                            <label class="control-label" for="TAName"><strong>需求描述</strong></label>
+                                            <div class="controls">
+                                                <s:textarea cssClass="span4" type="text" name="name" placeholder="请输入需求的具体要求" value="%{tea.name}" autofocus="autofocus" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="phoneNum"><strong>家庭地址</strong></label>
+                                            <div class="controls">
+                                                <s:textfield id="phoneNum" cssClass="span4" type="text" name="tel" placeholder="请输入您的家庭地址" value="%{tea.tel}"/>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="phoneNum"><strong>授课方式</strong></label>
+                                            <div class="controls">
+                                                <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
+                                                <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
+                                                <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="datepicker"><strong>课程</strong></label>
+                                            <div class="controls">
+                                                <s:textfield id="lessonSelect" cssClass="span4" name="lesson" placeholder="请输入课程名称" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="phoneNum"><strong>课程单价</strong></label>
+                                            <div class="controls">
+                                                <div class="input-append">
+                                                    <s:textfield placeholder="课程价格" name="price" value="1" onchange="checkNatureNumber($(this));"/>
+                                                    <span class="add-on">.00元/45分钟</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="datepicker"><strong>课时数</strong></label>
+                                            <div class="controls">
+                                                <input type="number" class="span1" min="1" max="20" step="1" value="1">
+                                            </div>
+                                        </div>           
+                                        <div class="control-group">
+                                            <label class="control-label" for="gender"><strong>是否公开需求</strong></label>
+                                            <div class="controls" id="gender">
+                                                <div style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></div>
+                                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                                                    <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">是</button>
+                                                    <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">否</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="datepicker"><strong>课时数</strong></label>
-                                    <div class="controls">
-                                           <input type="number" class="span1" min="1" max="20" step="1" value="1">
-                                    </div>
-                                </div>           
-                                <div class="control-group">
-                                    <label class="control-label" for="gender"><strong>是否公开需求</strong></label>
-                                    <div class="controls" id="gender">
-                                        <div style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></div>
-                                        <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                                            <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">是</button>
-                                            <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">否</button>
+                                <div class="modal-footer">
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button class="btn btn-primary pull-right">确认更改</button>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <div class="controls">
-                                        <button class="btn btn-primary pull-right">确认更改</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <s:if test="tab=='publicfile'">
-                                <script>
-                                    $("#publicfile_area").addClass("active in");
-                                    $("#l6").addClass("active")
-                                </script>
-                            </s:if>
-                            <s:elseif test="tab=='file'">
-                                <script>
-                                    $("#file_area").addClass("active in");
-                                    $("#l5").addClass("active")
-                                </script>
-                            </s:elseif>
-                            <s:elseif test="tab=='comment'">
-                                <script>
-                                    $("#comment_area").addClass("active in");
-                                    $("#l4").addClass("active")
-                                </script>
-                            </s:elseif>
-                            <s:else>
-                                <script>
-                                    $("#bill_area").addClass("active in");
-                                    $("#l3").addClass("active")
-                                </script>
-                            </s:else>
-                        </div>
+                    </div>
+                    <div>
+                        <s:if test="tab=='publicfile'">
+                            <script>
+                                $("#publicfile_area").addClass("active in");
+                                $("#l6").addClass("active")
+                            </script>
+                        </s:if>
+                        <s:elseif test="tab=='file'">
+                            <script>
+                                $("#file_area").addClass("active in");
+                                $("#l5").addClass("active")
+                            </script>
+                        </s:elseif>
+                        <s:elseif test="tab=='comment'">
+                            <script>
+                                $("#comment_area").addClass("active in");
+                                $("#l4").addClass("active")
+                            </script>
+                        </s:elseif>
+                        <s:else>
+                            <script>
+                                $("#bill_area").addClass("active in");
+                                $("#l3").addClass("active")
+                            </script>
+                        </s:else>
                     </div>
                 </div>
-            </div>         
-        </div>
+            </div>
+        </div>         
+    </div>
 
-        <!--==============================footer=================================-->
-        <%@ include file="WEB-INF/jspf/footer.jspf"%>
-    </body>
+    <!--==============================footer=================================-->
+    <%@ include file="WEB-INF/jspf/footer.jspf"%>
+</body>
 </html>
