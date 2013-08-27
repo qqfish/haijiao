@@ -37,12 +37,12 @@ public class SendMail {
     
     public void send(String email, String subject, String text){
         try {
-            Message msg = new MimeMessage(session);
+            MimeMessage msg = new MimeMessage(session);
             msg.setHeader("Content-Type", "text/plain; charset=UTF-8");
             msg.setFrom(new InternetAddress(from));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(email));
             msg.setSubject(subject);
-            msg.setText(text);
+            msg.setText(text,"UTF-8");
             Transport.send(msg);
         } catch (MessagingException ex) {
             Logger.getLogger(SendMail.class.getName()).log(Level.SEVERE, null, ex);

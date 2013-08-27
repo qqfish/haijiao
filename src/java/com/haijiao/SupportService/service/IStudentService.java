@@ -6,8 +6,9 @@ package com.haijiao.SupportService.service;
 
 //import com.haijiao.Domain.bean.Clazz;
 //import com.haijiao.Domain.bean.FreeTime;
+import com.haijiao.Domain.bean.Demand;
 import com.haijiao.Domain.bean.Student;
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -20,6 +21,11 @@ public interface IStudentService {
     public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType);
     //充值
     public boolean topUpMoney(String email, int numberOfCoin);
+    
+    public Demand getStudentDemand(String email);
+    public boolean publishDemand(String email, String lesson, String demand, String address, int duration, int total);
+    public boolean changeDemand(String email, String lesson, String demand, String address, int duration, int total);
+    public boolean cancelDemand(String email);
     
 //    //获取学生时间表
 //    public List<Clazz> getClasses(String email);

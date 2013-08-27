@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Teachers</title>
+        <title><s:property value="student.name"/>的主页</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
         <link rel="stylesheet" href="css/jquery.autocomplete.css">
+        <link rel="stylesheet" href="css/validate.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -80,14 +81,14 @@
                                     <div class="modal-body">
                                         <s:textfield name="id" id="comment_id" cssStyle="display:none;"></s:textfield>
                                         内容<s:textarea name="content" autofocus="autofocus" id="content"></s:textarea>
-                                        <br/>
-                                        评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
+                                            <br/>
+                                            评分<div id="comment_rate" class="rateit" data-rateit-step="1" data-rateit-ispreset="true"></div>
                                         <s:textfield id="comment_score" name="score" value="0" cssStyle="display:none;"></s:textfield>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn" data-dismiss="modal" aria-hidden="true">关闭</button>
                                         <s:submit cssClass="btn btn-primary" method="comment" value="提交"></s:submit>
-                                    </div>
+                                        </div>
                                 </s:form>
                             </div>
                         </div>
@@ -95,14 +96,14 @@
 
                         </div>
                         <div class="tab-pane fade" id='file_area'>
-                            <button class="btn btn-mini btn-primary pull-right" data-toggle="button" onclick="$('#newgroup').toggle();">新建分组</button>
-                            <button data-toggle="modal" data-target="#uploadmodal" class="btn btn-mini btn-primary pull-right" style="margin-right: 10px;">上传</button>
                             <div id="newgroup" style="display:none;">
                                 <hr/>
                                 <s:form action="file">
-                                    <s:textfield name="dest"/>
-                                    <s:submit cssClass="btn btn-primary" value="新建" method="create"/>
+                                    <s:textfield id="newGroupName" name="dest"/>
+                                    <s:submit id="newGroup" cssStyle="display:none;" value="新建" method="create"/>
+                                    <span class="btn btn-primary" onclick="testAddGroup();">新建</span>
                                     <button class="btn" onclick="$('#userfile').first('button').click();">取消</button>
+                                    <div id="newGroup_tip" class="validateTip" style="text-align:left;"></div>
                                 </s:form>
                             </div>
                             <hr/>
@@ -177,84 +178,90 @@
                                 <dd class="muted" style="margin-left:110px;margin-top: 10px;" id=""></dd>
                             </dl>
                             <hr />
-                            <dl class="dl-horizontal" style="margin:0;">
-                                <dt class="muted" style="width:90px;">发布时间</dt>
-                                <dd class="" style="margin-left:110px;" id="">2013-3-14 12:00:00</dd>
-                            </dl>
-                            <dl class="dl-horizontal" style="margin:0;">
-                                <dt class="muted" style="width:90px;">价格</dt>
-                                <dd class="" style="margin-left:110px;" id="">100元 / 5课时</dd>
-                            </dl>
-                            <dl class="dl-horizontal" style="margin:0;">
-                                <dt class="muted" style="width:90px;">需求描述</dt>
-                                <dd class="" style="margin-left:110px;" id="">啦啦啦啦啦</dd>
-                            </dl>
-                            <dl class="dl-horizontal" style="margin:0;">
-                                <dt class="muted" style="width:90px;">家教地址</dt>
-                                <dd class="" style="margin-left:110px;" id="">123123123</dd>
-                            </dl>
-                            <dl class="dl-horizontal" style="margin:0;">
-                                <dt class="muted" style="width:90px;">课程</dt>
-                                <dd class="" style="margin-left:110px;" id=""> 
-                                    <small>数学</small>
-                                    <small>语文</small>
-                                    <small>英语</small>
-                                </dd>
-                            </dl>
-                            <dl class="dl-horizontal" style="margin:0;">
-                                <dt class="muted" style="width:90px;">授课方式</dt>
-                                <dd class="" style="margin-left:110px;" id="">
-                                    <span data-toggle-name="is_private" data-toggle="buttons-radio">
-                                        <button type="button" class="btn btn-mini btn-choice">线上授课</button>
-                                        <button type="button" class="btn btn-mini btn-choice">学生上门</button>
-                                        <button type="button" class="btn btn-mini btn-choice">老师上门</button>
-                                    </span>
-                                </dd>
-                            </dl>
+                            <s:if test="student.demand.publish">
+                                <dl class="dl-horizontal" style="margin:0;">
+                                    <dt class="muted" style="width:90px;">发布时间</dt>
+                                    <dd class="" style="margin-left:110px;" id=""><s:date name="student.demand.publishTime" format="MM/dd/yy hh:mm:ss"/></dd>
+                                </dl>
+                                <dl class="dl-horizontal" style="margin:0;">
+                                    <dt class="muted" style="width:90px;">价格</dt>
+                                    <dd class="" style="margin-left:110px;" id=""><s:property value="student.demand.total"/>元 / <s:property value="student.demand.duration"/>课时</dd>
+                                </dl>
+                                <dl class="dl-horizontal" style="margin:0;">
+                                    <dt class="muted" style="width:90px;">需求描述</dt>
+                                    <dd class="" style="margin-left:110px;" id=""><s:property value="student.demand.demand"/></dd>
+                                </dl>
+                                <dl class="dl-horizontal" style="margin:0;">
+                                    <dt class="muted" style="width:90px;">家教地址</dt>
+                                    <dd class="" style="margin-left:110px;" id=""><s:property value="student.demand.address"/></dd>
+                                </dl>
+                                <dl class="dl-horizontal" style="margin:0;">
+                                    <dt class="muted" style="width:90px;">课程</dt>
+                                    <dd class="" style="margin-left:110px;" id=""> 
+                                        <small><s:property value="student.demand.lesson"/></small>
+                                    </dd>
+                                </dl>
+                                <dl class="dl-horizontal" style="margin:0;">
+                                    <dt class="muted" style="width:90px;">授课方式</dt>
+                                    <dd class="" style="margin-left:110px;" id="">
+                                        <s:property value="student.demand.way"/>
+                                    </dd>
+                                </dl>
+                            </s:if>
+                            <s:else>
+                                还没有发布需求哦~！
+                            </s:else>
                             <hr />
                             <h4>抢单老师</h4>
+                            <s:if test="student.demand.bills.isEmpty()">
+                                暂无抢单老师
+                            </s:if>
+                            <s:else>
+                            <s:iterator value="student.demand.bills">
                             <div class="thumbnail" style="line-height: 15px">
-                                <img class="pull-left" style="margin: 0px 10px 0px 0px;width: 110px;height: 110px;" src="<s:property value="pic.content"/>"/>
-                                <a href="${id}" style="text-decoration: none;">
-                                    <b style="font-size: 20px;"><s:property value="getSecretName()"/>&nbsp;</b>
+                                <img class="pull-left" style="margin: 0px 10px 0px 0px;width: 110px;height: 110px;" src="<s:property value="teacher.pic.content"/>"/>
+                                <a href="${teacher.id}" style="text-decoration: none;">
+                                    <b style="font-size: 20px;"><s:property value="teacher.getSecretName()"/>&nbsp;</b>
                                 </a>
-                                <s:if test="level==1">
+                                <s:if test="teacher.level==1">
                                     <i class="icon-diomand"></i>
                                 </s:if>
                                 <s:else>
                                     <i class="icon-"></i>
                                 </s:else>
-                                <s:if test="status==0"><label class="label">离线</label></s:if>
-                                <s:elseif test="status==1"><label class="label label-success">在线</label></s:elseif>
+                                <s:if test="teacher.status==0"><label class="label">离线</label></s:if>
+                                <s:elseif test="teacher.status==1"><label class="label label-success">在线</label></s:elseif>
                                 <s:else><label class="label label-warning">忙碌</label></s:else>
-                                <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:date name="lastActiveDate" nice="true"/></small>
-                                <label class="label label-info pull-right"><s:property value="reserveNum"/>人预约</label>
+                                <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:date name="teacher.lastActiveDate" nice="true"/></small>
+                                <label class="label label-info pull-right"><s:property value="teacher.reserveNum"/>人预约</label>
                                 <br/>
                                 <div class="resultInfo" >
-                                    <div class="rateit pull-right" data-rateit-value="<s:property value="score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                                    <p><small><s:property value="school" default="暂无大学"/> | <s:property value="major" default="暂无专业"/></small></p>
-                                    <p><small>生源地：上海市XX中学</small></p>
-                                    <p><small>上课方式：线上授课</small></p>
+                                    <div class="rateit pull-right" data-rateit-value="<s:property value="teacher.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                    <p><small><s:property value="teacher.school" default="暂无大学"/> | <s:property value="teacher.major" default="暂无专业"/></small></p>
+                                    <p><small>生源地：<s:property value="teacher.origin" default="暂无生源地"/></small></p>
+                                    <p><small>上课方式：<s:property value="message"/></small></p>
                                     <a class="btn btn-mini pull-right">接受</a>
-                                    <p><small>身份：<s:if test="studyStatus == null">无</s:if><s:else><s:property value="studyStatus"/></s:else></small></p>
+                                    <p><small>身份：<s:if test="teacher.studyStatus == null">无</s:if><s:else><s:property value="teacher.studyStatus"/></s:else></small></p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div id="requireModal"class="modal fade">
-                                <div class="modal-header">
-                                    <h4>需求修改</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-horizontal">
-                                        <div class="control-group">
-                                            <label class="control-label" for="TAName"><strong>需求描述</strong></label>
-                                            <div class="controls">
-                                                <s:textarea cssClass="span4" type="text" name="name" placeholder="请输入需求的具体要求" value="%{tea.name}" autofocus="autofocus" />
+                                </s:iterator>
+                        </s:else>
+                                <div id="requireModal"class="modal fade">
+                                    <div class="modal-header">
+                                        <h4>需求修改</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label" for="TAName"><strong>需求描述</strong></label>
+                                                <div class="controls">
+                                                <s:textarea cssClass="span4" type="text" name="name" placeholder="请输入需求的具体要求" value="%{student.demand.demand}" autofocus="autofocus" />
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="phoneNum"><strong>家庭地址</strong></label>
                                             <div class="controls">
-                                                <s:textfield id="phoneNum" cssClass="span4" type="text" name="tel" placeholder="请输入您的家庭地址" value="%{tea.tel}"/>
+                                                <s:textfield id="phoneNum" cssClass="span4" type="text" name="tel" placeholder="请输入您的家庭地址" value="%{student.demand.address}"/>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -268,14 +275,19 @@
                                         <div class="control-group">
                                             <label class="control-label" for="datepicker"><strong>课程</strong></label>
                                             <div class="controls">
-                                                <s:textfield id="lessonSelect" cssClass="span4" name="lesson" placeholder="请输入课程名称" />
+                                                <s:textfield id="lessonSelect" cssClass="span4" name="lesson" placeholder="请输入课程名称" value="%{student.demand.lesson}"/>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="phoneNum"><strong>课程单价</strong></label>
                                             <div class="controls">
                                                 <div class="input-append">
-                                                    <s:textfield placeholder="课程价格" name="price" value="1" onchange="checkNatureNumber($(this));"/>
+                                                    <s:if test="student.demand.duration == 0">
+                                                        <s:textfield placeholder="课程价格" name="price" value="%{student.demand.total / student.demand.duration}" onchange="checkNatureNumber($(this));"/>
+                                                    </s:if>
+                                                    <s:else>
+                                                    <s:textfield placeholder="课程价格" name="price" value="%{student.demand.total / student.demand.duration}" onchange="checkNatureNumber($(this));"/>
+                                                    </s:else>
                                                     <span class="add-on">.00元/45分钟</span>
                                                 </div>
                                             </div>
@@ -283,13 +295,13 @@
                                         <div class="control-group">
                                             <label class="control-label" for="datepicker"><strong>课时数</strong></label>
                                             <div class="controls">
-                                                <input type="number" class="span1" min="1" max="20" step="1" value="1">
+                                                <input type="number" class="span1" min="1" max="20" step="1" value="%{student.demand.duration}">
                                             </div>
                                         </div>           
                                         <div class="control-group">
                                             <label class="control-label" for="gender"><strong>是否公开需求</strong></label>
                                             <div class="controls" id="gender">
-                                                <div style="display:none;"><s:radio list="{'男', '女'}" name="sex" value="%{tea.sex}"/></div>
+                                                <div style="display:none;"><s:radio list="{'是', '否'}" name="sex" value="%{student.demand.publish}"/></div>
                                                 <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
                                                     <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">是</button>
                                                     <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">否</button>

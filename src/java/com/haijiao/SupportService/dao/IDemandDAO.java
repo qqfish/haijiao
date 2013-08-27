@@ -12,5 +12,5 @@ import com.haijiao.Domain.bean.Demand;
  * @author hp
  */
 public interface IDemandDAO extends GenericDAO<Demand,Integer>{
-    
+    public Demand getStudentDemand(String email);
 }

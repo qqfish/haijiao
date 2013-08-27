@@ -55,6 +55,10 @@ public class Bill extends BaseBean{
     @JoinColumn(name = "tcommentid", unique = true)
     private Comment ttos; //老师对学生的评论
     
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @JoinColumn(name="did")
+    private Demand demand;
+    
 //    public int getRealMoney(String userType){
 //        if (userType.equals("teacher")) {
 //            return money;
@@ -145,4 +149,13 @@ public class Bill extends BaseBean{
     public void setDay(int day) {
         this.day = day;
     }
+
+    public Demand getDemand() {
+        return demand;
+    }
+
+    public void setDemand(Demand demand) {
+        this.demand = demand;
+    }
+    
 }

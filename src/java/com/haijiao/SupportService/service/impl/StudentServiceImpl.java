@@ -6,11 +6,13 @@ package com.haijiao.SupportService.service.impl;
 
 //import com.haijiao.Domain.bean.Clazz;
 //import com.haijiao.Domain.bean.FreeTime;
+import com.haijiao.Domain.bean.Demand;
 import com.haijiao.Domain.bean.Student;
+import com.haijiao.SupportService.dao.IDemandDAO;
 //import com.haijiao.SupportService.dao.IClazzDAO;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.dao.IStudentDAO;
-import java.sql.Date;
+import java.util.Date;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -22,6 +24,8 @@ public class StudentServiceImpl implements IStudentService {
 
     @Resource
     IStudentDAO studentDAO;
+    @Resource
+    IDemandDAO demandDAO;
 //    @Resource
 //    IClazzDAO clazzDAO;
 
@@ -34,6 +38,43 @@ public class StudentServiceImpl implements IStudentService {
         return studentDAO.getStudentByEmail(email);
     }
 
+    @Override
+    public Demand getStudentDemand(String email){
+        return demandDAO.getStudentDemand(email);
+    }
+    
+    
+    @Override
+    public boolean publishDemand(String email, String lesson, String demand, String address, int duration, int total){
+        Demand d = demandDAO.getStudentDemand(email);
+        d.setAddress(address);
+        d.setDemand(demand);
+        d.setDuration(duration);
+        d.setLesson(lesson);
+        d.setTotal(total);
+        d.setPublish(true);
+        d.setPublishTime(new Date());
+        demandDAO.update(d);
+        return true;
+    }
+
+    @Override
+    public boolean changeDemand(String email, String lesson, String demand, String address, int duration, int total){
+        Demand d = demandDAO.getStudentDemand(email);
+        d.setAddress(address);
+        d.setDemand(demand);
+        d.setDuration(duration);
+        d.setLesson(lesson);
+        d.setTotal(total);
+        demandDAO.update(d);
+        return true;
+    }
+    
+    @Override
+    public boolean cancelDemand(String email){
+        Demand d = demandDAO.getStudentDemand(email);
+        return demandDAO.makeTransient(d);
+    }
 //    public IClazzDAO getClazzDAO() {
 //        return clazzDAO;
 //    }

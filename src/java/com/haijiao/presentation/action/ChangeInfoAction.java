@@ -10,7 +10,7 @@ import com.haijiao.SupportService.MD5Util;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.service.ITeacherService;
 import com.haijiao.SupportService.service.IUserService;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.annotation.Resource;

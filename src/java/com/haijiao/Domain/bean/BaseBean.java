@@ -23,7 +23,7 @@ public class BaseBean {
     @Column(name = "del")
     private boolean delete;
     @Column(name = "createtime")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime = new Date();
 
     public Integer getId() {

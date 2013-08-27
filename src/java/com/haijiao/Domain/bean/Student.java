@@ -44,7 +44,8 @@ public class Student extends User {
     @JoinColumn(name = "tid"))
     private List<Teacher> teacherList;   //收藏老师的列表
     
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "did", unique = true)
     private Demand demand;   //学生需求列表
 
     public Student() {

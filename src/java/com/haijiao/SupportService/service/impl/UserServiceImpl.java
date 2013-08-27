@@ -4,6 +4,7 @@
  */
 package com.haijiao.SupportService.service.impl;
 
+import com.haijiao.Domain.bean.Demand;
 import com.haijiao.Domain.bean.Picture;
 import com.haijiao.Domain.bean.ResetInfo;
 import com.haijiao.Domain.bean.Student;
@@ -14,6 +15,7 @@ import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
 import com.haijiao.SupportService.MD5Util;
 import com.haijiao.SupportService.dao.ICommentDAO;
+import com.haijiao.SupportService.dao.IDemandDAO;
 import com.haijiao.SupportService.dao.IPictureDAO;
 import com.haijiao.SupportService.dao.IPublicFileDAO;
 import com.haijiao.SupportService.dao.IResetInfoDAO;
@@ -60,6 +62,8 @@ public class UserServiceImpl implements IUserService {
     IPublicFileDAO publicFileDAO;
     @Resource
     IPictureDAO pictureDAO;
+    @Resource
+    IDemandDAO demandDAO;
 
     public void setUserDAO(IUserDAO userDAO) {
         this.userDAO = userDAO;
@@ -183,6 +187,9 @@ public class UserServiceImpl implements IUserService {
             UserFileGroup fg = new UserFileGroup();
             fg.setGroupName("默认分组");
             s.addPersistFileGroup(fg);
+            Demand d = new Demand();
+            s.setDemand(d);
+            demandDAO.makePersistent(d);
             userFileGroupDAO.makePersistent(fg);
             return studentDAO.makePersistent(s);
         } else if (userType.equals("teacher")) {

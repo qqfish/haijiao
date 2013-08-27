@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/datepicker.css">
         <link rel="stylesheet" href="kindeditor/themes/default/default.css" />
         <link rel="stylesheet" href="css/validate.css"/>
+        <link rel="stylesheet" href="css/jquery.Jcrop.min.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/jquery.autocomplete.css">
 
@@ -27,6 +28,7 @@
         <script type="text/javascript" src="js/bootstrap.file-input.js"></script>
         <script charset="utf-8" src="kindeditor/kindeditor-min.js"></script>
         <script charset="utf-8" src="kindeditor/lang/zh_CN.js"></script>
+        <script type="text/javascript" src="js/jquery.Jcrop.min.js"></script>
         <script type="text/javascript" src="js/ling.chinaArea.sort-1.0.js"></script>
         <script type="text/javascript" src="js/jquery.autocomplete.min.js"></script>
         <script type="text/javascript" src="js/schoolSelect.js"></script>
@@ -75,39 +77,92 @@
                 }
             }
 
+            var jcrop_api;
+
+            //显示图片
+            function previewPhoto() {
+                var picsrc = getPath(document.all.fileid);
+                var picpreview = document.getElementById("preview");
+                if (!picsrc) {
+                    return;
+                }
+                if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+                    if (picpreview) {
+                        try {
+                            picpreview.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = picsrc;
+                        } catch (ex) {
+                            alert("文件路径非法，请重新选择！");
+                            return false;
+                        }
+                    } else {
+                        $("#preimg").attr("src", picsrc);
+                    }
+                }
+            }
+
             var uploadButton = false;
 
-            function preImg(fileid) {
+            function preImg(fileid, imgid) {
+                $('#myModal').modal("show", true);
                 var src = $("#fileid").val();
                 $('#pic_tip2').css("color", "black");
-                var type = src.substr(src.lastIndexOf('.') +1).toLowerCase();
-                if (type != "jpg" && type != "jpeg" && type != "png") {
+                if (src.substr(src.length - 3, src.length) != "jpg") {
                     $('#pic_tip2').css("color", "red");
                     return;
                 }
                 $('#uploadButton').removeClass("disabled");
                 uploadButton = true;
+                $('#pic_org').fadeOut();
+                $('#pre_area').fadeIn();
                 if (typeof FileReader == 'undefined') {
                     var picsrc = getPath(document.all.fileid);
-                    $('#pic_org').attr("src",picsrc);
+                    jcrop_api.setImage(picsrc);
+                    //previewPhoto();
                 }
                 else {
                     var reader = new FileReader();
                     reader.onload = function(e) {
-                        console.log(this.result);
-                        $('#pic_org').attr("src",this.result);
+                        jcrop_api.setImage(this.result);
                     };
                     reader.readAsDataURL(document.getElementById(fileid).files[0]);
                 }
+            }
+
+            function showPreview(coords) {
+                $('#pic_x').val(coords.x);
+                $('#pic_y').val(coords.y);
+                $('#pic_rate').val(this.getBounds()[0] / width);
+                $('#pic_w').val(coords.w);
+                $('#pic_h').val(coords.h);
             }
 
             function checkSubmit() {
                 if (uploadButton === false) {
                     return;
                 }
+                if ($('#pic_w').val() == null || $('#pic_w').val() <= 10) {
+                    alert("未选中区域或选中区域太小");
+                } else if ($('#pic_h').val() == null || $('#pic_h').val() <= 10) {
+                    alert("未选中区域或选中区域太小");
+                } 
                 else {
                     $('#upload').submit();
                 }
+            }
+
+            var width;
+
+            function getSize(img)
+            {
+                if (typeof (img) != 'object')
+                    img = document.getElementById(img);
+                if (img == null)
+                    return;
+                var image = document.createElement("img");
+                image.onload = function() {
+                    width = this.width;
+                };
+                image.src = img.src;
             }
 
             jQuery(window).load(function() {
@@ -119,7 +174,12 @@
                             clearInterval(wait);
                     }, 100);
                 });
-                
+
+                jcrop_api = $.Jcrop("#preimg", {
+                    onChange: showPreview,
+                    onSelect: showPreview,
+                    aspectRatio: 1
+                });
             });
         </script>
         <!--[if lt IE 8]>
@@ -383,7 +443,7 @@
                             <hr/>
                             <p style="font-size: 9px;">请先选择图片上传，再在上传图片中截取作为头像的部分，按上传文件完成上传。<br/>
                             <div id="pic_tip1">注意①：请确保图片小于2MB<br/></div>
-                            <div id="pic_tip2">注意②：目前只支持JPG,PNG,JPEG类型的图片</div></p>
+                            <div id="pic_tip2">注意②：目前只支持上传JPG类型的图片哦</div></p>
 
                             <s:if test="#session.userType=='student'">
                                 <img id="pic_org" src="<s:property value="stu.pic.content"/>" style="height: 230px;width: 230px;"/>
@@ -392,8 +452,30 @@
                                 <img id="pic_org" src="<s:property value="tea.pic.content"/>" style="height: 230px;width: 230px;"/>
                             </s:if>
                             <s:form action="uploadPic" id="upload" enctype="multipart/form-data">
-                                <s:file name="upload" title="选择文件" id="fileid" onchange="preImg(this.id);"/><br/>
-                                <button type="button" id="uploadButton" class="btn disabled" data-toggle="button" onclick="checkSubmit();" >上传文件</button>
+                                <s:textfield id="pic_x" name="x" style="display:none;"/>
+                                <s:textfield id="pic_y" name="y" style="display:none;"/>
+                                <s:textfield id="pic_rate" name="rate" style="display:none;"/>
+                                <s:textfield id="pic_w" name="w" style="display:none;"/>
+                                <s:textfield id="pic_h" name="h" style="display:none;"/>
+                                <s:file name="upload" title="选择文件" id="fileid" onchange="preImg(this.id,preimg);"/>
+
+                                <div id="myModal" class="modal hide fade">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3>预览</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="pre_area" style="display:none;">
+                                            <div id="preview" style="filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);">
+                                                <img id="preimg" onload="getSize(this)"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+                                        <button type="button" id="uploadButton" class="btn disabled" data-toggle="button" onclick="checkSubmit();" >上传文件</button>
+                                    </div>
+                                </div>
                             </s:form>
                             <div class="progress"><div class="bar"></div></div>
                         </div>

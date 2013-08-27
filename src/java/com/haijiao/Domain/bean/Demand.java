@@ -5,11 +5,17 @@
  */
 package com.haijiao.Domain.bean;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 /**
  *
@@ -22,13 +28,26 @@ public class Demand extends BaseBean{
     private String lesson;  //课程名称
     private String demand;  //详细需求
     private String address; //地址
+    private String way;     //授课方式
+    @Column(columnDefinition = "int default 5")
     private int reserveMax; //最大预约老师数
+    @Column(columnDefinition = "int default 0")
     private int reserved;   //已预约数
     private int duration;   //课时数
     private int total;      //总价
-    @OneToMany
-    @JoinColumn(name = "did")
+    @Column(columnDefinition = "bool default false")
+    private boolean publish;//是否发布
+    @Column(name = "publishtime")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date publishTime;
+    
+    @OneToMany(mappedBy="demand")
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Bill> bills;//对应预约
+
+    public Demand() {
+        bills = new ArrayList<Bill>();
+    }
 
     public String getLesson() {
         return lesson;
@@ -52,6 +71,14 @@ public class Demand extends BaseBean{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getWay() {
+        return way;
+    }
+
+    public void setWay(String way) {
+        this.way = way;
     }
 
     public int getReserveMax() {
@@ -92,6 +119,22 @@ public class Demand extends BaseBean{
 
     public void setBills(List<Bill> bills) {
         this.bills = bills;
+    }
+
+    public boolean isPublish() {
+        return publish;
+    }
+
+    public void setPublish(boolean publish) {
+        this.publish = publish;
+    }
+
+    public Date getPublishTime() {
+        return publishTime;
+    }
+
+    public void setPublishTime(Date publishTime) {
+        this.publishTime = publishTime;
     }
     
 }

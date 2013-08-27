@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>海角教育</title>
+        <title>站内信</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="css/validate.css" />
         <link rel="stylesheet" href="css/style.css"/>

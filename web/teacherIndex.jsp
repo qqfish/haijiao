@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Teachers</title>
+        <title><s:property value="teacher.name"/>的主页</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
@@ -76,7 +76,7 @@
         <div class="container wrapper">
             <div class="row" style="margin:-5px;">
                 <div id="sideInfo" class="span3 module" style="padding:12px;">
-                    <a href="toChangeInfo.action?tab=head"><img width="210px" height="210px" src="<s:property value="teacher.pic.content"/>" class="img-polaroid"/></a>
+                    <a href="toChangeInfo.action?tab=head" title="点击修改头像"><img width="210px" height="210px" src="<s:property value="teacher.pic.content"/>" class="img-polaroid"/></a>
                     <h4 style="margin-left: 10px;">
                         <s:property value="teacher.name"/>
                         <s:if test="teacher.level==1">
