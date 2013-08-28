@@ -35,6 +35,8 @@ public class Demand extends BaseBean{
     private int reserved;   //已预约数
     private int duration;   //课时数
     private int total;      //总价
+    @Column(columnDefinition = "int default 0")
+    private int finishNum;  //对接数
     @Column(columnDefinition = "bool default false")
     private boolean publish;//是否发布
     @Column(name = "publishtime")
@@ -111,6 +113,14 @@ public class Demand extends BaseBean{
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public int getFinishNum() {
+        return finishNum;
+    }
+
+    public void setFinishNum(int finishNum) {
+        this.finishNum = finishNum;
     }
 
     public List<Bill> getBills() {

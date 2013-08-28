@@ -28,6 +28,8 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, Integer> implements I
         String hql = "from Bill b where b." + userType + ".email = '" + email + "'";
         if(status != -1)
             hql += " and status = '" + status + "'";
+        if(userType.equals("student"))
+            hql += " and demand is null";
         hql += " order by id desc";
         return findPageByQuery(hql,first,pageSize);
     }
@@ -54,6 +56,8 @@ public class BillDAOImpl extends GenericHibernateDAO<Bill, Integer> implements I
         String hql = "select count(b) from Bill b where b." + userType + ".email = '" + email + "'";
         if(status != -1)
             hql += " and status = '" + status + "'";
+        if(userType.equals("student"))
+            hql += " and demand is null";
         return getNumber(hql).intValue();
     }
 

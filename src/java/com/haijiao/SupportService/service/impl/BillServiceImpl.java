@@ -6,12 +6,14 @@ package com.haijiao.SupportService.service.impl;
 
 import com.haijiao.Domain.bean.Bill;
 import com.haijiao.Domain.bean.Comment;
+import com.haijiao.Domain.bean.Demand;
 import com.haijiao.Domain.bean.Lesson;
 import com.haijiao.Domain.bean.Payment;
 import com.haijiao.Domain.bean.Student;
 import com.haijiao.Domain.bean.Teacher;
 import com.haijiao.SupportService.dao.IBillDAO;
 import com.haijiao.SupportService.dao.ICommentDAO;
+import com.haijiao.SupportService.dao.IDemandDAO;
 import com.haijiao.SupportService.dao.ILessonDAO;
 import com.haijiao.SupportService.dao.IPaymentDAO;
 import com.haijiao.SupportService.dao.IStudentDAO;
@@ -47,6 +49,8 @@ public class BillServiceImpl implements IBillService {
     ICommentDAO commentDAO;
     @Resource
     IPaymentDAO paymentDAO;
+    @Resource
+    IDemandDAO demandDAO;
 
     public void setBillDAO(IBillDAO billDAO) {
         this.billDAO = billDAO;
@@ -62,6 +66,22 @@ public class BillServiceImpl implements IBillService {
 
     public void setCommentDAO(ICommentDAO commentDAO) {
         this.commentDAO = commentDAO;
+    }
+
+    public void setUserDAO(IUserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
+    public void setLessonDAO(ILessonDAO lessonDAO) {
+        this.lessonDAO = lessonDAO;
+    }
+
+    public void setPaymentDAO(IPaymentDAO paymentDAO) {
+        this.paymentDAO = paymentDAO;
+    }
+
+    public void setDemandDAO(IDemandDAO demandDAO) {
+        this.demandDAO = demandDAO;
     }
 
     @Override
@@ -112,6 +132,39 @@ public class BillServiceImpl implements IBillService {
         return bbill;
     }
 
+    @Override
+    public boolean produceDemandBill(String studentEmail, String teacherEmail){
+        Student s = studentDAO.getStudentByEmail(studentEmail);
+        Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
+        Demand d = s.getDemand();
+        Bill bill = new Bill();
+        bill.setDelete(false);
+        bill.setMessage(d.getWay() + " " + d.getAddress());
+        bill.setDuration(d.getDuration());
+        bill.setLesson(d.getLesson());
+        bill.setMoney(d.getTotal());
+        bill.setStudent(s);
+        bill.setTeacher(t);
+        bill.setDemand(d);
+        bill.setStatus(Bill.Status.accept);
+        boolean bbill = billDAO.makePersistent(bill);
+        teacherDAO.update(t);
+        return bbill;
+    }
+    
+    @Override
+    public boolean confirmDemandBill(int billId, String studentEmail){
+        Demand d = demandDAO.getStudentDemand(studentEmail);
+        d.setBills(null);
+        d.setFinishNum(d.getFinishNum() +1);
+        d.setPublish(false);
+        Bill bill = billDAO.findById(billId);
+        bill.setDemand(null);
+        demandDAO.update(d);
+        billDAO.update(bill);
+        return true;
+    }
+    
     @Override
     public boolean commentBill(int billId, String content, int score, String userType) {
         Bill b = billDAO.findById(billId);

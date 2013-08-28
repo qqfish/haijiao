@@ -45,6 +45,10 @@ public class TeacherServiceImpl implements ITeacherService {
         this.lessonDAO = lessonDAO;
     }
 
+    public void setMoneyRequestDAO(IMoneyRequestDAO moneyRequestDAO) {
+        this.moneyRequestDAO = moneyRequestDAO;
+    }
+
     @Override
     public Teacher getTeacherById(int id) {
         return teacherDAO.findById(id);

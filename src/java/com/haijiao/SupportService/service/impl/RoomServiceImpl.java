@@ -275,4 +275,5 @@ public class RoomServiceImpl implements IRoomService {
     public void setRoomLogDAO(IRoomLogDAO roomLogDAO) {
         this.roomLogDAO = roomLogDAO;
     }
+    
 }

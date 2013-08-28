@@ -107,11 +107,10 @@ public class SearchTeacherAction extends RequestSessionAction {
         int num = userService.getTeacherNum(strList, lessonGet, way, netGet, sex, role, school, province, city, district, status, extOrder, desc);
         pb = new PageBean(teacherlist, num, cp, pageSize);
 
-        if (!teacherlist.isEmpty()) {
-            this.sessionPutIn("message", this.getText("searchSuccess"));
-        } else {
+        if (teacherlist == null || teacherlist.isEmpty()) {
             this.sessionPutIn("message", this.getText("searchNull"));
-
+        } else {
+            this.sessionPutIn("message", this.getText("searchSuccess"));
         }
         return returnValue;
         /**

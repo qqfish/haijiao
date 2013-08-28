@@ -93,6 +93,18 @@ public class UserServiceImpl implements IUserService {
         this.userFileGroupDAO = userFileGroupDAO;
     }
 
+    public void setPublicFileDAO(IPublicFileDAO publicFileDAO) {
+        this.publicFileDAO = publicFileDAO;
+    }
+
+    public void setPictureDAO(IPictureDAO pictureDAO) {
+        this.pictureDAO = pictureDAO;
+    }
+
+    public void setDemandDAO(IDemandDAO demandDAO) {
+        this.demandDAO = demandDAO;
+    }
+
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
     public boolean confirmExist(String email) {

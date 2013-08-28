@@ -23,8 +23,8 @@ public interface IStudentService {
     public boolean topUpMoney(String email, int numberOfCoin);
     
     public Demand getStudentDemand(String email);
-    public boolean publishDemand(String email, String lesson, String demand, String address, int duration, int total);
-    public boolean changeDemand(String email, String lesson, String demand, String address, int duration, int total);
+    public boolean publishDemand(String email, String lesson, String demand, String way, String address, int duration, int total);
+    public boolean changeDemand(String email, String lesson, String way, String demand, String address, int duration, int total);
     public boolean cancelDemand(String email);
     
 //    //获取学生时间表
