@@ -6,7 +6,7 @@
         <title>Teachers</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
-        <script type="text/javascript" src="js/teachers.js"></script>
+        <script type="text/javascript" src="js/students.js"></script>
         <script type="text/javascript" src="js/my.ling.chinaArea.sort-1.0.js"></script>
         <script type="text/javascript">
             window.onload = function() {
@@ -116,7 +116,14 @@
                             <button type="button" value="5" class="btn btn-small" data-toggle="button">有线通</button>
                             <button type="button" value="6" class="btn btn-small" data-toggle="button">其他</button>
                         </div> 
-                        <br/>
+                        <p></p>
+                        <button type="button" class="btn btn-small btn-danger disabled">性别</button>
+                        <div id="sex" class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
+                            <button type="button" value="0" class="btn btn-small active" data-toggle="button">不限</button>
+                            <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
+                            <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
+                        </div>
+                        <p></p>
                         <s:if test="@com.haijiao.global.config@domain == 0">
                             <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
                             <div id="area" class="btn-group" style="margin-top: -2px;" data-toggle-name="is_private" data-toggle="buttons-radio">
@@ -138,6 +145,7 @@
                                         <button class="btn btn-small btn-inverse" id="normal_button">时间<i class="icon-arrow-down icon-white"></i></button>
                                         <button class="btn btn-small btn-inverse" id="price_button">价格<i class="icon-arrow-down"></i></button>
                                     </div>
+                                    <button class="btn btn-small btn-danger" id="online_button">仅显示在线</button>
                                 </div>
                             </small>
                         </h3>
@@ -146,30 +154,27 @@
                     <div id="resultdetail">
                         <div class="row-fluid" style="margin-top: 10px; margin-left: 10px;">
                             <ul class="thumbnails">
+                                <s:iterator value="pb.list" id="list">
                                 <div id="resultBar">
                                     <li class="span11">
                                         <div class="thumbnail">
-                                            <label class="label pull-right">100元 / 5课时</label>
-                                            <label class="label label-success pull-right" style="margin-right: 5px;">已有9人接受需求</label>
+                                            <label class="label pull-right"><s:property value="demand.total"/>元 / <s:property value="demand.duration"/>课时</label>
+                                            <label class="label label-success pull-right" style="margin-right: 5px;">已有<s:property value="demand.reserved"/>/<s:property value="demand.reserveMax"/>人接受需求</label>
                                             <dl class="dl-horizontal" style="margin:0;">
-                                                <dt class="lead" style="width:90px;margin:0;">张同学</dt>
-                                                <dd class="muted" style="margin-left:110px;margin-top: 10px;" id="">上海市 - 上海市 - 闵行区，2013-3-14 12:00:00</dd>
+                                                <dt class="lead" style="width:90px;margin:0;"><s:property value="getSecretName()"/></dt>
+                                                <dd class="muted" style="margin-left:110px;margin-top: 10px;" id=""><s:property value="province" default="未填写省份"/> - <s:property value="city" default="未填写城市"/> - <s:property value="district" default="未填写地区"/>，<s:date name="demand.publishTime" nice="true"/></dd>
                                             </dl>
                                             <dl class="dl-horizontal" style="margin:0;">
                                                 <dt class="muted" style="width:90px;">需求描述</dt>
-                                                <dd class="" style="margin-left:110px;" id="">啦啦啦啦啦</dd>
+                                                <dd class="" style="margin-left:110px;" id=""><s:property value="demand.demand"/></dd>
                                             </dl>
                                             <dl class="dl-horizontal" style="margin:0;">
                                                 <dt class="muted" style="width:90px;">家教地址</dt>
-                                                <dd class="" style="margin-left:110px;" id="">123123123</dd>
+                                                <dd class="" style="margin-left:110px;" id=""><s:property value="demand.address"/></dd>
                                             </dl>
                                             <dl class="dl-horizontal" style="margin:0;">
                                                 <dt class="muted" style="width:90px;">课程</dt>
-                                                <dd class="" style="margin-left:110px;" id=""> 
-                                                    <small>数学</small>
-                                                    <small>语文</small>
-                                                    <small>英语</small>
-                                                </dd>
+                                                <dd class="" style="margin-left:110px;" id=""><s:property value="demand.lesson"/></dd>
                                             </dl>
                                             <div class="pull-right">
                                                 <button class="btn btn-mini btn-danger">接受需求</button>
@@ -187,6 +192,7 @@
                                         </div>
                                     </li>
                                 </div>
+                                </s:iterator>
                             </ul>
                         </div>
                         <div class="pagination pagination-right">

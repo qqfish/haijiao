@@ -1,9 +1,10 @@
 /**
  * User.java
+ *
  * @author fish
  */
-
 package com.haijiao.Domain.bean;
+
 import com.google.gson.Gson;
 import com.haijiao.Domain.file.UserFile;
 import com.haijiao.Domain.file.UserFileGroup;
@@ -25,11 +26,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@org.hibernate.annotations.Entity(dynamicUpdate=true,dynamicInsert=true)
-@Table    
-@Inheritance(strategy = InheritanceType.JOINED )
-public class User extends BaseBean{
-    public class Status{
+@org.hibernate.annotations.Entity(dynamicUpdate = true, dynamicInsert = true)
+@Table
+@Inheritance(strategy = InheritanceType.JOINED)
+public class User extends BaseBean {
+
+    public class Status {
+
         public static final int offline = 0;
         public static final int onlineAndAvailable = 1;
         public static final int onlineAndBusy = 2;
@@ -37,34 +40,39 @@ public class User extends BaseBean{
     protected String email;     //用户的账号,即Email
     protected String name;      //用户的真实姓名
     protected String userType;  //用户的类型："teacher" or "student"
-    @Column(columnDefinition="int default 0")
+    @Column(columnDefinition = "int default 0")
     protected Integer score;    //用户的评分
-    @Column(columnDefinition="int default 0")
+    @Column(columnDefinition = "int default 0")
     protected Integer scoreNum; //评分数
-    @Column(columnDefinition="int default 0")
+    @Column(columnDefinition = "int default 0")
     protected Integer loginNum; //登录数
     protected String password;  //用户密码
     protected int coin;         //该账户中剩下的智慧币
     @Lob
     @Basic(fetch = FetchType.LAZY)
-    @Column(name="intro", columnDefinition="TEXT", nullable=true)
+    @Column(name = "intro", columnDefinition = "TEXT", nullable = true)
     protected String intro;     //用户的个人简介，显示在个人主页上
-    
+
     @OneToOne
     protected Picture pic;      //用户头像的datauri
-    
+
     protected String sex;       //性别
     @Temporal(TemporalType.DATE)
     protected Date birthday;    //生日
     @Temporal(TemporalType.TIMESTAMP)
     protected Date lastActiveDate;//最近活跃时间
     protected int status;       //可选项为Status
-    
+    private String net;         //网络环境
+
+    private String province;    //省份
+    private String city;            //市级
+    private String district;       //县级
+
     @OneToMany(mappedBy = "to")
     protected List<Mail> mailBox;   //收到的私信
-    
+
     @OneToMany
-    @JoinColumn(name="uid")
+    @JoinColumn(name = "uid")
     protected List<UserFileGroup> fileGroups;
 
     public User() {
@@ -184,6 +192,50 @@ public class User extends BaseBean{
         this.status = status;
     }
 
+    public String getNet() {
+        return net;
+    }
+
+    public void setNet(String net) {
+        this.net = net;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+    
+    public String getDirectProvince() {
+        return province.substring(7);
+    }
+
+    public String getDirectCity() {
+        return city.substring(7);
+    }
+
+    public String getDirectDistrict() {
+        return district.substring(7);
+    }
+    
     public List<Mail> getMailBox() {
         return mailBox;
     }
@@ -191,78 +243,77 @@ public class User extends BaseBean{
     public void setMailBox(List<Mail> mailBox) {
         this.mailBox = mailBox;
     }
-    
-    public void addFileGroup(String groupName){
+
+    public void addFileGroup(String groupName) {
         UserFileGroup group = new UserFileGroup(groupName);
         fileGroups.add(group);
     }
-    
-    public void addPersistFileGroup(UserFileGroup group){
+
+    public void addPersistFileGroup(UserFileGroup group) {
         fileGroups.add(group);
     }
-    
-    public UserFile getFile(String group, String name){
+
+    public UserFile getFile(String group, String name) {
         UserFileGroup groupResult = null;
-        for(int i = 0; i < fileGroups.size(); i++){
-            if(fileGroups.get(i).getGroupName().equals(group)){
+        for (int i = 0; i < fileGroups.size(); i++) {
+            if (fileGroups.get(i).getGroupName().equals(group)) {
                 groupResult = fileGroups.get(i);
                 break;
             }
         }
-        if(groupResult == null){
+        if (groupResult == null) {
             return null;
         }
-        
+
         return groupResult.getFile(name);
     }
 
-    
-    public boolean addFile(String groupName, UserFile file){
+    public boolean addFile(String groupName, UserFile file) {
         UserFileGroup group = null;
-        for(int i = 0; i < fileGroups.size(); i++){
-            if(fileGroups.get(i).getGroupName().equals(groupName)){
+        for (int i = 0; i < fileGroups.size(); i++) {
+            if (fileGroups.get(i).getGroupName().equals(groupName)) {
                 group = fileGroups.get(i);
                 break;
             }
         }
-        if(group == null){
+        if (group == null) {
             return false;
         }
-        
+
         group.addFile(file);
         return true;
     }
-    
-    public void removeFile(String groupName, UserFile file){
+
+    public void removeFile(String groupName, UserFile file) {
         UserFileGroup group = null;
-        for(int i = 0; i < fileGroups.size(); i++){
-            if(fileGroups.get(i).getGroupName().equals(groupName)){
+        for (int i = 0; i < fileGroups.size(); i++) {
+            if (fileGroups.get(i).getGroupName().equals(groupName)) {
                 group = fileGroups.get(i);
                 break;
             }
         }
-        if(group == null){
+        if (group == null) {
             return;
         }
-        
+
         group.removeFile(file);
     }
-    
-    public void moveFile(String fromGroup, String toGroup, UserFile file){
+
+    public void moveFile(String fromGroup, String toGroup, UserFile file) {
         UserFileGroup from = null;
         UserFileGroup to = null;
-        for(int i = 0; i < fileGroups.size(); i++){
-            if(fileGroups.get(i).getGroupName().equals(fromGroup)){
+        for (int i = 0; i < fileGroups.size(); i++) {
+            if (fileGroups.get(i).getGroupName().equals(fromGroup)) {
                 from = fileGroups.get(i);
             }
-            if(fileGroups.get(i).getGroupName().equals(toGroup)){
+            if (fileGroups.get(i).getGroupName().equals(toGroup)) {
                 to = fileGroups.get(i);
             }
         }
-        if(from == null || to == null){
+        if (from == null || to == null) {
             return;
         }
-        
+
         from.removeFile(file);
         to.addFile(file);
     }
@@ -270,14 +321,14 @@ public class User extends BaseBean{
     public List<UserFileGroup> getFileGroups() {
         return fileGroups;
     }
-    
-    public String toJson(){
+
+    public String toJson() {
         Gson gson = new Gson();
         //System.out.println(gson.toJson(this));
         return gson.toJson(this);
     }
-    
-    public String fileGroupsToJson(){
+
+    public String fileGroupsToJson() {
         Gson gson = new Gson();
         System.out.println(gson.toJson(fileGroups));
         return gson.toJson(fileGroups);
@@ -312,5 +363,5 @@ public class User extends BaseBean{
         }
         return true;
     }
-    
+
 }

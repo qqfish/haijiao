@@ -65,7 +65,7 @@ public class RegisterThenAction extends SessionAction {
     }
     
     public String studentRegister(){
-        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, null, grade, school, tel, telType)){
+        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, null, grade, school, tel, telType, province, city, district, net)){
             Student s = studentService.getStudentByEmail((String)this.getSessionValue("email"));
             this.sessionPutIn("name", s.getName());
             this.sessionPutIn("userType", "student");

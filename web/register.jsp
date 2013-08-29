@@ -131,6 +131,14 @@
                                     </div>
                                 </dd>
                                 <br/>
+                                <dt style='margin-top:5px'>网络环境</dt>
+                                <dd>
+                                    <s:select cssClass="span4" name="net" list="{'电信', '联通(网通)', '教育网', '移动(铁通)', '有线通', '其他'}"/>
+                                </dd>
+                                <dd>
+                                    <small class="text-warning">同样网络下视频效果更佳，请选择常用网络环境</small>
+                                </dd>
+                                <br/>
                                 <dt style='margin-top:5px'>性别</dt>
                                 <dd style="display:none;"><s:radio list="{'男', '女'}" name="sex"/></dd>
                                 <dd>
@@ -138,6 +146,13 @@
                                         <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">男</button>
                                         <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">女</button>
                                     </div>
+                                </dd>
+                                <br/>
+                                <dt>所在地</dt>
+                                <dd>
+                                    <s:select id="selProvince" name="province" list="{ }"></s:select>
+                                    <s:select id="selCity" name="city" list="{ }"></s:select>
+                                    <s:select id="selDistrict" name="district" list="{ }"></s:select>
                                 </dd>
                                 <br/>
                                 <dt style='margin-top:5px'>年级</dt>

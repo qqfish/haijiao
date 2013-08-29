@@ -134,4 +134,9 @@ public class Student extends User {
         this.demand = demand;
     }
 
+    public String getSecretName() {
+        String result = name.substring(0, 1) + "同学";
+        return result;
+    }
+    
 }

@@ -375,6 +375,24 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
+                                        <label class="control-label" for="place"><strong>所在地</strong></label>
+                                        <div class="controls" id="place">
+                                            <s:select id="selProvince" cssClass="span2" name="province" list="{ }" value="%{tea.province}"></s:select>
+                                            <s:select id="selCity" cssClass="span2" name="city" list="{ }" value="%{tea.city}"></s:select>
+                                            <s:select id="selDistrict" cssClass="span2" name="district" list="{ }" value="%{tea.district}"></s:select>
+                                            <input type="hidden" id="txtProvince" value="<s:property value="tea.province"/>"/>
+                                            <input type="hidden" id="txtCity" value="<s:property value="tea.city"/>"/>
+                                            <input type="hidden" id="txtDistrict" value="<s:property value="tea.district"/>"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="network"><strong>网络环境</strong></label>
+                                        <div class="controls">
+                                            <s:select id="network" cssClass="span2" name="net" list="{'电信', '联通(网通)', '教育网', '移动(铁通)', '有线通', '其他'}" value="%{tea.net}"/>
+                                            <br /><small class="text-warning">同样网络下视频效果更佳，请选择常用网络环境</small>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
                                         <div class="controls">
                                             <input class="btn btn-primary" style="width:300px;" type="button" value="提交" onclick="testSubmit();"/>
                                             <s:submit id="form_submit" cssClass="btn btn-primary" style="width:300px; display:none;" value="提交" method="studentChange"/>

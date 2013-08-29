@@ -112,7 +112,7 @@ public class ChangeInfoAction extends SessionAction {
     
     public String studentChange() throws ParseException{
         parseDate();
-        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, date, grade, school, tel, telType)){
+        if(studentService.changeInfo((String)this.getSessionValue("email"), name, sex, date, grade, school, tel, telType, province, city, district, net)){
             this.sessionPutIn("nextPageMessage", this.getText("teaChangeSuccess"));
             return SUCCESS;
         } else {

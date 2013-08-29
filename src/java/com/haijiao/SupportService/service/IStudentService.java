@@ -9,6 +9,7 @@ package com.haijiao.SupportService.service;
 import com.haijiao.Domain.bean.Demand;
 import com.haijiao.Domain.bean.Student;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -18,7 +19,7 @@ public interface IStudentService {
     public Student getStudentByEmail(String email);
     
     //修改基本资料
-    public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType);
+    public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType, String province, String city, String district, String net);
     //充值
     public boolean topUpMoney(String email, int numberOfCoin);
     
@@ -27,6 +28,9 @@ public interface IStudentService {
     public boolean changeDemand(String email, String lesson, String way, String demand, String address, int duration, int total);
     public boolean cancelDemand(String email);
     
+    public List<Student> searchStudentPage(List<String> strList, String lesson, String way, String net, String sex, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc);
+    public int searchStudentNum(List<String> strList, String lesson, String way, String net, String sex, String province, String city, String district, String status, String extOrder, int desc);
+
 //    //获取学生时间表
 //    public List<Clazz> getClasses(String email);
 //    

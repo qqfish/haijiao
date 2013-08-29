@@ -13,6 +13,7 @@ import com.haijiao.SupportService.dao.IDemandDAO;
 import com.haijiao.SupportService.service.IStudentService;
 import com.haijiao.SupportService.dao.IStudentDAO;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -86,7 +87,7 @@ public class StudentServiceImpl implements IStudentService {
 //        this.clazzDAO = clazzDAO;
 //    }
     @Override
-    public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType) {
+    public boolean changeInfo(String email, String name, String sex, Date birthday, String grade, String school, String tel, String telType, String province, String city, String district, String net) {
         Student s = studentDAO.getStudentByEmail(email);
         if (birthday != null) {
             s.setBirthday(birthday);
@@ -109,6 +110,18 @@ public class StudentServiceImpl implements IStudentService {
         if (telType != null) {
             s.setTelType(telType);
         }
+        if (province != null) {
+            s.setProvince(province);
+        }
+        if (city != null) {
+            s.setCity(city);
+        }
+        if (district != null) {
+            s.setDistrict(district);
+        }
+        if (net != null) {
+            s.setNet(net);
+        }
         studentDAO.update(s);
         return true;
     }
@@ -120,6 +133,16 @@ public class StudentServiceImpl implements IStudentService {
         s.setCoin(coin + numberOfCoin);
         studentDAO.update(s);
         return true;
+    }
+
+    @Override
+    public List<Student> searchStudentPage(List<String> strList, String lesson, String way, String net, String sex, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc){
+        return studentDAO.searchStudentPage(strList, lesson, way, net, sex, province, city, district, status, first, pagesize, extOrder, desc);
+    }
+    
+    @Override
+    public int searchStudentNum(List<String> strList, String lesson, String way, String net, String sex, String province, String city, String district, String status, String extOrder, int desc){
+        return studentDAO.searchStudentNum(strList, lesson, way, net, sex, province, city, district, status, extOrder, desc);
     }
 
 //    @Override

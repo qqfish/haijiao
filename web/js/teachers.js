@@ -33,7 +33,6 @@ jQuery(document).ready(function($) {
             $(this).addClass("active");
             gotopage(1, null);
         }
-
     });
 
     $('#lesson').children().click(function() {

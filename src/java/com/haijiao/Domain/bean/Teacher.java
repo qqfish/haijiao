@@ -23,10 +23,6 @@ public class Teacher extends User {
     private String school;      //就读大学
     private String major;       //就读专业
     private String studyStatus;  //教师身份
-    private String province;    //省份
-    private String city;            //市级
-    private String district;       //县级
-    private String net;         //网络环境
     private String origin;      //生源地
 
     @Column(columnDefinition = "int default 0")
@@ -91,18 +87,6 @@ public class Teacher extends User {
         this.billList = new ArrayList<Bill>();
     }
 
-    public String getDirectProvince() {
-        return province.substring(7);
-    }
-
-    public String getDirectCity() {
-        return city.substring(7);
-    }
-
-    public String getDirectDistrict() {
-        return district.substring(7);
-    }
-
     public String getSchool() {
         return school;
     }
@@ -117,22 +101,6 @@ public class Teacher extends User {
 
     public void setMajor(String major) {
         this.major = major;
-    }
-
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getNet() {
-        return net;
-    }
-
-    public void setNet(String net) {
-        this.net = net;
     }
 
     public int getClassNum() {
@@ -173,22 +141,6 @@ public class Teacher extends User {
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
     }
 
     public String getStudyStatus() {
@@ -386,6 +338,7 @@ public class Teacher extends User {
     public void setBankname(String bankname) {
         this.bankname = bankname;
     }
+    
     public String getSecretName() {
         String result = name.substring(0, 1) + "老师";
         return result;
