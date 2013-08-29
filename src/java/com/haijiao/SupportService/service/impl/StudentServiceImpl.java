@@ -46,14 +46,16 @@ public class StudentServiceImpl implements IStudentService {
     
     
     @Override
-    public boolean publishDemand(String email, String lesson, String demand, String way, String address, int duration, int total){
+    public boolean publishDemand(String email, String lesson, String demand, boolean sprtOnline, boolean sprtSUnderline, boolean sprtTUnderline, String address, int duration, int total){
         Demand d = demandDAO.getStudentDemand(email);
         d.setAddress(address);
         d.setDemand(demand);
         d.setDuration(duration);
         d.setLesson(lesson);
         d.setTotal(total);
-        d.setWay(way);
+        d.setSprtOnline(sprtOnline);
+        d.setSprtSUnderline(sprtSUnderline);
+        d.setSprtTUnderline(sprtTUnderline);
         d.setPublish(true);
         d.setPublishTime(new Date());
         demandDAO.update(d);
@@ -61,14 +63,16 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public boolean changeDemand(String email, String lesson, String demand, String way, String address, int duration, int total){
+    public boolean changeDemand(String email, String lesson, String demand, boolean sprtOnline, boolean sprtSUnderline, boolean sprtTUnderline, String address, int duration, int total){
         Demand d = demandDAO.getStudentDemand(email);
         d.setAddress(address);
         d.setDemand(demand);
         d.setDuration(duration);
         d.setLesson(lesson);
         d.setTotal(total);
-        d.setWay(way);
+        d.setSprtOnline(sprtOnline);
+        d.setSprtSUnderline(sprtSUnderline);
+        d.setSprtTUnderline(sprtTUnderline);
         demandDAO.update(d);
         return true;
     }

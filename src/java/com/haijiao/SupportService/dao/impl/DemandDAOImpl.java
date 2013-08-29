@@ -21,7 +21,7 @@ public class DemandDAOImpl extends GenericHibernateDAO<Demand,Integer> implement
 
     @Override
     public Demand getStudentDemand(String email) {
-        String hql = "select d from Student s right join Demand d where s.email='"+ email + "'";
+        String hql = "select d from Student s right join s.demand d where s.email='"+ email + "'";
         List<Demand> ld = findByQuery(hql);
         if(ld.size() == 1){
             return findByQuery(hql).get(0);

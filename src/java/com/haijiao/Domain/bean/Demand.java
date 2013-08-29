@@ -28,7 +28,9 @@ public class Demand extends BaseBean{
     private String lesson;  //课程名称
     private String demand;  //详细需求
     private String address; //地址
-    private String way;     //授课方式
+    private Boolean sprtOnline;      //支持线上
+    private Boolean sprtSUnderline;  //学生上门
+    private Boolean sprtTUnderline;  //老师上门
     @Column(columnDefinition = "int default 5")
     private int reserveMax; //最大预约老师数
     @Column(columnDefinition = "int default 0")
@@ -75,12 +77,28 @@ public class Demand extends BaseBean{
         this.address = address;
     }
 
-    public String getWay() {
-        return way;
+    public Boolean isSprtOnline() {
+        return sprtOnline;
     }
 
-    public void setWay(String way) {
-        this.way = way;
+    public void setSprtOnline(Boolean sprtOnline) {
+        this.sprtOnline = sprtOnline;
+    }
+
+    public Boolean isSprtSUnderline() {
+        return sprtSUnderline;
+    }
+
+    public void setSprtSUnderline(Boolean sprtSUnderline) {
+        this.sprtSUnderline = sprtSUnderline;
+    }
+
+    public Boolean isSprtTUnderline() {
+        return sprtTUnderline;
+    }
+
+    public void setSprtTUnderline(Boolean sprtTUnderline) {
+        this.sprtTUnderline = sprtTUnderline;
     }
 
     public int getReserveMax() {

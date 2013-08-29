@@ -38,12 +38,15 @@ public class DealDemandAction extends SessionAction{
     private String lesson;
     private String demand;
     private String address;
-    private String way;
+    private boolean sprtOnline;
+    private boolean sprtSUnderline;
+    private boolean sprtTUnderline;
     private int duration;
-    private int total;
+    private int price;
     
     public String changeDemand(){
-        if(studentService.changeDemand((String)this.getSessionValue("email"), lesson, demand, way, address, duration, total)){
+        int total = price * duration;
+        if(studentService.changeDemand((String)this.getSessionValue("email"), lesson, demand, sprtOnline, sprtSUnderline, sprtTUnderline, address, duration, total)){
             this.sessionPutIn("nextPageMessage", "修改成功");
             return SUCCESS;
         }
@@ -54,7 +57,8 @@ public class DealDemandAction extends SessionAction{
     }
     
     public String publishDemand(){
-        if(studentService.publishDemand((String)this.getSessionValue("email"), lesson, demand, way, address, duration, total)){
+        int total = price * duration;
+        if(studentService.publishDemand((String)this.getSessionValue("email"), lesson, demand, sprtOnline, sprtSUnderline, sprtTUnderline, address, duration, total)){
             this.sessionPutIn("nextPageMessage", "发布成功");
             return SUCCESS;
         }
@@ -103,12 +107,28 @@ public class DealDemandAction extends SessionAction{
         this.address = address;
     }
 
-    public String getWay() {
-        return way;
+    public boolean isSprtOnline() {
+        return sprtOnline;
     }
 
-    public void setWay(String way) {
-        this.way = way;
+    public void setSprtOnline(boolean sprtOnline) {
+        this.sprtOnline = sprtOnline;
+    }
+
+    public boolean isSprtSUnderline() {
+        return sprtSUnderline;
+    }
+
+    public void setSprtSUnderline(boolean sprtSUnderline) {
+        this.sprtSUnderline = sprtSUnderline;
+    }
+
+    public boolean isSprtTUnderline() {
+        return sprtTUnderline;
+    }
+
+    public void setSprtTUnderline(boolean sprtTUnderline) {
+        this.sprtTUnderline = sprtTUnderline;
     }
 
     public int getDuration() {
@@ -119,12 +139,12 @@ public class DealDemandAction extends SessionAction{
         this.duration = duration;
     }
 
-    public int getTotal() {
-        return total;
+    public int getPrice() {
+        return price;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setPrice(int price) {
+        this.price = price;
     }
     
 }

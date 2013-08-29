@@ -25,7 +25,7 @@ public interface IBillService {
     //生成账单（其实是两张账单，学生有一张，老师有一张）并对账户余额进行相应操作
     public boolean produceBill(String studentEmail, String teacherEmail, int hour, String lessonName, String message);
     //生成需求账单
-    public boolean produceDemandBill(String studentEmail, String teacherEmail);
+    public boolean produceDemandBill(String studentEmail, String teacherEmail, String way);
     //确认需求账单
     public boolean confirmDemandBill(int billId, String studentEmail);
     //评论账单（即评论本次课程）

@@ -172,7 +172,17 @@
                         <div class="tab-pane fade" id="require_area">
                             <div class="pull-right">
                                 <button class="btn btn-mini btn-inverse">取消需求</button>
-                                <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">更改需求</button>
+                                <s:if test="student.demand.publish">
+                                    <s:if test="!student.demand.bills.isEmpty()">
+                                        <button class="btn btn-mini btn-danger disable">更改需求</button>
+                                    </s:if>
+                                    <s:else>
+                                        <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">更改需求</button>
+                                    </s:else>
+                                </s:if>
+                                <s:else>    
+                                    <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">发布需求</button>
+                                </s:else>
                             </div>
                             <dl class="dl-horizontal" style="margin:0;">
                                 <dt class="lead" style="width:90px;margin:0;">当前需求</dt>
@@ -182,30 +192,38 @@
                             <s:if test="student.demand.publish">
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">发布时间</dt>
-                                    <dd class="" style="margin-left:110px;" id=""><s:date name="student.demand.publishTime" format="MM/dd/yy hh:mm:ss"/></dd>
+                                    <dd style="margin-left:110px;"><s:date name="student.demand.publishTime" format="MM/dd/yy hh:mm:ss"/></dd>
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">价格</dt>
-                                    <dd class="" style="margin-left:110px;" id=""><s:property value="student.demand.total"/>元 / <s:property value="student.demand.duration"/>课时</dd>
+                                    <dd style="margin-left:110px;"><s:property value="student.demand.total"/>元 / <s:property value="student.demand.duration"/>课时</dd>
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">需求描述</dt>
-                                    <dd class="" style="margin-left:110px;" id=""><s:property value="student.demand.demand"/></dd>
+                                    <dd style="margin-left:110px;"><s:property value="student.demand.demand"/></dd>
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">家教地址</dt>
-                                    <dd class="" style="margin-left:110px;" id=""><s:property value="student.demand.address"/></dd>
+                                    <dd style="margin-left:110px;"><s:property value="student.demand.address"/></dd>
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">课程</dt>
-                                    <dd class="" style="margin-left:110px;" id=""> 
+                                    <dd style="margin-left:110px;"> 
                                         <small><s:property value="student.demand.lesson"/></small>
                                     </dd>
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">授课方式</dt>
-                                    <dd class="" style="margin-left:110px;" id="">
-                                        <s:property value="student.demand.way"/>
+                                    <dd style="margin-left:110px;">
+                                        <s:if test="student.sprtOnline">
+                                            线上授课
+                                        </s:if>
+                                        <s:if test="student.sprtSUnderline">
+                                            学生上门
+                                        </s:if>
+                                        <s:if test="student.sprtTUnderline">
+                                            老师上门
+                                        </s:if>
                                     </dd>
                                 </dl>
                             </s:if>
@@ -218,96 +236,109 @@
                                 暂无抢单老师
                             </s:if>
                             <s:else>
-                            <s:iterator value="student.demand.bills">
-                            <div class="thumbnail" style="line-height: 15px">
-                                <img class="pull-left" style="margin: 0px 10px 0px 0px;width: 110px;height: 110px;" src="<s:property value="teacher.pic.content"/>"/>
-                                <a href="${teacher.id}" style="text-decoration: none;">
-                                    <b style="font-size: 20px;"><s:property value="teacher.getSecretName()"/>&nbsp;</b>
-                                </a>
-                                <s:if test="teacher.level==1">
-                                    <i class="icon-diomand"></i>
-                                </s:if>
-                                <s:else>
-                                    <i class="icon-"></i>
-                                </s:else>
-                                <s:if test="teacher.status==0"><label class="label">离线</label></s:if>
-                                <s:elseif test="teacher.status==1"><label class="label label-success">在线</label></s:elseif>
-                                <s:else><label class="label label-warning">忙碌</label></s:else>
-                                <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:date name="teacher.lastActiveDate" nice="true"/></small>
-                                <label class="label label-info pull-right"><s:property value="teacher.reserveNum"/>人预约</label>
-                                <br/>
-                                <div class="resultInfo" >
-                                    <div class="rateit pull-right" data-rateit-value="<s:property value="teacher.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
-                                    <p><small><s:property value="teacher.school" default="暂无大学"/> | <s:property value="teacher.major" default="暂无专业"/></small></p>
-                                    <p><small>生源地：<s:property value="teacher.origin" default="暂无生源地"/></small></p>
-                                    <p><small>上课方式：<s:property value="message"/></small></p>
-                                    <a class="btn btn-mini pull-right">接受</a>
-                                    <p><small>身份：<s:if test="teacher.studyStatus == null">无</s:if><s:else><s:property value="teacher.studyStatus"/></s:else></small></p>
-                                    </div>
-                                </div>
+                                <s:iterator value="student.demand.bills">
+                                    <div class="thumbnail" style="line-height: 15px">
+                                        <img class="pull-left" style="margin: 0px 10px 0px 0px;width: 110px;height: 110px;" src="<s:property value="teacher.pic.content"/>"/>
+                                        <a href="${teacher.id}" style="text-decoration: none;">
+                                            <b style="font-size: 20px;"><s:property value="teacher.getSecretName()"/>&nbsp;</b>
+                                        </a>
+                                        <s:if test="teacher.level==1">
+                                            <i class="icon-diomand"></i>
+                                        </s:if>
+                                        <s:else>
+                                            <i class="icon-"></i>
+                                        </s:else>
+                                        <s:if test="teacher.status==0"><label class="label">离线</label></s:if>
+                                        <s:elseif test="teacher.status==1"><label class="label label-success">在线</label></s:elseif>
+                                        <s:else><label class="label label-warning">忙碌</label></s:else>
+                                        <small class="muted" style="margin-bottom: 5px;">&nbsp;&nbsp;上次登陆时间<s:date name="teacher.lastActiveDate" nice="true"/></small>
+                                        <label class="label label-info pull-right"><s:property value="teacher.reserveNum"/>人预约</label>
+                                        <br/>
+                                        <div class="resultInfo" >
+                                            <div class="rateit pull-right" data-rateit-value="<s:property value="teacher.score" default="0" />" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                                            <p><small><s:property value="teacher.school" default="暂无大学"/> | <s:property value="teacher.major" default="暂无专业"/></small></p>
+                                            <p><small>生源地：<s:property value="teacher.origin" default="暂无生源地"/></small></p>
+                                            <p><small>上课方式：<s:property value="message"/></small></p>
+                                            <a class="btn btn-mini pull-right">接受</a>
+                                            <p><small>身份：<s:if test="teacher.studyStatus == null">无</s:if><s:else><s:property value="teacher.studyStatus"/></s:else></small></p>
+                                            </div>
+                                        </div>
                                 </s:iterator>
-                        </s:else>
-                                <div id="requireModal"class="modal fade hide">
+                            </s:else>
+                            <div id="requireModal" class="modal fade hide">
+                                <s:form action="dealDemand">
                                     <div class="modal-header">
-                                        <h4>需求修改</h4>
+                                        <s:if test="student.demand.publish">
+                                            <h4>需求修改</h4>
+                                        </s:if>
+                                        <s:else>
+                                            <h4>需求发布</h4>
+                                        </s:else>
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-horizontal">
                                             <div class="control-group">
-                                                <label class="control-label" for="TAName"><strong>需求描述</strong></label>
+                                                <label class="control-label" for="demand"><strong>需求描述</strong></label>
                                                 <div class="controls">
-                                                <s:textarea cssClass="span4" type="text" placeholder="请输入需求的具体要求" value="%{student.demand.demand}" autofocus="autofocus" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="phoneNum"><strong>家庭地址</strong></label>
-                                            <div class="controls">
-                                                <s:textfield  cssClass="span4" type="text" placeholder="请输入您的家庭地址" value="%{student.demand.address}"/>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="phoneNum"><strong>授课方式</strong></label>
-                                            <div class="controls">
-                                                <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
-                                                <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
-                                                <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="datepicker"><strong>课程</strong></label>
-                                            <div class="controls">
-                                                <s:textfield id="lessonSelect" cssClass="span4" name="lesson" placeholder="请输入课程名称" value="%{student.demand.lesson}"/>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="phoneNum"><strong>课程单价</strong></label>
-                                            <div class="controls">
-                                                <div class="input-append">
-                                                    <s:if test="student.demand.duration == 0">
-                                                        <s:textfield placeholder="课程价格" name="price" value="%{student.demand.total / student.demand.duration}" onchange="checkNatureNumber($(this));"/>
-                                                    </s:if>
-                                                    <s:else>
-                                                    <s:textfield placeholder="课程价格" name="price" value="%{student.demand.total / student.demand.duration}" onchange="checkNatureNumber($(this));"/>
-                                                    </s:else>
-                                                    <span class="add-on">.00元/45分钟</span>
+                                                    <s:textarea id="demand" name="demand" cssClass="span4" type="text" placeholder="请输入需求的具体要求" value="%{student.demand.demand}" autofocus="autofocus" />
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="datepicker"><strong>课时数</strong></label>
-                                            <div class="controls">
-                                                <input type="number" class="span1" min="1" max="20" step="1" value="%{student.demand.duration}">
+                                            <div class="control-group">
+                                                <label class="control-label" for="home"><strong>家庭地址</strong></label>
+                                                <div class="controls">
+                                                    <s:textfield id="home" name="address" cssClass="span4" type="text" placeholder="请输入您的家庭地址" value="%{student.demand.address}"/>
+                                                </div>
                                             </div>
-                                        </div>           
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <div class="control-group">
-                                        <div class="controls">
-                                            <button class="btn btn-primary pull-right">发布需求</button>
+                                            <div class="control-group">
+                                                <label class="control-label" for="way"><strong>授课方式</strong></label>
+                                                <div class="controls">
+                                                    <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
+                                                    <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
+                                                    <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="lessonSelect"><strong>课程</strong></label>
+                                                <div class="controls">
+                                                    <s:textfield id="lessonSelect" name="lesson" cssClass="span4" placeholder="请输入课程名称" value="%{student.demand.lesson}"/>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="price"><strong>课程单价</strong></label>
+                                                <div class="controls">
+                                                    <div class="input-append">
+                                                        <s:if test="student.demand.duration == 0">
+                                                            <s:textfield placeholder="课程价格" id="price" name="price" value="%{student.demand.total / student.demand.duration}" onchange="checkNatureNumber($(this));"/>
+                                                        </s:if>
+                                                        <s:else>
+                                                            <s:textfield placeholder="课程价格" id="price" name="price" value="%{student.demand.total / student.demand.duration}" onchange="checkNatureNumber($(this));"/>
+                                                        </s:else>
+                                                        <span class="add-on">.00元/45分钟</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label" for="datepicker"><strong>课时数</strong></label>
+                                                <div class="controls">
+                                                    <input id="num" type="number" class="span1" min="1" max="20" step="1" value="%{student.demand.duration}" onchange="$('#reserveNum').val(this.value);">
+                                                    <s:textfield id="reserveNum" name="duration" value="1" cssStyle="display:none;"/>
+                                                </div>
+                                            </div>           
                                         </div>
                                     </div>
-                                </div>
+                                    <div class="modal-footer">
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <s:if test="student.demand.publish">
+                                                    <s:submit method="changeDemand" cssClass="btn btn-primary pull-right" value="修改需求"/>
+                                                </s:if>
+                                                <s:else>
+                                                    <s:submit method="publishDemand" cssClass="btn btn-primary pull-right" value="发布需求"/>
+                                                </s:else>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </s:form>
                             </div>
                         </div>
                     </div>

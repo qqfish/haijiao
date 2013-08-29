@@ -36,10 +36,11 @@ public class MeetDemandAction extends SessionAction{
     @Resource
     private IBillService billService;
     private String studentEmail;
+    private String way;
     
     @Override
     public String execute(){
-        billService.produceDemandBill(studentEmail, (String)this.getSessionValue("email"));
+        billService.produceDemandBill(studentEmail, (String)this.getSessionValue("email"), way);
         this.sessionPutIn("nextPageMessage", "成功接受需求，请耐心等待学生确认");
         return SUCCESS;
     }
@@ -54,6 +55,14 @@ public class MeetDemandAction extends SessionAction{
 
     public void setStudentEmail(String studentEmail) {
         this.studentEmail = studentEmail;
+    }
+
+    public String getWay() {
+        return way;
+    }
+
+    public void setWay(String way) {
+        this.way = way;
     }
     
 }

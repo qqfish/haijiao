@@ -21,6 +21,7 @@ import com.haijiao.SupportService.dao.ITeacherDAO;
 import com.haijiao.SupportService.dao.IUserDAO;
 import com.haijiao.SupportService.service.IBillService;
 import com.haijiao.global.TeacherLevel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -133,13 +134,13 @@ public class BillServiceImpl implements IBillService {
     }
 
     @Override
-    public boolean produceDemandBill(String studentEmail, String teacherEmail){
+    public boolean produceDemandBill(String studentEmail, String teacherEmail, String way){
         Student s = studentDAO.getStudentByEmail(studentEmail);
         Teacher t = teacherDAO.getTeacherByEmail(teacherEmail);
         Demand d = s.getDemand();
         Bill bill = new Bill();
         bill.setDelete(false);
-        bill.setMessage(d.getWay() + " " + d.getAddress());
+        bill.setMessage(way + " " + d.getAddress());
         bill.setDuration(d.getDuration());
         bill.setLesson(d.getLesson());
         bill.setMoney(d.getTotal());
@@ -155,7 +156,7 @@ public class BillServiceImpl implements IBillService {
     @Override
     public boolean confirmDemandBill(int billId, String studentEmail){
         Demand d = demandDAO.getStudentDemand(studentEmail);
-        d.setBills(null);
+        d.setBills(new ArrayList<Bill>());
         d.setFinishNum(d.getFinishNum() +1);
         d.setPublish(false);
         Bill bill = billDAO.findById(billId);
