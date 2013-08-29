@@ -171,6 +171,7 @@
 
                         <div class="tab-pane fade" id="require_area">
                             <div class="pull-right">
+                                <button class="btn btn-mini btn-inverse">取消需求</button>
                                 <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">更改需求</button>
                             </div>
                             <dl class="dl-horizontal" style="margin:0;">
@@ -246,7 +247,7 @@
                                 </div>
                                 </s:iterator>
                         </s:else>
-                                <div id="requireModal"class="modal fade">
+                                <div id="requireModal"class="modal fade hide">
                                     <div class="modal-header">
                                         <h4>需求修改</h4>
                                     </div>
@@ -255,13 +256,13 @@
                                             <div class="control-group">
                                                 <label class="control-label" for="TAName"><strong>需求描述</strong></label>
                                                 <div class="controls">
-                                                <s:textarea cssClass="span4" type="text" name="name" placeholder="请输入需求的具体要求" value="%{student.demand.demand}" autofocus="autofocus" />
+                                                <s:textarea cssClass="span4" type="text" placeholder="请输入需求的具体要求" value="%{student.demand.demand}" autofocus="autofocus" />
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label" for="phoneNum"><strong>家庭地址</strong></label>
                                             <div class="controls">
-                                                <s:textfield id="phoneNum" cssClass="span4" type="text" name="tel" placeholder="请输入您的家庭地址" value="%{student.demand.address}"/>
+                                                <s:textfield  cssClass="span4" type="text" placeholder="请输入您的家庭地址" value="%{student.demand.address}"/>
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -298,22 +299,12 @@
                                                 <input type="number" class="span1" min="1" max="20" step="1" value="%{student.demand.duration}">
                                             </div>
                                         </div>           
-                                        <div class="control-group">
-                                            <label class="control-label" for="gender"><strong>是否公开需求</strong></label>
-                                            <div class="controls" id="gender">
-                                                <div style="display:none;"><s:radio list="{'是', '否'}" name="sex" value="%{student.demand.publish}"/></div>
-                                                <div class="btn-group" data-toggle-name="is_private" data-toggle="buttons-radio">
-                                                    <button id="maleButton" type="button" value="0" class="btn" data-toggle="button">是</button>
-                                                    <button id="femaleButton" type="button" value="1" class="btn" data-toggle="button">否</button>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div class="control-group">
                                         <div class="controls">
-                                            <button class="btn btn-primary pull-right">确认更改</button>
+                                            <button class="btn btn-primary pull-right">发布需求</button>
                                         </div>
                                     </div>
                                 </div>
