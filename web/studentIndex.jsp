@@ -174,7 +174,7 @@
                                 <button class="btn btn-mini btn-inverse">取消需求</button>
                                 <s:if test="student.demand.publish">
                                     <s:if test="!student.demand.bills.isEmpty()">
-                                        <button class="btn btn-mini btn-danger disable">更改需求</button>
+                                        <button class="btn btn-mini btn-danger disabled">更改需求</button>
                                     </s:if>
                                     <s:else>
                                         <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">更改需求</button>
@@ -215,13 +215,13 @@
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">授课方式</dt>
                                     <dd style="margin-left:110px;">
-                                        <s:if test="student.sprtOnline">
+                                        <s:if test="student.demand.sprtOnline">
                                             线上授课
                                         </s:if>
-                                        <s:if test="student.sprtSUnderline">
+                                        <s:if test="student.demand.sprtSUnderline">
                                             学生上门
                                         </s:if>
-                                        <s:if test="student.sprtTUnderline">
+                                        <s:if test="student.demand.sprtTUnderline">
                                             老师上门
                                         </s:if>
                                     </dd>

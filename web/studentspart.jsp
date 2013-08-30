@@ -28,26 +28,36 @@
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">需求描述</dt>
-                                    <dd class="" style="margin-left:110px;" id=""><s:property value="demand.demand"/></dd>
+                                    <dd style="margin-left:110px;"><s:property value="demand.demand"/></dd>
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">家教地址</dt>
-                                    <dd class="" style="margin-left:110px;" id=""><s:property value="demand.address"/></dd>
+                                    <dd style="margin-left:110px;"><s:property value="demand.address"/></dd>
                                 </dl>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">课程</dt>
-                                    <dd class="" style="margin-left:110px;" id=""><s:property value="demand.lesson"/></dd>
+                                    <dd  style="margin-left:110px;"><s:property value="demand.lesson"/></dd>
                                 </dl>
                                 <div class="pull-right">
-                                    <button class="btn btn-mini btn-danger">接受需求</button>
+                                    <s:form action="meetDemand">
+                                        <s:hidden id="way" name="way"/>
+                                        <s:hidden name="studentEmail" value="%{email}"/>
+                                        <s:submit cssClass="btn btn-mini btn-danger" value="接受需求"/>
+                                    </s:form>
                                 </div>
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">授课方式</dt>
                                     <dd class="" style="margin-left:110px;" id="">
                                         <span data-toggle-name="is_private" data-toggle="buttons-radio">
-                                            <button type="button" class="btn btn-mini btn-choice">线上授课</button>
-                                            <button type="button" class="btn btn-mini btn-choice">学生上门</button>
-                                            <button type="button" class="btn btn-mini btn-choice">老师上门</button>
+                                            <s:if test="demand.sprtOnline">
+                                                <button type="button" class="btn btn-mini btn-choice" onclick="$('#way').val(($(this).text()));">线上授课</button>
+                                            </s:if>
+                                            <s:if test="demand.sprtSUnderline">
+                                                <button type="button" class="btn btn-mini btn-choice" onclick="$('#way').val(($(this).text()));">学生上门</button>
+                                            </s:if>
+                                            <s:if test="demand.sprtTUnderline">
+                                                <button type="button" class="btn btn-mini btn-choice" onclick="$('#way').val(($(this).text()));">老师上门</button>
+                                            </s:if>
                                         </span>
                                     </dd>
                                 </dl>
@@ -64,7 +74,7 @@
                     <li class="disabled"><a href="javascript:;">Prev</a></li>
                     </s:elseif>
                     <s:else>
-                    <li><s:a href="javascript:;" onclick="gotopage( % {pb.currentPage - 1});">
+                    <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage -1});">
                             Prev</s:a></li>
                     </s:else>
                     <s:if test="pb.totalPage > 7">
@@ -74,7 +84,7 @@
                                 <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
                                 </s:if>
                                 <s:else>
-                                <li><s:a href="javascript:;" onclick="gotopage( % {#i.index + 1});">
+                                <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                         <s:property value="#i.index+1"/>
                                     </s:a></li>
                                 </s:else>
@@ -91,7 +101,7 @@
                                     </s:a></li>
                                 </s:if>
                                 <s:else>
-                                <li><s:a href="javascript:;" onclick="gotopage( % {pb.currentPage + #i.index - 1});">
+                                <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage + #i.index - 1});">
                                         <s:property value="pb.currentPage + #i.index -1"/>
                                     </s:a></li>
                                 </s:else>
@@ -101,20 +111,20 @@
                         <li><s:a href="javascript:;" onclick="gotopage(1);">1</s:a></li>
                         <li><s:a href="javascript:;" onclick="gotopage(2);">2</s:a></li>
                         <li class="disabled"><s:a href="javascript:;">...</s:a></li>
-                        <li><s:a href="javascript:;" onclick="gotopage( % {pb.currentPage - 1});">
+                        <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage - 1});">
                                 <s:property value="pb.currentPage -1"/>
                             </s:a></li>
-                        <li><s:a href="javascript:;" onclick="gotopage( % {pb.currentPage});">
+                        <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage});">
                                 <s:property value="pb.currentPage"/>
                             </s:a></li>
-                        <li><s:a href="javascript:;" onclick="gotopage( % {pb.currentPage + 1});">
+                        <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage + 1});">
                                 <s:property value="pb.currentPage +1"/>
                             </s:a></li>
                         <li><s:a href="javascript:;">...</s:a></li>
-                        <li><s:a href="javascript:;" onclick="gotopage( % {pb.totalPage - 1});">
+                        <li><s:a href="javascript:;" onclick="gotopage(%{pb.totalPage - 1});">
                                 <s:property value="pb.totalPage -1"/>
                             </s:a></li>
-                        <li><s:a href="javascript:;" onclick="gotopage( % {pb.totalpage});">
+                        <li><s:a href="javascript:;" onclick="gotopage(%{pb.totalpage});">
                                 <s:property value="pb.totalPage"/>
                             </s:a></li>
                         </s:else>
@@ -125,7 +135,7 @@
                             <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
                             </s:if>
                             <s:else>
-                            <li><s:a href="javascript:;" onclick="gotopage( % {#i.index + 1});">
+                            <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                     <s:property value="#i.index+1"/>
                                 </s:a></li>
                             </s:else>
@@ -136,7 +146,7 @@
                     </s:if>
                     <s:elseif test="pb.totalPage == 0"></s:elseif>
                     <s:else>
-                    <li><s:a href="javascript:;" onclick="gotopage( % {pb.currentPage + 1});">
+                    <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage +1});">
                             Next
                         </s:a></li>
                     </s:else>

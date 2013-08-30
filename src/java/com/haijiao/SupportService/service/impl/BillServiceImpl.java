@@ -146,8 +146,10 @@ public class BillServiceImpl implements IBillService {
         bill.setMoney(d.getTotal());
         bill.setStudent(s);
         bill.setTeacher(t);
+        d.setReserved(d.getReserved() +1);
         bill.setDemand(d);
         bill.setStatus(Bill.Status.accept);
+        demandDAO.update(d);
         boolean bbill = billDAO.makePersistent(bill);
         teacherDAO.update(t);
         return bbill;

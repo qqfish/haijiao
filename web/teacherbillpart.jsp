@@ -73,7 +73,12 @@
                                 </td>
                             </s:elseif>
                             <s:elseif test="status == 2">
+                                <s:if test="demand == null">
                                 <td><br /><label class="label label-warning" style="font-size:9px;">等待支付</label></td>
+                                </s:if>
+                                <s:else>
+                                <td><br /><label class="label label-warning" style="font-size:9px;">等待学生选择</label></td>
+                                </s:else>
                                 <td>
                                     <br /><a class="btn btn-mini btn-link" href="contact.jsp">举报</a>
                                 </td>
