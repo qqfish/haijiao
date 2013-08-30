@@ -17,6 +17,7 @@
         <script type="text/javascript" src="js/reserve.js"></script>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen">
         <link rel="stylesheet" href="css/rateit.css" type="text/css">
+        <link rel="stylesheet" href="css/validate.css" type="text/css">
 
         <!--[if lt IE 8]>
               <div style=' clear: both; text-align:center; position: relative;'>
@@ -180,12 +181,13 @@
                                                     <s:form action="meetDemand">
                                                         <s:hidden id="way" name="way"/>
                                                         <s:hidden name="studentEmail" value="%{email}"/>
-                                                        <s:submit cssClass="btn btn-mini btn-danger" value="接受需求"/>
+                                                        <a class="btn btn-mini btn-danger" onclick="testWay();">接受需求</a>
+                                                        <s:submit cssStyle="display:none;" id="accept"/>
                                                     </s:form>
                                                 </div>
                                                 <dl class="dl-horizontal" style="margin:0;">
                                                     <dt class="muted" style="width:90px;">授课方式</dt>
-                                                    <dd class="" style="margin-left:110px;" id="">
+                                                    <dd style="margin-left:110px;">
                                                         <span data-toggle-name="is_private" data-toggle="buttons-radio">
                                                             <s:if test="demand.sprtOnline">
                                                                 <button type="button" class="btn btn-mini btn-choice" onclick="$('#way').val(($(this).text()));">线上授课</button>
@@ -197,6 +199,7 @@
                                                                 <button type="button" class="btn btn-mini btn-choice" onclick="$('#way').val(($(this).text()));">老师上门</button>
                                                             </s:if>
                                                         </span>
+                                                        <span id="way_tip" class="validateTip" style="text-align: left;"></span>
                                                     </dd>
                                                 </dl>
                                             </div>

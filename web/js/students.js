@@ -3,6 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+function testWay() {
+    var way = $('#way').val();
+    if (way == null || way == "") {
+        $('#way_tip').text("* 请选择上课方式！");
+        $('#way_tip').fadeIn(1, null);
+        return false;
+    }
+    else {
+        $('#way_tip').fadeOut(1, null);
+        $('#accept').click();
+    }
+}
 
 jQuery(document).ready(function($) {
     $('#choosemodal').modal({
@@ -28,7 +40,7 @@ jQuery(document).ready(function($) {
             gotopage(1, null);
         }
     });
-    
+
     $('#lesson').children().click(function() {
         $('#lesson').children().removeClass("active");
         $(this).addClass("active");

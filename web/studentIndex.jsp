@@ -188,7 +188,7 @@
                                 <dt class="lead" style="width:90px;margin:0;">当前需求</dt>
                                 <dd class="muted" style="margin-left:110px;margin-top: 10px;" id=""></dd>
                             </dl>
-                            <hr />
+                            <hr/>
                             <s:if test="student.demand.publish">
                                 <dl class="dl-horizontal" style="margin:0;">
                                     <dt class="muted" style="width:90px;">发布时间</dt>
@@ -259,7 +259,10 @@
                                             <p><small><s:property value="teacher.school" default="暂无大学"/> | <s:property value="teacher.major" default="暂无专业"/></small></p>
                                             <p><small>生源地：<s:property value="teacher.origin" default="暂无生源地"/></small></p>
                                             <p><small>上课方式：<s:property value="message"/></small></p>
-                                            <a class="btn btn-mini pull-right">接受</a>
+                                            <s:form action="confirmDemand.action">
+                                                <s:hidden name="id" value="%{id}"/>
+                                                <s:submit cssClass="btn btn-mini pull-right" value="接受"/>
+                                            </s:form>
                                             <p><small>身份：<s:if test="teacher.studyStatus == null">无</s:if><s:else><s:property value="teacher.studyStatus"/></s:else></small></p>
                                             </div>
                                         </div>
@@ -281,26 +284,31 @@
                                                 <label class="control-label" for="demand"><strong>需求描述</strong></label>
                                                 <div class="controls">
                                                     <s:textarea id="demand" name="demand" cssClass="span4" type="text" placeholder="请输入需求的具体要求" value="%{student.demand.demand}" autofocus="autofocus" />
+                                                    <div id="demand_tip" class="validateTip" style="text-align: left;"></div>
                                                 </div>
                                             </div>
+                                            
                                             <div class="control-group">
                                                 <label class="control-label" for="home"><strong>家庭地址</strong></label>
                                                 <div class="controls">
                                                     <s:textfield id="home" name="address" cssClass="span4" type="text" placeholder="请输入您的家庭地址" value="%{student.demand.address}"/>
+                                                    <div id="home_tip" class="validateTip" style="text-align: left;"></div>
                                                 </div>
                                             </div>
                                             <div class="control-group">
-                                                <label class="control-label" for="way"><strong>授课方式</strong></label>
+                                                <label class="control-label"><strong>授课方式</strong></label>
                                                 <div class="controls">
-                                                    <s:checkbox name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
-                                                    <s:checkbox name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
-                                                    <s:checkbox name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
+                                                    <s:checkbox id="online" name="sprtOnline" value="%{tea.sprtOnline}" cssStyle="margin-top:-5px"/> 线上授课
+                                                    <s:checkbox id="tunderline" name="sprtTUnderline" value="%{tea.sprtTUnderline}" cssStyle="margin-top:-5px"/> 老师上门
+                                                    <s:checkbox id="sunderline" name="sprtSUnderline" value="%{tea.sprtSUnderline}" cssStyle="margin-top:-5px"/> 学生上门
+                                                    <span id="way_tip" class="validateTip" style="text-align: left;"></span>
                                                 </div>
                                             </div>
                                             <div class="control-group">
                                                 <label class="control-label" for="lessonSelect"><strong>课程</strong></label>
                                                 <div class="controls">
                                                     <s:textfield id="lessonSelect" name="lesson" cssClass="span4" placeholder="请输入课程名称" value="%{student.demand.lesson}"/>
+                                                    <div id="lesson_tip" class="validateTip" style="text-align: left;"></div>
                                                 </div>
                                             </div>
                                             <div class="control-group">
@@ -314,6 +322,7 @@
                                                             <s:textfield placeholder="课程价格" id="price" name="price" value="%{student.demand.total / student.demand.duration}" onchange="checkNatureNumber($(this));"/>
                                                         </s:else>
                                                         <span class="add-on">.00元/45分钟</span>
+                                                        <div id="price_tip" class="validateTip" style="text-align: left;"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -322,6 +331,7 @@
                                                 <div class="controls">
                                                     <input id="num" type="number" class="span1" min="1" max="20" step="1" value="%{student.demand.duration}" onchange="$('#reserveNum').val(this.value);">
                                                     <s:textfield id="reserveNum" name="duration" value="1" cssStyle="display:none;"/>
+                                                    <span id="duration_tip" class="validateTip" style="text-align: left;"></span>
                                                 </div>
                                             </div>           
                                         </div>
@@ -330,10 +340,12 @@
                                         <div class="control-group">
                                             <div class="controls">
                                                 <s:if test="student.demand.publish">
-                                                    <s:submit method="changeDemand" cssClass="btn btn-primary pull-right" value="修改需求"/>
+                                                    <a class="btn btn-primary pull-right" onclick="testChangeDemand();">修改需求</a>
+                                                    <s:submit method="changeDemand" cssStyle="display:none;" id="changd"/>
                                                 </s:if>
                                                 <s:else>
-                                                    <s:submit method="publishDemand" cssClass="btn btn-primary pull-right" value="发布需求"/>
+                                                    <a class="btn btn-primary pull-right" onclick="testPublishDemand();">发布需求</a>
+                                                    <s:submit method="publishDemand" cssStyle="display:none;" id="publishd"/>
                                                 </s:else>
                                             </div>
                                         </div>
