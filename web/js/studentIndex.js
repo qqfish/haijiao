@@ -41,6 +41,7 @@ function testChangeDemand() {
     var lesson = $('#lessonSelect').val();
     var price = $('#demand').val();
     var num = $('#num').val();
+    var deadline = $('#dead').val();
     var online = $("#online").attr("checked");
     var tunderline = $('#tunderline').attr("checked");
     var sunderline = $('#demand').attr("checked");
@@ -84,6 +85,7 @@ function testChangeDemand() {
         return false;
     }
     $('#price_tip').fadeOut(1, null);
+    $('#duration_tip').fadeOut(1, null);
     $('#changd').click();
 }
 
@@ -93,6 +95,7 @@ function testPublishDemand() {
     var lesson = $('#lessonSelect').val();
     var price = $('#demand').val();
     var num = $('#num').val();
+    var deadline = $('#dead').val();
     var online = $("#online").attr("checked");
     var tunderline = $('#tunderline').attr("checked");
     var sunderline = $('#demand').attr("checked");
@@ -136,7 +139,18 @@ function testPublishDemand() {
         return false;
     }
     $('#price_tip').fadeOut(1, null);
+    if (deadline == null || deadline == "") {
+        $('#deadline_tip').text("*请填截止天数");
+        $('#deadline_tip').fadeIn();
+        return false;
+    }
+    $('#duration_tip').fadeOut(1, null);
     $('#publishd').click();
+}
+
+function accept(id){
+    $('#acceptbill').val(id);
+    $('#accepts').click();
 }
 
 jQuery(document).ready(function($) {

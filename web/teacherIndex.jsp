@@ -231,7 +231,8 @@
                             <li id="l5"><a href="#comment_area" data-toggle="tab" >评论</a></li>
 
                             <!--  add a button for previewing Profile -->
-                            <li style="float:right;margin-right: 20px"> <button class="btn" data-toggle="modal" data-target="#personal_profile">分享个人主页</button></li>
+                            <li><a class="btn" href="searchStudent.action">找学生</a></li>
+                            <li ><a class="btn" data-toggle="modal" data-target="#personal_profile">分享主页</a></li>
                         </ul>
 
                         <!--   personal proflie   -->

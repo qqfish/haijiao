@@ -49,8 +49,8 @@
                         <td><br /><s:property value="id"/></td>
                         <td><strong>
                                 <a href="getMail.action?toEmail=<s:property value="teacher.email" />"><s:property value="teacher.name" /></a>
-                                <s:if test="student.status==0"><label class="label">离线</label></s:if>
-                                <s:elseif test="student.status==1"><label class="label label-success">在线</label></s:elseif>
+                                <s:if test="teacher.status==0"><label class="label">离线</label></s:if>
+                                <s:elseif test="teacher.status==1"><label class="label label-success">在线</label></s:elseif>
                                 <s:else><label class="label label-warning">忙碌</label></s:else>
                                 </strong><br />
                                 <span class="muted" style="font-size:9px;">电话:<s:property value="teacher.tel" default="无"/><br />

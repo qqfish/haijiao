@@ -26,8 +26,6 @@ public interface IBillService {
     public boolean produceBill(String studentEmail, String teacherEmail, int hour, String lessonName, String message);
     //生成需求账单
     public boolean produceDemandBill(String studentEmail, String teacherEmail, String way);
-    //确认需求账单
-    public boolean confirmDemandBill(int billId, String studentEmail);
     //评论账单（即评论本次课程）
     public boolean commentBill(int billId, String content, int score, String userType);
     //回复评论

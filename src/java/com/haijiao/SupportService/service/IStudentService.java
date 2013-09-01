@@ -24,9 +24,10 @@ public interface IStudentService {
     public boolean topUpMoney(String email, int numberOfCoin);
     
     public Demand getStudentDemand(String email);
-    public boolean publishDemand(String email, String lesson, String demand, boolean sprtOnline, boolean sprtSUnderline, boolean sprtTUnderline, String address, int duration, int total);
+    public boolean publishDemand(String email, String lesson, String demand, boolean sprtOnline, boolean sprtSUnderline, boolean sprtTUnderline, String address, int duration, int total, int deadline);
     public boolean changeDemand(String email, String lesson,  String demand, boolean sprtOnline, boolean sprtSUnderline, boolean sprtTUnderline, String address, int duration, int total);
     public boolean cancelDemand(String email);
+    public boolean confirmDemand(int billId, String email);
     
     public List<Student> searchStudentPage(List<String> strList, String lesson, String way, String net, String sex, String province, String city, String district, String status, int first, int pagesize, String extOrder, int desc);
     public int searchStudentNum(List<String> strList, String lesson, String way, String net, String sex, String province, String city, String district, String status, String extOrder, int desc);

@@ -30,7 +30,7 @@ import org.springframework.stereotype.Controller;
 @Action("dealDemand")
 @Results({
     @Result(name="input",type="redirect",location="index.action"),
-    @Result(name="success",type="redirect",location="index.action")
+    @Result(name="success",type="redirect",location="index.action?tab=require")
 })
 public class DealDemandAction extends SessionAction{
     @Resource
@@ -43,6 +43,7 @@ public class DealDemandAction extends SessionAction{
     private boolean sprtTUnderline;
     private int duration;
     private int price;
+    private int deadline;
     
     public String changeDemand(){
         int total = price * duration;
@@ -58,7 +59,7 @@ public class DealDemandAction extends SessionAction{
     
     public String publishDemand(){
         int total = price * duration;
-        if(studentService.publishDemand((String)this.getSessionValue("email"), lesson, demand, sprtOnline, sprtSUnderline, sprtTUnderline, address, duration, total)){
+        if(studentService.publishDemand((String)this.getSessionValue("email"), lesson, demand, sprtOnline, sprtSUnderline, sprtTUnderline, address, duration, total, deadline)){
             this.sessionPutIn("nextPageMessage", "发布成功");
             return SUCCESS;
         }
@@ -145,6 +146,14 @@ public class DealDemandAction extends SessionAction{
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(int deadline) {
+        this.deadline = deadline;
     }
     
 }

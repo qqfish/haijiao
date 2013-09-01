@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Teachers</title>
+        <title>学生列表</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/students.js"></script>
@@ -132,8 +132,8 @@
                                 <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="city" list="{}" value="%{tea.city}"></s:select>
                                 <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="district" list="{}" value="%{tea.district}"></s:select>
                                 </div>
+                                <br/>
                         </s:if>
-                        <br/>
                     </div>
                 </div>
                 <div  id="resultPanel" class="span11 module">

@@ -31,8 +31,7 @@ public class Demand extends BaseBean{
     private Boolean sprtOnline;      //支持线上
     private Boolean sprtSUnderline;  //学生上门
     private Boolean sprtTUnderline;  //老师上门
-    @Column(columnDefinition = "int default 5")
-    private int reserveMax; //最大预约老师数
+    private int reserveMax =5; //最大预约老师数
     @Column(columnDefinition = "int default 0")
     private int reserved;   //已预约数
     private int duration;   //课时数
@@ -44,6 +43,9 @@ public class Demand extends BaseBean{
     @Column(name = "publishtime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date publishTime;
+    @Column(name = "deadline")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deadline;
     
     @OneToMany(mappedBy="demand")
     @Fetch(value = FetchMode.SUBSELECT)
@@ -163,6 +165,14 @@ public class Demand extends BaseBean{
 
     public void setPublishTime(Date publishTime) {
         this.publishTime = publishTime;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
     }
     
 }

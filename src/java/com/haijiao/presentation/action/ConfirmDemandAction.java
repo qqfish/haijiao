@@ -6,6 +6,7 @@
 package com.haijiao.presentation.action;
 
 import com.haijiao.SupportService.service.IBillService;
+import com.haijiao.SupportService.service.IStudentService;
 import javax.annotation.Resource;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -32,18 +33,22 @@ import org.springframework.stereotype.Controller;
 })
 public class ConfirmDemandAction extends SessionAction{
     @Resource
-    private IBillService billService;
+    private IStudentService studentService;
     private int id;
     
     @Override
     public String execute(){
-        billService.confirmDemandBill(id, (String)this.getSessionValue("email"));
+        studentService.confirmDemand(id, (String)this.getSessionValue("email"));
         this.sessionPutIn("nextPageMessage", "确认成功，请尽快完成支付");
         return SUCCESS;
     }
 
-    public void setBillService(IBillService billService) {
-        this.billService = billService;
+    public IStudentService getStudentService() {
+        return studentService;
+    }
+
+    public void setStudentService(IStudentService studentService) {
+        this.studentService = studentService;
     }
 
     public int getId() {

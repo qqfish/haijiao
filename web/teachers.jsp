@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Teachers</title>
+        <title>老师列表</title>
         <meta charset="utf-8">
         <script type="text/javascript" src="js/jquery-1.8.3.min.js" ></script>
         <script type="text/javascript" src="js/teachers.js"></script>
@@ -131,6 +131,24 @@
                             <button type="button" value="1" class="btn btn-small" data-toggle="button">男</button>
                             <button type="button" value="2" class="btn btn-small" data-toggle="button">女</button>
                         </div>
+
+                        <div class="alert pull-right">
+                        <s:if test="#session.userType=='student'">
+                            <a class="btn btn-warning" href="index.action?tab=require">登陆发布</a>
+                        </s:if>
+                        <s:else>
+                            <a class="btn btn-warning" data-toggle="modal" data-target="#publishWarning">登陆发布</a>
+                        </s:else>
+                            多位老师抢单供学生挑
+                        </div>
+                        <div class="modal fade hide" id="publishWarning">
+                            <div class="modal-body">
+                                <h4>请登陆<strong>学生账号</strong></h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-success" data-dismiss="modal">确认</button>
+                            </div>
+                        </div>
                         <br/>
                         <s:if test="@com.haijiao.global.config@domain == 0">
                             <button type="button" style="margin-top: -10px;" class="btn btn-small btn-danger disabled">地区</button>
@@ -138,7 +156,7 @@
                                 <s:select id="selProvince" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="province" list="{}" value="%{tea.province}"></s:select>
                                 <s:select id="selCity" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="city" list="{}" value="%{tea.city}"></s:select>
                                 <s:select id="selDistrict" cssClass="span2 choosetext" cssStyle="margin-top:4px;" name="district" list="{}" value="%{tea.district}"></s:select>
-                            </div>
+                                </div>
                         </s:if>
                         <br/>
                     </div>
@@ -259,8 +277,8 @@
                                 <s:if test="pb.totalPage ==0"></s:if>
                                 <s:elseif test="pb.currentPage == 1">
                                     <li class="disabled"><a href="javascript:;">Prev</a></li>
-                                </s:elseif>
-                                <s:else>
+                                    </s:elseif>
+                                    <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage -1});">
                                             Prev</s:a></li>
                                     </s:else>
@@ -269,8 +287,8 @@
                                             <s:iterator value="new int[pb.currentPage +1]" status="i">
                                                 <s:if test="pb.currentPage == #i.index+1">
                                                 <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                            </s:if>
-                                            <s:else>
+                                                </s:if>
+                                                <s:else>
                                                 <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                                         <s:property value="#i.index+1"/>
                                                     </s:a></li>
@@ -281,8 +299,8 @@
                                         <li><s:a href="javascript:;" onclick="gotopage(1);">1</s:a></li>
                                         <li><s:a href="javascript:;" onclick="gotopage(2);">2</s:a></li>
                                         <li class="disabled"><s:a href="javascript:;">...</s:a></li>
-                                        <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
-                                            <s:if test="#i.index == 1">
+                                            <s:iterator  value="new int[pb.totalPage - pb.currentPage +1]" status="i">
+                                                <s:if test="#i.index == 1">
                                                 <li class="disabled"><s:a href="javascript:;">
                                                         <s:property value="pb.currentPage"/>
                                                     </s:a></li>
@@ -320,8 +338,8 @@
                                         <s:iterator value="new int[pb.totalPage]" status="i">
                                             <s:if test="pb.currentPage == #i.index+1">
                                             <li class="disabled"><a href="javascript:;"><s:property value="#i.index+1"/></a></li>
-                                        </s:if>
-                                        <s:else>
+                                            </s:if>
+                                            <s:else>
                                             <li><s:a href="javascript:;" onclick="gotopage(%{#i.index +1});">
                                                     <s:property value="#i.index+1"/>
                                                 </s:a></li>
@@ -330,9 +348,9 @@
                                     </s:else>
                                     <s:if test="pb.currentPage == pb.totalPage">
                                     <li class="disabled"><a href="javascript:;">Next</a></li>
-                                </s:if>
-                                <s:elseif test="pb.totalPage == 0"></s:elseif>
-                                <s:else>
+                                    </s:if>
+                                    <s:elseif test="pb.totalPage == 0"></s:elseif>
+                                    <s:else>
                                     <li><s:a href="javascript:;" onclick="gotopage(%{pb.currentPage +1});">
                                             Next
                                         </s:a></li>

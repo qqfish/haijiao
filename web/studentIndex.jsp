@@ -171,18 +171,26 @@
 
                         <div class="tab-pane fade" id="require_area">
                             <div class="pull-right">
-                                <button class="btn btn-mini btn-inverse">取消需求</button>
-                                <s:if test="student.demand.publish">
-                                    <s:if test="!student.demand.bills.isEmpty()">
-                                        <button class="btn btn-mini btn-danger disabled">更改需求</button>
+                                <s:form action="dealDemand.action" theme="simple">
+                                    <s:if test="student.demand.publish">
+                                        <s:set name="now" value="new java.util.Date()"></s:set>
+                                        <s:if test="#now.getTime() < student.demand.deadline.getTime()">
+                                            <s:submit cssClass="btn btn-mini btn-inverse" method="cancelDemand" value="取消需求"/>
+                                        </s:if>
+                                        <s:else>
+                                            <button class="btn btn-mini btn-inverse disabled">取消需求</button>
+                                        </s:else>
+                                        <s:if test="!student.demand.bills.isEmpty()">
+                                            <button class="btn btn-mini btn-danger disabled">更改需求</button>
+                                        </s:if>
+                                        <s:else>
+                                            <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">更改需求</button>
+                                        </s:else>
                                     </s:if>
-                                    <s:else>
-                                        <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">更改需求</button>
+                                    <s:else>    
+                                        <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">发布需求</button>
                                     </s:else>
-                                </s:if>
-                                <s:else>    
-                                    <button class="btn btn-mini btn-danger" data-toggle="modal" data-target="#requireModal">发布需求</button>
-                                </s:else>
+                                </s:form>
                             </div>
                             <dl class="dl-horizontal" style="margin:0;">
                                 <dt class="lead" style="width:90px;margin:0;">当前需求</dt>
@@ -226,6 +234,12 @@
                                         </s:if>
                                     </dd>
                                 </dl>
+                                <dl class="dl-horizontal" style="margin:0;">
+                                    <dt class="muted" style="width:90px;">截止时间</dt>
+                                    <dd style="margin-left:110px;"> 
+                                        <s:date name="student.demand.deadline" format="MM/dd/yy hh:mm:ss"/>(<s:date name="student.demand.deadline" nice="true"/>)
+                                    </dd>
+                                </dl>
                             </s:if>
                             <s:else>
                                 还没有发布需求哦~！
@@ -259,14 +273,15 @@
                                             <p><small><s:property value="teacher.school" default="暂无大学"/> | <s:property value="teacher.major" default="暂无专业"/></small></p>
                                             <p><small>生源地：<s:property value="teacher.origin" default="暂无生源地"/></small></p>
                                             <p><small>上课方式：<s:property value="message"/></small></p>
-                                            <s:form action="confirmDemand.action">
-                                                <s:hidden name="id" value="%{id}"/>
-                                                <s:submit cssClass="btn btn-mini pull-right" value="接受"/>
-                                            </s:form>
+                                            <a class="btn btn-mini pull-right" onclick="accept(<s:property value='id'/>)">接受</a>
                                             <p><small>身份：<s:if test="teacher.studyStatus == null">无</s:if><s:else><s:property value="teacher.studyStatus"/></s:else></small></p>
                                             </div>
                                         </div>
                                 </s:iterator>
+                                <s:form action="confirmDemand.action" cssStyle="display:none;">
+                                    <s:hidden id="acceptbill" name="id" value="%{id}"/>
+                                    <s:submit id="accepts"/>
+                                </s:form>
                             </s:else>
                             <div id="requireModal" class="modal fade hide">
                                 <s:form action="dealDemand">
@@ -287,7 +302,7 @@
                                                     <div id="demand_tip" class="validateTip" style="text-align: left;"></div>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="control-group">
                                                 <label class="control-label" for="home"><strong>家庭地址</strong></label>
                                                 <div class="controls">
@@ -333,7 +348,20 @@
                                                     <s:textfield id="reserveNum" name="duration" value="1" cssStyle="display:none;"/>
                                                     <span id="duration_tip" class="validateTip" style="text-align: left;"></span>
                                                 </div>
-                                            </div>           
+                                            </div>
+                                            <s:if test="!student.demand.publish">
+                                                <div class="control-group">
+                                                    <label class="control-label" for="datepicker"><strong>截止日</strong></label>
+                                                    <div class="controls">
+                                                        <div class="input-append">
+                                                            <input id="dead" type="number" class="span1" min="1" max="7" step="1" onchange="$('#deadline').val(this.value);">
+                                                            <s:textfield id="deadline" name="deadline" value="1" cssStyle="display:none;"/>
+                                                            <span class="add-on">天后</span>
+                                                            <span id="deadline_tip" class="validateTip" style="text-align: left;"></sapn>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </s:if>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
@@ -373,6 +401,12 @@
                                 $("#l4").addClass("active")
                             </script>
                         </s:elseif>
+                        <s:if test="tab=='require'">
+                            <script>
+                                $("#require_area").addClass("active in");
+                                $("#l7").addClass("active")
+                            </script>
+                        </s:if>
                         <s:else>
                             <script>
                                 $("#bill_area").addClass("active in");

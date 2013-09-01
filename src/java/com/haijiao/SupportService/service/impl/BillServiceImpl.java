@@ -140,12 +140,13 @@ public class BillServiceImpl implements IBillService {
         Demand d = s.getDemand();
         Bill bill = new Bill();
         bill.setDelete(false);
-        bill.setMessage(way + " " + d.getAddress());
+        bill.setMessage("学生需求 " + way + " " + d.getAddress());
         bill.setDuration(d.getDuration());
         bill.setLesson(d.getLesson());
         bill.setMoney(d.getTotal());
         bill.setStudent(s);
         bill.setTeacher(t);
+        d.getBills().add(bill);
         d.setReserved(d.getReserved() +1);
         bill.setDemand(d);
         bill.setStatus(Bill.Status.accept);
@@ -153,19 +154,6 @@ public class BillServiceImpl implements IBillService {
         boolean bbill = billDAO.makePersistent(bill);
         teacherDAO.update(t);
         return bbill;
-    }
-    
-    @Override
-    public boolean confirmDemandBill(int billId, String studentEmail){
-        Demand d = demandDAO.getStudentDemand(studentEmail);
-        d.setBills(new ArrayList<Bill>());
-        d.setFinishNum(d.getFinishNum() +1);
-        d.setPublish(false);
-        Bill bill = billDAO.findById(billId);
-        bill.setDemand(null);
-        demandDAO.update(d);
-        billDAO.update(bill);
-        return true;
     }
     
     @Override
